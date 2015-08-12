@@ -6,9 +6,9 @@
 #ifndef _JavaUtilConcurrentFuture_H_
 #define _JavaUtilConcurrentFuture_H_
 
-@class JavaUtilConcurrentTimeUnitEnum;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaUtilConcurrentTimeUnitEnum;
 
 @protocol JavaUtilConcurrentFuture < NSObject, JavaObject >
 
@@ -25,6 +25,8 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentFuture_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentFuture)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentFuture)
 
 #endif // _JavaUtilConcurrentFuture_H_

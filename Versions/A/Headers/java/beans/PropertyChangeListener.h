@@ -6,16 +6,19 @@
 #ifndef _JavaBeansPropertyChangeListener_H_
 #define _JavaBeansPropertyChangeListener_H_
 
-@class JavaBeansPropertyChangeEvent;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/EventListener.h"
 
+@class JavaBeansPropertyChangeEvent;
+
 @protocol JavaBeansPropertyChangeListener < JavaUtilEventListener, NSObject, JavaObject >
+
 - (void)propertyChangeWithJavaBeansPropertyChangeEvent:(JavaBeansPropertyChangeEvent *)event;
 
 @end
 
-__attribute__((always_inline)) inline void JavaBeansPropertyChangeListener_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaBeansPropertyChangeListener)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaBeansPropertyChangeListener)
 
 #endif // _JavaBeansPropertyChangeListener_H_

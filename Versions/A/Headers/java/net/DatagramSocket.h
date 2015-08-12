@@ -6,18 +6,17 @@
 #ifndef _JavaNetDatagramSocket_H_
 #define _JavaNetDatagramSocket_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+
 @class JavaIoFileDescriptor;
 @class JavaNetDatagramPacket;
 @class JavaNetDatagramSocketImpl;
 @class JavaNetInetAddress;
 @class JavaNetNetworkInterface;
 @class JavaNetSocketAddress;
-@class JavaNetSocketException;
 @class JavaNioChannelsDatagramChannel;
 @protocol JavaNetDatagramSocketImplFactory;
-
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
 
 @interface JavaNetDatagramSocket : NSObject < JavaIoCloseable > {
  @public
@@ -27,6 +26,8 @@
   jboolean isBound__;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)aPort;
@@ -34,16 +35,24 @@
 - (instancetype)initWithInt:(jint)aPort
      withJavaNetInetAddress:(JavaNetInetAddress *)addr;
 
+- (instancetype)initWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
+
+- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
+
 - (void)close;
 
-- (void)onClose;
+- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)address
+                              withInt:(jint)port;
+
+- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)peer;
 
 - (void)disconnect;
 
-- (void)onDisconnect;
+- (jboolean)getBroadcast;
 
-- (void)createSocketWithInt:(jint)aPort
-     withJavaNetInetAddress:(JavaNetInetAddress *)addr;
+- (JavaNioChannelsDatagramChannel *)getChannel;
+
+- (JavaIoFileDescriptor *)getFileDescriptor$;
 
 - (JavaNetInetAddress *)getInetAddress;
 
@@ -51,85 +60,104 @@
 
 - (jint)getLocalPort;
 
+- (JavaNetSocketAddress *)getLocalSocketAddress;
+
 - (jint)getPort;
 
-- (jboolean)isMulticastSocket;
-
 - (jint)getReceiveBufferSize;
+
+- (JavaNetSocketAddress *)getRemoteSocketAddress;
+
+- (jboolean)getReuseAddress;
 
 - (jint)getSendBufferSize;
 
 - (jint)getSoTimeout;
 
-- (void)receiveWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
+- (jint)getTrafficClass;
 
-- (void)sendWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
+- (jboolean)isBound;
 
-- (void)setNetworkInterfaceWithJavaNetNetworkInterface:(JavaNetNetworkInterface *)netInterface;
+- (jboolean)isClosed;
 
-- (void)setSendBufferSizeWithInt:(jint)size;
-
-- (void)setReceiveBufferSizeWithInt:(jint)size;
-
-- (void)setSoTimeoutWithInt:(jint)timeout;
-
-+ (void)setDatagramSocketImplFactoryWithJavaNetDatagramSocketImplFactory:(id<JavaNetDatagramSocketImplFactory>)fac;
-
-- (instancetype)initWithJavaNetDatagramSocketImpl:(JavaNetDatagramSocketImpl *)socketImpl;
-
-- (instancetype)initWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
-
-- (void)checkOpen;
-
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
+- (jboolean)isConnected;
 
 - (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
                              withInt:(jint)localPort;
 
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)peer;
+- (void)onClose;
 
 - (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
                                 withInt:(jint)remotePort;
 
-- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)address
-                              withInt:(jint)port;
+- (void)onDisconnect;
 
-- (jboolean)isBound;
+- (void)receiveWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
-- (jboolean)isConnected;
-
-- (JavaNetSocketAddress *)getRemoteSocketAddress;
-
-- (JavaNetSocketAddress *)getLocalSocketAddress;
-
-- (void)setReuseAddressWithBoolean:(jboolean)reuse;
-
-- (jboolean)getReuseAddress;
+- (void)sendWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
 - (void)setBroadcastWithBoolean:(jboolean)broadcast;
 
-- (jboolean)getBroadcast;
++ (void)setDatagramSocketImplFactoryWithJavaNetDatagramSocketImplFactory:(id<JavaNetDatagramSocketImplFactory>)fac;
+
+- (void)setNetworkInterfaceWithJavaNetNetworkInterface:(JavaNetNetworkInterface *)netInterface;
+
+- (void)setReceiveBufferSizeWithInt:(jint)size;
+
+- (void)setReuseAddressWithBoolean:(jboolean)reuse;
+
+- (void)setSendBufferSizeWithInt:(jint)size;
+
+- (void)setSoTimeoutWithInt:(jint)timeout;
 
 - (void)setTrafficClassWithInt:(jint)value;
 
-- (jint)getTrafficClass;
+#pragma mark Protected
 
-- (jboolean)isClosed;
+- (instancetype)initWithJavaNetDatagramSocketImpl:(JavaNetDatagramSocketImpl *)socketImpl;
 
-- (JavaNioChannelsDatagramChannel *)getChannel;
+#pragma mark Package-Private
 
-- (JavaIoFileDescriptor *)getFileDescriptor$;
+- (void)checkOpen;
+
+- (void)createSocketWithInt:(jint)aPort
+     withJavaNetInetAddress:(JavaNetInetAddress *)addr;
+
+- (jboolean)isMulticastSocket;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetDatagramSocket_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetDatagramSocket)
 
 J2OBJC_FIELD_SETTER(JavaNetDatagramSocket, impl_, JavaNetDatagramSocketImpl *)
 J2OBJC_FIELD_SETTER(JavaNetDatagramSocket, address_, JavaNetInetAddress *)
-FOUNDATION_EXPORT void JavaNetDatagramSocket_setDatagramSocketImplFactoryWithJavaNetDatagramSocketImplFactory_(id<JavaNetDatagramSocketImplFactory> fac);
 
 FOUNDATION_EXPORT id<JavaNetDatagramSocketImplFactory> JavaNetDatagramSocket_factory_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetDatagramSocket, factory_, id<JavaNetDatagramSocketImplFactory>)
 J2OBJC_STATIC_FIELD_SETTER(JavaNetDatagramSocket, factory_, id<JavaNetDatagramSocketImplFactory>)
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_init(JavaNetDatagramSocket *self);
+
+FOUNDATION_EXPORT JavaNetDatagramSocket *new_JavaNetDatagramSocket_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_initWithInt_(JavaNetDatagramSocket *self, jint aPort);
+
+FOUNDATION_EXPORT JavaNetDatagramSocket *new_JavaNetDatagramSocket_initWithInt_(jint aPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_initWithInt_withJavaNetInetAddress_(JavaNetDatagramSocket *self, jint aPort, JavaNetInetAddress *addr);
+
+FOUNDATION_EXPORT JavaNetDatagramSocket *new_JavaNetDatagramSocket_initWithInt_withJavaNetInetAddress_(jint aPort, JavaNetInetAddress *addr) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_setDatagramSocketImplFactoryWithJavaNetDatagramSocketImplFactory_(id<JavaNetDatagramSocketImplFactory> fac);
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_initWithJavaNetDatagramSocketImpl_(JavaNetDatagramSocket *self, JavaNetDatagramSocketImpl *socketImpl);
+
+FOUNDATION_EXPORT JavaNetDatagramSocket *new_JavaNetDatagramSocket_initWithJavaNetDatagramSocketImpl_(JavaNetDatagramSocketImpl *socketImpl) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramSocket_initWithJavaNetSocketAddress_(JavaNetDatagramSocket *self, JavaNetSocketAddress *localAddr);
+
+FOUNDATION_EXPORT JavaNetDatagramSocket *new_JavaNetDatagramSocket_initWithJavaNetSocketAddress_(JavaNetSocketAddress *localAddr) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetDatagramSocket)
 
 #endif // _JavaNetDatagramSocket_H_

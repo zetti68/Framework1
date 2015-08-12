@@ -6,13 +6,14 @@
 #ifndef _JavaLangReflectTypeVariable_H_
 #define _JavaLangReflectTypeVariable_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/reflect/Type.h"
+
 @class IOSObjectArray;
 @protocol JavaLangReflectGenericDeclaration;
 
-#import "JreEmulation.h"
-#include "java/lang/reflect/Type.h"
-
 @protocol JavaLangReflectTypeVariable < JavaLangReflectType, NSObject, JavaObject >
+
 - (IOSObjectArray *)getBounds;
 
 - (id)getGenericDeclaration;
@@ -21,6 +22,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectTypeVariable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectTypeVariable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectTypeVariable)
 
 #endif // _JavaLangReflectTypeVariable_H_

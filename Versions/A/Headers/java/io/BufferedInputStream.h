@@ -6,12 +6,11 @@
 #ifndef _JavaIoBufferedInputStream_H_
 #define _JavaIoBufferedInputStream_H_
 
-@class IOSByteArray;
-@class JavaIoIOException;
-@class JavaIoInputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/FilterInputStream.h"
+
+@class IOSByteArray;
+@class JavaIoInputStream;
 
 #define JavaIoBufferedInputStream_DEFAULT_BUFFER_SIZE 8192
 
@@ -23,6 +22,8 @@
   jint markpos_;
   jint pos_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
@@ -49,10 +50,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoBufferedInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoBufferedInputStream)
 
 J2OBJC_FIELD_SETTER(JavaIoBufferedInputStream, buf_, IOSByteArray *)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaIoBufferedInputStream, DEFAULT_BUFFER_SIZE, jint)
+
+FOUNDATION_EXPORT void JavaIoBufferedInputStream_initWithJavaIoInputStream_(JavaIoBufferedInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaIoBufferedInputStream *new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoBufferedInputStream_initWithJavaIoInputStream_withInt_(JavaIoBufferedInputStream *self, JavaIoInputStream *inArg, jint size);
+
+FOUNDATION_EXPORT JavaIoBufferedInputStream *new_JavaIoBufferedInputStream_initWithJavaIoInputStream_withInt_(JavaIoInputStream *inArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoBufferedInputStream)
 
 #endif // _JavaIoBufferedInputStream_H_

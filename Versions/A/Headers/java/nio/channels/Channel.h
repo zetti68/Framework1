@@ -6,16 +6,19 @@
 #ifndef _JavaNioChannelsChannel_H_
 #define _JavaNioChannelsChannel_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 
 @protocol JavaNioChannelsChannel < JavaIoCloseable, NSObject, JavaObject >
+
 - (jboolean)isOpen;
 
 - (void)close;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsChannel)
 
 #endif // _JavaNioChannelsChannel_H_

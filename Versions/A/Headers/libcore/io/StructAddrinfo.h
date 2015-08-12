@@ -6,9 +6,9 @@
 #ifndef _LibcoreIoStructAddrinfo_H_
 #define _LibcoreIoStructAddrinfo_H_
 
-@class JavaNetInetAddress;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaNetInetAddress;
 
 @interface LibcoreIoStructAddrinfo : NSObject {
  @public
@@ -20,13 +20,21 @@
   LibcoreIoStructAddrinfo *ai_next_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructAddrinfo_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructAddrinfo)
 
 J2OBJC_FIELD_SETTER(LibcoreIoStructAddrinfo, ai_addr_, JavaNetInetAddress *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructAddrinfo, ai_next_, LibcoreIoStructAddrinfo *)
+
+FOUNDATION_EXPORT void LibcoreIoStructAddrinfo_init(LibcoreIoStructAddrinfo *self);
+
+FOUNDATION_EXPORT LibcoreIoStructAddrinfo *new_LibcoreIoStructAddrinfo_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructAddrinfo)
 
 #endif // _LibcoreIoStructAddrinfo_H_

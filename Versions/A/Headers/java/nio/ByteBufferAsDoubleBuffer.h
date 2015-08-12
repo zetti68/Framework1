@@ -6,17 +6,16 @@
 #ifndef _JavaNioByteBufferAsDoubleBuffer_H_
 #define _JavaNioByteBufferAsDoubleBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/DoubleBuffer.h"
+
 @class IOSDoubleArray;
 @class JavaNioByteBuffer;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/DoubleBuffer.h"
+@interface JavaNioByteBufferAsDoubleBuffer : JavaNioDoubleBuffer
 
-@interface JavaNioByteBufferAsDoubleBuffer : JavaNioDoubleBuffer {
-}
-
-+ (JavaNioDoubleBuffer *)asDoubleBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+#pragma mark Public
 
 - (JavaNioDoubleBuffer *)asReadOnlyBuffer;
 
@@ -26,11 +25,11 @@
 
 - (jdouble)get;
 
-- (jdouble)getWithInt:(jint)index;
-
 - (JavaNioDoubleBuffer *)getWithDoubleArray:(IOSDoubleArray *)dst
                                     withInt:(jint)dstOffset
                                     withInt:(jint)doubleCount;
+
+- (jdouble)getWithInt:(jint)index;
 
 - (jboolean)isDirect;
 
@@ -38,26 +37,33 @@
 
 - (JavaNioByteOrder *)order;
 
+- (JavaNioDoubleBuffer *)putWithDouble:(jdouble)c;
+
+- (JavaNioDoubleBuffer *)putWithDoubleArray:(IOSDoubleArray *)src
+                                    withInt:(jint)srcOffset
+                                    withInt:(jint)doubleCount;
+
+- (JavaNioDoubleBuffer *)putWithInt:(jint)index
+                         withDouble:(jdouble)c;
+
+- (JavaNioDoubleBuffer *)slice;
+
+#pragma mark Package-Private
+
++ (JavaNioDoubleBuffer *)asDoubleBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+
 - (IOSDoubleArray *)protectedArray;
 
 - (jint)protectedArrayOffset;
 
 - (jboolean)protectedHasArray;
 
-- (JavaNioDoubleBuffer *)putWithDouble:(jdouble)c;
-
-- (JavaNioDoubleBuffer *)putWithInt:(jint)index
-                         withDouble:(jdouble)c;
-
-- (JavaNioDoubleBuffer *)putWithDoubleArray:(IOSDoubleArray *)src
-                                    withInt:(jint)srcOffset
-                                    withInt:(jint)doubleCount;
-
-- (JavaNioDoubleBuffer *)slice;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioByteBufferAsDoubleBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioByteBufferAsDoubleBuffer)
+
 FOUNDATION_EXPORT JavaNioDoubleBuffer *JavaNioByteBufferAsDoubleBuffer_asDoubleBufferWithJavaNioByteBuffer_(JavaNioByteBuffer *byteBuffer);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteBufferAsDoubleBuffer)
 
 #endif // _JavaNioByteBufferAsDoubleBuffer_H_

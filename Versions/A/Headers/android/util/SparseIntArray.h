@@ -6,50 +6,59 @@
 #ifndef _AndroidUtilSparseIntArray_H_
 #define _AndroidUtilSparseIntArray_H_
 
-@class IOSIntArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface AndroidUtilSparseIntArray : NSObject < NSCopying >
 
-@interface AndroidUtilSparseIntArray : NSObject < NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialCapacity;
 
+- (void)appendWithInt:(jint)key
+              withInt:(jint)value;
+
+- (void)clear;
+
 - (AndroidUtilSparseIntArray *)clone;
+
+- (void)delete__WithInt:(jint)key;
 
 - (jint)getWithInt:(jint)key;
 
 - (jint)getWithInt:(jint)key
            withInt:(jint)valueIfKeyNotFound;
 
-- (void)delete__WithInt:(jint)key;
-
-- (void)removeAtWithInt:(jint)index;
-
-- (void)putWithInt:(jint)key
-           withInt:(jint)value;
-
-- (jint)size;
-
-- (jint)keyAtWithInt:(jint)index;
-
-- (jint)valueAtWithInt:(jint)index;
-
 - (jint)indexOfKeyWithInt:(jint)key;
 
 - (jint)indexOfValueWithInt:(jint)value;
 
-- (void)clear;
+- (jint)keyAtWithInt:(jint)index;
 
-- (void)appendWithInt:(jint)key
-              withInt:(jint)value;
+- (void)putWithInt:(jint)key
+           withInt:(jint)value;
+
+- (void)removeAtWithInt:(jint)index;
+
+- (jint)size;
 
 - (NSString *)description;
 
+- (jint)valueAtWithInt:(jint)index;
+
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilSparseIntArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilSparseIntArray)
+
+FOUNDATION_EXPORT void AndroidUtilSparseIntArray_init(AndroidUtilSparseIntArray *self);
+
+FOUNDATION_EXPORT AndroidUtilSparseIntArray *new_AndroidUtilSparseIntArray_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void AndroidUtilSparseIntArray_initWithInt_(AndroidUtilSparseIntArray *self, jint initialCapacity);
+
+FOUNDATION_EXPORT AndroidUtilSparseIntArray *new_AndroidUtilSparseIntArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilSparseIntArray)
 
 #endif // _AndroidUtilSparseIntArray_H_

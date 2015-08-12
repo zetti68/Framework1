@@ -6,19 +6,18 @@
 #ifndef _JavaSecuritySignatureException_H_
 #define _JavaSecuritySignatureException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecuritySignatureException_serialVersionUID 7509989324975124438LL
+@class JavaLangThrowable;
 
-@interface JavaSecuritySignatureException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecuritySignatureException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecuritySignatureException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecuritySignatureException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySignatureException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecuritySignatureException_initWithNSString_(JavaSecuritySignatureException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecuritySignatureException *new_JavaSecuritySignatureException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySignatureException_init(JavaSecuritySignatureException *self);
+
+FOUNDATION_EXPORT JavaSecuritySignatureException *new_JavaSecuritySignatureException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySignatureException_initWithNSString_withJavaLangThrowable_(JavaSecuritySignatureException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecuritySignatureException *new_JavaSecuritySignatureException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySignatureException_initWithJavaLangThrowable_(JavaSecuritySignatureException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecuritySignatureException *new_JavaSecuritySignatureException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecuritySignatureException)
 
 #endif // _JavaSecuritySignatureException_H_

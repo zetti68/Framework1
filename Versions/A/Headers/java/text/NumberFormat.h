@@ -6,6 +6,9 @@
 #ifndef _JavaTextNumberFormat_H_
 #define _JavaTextNumberFormat_H_
 
+#include "J2ObjC_header.h"
+#include "java/text/Format.h"
+
 @class IOSObjectArray;
 @class JavaLangStringBuffer;
 @class JavaMathRoundingModeEnum;
@@ -14,17 +17,12 @@
 @class JavaUtilCurrency;
 @class JavaUtilLocale;
 
-#import "JreEmulation.h"
-#include "java/text/Format.h"
-
-#define JavaTextNumberFormat_FRACTION_FIELD 1
 #define JavaTextNumberFormat_INTEGER_FIELD 0
-#define JavaTextNumberFormat_serialVersionUID -2308460125733713944LL
+#define JavaTextNumberFormat_FRACTION_FIELD 1
 
-@interface JavaTextNumberFormat : JavaTextFormat {
-}
+@interface JavaTextNumberFormat : JavaTextFormat
 
-- (instancetype)init;
+#pragma mark Public
 
 - (id)clone;
 
@@ -54,13 +52,13 @@
 
 + (JavaTextNumberFormat *)getCurrencyInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
-+ (JavaTextNumberFormat *)getIntegerInstance;
-
-+ (JavaTextNumberFormat *)getIntegerInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
 + (JavaTextNumberFormat *)getInstance;
 
 + (JavaTextNumberFormat *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
++ (JavaTextNumberFormat *)getIntegerInstance;
+
++ (JavaTextNumberFormat *)getIntegerInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (jint)getMaximumFractionDigits;
 
@@ -77,6 +75,8 @@
 + (JavaTextNumberFormat *)getPercentInstance;
 
 + (JavaTextNumberFormat *)getPercentInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
+- (JavaMathRoundingModeEnum *)getRoundingMode;
 
 - (NSUInteger)hash;
 
@@ -106,44 +106,55 @@
 
 - (void)setParseIntegerOnlyWithBoolean:(jboolean)value;
 
-- (JavaMathRoundingModeEnum *)getRoundingMode;
-
 - (void)setRoundingModeWithJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode;
+
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextNumberFormat_init() {}
-FOUNDATION_EXPORT IOSObjectArray *JavaTextNumberFormat_getAvailableLocales();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getCurrencyInstance();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getCurrencyInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getIntegerInstance();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getIntegerInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getInstance();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getNumberInstance();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getNumberInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getPercentInstance();
-FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getPercentInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat, serialVersionUID, jlong)
+J2OBJC_EMPTY_STATIC_INIT(JavaTextNumberFormat)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat, INTEGER_FIELD, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat, FRACTION_FIELD, jint)
 
-#define JavaTextNumberFormat_Field_serialVersionUID 7494728892700160890LL
+FOUNDATION_EXPORT void JavaTextNumberFormat_init(JavaTextNumberFormat *self);
 
-@interface JavaTextNumberFormat_Field : JavaTextFormat_Field {
-}
+FOUNDATION_EXPORT IOSObjectArray *JavaTextNumberFormat_getAvailableLocales();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getCurrencyInstance();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getCurrencyInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getIntegerInstance();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getIntegerInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getInstance();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getNumberInstance();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getNumberInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getPercentInstance();
+
+FOUNDATION_EXPORT JavaTextNumberFormat *JavaTextNumberFormat_getPercentInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextNumberFormat)
+
+@interface JavaTextNumberFormat_Field : JavaTextFormat_Field
+
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)fieldName;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextNumberFormat_Field_initialized;
 J2OBJC_STATIC_INIT(JavaTextNumberFormat_Field)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat_Field, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaTextNumberFormat_Field *JavaTextNumberFormat_Field_SIGN_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat_Field, SIGN_, JavaTextNumberFormat_Field *)
@@ -177,5 +188,11 @@ J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat_Field, PERMILLE_, JavaTextNumber
 
 FOUNDATION_EXPORT JavaTextNumberFormat_Field *JavaTextNumberFormat_Field_CURRENCY_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextNumberFormat_Field, CURRENCY_, JavaTextNumberFormat_Field *)
+
+FOUNDATION_EXPORT void JavaTextNumberFormat_Field_initWithNSString_(JavaTextNumberFormat_Field *self, NSString *fieldName);
+
+FOUNDATION_EXPORT JavaTextNumberFormat_Field *new_JavaTextNumberFormat_Field_initWithNSString_(NSString *fieldName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextNumberFormat_Field)
 
 #endif // _JavaTextNumberFormat_H_

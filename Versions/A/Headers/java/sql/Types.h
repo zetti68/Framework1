@@ -6,7 +6,7 @@
 #ifndef _JavaSqlTypes_H_
 #define _JavaSqlTypes_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 #define JavaSqlTypes_ARRAY 2003
 #define JavaSqlTypes_BIGINT -5
@@ -24,33 +24,32 @@
 #define JavaSqlTypes_FLOAT 6
 #define JavaSqlTypes_INTEGER 4
 #define JavaSqlTypes_JAVA_OBJECT 2000
-#define JavaSqlTypes_LONGNVARCHAR -16
 #define JavaSqlTypes_LONGVARBINARY -4
 #define JavaSqlTypes_LONGVARCHAR -1
-#define JavaSqlTypes_NCHAR -15
-#define JavaSqlTypes_NCLOB 2011
 #define JavaSqlTypes_NULL 0
 #define JavaSqlTypes_NUMERIC 2
-#define JavaSqlTypes_NVARCHAR -9
 #define JavaSqlTypes_OTHER 1111
 #define JavaSqlTypes_REAL 7
 #define JavaSqlTypes_REF 2006
-#define JavaSqlTypes_ROWID -8
 #define JavaSqlTypes_SMALLINT 5
-#define JavaSqlTypes_SQLXML 2009
 #define JavaSqlTypes_STRUCT 2002
 #define JavaSqlTypes_TIME 92
 #define JavaSqlTypes_TIMESTAMP 93
 #define JavaSqlTypes_TINYINT -6
 #define JavaSqlTypes_VARBINARY -3
 #define JavaSqlTypes_VARCHAR 12
+#define JavaSqlTypes_ROWID -8
+#define JavaSqlTypes_NCHAR -15
+#define JavaSqlTypes_NVARCHAR -9
+#define JavaSqlTypes_LONGNVARCHAR -16
+#define JavaSqlTypes_NCLOB 2011
+#define JavaSqlTypes_SQLXML 2009
 
-@interface JavaSqlTypes : NSObject {
-}
+@interface JavaSqlTypes : NSObject
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlTypes_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlTypes)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlTypes, ARRAY, jint)
 
@@ -123,5 +122,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlTypes, LONGNVARCHAR, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlTypes, NCLOB, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlTypes, SQLXML, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlTypes)
 
 #endif // _JavaSqlTypes_H_

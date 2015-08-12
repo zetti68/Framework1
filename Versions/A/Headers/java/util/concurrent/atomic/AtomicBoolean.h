@@ -6,38 +6,45 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicBoolean_H_
 #define _JavaUtilConcurrentAtomicAtomicBoolean_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicBoolean_serialVersionUID 4654671469794556979LL
+@interface JavaUtilConcurrentAtomicAtomicBoolean : NSObject < JavaIoSerializable >
 
-@interface JavaUtilConcurrentAtomicAtomicBoolean : NSObject < JavaIoSerializable > {
-}
-
-- (instancetype)initWithBoolean:(jboolean)initialValue;
+#pragma mark Public
 
 - (instancetype)init;
 
-- (jboolean)get;
+- (instancetype)initWithBoolean:(jboolean)initialValue;
 
 - (jboolean)compareAndSetWithBoolean:(jboolean)expect
                          withBoolean:(jboolean)update;
 
-- (jboolean)weakCompareAndSetWithBoolean:(jboolean)expect
-                             withBoolean:(jboolean)update;
-
-- (void)setWithBoolean:(jboolean)newValue;
-
-- (void)lazySetWithBoolean:(jboolean)newValue;
+- (jboolean)get;
 
 - (jboolean)getAndSetWithBoolean:(jboolean)newValue;
 
+- (void)lazySetWithBoolean:(jboolean)newValue;
+
+- (void)setWithBoolean:(jboolean)newValue;
+
 - (NSString *)description;
+
+- (jboolean)weakCompareAndSetWithBoolean:(jboolean)expect
+                             withBoolean:(jboolean)update;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicBoolean_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicBoolean)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicBoolean, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(JavaUtilConcurrentAtomicAtomicBoolean *self, jboolean initialValue);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicBoolean *new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(jboolean initialValue) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicBoolean_init(JavaUtilConcurrentAtomicAtomicBoolean *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicBoolean *new_JavaUtilConcurrentAtomicAtomicBoolean_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicBoolean)
 
 #endif // _JavaUtilConcurrentAtomicAtomicBoolean_H_

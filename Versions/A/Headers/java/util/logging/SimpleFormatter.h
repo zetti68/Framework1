@@ -6,13 +6,14 @@
 #ifndef _JavaUtilLoggingSimpleFormatter_H_
 #define _JavaUtilLoggingSimpleFormatter_H_
 
-@class JavaUtilLoggingLogRecord;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/logging/Formatter.h"
 
-@interface JavaUtilLoggingSimpleFormatter : JavaUtilLoggingFormatter {
-}
+@class JavaUtilLoggingLogRecord;
+
+@interface JavaUtilLoggingSimpleFormatter : JavaUtilLoggingFormatter
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,6 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingSimpleFormatter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingSimpleFormatter)
+
+FOUNDATION_EXPORT void JavaUtilLoggingSimpleFormatter_init(JavaUtilLoggingSimpleFormatter *self);
+
+FOUNDATION_EXPORT JavaUtilLoggingSimpleFormatter *new_JavaUtilLoggingSimpleFormatter_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingSimpleFormatter)
 
 #endif // _JavaUtilLoggingSimpleFormatter_H_

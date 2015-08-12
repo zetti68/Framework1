@@ -6,12 +6,14 @@
 #ifndef _JavaLangReflectType_H_
 #define _JavaLangReflectType_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaLangReflectType < NSObject, JavaObject >
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectType_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectType)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectType)
 
 #endif // _JavaLangReflectType_H_

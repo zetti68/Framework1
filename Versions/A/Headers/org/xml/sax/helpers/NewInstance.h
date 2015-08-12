@@ -6,23 +6,32 @@
 #ifndef _OrgXmlSaxHelpersNewInstance_H_
 #define _OrgXmlSaxHelpersNewInstance_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangClassLoader;
 
-#import "JreEmulation.h"
+@interface OrgXmlSaxHelpersNewInstance : NSObject
 
-@interface OrgXmlSaxHelpersNewInstance : NSObject {
-}
-
-+ (id)newInstanceWithNSString:(NSString *)className_ OBJC_METHOD_FAMILY_NONE;
-
-+ (JavaLangClassLoader *)getClassLoader;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
++ (JavaLangClassLoader *)getClassLoader;
+
++ (id)newInstanceWithNSString:(NSString *)className_ OBJC_METHOD_FAMILY_NONE;
+
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersNewInstance_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersNewInstance)
+
 FOUNDATION_EXPORT id OrgXmlSaxHelpersNewInstance_newInstanceWithNSString_(NSString *className_);
+
 FOUNDATION_EXPORT JavaLangClassLoader *OrgXmlSaxHelpersNewInstance_getClassLoader();
+
+FOUNDATION_EXPORT void OrgXmlSaxHelpersNewInstance_init(OrgXmlSaxHelpersNewInstance *self);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersNewInstance *new_OrgXmlSaxHelpersNewInstance_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersNewInstance)
 
 #endif // _OrgXmlSaxHelpersNewInstance_H_

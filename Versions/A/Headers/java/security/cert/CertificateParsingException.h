@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityCertCertificateParsingException_H_
 #define _JavaSecurityCertCertificateParsingException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/cert/CertificateException.h"
 
-#define JavaSecurityCertCertificateParsingException_serialVersionUID -7989222416793322029LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityCertCertificateParsingException : JavaSecurityCertCertificateException {
-}
+@interface JavaSecurityCertCertificateParsingException : JavaSecurityCertCertificateException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateParsingException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateParsingException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateParsingException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificateParsingException_initWithNSString_(JavaSecurityCertCertificateParsingException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateParsingException *new_JavaSecurityCertCertificateParsingException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateParsingException_init(JavaSecurityCertCertificateParsingException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateParsingException *new_JavaSecurityCertCertificateParsingException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateParsingException_initWithNSString_withJavaLangThrowable_(JavaSecurityCertCertificateParsingException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateParsingException *new_JavaSecurityCertCertificateParsingException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateParsingException_initWithJavaLangThrowable_(JavaSecurityCertCertificateParsingException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateParsingException *new_JavaSecurityCertCertificateParsingException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateParsingException)
 
 #endif // _JavaSecurityCertCertificateParsingException_H_

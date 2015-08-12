@@ -6,39 +6,42 @@
 #ifndef _JavaLangDouble_H_
 #define _JavaLangDouble_H_
 
-@class IOSClass;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
+
+@class IOSClass;
 
 #define JavaLangDouble_EXPONENT_BIAS 1023
 #define JavaLangDouble_EXPONENT_BITS 12
-#define JavaLangDouble_EXPONENT_MASK 9218868437227405312LL
 #define JavaLangDouble_MANTISSA_BITS 52
-#define JavaLangDouble_MANTISSA_MASK 4503599627370495LL
-#define JavaLangDouble_MAX_EXPONENT 1023
-#define JavaLangDouble_MAX_VALUE __DBL_MAX__
-#define JavaLangDouble_MIN_EXPONENT -1022
-#define JavaLangDouble_MIN_NORMAL __DBL_MIN__
-#define JavaLangDouble_MIN_VALUE 4.9E-324
-#define JavaLangDouble_NEGATIVE_INFINITY -INFINITY
 #define JavaLangDouble_NON_MANTISSA_BITS 12
+#define JavaLangDouble_SIGN_MASK ((jlong) 0x8000000000000000LL)
+#define JavaLangDouble_EXPONENT_MASK 9218868437227405312LL
+#define JavaLangDouble_MANTISSA_MASK 4503599627370495LL
+#define JavaLangDouble_MAX_VALUE __DBL_MAX__
+#define JavaLangDouble_MIN_VALUE 4.9E-324
 #define JavaLangDouble_NaN NAN
 #define JavaLangDouble_POSITIVE_INFINITY INFINITY
-#define JavaLangDouble_SIGN_MASK ((jlong) 0x8000000000000000LL)
+#define JavaLangDouble_NEGATIVE_INFINITY -INFINITY
+#define JavaLangDouble_MIN_NORMAL __DBL_MIN__
+#define JavaLangDouble_MAX_EXPONENT 1023
+#define JavaLangDouble_MIN_EXPONENT -1022
 #define JavaLangDouble_SIZE 64
-#define JavaLangDouble_serialVersionUID -9172774392245257468LL
 
-@interface JavaLangDouble : NSNumber < JavaLangComparable > {
-}
+@interface JavaLangDouble : NSNumber < JavaLangComparable >
+
+#pragma mark Public
 
 - (instancetype)initWithDouble:(jdouble)value;
 
 - (instancetype)initWithNSString:(NSString *)string;
 
-- (jint)compareToWithId:(JavaLangDouble *)object;
-
 - (jbyte)charValue;
+
++ (jint)compareWithDouble:(jdouble)double1
+               withDouble:(jdouble)double2;
+
+- (jint)compareToWithId:(JavaLangDouble *)object;
 
 + (jlong)doubleToLongBitsWithDouble:(jdouble)value;
 
@@ -70,35 +73,22 @@
 
 - (jshort)shortValue;
 
++ (NSString *)toHexStringWithDouble:(jdouble)d;
+
 - (NSString *)description;
 
 + (NSString *)toStringWithDouble:(jdouble)d;
 
-+ (JavaLangDouble *)valueOfWithNSString:(NSString *)string;
-
-+ (jint)compareWithDouble:(jdouble)double1
-               withDouble:(jdouble)double2;
-
 + (JavaLangDouble *)valueOfWithDouble:(jdouble)d;
 
-+ (NSString *)toHexStringWithDouble:(jdouble)d;
++ (JavaLangDouble *)valueOfWithNSString:(NSString *)string;
+
+#pragma mark Package-Private
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangDouble_initialized;
 J2OBJC_STATIC_INIT(JavaLangDouble)
-FOUNDATION_EXPORT jlong JavaLangDouble_doubleToLongBitsWithDouble_(jdouble value);
-FOUNDATION_EXPORT jlong JavaLangDouble_doubleToRawLongBitsWithDouble_(jdouble value);
-FOUNDATION_EXPORT jboolean JavaLangDouble_isInfiniteWithDouble_(jdouble d);
-FOUNDATION_EXPORT jboolean JavaLangDouble_isNaNWithDouble_(jdouble d);
-FOUNDATION_EXPORT jdouble JavaLangDouble_longBitsToDoubleWithLong_(jlong bits);
-FOUNDATION_EXPORT jdouble JavaLangDouble_parseDoubleWithNSString_(NSString *string);
-FOUNDATION_EXPORT NSString *JavaLangDouble_toStringWithDouble_(jdouble d);
-FOUNDATION_EXPORT JavaLangDouble *JavaLangDouble_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT jint JavaLangDouble_compareWithDouble_withDouble_(jdouble double1, jdouble double2);
-FOUNDATION_EXPORT JavaLangDouble *JavaLangDouble_valueOfWithDouble_(jdouble d);
-FOUNDATION_EXPORT NSString *JavaLangDouble_toHexStringWithDouble_(jdouble d);
 
 FOUNDATION_EXPORT NSString *JavaLangDouble_FLOATING_POINT_REGEX_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, FLOATING_POINT_REGEX_, NSString *)
@@ -116,8 +106,6 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, SIGN_MASK, jlong)
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, EXPONENT_MASK, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, MANTISSA_MASK, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, MAX_VALUE, jdouble)
 
@@ -139,6 +127,38 @@ FOUNDATION_EXPORT IOSClass *JavaLangDouble_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, TYPE_, IOSClass *)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangDouble, SIZE, jint)
+
+FOUNDATION_EXPORT void JavaLangDouble_initWithDouble_(JavaLangDouble *self, jdouble value);
+
+FOUNDATION_EXPORT JavaLangDouble *new_JavaLangDouble_initWithDouble_(jdouble value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangDouble_initWithNSString_(JavaLangDouble *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangDouble *new_JavaLangDouble_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jlong JavaLangDouble_doubleToLongBitsWithDouble_(jdouble value);
+
+FOUNDATION_EXPORT jlong JavaLangDouble_doubleToRawLongBitsWithDouble_(jdouble value);
+
+FOUNDATION_EXPORT jboolean JavaLangDouble_isInfiniteWithDouble_(jdouble d);
+
+FOUNDATION_EXPORT jboolean JavaLangDouble_isNaNWithDouble_(jdouble d);
+
+FOUNDATION_EXPORT jdouble JavaLangDouble_longBitsToDoubleWithLong_(jlong bits);
+
+FOUNDATION_EXPORT jdouble JavaLangDouble_parseDoubleWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT NSString *JavaLangDouble_toStringWithDouble_(jdouble d);
+
+FOUNDATION_EXPORT JavaLangDouble *JavaLangDouble_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jint JavaLangDouble_compareWithDouble_withDouble_(jdouble double1, jdouble double2);
+
+FOUNDATION_EXPORT JavaLangDouble *JavaLangDouble_valueOfWithDouble_(jdouble d);
+
+FOUNDATION_EXPORT NSString *JavaLangDouble_toHexStringWithDouble_(jdouble d);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangDouble)
 
 BOXED_INC_AND_DEC(Double, doubleValue, JavaLangDouble)
 

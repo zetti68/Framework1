@@ -6,12 +6,13 @@
 #ifndef _JavaUtilNavigableSet_H_
 #define _JavaUtilNavigableSet_H_
 
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/SortedSet.h"
 
+@protocol JavaUtilIterator;
+
 @protocol JavaUtilNavigableSet < JavaUtilSortedSet, NSObject, JavaObject >
+
 - (id)lowerWithId:(id)e;
 
 - (id)floorWithId:(id)e;
@@ -48,9 +49,10 @@
 
 - (id<JavaUtilSortedSet>)tailSetWithId:(id)fromElement;
 
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilNavigableSet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilNavigableSet)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilNavigableSet)
 
 #endif // _JavaUtilNavigableSet_H_

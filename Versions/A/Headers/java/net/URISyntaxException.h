@@ -6,33 +6,40 @@
 #ifndef _JavaNetURISyntaxException_H_
 #define _JavaNetURISyntaxException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaNetURISyntaxException_serialVersionUID 2137979680897488891LL
+@interface JavaNetURISyntaxException : JavaLangException
 
-@interface JavaNetURISyntaxException : JavaLangException {
-}
+#pragma mark Public
+
+- (instancetype)initWithNSString:(NSString *)input
+                    withNSString:(NSString *)reason;
 
 - (instancetype)initWithNSString:(NSString *)input
                     withNSString:(NSString *)reason
                          withInt:(jint)index;
 
-- (instancetype)initWithNSString:(NSString *)input
-                    withNSString:(NSString *)reason;
-
 - (jint)getIndex;
-
-- (NSString *)getReason;
 
 - (NSString *)getInput;
 
 - (NSString *)getMessage;
 
+- (NSString *)getReason;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNetURISyntaxException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetURISyntaxException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURISyntaxException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetURISyntaxException_initWithNSString_withNSString_withInt_(JavaNetURISyntaxException *self, NSString *input, NSString *reason, jint index);
+
+FOUNDATION_EXPORT JavaNetURISyntaxException *new_JavaNetURISyntaxException_initWithNSString_withNSString_withInt_(NSString *input, NSString *reason, jint index) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetURISyntaxException_initWithNSString_withNSString_(JavaNetURISyntaxException *self, NSString *input, NSString *reason);
+
+FOUNDATION_EXPORT JavaNetURISyntaxException *new_JavaNetURISyntaxException_initWithNSString_withNSString_(NSString *input, NSString *reason) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURISyntaxException)
 
 #endif // _JavaNetURISyntaxException_H_

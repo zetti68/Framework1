@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsNotYetBoundException_H_
 #define _JavaNioChannelsNotYetBoundException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsNotYetBoundException_serialVersionUID 4640999303950202242LL
+@interface JavaNioChannelsNotYetBoundException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsNotYetBoundException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsNotYetBoundException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsNotYetBoundException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsNotYetBoundException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsNotYetBoundException_init(JavaNioChannelsNotYetBoundException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsNotYetBoundException *new_JavaNioChannelsNotYetBoundException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsNotYetBoundException)
 
 #endif // _JavaNioChannelsNotYetBoundException_H_

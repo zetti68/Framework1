@@ -6,41 +6,44 @@
 #ifndef _JavaLangFloat_H_
 #define _JavaLangFloat_H_
 
-@class IOSClass;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
+
+@class IOSClass;
 
 #define JavaLangFloat_EXPONENT_BIAS 127
 #define JavaLangFloat_EXPONENT_BITS 9
-#define JavaLangFloat_EXPONENT_MASK 2139095040
 #define JavaLangFloat_MANTISSA_BITS 23
-#define JavaLangFloat_MANTISSA_MASK 8388607
-#define JavaLangFloat_MAX_EXPONENT 127
-#define JavaLangFloat_MAX_VALUE __FLT_MAX__
-#define JavaLangFloat_MIN_EXPONENT -126
-#define JavaLangFloat_MIN_NORMAL __FLT_MIN__
-#define JavaLangFloat_MIN_VALUE 1.4E-45f
-#define JavaLangFloat_NEGATIVE_INFINITY -INFINITY
 #define JavaLangFloat_NON_MANTISSA_BITS 9
+#define JavaLangFloat_SIGN_MASK ((jint) 0x80000000)
+#define JavaLangFloat_EXPONENT_MASK 2139095040
+#define JavaLangFloat_MANTISSA_MASK 8388607
+#define JavaLangFloat_MAX_VALUE __FLT_MAX__
+#define JavaLangFloat_MIN_VALUE 1.4E-45f
 #define JavaLangFloat_NaN NAN
 #define JavaLangFloat_POSITIVE_INFINITY INFINITY
-#define JavaLangFloat_SIGN_MASK ((jint) 0x80000000)
+#define JavaLangFloat_NEGATIVE_INFINITY -INFINITY
+#define JavaLangFloat_MIN_NORMAL __FLT_MIN__
+#define JavaLangFloat_MAX_EXPONENT 127
+#define JavaLangFloat_MIN_EXPONENT -126
 #define JavaLangFloat_SIZE 32
-#define JavaLangFloat_serialVersionUID -2671257302660747028LL
 
-@interface JavaLangFloat : NSNumber < JavaLangComparable > {
-}
+@interface JavaLangFloat : NSNumber < JavaLangComparable >
 
-- (instancetype)initWithFloat:(jfloat)value;
+#pragma mark Public
 
 - (instancetype)initWithDouble:(jdouble)value;
 
+- (instancetype)initWithFloat:(jfloat)value;
+
 - (instancetype)initWithNSString:(NSString *)string;
 
-- (jint)compareToWithId:(JavaLangFloat *)object;
-
 - (jbyte)charValue;
+
++ (jint)compareWithFloat:(jfloat)float1
+               withFloat:(jfloat)float2;
+
+- (jint)compareToWithId:(JavaLangFloat *)object;
 
 - (jdouble)doubleValue;
 
@@ -72,35 +75,22 @@
 
 - (jshort)shortValue;
 
++ (NSString *)toHexStringWithFloat:(jfloat)f;
+
 - (NSString *)description;
 
 + (NSString *)toStringWithFloat:(jfloat)f;
 
-+ (JavaLangFloat *)valueOfWithNSString:(NSString *)string;
-
-+ (jint)compareWithFloat:(jfloat)float1
-               withFloat:(jfloat)float2;
-
 + (JavaLangFloat *)valueOfWithFloat:(jfloat)f;
 
-+ (NSString *)toHexStringWithFloat:(jfloat)f;
++ (JavaLangFloat *)valueOfWithNSString:(NSString *)string;
+
+#pragma mark Package-Private
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangFloat_initialized;
 J2OBJC_STATIC_INIT(JavaLangFloat)
-FOUNDATION_EXPORT jint JavaLangFloat_floatToIntBitsWithFloat_(jfloat value);
-FOUNDATION_EXPORT jint JavaLangFloat_floatToRawIntBitsWithFloat_(jfloat value);
-FOUNDATION_EXPORT jfloat JavaLangFloat_intBitsToFloatWithInt_(jint bits);
-FOUNDATION_EXPORT jboolean JavaLangFloat_isInfiniteWithFloat_(jfloat f);
-FOUNDATION_EXPORT jboolean JavaLangFloat_isNaNWithFloat_(jfloat f);
-FOUNDATION_EXPORT jfloat JavaLangFloat_parseFloatWithNSString_(NSString *string);
-FOUNDATION_EXPORT NSString *JavaLangFloat_toStringWithFloat_(jfloat f);
-FOUNDATION_EXPORT JavaLangFloat *JavaLangFloat_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT jint JavaLangFloat_compareWithFloat_withFloat_(jfloat float1, jfloat float2);
-FOUNDATION_EXPORT JavaLangFloat *JavaLangFloat_valueOfWithFloat_(jfloat f);
-FOUNDATION_EXPORT NSString *JavaLangFloat_toHexStringWithFloat_(jfloat f);
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, EXPONENT_BIAS, jint)
 
@@ -115,8 +105,6 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, SIGN_MASK, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, EXPONENT_MASK, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, MANTISSA_MASK, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, MAX_VALUE, jfloat)
 
@@ -138,6 +126,42 @@ FOUNDATION_EXPORT IOSClass *JavaLangFloat_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, TYPE_, IOSClass *)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangFloat, SIZE, jint)
+
+FOUNDATION_EXPORT void JavaLangFloat_initWithFloat_(JavaLangFloat *self, jfloat value);
+
+FOUNDATION_EXPORT JavaLangFloat *new_JavaLangFloat_initWithFloat_(jfloat value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangFloat_initWithDouble_(JavaLangFloat *self, jdouble value);
+
+FOUNDATION_EXPORT JavaLangFloat *new_JavaLangFloat_initWithDouble_(jdouble value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangFloat_initWithNSString_(JavaLangFloat *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangFloat *new_JavaLangFloat_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangFloat_floatToIntBitsWithFloat_(jfloat value);
+
+FOUNDATION_EXPORT jint JavaLangFloat_floatToRawIntBitsWithFloat_(jfloat value);
+
+FOUNDATION_EXPORT jfloat JavaLangFloat_intBitsToFloatWithInt_(jint bits);
+
+FOUNDATION_EXPORT jboolean JavaLangFloat_isInfiniteWithFloat_(jfloat f);
+
+FOUNDATION_EXPORT jboolean JavaLangFloat_isNaNWithFloat_(jfloat f);
+
+FOUNDATION_EXPORT jfloat JavaLangFloat_parseFloatWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT NSString *JavaLangFloat_toStringWithFloat_(jfloat f);
+
+FOUNDATION_EXPORT JavaLangFloat *JavaLangFloat_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jint JavaLangFloat_compareWithFloat_withFloat_(jfloat float1, jfloat float2);
+
+FOUNDATION_EXPORT JavaLangFloat *JavaLangFloat_valueOfWithFloat_(jfloat f);
+
+FOUNDATION_EXPORT NSString *JavaLangFloat_toHexStringWithFloat_(jfloat f);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangFloat)
 
 BOXED_INC_AND_DEC(Float, floatValue, JavaLangFloat)
 

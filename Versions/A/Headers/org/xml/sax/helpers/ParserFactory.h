@@ -6,12 +6,13 @@
 #ifndef _OrgXmlSaxHelpersParserFactory_H_
 #define _OrgXmlSaxHelpersParserFactory_H_
 
+#include "J2ObjC_header.h"
+
 @protocol OrgXmlSaxParser;
 
-#import "JreEmulation.h"
+@interface OrgXmlSaxHelpersParserFactory : NSObject
 
-@interface OrgXmlSaxHelpersParserFactory : NSObject {
-}
+#pragma mark Public
 
 + (id<OrgXmlSaxParser>)makeParser;
 
@@ -19,8 +20,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersParserFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersParserFactory)
+
 FOUNDATION_EXPORT id<OrgXmlSaxParser> OrgXmlSaxHelpersParserFactory_makeParser();
+
 FOUNDATION_EXPORT id<OrgXmlSaxParser> OrgXmlSaxHelpersParserFactory_makeParserWithNSString_(NSString *className_);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersParserFactory)
 
 #endif // _OrgXmlSaxHelpersParserFactory_H_

@@ -6,15 +6,14 @@
 #ifndef _JavaSecurityAccessControlException_H_
 #define _JavaSecurityAccessControlException_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/SecurityException.h"
 
-#define JavaSecurityAccessControlException_serialVersionUID 5138225684096988535LL
+@class JavaSecurityPermission;
 
-@interface JavaSecurityAccessControlException : JavaLangSecurityException {
-}
+@interface JavaSecurityAccessControlException : JavaLangSecurityException
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)message;
 
@@ -25,8 +24,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityAccessControlException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityAccessControlException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityAccessControlException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityAccessControlException_initWithNSString_(JavaSecurityAccessControlException *self, NSString *message);
+
+FOUNDATION_EXPORT JavaSecurityAccessControlException *new_JavaSecurityAccessControlException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityAccessControlException_initWithNSString_withJavaSecurityPermission_(JavaSecurityAccessControlException *self, NSString *message, JavaSecurityPermission *perm);
+
+FOUNDATION_EXPORT JavaSecurityAccessControlException *new_JavaSecurityAccessControlException_initWithNSString_withJavaSecurityPermission_(NSString *message, JavaSecurityPermission *perm) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityAccessControlException)
 
 #endif // _JavaSecurityAccessControlException_H_

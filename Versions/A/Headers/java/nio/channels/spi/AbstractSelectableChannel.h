@@ -6,47 +6,56 @@
 #ifndef _JavaNioChannelsSpiAbstractSelectableChannel_H_
 #define _JavaNioChannelsSpiAbstractSelectableChannel_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/SelectableChannel.h"
+
 @class JavaNioChannelsSelectionKey;
 @class JavaNioChannelsSelector;
 @class JavaNioChannelsSpiSelectorProvider;
-@protocol JavaUtilList;
-
-#import "JreEmulation.h"
-#include "java/nio/channels/SelectableChannel.h"
 
 @interface JavaNioChannelsSpiAbstractSelectableChannel : JavaNioChannelsSelectableChannel {
  @public
   jboolean isBlocking__;
 }
 
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
-
-- (JavaNioChannelsSpiSelectorProvider *)provider;
-
-- (jboolean)isRegistered;
-
-- (JavaNioChannelsSelectionKey *)keyForWithJavaNioChannelsSelector:(JavaNioChannelsSelector *)selector;
-
-- (JavaNioChannelsSelectionKey *)register__WithJavaNioChannelsSelector:(JavaNioChannelsSelector *)selector
-                                                               withInt:(jint)interestSet
-                                                                withId:(id)attachment;
-
-- (void)implCloseChannel;
-
-- (void)implCloseSelectableChannel;
-
-- (jboolean)isBlocking;
+#pragma mark Public
 
 - (id)blockingLock;
 
 - (JavaNioChannelsSelectableChannel *)configureBlockingWithBoolean:(jboolean)blockingMode;
 
+- (jboolean)isBlocking;
+
+- (jboolean)isRegistered;
+
+- (JavaNioChannelsSelectionKey *)keyForWithJavaNioChannelsSelector:(JavaNioChannelsSelector *)selector;
+
+- (JavaNioChannelsSpiSelectorProvider *)provider;
+
+- (JavaNioChannelsSelectionKey *)register__WithJavaNioChannelsSelector:(JavaNioChannelsSelector *)selector
+                                                               withInt:(jint)interestSet
+                                                                withId:(id)attachment;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
+
+- (void)implCloseChannel;
+
+- (void)implCloseSelectableChannel;
+
 - (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
+
+#pragma mark Package-Private
 
 - (void)deregisterWithJavaNioChannelsSelectionKey:(JavaNioChannelsSelectionKey *)k;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractSelectableChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSpiAbstractSelectableChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsSpiAbstractSelectableChannel_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiAbstractSelectableChannel *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSpiAbstractSelectableChannel)
 
 #endif // _JavaNioChannelsSpiAbstractSelectableChannel_H_

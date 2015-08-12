@@ -6,16 +6,15 @@
 #ifndef _JavaSqlSQLWarning_H_
 #define _JavaSqlSQLWarning_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/sql/SQLException.h"
 
-#define JavaSqlSQLWarning_serialVersionUID 3917336774604784856LL
+@class JavaLangThrowable;
 
-@interface JavaSqlSQLWarning : JavaSqlSQLException < JavaIoSerializable > {
-}
+@interface JavaSqlSQLWarning : JavaSqlSQLException < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -28,29 +27,63 @@
                     withNSString:(NSString *)theSQLState
                          withInt:(jint)theErrorCode;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-                    withNSString:(NSString *)SQLState
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
 - (instancetype)initWithNSString:(NSString *)reason
                     withNSString:(NSString *)SQLState
                          withInt:(jint)vendorCode
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
+- (instancetype)initWithNSString:(NSString *)reason
+                    withNSString:(NSString *)SQLState
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithNSString:(NSString *)reason
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+
 - (JavaSqlSQLWarning *)getNextWarning;
 
 - (void)setNextWarningWithJavaSqlSQLWarning:(JavaSqlSQLWarning *)w;
 
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLWarning_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLWarning)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlSQLWarning, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSqlSQLWarning_init(JavaSqlSQLWarning *self);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_(JavaSqlSQLWarning *self, NSString *theReason);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_(NSString *theReason) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_withNSString_(JavaSqlSQLWarning *self, NSString *theReason, NSString *theSQLState);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_withNSString_(NSString *theReason, NSString *theSQLState) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_withNSString_withInt_(JavaSqlSQLWarning *self, NSString *theReason, NSString *theSQLState, jint theErrorCode);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_withNSString_withInt_(NSString *theReason, NSString *theSQLState, jint theErrorCode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithJavaLangThrowable_(JavaSqlSQLWarning *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_withJavaLangThrowable_(JavaSqlSQLWarning *self, NSString *reason, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_withJavaLangThrowable_(NSString *reason, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_withNSString_withJavaLangThrowable_(JavaSqlSQLWarning *self, NSString *reason, NSString *SQLState, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_withNSString_withJavaLangThrowable_(NSString *reason, NSString *SQLState, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLWarning_initWithNSString_withNSString_withInt_withJavaLangThrowable_(JavaSqlSQLWarning *self, NSString *reason, NSString *SQLState, jint vendorCode, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLWarning *new_JavaSqlSQLWarning_initWithNSString_withNSString_withInt_withJavaLangThrowable_(NSString *reason, NSString *SQLState, jint vendorCode, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLWarning)
 
 #endif // _JavaSqlSQLWarning_H_

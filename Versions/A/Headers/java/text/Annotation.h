@@ -6,10 +6,11 @@
 #ifndef _JavaTextAnnotation_H_
 #define _JavaTextAnnotation_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface JavaTextAnnotation : NSObject {
-}
+@interface JavaTextAnnotation : NSObject
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)attribute;
 
@@ -19,6 +20,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextAnnotation_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextAnnotation)
+
+FOUNDATION_EXPORT void JavaTextAnnotation_initWithId_(JavaTextAnnotation *self, id attribute);
+
+FOUNDATION_EXPORT JavaTextAnnotation *new_JavaTextAnnotation_initWithId_(id attribute) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAnnotation)
 
 #endif // _JavaTextAnnotation_H_

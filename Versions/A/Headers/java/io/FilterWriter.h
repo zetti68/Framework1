@@ -6,17 +6,17 @@
 #ifndef _JavaIoFilterWriter_H_
 #define _JavaIoFilterWriter_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Writer.h"
+
+@class IOSCharArray;
 
 @interface JavaIoFilterWriter : JavaIoWriter {
  @public
   JavaIoWriter *out_;
 }
 
-- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)outArg;
+#pragma mark Public
 
 - (void)close;
 
@@ -32,10 +32,18 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)outArg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoFilterWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFilterWriter)
 
 J2OBJC_FIELD_SETTER(JavaIoFilterWriter, out_, JavaIoWriter *)
+
+FOUNDATION_EXPORT void JavaIoFilterWriter_initWithJavaIoWriter_(JavaIoFilterWriter *self, JavaIoWriter *outArg);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFilterWriter)
 
 #endif // _JavaIoFilterWriter_H_

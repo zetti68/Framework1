@@ -6,17 +6,17 @@
 #ifndef _JavaIoFileOutputStream_H_
 #define _JavaIoFileOutputStream_H_
 
-@class DalvikSystemCloseGuard;
+#include "J2ObjC_header.h"
+#include "java/io/OutputStream.h"
+
 @class IOSByteArray;
 @class JavaIoFile;
 @class JavaIoFileDescriptor;
 @class JavaNioChannelsFileChannel;
 
-#import "JreEmulation.h"
-#include "java/io/OutputStream.h"
+@interface JavaIoFileOutputStream : JavaIoOutputStream
 
-@interface JavaIoFileOutputStream : JavaIoOutputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
@@ -32,8 +32,6 @@
 
 - (void)close;
 
-- (void)dealloc;
-
 - (JavaNioChannelsFileChannel *)getChannel;
 
 - (JavaIoFileDescriptor *)getFD;
@@ -44,8 +42,34 @@
 
 - (void)writeWithInt:(jint)oneByte;
 
+#pragma mark Protected
+
+- (void)dealloc;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileOutputStream)
+
+FOUNDATION_EXPORT void JavaIoFileOutputStream_initWithJavaIoFile_(JavaIoFileOutputStream *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoFileOutputStream *new_JavaIoFileOutputStream_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileOutputStream_initWithJavaIoFile_withBoolean_(JavaIoFileOutputStream *self, JavaIoFile *file, jboolean append);
+
+FOUNDATION_EXPORT JavaIoFileOutputStream *new_JavaIoFileOutputStream_initWithJavaIoFile_withBoolean_(JavaIoFile *file, jboolean append) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileOutputStream_initWithJavaIoFileDescriptor_(JavaIoFileOutputStream *self, JavaIoFileDescriptor *fd);
+
+FOUNDATION_EXPORT JavaIoFileOutputStream *new_JavaIoFileOutputStream_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileOutputStream_initWithNSString_(JavaIoFileOutputStream *self, NSString *path);
+
+FOUNDATION_EXPORT JavaIoFileOutputStream *new_JavaIoFileOutputStream_initWithNSString_(NSString *path) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileOutputStream_initWithNSString_withBoolean_(JavaIoFileOutputStream *self, NSString *path, jboolean append);
+
+FOUNDATION_EXPORT JavaIoFileOutputStream *new_JavaIoFileOutputStream_initWithNSString_withBoolean_(NSString *path, jboolean append) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileOutputStream)
 
 #endif // _JavaIoFileOutputStream_H_

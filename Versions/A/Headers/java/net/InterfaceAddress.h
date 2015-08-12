@@ -6,14 +6,29 @@
 #ifndef _JavaNetInterfaceAddress_H_
 #define _JavaNetInterfaceAddress_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNetInet4Address;
 @class JavaNetInet6Address;
 @class JavaNetInetAddress;
 
-#import "JreEmulation.h"
+@interface JavaNetInterfaceAddress : NSObject
 
-@interface JavaNetInterfaceAddress : NSObject {
-}
+#pragma mark Public
+
+- (jboolean)isEqual:(id)obj;
+
+- (JavaNetInetAddress *)getAddress;
+
+- (JavaNetInetAddress *)getBroadcast;
+
+- (jshort)getNetworkPrefixLength;
+
+- (NSUInteger)hash;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaNetInet4Address:(JavaNetInet4Address *)address
                     withJavaNetInet4Address:(JavaNetInet4Address *)broadcastAddress
@@ -22,20 +37,18 @@
 - (instancetype)initWithJavaNetInet6Address:(JavaNetInet6Address *)address
                                   withShort:(jshort)prefixLength;
 
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
-- (JavaNetInetAddress *)getAddress;
-
-- (JavaNetInetAddress *)getBroadcast;
-
-- (jshort)getNetworkPrefixLength;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetInterfaceAddress_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetInterfaceAddress)
+
+FOUNDATION_EXPORT void JavaNetInterfaceAddress_initWithJavaNetInet4Address_withJavaNetInet4Address_withJavaNetInet4Address_(JavaNetInterfaceAddress *self, JavaNetInet4Address *address, JavaNetInet4Address *broadcastAddress, JavaNetInet4Address *mask);
+
+FOUNDATION_EXPORT JavaNetInterfaceAddress *new_JavaNetInterfaceAddress_initWithJavaNetInet4Address_withJavaNetInet4Address_withJavaNetInet4Address_(JavaNetInet4Address *address, JavaNetInet4Address *broadcastAddress, JavaNetInet4Address *mask) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInterfaceAddress_initWithJavaNetInet6Address_withShort_(JavaNetInterfaceAddress *self, JavaNetInet6Address *address, jshort prefixLength);
+
+FOUNDATION_EXPORT JavaNetInterfaceAddress *new_JavaNetInterfaceAddress_initWithJavaNetInet6Address_withShort_(JavaNetInet6Address *address, jshort prefixLength) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInterfaceAddress)
 
 #endif // _JavaNetInterfaceAddress_H_

@@ -6,30 +6,15 @@
 #ifndef _JavaUtilConcurrentPhaser_H_
 #define _JavaUtilConcurrentPhaser_H_
 
-@class JavaLangThread;
-@class JavaUtilConcurrentAtomicAtomicReference;
-@class JavaUtilConcurrentPhaser_QNode;
-@class JavaUtilConcurrentTimeUnitEnum;
-@class SunMiscUnsafe;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/concurrent/ForkJoinPool.h"
 
-#define JavaUtilConcurrentPhaser_COUNTS_MASK 4294967295LL
-#define JavaUtilConcurrentPhaser_EMPTY 1
-#define JavaUtilConcurrentPhaser_MAX_PARTIES 65535
-#define JavaUtilConcurrentPhaser_MAX_PHASE 2147483647
-#define JavaUtilConcurrentPhaser_ONE_ARRIVAL 1
-#define JavaUtilConcurrentPhaser_ONE_DEREGISTER 65537
-#define JavaUtilConcurrentPhaser_ONE_PARTY 65536
-#define JavaUtilConcurrentPhaser_PARTIES_MASK 4294901760LL
-#define JavaUtilConcurrentPhaser_PARTIES_SHIFT 16
-#define JavaUtilConcurrentPhaser_PHASE_SHIFT 32
-#define JavaUtilConcurrentPhaser_TERMINATION_BIT ((jlong) 0x8000000000000000LL)
-#define JavaUtilConcurrentPhaser_UNARRIVED_MASK 65535
+@class JavaLangThread;
+@class JavaUtilConcurrentTimeUnitEnum;
 
-@interface JavaUtilConcurrentPhaser : NSObject {
-}
+@interface JavaUtilConcurrentPhaser : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -40,15 +25,11 @@
 - (instancetype)initWithJavaUtilConcurrentPhaser:(JavaUtilConcurrentPhaser *)parent
                                          withInt:(jint)parties;
 
-- (jint)register__;
-
-- (jint)bulkRegisterWithInt:(jint)parties;
-
 - (jint)arrive;
 
-- (jint)arriveAndDeregister;
-
 - (jint)arriveAndAwaitAdvance;
+
+- (jint)arriveAndDeregister;
 
 - (jint)awaitAdvanceWithInt:(jint)phase;
 
@@ -58,67 +39,57 @@
                                 withLong:(jlong)timeout
       withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
+- (jint)bulkRegisterWithInt:(jint)parties;
+
 - (void)forceTermination;
+
+- (jint)getArrivedParties;
+
+- (JavaUtilConcurrentPhaser *)getParent;
 
 - (jint)getPhase;
 
 - (jint)getRegisteredParties;
 
-- (jint)getArrivedParties;
+- (JavaUtilConcurrentPhaser *)getRoot;
 
 - (jint)getUnarrivedParties;
 
-- (JavaUtilConcurrentPhaser *)getParent;
-
-- (JavaUtilConcurrentPhaser *)getRoot;
-
 - (jboolean)isTerminated;
+
+- (jint)register__;
+
+- (NSString *)description;
+
+#pragma mark Protected
 
 - (jboolean)onAdvanceWithInt:(jint)phase
                      withInt:(jint)registeredParties;
 
-- (NSString *)description;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentPhaser_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentPhaser)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, MAX_PARTIES, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, MAX_PHASE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, PARTIES_SHIFT, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, PHASE_SHIFT, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, UNARRIVED_MASK, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, PARTIES_MASK, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, COUNTS_MASK, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, TERMINATION_BIT, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, ONE_ARRIVAL, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, ONE_PARTY, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, ONE_DEREGISTER, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, EMPTY, jint)
-
-FOUNDATION_EXPORT jint JavaUtilConcurrentPhaser_NCPU_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, NCPU_, jint)
 
 FOUNDATION_EXPORT jint JavaUtilConcurrentPhaser_SPINS_PER_ARRIVAL_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, SPINS_PER_ARRIVAL_, jint)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentPhaser_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT void JavaUtilConcurrentPhaser_init(JavaUtilConcurrentPhaser *self);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentPhaser_stateOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, stateOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentPhaser *new_JavaUtilConcurrentPhaser_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPhaser_initWithInt_(JavaUtilConcurrentPhaser *self, jint parties);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPhaser *new_JavaUtilConcurrentPhaser_initWithInt_(jint parties) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPhaser_initWithJavaUtilConcurrentPhaser_(JavaUtilConcurrentPhaser *self, JavaUtilConcurrentPhaser *parent);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPhaser *new_JavaUtilConcurrentPhaser_initWithJavaUtilConcurrentPhaser_(JavaUtilConcurrentPhaser *parent) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPhaser_initWithJavaUtilConcurrentPhaser_withInt_(JavaUtilConcurrentPhaser *self, JavaUtilConcurrentPhaser *parent, jint parties);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPhaser *new_JavaUtilConcurrentPhaser_initWithJavaUtilConcurrentPhaser_withInt_(JavaUtilConcurrentPhaser *parent, jint parties) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentPhaser)
 
 @interface JavaUtilConcurrentPhaser_QNode : NSObject < JavaUtilConcurrentForkJoinPool_ManagedBlocker > {
  @public
@@ -133,22 +104,32 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPhaser, stateOffset_, jlong)
   JavaUtilConcurrentPhaser_QNode *next_;
 }
 
+#pragma mark Public
+
+- (jboolean)block;
+
+- (jboolean)isReleasable;
+
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentPhaser:(JavaUtilConcurrentPhaser *)phaser
                                          withInt:(jint)phase
                                      withBoolean:(jboolean)interruptible
                                      withBoolean:(jboolean)timed
                                         withLong:(jlong)nanos;
 
-- (jboolean)isReleasable;
-
-- (jboolean)block;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentPhaser_QNode_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentPhaser_QNode)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentPhaser_QNode, phaser_, JavaUtilConcurrentPhaser *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentPhaser_QNode, thread_, JavaLangThread *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentPhaser_QNode, next_, JavaUtilConcurrentPhaser_QNode *)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPhaser_QNode_initWithJavaUtilConcurrentPhaser_withInt_withBoolean_withBoolean_withLong_(JavaUtilConcurrentPhaser_QNode *self, JavaUtilConcurrentPhaser *phaser, jint phase, jboolean interruptible, jboolean timed, jlong nanos);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPhaser_QNode *new_JavaUtilConcurrentPhaser_QNode_initWithJavaUtilConcurrentPhaser_withInt_withBoolean_withBoolean_withLong_(JavaUtilConcurrentPhaser *phaser, jint phase, jboolean interruptible, jboolean timed, jlong nanos) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentPhaser_QNode)
 
 #endif // _JavaUtilConcurrentPhaser_H_

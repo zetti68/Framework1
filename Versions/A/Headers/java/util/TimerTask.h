@@ -6,7 +6,7 @@
 #ifndef _JavaUtilTimerTask_H_
 #define _JavaUtilTimerTask_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Runnable.h"
 
 @interface JavaUtilTimerTask : NSObject < JavaLangRunnable > {
@@ -18,24 +18,34 @@
   jboolean fixedRate_;
 }
 
-- (jlong)getWhen;
-
-- (void)setScheduledTimeWithLong:(jlong)time;
-
-- (jboolean)isScheduled;
-
-- (instancetype)init;
+#pragma mark Public
 
 - (jboolean)cancel;
 
+- (void)run;
+
 - (jlong)scheduledExecutionTime;
 
-- (void)run;
+#pragma mark Protected
+
+- (instancetype)init;
+
+#pragma mark Package-Private
+
+- (jlong)getWhen;
+
+- (jboolean)isScheduled;
+
+- (void)setScheduledTimeWithLong:(jlong)time;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTimerTask_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTimerTask)
 
 J2OBJC_FIELD_SETTER(JavaUtilTimerTask, lock_, id)
+
+FOUNDATION_EXPORT void JavaUtilTimerTask_init(JavaUtilTimerTask *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTimerTask)
 
 #endif // _JavaUtilTimerTask_H_

@@ -6,20 +6,23 @@
 #ifndef _JavaNioReadOnlyBufferException_H_
 #define _JavaNioReadOnlyBufferException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/UnsupportedOperationException.h"
 
-#define JavaNioReadOnlyBufferException_serialVersionUID -1210063976496234090LL
+@interface JavaNioReadOnlyBufferException : JavaLangUnsupportedOperationException
 
-@interface JavaNioReadOnlyBufferException : JavaLangUnsupportedOperationException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioReadOnlyBufferException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioReadOnlyBufferException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioReadOnlyBufferException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioReadOnlyBufferException_init(JavaNioReadOnlyBufferException *self);
+
+FOUNDATION_EXPORT JavaNioReadOnlyBufferException *new_JavaNioReadOnlyBufferException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioReadOnlyBufferException)
 
 #endif // _JavaNioReadOnlyBufferException_H_

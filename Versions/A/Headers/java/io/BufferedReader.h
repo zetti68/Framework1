@@ -6,13 +6,14 @@
 #ifndef _JavaIoBufferedReader_H_
 #define _JavaIoBufferedReader_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Reader.h"
 
-@interface JavaIoBufferedReader : JavaIoReader {
-}
+@class IOSCharArray;
+
+@interface JavaIoBufferedReader : JavaIoReader
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
 
@@ -31,8 +32,6 @@
                   withInt:(jint)offset
                   withInt:(jint)length;
 
-- (void)chompNewline;
-
 - (NSString *)readLine;
 
 - (jboolean)ready;
@@ -41,8 +40,22 @@
 
 - (jlong)skipWithLong:(jlong)charCount;
 
+#pragma mark Package-Private
+
+- (void)chompNewline;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoBufferedReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoBufferedReader)
+
+FOUNDATION_EXPORT void JavaIoBufferedReader_initWithJavaIoReader_(JavaIoBufferedReader *self, JavaIoReader *inArg);
+
+FOUNDATION_EXPORT JavaIoBufferedReader *new_JavaIoBufferedReader_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoBufferedReader_initWithJavaIoReader_withInt_(JavaIoBufferedReader *self, JavaIoReader *inArg, jint size);
+
+FOUNDATION_EXPORT JavaIoBufferedReader *new_JavaIoBufferedReader_initWithJavaIoReader_withInt_(JavaIoReader *inArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoBufferedReader)
 
 #endif // _JavaIoBufferedReader_H_

@@ -6,23 +6,32 @@
 #ifndef _ComGoogleJ2objcNetIosHttpHandler_H_
 #define _ComGoogleJ2objcNetIosHttpHandler_H_
 
+#include "J2ObjC_header.h"
+#include "java/net/URLStreamHandler.h"
+
 @class JavaNetURL;
 @class JavaNetURLConnection;
 
-#import "JreEmulation.h"
-#include "java/net/URLStreamHandler.h"
+@interface ComGoogleJ2objcNetIosHttpHandler : JavaNetURLStreamHandler
 
-@interface ComGoogleJ2objcNetIosHttpHandler : JavaNetURLStreamHandler {
-}
-
-- (JavaNetURLConnection *)openConnectionWithJavaNetURL:(JavaNetURL *)url;
-
-- (jint)getDefaultPort;
+#pragma mark Public
 
 - (instancetype)init;
 
+#pragma mark Protected
+
+- (jint)getDefaultPort;
+
+- (JavaNetURLConnection *)openConnectionWithJavaNetURL:(JavaNetURL *)url;
+
 @end
 
-__attribute__((always_inline)) inline void ComGoogleJ2objcNetIosHttpHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleJ2objcNetIosHttpHandler)
+
+FOUNDATION_EXPORT void ComGoogleJ2objcNetIosHttpHandler_init(ComGoogleJ2objcNetIosHttpHandler *self);
+
+FOUNDATION_EXPORT ComGoogleJ2objcNetIosHttpHandler *new_ComGoogleJ2objcNetIosHttpHandler_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcNetIosHttpHandler)
 
 #endif // _ComGoogleJ2objcNetIosHttpHandler_H_

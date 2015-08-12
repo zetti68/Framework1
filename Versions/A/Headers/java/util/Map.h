@@ -6,10 +6,10 @@
 #ifndef _JavaUtilMap_H_
 #define _JavaUtilMap_H_
 
+#include "J2ObjC_header.h"
+
 @protocol JavaUtilCollection;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilMap < NSObject, JavaObject >
 
@@ -44,7 +44,9 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilMap)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilMap)
 
 @protocol JavaUtilMap_Entry < NSObject, JavaObject >
 
@@ -60,6 +62,8 @@ __attribute__((always_inline)) inline void JavaUtilMap_init() {}
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilMap_Entry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilMap_Entry)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilMap_Entry)
 
 #endif // _JavaUtilMap_H_

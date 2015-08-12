@@ -6,6 +6,9 @@
 #ifndef _JavaIoPrintWriter_H_
 #define _JavaIoPrintWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Writer.h"
+
 @class IOSCharArray;
 @class IOSObjectArray;
 @class JavaIoFile;
@@ -13,59 +16,59 @@
 @class JavaUtilLocale;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "java/io/Writer.h"
-
 @interface JavaIoPrintWriter : JavaIoWriter {
  @public
   JavaIoWriter *out_;
 }
 
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
-
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
-                               withBoolean:(jboolean)autoFlush;
-
-- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)wr;
-
-- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)wr
-                         withBoolean:(jboolean)autoFlush;
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file
                       withNSString:(NSString *)csn;
 
+- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
+
+- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
+                               withBoolean:(jboolean)autoFlush;
+
 - (instancetype)initWithNSString:(NSString *)fileName;
 
 - (instancetype)initWithNSString:(NSString *)fileName
                     withNSString:(NSString *)csn;
 
-- (jboolean)checkError;
+- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)wr;
 
-- (void)clearError;
+- (instancetype)initWithJavaIoWriter:(JavaIoWriter *)wr
+                         withBoolean:(jboolean)autoFlush;
+
+- (JavaIoPrintWriter *)appendWithChar:(jchar)c;
+
+- (JavaIoPrintWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+
+- (JavaIoPrintWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
+                                              withInt:(jint)start
+                                              withInt:(jint)end;
+
+- (jboolean)checkError;
 
 - (void)close;
 
 - (void)flush;
 
-- (JavaIoPrintWriter *)formatWithNSString:(NSString *)format
-                        withNSObjectArray:(IOSObjectArray *)args;
-
 - (JavaIoPrintWriter *)formatWithJavaUtilLocale:(JavaUtilLocale *)l
                                    withNSString:(NSString *)format
                               withNSObjectArray:(IOSObjectArray *)args;
 
-- (JavaIoPrintWriter *)printfWithNSString:(NSString *)format
+- (JavaIoPrintWriter *)formatWithNSString:(NSString *)format
                         withNSObjectArray:(IOSObjectArray *)args;
 
-- (JavaIoPrintWriter *)printfWithJavaUtilLocale:(JavaUtilLocale *)l
-                                   withNSString:(NSString *)format
-                              withNSObjectArray:(IOSObjectArray *)args;
-
-- (void)printWithCharArray:(IOSCharArray *)charArray;
+- (void)printWithBoolean:(jboolean)bool_;
 
 - (void)printWithChar:(jchar)ch;
+
+- (void)printWithCharArray:(IOSCharArray *)charArray;
 
 - (void)printWithDouble:(jdouble)dnum;
 
@@ -79,13 +82,20 @@
 
 - (void)printWithNSString:(NSString *)str;
 
-- (void)printWithBoolean:(jboolean)bool_;
+- (JavaIoPrintWriter *)printfWithJavaUtilLocale:(JavaUtilLocale *)l
+                                   withNSString:(NSString *)format
+                              withNSObjectArray:(IOSObjectArray *)args;
+
+- (JavaIoPrintWriter *)printfWithNSString:(NSString *)format
+                        withNSObjectArray:(IOSObjectArray *)args;
 
 - (void)println;
 
-- (void)printlnWithCharArray:(IOSCharArray *)chars;
+- (void)printlnWithBoolean:(jboolean)b;
 
 - (void)printlnWithChar:(jchar)c;
+
+- (void)printlnWithCharArray:(IOSCharArray *)chars;
 
 - (void)printlnWithDouble:(jdouble)d;
 
@@ -98,10 +108,6 @@
 - (void)printlnWithId:(id)obj;
 
 - (void)printlnWithNSString:(NSString *)str;
-
-- (void)printlnWithBoolean:(jboolean)b;
-
-- (void)setError;
 
 - (void)writeWithCharArray:(IOSCharArray *)buf;
 
@@ -117,18 +123,50 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
-- (JavaIoPrintWriter *)appendWithChar:(jchar)c;
+#pragma mark Protected
 
-- (JavaIoPrintWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+- (void)clearError;
 
-- (JavaIoPrintWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                              withInt:(jint)start
-                                              withInt:(jint)end;
+- (void)setError;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoPrintWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPrintWriter)
 
 J2OBJC_FIELD_SETTER(JavaIoPrintWriter, out_, JavaIoWriter *)
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoOutputStream_(JavaIoPrintWriter *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoOutputStream_withBoolean_(JavaIoPrintWriter *self, JavaIoOutputStream *outArg, jboolean autoFlush);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoOutputStream_withBoolean_(JavaIoOutputStream *outArg, jboolean autoFlush) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoWriter_(JavaIoPrintWriter *self, JavaIoWriter *wr);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoWriter_(JavaIoWriter *wr) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoWriter_withBoolean_(JavaIoPrintWriter *self, JavaIoWriter *wr, jboolean autoFlush);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoWriter_withBoolean_(JavaIoWriter *wr, jboolean autoFlush) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoFile_(JavaIoPrintWriter *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithJavaIoFile_withNSString_(JavaIoPrintWriter *self, JavaIoFile *file, NSString *csn);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithJavaIoFile_withNSString_(JavaIoFile *file, NSString *csn) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithNSString_(JavaIoPrintWriter *self, NSString *fileName);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithNSString_(NSString *fileName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintWriter_initWithNSString_withNSString_(JavaIoPrintWriter *self, NSString *fileName, NSString *csn);
+
+FOUNDATION_EXPORT JavaIoPrintWriter *new_JavaIoPrintWriter_initWithNSString_withNSString_(NSString *fileName, NSString *csn) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPrintWriter)
 
 #endif // _JavaIoPrintWriter_H_

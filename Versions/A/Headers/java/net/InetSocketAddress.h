@@ -6,35 +6,29 @@
 #ifndef _JavaNetInetSocketAddress_H_
 #define _JavaNetInetSocketAddress_H_
 
-@class JavaIoObjectInputStream;
-@class JavaNetInetAddress;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/SocketAddress.h"
 
-#define JavaNetInetSocketAddress_serialVersionUID 5076001401234631237LL
+@class JavaNetInetAddress;
 
-@interface JavaNetInetSocketAddress : JavaNetSocketAddress {
-}
+@interface JavaNetInetSocketAddress : JavaNetSocketAddress
+
+#pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithInt:(jint)port;
 
 - (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)address
                                    withInt:(jint)port;
 
+- (instancetype)initWithInt:(jint)port;
+
 - (instancetype)initWithNSString:(NSString *)host
                          withInt:(jint)port;
-
-- (instancetype)initWithNSString:(NSString *)hostname
-                         withInt:(jint)port
-                     withBoolean:(jboolean)needResolved;
 
 + (JavaNetInetSocketAddress *)createUnresolvedWithNSString:(NSString *)host
                                                    withInt:(jint)port;
 
-- (jint)getPort;
+- (jboolean)isEqual:(id)socketAddr;
 
 - (JavaNetInetAddress *)getAddress;
 
@@ -42,19 +36,46 @@
 
 - (NSString *)getHostString;
 
+- (jint)getPort;
+
+- (NSUInteger)hash;
+
 - (jboolean)isUnresolved;
 
 - (NSString *)description;
 
-- (jboolean)isEqual:(id)socketAddr;
+#pragma mark Package-Private
 
-- (NSUInteger)hash;
+- (instancetype)initWithNSString:(NSString *)hostname
+                         withInt:(jint)port
+                     withBoolean:(jboolean)needResolved;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetInetSocketAddress_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetInetSocketAddress)
+
+FOUNDATION_EXPORT void JavaNetInetSocketAddress_init(JavaNetInetSocketAddress *self);
+
+FOUNDATION_EXPORT JavaNetInetSocketAddress *new_JavaNetInetSocketAddress_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInetSocketAddress_initWithInt_(JavaNetInetSocketAddress *self, jint port);
+
+FOUNDATION_EXPORT JavaNetInetSocketAddress *new_JavaNetInetSocketAddress_initWithInt_(jint port) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInetSocketAddress_initWithJavaNetInetAddress_withInt_(JavaNetInetSocketAddress *self, JavaNetInetAddress *address, jint port);
+
+FOUNDATION_EXPORT JavaNetInetSocketAddress *new_JavaNetInetSocketAddress_initWithJavaNetInetAddress_withInt_(JavaNetInetAddress *address, jint port) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInetSocketAddress_initWithNSString_withInt_(JavaNetInetSocketAddress *self, NSString *host, jint port);
+
+FOUNDATION_EXPORT JavaNetInetSocketAddress *new_JavaNetInetSocketAddress_initWithNSString_withInt_(NSString *host, jint port) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInetSocketAddress_initWithNSString_withInt_withBoolean_(JavaNetInetSocketAddress *self, NSString *hostname, jint port, jboolean needResolved);
+
+FOUNDATION_EXPORT JavaNetInetSocketAddress *new_JavaNetInetSocketAddress_initWithNSString_withInt_withBoolean_(NSString *hostname, jint port, jboolean needResolved) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaNetInetSocketAddress *JavaNetInetSocketAddress_createUnresolvedWithNSString_withInt_(NSString *host, jint port);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInetSocketAddress, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInetSocketAddress)
 
 #endif // _JavaNetInetSocketAddress_H_

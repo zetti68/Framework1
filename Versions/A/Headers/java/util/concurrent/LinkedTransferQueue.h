@@ -6,33 +6,79 @@
 #ifndef _JavaUtilConcurrentLinkedTransferQueue_H_
 #define _JavaUtilConcurrentLinkedTransferQueue_H_
 
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangThread;
-@class JavaUtilConcurrentLinkedTransferQueue_Node;
-@class JavaUtilConcurrentTimeUnitEnum;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractQueue.h"
 #include "java/util/Iterator.h"
 #include "java/util/concurrent/TransferQueue.h"
 
-#define JavaUtilConcurrentLinkedTransferQueue_ASYNC 1
-#define JavaUtilConcurrentLinkedTransferQueue_CHAINED_SPINS 64
-#define JavaUtilConcurrentLinkedTransferQueue_FRONT_SPINS 128
-#define JavaUtilConcurrentLinkedTransferQueue_NOW 0
+@class JavaLangThread;
+@class JavaUtilConcurrentLinkedTransferQueue_Node;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
+
 #define JavaUtilConcurrentLinkedTransferQueue_SWEEP_THRESHOLD 32
-#define JavaUtilConcurrentLinkedTransferQueue_SYNC 2
-#define JavaUtilConcurrentLinkedTransferQueue_TIMED 3
-#define JavaUtilConcurrentLinkedTransferQueue_serialVersionUID -3223113410248163686LL
 
 @interface JavaUtilConcurrentLinkedTransferQueue : JavaUtilAbstractQueue < JavaUtilConcurrentTransferQueue, JavaIoSerializable > {
  @public
   JavaUtilConcurrentLinkedTransferQueue_Node *head_;
 }
+
+#pragma mark Public
+
+- (instancetype)init;
+
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
+- (jboolean)addWithId:(id)e;
+
+- (jboolean)containsWithId:(id)o;
+
+- (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
+- (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
+                              withInt:(jint)maxElements;
+
+- (jint)getWaitingConsumerCount;
+
+- (jboolean)hasWaitingConsumer;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id)e;
+
+- (jboolean)offerWithId:(id)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id)peek;
+
+- (id)poll;
+
+- (id)pollWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id)e;
+
+- (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+- (id)take;
+
+- (void)transferWithId:(id)e;
+
+- (jboolean)tryTransferWithId:(id)e;
+
+- (jboolean)tryTransferWithId:(id)e
+                     withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+#pragma mark Package-Private
 
 + (id)castWithId:(id)item;
 
@@ -41,99 +87,26 @@
 - (void)unspliceWithJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)pred
                 withJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)s;
 
-- (instancetype)init;
-
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (void)putWithId:(id)e;
-
-- (jboolean)offerWithId:(id)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (jboolean)offerWithId:(id)e;
-
-- (jboolean)addWithId:(id)e;
-
-- (jboolean)tryTransferWithId:(id)e;
-
-- (void)transferWithId:(id)e;
-
-- (jboolean)tryTransferWithId:(id)e
-                     withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)take;
-
-- (id)pollWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)poll;
-
-- (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
-                              withInt:(jint)maxElements;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (id)peek;
-
-- (jboolean)isEmpty;
-
-- (jboolean)hasWaitingConsumer;
-
-- (jint)size;
-
-- (jint)getWaitingConsumerCount;
-
-- (jboolean)removeWithId:(id)o;
-
-- (jboolean)containsWithId:(id)o;
-
-- (jint)remainingCapacity;
-
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentLinkedTransferQueue_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentLinkedTransferQueue)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedTransferQueue, head_, JavaUtilConcurrentLinkedTransferQueue_Node *)
-FOUNDATION_EXPORT id JavaUtilConcurrentLinkedTransferQueue_castWithId_(id item);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT jboolean JavaUtilConcurrentLinkedTransferQueue_MP_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, MP_, jboolean)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, FRONT_SPINS, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, CHAINED_SPINS, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, SWEEP_THRESHOLD, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, NOW, jint)
+FOUNDATION_EXPORT id JavaUtilConcurrentLinkedTransferQueue_castWithId_(id item);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, ASYNC, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedTransferQueue_init(JavaUtilConcurrentLinkedTransferQueue *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, SYNC, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedTransferQueue *new_JavaUtilConcurrentLinkedTransferQueue_init() NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, TIMED, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedTransferQueue_initWithJavaUtilCollection_(JavaUtilConcurrentLinkedTransferQueue *self, id<JavaUtilCollection> c);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentLinkedTransferQueue_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedTransferQueue *new_JavaUtilConcurrentLinkedTransferQueue_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_headOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, headOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_tailOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, tailOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_sweepVotesOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, sweepVotesOffset_, jlong)
-
-#define JavaUtilConcurrentLinkedTransferQueue_Node_serialVersionUID -3375979862319811754LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLinkedTransferQueue)
 
 @interface JavaUtilConcurrentLinkedTransferQueue_Node : NSObject {
  @public
@@ -143,54 +116,46 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue, sweepVotesOffs
   JavaLangThread *waiter_;
 }
 
-- (jboolean)casNextWithJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)cmp
-                   withJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)val;
-
-- (jboolean)casItemWithId:(id)cmp
-                   withId:(id)val;
+#pragma mark Package-Private
 
 - (instancetype)initWithId:(id)item
                withBoolean:(jboolean)isData;
 
-- (void)forgetNext;
+- (jboolean)cannotPrecedeWithBoolean:(jboolean)haveData;
+
+- (jboolean)casItemWithId:(id)cmp
+                   withId:(id)val;
+
+- (jboolean)casNextWithJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)cmp
+                   withJavaUtilConcurrentLinkedTransferQueue_Node:(JavaUtilConcurrentLinkedTransferQueue_Node *)val;
 
 - (void)forgetContents;
+
+- (void)forgetNext;
 
 - (jboolean)isMatched;
 
 - (jboolean)isUnmatchedRequest;
 
-- (jboolean)cannotPrecedeWithBoolean:(jboolean)haveData;
-
 - (jboolean)tryMatchData;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentLinkedTransferQueue_Node_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentLinkedTransferQueue_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedTransferQueue_Node, item_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedTransferQueue_Node, next_, JavaUtilConcurrentLinkedTransferQueue_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedTransferQueue_Node, waiter_, JavaLangThread *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedTransferQueue_Node_initWithId_withBoolean_(JavaUtilConcurrentLinkedTransferQueue_Node *self, id item, jboolean isData);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentLinkedTransferQueue_Node_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedTransferQueue_Node *new_JavaUtilConcurrentLinkedTransferQueue_Node_initWithId_withBoolean_(id item, jboolean isData) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_Node_itemOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, itemOffset_, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLinkedTransferQueue_Node)
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_Node_nextOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, nextOffset_, jlong)
+@interface JavaUtilConcurrentLinkedTransferQueue_Itr : NSObject < JavaUtilIterator >
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLinkedTransferQueue_Node_waiterOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, waiterOffset_, jlong)
-
-@interface JavaUtilConcurrentLinkedTransferQueue_Itr : NSObject < JavaUtilIterator > {
-}
-
-- (instancetype)initWithJavaUtilConcurrentLinkedTransferQueue:(JavaUtilConcurrentLinkedTransferQueue *)outer$;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
@@ -198,8 +163,18 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedTransferQueue_Node, waiterOff
 
 - (void)remove;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentLinkedTransferQueue:(JavaUtilConcurrentLinkedTransferQueue *)outer$;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLinkedTransferQueue_Itr_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLinkedTransferQueue_Itr)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedTransferQueue_Itr_initWithJavaUtilConcurrentLinkedTransferQueue_(JavaUtilConcurrentLinkedTransferQueue_Itr *self, JavaUtilConcurrentLinkedTransferQueue *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedTransferQueue_Itr *new_JavaUtilConcurrentLinkedTransferQueue_Itr_initWithJavaUtilConcurrentLinkedTransferQueue_(JavaUtilConcurrentLinkedTransferQueue *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLinkedTransferQueue_Itr)
 
 #endif // _JavaUtilConcurrentLinkedTransferQueue_H_

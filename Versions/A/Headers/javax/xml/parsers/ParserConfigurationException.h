@@ -6,11 +6,12 @@
 #ifndef _JavaxXmlParsersParserConfigurationException_H_
 #define _JavaxXmlParsersParserConfigurationException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-@interface JavaxXmlParsersParserConfigurationException : JavaLangException {
-}
+@interface JavaxXmlParsersParserConfigurationException : JavaLangException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -18,6 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlParsersParserConfigurationException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlParsersParserConfigurationException)
+
+FOUNDATION_EXPORT void JavaxXmlParsersParserConfigurationException_init(JavaxXmlParsersParserConfigurationException *self);
+
+FOUNDATION_EXPORT JavaxXmlParsersParserConfigurationException *new_JavaxXmlParsersParserConfigurationException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaxXmlParsersParserConfigurationException_initWithNSString_(JavaxXmlParsersParserConfigurationException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaxXmlParsersParserConfigurationException *new_JavaxXmlParsersParserConfigurationException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlParsersParserConfigurationException)
 
 #endif // _JavaxXmlParsersParserConfigurationException_H_

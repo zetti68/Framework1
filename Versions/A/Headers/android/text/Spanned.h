@@ -6,30 +6,31 @@
 #ifndef _AndroidTextSpanned_H_
 #define _AndroidTextSpanned_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/CharSequence.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 
-#import "JreEmulation.h"
-#include "java/lang/CharSequence.h"
-
-#define AndroidTextSpanned_SPAN_COMPOSING 256
-#define AndroidTextSpanned_SPAN_EXCLUSIVE_EXCLUSIVE 33
-#define AndroidTextSpanned_SPAN_EXCLUSIVE_INCLUSIVE 34
-#define AndroidTextSpanned_SPAN_INCLUSIVE_EXCLUSIVE 17
-#define AndroidTextSpanned_SPAN_INCLUSIVE_INCLUSIVE 18
-#define AndroidTextSpanned_SPAN_INTERMEDIATE 512
+#define AndroidTextSpanned_SPAN_POINT_MARK_MASK 51
 #define AndroidTextSpanned_SPAN_MARK_MARK 17
 #define AndroidTextSpanned_SPAN_MARK_POINT 18
-#define AndroidTextSpanned_SPAN_PARAGRAPH 51
 #define AndroidTextSpanned_SPAN_POINT_MARK 33
-#define AndroidTextSpanned_SPAN_POINT_MARK_MASK 51
 #define AndroidTextSpanned_SPAN_POINT_POINT 34
-#define AndroidTextSpanned_SPAN_PRIORITY 16711680
-#define AndroidTextSpanned_SPAN_PRIORITY_SHIFT 16
-#define AndroidTextSpanned_SPAN_USER -16777216
+#define AndroidTextSpanned_SPAN_PARAGRAPH 51
+#define AndroidTextSpanned_SPAN_INCLUSIVE_EXCLUSIVE 17
+#define AndroidTextSpanned_SPAN_INCLUSIVE_INCLUSIVE 18
+#define AndroidTextSpanned_SPAN_EXCLUSIVE_EXCLUSIVE 33
+#define AndroidTextSpanned_SPAN_EXCLUSIVE_INCLUSIVE 34
+#define AndroidTextSpanned_SPAN_COMPOSING 256
+#define AndroidTextSpanned_SPAN_INTERMEDIATE 512
 #define AndroidTextSpanned_SPAN_USER_SHIFT 24
+#define AndroidTextSpanned_SPAN_USER -16777216
+#define AndroidTextSpanned_SPAN_PRIORITY_SHIFT 16
+#define AndroidTextSpanned_SPAN_PRIORITY 16711680
 
 @protocol AndroidTextSpanned < JavaLangCharSequence, NSObject, JavaObject >
+
 - (IOSObjectArray *)getSpansWithInt:(jint)start
                             withInt:(jint)end
                        withIOSClass:(IOSClass *)type;
@@ -46,7 +47,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextSpanned_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextSpanned)
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpanned, SPAN_POINT_MARK_MASK, jint)
 
@@ -79,5 +80,7 @@ J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpanned, SPAN_USER, jint)
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpanned, SPAN_PRIORITY_SHIFT, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpanned, SPAN_PRIORITY, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextSpanned)
 
 #endif // _AndroidTextSpanned_H_

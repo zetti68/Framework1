@@ -6,31 +6,44 @@
 #ifndef _JavaLangReflectInvocationTargetException_H_
 #define _JavaLangReflectInvocationTargetException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ReflectiveOperationException.h"
 
-#define JavaLangReflectInvocationTargetException_serialVersionUID 4085088731926701167LL
+@class JavaLangThrowable;
 
-@interface JavaLangReflectInvocationTargetException : JavaLangReflectiveOperationException {
-}
+@interface JavaLangReflectInvocationTargetException : JavaLangReflectiveOperationException
 
-- (instancetype)init;
+#pragma mark Public
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exception;
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exception
                              withNSString:(NSString *)detailMessage;
 
+- (JavaLangThrowable *)getCause;
+
 - (JavaLangThrowable *)getTargetException;
 
-- (JavaLangThrowable *)getCause;
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectInvocationTargetException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectInvocationTargetException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectInvocationTargetException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangReflectInvocationTargetException_init(JavaLangReflectInvocationTargetException *self);
+
+FOUNDATION_EXPORT JavaLangReflectInvocationTargetException *new_JavaLangReflectInvocationTargetException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangReflectInvocationTargetException_initWithJavaLangThrowable_(JavaLangReflectInvocationTargetException *self, JavaLangThrowable *exception);
+
+FOUNDATION_EXPORT JavaLangReflectInvocationTargetException *new_JavaLangReflectInvocationTargetException_initWithJavaLangThrowable_(JavaLangThrowable *exception) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangReflectInvocationTargetException_initWithJavaLangThrowable_withNSString_(JavaLangReflectInvocationTargetException *self, JavaLangThrowable *exception, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangReflectInvocationTargetException *new_JavaLangReflectInvocationTargetException_initWithJavaLangThrowable_withNSString_(JavaLangThrowable *exception, NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectInvocationTargetException)
 
 #endif // _JavaLangReflectInvocationTargetException_H_

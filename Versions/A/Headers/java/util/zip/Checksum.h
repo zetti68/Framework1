@@ -6,9 +6,9 @@
 #ifndef _JavaUtilZipChecksum_H_
 #define _JavaUtilZipChecksum_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSByteArray;
 
 @protocol JavaUtilZipChecksum < NSObject, JavaObject >
 
@@ -24,6 +24,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipChecksum_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipChecksum)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipChecksum)
 
 #endif // _JavaUtilZipChecksum_H_

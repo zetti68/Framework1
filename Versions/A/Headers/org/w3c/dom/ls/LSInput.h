@@ -6,10 +6,10 @@
 #ifndef _OrgW3cDomLsLSInput_H_
 #define _OrgW3cDomLsLSInput_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaIoReader;
-
-#import "JreEmulation.h"
 
 @protocol OrgW3cDomLsLSInput < NSObject, JavaObject >
 
@@ -47,6 +47,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgW3cDomLsLSInput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgW3cDomLsLSInput)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgW3cDomLsLSInput)
 
 #endif // _OrgW3cDomLsLSInput_H_

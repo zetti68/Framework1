@@ -6,29 +6,48 @@
 #ifndef _JavaxXmlParsersFactoryConfigurationError_H_
 #define _JavaxXmlParsersFactoryConfigurationError_H_
 
-@class JavaLangException;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-@interface JavaxXmlParsersFactoryConfigurationError : JavaLangError {
-}
+@class JavaLangException;
+
+@interface JavaxXmlParsersFactoryConfigurationError : JavaLangError
+
+#pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithJavaLangException:(JavaLangException *)e;
 
 - (instancetype)initWithJavaLangException:(JavaLangException *)e
                              withNSString:(NSString *)msg;
 
-- (NSString *)getMessage;
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (JavaLangException *)getException;
 
+- (NSString *)getMessage;
+
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlParsersFactoryConfigurationError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlParsersFactoryConfigurationError)
+
+FOUNDATION_EXPORT void JavaxXmlParsersFactoryConfigurationError_init(JavaxXmlParsersFactoryConfigurationError *self);
+
+FOUNDATION_EXPORT JavaxXmlParsersFactoryConfigurationError *new_JavaxXmlParsersFactoryConfigurationError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaxXmlParsersFactoryConfigurationError_initWithNSString_(JavaxXmlParsersFactoryConfigurationError *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaxXmlParsersFactoryConfigurationError *new_JavaxXmlParsersFactoryConfigurationError_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaxXmlParsersFactoryConfigurationError_initWithJavaLangException_(JavaxXmlParsersFactoryConfigurationError *self, JavaLangException *e);
+
+FOUNDATION_EXPORT JavaxXmlParsersFactoryConfigurationError *new_JavaxXmlParsersFactoryConfigurationError_initWithJavaLangException_(JavaLangException *e) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaxXmlParsersFactoryConfigurationError_initWithJavaLangException_withNSString_(JavaxXmlParsersFactoryConfigurationError *self, JavaLangException *e, NSString *msg);
+
+FOUNDATION_EXPORT JavaxXmlParsersFactoryConfigurationError *new_JavaxXmlParsersFactoryConfigurationError_initWithJavaLangException_withNSString_(JavaLangException *e, NSString *msg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlParsersFactoryConfigurationError)
 
 #endif // _JavaxXmlParsersFactoryConfigurationError_H_

@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityKeyException_H_
 #define _JavaSecurityKeyException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityKeyException_serialVersionUID -7483676942812432108LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityKeyException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecurityKeyException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityKeyException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityKeyException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityKeyException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityKeyException_initWithNSString_(JavaSecurityKeyException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityKeyException *new_JavaSecurityKeyException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyException_init(JavaSecurityKeyException *self);
+
+FOUNDATION_EXPORT JavaSecurityKeyException *new_JavaSecurityKeyException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyException_initWithNSString_withJavaLangThrowable_(JavaSecurityKeyException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityKeyException *new_JavaSecurityKeyException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyException_initWithJavaLangThrowable_(JavaSecurityKeyException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityKeyException *new_JavaSecurityKeyException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityKeyException)
 
 #endif // _JavaSecurityKeyException_H_

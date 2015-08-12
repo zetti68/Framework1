@@ -6,15 +6,14 @@
 #ifndef _JavaLangAnnotationIncompleteAnnotationException_H_
 #define _JavaLangAnnotationIncompleteAnnotationException_H_
 
-@class IOSClass;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangAnnotationIncompleteAnnotationException_serialVersionUID 8445097402741811912LL
+@class IOSClass;
 
-@interface JavaLangAnnotationIncompleteAnnotationException : JavaLangRuntimeException {
-}
+@interface JavaLangAnnotationIncompleteAnnotationException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)initWithIOSClass:(IOSClass *)annotationType
                     withNSString:(NSString *)elementName;
@@ -25,8 +24,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationIncompleteAnnotationException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationIncompleteAnnotationException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationIncompleteAnnotationException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangAnnotationIncompleteAnnotationException_initWithIOSClass_withNSString_(JavaLangAnnotationIncompleteAnnotationException *self, IOSClass *annotationType, NSString *elementName);
+
+FOUNDATION_EXPORT JavaLangAnnotationIncompleteAnnotationException *new_JavaLangAnnotationIncompleteAnnotationException_initWithIOSClass_withNSString_(IOSClass *annotationType, NSString *elementName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationIncompleteAnnotationException)
 
 #endif // _JavaLangAnnotationIncompleteAnnotationException_H_

@@ -6,24 +6,33 @@
 #ifndef _ComGoogleJ2objcSecurityIosSecureRandomImpl_H_
 #define _ComGoogleJ2objcSecurityIosSecureRandomImpl_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/SecureRandomSpi.h"
 
-@interface ComGoogleJ2objcSecurityIosSecureRandomImpl : JavaSecuritySecureRandomSpi {
-}
+@class IOSByteArray;
 
-- (void)engineSetSeedWithByteArray:(IOSByteArray *)seed;
+@interface ComGoogleJ2objcSecurityIosSecureRandomImpl : JavaSecuritySecureRandomSpi
 
-- (void)engineNextBytesWithByteArray:(IOSByteArray *)bytes;
-
-- (IOSByteArray *)engineGenerateSeedWithInt:(jint)numBytes;
+#pragma mark Public
 
 - (instancetype)init;
 
+#pragma mark Protected
+
+- (IOSByteArray *)engineGenerateSeedWithInt:(jint)numBytes;
+
+- (void)engineNextBytesWithByteArray:(IOSByteArray *)bytes;
+
+- (void)engineSetSeedWithByteArray:(IOSByteArray *)seed;
+
 @end
 
-__attribute__((always_inline)) inline void ComGoogleJ2objcSecurityIosSecureRandomImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleJ2objcSecurityIosSecureRandomImpl)
+
+FOUNDATION_EXPORT void ComGoogleJ2objcSecurityIosSecureRandomImpl_init(ComGoogleJ2objcSecurityIosSecureRandomImpl *self);
+
+FOUNDATION_EXPORT ComGoogleJ2objcSecurityIosSecureRandomImpl *new_ComGoogleJ2objcSecurityIosSecureRandomImpl_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcSecurityIosSecureRandomImpl)
 
 #endif // _ComGoogleJ2objcSecurityIosSecureRandomImpl_H_

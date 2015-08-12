@@ -6,9 +6,9 @@
 #ifndef _JavaSqlWrapper_H_
 #define _JavaSqlWrapper_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSClass;
 
 @protocol JavaSqlWrapper < NSObject, JavaObject >
 
@@ -18,6 +18,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlWrapper_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlWrapper)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlWrapper)
 
 #endif // _JavaSqlWrapper_H_

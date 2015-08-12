@@ -6,22 +6,29 @@
 #ifndef _JavaSecurityCertCertificateNotYetValidException_H_
 #define _JavaSecurityCertCertificateNotYetValidException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/cert/CertificateException.h"
 
-#define JavaSecurityCertCertificateNotYetValidException_serialVersionUID 4355919900041064702LL
+@interface JavaSecurityCertCertificateNotYetValidException : JavaSecurityCertCertificateException
 
-@interface JavaSecurityCertCertificateNotYetValidException : JavaSecurityCertCertificateException {
-}
-
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithNSString:(NSString *)msg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateNotYetValidException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateNotYetValidException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateNotYetValidException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificateNotYetValidException_initWithNSString_(JavaSecurityCertCertificateNotYetValidException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateNotYetValidException *new_JavaSecurityCertCertificateNotYetValidException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateNotYetValidException_init(JavaSecurityCertCertificateNotYetValidException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateNotYetValidException *new_JavaSecurityCertCertificateNotYetValidException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateNotYetValidException)
 
 #endif // _JavaSecurityCertCertificateNotYetValidException_H_

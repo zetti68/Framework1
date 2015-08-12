@@ -6,22 +6,18 @@
 #ifndef _JavaUtilSimpleTimeZone_H_
 #define _JavaUtilSimpleTimeZone_H_
 
-@class JavaUtilDate;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/TimeZone.h"
 
-#define JavaUtilSimpleTimeZone_DOM_MODE 1
-#define JavaUtilSimpleTimeZone_DOW_GE_DOM_MODE 3
-#define JavaUtilSimpleTimeZone_DOW_IN_MONTH_MODE 2
-#define JavaUtilSimpleTimeZone_DOW_LE_DOM_MODE 4
-#define JavaUtilSimpleTimeZone_STANDARD_TIME 1
-#define JavaUtilSimpleTimeZone_UTC_TIME 2
-#define JavaUtilSimpleTimeZone_WALL_TIME 0
-#define JavaUtilSimpleTimeZone_serialVersionUID -403250971215465050LL
+@class JavaUtilDate;
 
-@interface JavaUtilSimpleTimeZone : JavaUtilTimeZone {
-}
+#define JavaUtilSimpleTimeZone_UTC_TIME 2
+#define JavaUtilSimpleTimeZone_STANDARD_TIME 1
+#define JavaUtilSimpleTimeZone_WALL_TIME 0
+
+@interface JavaUtilSimpleTimeZone : JavaUtilTimeZone
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)offset
                withNSString:(NSString *)name;
@@ -128,22 +124,30 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilSimpleTimeZone_init() {}
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, serialVersionUID, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, DOM_MODE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, DOW_IN_MONTH_MODE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, DOW_GE_DOM_MODE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, DOW_LE_DOM_MODE, jint)
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilSimpleTimeZone)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, UTC_TIME, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, STANDARD_TIME, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilSimpleTimeZone, WALL_TIME, jint)
+
+FOUNDATION_EXPORT void JavaUtilSimpleTimeZone_initWithInt_withNSString_(JavaUtilSimpleTimeZone *self, jint offset, NSString *name);
+
+FOUNDATION_EXPORT JavaUtilSimpleTimeZone *new_JavaUtilSimpleTimeZone_initWithInt_withNSString_(jint offset, NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(JavaUtilSimpleTimeZone *self, jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime);
+
+FOUNDATION_EXPORT JavaUtilSimpleTimeZone *new_JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(JavaUtilSimpleTimeZone *self, jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime, jint daylightSavings);
+
+FOUNDATION_EXPORT JavaUtilSimpleTimeZone *new_JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime, jint daylightSavings) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(JavaUtilSimpleTimeZone *self, jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint startTimeMode, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime, jint endTimeMode, jint daylightSavings);
+
+FOUNDATION_EXPORT JavaUtilSimpleTimeZone *new_JavaUtilSimpleTimeZone_initWithInt_withNSString_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_withInt_(jint offset, NSString *name, jint startMonth, jint startDay, jint startDayOfWeek, jint startTime, jint startTimeMode, jint endMonth, jint endDay, jint endDayOfWeek, jint endTime, jint endTimeMode, jint daylightSavings) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilSimpleTimeZone)
 
 #endif // _JavaUtilSimpleTimeZone_H_

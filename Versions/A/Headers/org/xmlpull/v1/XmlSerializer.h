@@ -6,12 +6,12 @@
 #ifndef _OrgXmlpullV1XmlSerializer_H_
 #define _OrgXmlpullV1XmlSerializer_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSCharArray;
 @class JavaIoOutputStream;
 @class JavaIoWriter;
 @class JavaLangBoolean;
-
-#import "JreEmulation.h"
 
 @protocol OrgXmlpullV1XmlSerializer < NSObject, JavaObject >
 
@@ -79,6 +79,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlpullV1XmlSerializer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlpullV1XmlSerializer)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlpullV1XmlSerializer)
 
 #endif // _OrgXmlpullV1XmlSerializer_H_

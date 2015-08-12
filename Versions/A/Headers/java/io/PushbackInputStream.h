@@ -6,18 +6,19 @@
 #ifndef _JavaIoPushbackInputStream_H_
 #define _JavaIoPushbackInputStream_H_
 
-@class IOSByteArray;
-@class JavaIoIOException;
-@class JavaIoInputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/FilterInputStream.h"
+
+@class IOSByteArray;
+@class JavaIoInputStream;
 
 @interface JavaIoPushbackInputStream : JavaIoFilterInputStream {
  @public
   IOSByteArray *buf_;
   jint pos_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
@@ -28,6 +29,8 @@
 
 - (void)close;
 
+- (void)markWithInt:(jint)readlimit;
+
 - (jboolean)markSupported;
 
 - (jint)read;
@@ -35,6 +38,8 @@
 - (jint)readWithByteArray:(IOSByteArray *)buffer
                   withInt:(jint)byteOffset
                   withInt:(jint)byteCount;
+
+- (void)reset;
 
 - (jlong)skipWithLong:(jlong)byteCount;
 
@@ -46,14 +51,20 @@
 
 - (void)unreadWithInt:(jint)oneByte;
 
-- (void)markWithInt:(jint)readlimit;
-
-- (void)reset;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoPushbackInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPushbackInputStream)
 
 J2OBJC_FIELD_SETTER(JavaIoPushbackInputStream, buf_, IOSByteArray *)
+
+FOUNDATION_EXPORT void JavaIoPushbackInputStream_initWithJavaIoInputStream_(JavaIoPushbackInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaIoPushbackInputStream *new_JavaIoPushbackInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPushbackInputStream_initWithJavaIoInputStream_withInt_(JavaIoPushbackInputStream *self, JavaIoInputStream *inArg, jint size);
+
+FOUNDATION_EXPORT JavaIoPushbackInputStream *new_JavaIoPushbackInputStream_initWithJavaIoInputStream_withInt_(JavaIoInputStream *inArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPushbackInputStream)
 
 #endif // _JavaIoPushbackInputStream_H_

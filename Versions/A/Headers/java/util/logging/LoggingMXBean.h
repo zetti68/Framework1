@@ -6,9 +6,9 @@
 #ifndef _JavaUtilLoggingLoggingMXBean_H_
 #define _JavaUtilLoggingLoggingMXBean_H_
 
-@protocol JavaUtilList;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@protocol JavaUtilList;
 
 @protocol JavaUtilLoggingLoggingMXBean < NSObject, JavaObject >
 
@@ -23,6 +23,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingLoggingMXBean_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingLoggingMXBean)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLoggingMXBean)
 
 #endif // _JavaUtilLoggingLoggingMXBean_H_

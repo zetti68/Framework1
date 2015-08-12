@@ -6,15 +6,14 @@
 #ifndef _JavaSqlSQLFeatureNotSupportedException_H_
 #define _JavaSqlSQLFeatureNotSupportedException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/sql/SQLNonTransientException.h"
 
-#define JavaSqlSQLFeatureNotSupportedException_serialVersionUID -1026510870282316051LL
+@class JavaLangThrowable;
 
-@interface JavaSqlSQLFeatureNotSupportedException : JavaSqlSQLNonTransientException {
-}
+@interface JavaSqlSQLFeatureNotSupportedException : JavaSqlSQLNonTransientException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,25 +26,59 @@
                     withNSString:(NSString *)sqlState
                          withInt:(jint)vendorCode;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-                    withNSString:(NSString *)sqlState
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
 - (instancetype)initWithNSString:(NSString *)reason
                     withNSString:(NSString *)sqlState
                          withInt:(jint)vendorCode
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
+- (instancetype)initWithNSString:(NSString *)reason
+                    withNSString:(NSString *)sqlState
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithNSString:(NSString *)reason
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLFeatureNotSupportedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLFeatureNotSupportedException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlSQLFeatureNotSupportedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_init(JavaSqlSQLFeatureNotSupportedException *self);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_(NSString *reason) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason, NSString *sqlState);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_(NSString *reason, NSString *sqlState) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withInt_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason, NSString *sqlState, jint vendorCode);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withInt_(NSString *reason, NSString *sqlState, jint vendorCode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithJavaLangThrowable_(JavaSqlSQLFeatureNotSupportedException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_withJavaLangThrowable_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_withJavaLangThrowable_(NSString *reason, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withJavaLangThrowable_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason, NSString *sqlState, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withJavaLangThrowable_(NSString *reason, NSString *sqlState, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withInt_withJavaLangThrowable_(JavaSqlSQLFeatureNotSupportedException *self, NSString *reason, NSString *sqlState, jint vendorCode, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLFeatureNotSupportedException *new_JavaSqlSQLFeatureNotSupportedException_initWithNSString_withNSString_withInt_withJavaLangThrowable_(NSString *reason, NSString *sqlState, jint vendorCode, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLFeatureNotSupportedException)
 
 #endif // _JavaSqlSQLFeatureNotSupportedException_H_

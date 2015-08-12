@@ -6,72 +6,41 @@
 #ifndef _JavaUtilListResourceBundle_H_
 #define _JavaUtilListResourceBundle_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/ResourceBundle.h"
+
 @class IOSObjectArray;
 @class JavaUtilHashMap;
-@protocol JavaUtilIterator;
+@protocol JavaUtilEnumeration;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/util/Enumeration.h"
-#include "java/util/ResourceBundle.h"
 
 @interface JavaUtilListResourceBundle : JavaUtilResourceBundle {
  @public
   JavaUtilHashMap *table_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
-- (IOSObjectArray *)getContents;
+- (instancetype)init;
 
 - (id<JavaUtilEnumeration>)getKeys;
 
 - (id)handleGetObjectWithNSString:(NSString *)key;
 
+#pragma mark Protected
+
+- (IOSObjectArray *)getContents;
+
 - (id<JavaUtilSet>)handleKeySet;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilListResourceBundle_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilListResourceBundle)
 
 J2OBJC_FIELD_SETTER(JavaUtilListResourceBundle, table_, JavaUtilHashMap *)
 
-@interface JavaUtilListResourceBundle_$1 : NSObject < JavaUtilEnumeration > {
- @public
-  id<JavaUtilIterator> local_;
-  id<JavaUtilEnumeration> pEnum_;
-  NSString *nextElement__;
-}
+FOUNDATION_EXPORT void JavaUtilListResourceBundle_init(JavaUtilListResourceBundle *self);
 
-- (jboolean)hasMoreElements;
-
-- (NSString *)nextElement;
-
-- (instancetype)initWithJavaUtilListResourceBundle:(JavaUtilListResourceBundle *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilListResourceBundle_$1_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilListResourceBundle_$1, local_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(JavaUtilListResourceBundle_$1, pEnum_, id<JavaUtilEnumeration>)
-J2OBJC_FIELD_SETTER(JavaUtilListResourceBundle_$1, nextElement__, NSString *)
-
-@interface JavaUtilListResourceBundle_$2 : NSObject < JavaUtilEnumeration > {
- @public
-  id<JavaUtilIterator> it_;
-}
-
-- (jboolean)hasMoreElements;
-
-- (NSString *)nextElement;
-
-- (instancetype)initWithJavaUtilListResourceBundle:(JavaUtilListResourceBundle *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilListResourceBundle_$2_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilListResourceBundle_$2, it_, id<JavaUtilIterator>)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilListResourceBundle)
 
 #endif // _JavaUtilListResourceBundle_H_

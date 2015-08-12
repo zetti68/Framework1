@@ -6,16 +6,16 @@
 #ifndef _OrgJsonJSONArray_H_
 #define _OrgJsonJSONArray_H_
 
+#include "J2ObjC_header.h"
+
 @class OrgJsonJSONObject;
 @class OrgJsonJSONStringer;
 @class OrgJsonJSONTokener;
 @protocol JavaUtilCollection;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface OrgJsonJSONArray : NSObject
 
-@interface OrgJsonJSONArray : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -23,23 +23,72 @@
 
 - (instancetype)initWithOrgJsonJSONTokener:(OrgJsonJSONTokener *)readFrom;
 
-- (instancetype)initWithNSString:(NSString *)json;
-
 - (instancetype)initWithId:(id)array;
 
+- (instancetype)initWithNSString:(NSString *)json;
+
+- (jboolean)isEqual:(id)o;
+
+- (id)getWithInt:(jint)index;
+
+- (jboolean)getBooleanWithInt:(jint)index;
+
+- (jdouble)getDoubleWithInt:(jint)index;
+
+- (jint)getIntWithInt:(jint)index;
+
+- (OrgJsonJSONArray *)getJSONArrayWithInt:(jint)index;
+
+- (OrgJsonJSONObject *)getJSONObjectWithInt:(jint)index;
+
+- (jlong)getLongWithInt:(jint)index;
+
+- (NSString *)getStringWithInt:(jint)index;
+
+- (NSUInteger)hash;
+
+- (jboolean)isNullWithInt:(jint)index;
+
+- (NSString *)joinWithNSString:(NSString *)separator;
+
 - (jint)length;
+
+- (id)optWithInt:(jint)index;
+
+- (jboolean)optBooleanWithInt:(jint)index;
+
+- (jboolean)optBooleanWithInt:(jint)index
+                  withBoolean:(jboolean)fallback;
+
+- (jdouble)optDoubleWithInt:(jint)index;
+
+- (jdouble)optDoubleWithInt:(jint)index
+                 withDouble:(jdouble)fallback;
+
+- (jint)optIntWithInt:(jint)index;
+
+- (jint)optIntWithInt:(jint)index
+              withInt:(jint)fallback;
+
+- (OrgJsonJSONArray *)optJSONArrayWithInt:(jint)index;
+
+- (OrgJsonJSONObject *)optJSONObjectWithInt:(jint)index;
+
+- (jlong)optLongWithInt:(jint)index;
+
+- (jlong)optLongWithInt:(jint)index
+               withLong:(jlong)fallback;
+
+- (NSString *)optStringWithInt:(jint)index;
+
+- (NSString *)optStringWithInt:(jint)index
+                  withNSString:(NSString *)fallback;
 
 - (OrgJsonJSONArray *)putWithBoolean:(jboolean)value;
 
 - (OrgJsonJSONArray *)putWithDouble:(jdouble)value;
 
 - (OrgJsonJSONArray *)putWithInt:(jint)value;
-
-- (OrgJsonJSONArray *)putWithLong:(jlong)value;
-
-- (OrgJsonJSONArray *)putWithId:(id)value;
-
-- (void)checkedPutWithId:(id)value;
 
 - (OrgJsonJSONArray *)putWithInt:(jint)index
                      withBoolean:(jboolean)value;
@@ -56,73 +105,48 @@
 - (OrgJsonJSONArray *)putWithInt:(jint)index
                           withId:(id)value;
 
-- (jboolean)isNullWithInt:(jint)index;
+- (OrgJsonJSONArray *)putWithLong:(jlong)value;
 
-- (id)getWithInt:(jint)index;
-
-- (id)optWithInt:(jint)index;
+- (OrgJsonJSONArray *)putWithId:(id)value;
 
 - (id)removeWithInt:(jint)index;
 
-- (jboolean)getBooleanWithInt:(jint)index;
-
-- (jboolean)optBooleanWithInt:(jint)index;
-
-- (jboolean)optBooleanWithInt:(jint)index
-                  withBoolean:(jboolean)fallback;
-
-- (jdouble)getDoubleWithInt:(jint)index;
-
-- (jdouble)optDoubleWithInt:(jint)index;
-
-- (jdouble)optDoubleWithInt:(jint)index
-                 withDouble:(jdouble)fallback;
-
-- (jint)getIntWithInt:(jint)index;
-
-- (jint)optIntWithInt:(jint)index;
-
-- (jint)optIntWithInt:(jint)index
-              withInt:(jint)fallback;
-
-- (jlong)getLongWithInt:(jint)index;
-
-- (jlong)optLongWithInt:(jint)index;
-
-- (jlong)optLongWithInt:(jint)index
-               withLong:(jlong)fallback;
-
-- (NSString *)getStringWithInt:(jint)index;
-
-- (NSString *)optStringWithInt:(jint)index;
-
-- (NSString *)optStringWithInt:(jint)index
-                  withNSString:(NSString *)fallback;
-
-- (OrgJsonJSONArray *)getJSONArrayWithInt:(jint)index;
-
-- (OrgJsonJSONArray *)optJSONArrayWithInt:(jint)index;
-
-- (OrgJsonJSONObject *)getJSONObjectWithInt:(jint)index;
-
-- (OrgJsonJSONObject *)optJSONObjectWithInt:(jint)index;
-
 - (OrgJsonJSONObject *)toJSONObjectWithOrgJsonJSONArray:(OrgJsonJSONArray *)names;
-
-- (NSString *)joinWithNSString:(NSString *)separator;
 
 - (NSString *)description;
 
 - (NSString *)toStringWithInt:(jint)indentSpaces;
 
+#pragma mark Package-Private
+
+- (void)checkedPutWithId:(id)value;
+
 - (void)writeToWithOrgJsonJSONStringer:(OrgJsonJSONStringer *)stringer;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
 
 @end
 
-__attribute__((always_inline)) inline void OrgJsonJSONArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgJsonJSONArray)
+
+FOUNDATION_EXPORT void OrgJsonJSONArray_init(OrgJsonJSONArray *self);
+
+FOUNDATION_EXPORT OrgJsonJSONArray *new_OrgJsonJSONArray_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONArray_initWithJavaUtilCollection_(OrgJsonJSONArray *self, id<JavaUtilCollection> copyFrom);
+
+FOUNDATION_EXPORT OrgJsonJSONArray *new_OrgJsonJSONArray_initWithJavaUtilCollection_(id<JavaUtilCollection> copyFrom) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONArray_initWithOrgJsonJSONTokener_(OrgJsonJSONArray *self, OrgJsonJSONTokener *readFrom);
+
+FOUNDATION_EXPORT OrgJsonJSONArray *new_OrgJsonJSONArray_initWithOrgJsonJSONTokener_(OrgJsonJSONTokener *readFrom) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONArray_initWithNSString_(OrgJsonJSONArray *self, NSString *json);
+
+FOUNDATION_EXPORT OrgJsonJSONArray *new_OrgJsonJSONArray_initWithNSString_(NSString *json) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONArray_initWithId_(OrgJsonJSONArray *self, id array);
+
+FOUNDATION_EXPORT OrgJsonJSONArray *new_OrgJsonJSONArray_initWithId_(id array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONArray)
 
 #endif // _OrgJsonJSONArray_H_

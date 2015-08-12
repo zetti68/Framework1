@@ -6,15 +6,16 @@
 #ifndef _AndroidTextEditable_H_
 #define _AndroidTextEditable_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "android/text/GetChars.h"
 #include "android/text/Spannable.h"
 #include "java/lang/Appendable.h"
 #include "java/lang/CharSequence.h"
 
+@class IOSObjectArray;
+
 @protocol AndroidTextEditable < JavaLangCharSequence, AndroidTextGetChars, AndroidTextSpannable, JavaLangAppendable, NSObject, JavaObject >
+
 - (id<AndroidTextEditable>)replaceWithInt:(jint)st
                                   withInt:(jint)en
                  withJavaLangCharSequence:(id<JavaLangCharSequence>)source
@@ -54,25 +55,30 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextEditable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextEditable)
 
-@interface AndroidTextEditable_Factory : NSObject {
-}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextEditable)
+
+@interface AndroidTextEditable_Factory : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
 
 + (AndroidTextEditable_Factory *)getInstance;
 
 - (id<AndroidTextEditable>)newEditableWithJavaLangCharSequence:(id<JavaLangCharSequence>)source OBJC_METHOD_FAMILY_NONE;
 
-- (instancetype)init;
-
 @end
 
-FOUNDATION_EXPORT BOOL AndroidTextEditable_Factory_initialized;
 J2OBJC_STATIC_INIT(AndroidTextEditable_Factory)
+
 FOUNDATION_EXPORT AndroidTextEditable_Factory *AndroidTextEditable_Factory_getInstance();
 
-FOUNDATION_EXPORT AndroidTextEditable_Factory *AndroidTextEditable_Factory_sInstance_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidTextEditable_Factory, sInstance_, AndroidTextEditable_Factory *)
-J2OBJC_STATIC_FIELD_SETTER(AndroidTextEditable_Factory, sInstance_, AndroidTextEditable_Factory *)
+FOUNDATION_EXPORT void AndroidTextEditable_Factory_init(AndroidTextEditable_Factory *self);
+
+FOUNDATION_EXPORT AndroidTextEditable_Factory *new_AndroidTextEditable_Factory_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextEditable_Factory)
 
 #endif // _AndroidTextEditable_H_

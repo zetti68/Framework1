@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityCertCertificateEncodingException_H_
 #define _JavaSecurityCertCertificateEncodingException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/cert/CertificateException.h"
 
-#define JavaSecurityCertCertificateEncodingException_serialVersionUID 6219492851589449162LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityCertCertificateEncodingException : JavaSecurityCertCertificateException {
-}
+@interface JavaSecurityCertCertificateEncodingException : JavaSecurityCertCertificateException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateEncodingException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateEncodingException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateEncodingException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificateEncodingException_initWithNSString_(JavaSecurityCertCertificateEncodingException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateEncodingException *new_JavaSecurityCertCertificateEncodingException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateEncodingException_init(JavaSecurityCertCertificateEncodingException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateEncodingException *new_JavaSecurityCertCertificateEncodingException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateEncodingException_initWithNSString_withJavaLangThrowable_(JavaSecurityCertCertificateEncodingException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateEncodingException *new_JavaSecurityCertCertificateEncodingException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateEncodingException_initWithJavaLangThrowable_(JavaSecurityCertCertificateEncodingException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateEncodingException *new_JavaSecurityCertCertificateEncodingException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateEncodingException)
 
 #endif // _JavaSecurityCertCertificateEncodingException_H_

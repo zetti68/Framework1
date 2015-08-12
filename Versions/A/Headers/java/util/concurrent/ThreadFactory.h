@@ -6,10 +6,10 @@
 #ifndef _JavaUtilConcurrentThreadFactory_H_
 #define _JavaUtilConcurrentThreadFactory_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangThread;
 @protocol JavaLangRunnable;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilConcurrentThreadFactory < NSObject, JavaObject >
 
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentThreadFactory)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadFactory)
 
 #endif // _JavaUtilConcurrentThreadFactory_H_

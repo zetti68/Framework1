@@ -6,12 +6,12 @@
 #ifndef _JavaLangReflectMember_H_
 #define _JavaLangReflectMember_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 
-#import "JreEmulation.h"
-
-#define JavaLangReflectMember_DECLARED 1
 #define JavaLangReflectMember_PUBLIC 0
+#define JavaLangReflectMember_DECLARED 1
 
 @protocol JavaLangReflectMember < NSObject, JavaObject >
 
@@ -25,10 +25,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectMember_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectMember)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectMember, PUBLIC, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectMember, DECLARED, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectMember)
 
 #endif // _JavaLangReflectMember_H_

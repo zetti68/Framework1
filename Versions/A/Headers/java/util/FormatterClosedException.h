@@ -6,21 +6,24 @@
 #ifndef _JavaUtilFormatterClosedException_H_
 #define _JavaUtilFormatterClosedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaUtilFormatterClosedException_serialVersionUID 18111216LL
+@interface JavaUtilFormatterClosedException : JavaLangIllegalStateException < JavaIoSerializable >
 
-@interface JavaUtilFormatterClosedException : JavaLangIllegalStateException < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilFormatterClosedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilFormatterClosedException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilFormatterClosedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilFormatterClosedException_init(JavaUtilFormatterClosedException *self);
+
+FOUNDATION_EXPORT JavaUtilFormatterClosedException *new_JavaUtilFormatterClosedException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilFormatterClosedException)
 
 #endif // _JavaUtilFormatterClosedException_H_

@@ -6,23 +6,22 @@
 #ifndef _LibcoreIoBufferIterator_H_
 #define _LibcoreIoBufferIterator_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class IOSIntArray;
 
-#import "JreEmulation.h"
+@interface LibcoreIoBufferIterator : NSObject
 
-@interface LibcoreIoBufferIterator : NSObject {
-}
+#pragma mark Public
 
-- (void)seekWithInt:(jint)offset;
+- (instancetype)init;
 
-- (void)skipWithInt:(jint)byteCount;
+- (jbyte)readByte;
 
 - (void)readByteArrayWithByteArray:(IOSByteArray *)dst
                            withInt:(jint)dstOffset
                            withInt:(jint)byteCount;
-
-- (jbyte)readByte;
 
 - (jint)readInt;
 
@@ -32,10 +31,16 @@
 
 - (jshort)readShort;
 
-- (instancetype)init;
+- (void)seekWithInt:(jint)offset;
+
+- (void)skipWithInt:(jint)byteCount;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoBufferIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoBufferIterator)
+
+FOUNDATION_EXPORT void LibcoreIoBufferIterator_init(LibcoreIoBufferIterator *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoBufferIterator)
 
 #endif // _LibcoreIoBufferIterator_H_

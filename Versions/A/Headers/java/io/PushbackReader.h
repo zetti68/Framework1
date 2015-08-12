@@ -6,17 +6,19 @@
 #ifndef _JavaIoPushbackReader_H_
 #define _JavaIoPushbackReader_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterReader.h"
+
 @class IOSCharArray;
 @class JavaIoReader;
-
-#import "JreEmulation.h"
-#include "java/io/FilterReader.h"
 
 @interface JavaIoPushbackReader : JavaIoFilterReader {
  @public
   IOSCharArray *buf_;
   jint pos_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
 
@@ -39,6 +41,8 @@
 
 - (void)reset;
 
+- (jlong)skipWithLong:(jlong)charCount;
+
 - (void)unreadWithCharArray:(IOSCharArray *)buffer;
 
 - (void)unreadWithCharArray:(IOSCharArray *)buffer
@@ -47,12 +51,20 @@
 
 - (void)unreadWithInt:(jint)oneChar;
 
-- (jlong)skipWithLong:(jlong)charCount;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoPushbackReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPushbackReader)
 
 J2OBJC_FIELD_SETTER(JavaIoPushbackReader, buf_, IOSCharArray *)
+
+FOUNDATION_EXPORT void JavaIoPushbackReader_initWithJavaIoReader_(JavaIoPushbackReader *self, JavaIoReader *inArg);
+
+FOUNDATION_EXPORT JavaIoPushbackReader *new_JavaIoPushbackReader_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPushbackReader_initWithJavaIoReader_withInt_(JavaIoPushbackReader *self, JavaIoReader *inArg, jint size);
+
+FOUNDATION_EXPORT JavaIoPushbackReader *new_JavaIoPushbackReader_initWithJavaIoReader_withInt_(JavaIoReader *inArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPushbackReader)
 
 #endif // _JavaIoPushbackReader_H_

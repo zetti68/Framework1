@@ -6,15 +6,14 @@
 #ifndef _JavaNetPortUnreachableException_H_
 #define _JavaNetPortUnreachableException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/SocketException.h"
 
-#define JavaNetPortUnreachableException_serialVersionUID 8462541992376507323LL
+@class JavaLangThrowable;
 
-@interface JavaNetPortUnreachableException : JavaNetSocketException {
-}
+@interface JavaNetPortUnreachableException : JavaNetSocketException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetPortUnreachableException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetPortUnreachableException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetPortUnreachableException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetPortUnreachableException_init(JavaNetPortUnreachableException *self);
+
+FOUNDATION_EXPORT JavaNetPortUnreachableException *new_JavaNetPortUnreachableException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetPortUnreachableException_initWithNSString_(JavaNetPortUnreachableException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetPortUnreachableException *new_JavaNetPortUnreachableException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetPortUnreachableException_initWithNSString_withJavaLangThrowable_(JavaNetPortUnreachableException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetPortUnreachableException *new_JavaNetPortUnreachableException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetPortUnreachableException)
 
 #endif // _JavaNetPortUnreachableException_H_

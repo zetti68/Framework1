@@ -6,9 +6,9 @@
 #ifndef _JavaUtilConcurrentLocksReadWriteLock_H_
 #define _JavaUtilConcurrentLocksReadWriteLock_H_
 
-@protocol JavaUtilConcurrentLocksLock;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@protocol JavaUtilConcurrentLocksLock;
 
 @protocol JavaUtilConcurrentLocksReadWriteLock < NSObject, JavaObject >
 
@@ -18,6 +18,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksReadWriteLock_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksReadWriteLock)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksReadWriteLock)
 
 #endif // _JavaUtilConcurrentLocksReadWriteLock_H_

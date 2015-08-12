@@ -6,20 +6,18 @@
 #ifndef _JavaSqlDriverManager_H_
 #define _JavaSqlDriverManager_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoPrintStream;
 @class JavaIoPrintWriter;
-@class JavaLangClassLoader;
-@class JavaSqlSQLPermission;
 @class JavaUtilProperties;
 @protocol JavaSqlConnection;
 @protocol JavaSqlDriver;
 @protocol JavaUtilEnumeration;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaSqlDriverManager : NSObject
 
-@interface JavaSqlDriverManager : NSObject {
-}
+#pragma mark Public
 
 + (void)deregisterDriverWithJavaSqlDriver:(id<JavaSqlDriver>)driver;
 
@@ -54,39 +52,36 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaSqlDriverManager_initialized;
 J2OBJC_STATIC_INIT(JavaSqlDriverManager)
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_deregisterDriverWithJavaSqlDriver_(id<JavaSqlDriver> driver);
+
 FOUNDATION_EXPORT id<JavaSqlConnection> JavaSqlDriverManager_getConnectionWithNSString_(NSString *url);
+
 FOUNDATION_EXPORT id<JavaSqlConnection> JavaSqlDriverManager_getConnectionWithNSString_withJavaUtilProperties_(NSString *url, JavaUtilProperties *info);
+
 FOUNDATION_EXPORT id<JavaSqlConnection> JavaSqlDriverManager_getConnectionWithNSString_withNSString_withNSString_(NSString *url, NSString *user, NSString *password);
+
 FOUNDATION_EXPORT id<JavaSqlDriver> JavaSqlDriverManager_getDriverWithNSString_(NSString *url);
+
 FOUNDATION_EXPORT id<JavaUtilEnumeration> JavaSqlDriverManager_getDrivers();
+
 FOUNDATION_EXPORT jint JavaSqlDriverManager_getLoginTimeout();
+
 FOUNDATION_EXPORT JavaIoPrintStream *JavaSqlDriverManager_getLogStream();
+
 FOUNDATION_EXPORT JavaIoPrintWriter *JavaSqlDriverManager_getLogWriter();
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_printlnWithNSString_(NSString *message);
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_registerDriverWithJavaSqlDriver_(id<JavaSqlDriver> driver);
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_setLoginTimeoutWithInt_(jint seconds);
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_setLogStreamWithJavaIoPrintStream_(JavaIoPrintStream *outArg);
+
 FOUNDATION_EXPORT void JavaSqlDriverManager_setLogWriterWithJavaIoPrintWriter_(JavaIoPrintWriter *outArg);
 
-FOUNDATION_EXPORT JavaIoPrintStream *JavaSqlDriverManager_thePrintStream_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDriverManager, thePrintStream_, JavaIoPrintStream *)
-J2OBJC_STATIC_FIELD_SETTER(JavaSqlDriverManager, thePrintStream_, JavaIoPrintStream *)
-
-FOUNDATION_EXPORT JavaIoPrintWriter *JavaSqlDriverManager_thePrintWriter_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDriverManager, thePrintWriter_, JavaIoPrintWriter *)
-J2OBJC_STATIC_FIELD_SETTER(JavaSqlDriverManager, thePrintWriter_, JavaIoPrintWriter *)
-
-FOUNDATION_EXPORT jint JavaSqlDriverManager_loginTimeout_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDriverManager, loginTimeout_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaSqlDriverManager, loginTimeout_, jint)
-
-FOUNDATION_EXPORT id<JavaUtilList> JavaSqlDriverManager_theDrivers_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDriverManager, theDrivers_, id<JavaUtilList>)
-
-FOUNDATION_EXPORT JavaSqlSQLPermission *JavaSqlDriverManager_logPermission_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDriverManager, logPermission_, JavaSqlSQLPermission *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDriverManager)
 
 #endif // _JavaSqlDriverManager_H_

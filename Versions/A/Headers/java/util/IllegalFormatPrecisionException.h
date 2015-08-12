@@ -6,24 +6,27 @@
 #ifndef _JavaUtilIllegalFormatPrecisionException_H_
 #define _JavaUtilIllegalFormatPrecisionException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilIllegalFormatPrecisionException_serialVersionUID 18711008LL
+@interface JavaUtilIllegalFormatPrecisionException : JavaUtilIllegalFormatException
 
-@interface JavaUtilIllegalFormatPrecisionException : JavaUtilIllegalFormatException {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)p;
 
-- (jint)getPrecision;
-
 - (NSString *)getMessage;
+
+- (jint)getPrecision;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilIllegalFormatPrecisionException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilIllegalFormatPrecisionException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilIllegalFormatPrecisionException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilIllegalFormatPrecisionException_initWithInt_(JavaUtilIllegalFormatPrecisionException *self, jint p);
+
+FOUNDATION_EXPORT JavaUtilIllegalFormatPrecisionException *new_JavaUtilIllegalFormatPrecisionException_initWithInt_(jint p) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilIllegalFormatPrecisionException)
 
 #endif // _JavaUtilIllegalFormatPrecisionException_H_

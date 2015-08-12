@@ -6,13 +6,12 @@
 #ifndef _JavaNioCharsetMalformedInputException_H_
 #define _JavaNioCharsetMalformedInputException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/charset/CharacterCodingException.h"
 
-#define JavaNioCharsetMalformedInputException_serialVersionUID -3438823399834806194LL
+@interface JavaNioCharsetMalformedInputException : JavaNioCharsetCharacterCodingException
 
-@interface JavaNioCharsetMalformedInputException : JavaNioCharsetCharacterCodingException {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)length;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetMalformedInputException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetMalformedInputException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetMalformedInputException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioCharsetMalformedInputException_initWithInt_(JavaNioCharsetMalformedInputException *self, jint length);
+
+FOUNDATION_EXPORT JavaNioCharsetMalformedInputException *new_JavaNioCharsetMalformedInputException_initWithInt_(jint length) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetMalformedInputException)
 
 #endif // _JavaNioCharsetMalformedInputException_H_

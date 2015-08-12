@@ -6,7 +6,7 @@
 #ifndef _JavaNioChannelsSpiAbstractSelectionKey_H_
 #define _JavaNioChannelsSpiAbstractSelectionKey_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/SelectionKey.h"
 
 @interface JavaNioChannelsSpiAbstractSelectionKey : JavaNioChannelsSelectionKey {
@@ -14,14 +14,22 @@
   jboolean isValid__;
 }
 
-- (instancetype)init;
-
-- (jboolean)isValid;
+#pragma mark Public
 
 - (void)cancel;
 
+- (jboolean)isValid;
+
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractSelectionKey_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSpiAbstractSelectionKey)
+
+FOUNDATION_EXPORT void JavaNioChannelsSpiAbstractSelectionKey_init(JavaNioChannelsSpiAbstractSelectionKey *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSpiAbstractSelectionKey)
 
 #endif // _JavaNioChannelsSpiAbstractSelectionKey_H_

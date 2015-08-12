@@ -6,36 +6,23 @@
 #ifndef _JavaUtilConcurrentFutureTask_H_
 #define _JavaUtilConcurrentFutureTask_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/RunnableFuture.h"
+
 @class JavaLangThread;
 @class JavaLangThrowable;
-@class JavaUtilConcurrentFutureTask_WaitNode;
 @class JavaUtilConcurrentTimeUnitEnum;
-@class SunMiscUnsafe;
 @protocol JavaLangRunnable;
 @protocol JavaUtilConcurrentCallable;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/RunnableFuture.h"
+@interface JavaUtilConcurrentFutureTask : NSObject < JavaUtilConcurrentRunnableFuture >
 
-#define JavaUtilConcurrentFutureTask_CANCELLED 4
-#define JavaUtilConcurrentFutureTask_COMPLETING 1
-#define JavaUtilConcurrentFutureTask_EXCEPTIONAL 3
-#define JavaUtilConcurrentFutureTask_INTERRUPTED 6
-#define JavaUtilConcurrentFutureTask_INTERRUPTING 5
-#define JavaUtilConcurrentFutureTask_NEW 0
-#define JavaUtilConcurrentFutureTask_NORMAL 2
-
-@interface JavaUtilConcurrentFutureTask : NSObject < JavaUtilConcurrentRunnableFuture > {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
 
 - (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
                                   withId:(id)result;
-
-- (jboolean)isCancelled;
-
-- (jboolean)isDone;
 
 - (jboolean)cancelWithBoolean:(jboolean)mayInterruptIfRunning;
 
@@ -44,46 +31,35 @@
 - (id)getWithLong:(jlong)timeout
 withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
+- (jboolean)isCancelled;
+
+- (jboolean)isDone;
+
+- (void)run;
+
+#pragma mark Protected
+
 - (void)done;
+
+- (jboolean)runAndReset;
 
 - (void)setWithId:(id)v;
 
 - (void)setExceptionWithJavaLangThrowable:(JavaLangThrowable *)t;
 
-- (void)run;
-
-- (jboolean)runAndReset;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentFutureTask_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentFutureTask)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, NEW, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentFutureTask_initWithJavaUtilConcurrentCallable_(JavaUtilConcurrentFutureTask *self, id<JavaUtilConcurrentCallable> callable);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, COMPLETING, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentFutureTask *new_JavaUtilConcurrentFutureTask_initWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> callable) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, NORMAL, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentFutureTask_initWithJavaLangRunnable_withId_(JavaUtilConcurrentFutureTask *self, id<JavaLangRunnable> runnable, id result);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, EXCEPTIONAL, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentFutureTask *new_JavaUtilConcurrentFutureTask_initWithJavaLangRunnable_withId_(id<JavaLangRunnable> runnable, id result) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, CANCELLED, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, INTERRUPTING, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, INTERRUPTED, jint)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentFutureTask_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, UNSAFE_, SunMiscUnsafe *)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentFutureTask_stateOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, stateOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentFutureTask_runnerOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, runnerOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentFutureTask_waitersOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, waitersOffset_, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentFutureTask)
 
 @interface JavaUtilConcurrentFutureTask_WaitNode : NSObject {
  @public
@@ -91,13 +67,21 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentFutureTask, waitersOffset_, jlong)
   JavaUtilConcurrentFutureTask_WaitNode *next_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentFutureTask_WaitNode_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentFutureTask_WaitNode)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentFutureTask_WaitNode, thread_, JavaLangThread *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentFutureTask_WaitNode, next_, JavaUtilConcurrentFutureTask_WaitNode *)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentFutureTask_WaitNode_init(JavaUtilConcurrentFutureTask_WaitNode *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentFutureTask_WaitNode *new_JavaUtilConcurrentFutureTask_WaitNode_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentFutureTask_WaitNode)
 
 #endif // _JavaUtilConcurrentFutureTask_H_

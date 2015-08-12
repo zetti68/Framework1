@@ -6,15 +6,18 @@
 #ifndef _JavaUtilConcurrentRunnableFuture_H_
 #define _JavaUtilConcurrentRunnableFuture_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Runnable.h"
 #include "java/util/concurrent/Future.h"
 
 @protocol JavaUtilConcurrentRunnableFuture < JavaLangRunnable, JavaUtilConcurrentFuture, NSObject, JavaObject >
+
 - (void)run;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentRunnableFuture_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentRunnableFuture)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentRunnableFuture)
 
 #endif // _JavaUtilConcurrentRunnableFuture_H_

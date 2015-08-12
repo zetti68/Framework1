@@ -6,14 +6,15 @@
 #ifndef _JavaIoLineNumberInputStream_H_
 #define _JavaIoLineNumberInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterInputStream.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 
-#import "JreEmulation.h"
-#include "java/io/FilterInputStream.h"
+@interface JavaIoLineNumberInputStream : JavaIoFilterInputStream
 
-@interface JavaIoLineNumberInputStream : JavaIoFilterInputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
@@ -37,6 +38,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoLineNumberInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoLineNumberInputStream)
+
+FOUNDATION_EXPORT void JavaIoLineNumberInputStream_initWithJavaIoInputStream_(JavaIoLineNumberInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaIoLineNumberInputStream *new_JavaIoLineNumberInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoLineNumberInputStream)
 
 #endif // _JavaIoLineNumberInputStream_H_

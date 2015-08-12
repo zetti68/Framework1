@@ -6,17 +6,23 @@
 #ifndef _JavaNetDatagramPacket_H_
 #define _JavaNetDatagramPacket_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaNetInetAddress;
 @class JavaNetSocketAddress;
 
-#import "JreEmulation.h"
+@interface JavaNetDatagramPacket : NSObject
 
-@interface JavaNetDatagramPacket : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithByteArray:(IOSByteArray *)data
                           withInt:(jint)length;
+
+- (instancetype)initWithByteArray:(IOSByteArray *)data
+                          withInt:(jint)length
+           withJavaNetInetAddress:(JavaNetInetAddress *)host
+                          withInt:(jint)port;
 
 - (instancetype)initWithByteArray:(IOSByteArray *)data
                           withInt:(jint)offset
@@ -29,9 +35,13 @@
                           withInt:(jint)aPort;
 
 - (instancetype)initWithByteArray:(IOSByteArray *)data
+                          withInt:(jint)offset
                           withInt:(jint)length
-           withJavaNetInetAddress:(JavaNetInetAddress *)host
-                          withInt:(jint)port;
+         withJavaNetSocketAddress:(JavaNetSocketAddress *)sockAddr;
+
+- (instancetype)initWithByteArray:(IOSByteArray *)data
+                          withInt:(jint)length
+         withJavaNetSocketAddress:(JavaNetSocketAddress *)sockAddr;
 
 - (JavaNetInetAddress *)getAddress;
 
@@ -43,37 +53,54 @@
 
 - (jint)getPort;
 
+- (JavaNetSocketAddress *)getSocketAddress;
+
+- (void)resetLengthForReceive;
+
 - (void)setAddressWithJavaNetInetAddress:(JavaNetInetAddress *)addr;
+
+- (void)setDataWithByteArray:(IOSByteArray *)buf;
 
 - (void)setDataWithByteArray:(IOSByteArray *)data
                      withInt:(jint)offset
                      withInt:(jint)byteCount;
 
-- (void)setDataWithByteArray:(IOSByteArray *)buf;
-
 - (void)setLengthWithInt:(jint)length;
-
-- (void)resetLengthForReceive;
-
-- (void)setReceivedLengthWithInt:(jint)length;
 
 - (void)setPortWithInt:(jint)aPort;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)data
-                          withInt:(jint)length
-         withJavaNetSocketAddress:(JavaNetSocketAddress *)sockAddr;
-
-- (instancetype)initWithByteArray:(IOSByteArray *)data
-                          withInt:(jint)offset
-                          withInt:(jint)length
-         withJavaNetSocketAddress:(JavaNetSocketAddress *)sockAddr;
-
-- (JavaNetSocketAddress *)getSocketAddress;
+- (void)setReceivedLengthWithInt:(jint)length;
 
 - (void)setSocketAddressWithJavaNetSocketAddress:(JavaNetSocketAddress *)sockAddr;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetDatagramPacket_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetDatagramPacket)
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_(JavaNetDatagramPacket *self, IOSByteArray *data, jint length);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_(IOSByteArray *data, jint length) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_withInt_(JavaNetDatagramPacket *self, IOSByteArray *data, jint offset, jint length);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_withInt_(IOSByteArray *data, jint offset, jint length) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_withInt_withJavaNetInetAddress_withInt_(JavaNetDatagramPacket *self, IOSByteArray *data, jint offset, jint length, JavaNetInetAddress *host, jint aPort);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_withInt_withJavaNetInetAddress_withInt_(IOSByteArray *data, jint offset, jint length, JavaNetInetAddress *host, jint aPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_withJavaNetInetAddress_withInt_(JavaNetDatagramPacket *self, IOSByteArray *data, jint length, JavaNetInetAddress *host, jint port);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_withJavaNetInetAddress_withInt_(IOSByteArray *data, jint length, JavaNetInetAddress *host, jint port) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_withJavaNetSocketAddress_(JavaNetDatagramPacket *self, IOSByteArray *data, jint length, JavaNetSocketAddress *sockAddr);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_withJavaNetSocketAddress_(IOSByteArray *data, jint length, JavaNetSocketAddress *sockAddr) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetDatagramPacket_initWithByteArray_withInt_withInt_withJavaNetSocketAddress_(JavaNetDatagramPacket *self, IOSByteArray *data, jint offset, jint length, JavaNetSocketAddress *sockAddr);
+
+FOUNDATION_EXPORT JavaNetDatagramPacket *new_JavaNetDatagramPacket_initWithByteArray_withInt_withInt_withJavaNetSocketAddress_(IOSByteArray *data, jint offset, jint length, JavaNetSocketAddress *sockAddr) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetDatagramPacket)
 
 #endif // _JavaNetDatagramPacket_H_

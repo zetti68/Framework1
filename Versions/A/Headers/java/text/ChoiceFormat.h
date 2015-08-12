@@ -6,19 +6,18 @@
 #ifndef _JavaTextChoiceFormat_H_
 #define _JavaTextChoiceFormat_H_
 
+#include "J2ObjC_header.h"
+#include "java/text/NumberFormat.h"
+
 @class IOSDoubleArray;
 @class IOSObjectArray;
 @class JavaLangStringBuffer;
 @class JavaTextFieldPosition;
 @class JavaTextParsePosition;
 
-#import "JreEmulation.h"
-#include "java/text/NumberFormat.h"
+@interface JavaTextChoiceFormat : JavaTextNumberFormat
 
-#define JavaTextChoiceFormat_serialVersionUID 1795184449645032964LL
-
-@interface JavaTextChoiceFormat : JavaTextNumberFormat {
-}
+#pragma mark Public
 
 - (instancetype)initWithDoubleArray:(IOSDoubleArray *)limits
                   withNSStringArray:(IOSObjectArray *)formats;
@@ -62,11 +61,22 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextChoiceFormat_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextChoiceFormat)
+
+FOUNDATION_EXPORT void JavaTextChoiceFormat_initWithDoubleArray_withNSStringArray_(JavaTextChoiceFormat *self, IOSDoubleArray *limits, IOSObjectArray *formats);
+
+FOUNDATION_EXPORT JavaTextChoiceFormat *new_JavaTextChoiceFormat_initWithDoubleArray_withNSStringArray_(IOSDoubleArray *limits, IOSObjectArray *formats) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextChoiceFormat_initWithNSString_(JavaTextChoiceFormat *self, NSString *template_);
+
+FOUNDATION_EXPORT JavaTextChoiceFormat *new_JavaTextChoiceFormat_initWithNSString_(NSString *template_) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jdouble JavaTextChoiceFormat_nextDoubleWithDouble_(jdouble value);
+
 FOUNDATION_EXPORT jdouble JavaTextChoiceFormat_nextDoubleWithDouble_withBoolean_(jdouble value, jboolean increment);
+
 FOUNDATION_EXPORT jdouble JavaTextChoiceFormat_previousDoubleWithDouble_(jdouble value);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextChoiceFormat, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextChoiceFormat)
 
 #endif // _JavaTextChoiceFormat_H_

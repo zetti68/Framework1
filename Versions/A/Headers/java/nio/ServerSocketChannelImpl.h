@@ -6,31 +6,30 @@
 #ifndef _JavaNioServerSocketChannelImpl_H_
 #define _JavaNioServerSocketChannelImpl_H_
 
-@class JavaIoFileDescriptor;
-@class JavaNetSocket;
-@class JavaNetSocketAddress;
-@class JavaNetSocketTimeoutException;
-@class JavaNioChannelsSocketChannel;
-@class JavaNioChannelsSpiSelectorProvider;
-@class JavaNioServerSocketChannelImpl_ServerSocketAdapter;
-@class JavaNioSocketChannelImpl;
-@protocol JavaNetSocketOption;
-@protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/net/ServerSocket.h"
+#include "J2ObjC_header.h"
 #include "java/nio/FileDescriptorChannel.h"
 #include "java/nio/channels/ServerSocketChannel.h"
 
-@interface JavaNioServerSocketChannelImpl : JavaNioChannelsServerSocketChannel < JavaNioFileDescriptorChannel > {
-}
+@class JavaIoFileDescriptor;
+@class JavaNetServerSocket;
+@class JavaNetSocketAddress;
+@class JavaNioChannelsSocketChannel;
+@class JavaNioChannelsSpiSelectorProvider;
+@protocol JavaNetSocketOption;
+@protocol JavaUtilSet;
+
+@interface JavaNioServerSocketChannelImpl : JavaNioChannelsServerSocketChannel < JavaNioFileDescriptorChannel >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)sp;
 
-- (JavaNetServerSocket *)socket;
+- (JavaNioChannelsSocketChannel *)accept;
 
 - (JavaNioChannelsServerSocketChannel *)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr
                                                              withInt:(jint)backlog;
+
+- (JavaIoFileDescriptor *)getFD;
 
 - (JavaNetSocketAddress *)getLocalAddress;
 
@@ -39,35 +38,24 @@
 - (JavaNioChannelsServerSocketChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
                                                                   withId:(id)value;
 
+- (JavaNetServerSocket *)socket;
+
 - (id<JavaUtilSet>)supportedOptions;
 
-- (JavaNioChannelsSocketChannel *)accept;
-
-- (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
+#pragma mark Protected
 
 - (void)implCloseSelectableChannel;
 
-- (JavaIoFileDescriptor *)getFD;
+- (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioServerSocketChannelImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioServerSocketChannelImpl)
 
-@interface JavaNioServerSocketChannelImpl_ServerSocketAdapter : JavaNetServerSocket {
-}
+FOUNDATION_EXPORT void JavaNioServerSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioServerSocketChannelImpl *self, JavaNioChannelsSpiSelectorProvider *sp);
 
-- (instancetype)initWithJavaNioServerSocketChannelImpl:(JavaNioServerSocketChannelImpl *)aChannelImpl;
+FOUNDATION_EXPORT JavaNioServerSocketChannelImpl *new_JavaNioServerSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiSelectorProvider *sp) NS_RETURNS_RETAINED;
 
-- (JavaNetSocket *)accept;
-
-- (JavaNetSocket *)implAcceptWithJavaNioSocketChannelImpl:(JavaNioSocketChannelImpl *)clientSocketChannel;
-
-- (JavaNioChannelsServerSocketChannel *)getChannel;
-
-- (void)close;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioServerSocketChannelImpl_ServerSocketAdapter_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioServerSocketChannelImpl)
 
 #endif // _JavaNioServerSocketChannelImpl_H_

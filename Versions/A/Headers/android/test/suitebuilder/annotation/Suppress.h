@@ -6,7 +6,7 @@
 #ifndef _AndroidTestSuitebuilderAnnotationSuppress_H_
 #define _AndroidTestSuitebuilderAnnotationSuppress_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol AndroidTestSuitebuilderAnnotationSuppress < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTestSuitebuilderAnnotationSuppress_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTestSuitebuilderAnnotationSuppress)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTestSuitebuilderAnnotationSuppress)
 
 #endif // _AndroidTestSuitebuilderAnnotationSuppress_H_

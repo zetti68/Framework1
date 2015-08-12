@@ -6,22 +6,25 @@
 #ifndef _JavaIoIOError_H_
 #define _JavaIoIOError_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-#define JavaIoIOError_serialVersionUID 67100927991680413LL
+@class JavaLangThrowable;
 
-@interface JavaIoIOError : JavaLangError {
-}
+@interface JavaIoIOError : JavaLangError
+
+#pragma mark Public
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoIOError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoIOError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoIOError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoIOError_initWithJavaLangThrowable_(JavaIoIOError *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaIoIOError *new_JavaIoIOError_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoIOError)
 
 #endif // _JavaIoIOError_H_

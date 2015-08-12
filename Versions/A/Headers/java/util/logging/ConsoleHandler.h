@@ -6,13 +6,14 @@
 #ifndef _JavaUtilLoggingConsoleHandler_H_
 #define _JavaUtilLoggingConsoleHandler_H_
 
-@class JavaUtilLoggingLogRecord;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/logging/StreamHandler.h"
 
-@interface JavaUtilLoggingConsoleHandler : JavaUtilLoggingStreamHandler {
-}
+@class JavaUtilLoggingLogRecord;
+
+@interface JavaUtilLoggingConsoleHandler : JavaUtilLoggingStreamHandler
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -22,6 +23,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingConsoleHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingConsoleHandler)
+
+FOUNDATION_EXPORT void JavaUtilLoggingConsoleHandler_init(JavaUtilLoggingConsoleHandler *self);
+
+FOUNDATION_EXPORT JavaUtilLoggingConsoleHandler *new_JavaUtilLoggingConsoleHandler_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingConsoleHandler)
 
 #endif // _JavaUtilLoggingConsoleHandler_H_

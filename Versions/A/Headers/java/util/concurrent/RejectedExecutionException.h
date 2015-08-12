@@ -6,15 +6,14 @@
 #ifndef _JavaUtilConcurrentRejectedExecutionException_H_
 #define _JavaUtilConcurrentRejectedExecutionException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaUtilConcurrentRejectedExecutionException_serialVersionUID -375805702767069545LL
+@class JavaLangThrowable;
 
-@interface JavaUtilConcurrentRejectedExecutionException : JavaLangRuntimeException {
-}
+@interface JavaUtilConcurrentRejectedExecutionException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentRejectedExecutionException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentRejectedExecutionException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentRejectedExecutionException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentRejectedExecutionException_init(JavaUtilConcurrentRejectedExecutionException *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentRejectedExecutionException *new_JavaUtilConcurrentRejectedExecutionException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentRejectedExecutionException_initWithNSString_(JavaUtilConcurrentRejectedExecutionException *self, NSString *message);
+
+FOUNDATION_EXPORT JavaUtilConcurrentRejectedExecutionException *new_JavaUtilConcurrentRejectedExecutionException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentRejectedExecutionException_initWithNSString_withJavaLangThrowable_(JavaUtilConcurrentRejectedExecutionException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaUtilConcurrentRejectedExecutionException *new_JavaUtilConcurrentRejectedExecutionException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentRejectedExecutionException_initWithJavaLangThrowable_(JavaUtilConcurrentRejectedExecutionException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaUtilConcurrentRejectedExecutionException *new_JavaUtilConcurrentRejectedExecutionException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentRejectedExecutionException)
 
 #endif // _JavaUtilConcurrentRejectedExecutionException_H_

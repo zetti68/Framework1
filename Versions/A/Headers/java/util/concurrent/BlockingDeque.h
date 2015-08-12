@@ -6,14 +6,15 @@
 #ifndef _JavaUtilConcurrentBlockingDeque_H_
 #define _JavaUtilConcurrentBlockingDeque_H_
 
-@class JavaUtilConcurrentTimeUnitEnum;
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Deque.h"
 #include "java/util/concurrent/BlockingQueue.h"
 
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilIterator;
+
 @protocol JavaUtilConcurrentBlockingDeque < JavaUtilConcurrentBlockingQueue, JavaUtilDeque, NSObject, JavaObject >
+
 - (void)addFirstWithId:(id)e;
 
 - (void)addLastWithId:(id)e;
@@ -81,9 +82,10 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (void)pushWithId:(id)e;
 
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentBlockingDeque_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentBlockingDeque)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentBlockingDeque)
 
 #endif // _JavaUtilConcurrentBlockingDeque_H_

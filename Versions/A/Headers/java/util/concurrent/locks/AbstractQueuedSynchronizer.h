@@ -6,137 +6,124 @@
 #ifndef _JavaUtilConcurrentLocksAbstractQueuedSynchronizer_H_
 #define _JavaUtilConcurrentLocksAbstractQueuedSynchronizer_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/util/concurrent/locks/AbstractOwnableSynchronizer.h"
+#include "java/util/concurrent/locks/Condition.h"
+
 @class JavaLangThread;
 @class JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject;
 @class JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node;
 @class JavaUtilConcurrentTimeUnitEnum;
 @class JavaUtilDate;
-@class SunMiscUnsafe;
 @protocol JavaUtilCollection;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/util/concurrent/locks/AbstractOwnableSynchronizer.h"
-#include "java/util/concurrent/locks/Condition.h"
-
-#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_serialVersionUID 7373984972572414691LL
 #define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_spinForTimeoutThreshold 1000LL
 
-@interface JavaUtilConcurrentLocksAbstractQueuedSynchronizer : JavaUtilConcurrentLocksAbstractOwnableSynchronizer < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentLocksAbstractQueuedSynchronizer : JavaUtilConcurrentLocksAbstractOwnableSynchronizer < JavaIoSerializable >
 
-- (instancetype)init;
-
-- (jint)getState;
-
-- (void)setStateWithInt:(jint)newState;
-
-- (jboolean)compareAndSetStateWithInt:(jint)expect
-                              withInt:(jint)update;
-
-+ (void)selfInterrupt;
-
-- (jboolean)acquireQueuedWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node
-                                                                            withInt:(jint)arg;
-
-- (jboolean)tryAcquireWithInt:(jint)arg;
-
-- (jboolean)tryReleaseWithInt:(jint)arg;
-
-- (jint)tryAcquireSharedWithInt:(jint)arg;
-
-- (jboolean)tryReleaseSharedWithInt:(jint)arg;
-
-- (jboolean)isHeldExclusively;
+#pragma mark Public
 
 - (void)acquireWithInt:(jint)arg;
 
 - (void)acquireInterruptiblyWithInt:(jint)arg;
 
-- (jboolean)tryAcquireNanosWithInt:(jint)arg
-                          withLong:(jlong)nanosTimeout;
-
-- (jboolean)release__WithInt:(jint)arg;
-
 - (void)acquireSharedWithInt:(jint)arg;
 
 - (void)acquireSharedInterruptiblyWithInt:(jint)arg;
 
-- (jboolean)tryAcquireSharedNanosWithInt:(jint)arg
-                                withLong:(jlong)nanosTimeout;
-
-- (jboolean)releaseSharedWithInt:(jint)arg;
-
-- (jboolean)hasQueuedThreads;
-
-- (jboolean)hasContended;
+- (id<JavaUtilCollection>)getExclusiveQueuedThreads;
 
 - (JavaLangThread *)getFirstQueuedThread;
 
-- (jboolean)isQueuedWithJavaLangThread:(JavaLangThread *)thread;
-
-- (jboolean)apparentlyFirstQueuedIsExclusive;
-
-- (jboolean)hasQueuedPredecessors;
+- (id<JavaUtilCollection>)getQueuedThreads;
 
 - (jint)getQueueLength;
 
-- (id<JavaUtilCollection>)getQueuedThreads;
-
-- (id<JavaUtilCollection>)getExclusiveQueuedThreads;
-
 - (id<JavaUtilCollection>)getSharedQueuedThreads;
-
-- (NSString *)description;
-
-- (jboolean)isOnSyncQueueWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
-
-- (jboolean)transferForSignalWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
-
-- (jboolean)transferAfterCancelledWaitWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
-
-- (jint)fullyReleaseWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
-
-- (jboolean)ownsWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
-
-- (jboolean)hasWaitersWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
-
-- (jint)getWaitQueueLengthWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
 
 - (id<JavaUtilCollection>)getWaitingThreadsWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
 
+- (jint)getWaitQueueLengthWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
+
+- (jboolean)hasContended;
+
+- (jboolean)hasQueuedPredecessors;
+
+- (jboolean)hasQueuedThreads;
+
+- (jboolean)hasWaitersWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
+
+- (jboolean)isQueuedWithJavaLangThread:(JavaLangThread *)thread;
+
+- (jboolean)ownsWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)condition;
+
+- (jboolean)release__WithInt:(jint)arg;
+
+- (jboolean)releaseSharedWithInt:(jint)arg;
+
+- (NSString *)description;
+
+- (jboolean)tryAcquireNanosWithInt:(jint)arg
+                          withLong:(jlong)nanosTimeout;
+
+- (jboolean)tryAcquireSharedNanosWithInt:(jint)arg
+                                withLong:(jlong)nanosTimeout;
+
+#pragma mark Protected
+
+- (instancetype)init;
+
+- (jboolean)compareAndSetStateWithInt:(jint)expect
+                              withInt:(jint)update;
+
+- (jint)getState;
+
+- (jboolean)isHeldExclusively;
+
+- (void)setStateWithInt:(jint)newState;
+
+- (jboolean)tryAcquireWithInt:(jint)arg;
+
+- (jint)tryAcquireSharedWithInt:(jint)arg;
+
+- (jboolean)tryReleaseWithInt:(jint)arg;
+
+- (jboolean)tryReleaseSharedWithInt:(jint)arg;
+
+#pragma mark Package-Private
+
+- (jboolean)acquireQueuedWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node
+                                                                            withInt:(jint)arg;
+
+- (jboolean)apparentlyFirstQueuedIsExclusive;
+
+- (jint)fullyReleaseWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
+
+- (jboolean)isOnSyncQueueWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
+
++ (void)selfInterrupt;
+
+- (jboolean)transferAfterCancelledWaitWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
+
+- (jboolean)transferForSignalWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)node;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentLocksAbstractQueuedSynchronizer_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentLocksAbstractQueuedSynchronizer)
-FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_selfInterrupt();
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, spinForTimeoutThreshold, jlong)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentLocksAbstractQueuedSynchronizer_unsafe_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, unsafe_, SunMiscUnsafe *)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_init(JavaUtilConcurrentLocksAbstractQueuedSynchronizer *self);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLocksAbstractQueuedSynchronizer_stateOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, stateOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_selfInterrupt();
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLocksAbstractQueuedSynchronizer_headOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, headOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLocksAbstractQueuedSynchronizer_tailOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, tailOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLocksAbstractQueuedSynchronizer_waitStatusOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, waitStatusOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentLocksAbstractQueuedSynchronizer_nextOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, nextOffset_, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer)
 
 #define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_CANCELLED 1
+#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_SIGNAL -1
 #define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_CONDITION -2
 #define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_PROPAGATE -3
-#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_SIGNAL -1
 
 @interface JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node : NSObject {
  @public
@@ -147,21 +134,22 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer, ne
   JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *nextWaiter_;
 }
 
-- (jboolean)isShared;
-
-- (JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)predecessor;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaLangThread:(JavaLangThread *)thread
-withJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)mode;
+                               withInt:(jint)waitStatus;
 
 - (instancetype)initWithJavaLangThread:(JavaLangThread *)thread
-                               withInt:(jint)waitStatus;
+withJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)mode;
+
+- (jboolean)isShared;
+
+- (JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)predecessor;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node, prev_, JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *)
@@ -183,46 +171,61 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Nod
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node, PROPAGATE, jint)
 
-#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_REINTERRUPT 1
-#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_THROW_IE -1
-#define JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_serialVersionUID 1173984872572414699LL
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_init(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *self);
 
-@interface JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject : NSObject < JavaUtilConcurrentLocksCondition, JavaIoSerializable > {
-}
+FOUNDATION_EXPORT JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *new_JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_initWithJavaLangThread_withJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *self, JavaLangThread *thread, JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *mode);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *new_JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_initWithJavaLangThread_withJavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_(JavaLangThread *thread, JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *mode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_initWithJavaLangThread_withInt_(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *self, JavaLangThread *thread, jint waitStatus);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node *new_JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node_initWithJavaLangThread_withInt_(JavaLangThread *thread, jint waitStatus) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_Node)
+
+@interface JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject : NSObject < JavaUtilConcurrentLocksCondition, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer *)outer$;
+
+- (void)await;
+
+- (jboolean)awaitWithLong:(jlong)time
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (jlong)awaitNanosWithLong:(jlong)nanosTimeout;
+
+- (void)awaitUninterruptibly;
+
+- (jboolean)awaitUntilWithJavaUtilDate:(JavaUtilDate *)deadline;
 
 - (void)signal;
 
 - (void)signalAll;
 
-- (void)awaitUninterruptibly;
-
-- (void)await;
-
-- (jlong)awaitNanosWithLong:(jlong)nanosTimeout;
-
-- (jboolean)awaitUntilWithJavaUtilDate:(JavaUtilDate *)deadline;
-
-- (jboolean)awaitWithLong:(jlong)time
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (jboolean)isOwnedByWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer *)sync;
-
-- (jboolean)hasWaiters;
-
-- (jint)getWaitQueueLength;
+#pragma mark Protected
 
 - (id<JavaUtilCollection>)getWaitingThreads;
 
+- (jint)getWaitQueueLength;
+
+- (jboolean)hasWaiters;
+
+#pragma mark Package-Private
+
+- (jboolean)isOwnedByWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer:(JavaUtilConcurrentLocksAbstractQueuedSynchronizer *)sync;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_initWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *self, JavaUtilConcurrentLocksAbstractQueuedSynchronizer *outer$);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject, REINTERRUPT, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *new_JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject_initWithJavaUtilConcurrentLocksAbstractQueuedSynchronizer_(JavaUtilConcurrentLocksAbstractQueuedSynchronizer *outer$) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject, THROW_IE, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject)
 
 #endif // _JavaUtilConcurrentLocksAbstractQueuedSynchronizer_H_

@@ -6,10 +6,8 @@
 #ifndef _JavaIoOptionalDataException_H_
 #define _JavaIoOptionalDataException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
-
-#define JavaIoOptionalDataException_serialVersionUID -8011121865681257820LL
 
 @interface JavaIoOptionalDataException : JavaIoObjectStreamException {
  @public
@@ -17,14 +15,24 @@
   jint length_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoOptionalDataException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoOptionalDataException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoOptionalDataException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoOptionalDataException_init(JavaIoOptionalDataException *self);
+
+FOUNDATION_EXPORT JavaIoOptionalDataException *new_JavaIoOptionalDataException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoOptionalDataException_initWithNSString_(JavaIoOptionalDataException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoOptionalDataException *new_JavaIoOptionalDataException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoOptionalDataException)
 
 #endif // _JavaIoOptionalDataException_H_

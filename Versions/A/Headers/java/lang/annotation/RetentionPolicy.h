@@ -6,42 +6,42 @@
 #ifndef _JavaLangAnnotationRetentionPolicy_H_
 #define _JavaLangAnnotationRetentionPolicy_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Enum.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaLangAnnotationRetentionPolicy) {
   JavaLangAnnotationRetentionPolicy_SOURCE = 0,
   JavaLangAnnotationRetentionPolicy_CLASS = 1,
   JavaLangAnnotationRetentionPolicy_RUNTIME = 2,
-} JavaLangAnnotationRetentionPolicy;
+};
 
-@interface JavaLangAnnotationRetentionPolicyEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaLangAnnotationRetentionPolicyEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaLangAnnotationRetentionPolicyEnum_values();
 
 + (JavaLangAnnotationRetentionPolicyEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaLangAnnotationRetentionPolicyEnum *JavaLangAnnotationRetentionPolicyEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaLangAnnotationRetentionPolicyEnum *JavaLangAnnotationRetentionPolicyEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangAnnotationRetentionPolicyEnum_initialized;
 J2OBJC_STATIC_INIT(JavaLangAnnotationRetentionPolicyEnum)
 
 FOUNDATION_EXPORT JavaLangAnnotationRetentionPolicyEnum *JavaLangAnnotationRetentionPolicyEnum_values_[];
 
 #define JavaLangAnnotationRetentionPolicyEnum_SOURCE JavaLangAnnotationRetentionPolicyEnum_values_[JavaLangAnnotationRetentionPolicy_SOURCE]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationRetentionPolicyEnum, SOURCE, JavaLangAnnotationRetentionPolicyEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationRetentionPolicyEnum, SOURCE)
 
 #define JavaLangAnnotationRetentionPolicyEnum_CLASS JavaLangAnnotationRetentionPolicyEnum_values_[JavaLangAnnotationRetentionPolicy_CLASS]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationRetentionPolicyEnum, CLASS, JavaLangAnnotationRetentionPolicyEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationRetentionPolicyEnum, CLASS)
 
 #define JavaLangAnnotationRetentionPolicyEnum_RUNTIME JavaLangAnnotationRetentionPolicyEnum_values_[JavaLangAnnotationRetentionPolicy_RUNTIME]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationRetentionPolicyEnum, RUNTIME, JavaLangAnnotationRetentionPolicyEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationRetentionPolicyEnum, RUNTIME)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationRetentionPolicyEnum)
 
 #endif // _JavaLangAnnotationRetentionPolicy_H_

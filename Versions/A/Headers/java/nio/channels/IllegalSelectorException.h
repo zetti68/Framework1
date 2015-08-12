@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsIllegalSelectorException_H_
 #define _JavaNioChannelsIllegalSelectorException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalArgumentException.h"
 
-#define JavaNioChannelsIllegalSelectorException_serialVersionUID -8406323347253320987LL
+@interface JavaNioChannelsIllegalSelectorException : JavaLangIllegalArgumentException
 
-@interface JavaNioChannelsIllegalSelectorException : JavaLangIllegalArgumentException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsIllegalSelectorException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsIllegalSelectorException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsIllegalSelectorException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsIllegalSelectorException_init(JavaNioChannelsIllegalSelectorException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsIllegalSelectorException *new_JavaNioChannelsIllegalSelectorException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsIllegalSelectorException)
 
 #endif // _JavaNioChannelsIllegalSelectorException_H_

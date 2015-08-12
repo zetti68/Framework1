@@ -6,22 +6,25 @@
 #ifndef _JavaNioCharsetCoderMalfunctionError_H_
 #define _JavaNioCharsetCoderMalfunctionError_H_
 
-@class JavaLangException;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-#define JavaNioCharsetCoderMalfunctionError_serialVersionUID -1151412348057794301LL
+@class JavaLangException;
 
-@interface JavaNioCharsetCoderMalfunctionError : JavaLangError {
-}
+@interface JavaNioCharsetCoderMalfunctionError : JavaLangError
+
+#pragma mark Public
 
 - (instancetype)initWithJavaLangException:(JavaLangException *)ex;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetCoderMalfunctionError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetCoderMalfunctionError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCoderMalfunctionError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioCharsetCoderMalfunctionError_initWithJavaLangException_(JavaNioCharsetCoderMalfunctionError *self, JavaLangException *ex);
+
+FOUNDATION_EXPORT JavaNioCharsetCoderMalfunctionError *new_JavaNioCharsetCoderMalfunctionError_initWithJavaLangException_(JavaLangException *ex) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCoderMalfunctionError)
 
 #endif // _JavaNioCharsetCoderMalfunctionError_H_

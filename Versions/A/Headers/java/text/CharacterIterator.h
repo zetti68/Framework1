@@ -6,11 +6,12 @@
 #ifndef _JavaTextCharacterIterator_H_
 #define _JavaTextCharacterIterator_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 #define JavaTextCharacterIterator_DONE 0xffff
 
 @protocol JavaTextCharacterIterator < NSCopying, NSObject, JavaObject >
+
 - (id)clone;
 
 - (jchar)current;
@@ -33,8 +34,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextCharacterIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextCharacterIterator)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaTextCharacterIterator, DONE, jchar)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextCharacterIterator)
 
 #endif // _JavaTextCharacterIterator_H_

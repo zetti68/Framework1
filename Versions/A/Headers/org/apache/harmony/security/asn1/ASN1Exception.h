@@ -6,20 +6,23 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Exception_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Exception_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define OrgApacheHarmonySecurityAsn1ASN1Exception_serialVersionUID -3561981263989123987LL
+@interface OrgApacheHarmonySecurityAsn1ASN1Exception : JavaIoIOException
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Exception : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)message;
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Exception_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Exception)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1Exception, serialVersionUID, jlong)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Exception_initWithNSString_(OrgApacheHarmonySecurityAsn1ASN1Exception *self, NSString *message);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Exception *new_OrgApacheHarmonySecurityAsn1ASN1Exception_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Exception)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Exception_H_

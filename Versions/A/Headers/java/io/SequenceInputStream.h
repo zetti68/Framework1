@@ -6,19 +6,20 @@
 #ifndef _JavaIoSequenceInputStream_H_
 #define _JavaIoSequenceInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/InputStream.h"
+
 @class IOSByteArray;
 @protocol JavaUtilEnumeration;
 
-#import "JreEmulation.h"
-#include "java/io/InputStream.h"
+@interface JavaIoSequenceInputStream : JavaIoInputStream
 
-@interface JavaIoSequenceInputStream : JavaIoInputStream {
-}
+#pragma mark Public
+
+- (instancetype)initWithJavaUtilEnumeration:(id<JavaUtilEnumeration>)e;
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)s1
                     withJavaIoInputStream:(JavaIoInputStream *)s2;
-
-- (instancetype)initWithJavaUtilEnumeration:(id<JavaUtilEnumeration>)e;
 
 - (jint)available;
 
@@ -32,6 +33,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoSequenceInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoSequenceInputStream)
+
+FOUNDATION_EXPORT void JavaIoSequenceInputStream_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoSequenceInputStream *self, JavaIoInputStream *s1, JavaIoInputStream *s2);
+
+FOUNDATION_EXPORT JavaIoSequenceInputStream *new_JavaIoSequenceInputStream_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *s1, JavaIoInputStream *s2) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoSequenceInputStream_initWithJavaUtilEnumeration_(JavaIoSequenceInputStream *self, id<JavaUtilEnumeration> e);
+
+FOUNDATION_EXPORT JavaIoSequenceInputStream *new_JavaIoSequenceInputStream_initWithJavaUtilEnumeration_(id<JavaUtilEnumeration> e) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoSequenceInputStream)
 
 #endif // _JavaIoSequenceInputStream_H_

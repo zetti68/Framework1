@@ -6,6 +6,11 @@
 #ifndef _OrgXmlSaxHelpersXMLReaderAdapter_H_
 #define _OrgXmlSaxHelpersXMLReaderAdapter_H_
 
+#include "J2ObjC_header.h"
+#include "org/xml/sax/AttributeList.h"
+#include "org/xml/sax/ContentHandler.h"
+#include "org/xml/sax/Parser.h"
+
 @class IOSCharArray;
 @class JavaUtilLocale;
 @class OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter;
@@ -18,11 +23,6 @@
 @protocol OrgXmlSaxLocator;
 @protocol OrgXmlSaxXMLReader;
 
-#import "JreEmulation.h"
-#include "org/xml/sax/AttributeList.h"
-#include "org/xml/sax/ContentHandler.h"
-#include "org/xml/sax/Parser.h"
-
 @interface OrgXmlSaxHelpersXMLReaderAdapter : NSObject < OrgXmlSaxParser, OrgXmlSaxContentHandler > {
  @public
   id<OrgXmlSaxXMLReader> xmlReader_;
@@ -30,71 +30,80 @@
   OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter *qAtts_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (instancetype)initWithOrgXmlSaxXMLReader:(id<OrgXmlSaxXMLReader>)xmlReader;
 
-- (void)setLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-- (void)setEntityResolverWithOrgXmlSaxEntityResolver:(id<OrgXmlSaxEntityResolver>)resolver;
-
-- (void)setDTDHandlerWithOrgXmlSaxDTDHandler:(id<OrgXmlSaxDTDHandler>)handler;
-
-- (void)setDocumentHandlerWithOrgXmlSaxDocumentHandler:(id<OrgXmlSaxDocumentHandler>)handler;
-
-- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler;
-
-- (void)parseWithNSString:(NSString *)systemId;
-
-- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)input;
-
-- (void)setDocumentLocatorWithOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
-
-- (void)startDocument;
+- (void)charactersWithCharArray:(IOSCharArray *)ch
+                        withInt:(jint)start
+                        withInt:(jint)length;
 
 - (void)endDocument;
 
-- (void)startPrefixMappingWithNSString:(NSString *)prefix
-                          withNSString:(NSString *)uri;
+- (void)endElementWithNSString:(NSString *)uri
+                  withNSString:(NSString *)localName
+                  withNSString:(NSString *)qName;
 
 - (void)endPrefixMappingWithNSString:(NSString *)prefix;
+
+- (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
+                                 withInt:(jint)start
+                                 withInt:(jint)length;
+
+- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)input;
+
+- (void)parseWithNSString:(NSString *)systemId;
+
+- (void)processingInstructionWithNSString:(NSString *)target
+                             withNSString:(NSString *)data;
+
+- (void)setDocumentHandlerWithOrgXmlSaxDocumentHandler:(id<OrgXmlSaxDocumentHandler>)handler;
+
+- (void)setDocumentLocatorWithOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
+
+- (void)setDTDHandlerWithOrgXmlSaxDTDHandler:(id<OrgXmlSaxDTDHandler>)handler;
+
+- (void)setEntityResolverWithOrgXmlSaxEntityResolver:(id<OrgXmlSaxEntityResolver>)resolver;
+
+- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler;
+
+- (void)setLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
+- (void)skippedEntityWithNSString:(NSString *)name;
+
+- (void)startDocument;
 
 - (void)startElementWithNSString:(NSString *)uri
                     withNSString:(NSString *)localName
                     withNSString:(NSString *)qName
          withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
 
-- (void)endElementWithNSString:(NSString *)uri
-                  withNSString:(NSString *)localName
-                  withNSString:(NSString *)qName;
-
-- (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
-
-- (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
-
-- (void)processingInstructionWithNSString:(NSString *)target
-                             withNSString:(NSString *)data;
-
-- (void)skippedEntityWithNSString:(NSString *)name;
+- (void)startPrefixMappingWithNSString:(NSString *)prefix
+                          withNSString:(NSString *)uri;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersXMLReaderAdapter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersXMLReaderAdapter)
 
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersXMLReaderAdapter, xmlReader_, id<OrgXmlSaxXMLReader>)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersXMLReaderAdapter, documentHandler_, id<OrgXmlSaxDocumentHandler>)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersXMLReaderAdapter, qAtts_, OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter *)
 
-@interface OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter : NSObject < OrgXmlSaxAttributeList > {
-}
+FOUNDATION_EXPORT void OrgXmlSaxHelpersXMLReaderAdapter_init(OrgXmlSaxHelpersXMLReaderAdapter *self);
 
-- (instancetype)init;
+FOUNDATION_EXPORT OrgXmlSaxHelpersXMLReaderAdapter *new_OrgXmlSaxHelpersXMLReaderAdapter_init() NS_RETURNS_RETAINED;
 
-- (void)setAttributesWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attributes;
+FOUNDATION_EXPORT void OrgXmlSaxHelpersXMLReaderAdapter_initWithOrgXmlSaxXMLReader_(OrgXmlSaxHelpersXMLReaderAdapter *self, id<OrgXmlSaxXMLReader> xmlReader);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersXMLReaderAdapter *new_OrgXmlSaxHelpersXMLReaderAdapter_initWithOrgXmlSaxXMLReader_(id<OrgXmlSaxXMLReader> xmlReader) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersXMLReaderAdapter)
+
+@interface OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter : NSObject < OrgXmlSaxAttributeList >
+
+#pragma mark Public
 
 - (jint)getLength;
 
@@ -102,14 +111,26 @@ J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersXMLReaderAdapter, qAtts_, OrgXmlSaxHelpersXM
 
 - (NSString *)getTypeWithInt:(jint)i;
 
-- (NSString *)getValueWithInt:(jint)i;
-
 - (NSString *)getTypeWithNSString:(NSString *)qName;
+
+- (NSString *)getValueWithInt:(jint)i;
 
 - (NSString *)getValueWithNSString:(NSString *)qName;
 
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+- (void)setAttributesWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attributes;
+
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter)
+
+FOUNDATION_EXPORT void OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter_init(OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter *self);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter *new_OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersXMLReaderAdapter_AttributesAdapter)
 
 #endif // _OrgXmlSaxHelpersXMLReaderAdapter_H_

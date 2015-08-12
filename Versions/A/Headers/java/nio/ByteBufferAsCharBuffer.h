@@ -6,17 +6,16 @@
 #ifndef _JavaNioByteBufferAsCharBuffer_H_
 #define _JavaNioByteBufferAsCharBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/CharBuffer.h"
+
 @class IOSCharArray;
 @class JavaNioByteBuffer;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/CharBuffer.h"
+@interface JavaNioByteBufferAsCharBuffer : JavaNioCharBuffer
 
-@interface JavaNioByteBufferAsCharBuffer : JavaNioCharBuffer {
-}
-
-+ (JavaNioCharBuffer *)asCharBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+#pragma mark Public
 
 - (JavaNioCharBuffer *)asReadOnlyBuffer;
 
@@ -26,11 +25,11 @@
 
 - (jchar)get;
 
-- (jchar)getWithInt:(jint)index;
-
 - (JavaNioCharBuffer *)getWithCharArray:(IOSCharArray *)dst
                                 withInt:(jint)dstOffset
                                 withInt:(jint)charCount;
+
+- (jchar)getWithInt:(jint)index;
 
 - (jboolean)isDirect;
 
@@ -38,28 +37,36 @@
 
 - (JavaNioByteOrder *)order;
 
+- (JavaNioCharBuffer *)putWithChar:(jchar)c;
+
+- (JavaNioCharBuffer *)putWithCharArray:(IOSCharArray *)src
+                                withInt:(jint)srcOffset
+                                withInt:(jint)charCount;
+
+- (JavaNioCharBuffer *)putWithInt:(jint)index
+                         withChar:(jchar)c;
+
+- (JavaNioCharBuffer *)slice;
+
+- (JavaNioCharBuffer *)subSequenceFrom:(jint)start
+                                    to:(jint)end;
+
+#pragma mark Package-Private
+
++ (JavaNioCharBuffer *)asCharBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+
 - (IOSCharArray *)protectedArray;
 
 - (jint)protectedArrayOffset;
 
 - (jboolean)protectedHasArray;
 
-- (JavaNioCharBuffer *)putWithChar:(jchar)c;
-
-- (JavaNioCharBuffer *)putWithInt:(jint)index
-                         withChar:(jchar)c;
-
-- (JavaNioCharBuffer *)putWithCharArray:(IOSCharArray *)src
-                                withInt:(jint)srcOffset
-                                withInt:(jint)charCount;
-
-- (JavaNioCharBuffer *)slice;
-
-- (JavaNioCharBuffer *)subSequenceFrom:(int)start to:(int)end;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioByteBufferAsCharBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioByteBufferAsCharBuffer)
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioByteBufferAsCharBuffer_asCharBufferWithJavaNioByteBuffer_(JavaNioByteBuffer *byteBuffer);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteBufferAsCharBuffer)
 
 #endif // _JavaNioByteBufferAsCharBuffer_H_

@@ -6,13 +6,14 @@
 #ifndef _JavaIoBufferedWriter_H_
 #define _JavaIoBufferedWriter_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Writer.h"
 
-@interface JavaIoBufferedWriter : JavaIoWriter {
-}
+@class IOSCharArray;
+
+@interface JavaIoBufferedWriter : JavaIoWriter
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoWriter:(JavaIoWriter *)outArg;
 
@@ -37,6 +38,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoBufferedWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoBufferedWriter)
+
+FOUNDATION_EXPORT void JavaIoBufferedWriter_initWithJavaIoWriter_(JavaIoBufferedWriter *self, JavaIoWriter *outArg);
+
+FOUNDATION_EXPORT JavaIoBufferedWriter *new_JavaIoBufferedWriter_initWithJavaIoWriter_(JavaIoWriter *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoBufferedWriter_initWithJavaIoWriter_withInt_(JavaIoBufferedWriter *self, JavaIoWriter *outArg, jint size);
+
+FOUNDATION_EXPORT JavaIoBufferedWriter *new_JavaIoBufferedWriter_initWithJavaIoWriter_withInt_(JavaIoWriter *outArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoBufferedWriter)
 
 #endif // _JavaIoBufferedWriter_H_

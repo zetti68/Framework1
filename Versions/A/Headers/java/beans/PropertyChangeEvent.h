@@ -6,10 +6,8 @@
 #ifndef _JavaBeansPropertyChangeEvent_H_
 #define _JavaBeansPropertyChangeEvent_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/EventObject.h"
-
-#define JavaBeansPropertyChangeEvent_serialVersionUID 7042693688939648123LL
 
 @interface JavaBeansPropertyChangeEvent : JavaUtilEventObject {
  @public
@@ -19,30 +17,36 @@
   id propagationId_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithId:(id)source
               withNSString:(NSString *)propertyName
                     withId:(id)oldValue
                     withId:(id)newValue;
 
+- (id)getNewValue;
+
+- (id)getOldValue;
+
+- (id)getPropagationId;
+
 - (NSString *)getPropertyName;
 
 - (void)setPropagationIdWithId:(id)propagationId;
 
-- (id)getPropagationId;
-
-- (id)getOldValue;
-
-- (id)getNewValue;
-
 @end
 
-__attribute__((always_inline)) inline void JavaBeansPropertyChangeEvent_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaBeansPropertyChangeEvent)
 
 J2OBJC_FIELD_SETTER(JavaBeansPropertyChangeEvent, propertyName_, NSString *)
 J2OBJC_FIELD_SETTER(JavaBeansPropertyChangeEvent, oldValue_, id)
 J2OBJC_FIELD_SETTER(JavaBeansPropertyChangeEvent, newValue_, id)
 J2OBJC_FIELD_SETTER(JavaBeansPropertyChangeEvent, propagationId_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaBeansPropertyChangeEvent, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaBeansPropertyChangeEvent_initWithId_withNSString_withId_withId_(JavaBeansPropertyChangeEvent *self, id source, NSString *propertyName, id oldValue, id newValue);
+
+FOUNDATION_EXPORT JavaBeansPropertyChangeEvent *new_JavaBeansPropertyChangeEvent_initWithId_withNSString_withId_withId_(id source, NSString *propertyName, id oldValue, id newValue) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaBeansPropertyChangeEvent)
 
 #endif // _JavaBeansPropertyChangeEvent_H_

@@ -6,11 +6,12 @@
 #ifndef _OrgXmlSaxSAXNotSupportedException_H_
 #define _OrgXmlSaxSAXNotSupportedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/SAXException.h"
 
-@interface OrgXmlSaxSAXNotSupportedException : OrgXmlSaxSAXException {
-}
+@interface OrgXmlSaxSAXNotSupportedException : OrgXmlSaxSAXException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -18,6 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxSAXNotSupportedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxSAXNotSupportedException)
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXNotSupportedException_init(OrgXmlSaxSAXNotSupportedException *self);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXNotSupportedException *new_OrgXmlSaxSAXNotSupportedException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXNotSupportedException_initWithNSString_(OrgXmlSaxSAXNotSupportedException *self, NSString *message);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXNotSupportedException *new_OrgXmlSaxSAXNotSupportedException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxSAXNotSupportedException)
 
 #endif // _OrgXmlSaxSAXNotSupportedException_H_

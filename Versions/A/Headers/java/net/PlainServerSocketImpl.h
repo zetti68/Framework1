@@ -6,22 +6,35 @@
 #ifndef _JavaNetPlainServerSocketImpl_H_
 #define _JavaNetPlainServerSocketImpl_H_
 
-@class JavaIoFileDescriptor;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/PlainSocketImpl.h"
 
-@interface JavaNetPlainServerSocketImpl : JavaNetPlainSocketImpl {
-}
+@class JavaIoFileDescriptor;
+
+@interface JavaNetPlainServerSocketImpl : JavaNetPlainSocketImpl
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
+#pragma mark Protected
+
 - (void)createWithBoolean:(jboolean)isStreaming;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetPlainServerSocketImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetPlainServerSocketImpl)
+
+FOUNDATION_EXPORT void JavaNetPlainServerSocketImpl_init(JavaNetPlainServerSocketImpl *self);
+
+FOUNDATION_EXPORT JavaNetPlainServerSocketImpl *new_JavaNetPlainServerSocketImpl_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetPlainServerSocketImpl_initWithJavaIoFileDescriptor_(JavaNetPlainServerSocketImpl *self, JavaIoFileDescriptor *fd);
+
+FOUNDATION_EXPORT JavaNetPlainServerSocketImpl *new_JavaNetPlainServerSocketImpl_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetPlainServerSocketImpl)
 
 #endif // _JavaNetPlainServerSocketImpl_H_

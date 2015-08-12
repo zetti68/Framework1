@@ -6,13 +6,14 @@
 #ifndef _JavaIoInputStream_H_
 #define _JavaIoInputStream_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 
-@interface JavaIoInputStream : NSObject < JavaIoCloseable > {
-}
+@class IOSByteArray;
+
+@interface JavaIoInputStream : NSObject < JavaIoCloseable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -38,6 +39,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoInputStream)
+
+FOUNDATION_EXPORT void JavaIoInputStream_init(JavaIoInputStream *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoInputStream)
 
 #endif // _JavaIoInputStream_H_

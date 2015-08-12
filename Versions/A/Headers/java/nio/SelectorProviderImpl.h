@@ -6,17 +6,20 @@
 #ifndef _JavaNioSelectorProviderImpl_H_
 #define _JavaNioSelectorProviderImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/spi/SelectorProvider.h"
+
 @class JavaNioChannelsDatagramChannel;
 @class JavaNioChannelsPipe;
 @class JavaNioChannelsServerSocketChannel;
 @class JavaNioChannelsSocketChannel;
 @class JavaNioChannelsSpiAbstractSelector;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/spi/SelectorProvider.h"
+@interface JavaNioSelectorProviderImpl : JavaNioChannelsSpiSelectorProvider
 
-@interface JavaNioSelectorProviderImpl : JavaNioChannelsSpiSelectorProvider {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (JavaNioChannelsDatagramChannel *)openDatagramChannel;
 
@@ -28,10 +31,14 @@
 
 - (JavaNioChannelsSocketChannel *)openSocketChannel;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioSelectorProviderImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioSelectorProviderImpl)
+
+FOUNDATION_EXPORT void JavaNioSelectorProviderImpl_init(JavaNioSelectorProviderImpl *self);
+
+FOUNDATION_EXPORT JavaNioSelectorProviderImpl *new_JavaNioSelectorProviderImpl_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioSelectorProviderImpl)
 
 #endif // _JavaNioSelectorProviderImpl_H_

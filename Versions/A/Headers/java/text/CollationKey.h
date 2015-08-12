@@ -6,15 +6,14 @@
 #ifndef _JavaTextCollationKey_H_
 #define _JavaTextCollationKey_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
 
-@interface JavaTextCollationKey : NSObject < JavaLangComparable > {
-}
+@class IOSByteArray;
 
-- (instancetype)initWithNSString:(NSString *)source;
+@interface JavaTextCollationKey : NSObject < JavaLangComparable >
+
+#pragma mark Public
 
 - (jint)compareToWithId:(JavaTextCollationKey *)value;
 
@@ -22,8 +21,16 @@
 
 - (IOSByteArray *)toByteArray;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)source;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextCollationKey_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextCollationKey)
+
+FOUNDATION_EXPORT void JavaTextCollationKey_initWithNSString_(JavaTextCollationKey *self, NSString *source);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextCollationKey)
 
 #endif // _JavaTextCollationKey_H_

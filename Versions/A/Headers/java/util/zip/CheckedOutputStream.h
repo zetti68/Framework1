@@ -6,29 +6,36 @@
 #ifndef _JavaUtilZipCheckedOutputStream_H_
 #define _JavaUtilZipCheckedOutputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterOutputStream.h"
+
 @class IOSByteArray;
 @class JavaIoOutputStream;
 @protocol JavaUtilZipChecksum;
 
-#import "JreEmulation.h"
-#include "java/io/FilterOutputStream.h"
+@interface JavaUtilZipCheckedOutputStream : JavaIoFilterOutputStream
 
-@interface JavaUtilZipCheckedOutputStream : JavaIoFilterOutputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)os
                    withJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)cs;
 
 - (id<JavaUtilZipChecksum>)getChecksum;
 
-- (void)writeWithInt:(jint)val;
-
 - (void)writeWithByteArray:(IOSByteArray *)buf
                    withInt:(jint)off
                    withInt:(jint)nbytes;
 
+- (void)writeWithInt:(jint)val;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipCheckedOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipCheckedOutputStream)
+
+FOUNDATION_EXPORT void JavaUtilZipCheckedOutputStream_initWithJavaIoOutputStream_withJavaUtilZipChecksum_(JavaUtilZipCheckedOutputStream *self, JavaIoOutputStream *os, id<JavaUtilZipChecksum> cs);
+
+FOUNDATION_EXPORT JavaUtilZipCheckedOutputStream *new_JavaUtilZipCheckedOutputStream_initWithJavaIoOutputStream_withJavaUtilZipChecksum_(JavaIoOutputStream *os, id<JavaUtilZipChecksum> cs) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipCheckedOutputStream)
 
 #endif // _JavaUtilZipCheckedOutputStream_H_

@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsAlreadyBoundException_H_
 #define _JavaNioChannelsAlreadyBoundException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsAlreadyBoundException_serialVersionUID 6796072983322737592LL
+@interface JavaNioChannelsAlreadyBoundException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsAlreadyBoundException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsAlreadyBoundException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsAlreadyBoundException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsAlreadyBoundException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsAlreadyBoundException_init(JavaNioChannelsAlreadyBoundException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsAlreadyBoundException *new_JavaNioChannelsAlreadyBoundException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsAlreadyBoundException)
 
 #endif // _JavaNioChannelsAlreadyBoundException_H_

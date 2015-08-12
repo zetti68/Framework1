@@ -6,85 +6,62 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_H_
 #define _JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
-@class SunMiscUnsafe;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater : NSObject
 
-@interface JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater : NSObject {
-}
-
-+ (JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
-                                                                 withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
-
-- (jboolean)compareAndSetWithId:(id)obj
-                        withInt:(jint)expect
-                        withInt:(jint)update;
-
-- (jboolean)weakCompareAndSetWithId:(id)obj
-                            withInt:(jint)expect
-                            withInt:(jint)update;
-
-- (void)setWithId:(id)obj
-          withInt:(jint)newValue;
-
-- (void)lazySetWithId:(id)obj
-              withInt:(jint)newValue;
-
-- (jint)getWithId:(id)obj;
-
-- (jint)getAndSetWithId:(id)obj
-                withInt:(jint)newValue;
-
-- (jint)getAndIncrementWithId:(id)obj;
-
-- (jint)getAndDecrementWithId:(id)obj;
-
-- (jint)getAndAddWithId:(id)obj
-                withInt:(jint)delta;
-
-- (jint)incrementAndGetWithId:(id)obj;
-
-- (jint)decrementAndGetWithId:(id)obj;
+#pragma mark Public
 
 - (jint)addAndGetWithId:(id)obj
                 withInt:(jint)delta;
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_init() {}
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater *JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_newUpdaterWithIOSClass_withNSString_(IOSClass *tclass, NSString *fieldName);
-
-@interface JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_AtomicIntegerFieldUpdaterImpl : JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater {
-}
-
-- (instancetype)initWithIOSClass:(IOSClass *)tclass
-                    withNSString:(NSString *)fieldName;
-
 - (jboolean)compareAndSetWithId:(id)obj
                         withInt:(jint)expect
                         withInt:(jint)update;
+
+- (jint)decrementAndGetWithId:(id)obj;
+
+- (jint)getWithId:(id)obj;
+
+- (jint)getAndAddWithId:(id)obj
+                withInt:(jint)delta;
+
+- (jint)getAndDecrementWithId:(id)obj;
+
+- (jint)getAndIncrementWithId:(id)obj;
+
+- (jint)getAndSetWithId:(id)obj
+                withInt:(jint)newValue;
+
+- (jint)incrementAndGetWithId:(id)obj;
+
+- (void)lazySetWithId:(id)obj
+              withInt:(jint)newValue;
+
++ (JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
+                                                                 withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
+
+- (void)setWithId:(id)obj
+          withInt:(jint)newValue;
 
 - (jboolean)weakCompareAndSetWithId:(id)obj
                             withInt:(jint)expect
                             withInt:(jint)update;
 
-- (void)setWithId:(id)obj
-          withInt:(jint)newValue;
+#pragma mark Protected
 
-- (void)lazySetWithId:(id)obj
-              withInt:(jint)newValue;
-
-- (jint)getWithId:(id)obj;
+- (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_AtomicIntegerFieldUpdaterImpl_initialized;
-J2OBJC_STATIC_INIT(JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_AtomicIntegerFieldUpdaterImpl)
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_AtomicIntegerFieldUpdaterImpl_unsafe_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_AtomicIntegerFieldUpdaterImpl, unsafe_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater *JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_newUpdaterWithIOSClass_withNSString_(IOSClass *tclass, NSString *fieldName);
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_init(JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater)
 
 #endif // _JavaUtilConcurrentAtomicAtomicIntegerFieldUpdater_H_

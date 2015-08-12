@@ -6,17 +6,16 @@
 #ifndef _JavaNioByteBufferAsShortBuffer_H_
 #define _JavaNioByteBufferAsShortBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/ShortBuffer.h"
+
 @class IOSShortArray;
 @class JavaNioByteBuffer;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/ShortBuffer.h"
+@interface JavaNioByteBufferAsShortBuffer : JavaNioShortBuffer
 
-@interface JavaNioByteBufferAsShortBuffer : JavaNioShortBuffer {
-}
-
-+ (JavaNioShortBuffer *)asShortBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+#pragma mark Public
 
 - (JavaNioShortBuffer *)asReadOnlyBuffer;
 
@@ -38,16 +37,10 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSShortArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
-
-- (JavaNioShortBuffer *)putWithShort:(jshort)c;
-
 - (JavaNioShortBuffer *)putWithInt:(jint)index
                          withShort:(jshort)c;
+
+- (JavaNioShortBuffer *)putWithShort:(jshort)c;
 
 - (JavaNioShortBuffer *)putWithShortArray:(IOSShortArray *)src
                                   withInt:(jint)srcOffset
@@ -55,9 +48,22 @@
 
 - (JavaNioShortBuffer *)slice;
 
+#pragma mark Package-Private
+
++ (JavaNioShortBuffer *)asShortBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+
+- (IOSShortArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioByteBufferAsShortBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioByteBufferAsShortBuffer)
+
 FOUNDATION_EXPORT JavaNioShortBuffer *JavaNioByteBufferAsShortBuffer_asShortBufferWithJavaNioByteBuffer_(JavaNioByteBuffer *byteBuffer);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteBufferAsShortBuffer)
 
 #endif // _JavaNioByteBufferAsShortBuffer_H_

@@ -6,13 +6,12 @@
 #ifndef _JavaTextParseException_H_
 #define _JavaTextParseException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaTextParseException_serialVersionUID 2703218443322787634LL
+@interface JavaTextParseException : JavaLangException
 
-@interface JavaTextParseException : JavaLangException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detailMessage
                          withInt:(jint)location;
@@ -21,8 +20,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextParseException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextParseException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextParseException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaTextParseException_initWithNSString_withInt_(JavaTextParseException *self, NSString *detailMessage, jint location);
+
+FOUNDATION_EXPORT JavaTextParseException *new_JavaTextParseException_initWithNSString_withInt_(NSString *detailMessage, jint location) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextParseException)
 
 #endif // _JavaTextParseException_H_

@@ -6,14 +6,17 @@
 #ifndef _JavaLangReflectGenericArrayType_H_
 #define _JavaLangReflectGenericArrayType_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/reflect/Type.h"
 
 @protocol JavaLangReflectGenericArrayType < JavaLangReflectType, NSObject, JavaObject >
+
 - (id<JavaLangReflectType>)getGenericComponentType;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectGenericArrayType_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectGenericArrayType)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectGenericArrayType)
 
 #endif // _JavaLangReflectGenericArrayType_H_

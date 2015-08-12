@@ -6,16 +6,14 @@
 #ifndef _JavaSecurityGuardedObject_H_
 #define _JavaSecurityGuardedObject_H_
 
-@class JavaIoObjectOutputStream;
-@protocol JavaSecurityGuard;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaSecurityGuardedObject_serialVersionUID -5240450096227834308LL
+@protocol JavaSecurityGuard;
 
-@interface JavaSecurityGuardedObject : NSObject < JavaIoSerializable > {
-}
+@interface JavaSecurityGuardedObject : NSObject < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)object
      withJavaSecurityGuard:(id<JavaSecurityGuard>)guard;
@@ -24,8 +22,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityGuardedObject_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityGuardedObject)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityGuardedObject, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityGuardedObject_initWithId_withJavaSecurityGuard_(JavaSecurityGuardedObject *self, id object, id<JavaSecurityGuard> guard);
+
+FOUNDATION_EXPORT JavaSecurityGuardedObject *new_JavaSecurityGuardedObject_initWithId_withJavaSecurityGuard_(id object, id<JavaSecurityGuard> guard) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityGuardedObject)
 
 #endif // _JavaSecurityGuardedObject_H_

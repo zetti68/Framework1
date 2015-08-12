@@ -6,22 +6,28 @@
 #ifndef _LibcoreInternalStringPool_H_
 #define _LibcoreInternalStringPool_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSCharArray;
-@class IOSObjectArray;
 
-#import "JreEmulation.h"
+@interface LibcoreInternalStringPool : NSObject
 
-@interface LibcoreInternalStringPool : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (NSString *)getWithCharArray:(IOSCharArray *)array
                        withInt:(jint)start
                        withInt:(jint)length;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void LibcoreInternalStringPool_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreInternalStringPool)
+
+FOUNDATION_EXPORT void LibcoreInternalStringPool_init(LibcoreInternalStringPool *self);
+
+FOUNDATION_EXPORT LibcoreInternalStringPool *new_LibcoreInternalStringPool_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreInternalStringPool)
 
 #endif // _LibcoreInternalStringPool_H_

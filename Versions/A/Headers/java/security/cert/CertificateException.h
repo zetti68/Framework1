@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityCertCertificateException_H_
 #define _JavaSecurityCertCertificateException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityCertCertificateException_serialVersionUID 3192535253797119798LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityCertCertificateException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecurityCertCertificateException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificateException_initWithNSString_(JavaSecurityCertCertificateException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateException *new_JavaSecurityCertCertificateException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateException_init(JavaSecurityCertCertificateException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateException *new_JavaSecurityCertCertificateException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateException_initWithNSString_withJavaLangThrowable_(JavaSecurityCertCertificateException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateException *new_JavaSecurityCertCertificateException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateException_initWithJavaLangThrowable_(JavaSecurityCertCertificateException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateException *new_JavaSecurityCertCertificateException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateException)
 
 #endif // _JavaSecurityCertCertificateException_H_

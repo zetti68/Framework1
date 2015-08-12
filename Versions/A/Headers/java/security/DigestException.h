@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityDigestException_H_
 #define _JavaSecurityDigestException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityDigestException_serialVersionUID 5821450303093652515LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityDigestException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecurityDigestException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityDigestException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityDigestException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityDigestException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityDigestException_initWithNSString_(JavaSecurityDigestException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityDigestException *new_JavaSecurityDigestException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityDigestException_init(JavaSecurityDigestException *self);
+
+FOUNDATION_EXPORT JavaSecurityDigestException *new_JavaSecurityDigestException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityDigestException_initWithNSString_withJavaLangThrowable_(JavaSecurityDigestException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityDigestException *new_JavaSecurityDigestException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityDigestException_initWithJavaLangThrowable_(JavaSecurityDigestException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityDigestException *new_JavaSecurityDigestException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityDigestException)
 
 #endif // _JavaSecurityDigestException_H_

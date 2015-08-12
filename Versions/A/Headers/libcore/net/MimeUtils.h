@@ -6,35 +6,32 @@
 #ifndef _LibcoreNetMimeUtils_H_
 #define _LibcoreNetMimeUtils_H_
 
-@class JavaIoInputStream;
-@protocol JavaUtilMap;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface LibcoreNetMimeUtils : NSObject
 
-@interface LibcoreNetMimeUtils : NSObject {
-}
+#pragma mark Public
 
-+ (jboolean)hasMimeTypeWithNSString:(NSString *)mimeType;
++ (NSString *)guessExtensionFromMimeTypeWithNSString:(NSString *)mimeType;
 
 + (NSString *)guessMimeTypeFromExtensionWithNSString:(NSString *)extension;
 
 + (jboolean)hasExtensionWithNSString:(NSString *)extension;
 
-+ (NSString *)guessExtensionFromMimeTypeWithNSString:(NSString *)mimeType;
++ (jboolean)hasMimeTypeWithNSString:(NSString *)mimeType;
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreNetMimeUtils_initialized;
 J2OBJC_STATIC_INIT(LibcoreNetMimeUtils)
+
 FOUNDATION_EXPORT jboolean LibcoreNetMimeUtils_hasMimeTypeWithNSString_(NSString *mimeType);
+
 FOUNDATION_EXPORT NSString *LibcoreNetMimeUtils_guessMimeTypeFromExtensionWithNSString_(NSString *extension);
+
 FOUNDATION_EXPORT jboolean LibcoreNetMimeUtils_hasExtensionWithNSString_(NSString *extension);
+
 FOUNDATION_EXPORT NSString *LibcoreNetMimeUtils_guessExtensionFromMimeTypeWithNSString_(NSString *mimeType);
 
-FOUNDATION_EXPORT id<JavaUtilMap> LibcoreNetMimeUtils_mimeTypeToExtensionMap_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreNetMimeUtils, mimeTypeToExtensionMap_, id<JavaUtilMap>)
-
-FOUNDATION_EXPORT id<JavaUtilMap> LibcoreNetMimeUtils_extensionToMimeTypeMap_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreNetMimeUtils, extensionToMimeTypeMap_, id<JavaUtilMap>)
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreNetMimeUtils)
 
 #endif // _LibcoreNetMimeUtils_H_

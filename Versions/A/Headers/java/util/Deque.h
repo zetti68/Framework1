@@ -6,12 +6,13 @@
 #ifndef _JavaUtilDeque_H_
 #define _JavaUtilDeque_H_
 
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Queue.h"
 
+@protocol JavaUtilIterator;
+
 @protocol JavaUtilDeque < JavaUtilQueue, NSObject, JavaObject >
+
 - (void)addFirstWithId:(id)e;
 
 - (void)addLastWithId:(id)e;
@@ -66,9 +67,10 @@
 
 - (id<JavaUtilIterator>)descendingIterator;
 
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilDeque_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilDeque)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilDeque)
 
 #endif // _JavaUtilDeque_H_

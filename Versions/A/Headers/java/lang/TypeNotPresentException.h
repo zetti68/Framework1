@@ -6,15 +6,14 @@
 #ifndef _JavaLangTypeNotPresentException_H_
 #define _JavaLangTypeNotPresentException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangTypeNotPresentException_serialVersionUID -5101214195716534496LL
+@class JavaLangThrowable;
 
-@interface JavaLangTypeNotPresentException : JavaLangRuntimeException {
-}
+@interface JavaLangTypeNotPresentException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)typeName
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -23,8 +22,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangTypeNotPresentException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangTypeNotPresentException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangTypeNotPresentException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangTypeNotPresentException_initWithNSString_withJavaLangThrowable_(JavaLangTypeNotPresentException *self, NSString *typeName, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaLangTypeNotPresentException *new_JavaLangTypeNotPresentException_initWithNSString_withJavaLangThrowable_(NSString *typeName, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangTypeNotPresentException)
 
 #endif // _JavaLangTypeNotPresentException_H_

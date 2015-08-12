@@ -6,17 +6,19 @@
 #ifndef _JavaIoDataOutputStream_H_
 #define _JavaIoDataOutputStream_H_
 
-@class IOSByteArray;
-@class JavaIoOutputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/DataOutput.h"
 #include "java/io/FilterOutputStream.h"
+
+@class IOSByteArray;
+@class JavaIoOutputStream;
 
 @interface JavaIoDataOutputStream : JavaIoFilterOutputStream < JavaIoDataOutput > {
  @public
   jint written_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
 
@@ -54,6 +56,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoDataOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoDataOutputStream)
+
+FOUNDATION_EXPORT void JavaIoDataOutputStream_initWithJavaIoOutputStream_(JavaIoDataOutputStream *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaIoDataOutputStream *new_JavaIoDataOutputStream_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoDataOutputStream)
 
 #endif // _JavaIoDataOutputStream_H_

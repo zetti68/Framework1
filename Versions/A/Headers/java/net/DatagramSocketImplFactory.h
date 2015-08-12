@@ -6,9 +6,9 @@
 #ifndef _JavaNetDatagramSocketImplFactory_H_
 #define _JavaNetDatagramSocketImplFactory_H_
 
-@class JavaNetDatagramSocketImpl;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaNetDatagramSocketImpl;
 
 @protocol JavaNetDatagramSocketImplFactory < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetDatagramSocketImplFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetDatagramSocketImplFactory)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetDatagramSocketImplFactory)
 
 #endif // _JavaNetDatagramSocketImplFactory_H_

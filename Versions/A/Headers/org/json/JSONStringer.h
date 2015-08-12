@@ -6,38 +6,32 @@
 #ifndef _OrgJsonJSONStringer_H_
 #define _OrgJsonJSONStringer_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Enum.h"
+
 @class JavaLangStringBuilder;
 @class OrgJsonJSONStringer_ScopeEnum;
-@protocol JavaUtilList;
-
-#import "JreEmulation.h"
-#include "java/lang/Enum.h"
 
 @interface OrgJsonJSONStringer : NSObject {
  @public
   JavaLangStringBuilder *out_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
-- (instancetype)initWithInt:(jint)indentSpaces;
+- (instancetype)init;
 
 - (OrgJsonJSONStringer *)array;
 
 - (OrgJsonJSONStringer *)endArray;
 
-- (OrgJsonJSONStringer *)object;
-
 - (OrgJsonJSONStringer *)endObject;
 
-- (OrgJsonJSONStringer *)openWithOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)empty
-                                                  withNSString:(NSString *)openBracket;
+- (OrgJsonJSONStringer *)keyWithNSString:(NSString *)name;
 
-- (OrgJsonJSONStringer *)closeWithOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)empty
-                              withOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)nonempty
-                                                   withNSString:(NSString *)closeBracket;
+- (OrgJsonJSONStringer *)object;
 
-- (OrgJsonJSONStringer *)valueWithId:(id)value;
+- (NSString *)description;
 
 - (OrgJsonJSONStringer *)valueWithBoolean:(jboolean)value;
 
@@ -45,61 +39,80 @@
 
 - (OrgJsonJSONStringer *)valueWithLong:(jlong)value;
 
-- (OrgJsonJSONStringer *)keyWithNSString:(NSString *)name;
+- (OrgJsonJSONStringer *)valueWithId:(id)value;
 
-- (NSString *)description;
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)indentSpaces;
+
+- (OrgJsonJSONStringer *)closeWithOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)empty
+                              withOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)nonempty
+                                                   withNSString:(NSString *)closeBracket;
+
+- (OrgJsonJSONStringer *)openWithOrgJsonJSONStringer_ScopeEnum:(OrgJsonJSONStringer_ScopeEnum *)empty
+                                                  withNSString:(NSString *)openBracket;
 
 @end
 
-__attribute__((always_inline)) inline void OrgJsonJSONStringer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgJsonJSONStringer)
 
 J2OBJC_FIELD_SETTER(OrgJsonJSONStringer, out_, JavaLangStringBuilder *)
 
-typedef enum {
+FOUNDATION_EXPORT void OrgJsonJSONStringer_init(OrgJsonJSONStringer *self);
+
+FOUNDATION_EXPORT OrgJsonJSONStringer *new_OrgJsonJSONStringer_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONStringer_initWithInt_(OrgJsonJSONStringer *self, jint indentSpaces);
+
+FOUNDATION_EXPORT OrgJsonJSONStringer *new_OrgJsonJSONStringer_initWithInt_(jint indentSpaces) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONStringer)
+
+typedef NS_ENUM(NSUInteger, OrgJsonJSONStringer_Scope) {
   OrgJsonJSONStringer_Scope_EMPTY_ARRAY = 0,
   OrgJsonJSONStringer_Scope_NONEMPTY_ARRAY = 1,
   OrgJsonJSONStringer_Scope_EMPTY_OBJECT = 2,
   OrgJsonJSONStringer_Scope_DANGLING_KEY = 3,
   OrgJsonJSONStringer_Scope_NONEMPTY_OBJECT = 4,
   OrgJsonJSONStringer_Scope_NULL = 5,
-} OrgJsonJSONStringer_Scope;
+};
 
-@interface OrgJsonJSONStringer_ScopeEnum : JavaLangEnum < NSCopying > {
-}
+@interface OrgJsonJSONStringer_ScopeEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *OrgJsonJSONStringer_ScopeEnum_values();
 
 + (OrgJsonJSONStringer_ScopeEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT OrgJsonJSONStringer_ScopeEnum *OrgJsonJSONStringer_ScopeEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT OrgJsonJSONStringer_ScopeEnum *OrgJsonJSONStringer_ScopeEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgJsonJSONStringer_ScopeEnum_initialized;
 J2OBJC_STATIC_INIT(OrgJsonJSONStringer_ScopeEnum)
 
 FOUNDATION_EXPORT OrgJsonJSONStringer_ScopeEnum *OrgJsonJSONStringer_ScopeEnum_values_[];
 
 #define OrgJsonJSONStringer_ScopeEnum_EMPTY_ARRAY OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_EMPTY_ARRAY]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, EMPTY_ARRAY, OrgJsonJSONStringer_ScopeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, EMPTY_ARRAY)
 
 #define OrgJsonJSONStringer_ScopeEnum_NONEMPTY_ARRAY OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_NONEMPTY_ARRAY]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, NONEMPTY_ARRAY, OrgJsonJSONStringer_ScopeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, NONEMPTY_ARRAY)
 
 #define OrgJsonJSONStringer_ScopeEnum_EMPTY_OBJECT OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_EMPTY_OBJECT]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, EMPTY_OBJECT, OrgJsonJSONStringer_ScopeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, EMPTY_OBJECT)
 
 #define OrgJsonJSONStringer_ScopeEnum_DANGLING_KEY OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_DANGLING_KEY]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, DANGLING_KEY, OrgJsonJSONStringer_ScopeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, DANGLING_KEY)
 
 #define OrgJsonJSONStringer_ScopeEnum_NONEMPTY_OBJECT OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_NONEMPTY_OBJECT]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, NONEMPTY_OBJECT, OrgJsonJSONStringer_ScopeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, NONEMPTY_OBJECT)
 
-#define OrgJsonJSONStringer_ScopeEnum_NULL_ OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_NULL]
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONStringer_ScopeEnum, NULL_, OrgJsonJSONStringer_ScopeEnum *)
+#define OrgJsonJSONStringer_ScopeEnum_NULL OrgJsonJSONStringer_ScopeEnum_values_[OrgJsonJSONStringer_Scope_NULL]
+J2OBJC_ENUM_CONSTANT_GETTER(OrgJsonJSONStringer_ScopeEnum, NULL)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONStringer_ScopeEnum)
 
 #endif // _OrgJsonJSONStringer_H_

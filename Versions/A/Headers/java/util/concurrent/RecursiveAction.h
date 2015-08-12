@@ -6,30 +6,33 @@
 #ifndef _JavaUtilConcurrentRecursiveAction_H_
 #define _JavaUtilConcurrentRecursiveAction_H_
 
-@class JavaLangVoid;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/concurrent/ForkJoinTask.h"
 
-#define JavaUtilConcurrentRecursiveAction_serialVersionUID 5232453952276485070LL
+@class JavaLangVoid;
 
-@interface JavaUtilConcurrentRecursiveAction : JavaUtilConcurrentForkJoinTask {
-}
+@interface JavaUtilConcurrentRecursiveAction : JavaUtilConcurrentForkJoinTask
 
-- (void)compute;
-
-- (id)getRawResult;
-
-- (void)setRawResultWithId:(id)mustBeNull;
-
-- (jboolean)exec;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (id)getRawResult;
+
+#pragma mark Protected
+
+- (void)compute;
+
+- (jboolean)exec;
+
+- (void)setRawResultWithId:(id)mustBeNull;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentRecursiveAction_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentRecursiveAction)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentRecursiveAction, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentRecursiveAction_init(JavaUtilConcurrentRecursiveAction *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentRecursiveAction)
 
 #endif // _JavaUtilConcurrentRecursiveAction_H_

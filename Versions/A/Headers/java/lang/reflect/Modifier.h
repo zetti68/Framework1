@@ -6,28 +6,29 @@
 #ifndef _JavaLangReflectModifier_H_
 #define _JavaLangReflectModifier_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-#define JavaLangReflectModifier_ABSTRACT 1024
-#define JavaLangReflectModifier_ANNOTATION 8192
-#define JavaLangReflectModifier_BRIDGE 64
-#define JavaLangReflectModifier_ENUM 16384
-#define JavaLangReflectModifier_FINAL 16
-#define JavaLangReflectModifier_INTERFACE 512
-#define JavaLangReflectModifier_NATIVE 256
+#define JavaLangReflectModifier_PUBLIC 1
 #define JavaLangReflectModifier_PRIVATE 2
 #define JavaLangReflectModifier_PROTECTED 4
-#define JavaLangReflectModifier_PUBLIC 1
 #define JavaLangReflectModifier_STATIC 8
-#define JavaLangReflectModifier_STRICT 2048
+#define JavaLangReflectModifier_FINAL 16
 #define JavaLangReflectModifier_SYNCHRONIZED 32
-#define JavaLangReflectModifier_SYNTHETIC 4096
-#define JavaLangReflectModifier_TRANSIENT 128
-#define JavaLangReflectModifier_VARARGS 128
 #define JavaLangReflectModifier_VOLATILE 64
+#define JavaLangReflectModifier_TRANSIENT 128
+#define JavaLangReflectModifier_NATIVE 256
+#define JavaLangReflectModifier_INTERFACE 512
+#define JavaLangReflectModifier_ABSTRACT 1024
+#define JavaLangReflectModifier_STRICT 2048
+#define JavaLangReflectModifier_BRIDGE 64
+#define JavaLangReflectModifier_VARARGS 128
+#define JavaLangReflectModifier_SYNTHETIC 4096
+#define JavaLangReflectModifier_ANNOTATION 8192
+#define JavaLangReflectModifier_ENUM 16384
 
-@interface JavaLangReflectModifier : NSObject {
-}
+@interface JavaLangReflectModifier : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -38,8 +39,6 @@
 + (jint)fieldModifiers;
 
 + (jint)interfaceModifiers;
-
-+ (jint)methodModifiers;
 
 + (jboolean)isAbstractWithInt:(jint)modifiers;
 
@@ -65,29 +64,13 @@
 
 + (jboolean)isVolatileWithInt:(jint)modifiers;
 
++ (jint)methodModifiers;
+
 + (NSString *)toStringWithInt:(jint)modifiers;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectModifier_init() {}
-FOUNDATION_EXPORT jint JavaLangReflectModifier_classModifiers();
-FOUNDATION_EXPORT jint JavaLangReflectModifier_constructorModifiers();
-FOUNDATION_EXPORT jint JavaLangReflectModifier_fieldModifiers();
-FOUNDATION_EXPORT jint JavaLangReflectModifier_interfaceModifiers();
-FOUNDATION_EXPORT jint JavaLangReflectModifier_methodModifiers();
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isAbstractWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isFinalWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isInterfaceWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isNativeWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isPrivateWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isProtectedWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isPublicWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isStaticWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isStrictWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isSynchronizedWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isTransientWithInt_(jint modifiers);
-FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isVolatileWithInt_(jint modifiers);
-FOUNDATION_EXPORT NSString *JavaLangReflectModifier_toStringWithInt_(jint modifiers);
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectModifier)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectModifier, PUBLIC, jint)
 
@@ -122,5 +105,47 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectModifier, SYNTHETIC, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectModifier, ANNOTATION, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectModifier, ENUM, jint)
+
+FOUNDATION_EXPORT void JavaLangReflectModifier_init(JavaLangReflectModifier *self);
+
+FOUNDATION_EXPORT JavaLangReflectModifier *new_JavaLangReflectModifier_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangReflectModifier_classModifiers();
+
+FOUNDATION_EXPORT jint JavaLangReflectModifier_constructorModifiers();
+
+FOUNDATION_EXPORT jint JavaLangReflectModifier_fieldModifiers();
+
+FOUNDATION_EXPORT jint JavaLangReflectModifier_interfaceModifiers();
+
+FOUNDATION_EXPORT jint JavaLangReflectModifier_methodModifiers();
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isAbstractWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isFinalWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isInterfaceWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isNativeWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isPrivateWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isProtectedWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isPublicWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isStaticWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isStrictWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isSynchronizedWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isTransientWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT jboolean JavaLangReflectModifier_isVolatileWithInt_(jint modifiers);
+
+FOUNDATION_EXPORT NSString *JavaLangReflectModifier_toStringWithInt_(jint modifiers);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectModifier)
 
 #endif // _JavaLangReflectModifier_H_

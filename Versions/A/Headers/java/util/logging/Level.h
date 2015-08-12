@@ -6,19 +6,30 @@
 #ifndef _JavaUtilLoggingLevel_H_
 #define _JavaUtilLoggingLevel_H_
 
-@class JavaIoObjectInputStream;
-@class JavaUtilResourceBundle;
-@protocol JavaUtilList;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilLoggingLevel_serialVersionUID -8176160795706313070LL
+@interface JavaUtilLoggingLevel : NSObject < JavaIoSerializable >
 
-@interface JavaUtilLoggingLevel : NSObject < JavaIoSerializable > {
-}
+#pragma mark Public
+
+- (jboolean)isEqual:(id)o;
+
+- (NSString *)getLocalizedName;
+
+- (NSString *)getName;
+
+- (NSString *)getResourceBundleName;
+
+- (NSUInteger)hash;
+
+- (jint)intValue;
 
 + (JavaUtilLoggingLevel *)parseWithNSString:(NSString *)name;
+
+- (NSString *)description;
+
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)name
                          withInt:(jint)level;
@@ -27,30 +38,9 @@
                          withInt:(jint)level
                     withNSString:(NSString *)resourceBundleName;
 
-- (NSString *)getName;
-
-- (NSString *)getResourceBundleName;
-
-- (jint)intValue;
-
-- (NSString *)getLocalizedName;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLoggingLevel_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLoggingLevel)
-FOUNDATION_EXPORT JavaUtilLoggingLevel *JavaUtilLoggingLevel_parseWithNSString_(NSString *name);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLevel, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT id<JavaUtilList> JavaUtilLoggingLevel_levels_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLevel, levels_, id<JavaUtilList>)
 
 FOUNDATION_EXPORT JavaUtilLoggingLevel *JavaUtilLoggingLevel_OFF_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLevel, OFF_, JavaUtilLoggingLevel *)
@@ -78,5 +68,17 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLevel, FINEST_, JavaUtilLoggingLevel *
 
 FOUNDATION_EXPORT JavaUtilLoggingLevel *JavaUtilLoggingLevel_ALL_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLevel, ALL_, JavaUtilLoggingLevel *)
+
+FOUNDATION_EXPORT JavaUtilLoggingLevel *JavaUtilLoggingLevel_parseWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT void JavaUtilLoggingLevel_initWithNSString_withInt_(JavaUtilLoggingLevel *self, NSString *name, jint level);
+
+FOUNDATION_EXPORT JavaUtilLoggingLevel *new_JavaUtilLoggingLevel_initWithNSString_withInt_(NSString *name, jint level) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilLoggingLevel_initWithNSString_withInt_withNSString_(JavaUtilLoggingLevel *self, NSString *name, jint level, NSString *resourceBundleName);
+
+FOUNDATION_EXPORT JavaUtilLoggingLevel *new_JavaUtilLoggingLevel_initWithNSString_withInt_withNSString_(NSString *name, jint level, NSString *resourceBundleName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLevel)
 
 #endif // _JavaUtilLoggingLevel_H_

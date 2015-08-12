@@ -6,9 +6,9 @@
 #ifndef _JavaSqlRowId_H_
 #define _JavaSqlRowId_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSByteArray;
 
 @protocol JavaSqlRowId < NSObject, JavaObject >
 
@@ -22,6 +22,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlRowId_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlRowId)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlRowId)
 
 #endif // _JavaSqlRowId_H_

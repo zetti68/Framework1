@@ -6,47 +6,30 @@
 #ifndef _JavaLangStringBuilder_H_
 #define _JavaLangStringBuilder_H_
 
-@class IOSCharArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangStringBuffer;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/AbstractStringBuilder.h"
 #include "java/lang/Appendable.h"
 #include "java/lang/CharSequence.h"
 
-#define JavaLangStringBuilder_serialVersionUID 4383685877147921099LL
+@class IOSCharArray;
+@class JavaLangStringBuffer;
 
-@interface JavaLangStringBuilder : JavaLangAbstractStringBuilder < JavaLangAppendable, JavaLangCharSequence, JavaIoSerializable > {
-}
+@interface JavaLangStringBuilder : JavaLangAbstractStringBuilder < JavaLangAppendable, JavaLangCharSequence, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)capacity;
-
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq;
+
+- (instancetype)initWithInt:(jint)capacity;
 
 - (instancetype)initWithNSString:(NSString *)str;
 
 - (JavaLangStringBuilder *)appendWithBoolean:(jboolean)b;
 
 - (JavaLangStringBuilder *)appendWithChar:(jchar)c;
-
-- (JavaLangStringBuilder *)appendWithInt:(jint)i;
-
-- (JavaLangStringBuilder *)appendWithLong:(jlong)l;
-
-- (JavaLangStringBuilder *)appendWithFloat:(jfloat)f;
-
-- (JavaLangStringBuilder *)appendWithDouble:(jdouble)d;
-
-- (JavaLangStringBuilder *)appendWithId:(id)obj;
-
-- (JavaLangStringBuilder *)appendWithNSString:(NSString *)str;
-
-- (JavaLangStringBuilder *)appendWithJavaLangStringBuffer:(JavaLangStringBuffer *)sb;
 
 - (JavaLangStringBuilder *)appendWithCharArray:(IOSCharArray *)chars;
 
@@ -60,6 +43,20 @@
                                                   withInt:(jint)start
                                                   withInt:(jint)end;
 
+- (JavaLangStringBuilder *)appendWithDouble:(jdouble)d;
+
+- (JavaLangStringBuilder *)appendWithFloat:(jfloat)f;
+
+- (JavaLangStringBuilder *)appendWithInt:(jint)i;
+
+- (JavaLangStringBuilder *)appendWithLong:(jlong)l;
+
+- (JavaLangStringBuilder *)appendWithId:(id)obj;
+
+- (JavaLangStringBuilder *)appendWithNSString:(NSString *)str;
+
+- (JavaLangStringBuilder *)appendWithJavaLangStringBuffer:(JavaLangStringBuffer *)sb;
+
 - (JavaLangStringBuilder *)appendCodePointWithInt:(jint)codePoint;
 
 - (JavaLangStringBuilder *)delete__WithInt:(jint)start
@@ -72,24 +69,6 @@
 
 - (JavaLangStringBuilder *)insertWithInt:(jint)offset
                                 withChar:(jchar)c;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                                 withInt:(jint)i;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                                withLong:(jlong)l;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                               withFloat:(jfloat)f;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                              withDouble:(jdouble)d;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                                  withId:(id)obj;
-
-- (JavaLangStringBuilder *)insertWithInt:(jint)offset
-                            withNSString:(NSString *)str;
 
 - (JavaLangStringBuilder *)insertWithInt:(jint)offset
                            withCharArray:(IOSCharArray *)ch;
@@ -107,22 +86,57 @@
                                  withInt:(jint)start
                                  withInt:(jint)end;
 
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                              withDouble:(jdouble)d;
+
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                               withFloat:(jfloat)f;
+
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                                 withInt:(jint)i;
+
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                                withLong:(jlong)l;
+
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                                  withId:(id)obj;
+
+- (JavaLangStringBuilder *)insertWithInt:(jint)offset
+                            withNSString:(NSString *)str;
+
+- (jint)length;
+
 - (JavaLangStringBuilder *)replaceWithInt:(jint)start
                                   withInt:(jint)end
                              withNSString:(NSString *)string;
 
 - (JavaLangStringBuilder *)reverse;
 
+- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
+                                         to:(jint)end;
+
 - (NSString *)description;
-
-- (jint)sequenceLength;
-
-- (id<JavaLangCharSequence>)subSequenceFrom:(int)start to:(int)end;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangStringBuilder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangStringBuilder)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangStringBuilder, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangStringBuilder_init(JavaLangStringBuilder *self);
+
+FOUNDATION_EXPORT JavaLangStringBuilder *new_JavaLangStringBuilder_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangStringBuilder_initWithInt_(JavaLangStringBuilder *self, jint capacity);
+
+FOUNDATION_EXPORT JavaLangStringBuilder *new_JavaLangStringBuilder_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangStringBuilder_initWithJavaLangCharSequence_(JavaLangStringBuilder *self, id<JavaLangCharSequence> seq);
+
+FOUNDATION_EXPORT JavaLangStringBuilder *new_JavaLangStringBuilder_initWithJavaLangCharSequence_(id<JavaLangCharSequence> seq) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangStringBuilder_initWithNSString_(JavaLangStringBuilder *self, NSString *str);
+
+FOUNDATION_EXPORT JavaLangStringBuilder *new_JavaLangStringBuilder_initWithNSString_(NSString *str) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangStringBuilder)
 
 #endif // _JavaLangStringBuilder_H_

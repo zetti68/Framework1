@@ -6,31 +6,28 @@
 #ifndef _ComGoogleJ2objcNetIosHttpURLConnection_H_
 #define _ComGoogleJ2objcNetIosHttpURLConnection_H_
 
-@class JavaIoIOException;
+#include "J2ObjC_header.h"
+#include "java/net/HttpURLConnection.h"
+
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
 @class JavaNetURL;
-@protocol JavaUtilList;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/net/HttpURLConnection.h"
-#include "java/util/Map.h"
+@interface ComGoogleJ2objcNetIosHttpURLConnection : JavaNetHttpURLConnection
 
-@interface ComGoogleJ2objcNetIosHttpURLConnection : JavaNetHttpURLConnection {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
 
-- (void)disconnect;
-
-- (jboolean)usingProxy;
-
-- (JavaIoInputStream *)getInputStream;
+- (void)addRequestPropertyWithNSString:(NSString *)field
+                          withNSString:(NSString *)newValue;
 
 - (void)connect;
 
-- (id<JavaUtilMap>)getHeaderFields;
+- (void)disconnect;
+
+- (JavaIoInputStream *)getErrorStream;
 
 - (NSString *)getHeaderFieldWithInt:(jint)pos;
 
@@ -39,59 +36,46 @@
 - (jlong)getHeaderFieldDateWithNSString:(NSString *)field
                                withLong:(jlong)defaultValue;
 
-- (NSString *)getHeaderFieldKeyWithInt:(jint)posn;
-
 - (jint)getHeaderFieldIntWithNSString:(NSString *)field
                               withInt:(jint)defaultValue;
+
+- (NSString *)getHeaderFieldKeyWithInt:(jint)posn;
 
 - (jlong)getHeaderFieldLongWithNSString:(NSString *)field
                                withLong:(jlong)defaultValue;
 
+- (id<JavaUtilMap>)getHeaderFields;
+
+- (jlong)getIfModifiedSince;
+
+- (JavaIoInputStream *)getInputStream;
+
+- (JavaIoOutputStream *)getOutputStream;
+
 - (id<JavaUtilMap>)getRequestProperties;
+
+- (NSString *)getRequestPropertyWithNSString:(NSString *)field;
+
+- (jint)getResponseCode;
+
+- (void)setIfModifiedSinceWithLong:(jlong)newValue;
 
 - (void)setRequestPropertyWithNSString:(NSString *)field
                           withNSString:(NSString *)newValue;
 
-- (void)addRequestPropertyWithNSString:(NSString *)field
-                          withNSString:(NSString *)newValue;
+- (jboolean)usingProxy;
 
-- (NSString *)getRequestPropertyWithNSString:(NSString *)field;
+#pragma mark Package-Private
 
-- (JavaIoInputStream *)getErrorStream;
-
-- (jlong)getIfModifiedSince;
-
-- (void)setIfModifiedSinceWithLong:(jlong)newValue;
-
-- (JavaIoOutputStream *)getOutputStream;
-
-- (jint)getResponseCode;
 
 @end
 
-FOUNDATION_EXPORT BOOL ComGoogleJ2objcNetIosHttpURLConnection_initialized;
 J2OBJC_STATIC_INIT(ComGoogleJ2objcNetIosHttpURLConnection)
 
-FOUNDATION_EXPORT NSString *ComGoogleJ2objcNetIosHttpURLConnection_HTTP_DATE_FORMAT_;
-J2OBJC_STATIC_FIELD_GETTER(ComGoogleJ2objcNetIosHttpURLConnection, HTTP_DATE_FORMAT_, NSString *)
+FOUNDATION_EXPORT void ComGoogleJ2objcNetIosHttpURLConnection_initWithJavaNetURL_(ComGoogleJ2objcNetIosHttpURLConnection *self, JavaNetURL *url);
 
-FOUNDATION_EXPORT id<JavaUtilMap> ComGoogleJ2objcNetIosHttpURLConnection_RESPONSE_CODES_;
-J2OBJC_STATIC_FIELD_GETTER(ComGoogleJ2objcNetIosHttpURLConnection, RESPONSE_CODES_, id<JavaUtilMap>)
+FOUNDATION_EXPORT ComGoogleJ2objcNetIosHttpURLConnection *new_ComGoogleJ2objcNetIosHttpURLConnection_initWithJavaNetURL_(JavaNetURL *url) NS_RETURNS_RETAINED;
 
-@interface ComGoogleJ2objcNetIosHttpURLConnection_HeaderEntry : NSObject < JavaUtilMap_Entry > {
-}
-
-- (instancetype)initWithNSString:(NSString *)k
-                    withNSString:(NSString *)v;
-
-- (NSString *)getKey;
-
-- (NSString *)getValue;
-
-- (NSString *)setValueWithId:(NSString *)object;
-
-@end
-
-__attribute__((always_inline)) inline void ComGoogleJ2objcNetIosHttpURLConnection_HeaderEntry_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcNetIosHttpURLConnection)
 
 #endif // _ComGoogleJ2objcNetIosHttpURLConnection_H_

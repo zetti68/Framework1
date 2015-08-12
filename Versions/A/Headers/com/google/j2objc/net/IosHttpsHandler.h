@@ -6,18 +6,27 @@
 #ifndef _ComGoogleJ2objcNetIosHttpsHandler_H_
 #define _ComGoogleJ2objcNetIosHttpsHandler_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "com/google/j2objc/net/IosHttpHandler.h"
 
-@interface ComGoogleJ2objcNetIosHttpsHandler : ComGoogleJ2objcNetIosHttpHandler {
-}
+@interface ComGoogleJ2objcNetIosHttpsHandler : ComGoogleJ2objcNetIosHttpHandler
 
-- (jint)getDefaultPort;
+#pragma mark Public
 
 - (instancetype)init;
 
+#pragma mark Protected
+
+- (jint)getDefaultPort;
+
 @end
 
-__attribute__((always_inline)) inline void ComGoogleJ2objcNetIosHttpsHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleJ2objcNetIosHttpsHandler)
+
+FOUNDATION_EXPORT void ComGoogleJ2objcNetIosHttpsHandler_init(ComGoogleJ2objcNetIosHttpsHandler *self);
+
+FOUNDATION_EXPORT ComGoogleJ2objcNetIosHttpsHandler *new_ComGoogleJ2objcNetIosHttpsHandler_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcNetIosHttpsHandler)
 
 #endif // _ComGoogleJ2objcNetIosHttpsHandler_H_

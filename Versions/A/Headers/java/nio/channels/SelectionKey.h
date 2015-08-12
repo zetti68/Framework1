@@ -6,20 +6,19 @@
 #ifndef _JavaNioChannelsSelectionKey_H_
 #define _JavaNioChannelsSelectionKey_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNioChannelsSelectableChannel;
 @class JavaNioChannelsSelector;
-
-#import "JreEmulation.h"
 
 #define JavaNioChannelsSelectionKey_OP_ACCEPT 16
 #define JavaNioChannelsSelectionKey_OP_CONNECT 8
 #define JavaNioChannelsSelectionKey_OP_READ 1
 #define JavaNioChannelsSelectionKey_OP_WRITE 4
 
-@interface JavaNioChannelsSelectionKey : NSObject {
-}
+@interface JavaNioChannelsSelectionKey : NSObject
 
-- (instancetype)init;
+#pragma mark Public
 
 - (id)attachWithId:(id)anObject;
 
@@ -47,9 +46,13 @@
 
 - (JavaNioChannelsSelector *)selector;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSelectionKey_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSelectionKey)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsSelectionKey, OP_ACCEPT, jint)
 
@@ -58,5 +61,9 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsSelectionKey, OP_CONNECT, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsSelectionKey, OP_READ, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsSelectionKey, OP_WRITE, jint)
+
+FOUNDATION_EXPORT void JavaNioChannelsSelectionKey_init(JavaNioChannelsSelectionKey *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSelectionKey)
 
 #endif // _JavaNioChannelsSelectionKey_H_

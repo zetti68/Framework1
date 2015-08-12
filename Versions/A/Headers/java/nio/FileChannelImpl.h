@@ -6,41 +6,32 @@
 #ifndef _JavaNioFileChannelImpl_H_
 #define _JavaNioFileChannelImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/FileChannel.h"
+
 @class IOSObjectArray;
 @class JavaIoFileDescriptor;
 @class JavaNioByteBuffer;
-@class JavaNioChannelsFileChannel_MapMode;
-@class JavaNioIoVec;
+@class JavaNioChannelsFileLock;
 @class JavaNioMappedByteBuffer;
 @protocol JavaNioChannelsReadableByteChannel;
 @protocol JavaNioChannelsWritableByteChannel;
-@protocol JavaUtilSortedSet;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/FileChannel.h"
-#include "java/nio/channels/FileLock.h"
-#include "java/util/Comparator.h"
+@interface JavaNioFileChannelImpl : JavaNioChannelsFileChannel
 
-@interface JavaNioFileChannelImpl : JavaNioChannelsFileChannel {
-}
+#pragma mark Public
 
 - (instancetype)initWithId:(id)stream
   withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                    withInt:(jint)mode;
 
-- (void)implCloseChannel;
+- (void)forceWithBoolean:(jboolean)metadata;
+
+- (JavaIoFileDescriptor *)getFD;
 
 - (JavaNioChannelsFileLock *)lockWithLong:(jlong)position
                                  withLong:(jlong)size
                               withBoolean:(jboolean)shared;
-
-- (JavaNioChannelsFileLock *)tryLockWithLong:(jlong)position
-                                    withLong:(jlong)size
-                                 withBoolean:(jboolean)shared;
-
-- (void)release__WithJavaNioChannelsFileLock:(JavaNioChannelsFileLock *)lock;
-
-- (void)forceWithBoolean:(jboolean)metadata;
 
 - (JavaNioMappedByteBuffer *)mapWithJavaNioChannelsFileChannel_MapMode:(JavaNioChannelsFileChannel_MapMode *)mapMode
                                                               withLong:(jlong)position
@@ -50,14 +41,16 @@
 
 - (JavaNioChannelsFileChannel *)positionWithLong:(jlong)newPosition;
 
+- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
+
 - (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
                          withLong:(jlong)position;
-
-- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 - (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
                                 withInt:(jint)offset
                                 withInt:(jint)length;
+
+- (void)release__WithJavaNioChannelsFileLock:(JavaNioChannelsFileLock *)lock;
 
 - (jlong)size;
 
@@ -71,57 +64,40 @@ withJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)t
 
 - (JavaNioChannelsFileChannel *)truncateWithLong:(jlong)size;
 
-- (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
-                          withLong:(jlong)position;
+- (JavaNioChannelsFileLock *)tryLockWithLong:(jlong)position
+                                    withLong:(jlong)size
+                                 withBoolean:(jboolean)shared;
 
 - (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
+
+- (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                          withLong:(jlong)position;
 
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
                                  withInt:(jint)offset
                                  withInt:(jint)length;
+
+#pragma mark Protected
+
+- (void)implCloseChannel;
+
+#pragma mark Package-Private
 
 + (jint)calculateTotalRemainingWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
                                                   withInt:(jint)offset
                                                   withInt:(jint)length
                                               withBoolean:(jboolean)copyingIn;
 
-- (JavaIoFileDescriptor *)getFD;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioFileChannelImpl_initialized;
 J2OBJC_STATIC_INIT(JavaNioFileChannelImpl)
+
+FOUNDATION_EXPORT void JavaNioFileChannelImpl_initWithId_withJavaIoFileDescriptor_withInt_(JavaNioFileChannelImpl *self, id stream, JavaIoFileDescriptor *fd, jint mode);
+
+FOUNDATION_EXPORT JavaNioFileChannelImpl *new_JavaNioFileChannelImpl_initWithId_withJavaIoFileDescriptor_withInt_(id stream, JavaIoFileDescriptor *fd, jint mode) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jint JavaNioFileChannelImpl_calculateTotalRemainingWithJavaNioByteBufferArray_withInt_withInt_withBoolean_(IOSObjectArray *buffers, jint offset, jint length, jboolean copyingIn);
 
-FOUNDATION_EXPORT id<JavaUtilComparator> JavaNioFileChannelImpl_LOCK_COMPARATOR_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNioFileChannelImpl, LOCK_COMPARATOR_, id<JavaUtilComparator>)
-
-@interface JavaNioFileChannelImpl_FileLockImpl : JavaNioChannelsFileLock {
-}
-
-- (instancetype)initWithJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)channel
-                                          withLong:(jlong)position
-                                          withLong:(jlong)size
-                                       withBoolean:(jboolean)shared;
-
-- (jboolean)isValid;
-
-- (void)release__;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioFileChannelImpl_FileLockImpl_init() {}
-
-@interface JavaNioFileChannelImpl_$1 : NSObject < JavaUtilComparator > {
-}
-
-- (jint)compareWithId:(JavaNioChannelsFileLock *)lock1
-               withId:(JavaNioChannelsFileLock *)lock2;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioFileChannelImpl_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioFileChannelImpl)
 
 #endif // _JavaNioFileChannelImpl_H_

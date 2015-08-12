@@ -6,7 +6,7 @@
 #ifndef _JavaSqlParameterMetaData_H_
 #define _JavaSqlParameterMetaData_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/sql/Wrapper.h"
 
 #define JavaSqlParameterMetaData_parameterModeIn 1
@@ -18,6 +18,7 @@
 #define JavaSqlParameterMetaData_parameterNullableUnknown 2
 
 @protocol JavaSqlParameterMetaData < JavaSqlWrapper, NSObject, JavaObject >
+
 - (NSString *)getParameterClassNameWithInt:(jint)paramIndex;
 
 - (jint)getParameterCount;
@@ -38,7 +39,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlParameterMetaData_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlParameterMetaData)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlParameterMetaData, parameterModeIn, jint)
 
@@ -53,5 +54,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlParameterMetaData, parameterNoNulls, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlParameterMetaData, parameterNullable, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlParameterMetaData, parameterNullableUnknown, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlParameterMetaData)
 
 #endif // _JavaSqlParameterMetaData_H_

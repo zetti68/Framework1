@@ -6,20 +6,23 @@
 #ifndef _JavaIoInvalidObjectException_H_
 #define _JavaIoInvalidObjectException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
 
-#define JavaIoInvalidObjectException_serialVersionUID 3233174318281839583LL
+@interface JavaIoInvalidObjectException : JavaIoObjectStreamException
 
-@interface JavaIoInvalidObjectException : JavaIoObjectStreamException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoInvalidObjectException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoInvalidObjectException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoInvalidObjectException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoInvalidObjectException_initWithNSString_(JavaIoInvalidObjectException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoInvalidObjectException *new_JavaIoInvalidObjectException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoInvalidObjectException)
 
 #endif // _JavaIoInvalidObjectException_H_

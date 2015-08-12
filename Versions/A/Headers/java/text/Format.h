@@ -6,21 +6,17 @@
 #ifndef _JavaTextFormat_H_
 #define _JavaTextFormat_H_
 
-@class JavaLangStringBuffer;
-@class JavaTextFieldPosition;
-@class JavaTextParsePosition;
-@protocol JavaTextAttributedCharacterIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/text/AttributedCharacterIterator.h"
 
-#define JavaTextFormat_serialVersionUID -299282585814624189LL
+@class JavaLangStringBuffer;
+@class JavaTextFieldPosition;
+@class JavaTextParsePosition;
 
-@interface JavaTextFormat : NSObject < JavaIoSerializable, NSCopying > {
-}
+@interface JavaTextFormat : NSObject < JavaIoSerializable, NSCopying >
 
-- (instancetype)init;
+#pragma mark Public
 
 - (id)clone;
 
@@ -37,6 +33,12 @@
 - (id)parseObjectWithNSString:(NSString *)string
     withJavaTextParsePosition:(JavaTextParsePosition *)position;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
+#pragma mark Package-Private
+
 + (jboolean)upToWithNSString:(NSString *)string
    withJavaTextParsePosition:(JavaTextParsePosition *)position
     withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
@@ -50,23 +52,30 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextFormat_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextFormat)
+
+FOUNDATION_EXPORT void JavaTextFormat_init(JavaTextFormat *self);
+
 FOUNDATION_EXPORT jboolean JavaTextFormat_upToWithNSString_withJavaTextParsePosition_withJavaLangStringBuffer_withChar_(NSString *string, JavaTextParsePosition *position, JavaLangStringBuffer *buffer, jchar stop);
+
 FOUNDATION_EXPORT jboolean JavaTextFormat_upToWithQuotesWithNSString_withJavaTextParsePosition_withJavaLangStringBuffer_withChar_withChar_(NSString *string, JavaTextParsePosition *position, JavaLangStringBuffer *buffer, jchar stop, jchar start);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextFormat, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextFormat)
 
-#define JavaTextFormat_Field_serialVersionUID 276966692217360283LL
+@interface JavaTextFormat_Field : JavaTextAttributedCharacterIterator_Attribute
 
-@interface JavaTextFormat_Field : JavaTextAttributedCharacterIterator_Attribute {
-}
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)fieldName;
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextFormat_Field_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextFormat_Field)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextFormat_Field, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaTextFormat_Field_initWithNSString_(JavaTextFormat_Field *self, NSString *fieldName);
+
+FOUNDATION_EXPORT JavaTextFormat_Field *new_JavaTextFormat_Field_initWithNSString_(NSString *fieldName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextFormat_Field)
 
 #endif // _JavaTextFormat_H_

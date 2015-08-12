@@ -6,10 +6,10 @@
 #ifndef _JavaIoStringBufferInputStream_H_
 #define _JavaIoStringBufferInputStream_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/InputStream.h"
+
+@class IOSByteArray;
 
 @interface JavaIoStringBufferInputStream : JavaIoInputStream {
  @public
@@ -17,6 +17,8 @@
   jint count_;
   jint pos_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)str;
 
@@ -34,8 +36,14 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoStringBufferInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoStringBufferInputStream)
 
 J2OBJC_FIELD_SETTER(JavaIoStringBufferInputStream, buffer_, NSString *)
+
+FOUNDATION_EXPORT void JavaIoStringBufferInputStream_initWithNSString_(JavaIoStringBufferInputStream *self, NSString *str);
+
+FOUNDATION_EXPORT JavaIoStringBufferInputStream *new_JavaIoStringBufferInputStream_initWithNSString_(NSString *str) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoStringBufferInputStream)
 
 #endif // _JavaIoStringBufferInputStream_H_

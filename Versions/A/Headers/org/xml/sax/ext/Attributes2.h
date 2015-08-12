@@ -6,10 +6,11 @@
 #ifndef _OrgXmlSaxExtAttributes2_H_
 #define _OrgXmlSaxExtAttributes2_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/Attributes.h"
 
 @protocol OrgXmlSaxExtAttributes2 < OrgXmlSaxAttributes, NSObject, JavaObject >
+
 - (jboolean)isDeclaredWithInt:(jint)index;
 
 - (jboolean)isDeclaredWithNSString:(NSString *)qName;
@@ -26,6 +27,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtAttributes2_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtAttributes2)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtAttributes2)
 
 #endif // _OrgXmlSaxExtAttributes2_H_

@@ -6,12 +6,13 @@
 #ifndef _JavaNetCacheRequest_H_
 #define _JavaNetCacheRequest_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoOutputStream;
 
-#import "JreEmulation.h"
+@interface JavaNetCacheRequest : NSObject
 
-@interface JavaNetCacheRequest : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -21,6 +22,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetCacheRequest_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetCacheRequest)
+
+FOUNDATION_EXPORT void JavaNetCacheRequest_init(JavaNetCacheRequest *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetCacheRequest)
 
 #endif // _JavaNetCacheRequest_H_

@@ -6,24 +6,33 @@
 #ifndef _ComGoogleAndroidCollectLists_H_
 #define _ComGoogleAndroidCollectLists_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaUtilArrayList;
 
-#import "JreEmulation.h"
+@interface ComGoogleAndroidCollectLists : NSObject
 
-@interface ComGoogleAndroidCollectLists : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 + (JavaUtilArrayList *)newArrayList OBJC_METHOD_FAMILY_NONE;
 
 + (JavaUtilArrayList *)newArrayListWithNSObjectArray:(IOSObjectArray *)elements OBJC_METHOD_FAMILY_NONE;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void ComGoogleAndroidCollectLists_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleAndroidCollectLists)
+
 FOUNDATION_EXPORT JavaUtilArrayList *ComGoogleAndroidCollectLists_newArrayList();
+
 FOUNDATION_EXPORT JavaUtilArrayList *ComGoogleAndroidCollectLists_newArrayListWithNSObjectArray_(IOSObjectArray *elements);
+
+FOUNDATION_EXPORT void ComGoogleAndroidCollectLists_init(ComGoogleAndroidCollectLists *self);
+
+FOUNDATION_EXPORT ComGoogleAndroidCollectLists *new_ComGoogleAndroidCollectLists_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleAndroidCollectLists)
 
 #endif // _ComGoogleAndroidCollectLists_H_

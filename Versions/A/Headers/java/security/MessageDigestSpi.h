@@ -6,15 +6,30 @@
 #ifndef _JavaSecurityMessageDigestSpi_H_
 #define _JavaSecurityMessageDigestSpi_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaNioByteBuffer;
 
-#import "JreEmulation.h"
+@interface JavaSecurityMessageDigestSpi : NSObject
 
-@interface JavaSecurityMessageDigestSpi : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
+
+- (id)clone;
+
+#pragma mark Protected
+
+- (IOSByteArray *)engineDigest;
+
+- (jint)engineDigestWithByteArray:(IOSByteArray *)buf
+                          withInt:(jint)offset
+                          withInt:(jint)len;
 
 - (jint)engineGetDigestLength;
+
+- (void)engineReset;
 
 - (void)engineUpdateWithByte:(jbyte)input;
 
@@ -24,20 +39,12 @@
 
 - (void)engineUpdateWithJavaNioByteBuffer:(JavaNioByteBuffer *)input;
 
-- (IOSByteArray *)engineDigest;
-
-- (jint)engineDigestWithByteArray:(IOSByteArray *)buf
-                          withInt:(jint)offset
-                          withInt:(jint)len;
-
-- (void)engineReset;
-
-- (id)clone;
-
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityMessageDigestSpi_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityMessageDigestSpi)
+
+FOUNDATION_EXPORT void JavaSecurityMessageDigestSpi_init(JavaSecurityMessageDigestSpi *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityMessageDigestSpi)
 
 #endif // _JavaSecurityMessageDigestSpi_H_

@@ -6,74 +6,33 @@
 #ifndef _JavaUtilConcurrentLinkedBlockingQueue_H_
 #define _JavaUtilConcurrentLinkedBlockingQueue_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilConcurrentAtomicAtomicInteger;
-@class JavaUtilConcurrentLinkedBlockingQueue_Node;
-@class JavaUtilConcurrentLocksReentrantLock;
-@class JavaUtilConcurrentTimeUnitEnum;
-@protocol JavaUtilCollection;
-@protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractQueue.h"
-#include "java/util/Iterator.h"
 #include "java/util/concurrent/BlockingQueue.h"
 
-#define JavaUtilConcurrentLinkedBlockingQueue_serialVersionUID -6903933977591709194LL
+@class IOSObjectArray;
+@class JavaUtilConcurrentLinkedBlockingQueue_Node;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
 @interface JavaUtilConcurrentLinkedBlockingQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue, JavaIoSerializable > {
  @public
   JavaUtilConcurrentLinkedBlockingQueue_Node *head_;
 }
 
-- (void)fullyLock;
-
-- (void)fullyUnlock;
+#pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)capacity;
-
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (jint)size;
-
-- (jint)remainingCapacity;
-
-- (void)putWithId:(id)e;
-
-- (jboolean)offerWithId:(id)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (jboolean)offerWithId:(id)e;
-
-- (id)take;
-
-- (id)pollWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)poll;
-
-- (id)peek;
-
-- (void)unlinkWithJavaUtilConcurrentLinkedBlockingQueue_Node:(JavaUtilConcurrentLinkedBlockingQueue_Node *)p
-              withJavaUtilConcurrentLinkedBlockingQueue_Node:(JavaUtilConcurrentLinkedBlockingQueue_Node *)trail;
-
-- (jboolean)removeWithId:(id)o;
-
-- (jboolean)containsWithId:(id)o;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
-
-- (NSString *)description;
+- (instancetype)initWithInt:(jint)capacity;
 
 - (void)clear;
+
+- (jboolean)containsWithId:(id)o;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
@@ -82,14 +41,64 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (id<JavaUtilIterator>)iterator;
 
+- (jboolean)offerWithId:(id)e;
+
+- (jboolean)offerWithId:(id)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id)peek;
+
+- (id)poll;
+
+- (id)pollWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id)e;
+
+- (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+- (id)take;
+
+- (IOSObjectArray *)toArray;
+
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (void)fullyLock;
+
+- (void)fullyUnlock;
+
+- (void)unlinkWithJavaUtilConcurrentLinkedBlockingQueue_Node:(JavaUtilConcurrentLinkedBlockingQueue_Node *)p
+              withJavaUtilConcurrentLinkedBlockingQueue_Node:(JavaUtilConcurrentLinkedBlockingQueue_Node *)trail;
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLinkedBlockingQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLinkedBlockingQueue)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedBlockingQueue, head_, JavaUtilConcurrentLinkedBlockingQueue_Node *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedBlockingQueue, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedBlockingQueue_init(JavaUtilConcurrentLinkedBlockingQueue *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedBlockingQueue *new_JavaUtilConcurrentLinkedBlockingQueue_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedBlockingQueue_initWithInt_(JavaUtilConcurrentLinkedBlockingQueue *self, jint capacity);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedBlockingQueue *new_JavaUtilConcurrentLinkedBlockingQueue_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedBlockingQueue_initWithJavaUtilCollection_(JavaUtilConcurrentLinkedBlockingQueue *self, id<JavaUtilCollection> c);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedBlockingQueue *new_JavaUtilConcurrentLinkedBlockingQueue_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLinkedBlockingQueue)
 
 @interface JavaUtilConcurrentLinkedBlockingQueue_Node : NSObject {
  @public
@@ -97,28 +106,21 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLinkedBlockingQueue, serialVersionU
   JavaUtilConcurrentLinkedBlockingQueue_Node *next_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithId:(id)x;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLinkedBlockingQueue_Node_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLinkedBlockingQueue_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedBlockingQueue_Node, item_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentLinkedBlockingQueue_Node, next_, JavaUtilConcurrentLinkedBlockingQueue_Node *)
 
-@interface JavaUtilConcurrentLinkedBlockingQueue_Itr : NSObject < JavaUtilIterator > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentLinkedBlockingQueue_Node_initWithId_(JavaUtilConcurrentLinkedBlockingQueue_Node *self, id x);
 
-- (instancetype)initWithJavaUtilConcurrentLinkedBlockingQueue:(JavaUtilConcurrentLinkedBlockingQueue *)outer$;
+FOUNDATION_EXPORT JavaUtilConcurrentLinkedBlockingQueue_Node *new_JavaUtilConcurrentLinkedBlockingQueue_Node_initWithId_(id x) NS_RETURNS_RETAINED;
 
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentLinkedBlockingQueue_Itr_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLinkedBlockingQueue_Node)
 
 #endif // _JavaUtilConcurrentLinkedBlockingQueue_H_

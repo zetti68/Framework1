@@ -6,16 +6,15 @@
 #ifndef _JavaNioFloatArrayBuffer_H_
 #define _JavaNioFloatArrayBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/FloatBuffer.h"
+
 @class IOSFloatArray;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/FloatBuffer.h"
+@interface JavaNioFloatArrayBuffer : JavaNioFloatBuffer
 
-@interface JavaNioFloatArrayBuffer : JavaNioFloatBuffer {
-}
-
-- (instancetype)initWithFloatArray:(IOSFloatArray *)array;
+#pragma mark Public
 
 - (JavaNioFloatBuffer *)asReadOnlyBuffer;
 
@@ -23,9 +22,34 @@
 
 - (JavaNioFloatBuffer *)duplicate;
 
-- (JavaNioFloatBuffer *)slice;
+- (jfloat)get;
+
+- (JavaNioFloatBuffer *)getWithFloatArray:(IOSFloatArray *)dst
+                                  withInt:(jint)dstOffset
+                                  withInt:(jint)floatCount;
+
+- (jfloat)getWithInt:(jint)index;
+
+- (jboolean)isDirect;
 
 - (jboolean)isReadOnly;
+
+- (JavaNioByteOrder *)order;
+
+- (JavaNioFloatBuffer *)putWithFloat:(jfloat)c;
+
+- (JavaNioFloatBuffer *)putWithFloatArray:(IOSFloatArray *)src
+                                  withInt:(jint)srcOffset
+                                  withInt:(jint)floatCount;
+
+- (JavaNioFloatBuffer *)putWithInt:(jint)index
+                         withFloat:(jfloat)c;
+
+- (JavaNioFloatBuffer *)slice;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithFloatArray:(IOSFloatArray *)array;
 
 - (IOSFloatArray *)protectedArray;
 
@@ -33,29 +57,14 @@
 
 - (jboolean)protectedHasArray;
 
-- (jfloat)get;
-
-- (jfloat)getWithInt:(jint)index;
-
-- (JavaNioFloatBuffer *)getWithFloatArray:(IOSFloatArray *)dst
-                                  withInt:(jint)dstOffset
-                                  withInt:(jint)floatCount;
-
-- (jboolean)isDirect;
-
-- (JavaNioByteOrder *)order;
-
-- (JavaNioFloatBuffer *)putWithFloat:(jfloat)c;
-
-- (JavaNioFloatBuffer *)putWithInt:(jint)index
-                         withFloat:(jfloat)c;
-
-- (JavaNioFloatBuffer *)putWithFloatArray:(IOSFloatArray *)src
-                                  withInt:(jint)srcOffset
-                                  withInt:(jint)floatCount;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioFloatArrayBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioFloatArrayBuffer)
+
+FOUNDATION_EXPORT void JavaNioFloatArrayBuffer_initWithFloatArray_(JavaNioFloatArrayBuffer *self, IOSFloatArray *array);
+
+FOUNDATION_EXPORT JavaNioFloatArrayBuffer *new_JavaNioFloatArrayBuffer_initWithFloatArray_(IOSFloatArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioFloatArrayBuffer)
 
 #endif // _JavaNioFloatArrayBuffer_H_

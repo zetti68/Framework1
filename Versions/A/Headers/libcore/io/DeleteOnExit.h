@@ -6,27 +6,25 @@
 #ifndef _LibcoreIoDeleteOnExit_H_
 #define _LibcoreIoDeleteOnExit_H_
 
-@class JavaUtilArrayList;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Thread.h"
 
-@interface LibcoreIoDeleteOnExit : JavaLangThread {
-}
+@interface LibcoreIoDeleteOnExit : JavaLangThread
 
-+ (LibcoreIoDeleteOnExit *)getInstance;
+#pragma mark Public
 
 - (void)addFileWithNSString:(NSString *)filename;
+
++ (LibcoreIoDeleteOnExit *)getInstance;
 
 - (void)run;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoDeleteOnExit_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoDeleteOnExit)
+
 FOUNDATION_EXPORT LibcoreIoDeleteOnExit *LibcoreIoDeleteOnExit_getInstance();
 
-FOUNDATION_EXPORT LibcoreIoDeleteOnExit *LibcoreIoDeleteOnExit_instance_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoDeleteOnExit, instance_, LibcoreIoDeleteOnExit *)
-J2OBJC_STATIC_FIELD_SETTER(LibcoreIoDeleteOnExit, instance_, LibcoreIoDeleteOnExit *)
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoDeleteOnExit)
 
 #endif // _LibcoreIoDeleteOnExit_H_

@@ -6,20 +6,15 @@
 #ifndef _JavaUtilArrayList_H_
 #define _JavaUtilArrayList_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangIndexOutOfBoundsException;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractList.h"
-#include "java/util/Iterator.h"
 #include "java/util/RandomAccess.h"
 
-#define JavaUtilArrayList_MIN_CAPACITY_INCREMENT 12
-#define JavaUtilArrayList_serialVersionUID 8683452581122892189LL
+@class IOSObjectArray;
+@class JavaLangIndexOutOfBoundsException;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
 @interface JavaUtilArrayList : JavaUtilAbstractList < NSCopying, JavaIoSerializable, JavaUtilRandomAccess > {
  @public
@@ -27,11 +22,13 @@
   IOSObjectArray *array_;
 }
 
-- (instancetype)initWithInt:(jint)capacity;
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (instancetype)initWithInt:(jint)capacity;
 
 - (jboolean)addWithId:(id)object;
 
@@ -43,24 +40,25 @@
 - (jboolean)addAllWithInt:(jint)index
    withJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-+ (JavaLangIndexOutOfBoundsException *)throwIndexOutOfBoundsExceptionWithInt:(jint)index
-                                                                     withInt:(jint)size;
-
 - (void)clear;
 
 - (id)clone;
 
+- (jboolean)containsWithId:(id)object;
+
 - (void)ensureCapacityWithInt:(jint)minimumCapacity;
+
+- (jboolean)isEqual:(id)o;
 
 - (id)getWithInt:(jint)index;
 
-- (jint)size;
+- (NSUInteger)hash;
+
+- (jint)indexOfWithId:(id)object;
 
 - (jboolean)isEmpty;
 
-- (jboolean)containsWithId:(id)object;
-
-- (jint)indexOfWithId:(id)object;
+- (id<JavaUtilIterator>)iterator;
 
 - (jint)lastIndexOfWithId:(id)object;
 
@@ -68,11 +66,10 @@
 
 - (jboolean)removeWithId:(id)object;
 
-- (void)removeRangeWithInt:(jint)fromIndex
-                   withInt:(jint)toIndex;
-
 - (id)setWithInt:(jint)index
           withId:(id)object;
+
+- (jint)size;
 
 - (IOSObjectArray *)toArray;
 
@@ -80,37 +77,37 @@
 
 - (void)trimToSize;
 
-- (id<JavaUtilIterator>)iterator;
+#pragma mark Protected
 
-- (NSUInteger)hash;
+- (void)removeRangeWithInt:(jint)fromIndex
+                   withInt:(jint)toIndex;
 
-- (jboolean)isEqual:(id)o;
+#pragma mark Package-Private
+
++ (JavaLangIndexOutOfBoundsException *)throwIndexOutOfBoundsExceptionWithInt:(jint)index
+                                                                     withInt:(jint)size;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilArrayList_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilArrayList)
 
 J2OBJC_FIELD_SETTER(JavaUtilArrayList, array_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void JavaUtilArrayList_initWithInt_(JavaUtilArrayList *self, jint capacity);
+
+FOUNDATION_EXPORT JavaUtilArrayList *new_JavaUtilArrayList_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilArrayList_init(JavaUtilArrayList *self);
+
+FOUNDATION_EXPORT JavaUtilArrayList *new_JavaUtilArrayList_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilArrayList_initWithJavaUtilCollection_(JavaUtilArrayList *self, id<JavaUtilCollection> collection);
+
+FOUNDATION_EXPORT JavaUtilArrayList *new_JavaUtilArrayList_initWithJavaUtilCollection_(id<JavaUtilCollection> collection) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaLangIndexOutOfBoundsException *JavaUtilArrayList_throwIndexOutOfBoundsExceptionWithInt_withInt_(jint index, jint size);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilArrayList, MIN_CAPACITY_INCREMENT, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilArrayList, serialVersionUID, jlong)
-
-@interface JavaUtilArrayList_ArrayListIterator : NSObject < JavaUtilIterator > {
-}
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-- (instancetype)initWithJavaUtilArrayList:(JavaUtilArrayList *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilArrayList_ArrayListIterator_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilArrayList)
 
 #endif // _JavaUtilArrayList_H_

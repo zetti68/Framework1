@@ -6,14 +6,15 @@
 #ifndef _JavaIoPipedOutputStream_H_
 #define _JavaIoPipedOutputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/OutputStream.h"
+
 @class IOSByteArray;
 @class JavaIoPipedInputStream;
 
-#import "JreEmulation.h"
-#include "java/io/OutputStream.h"
+@interface JavaIoPipedOutputStream : JavaIoOutputStream
 
-@interface JavaIoPipedOutputStream : JavaIoOutputStream {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -33,6 +34,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoPipedOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPipedOutputStream)
+
+FOUNDATION_EXPORT void JavaIoPipedOutputStream_init(JavaIoPipedOutputStream *self);
+
+FOUNDATION_EXPORT JavaIoPipedOutputStream *new_JavaIoPipedOutputStream_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPipedOutputStream_initWithJavaIoPipedInputStream_(JavaIoPipedOutputStream *self, JavaIoPipedInputStream *target);
+
+FOUNDATION_EXPORT JavaIoPipedOutputStream *new_JavaIoPipedOutputStream_initWithJavaIoPipedInputStream_(JavaIoPipedInputStream *target) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPipedOutputStream)
 
 #endif // _JavaIoPipedOutputStream_H_

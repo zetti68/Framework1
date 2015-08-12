@@ -6,60 +6,69 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicInteger_H_
 #define _JavaUtilConcurrentAtomicAtomicInteger_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicInteger_serialVersionUID 6214790243416807050LL
+@interface JavaUtilConcurrentAtomicAtomicInteger : NSNumber < JavaIoSerializable >
 
-@interface JavaUtilConcurrentAtomicAtomicInteger : NSNumber < JavaIoSerializable > {
-}
-
-
-- (instancetype)initWithInt:(jint)initialValue;
-
+#pragma mark Public
 
 - (instancetype)init;
 
-- (jint)get;
+- (instancetype)initWithInt:(jint)initialValue;
 
-- (void)setWithInt:(jint)newValue;
-
-- (void)lazySetWithInt:(jint)newValue;
-
-- (jint)getAndSetWithInt:(jint)newValue;
+- (jint)addAndGetWithInt:(jint)delta;
 
 - (jboolean)compareAndSetWithInt:(jint)expect
                          withInt:(jint)update;
 
-- (jboolean)weakCompareAndSetWithInt:(jint)expect
-                             withInt:(jint)update;
-
-- (jint)getAndIncrement;
-
-- (jint)getAndDecrement;
-
-- (jint)getAndAddWithInt:(jint)delta;
-
-- (jint)incrementAndGet;
-
 - (jint)decrementAndGet;
-
-- (jint)addAndGetWithInt:(jint)delta;
-
-- (NSString *)description;
-
-- (jint)intValue;
-
-- (jlong)longLongValue;
-
-- (jfloat)floatValue;
 
 - (jdouble)doubleValue;
 
+- (jfloat)floatValue;
+
+- (jint)get;
+
+- (jint)getAndAddWithInt:(jint)delta;
+
+- (jint)getAndDecrement;
+
+- (jint)getAndIncrement;
+
+- (jint)getAndSetWithInt:(jint)newValue;
+
+- (jint)incrementAndGet;
+
+- (jint)intValue;
+
+- (void)lazySetWithInt:(jint)newValue;
+
+- (jlong)longLongValue;
+
+- (void)setWithInt:(jint)newValue;
+
+- (NSString *)description;
+
+- (jboolean)weakCompareAndSetWithInt:(jint)expect
+                             withInt:(jint)update;
+
+#pragma mark Package-Private
+
+
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicInteger_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicInteger)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicInteger, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(JavaUtilConcurrentAtomicAtomicInteger *self, jint initialValue);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicInteger *new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(jint initialValue) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicInteger_init(JavaUtilConcurrentAtomicAtomicInteger *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicInteger *new_JavaUtilConcurrentAtomicAtomicInteger_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicInteger)
 
 #endif // _JavaUtilConcurrentAtomicAtomicInteger_H_

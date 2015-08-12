@@ -6,35 +6,27 @@
 #ifndef _OrgApacheHarmonySecurityX501DirectoryString_H_
 #define _OrgApacheHarmonySecurityX501DirectoryString_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Choice.h"
+@class OrgApacheHarmonySecurityAsn1ASN1Choice;
 
-@interface OrgApacheHarmonySecurityX501DirectoryString : NSObject {
-}
+@interface OrgApacheHarmonySecurityX501DirectoryString : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityX501DirectoryString_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityX501DirectoryString)
 
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Choice *OrgApacheHarmonySecurityX501DirectoryString_ASN1_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityX501DirectoryString, ASN1_, OrgApacheHarmonySecurityAsn1ASN1Choice *)
 
-@interface OrgApacheHarmonySecurityX501DirectoryString_$1 : OrgApacheHarmonySecurityAsn1ASN1Choice {
-}
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501DirectoryString_init(OrgApacheHarmonySecurityX501DirectoryString *self);
 
-- (jint)getIndexWithId:(id)object;
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501DirectoryString *new_OrgApacheHarmonySecurityX501DirectoryString_init() NS_RETURNS_RETAINED;
 
-- (id)getObjectToEncodeWithId:(id)object;
-
-- (instancetype)initWithOrgApacheHarmonySecurityAsn1ASN1TypeArray:(IOSObjectArray *)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityX501DirectoryString_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityX501DirectoryString)
 
 #endif // _OrgApacheHarmonySecurityX501DirectoryString_H_

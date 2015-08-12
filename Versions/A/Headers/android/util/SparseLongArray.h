@@ -6,51 +6,59 @@
 #ifndef _AndroidUtilSparseLongArray_H_
 #define _AndroidUtilSparseLongArray_H_
 
-@class IOSIntArray;
-@class IOSLongArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface AndroidUtilSparseLongArray : NSObject < NSCopying >
 
-@interface AndroidUtilSparseLongArray : NSObject < NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialCapacity;
 
+- (void)appendWithInt:(jint)key
+             withLong:(jlong)value;
+
+- (void)clear;
+
 - (AndroidUtilSparseLongArray *)clone;
+
+- (void)delete__WithInt:(jint)key;
 
 - (jlong)getWithInt:(jint)key;
 
 - (jlong)getWithInt:(jint)key
            withLong:(jlong)valueIfKeyNotFound;
 
-- (void)delete__WithInt:(jint)key;
-
-- (void)removeAtWithInt:(jint)index;
-
-- (void)putWithInt:(jint)key
-          withLong:(jlong)value;
-
-- (jint)size;
-
-- (jint)keyAtWithInt:(jint)index;
-
-- (jlong)valueAtWithInt:(jint)index;
-
 - (jint)indexOfKeyWithInt:(jint)key;
 
 - (jint)indexOfValueWithLong:(jlong)value;
 
-- (void)clear;
+- (jint)keyAtWithInt:(jint)index;
 
-- (void)appendWithInt:(jint)key
-             withLong:(jlong)value;
+- (void)putWithInt:(jint)key
+          withLong:(jlong)value;
+
+- (void)removeAtWithInt:(jint)index;
+
+- (jint)size;
 
 - (NSString *)description;
 
+- (jlong)valueAtWithInt:(jint)index;
+
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilSparseLongArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilSparseLongArray)
+
+FOUNDATION_EXPORT void AndroidUtilSparseLongArray_init(AndroidUtilSparseLongArray *self);
+
+FOUNDATION_EXPORT AndroidUtilSparseLongArray *new_AndroidUtilSparseLongArray_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void AndroidUtilSparseLongArray_initWithInt_(AndroidUtilSparseLongArray *self, jint initialCapacity);
+
+FOUNDATION_EXPORT AndroidUtilSparseLongArray *new_AndroidUtilSparseLongArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilSparseLongArray)
 
 #endif // _AndroidUtilSparseLongArray_H_

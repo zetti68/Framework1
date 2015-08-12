@@ -6,14 +6,15 @@
 #ifndef _JavaIoOutputStream_H_
 #define _JavaIoOutputStream_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 #include "java/io/Flushable.h"
 
-@interface JavaIoOutputStream : NSObject < JavaIoCloseable, JavaIoFlushable > {
-}
+@class IOSByteArray;
+
+@interface JavaIoOutputStream : NSObject < JavaIoCloseable, JavaIoFlushable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -29,10 +30,16 @@
 
 - (void)writeWithInt:(jint)oneByte;
 
+#pragma mark Package-Private
+
 - (jboolean)checkError;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoOutputStream)
+
+FOUNDATION_EXPORT void JavaIoOutputStream_init(JavaIoOutputStream *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoOutputStream)
 
 #endif // _JavaIoOutputStream_H_

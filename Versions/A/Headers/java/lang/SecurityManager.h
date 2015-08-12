@@ -6,6 +6,8 @@
 #ifndef _JavaLangSecurityManager_H_
 #define _JavaLangSecurityManager_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaIoFileDescriptor;
@@ -14,12 +16,12 @@
 @class JavaLangThreadGroup;
 @class JavaSecurityPermission;
 
-#import "JreEmulation.h"
-
 @interface JavaLangSecurityManager : NSObject {
  @public
   jboolean inCheck_;
 }
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -29,6 +31,8 @@
 - (void)checkAccessWithJavaLangThread:(JavaLangThread *)thread;
 
 - (void)checkAccessWithJavaLangThreadGroup:(JavaLangThreadGroup *)group;
+
+- (void)checkAwtEventQueueAccess;
 
 - (void)checkConnectWithNSString:(NSString *)host
                          withInt:(jint)port;
@@ -56,6 +60,13 @@
 
 - (void)checkPackageDefinitionWithNSString:(NSString *)packageName;
 
+- (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
+
+- (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission
+                                           withId:(id)context;
+
+- (void)checkPrintJobAccess;
+
 - (void)checkPropertiesAccess;
 
 - (void)checkPropertyAccessWithNSString:(NSString *)key;
@@ -71,13 +82,9 @@
 
 - (void)checkSetFactory;
 
-- (jboolean)checkTopLevelWindowWithId:(id)window;
-
 - (void)checkSystemClipboardAccess;
 
-- (void)checkAwtEventQueueAccess;
-
-- (void)checkPrintJobAccess;
+- (jboolean)checkTopLevelWindowWithId:(id)window;
 
 - (void)checkWriteWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
@@ -85,31 +92,34 @@
 
 - (jboolean)getInCheck;
 
-- (IOSObjectArray *)getClassContext;
+- (id)getSecurityContext;
 
-- (JavaLangClassLoader *)currentClassLoader;
+- (JavaLangThreadGroup *)getThreadGroup;
+
+#pragma mark Protected
+
+- (jint)classDepthWithNSString:(NSString *)name;
 
 - (jint)classLoaderDepth;
 
+- (JavaLangClassLoader *)currentClassLoader;
+
 - (IOSClass *)currentLoadedClass;
 
-- (jint)classDepthWithNSString:(NSString *)name;
+- (IOSObjectArray *)getClassContext;
 
 - (jboolean)inClassWithNSString:(NSString *)name;
 
 - (jboolean)inClassLoader;
 
-- (JavaLangThreadGroup *)getThreadGroup;
-
-- (id)getSecurityContext;
-
-- (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
-
-- (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission
-                                           withId:(id)context;
-
 @end
 
-__attribute__((always_inline)) inline void JavaLangSecurityManager_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangSecurityManager)
+
+FOUNDATION_EXPORT void JavaLangSecurityManager_init(JavaLangSecurityManager *self);
+
+FOUNDATION_EXPORT JavaLangSecurityManager *new_JavaLangSecurityManager_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangSecurityManager)
 
 #endif // _JavaLangSecurityManager_H_

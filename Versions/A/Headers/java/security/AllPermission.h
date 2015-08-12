@@ -6,16 +6,17 @@
 #ifndef _JavaSecurityAllPermission_H_
 #define _JavaSecurityAllPermission_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/Permission.h"
 
-@interface JavaSecurityAllPermission : JavaSecurityPermission {
-}
+@interface JavaSecurityAllPermission : JavaSecurityPermission
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)actions;
-
-- (instancetype)init;
 
 - (NSString *)getActions;
 
@@ -23,6 +24,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityAllPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityAllPermission)
+
+FOUNDATION_EXPORT void JavaSecurityAllPermission_initWithNSString_withNSString_(JavaSecurityAllPermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaSecurityAllPermission *new_JavaSecurityAllPermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityAllPermission_init(JavaSecurityAllPermission *self);
+
+FOUNDATION_EXPORT JavaSecurityAllPermission *new_JavaSecurityAllPermission_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityAllPermission)
 
 #endif // _JavaSecurityAllPermission_H_

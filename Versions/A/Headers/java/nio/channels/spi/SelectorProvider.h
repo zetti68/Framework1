@@ -6,6 +6,8 @@
 #ifndef _JavaNioChannelsSpiSelectorProvider_H_
 #define _JavaNioChannelsSpiSelectorProvider_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNioChannelsDatagramChannel;
 @class JavaNioChannelsPipe;
 @class JavaNioChannelsServerSocketChannel;
@@ -13,14 +15,11 @@
 @class JavaNioChannelsSpiAbstractSelector;
 @protocol JavaNioChannelsChannel;
 
-#import "JreEmulation.h"
+@interface JavaNioChannelsSpiSelectorProvider : NSObject
 
-@interface JavaNioChannelsSpiSelectorProvider : NSObject {
-}
+#pragma mark Public
 
-- (instancetype)init;
-
-+ (JavaNioChannelsSpiSelectorProvider *)provider;
+- (id<JavaNioChannelsChannel>)inheritedChannel;
 
 - (JavaNioChannelsDatagramChannel *)openDatagramChannel;
 
@@ -32,15 +31,20 @@
 
 - (JavaNioChannelsSocketChannel *)openSocketChannel;
 
-- (id<JavaNioChannelsChannel>)inheritedChannel;
++ (JavaNioChannelsSpiSelectorProvider *)provider;
+
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSpiSelectorProvider_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSpiSelectorProvider)
+
+FOUNDATION_EXPORT void JavaNioChannelsSpiSelectorProvider_init(JavaNioChannelsSpiSelectorProvider *self);
+
 FOUNDATION_EXPORT JavaNioChannelsSpiSelectorProvider *JavaNioChannelsSpiSelectorProvider_provider();
 
-FOUNDATION_EXPORT JavaNioChannelsSpiSelectorProvider *JavaNioChannelsSpiSelectorProvider_provider__;
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsSpiSelectorProvider, provider__, JavaNioChannelsSpiSelectorProvider *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNioChannelsSpiSelectorProvider, provider__, JavaNioChannelsSpiSelectorProvider *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSpiSelectorProvider)
 
 #endif // _JavaNioChannelsSpiSelectorProvider_H_

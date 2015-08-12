@@ -6,19 +6,20 @@
 #ifndef _OrgMockitoInternalCreationDelegatingMethod_H_
 #define _OrgMockitoInternalCreationDelegatingMethod_H_
 
+#include "J2ObjC_header.h"
+#include "org/mockito/internal/invocation/MockitoMethod.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaLangReflectMethod;
 
-#import "JreEmulation.h"
-#include "org/mockito/internal/invocation/MockitoMethod.h"
+@interface OrgMockitoInternalCreationDelegatingMethod : NSObject < OrgMockitoInternalInvocationMockitoMethod >
 
-@interface OrgMockitoInternalCreationDelegatingMethod : NSObject < OrgMockitoInternalInvocationMockitoMethod > {
- @public
-  JavaLangReflectMethod *method_;
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaLangReflectMethod:(JavaLangReflectMethod *)method;
+
+- (jboolean)isEqual:(id)obj;
 
 - (IOSObjectArray *)getExceptionTypes;
 
@@ -30,20 +31,18 @@
 
 - (IOSClass *)getReturnType;
 
-- (jboolean)isVarArgs;
-
 - (NSUInteger)hash;
 
-- (jboolean)isEqual:(id)obj;
-
-- (void)dealloc;
-
-- (void)copyAllFieldsTo:(OrgMockitoInternalCreationDelegatingMethod *)other;
+- (jboolean)isVarArgs;
 
 @end
 
-__attribute__((always_inline)) inline void OrgMockitoInternalCreationDelegatingMethod_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgMockitoInternalCreationDelegatingMethod)
 
-J2OBJC_FIELD_SETTER(OrgMockitoInternalCreationDelegatingMethod, method_, JavaLangReflectMethod *)
+FOUNDATION_EXPORT void OrgMockitoInternalCreationDelegatingMethod_initWithJavaLangReflectMethod_(OrgMockitoInternalCreationDelegatingMethod *self, JavaLangReflectMethod *method);
+
+FOUNDATION_EXPORT OrgMockitoInternalCreationDelegatingMethod *new_OrgMockitoInternalCreationDelegatingMethod_initWithJavaLangReflectMethod_(JavaLangReflectMethod *method) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalCreationDelegatingMethod)
 
 #endif // _OrgMockitoInternalCreationDelegatingMethod_H_

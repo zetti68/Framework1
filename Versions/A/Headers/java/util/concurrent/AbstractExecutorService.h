@@ -6,6 +6,9 @@
 #ifndef _JavaUtilConcurrentAbstractExecutorService_H_
 #define _JavaUtilConcurrentAbstractExecutorService_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/ExecutorService.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilCollection;
@@ -14,29 +17,11 @@
 @protocol JavaUtilConcurrentRunnableFuture;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/ExecutorService.h"
+@interface JavaUtilConcurrentAbstractExecutorService : NSObject < JavaUtilConcurrentExecutorService >
 
-@interface JavaUtilConcurrentAbstractExecutorService : NSObject < JavaUtilConcurrentExecutorService > {
-}
+#pragma mark Public
 
-- (id<JavaUtilConcurrentRunnableFuture>)newTaskForWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                                                withId:(id)value OBJC_METHOD_FAMILY_NONE;
-
-- (id<JavaUtilConcurrentRunnableFuture>)newTaskForWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable OBJC_METHOD_FAMILY_NONE;
-
-- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task;
-
-- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task
-                                                    withId:(id)result;
-
-- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
-
-- (id)invokeAnyWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
-
-- (id)invokeAnyWithJavaUtilCollection:(id<JavaUtilCollection>)tasks
-                             withLong:(jlong)timeout
-   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+- (instancetype)init;
 
 - (id<JavaUtilList>)invokeAllWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
 
@@ -44,10 +29,32 @@
                                            withLong:(jlong)timeout
                  withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-- (instancetype)init;
+- (id)invokeAnyWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
+
+- (id)invokeAnyWithJavaUtilCollection:(id<JavaUtilCollection>)tasks
+                             withLong:(jlong)timeout
+   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task
+                                                    withId:(id)result;
+
+#pragma mark Protected
+
+- (id<JavaUtilConcurrentRunnableFuture>)newTaskForWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable OBJC_METHOD_FAMILY_NONE;
+
+- (id<JavaUtilConcurrentRunnableFuture>)newTaskForWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                                                withId:(id)value OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAbstractExecutorService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAbstractExecutorService)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAbstractExecutorService_init(JavaUtilConcurrentAbstractExecutorService *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAbstractExecutorService)
 
 #endif // _JavaUtilConcurrentAbstractExecutorService_H_

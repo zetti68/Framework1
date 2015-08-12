@@ -6,26 +6,18 @@
 #ifndef _JavaNioDoubleBuffer_H_
 #define _JavaNioDoubleBuffer_H_
 
-@class IOSDoubleArray;
-@class JavaNioByteOrder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
 #include "java/nio/Buffer.h"
 
-@interface JavaNioDoubleBuffer : JavaNioBuffer < JavaLangComparable > {
-}
+@class IOSDoubleArray;
+@class JavaNioByteOrder;
+
+@interface JavaNioDoubleBuffer : JavaNioBuffer < JavaLangComparable >
+
+#pragma mark Public
 
 + (JavaNioDoubleBuffer *)allocateWithInt:(jint)capacity OBJC_METHOD_FAMILY_NONE;
-
-+ (JavaNioDoubleBuffer *)wrapWithDoubleArray:(IOSDoubleArray *)array;
-
-+ (JavaNioDoubleBuffer *)wrapWithDoubleArray:(IOSDoubleArray *)array
-                                     withInt:(jint)start
-                                     withInt:(jint)doubleCount;
-
-- (instancetype)initWithInt:(jint)capacity
-                   withLong:(jlong)effectiveDirectAddress;
 
 - (IOSDoubleArray *)array;
 
@@ -59,12 +51,6 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSDoubleArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
-
 - (JavaNioDoubleBuffer *)putWithDouble:(jdouble)d;
 
 - (JavaNioDoubleBuffer *)putWithDoubleArray:(IOSDoubleArray *)src;
@@ -80,11 +66,35 @@
 
 - (JavaNioDoubleBuffer *)slice;
 
++ (JavaNioDoubleBuffer *)wrapWithDoubleArray:(IOSDoubleArray *)array;
+
++ (JavaNioDoubleBuffer *)wrapWithDoubleArray:(IOSDoubleArray *)array
+                                     withInt:(jint)start
+                                     withInt:(jint)doubleCount;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)capacity
+                   withLong:(jlong)effectiveDirectAddress;
+
+- (IOSDoubleArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioDoubleBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioDoubleBuffer)
+
 FOUNDATION_EXPORT JavaNioDoubleBuffer *JavaNioDoubleBuffer_allocateWithInt_(jint capacity);
+
 FOUNDATION_EXPORT JavaNioDoubleBuffer *JavaNioDoubleBuffer_wrapWithDoubleArray_(IOSDoubleArray *array);
+
 FOUNDATION_EXPORT JavaNioDoubleBuffer *JavaNioDoubleBuffer_wrapWithDoubleArray_withInt_withInt_(IOSDoubleArray *array, jint start, jint doubleCount);
+
+FOUNDATION_EXPORT void JavaNioDoubleBuffer_initWithInt_withLong_(JavaNioDoubleBuffer *self, jint capacity, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioDoubleBuffer)
 
 #endif // _JavaNioDoubleBuffer_H_

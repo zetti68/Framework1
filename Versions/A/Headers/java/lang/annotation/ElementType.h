@@ -6,10 +6,10 @@
 #ifndef _JavaLangAnnotationElementType_H_
 #define _JavaLangAnnotationElementType_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Enum.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaLangAnnotationElementType) {
   JavaLangAnnotationElementType_TYPE = 0,
   JavaLangAnnotationElementType_FIELD = 1,
   JavaLangAnnotationElementType_METHOD = 2,
@@ -18,50 +18,50 @@ typedef enum {
   JavaLangAnnotationElementType_LOCAL_VARIABLE = 5,
   JavaLangAnnotationElementType_ANNOTATION_TYPE = 6,
   JavaLangAnnotationElementType_PACKAGE = 7,
-} JavaLangAnnotationElementType;
+};
 
-@interface JavaLangAnnotationElementTypeEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaLangAnnotationElementTypeEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaLangAnnotationElementTypeEnum_values();
 
 + (JavaLangAnnotationElementTypeEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaLangAnnotationElementTypeEnum *JavaLangAnnotationElementTypeEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaLangAnnotationElementTypeEnum *JavaLangAnnotationElementTypeEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangAnnotationElementTypeEnum_initialized;
 J2OBJC_STATIC_INIT(JavaLangAnnotationElementTypeEnum)
 
 FOUNDATION_EXPORT JavaLangAnnotationElementTypeEnum *JavaLangAnnotationElementTypeEnum_values_[];
 
 #define JavaLangAnnotationElementTypeEnum_TYPE JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_TYPE]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, TYPE, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, TYPE)
 
 #define JavaLangAnnotationElementTypeEnum_FIELD JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_FIELD]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, FIELD, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, FIELD)
 
 #define JavaLangAnnotationElementTypeEnum_METHOD JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_METHOD]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, METHOD, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, METHOD)
 
 #define JavaLangAnnotationElementTypeEnum_PARAMETER JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_PARAMETER]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, PARAMETER, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, PARAMETER)
 
 #define JavaLangAnnotationElementTypeEnum_CONSTRUCTOR JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_CONSTRUCTOR]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, CONSTRUCTOR, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, CONSTRUCTOR)
 
 #define JavaLangAnnotationElementTypeEnum_LOCAL_VARIABLE JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_LOCAL_VARIABLE]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, LOCAL_VARIABLE, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, LOCAL_VARIABLE)
 
 #define JavaLangAnnotationElementTypeEnum_ANNOTATION_TYPE JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_ANNOTATION_TYPE]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, ANNOTATION_TYPE, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, ANNOTATION_TYPE)
 
 #define JavaLangAnnotationElementTypeEnum_PACKAGE JavaLangAnnotationElementTypeEnum_values_[JavaLangAnnotationElementType_PACKAGE]
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationElementTypeEnum, PACKAGE, JavaLangAnnotationElementTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaLangAnnotationElementTypeEnum, PACKAGE)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationElementTypeEnum)
 
 #endif // _JavaLangAnnotationElementType_H_

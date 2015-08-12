@@ -6,13 +6,12 @@
 #ifndef _JavaUtilDuplicateFormatFlagsException_H_
 #define _JavaUtilDuplicateFormatFlagsException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilDuplicateFormatFlagsException_serialVersionUID 18890531LL
+@interface JavaUtilDuplicateFormatFlagsException : JavaUtilIllegalFormatException
 
-@interface JavaUtilDuplicateFormatFlagsException : JavaUtilIllegalFormatException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)f;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilDuplicateFormatFlagsException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilDuplicateFormatFlagsException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilDuplicateFormatFlagsException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilDuplicateFormatFlagsException_initWithNSString_(JavaUtilDuplicateFormatFlagsException *self, NSString *f);
+
+FOUNDATION_EXPORT JavaUtilDuplicateFormatFlagsException *new_JavaUtilDuplicateFormatFlagsException_initWithNSString_(NSString *f) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilDuplicateFormatFlagsException)
 
 #endif // _JavaUtilDuplicateFormatFlagsException_H_

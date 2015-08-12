@@ -6,6 +6,8 @@
 #ifndef _JavaNioNioUtils_H_
 #define _JavaNioNioUtils_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoFileDescriptor;
 @class JavaNioByteBuffer;
@@ -14,41 +16,49 @@
 @protocol JavaNioFileDescriptorChannel;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
+@interface JavaNioNioUtils : NSObject
 
-@interface JavaNioNioUtils : NSObject {
-}
+#pragma mark Public
 
 + (void)freeDirectBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 + (JavaIoFileDescriptor *)getFDWithJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)fc;
 
++ (id)getSocketOptionWithJavaNioFileDescriptorChannel:(id<JavaNioFileDescriptorChannel>)channel
+                                      withJavaUtilSet:(id<JavaUtilSet>)allowedOptions
+                              withJavaNetSocketOption:(id<JavaNetSocketOption>)option;
+
 + (JavaNioChannelsFileChannel *)newFileChannelWithId:(id)stream
                             withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                              withInt:(jint)mode OBJC_METHOD_FAMILY_NONE;
-
-+ (IOSByteArray *)unsafeArrayWithJavaNioByteBuffer:(JavaNioByteBuffer *)b;
-
-+ (jint)unsafeArrayOffsetWithJavaNioByteBuffer:(JavaNioByteBuffer *)b;
 
 + (void)setSocketOptionWithJavaNioFileDescriptorChannel:(id<JavaNioFileDescriptorChannel>)channel
                                         withJavaUtilSet:(id<JavaUtilSet>)allowedOptions
                                 withJavaNetSocketOption:(id<JavaNetSocketOption>)option
                                                  withId:(id)value;
 
-+ (id)getSocketOptionWithJavaNioFileDescriptorChannel:(id<JavaNioFileDescriptorChannel>)channel
-                                      withJavaUtilSet:(id<JavaUtilSet>)allowedOptions
-                              withJavaNetSocketOption:(id<JavaNetSocketOption>)option;
++ (IOSByteArray *)unsafeArrayWithJavaNioByteBuffer:(JavaNioByteBuffer *)b;
+
++ (jint)unsafeArrayOffsetWithJavaNioByteBuffer:(JavaNioByteBuffer *)b;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioNioUtils_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioNioUtils)
+
 FOUNDATION_EXPORT void JavaNioNioUtils_freeDirectBufferWithJavaNioByteBuffer_(JavaNioByteBuffer *buffer);
+
 FOUNDATION_EXPORT JavaIoFileDescriptor *JavaNioNioUtils_getFDWithJavaNioChannelsFileChannel_(JavaNioChannelsFileChannel *fc);
+
 FOUNDATION_EXPORT JavaNioChannelsFileChannel *JavaNioNioUtils_newFileChannelWithId_withJavaIoFileDescriptor_withInt_(id stream, JavaIoFileDescriptor *fd, jint mode);
+
 FOUNDATION_EXPORT IOSByteArray *JavaNioNioUtils_unsafeArrayWithJavaNioByteBuffer_(JavaNioByteBuffer *b);
+
 FOUNDATION_EXPORT jint JavaNioNioUtils_unsafeArrayOffsetWithJavaNioByteBuffer_(JavaNioByteBuffer *b);
+
 FOUNDATION_EXPORT void JavaNioNioUtils_setSocketOptionWithJavaNioFileDescriptorChannel_withJavaUtilSet_withJavaNetSocketOption_withId_(id<JavaNioFileDescriptorChannel> channel, id<JavaUtilSet> allowedOptions, id<JavaNetSocketOption> option, id value);
+
 FOUNDATION_EXPORT id JavaNioNioUtils_getSocketOptionWithJavaNioFileDescriptorChannel_withJavaUtilSet_withJavaNetSocketOption_(id<JavaNioFileDescriptorChannel> channel, id<JavaUtilSet> allowedOptions, id<JavaNetSocketOption> option);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioNioUtils)
 
 #endif // _JavaNioNioUtils_H_

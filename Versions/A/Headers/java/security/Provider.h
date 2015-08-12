@@ -6,52 +6,65 @@
 #ifndef _JavaSecurityProvider_H_
 #define _JavaSecurityProvider_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
+#include "java/util/Properties.h"
+
 @class JavaIoInputStream;
-@class JavaIoObjectInputStream;
 @class JavaSecurityProvider_Service;
-@class JavaUtilLinkedHashMap;
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/util/Properties.h"
+@interface JavaSecurityProvider : JavaUtilProperties
 
-#define JavaSecurityProvider_serialVersionUID -4298000515446427739LL
+#pragma mark Public
 
-@interface JavaSecurityProvider : JavaUtilProperties {
-}
+- (void)clear;
+
+- (id<JavaUtilSet>)entrySet;
+
+- (NSString *)getInfo;
+
+- (NSString *)getName;
+
+- (JavaSecurityProvider_Service *)getServiceWithNSString:(NSString *)type
+                                            withNSString:(NSString *)algorithm;
+
+- (id<JavaUtilSet>)getServices;
+
+- (jdouble)getVersion;
+
+- (id<JavaUtilSet>)keySet;
+
+- (void)load__WithJavaIoInputStream:(JavaIoInputStream *)inStream;
+
+- (id)putWithId:(id)key
+         withId:(id)value;
+
+- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)t;
+
+- (id)removeWithId:(id)key;
+
+- (NSString *)description;
+
+- (id<JavaUtilCollection>)values;
+
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)name
                       withDouble:(jdouble)version_
                     withNSString:(NSString *)info;
 
-- (NSString *)getName;
+- (void)putServiceWithJavaSecurityProvider_Service:(JavaSecurityProvider_Service *)s;
 
-- (jdouble)getVersion;
+- (void)removeServiceWithJavaSecurityProvider_Service:(JavaSecurityProvider_Service *)s;
 
-- (NSString *)getInfo;
+#pragma mark Package-Private
 
-- (NSString *)description;
+- (jint)getProviderNumber;
 
-- (void)clear;
-
-- (void)load__WithJavaIoInputStream:(JavaIoInputStream *)inStream;
-
-- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)t;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilSet>)keySet;
-
-- (id<JavaUtilCollection>)values;
-
-- (id)putWithId:(id)key
-         withId:(id)value;
-
-- (id)removeWithId:(id)key;
+- (JavaSecurityProvider_Service *)getServiceWithNSString:(NSString *)type;
 
 - (jboolean)implementsAlgWithNSString:(NSString *)serv
                          withNSString:(NSString *)alg
@@ -60,27 +73,17 @@
 
 - (void)setProviderNumberWithInt:(jint)n;
 
-- (jint)getProviderNumber;
-
-- (JavaSecurityProvider_Service *)getServiceWithNSString:(NSString *)type;
-
-- (JavaSecurityProvider_Service *)getServiceWithNSString:(NSString *)type
-                                            withNSString:(NSString *)algorithm;
-
-- (id<JavaUtilSet>)getServices;
-
-- (void)putServiceWithJavaSecurityProvider_Service:(JavaSecurityProvider_Service *)s;
-
-- (void)removeServiceWithJavaSecurityProvider_Service:(JavaSecurityProvider_Service *)s;
-
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityProvider_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityProvider)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityProvider, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityProvider_initWithNSString_withDouble_withNSString_(JavaSecurityProvider *self, NSString *name, jdouble version_, NSString *info);
 
-@interface JavaSecurityProvider_Service : NSObject {
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityProvider)
+
+@interface JavaSecurityProvider_Service : NSObject
+
+#pragma mark Public
 
 - (instancetype)initWithJavaSecurityProvider:(JavaSecurityProvider *)provider
                                 withNSString:(NSString *)type
@@ -89,22 +92,15 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSecurityProvider, serialVersionUID, jlong)
                             withJavaUtilList:(id<JavaUtilList>)aliases
                              withJavaUtilMap:(id<JavaUtilMap>)attributes;
 
-- (void)addAliasWithNSString:(NSString *)alias;
-
-- (void)putAttributeWithNSString:(NSString *)name
-                    withNSString:(NSString *)value;
-
-- (NSString *)getType;
-
 - (NSString *)getAlgorithm;
-
-- (JavaSecurityProvider *)getProvider;
-
-- (NSString *)getClassName;
 
 - (NSString *)getAttributeWithNSString:(NSString *)name;
 
-- (id<JavaUtilList>)getAliases;
+- (NSString *)getClassName;
+
+- (JavaSecurityProvider *)getProvider;
+
+- (NSString *)getType;
 
 - (id)newInstanceWithId:(id)constructorParameter OBJC_METHOD_FAMILY_NONE;
 
@@ -112,8 +108,23 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSecurityProvider, serialVersionUID, jlong)
 
 - (NSString *)description;
 
+#pragma mark Package-Private
+
+- (void)addAliasWithNSString:(NSString *)alias;
+
+- (id<JavaUtilList>)getAliases;
+
+- (void)putAttributeWithNSString:(NSString *)name
+                    withNSString:(NSString *)value;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityProvider_Service_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityProvider_Service)
+
+FOUNDATION_EXPORT void JavaSecurityProvider_Service_initWithJavaSecurityProvider_withNSString_withNSString_withNSString_withJavaUtilList_withJavaUtilMap_(JavaSecurityProvider_Service *self, JavaSecurityProvider *provider, NSString *type, NSString *algorithm, NSString *className_, id<JavaUtilList> aliases, id<JavaUtilMap> attributes);
+
+FOUNDATION_EXPORT JavaSecurityProvider_Service *new_JavaSecurityProvider_Service_initWithJavaSecurityProvider_withNSString_withNSString_withNSString_withJavaUtilList_withJavaUtilMap_(JavaSecurityProvider *provider, NSString *type, NSString *algorithm, NSString *className_, id<JavaUtilList> aliases, id<JavaUtilMap> attributes) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityProvider_Service)
 
 #endif // _JavaSecurityProvider_H_

@@ -6,13 +6,12 @@
 #ifndef _JavaNetHttpRetryException_H_
 #define _JavaNetHttpRetryException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetHttpRetryException_serialVersionUID -9186022286469111381LL
+@interface JavaNetHttpRetryException : JavaIoIOException
 
-@interface JavaNetHttpRetryException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detail
                          withInt:(jint)code;
@@ -29,8 +28,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetHttpRetryException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetHttpRetryException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpRetryException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetHttpRetryException_initWithNSString_withInt_(JavaNetHttpRetryException *self, NSString *detail, jint code);
+
+FOUNDATION_EXPORT JavaNetHttpRetryException *new_JavaNetHttpRetryException_initWithNSString_withInt_(NSString *detail, jint code) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetHttpRetryException_initWithNSString_withInt_withNSString_(JavaNetHttpRetryException *self, NSString *detail, jint code, NSString *location);
+
+FOUNDATION_EXPORT JavaNetHttpRetryException *new_JavaNetHttpRetryException_initWithNSString_withInt_withNSString_(NSString *detail, jint code, NSString *location) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetHttpRetryException)
 
 #endif // _JavaNetHttpRetryException_H_

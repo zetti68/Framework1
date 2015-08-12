@@ -6,15 +6,16 @@
 #ifndef _JavaUtilConcurrentScheduledExecutorService_H_
 #define _JavaUtilConcurrentScheduledExecutorService_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/ExecutorService.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilConcurrentCallable;
 @protocol JavaUtilConcurrentScheduledFuture;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/ExecutorService.h"
-
 @protocol JavaUtilConcurrentScheduledExecutorService < JavaUtilConcurrentExecutorService, NSObject, JavaObject >
+
 - (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaLangRunnable:(id<JavaLangRunnable>)command
                                                              withLong:(jlong)delay
                                    withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
@@ -35,6 +36,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentScheduledExecutorService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentScheduledExecutorService)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentScheduledExecutorService)
 
 #endif // _JavaUtilConcurrentScheduledExecutorService_H_

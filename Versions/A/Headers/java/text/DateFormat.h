@@ -6,6 +6,9 @@
 #ifndef _JavaTextDateFormat_H_
 #define _JavaTextDateFormat_H_
 
+#include "J2ObjC_header.h"
+#include "java/text/Format.h"
+
 @class IOSObjectArray;
 @class JavaLangStringBuffer;
 @class JavaTextFieldPosition;
@@ -13,37 +16,32 @@
 @class JavaTextParsePosition;
 @class JavaUtilCalendar;
 @class JavaUtilDate;
-@class JavaUtilHashtable;
 @class JavaUtilLocale;
 @class JavaUtilTimeZone;
 
-#import "JreEmulation.h"
-#include "java/text/Format.h"
-
-#define JavaTextDateFormat_AM_PM_FIELD 14
-#define JavaTextDateFormat_DATE_FIELD 3
-#define JavaTextDateFormat_DAY_OF_WEEK_FIELD 9
-#define JavaTextDateFormat_DAY_OF_WEEK_IN_MONTH_FIELD 11
-#define JavaTextDateFormat_DAY_OF_YEAR_FIELD 10
 #define JavaTextDateFormat_DEFAULT 2
-#define JavaTextDateFormat_ERA_FIELD 0
 #define JavaTextDateFormat_FULL 0
-#define JavaTextDateFormat_HOUR0_FIELD 16
-#define JavaTextDateFormat_HOUR1_FIELD 15
-#define JavaTextDateFormat_HOUR_OF_DAY0_FIELD 5
-#define JavaTextDateFormat_HOUR_OF_DAY1_FIELD 4
 #define JavaTextDateFormat_LONG 1
 #define JavaTextDateFormat_MEDIUM 2
-#define JavaTextDateFormat_MILLISECOND_FIELD 8
-#define JavaTextDateFormat_MINUTE_FIELD 6
-#define JavaTextDateFormat_MONTH_FIELD 2
-#define JavaTextDateFormat_SECOND_FIELD 7
 #define JavaTextDateFormat_SHORT 3
-#define JavaTextDateFormat_TIMEZONE_FIELD 17
-#define JavaTextDateFormat_WEEK_OF_MONTH_FIELD 13
-#define JavaTextDateFormat_WEEK_OF_YEAR_FIELD 12
+#define JavaTextDateFormat_ERA_FIELD 0
 #define JavaTextDateFormat_YEAR_FIELD 1
-#define JavaTextDateFormat_serialVersionUID 7218322306649953788LL
+#define JavaTextDateFormat_MONTH_FIELD 2
+#define JavaTextDateFormat_DATE_FIELD 3
+#define JavaTextDateFormat_HOUR_OF_DAY1_FIELD 4
+#define JavaTextDateFormat_HOUR_OF_DAY0_FIELD 5
+#define JavaTextDateFormat_MINUTE_FIELD 6
+#define JavaTextDateFormat_SECOND_FIELD 7
+#define JavaTextDateFormat_MILLISECOND_FIELD 8
+#define JavaTextDateFormat_DAY_OF_WEEK_FIELD 9
+#define JavaTextDateFormat_DAY_OF_YEAR_FIELD 10
+#define JavaTextDateFormat_DAY_OF_WEEK_IN_MONTH_FIELD 11
+#define JavaTextDateFormat_WEEK_OF_YEAR_FIELD 12
+#define JavaTextDateFormat_WEEK_OF_MONTH_FIELD 13
+#define JavaTextDateFormat_AM_PM_FIELD 14
+#define JavaTextDateFormat_HOUR1_FIELD 15
+#define JavaTextDateFormat_HOUR0_FIELD 16
+#define JavaTextDateFormat_TIMEZONE_FIELD 17
 
 @interface JavaTextDateFormat : JavaTextFormat {
  @public
@@ -51,21 +49,21 @@
   JavaTextNumberFormat *numberFormat_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
 - (id)clone;
 
 - (jboolean)isEqual:(id)object;
-
-- (JavaLangStringBuffer *)formatWithId:(id)object
-              withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
-             withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
 - (NSString *)formatWithJavaUtilDate:(JavaUtilDate *)date;
 
 - (JavaLangStringBuffer *)formatWithJavaUtilDate:(JavaUtilDate *)date
                         withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
                        withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
+
+- (JavaLangStringBuffer *)formatWithId:(id)object
+              withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
+             withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
 + (IOSObjectArray *)getAvailableLocales;
 
@@ -88,8 +86,6 @@
                                 withJavaUtilLocale:(JavaUtilLocale *)locale;
 
 + (JavaTextDateFormat *)getInstance;
-
-+ (void)set24HourTimePrefWithBoolean:(jboolean)is24Hour;
 
 - (JavaTextNumberFormat *)getNumberFormat;
 
@@ -114,6 +110,8 @@
 - (id)parseObjectWithNSString:(NSString *)string
     withJavaTextParsePosition:(JavaTextParsePosition *)position;
 
++ (void)set24HourTimePrefWithBoolean:(jboolean)is24Hour;
+
 - (void)setCalendarWithJavaUtilCalendar:(JavaUtilCalendar *)cal;
 
 - (void)setLenientWithBoolean:(jboolean)value;
@@ -122,26 +120,16 @@
 
 - (void)setTimeZoneWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextDateFormat_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextDateFormat)
 
 J2OBJC_FIELD_SETTER(JavaTextDateFormat, calendar_, JavaUtilCalendar *)
 J2OBJC_FIELD_SETTER(JavaTextDateFormat, numberFormat_, JavaTextNumberFormat *)
-FOUNDATION_EXPORT IOSObjectArray *JavaTextDateFormat_getAvailableLocales();
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstance();
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstanceWithInt_(jint style);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(jint style, JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstance();
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstanceWithInt_withInt_(jint dateStyle, jint timeStyle);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstanceWithInt_withInt_withJavaUtilLocale_(jint dateStyle, jint timeStyle, JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getInstance();
-FOUNDATION_EXPORT void JavaTextDateFormat_set24HourTimePrefWithBoolean_(jboolean is24Hour);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstance();
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstanceWithInt_(jint style);
-FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstanceWithInt_withJavaUtilLocale_(jint style, JavaUtilLocale *locale);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat, DEFAULT, jint)
 
@@ -189,29 +177,50 @@ J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat, HOUR0_FIELD, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat, TIMEZONE_FIELD, jint)
 
-#define JavaTextDateFormat_Field_serialVersionUID 7441350119349544720LL
+FOUNDATION_EXPORT void JavaTextDateFormat_init(JavaTextDateFormat *self);
 
-@interface JavaTextDateFormat_Field : JavaTextFormat_Field {
-}
+FOUNDATION_EXPORT IOSObjectArray *JavaTextDateFormat_getAvailableLocales();
 
-- (instancetype)initWithNSString:(NSString *)fieldName
-                         withInt:(jint)calendarField;
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstance();
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstanceWithInt_(jint style);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(jint style, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstance();
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstanceWithInt_withInt_(jint dateStyle, jint timeStyle);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getDateTimeInstanceWithInt_withInt_withJavaUtilLocale_(jint dateStyle, jint timeStyle, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getInstance();
+
+FOUNDATION_EXPORT void JavaTextDateFormat_set24HourTimePrefWithBoolean_(jboolean is24Hour);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstance();
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstanceWithInt_(jint style);
+
+FOUNDATION_EXPORT JavaTextDateFormat *JavaTextDateFormat_getTimeInstanceWithInt_withJavaUtilLocale_(jint style, JavaUtilLocale *locale);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextDateFormat)
+
+@interface JavaTextDateFormat_Field : JavaTextFormat_Field
+
+#pragma mark Public
 
 - (jint)getCalendarField;
 
 + (JavaTextDateFormat_Field *)ofCalendarFieldWithInt:(jint)calendarField;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)fieldName
+                         withInt:(jint)calendarField;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextDateFormat_Field_initialized;
 J2OBJC_STATIC_INIT(JavaTextDateFormat_Field)
-FOUNDATION_EXPORT JavaTextDateFormat_Field *JavaTextDateFormat_Field_ofCalendarFieldWithInt_(jint calendarField);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat_Field, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT JavaUtilHashtable *JavaTextDateFormat_Field_table_;
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat_Field, table_, JavaUtilHashtable *)
-J2OBJC_STATIC_FIELD_SETTER(JavaTextDateFormat_Field, table_, JavaUtilHashtable *)
 
 FOUNDATION_EXPORT JavaTextDateFormat_Field *JavaTextDateFormat_Field_ERA_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat_Field, ERA_, JavaTextDateFormat_Field *)
@@ -266,5 +275,13 @@ J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat_Field, HOUR1_, JavaTextDateFormat_
 
 FOUNDATION_EXPORT JavaTextDateFormat_Field *JavaTextDateFormat_Field_TIME_ZONE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormat_Field, TIME_ZONE_, JavaTextDateFormat_Field *)
+
+FOUNDATION_EXPORT void JavaTextDateFormat_Field_initWithNSString_withInt_(JavaTextDateFormat_Field *self, NSString *fieldName, jint calendarField);
+
+FOUNDATION_EXPORT JavaTextDateFormat_Field *new_JavaTextDateFormat_Field_initWithNSString_withInt_(NSString *fieldName, jint calendarField) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT JavaTextDateFormat_Field *JavaTextDateFormat_Field_ofCalendarFieldWithInt_(jint calendarField);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextDateFormat_Field)
 
 #endif // _JavaTextDateFormat_H_

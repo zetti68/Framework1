@@ -6,17 +6,19 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Explicit_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Explicit_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Constructed.h"
+
 @class OrgApacheHarmonySecurityAsn1ASN1Type;
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
-
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Constructed.h"
 
 @interface OrgApacheHarmonySecurityAsn1ASN1Explicit : OrgApacheHarmonySecurityAsn1ASN1Constructed {
  @public
   OrgApacheHarmonySecurityAsn1ASN1Type *type_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)tagNumber
 withOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *)type;
@@ -35,8 +37,18 @@ withOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Explicit_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Explicit)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1ASN1Explicit, type_, OrgApacheHarmonySecurityAsn1ASN1Type *)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Explicit_initWithInt_withOrgApacheHarmonySecurityAsn1ASN1Type_(OrgApacheHarmonySecurityAsn1ASN1Explicit *self, jint tagNumber, OrgApacheHarmonySecurityAsn1ASN1Type *type);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Explicit *new_OrgApacheHarmonySecurityAsn1ASN1Explicit_initWithInt_withOrgApacheHarmonySecurityAsn1ASN1Type_(jint tagNumber, OrgApacheHarmonySecurityAsn1ASN1Type *type) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Explicit_initWithInt_withInt_withOrgApacheHarmonySecurityAsn1ASN1Type_(OrgApacheHarmonySecurityAsn1ASN1Explicit *self, jint tagClass, jint tagNumber, OrgApacheHarmonySecurityAsn1ASN1Type *type);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Explicit *new_OrgApacheHarmonySecurityAsn1ASN1Explicit_initWithInt_withInt_withOrgApacheHarmonySecurityAsn1ASN1Type_(jint tagClass, jint tagNumber, OrgApacheHarmonySecurityAsn1ASN1Type *type) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Explicit)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Explicit_H_

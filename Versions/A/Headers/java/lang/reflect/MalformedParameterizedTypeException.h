@@ -6,20 +6,23 @@
 #ifndef _JavaLangReflectMalformedParameterizedTypeException_H_
 #define _JavaLangReflectMalformedParameterizedTypeException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangReflectMalformedParameterizedTypeException_serialVersionUID -5696557788586220964LL
+@interface JavaLangReflectMalformedParameterizedTypeException : JavaLangRuntimeException
 
-@interface JavaLangReflectMalformedParameterizedTypeException : JavaLangRuntimeException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectMalformedParameterizedTypeException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectMalformedParameterizedTypeException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectMalformedParameterizedTypeException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangReflectMalformedParameterizedTypeException_init(JavaLangReflectMalformedParameterizedTypeException *self);
+
+FOUNDATION_EXPORT JavaLangReflectMalformedParameterizedTypeException *new_JavaLangReflectMalformedParameterizedTypeException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectMalformedParameterizedTypeException)
 
 #endif // _JavaLangReflectMalformedParameterizedTypeException_H_

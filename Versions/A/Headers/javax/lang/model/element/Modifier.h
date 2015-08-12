@@ -6,10 +6,10 @@
 #ifndef _JavaxLangModelElementModifier_H_
 #define _JavaxLangModelElementModifier_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Enum.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaxLangModelElementModifier) {
   JavaxLangModelElementModifier_PUBLIC = 0,
   JavaxLangModelElementModifier_PROTECTED = 1,
   JavaxLangModelElementModifier_PRIVATE = 2,
@@ -21,61 +21,63 @@ typedef enum {
   JavaxLangModelElementModifier_SYNCHRONIZED = 8,
   JavaxLangModelElementModifier_NATIVE = 9,
   JavaxLangModelElementModifier_STRICTFP = 10,
-} JavaxLangModelElementModifier;
+};
 
-@interface JavaxLangModelElementModifierEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaxLangModelElementModifierEnum : JavaLangEnum < NSCopying >
+
+#pragma mark Public
 
 - (NSString *)description;
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaxLangModelElementModifierEnum_values();
 
 + (JavaxLangModelElementModifierEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaxLangModelElementModifierEnum *JavaxLangModelElementModifierEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaxLangModelElementModifierEnum *JavaxLangModelElementModifierEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaxLangModelElementModifierEnum_initialized;
 J2OBJC_STATIC_INIT(JavaxLangModelElementModifierEnum)
 
 FOUNDATION_EXPORT JavaxLangModelElementModifierEnum *JavaxLangModelElementModifierEnum_values_[];
 
 #define JavaxLangModelElementModifierEnum_PUBLIC JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_PUBLIC]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, PUBLIC, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, PUBLIC)
 
 #define JavaxLangModelElementModifierEnum_PROTECTED JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_PROTECTED]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, PROTECTED, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, PROTECTED)
 
 #define JavaxLangModelElementModifierEnum_PRIVATE JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_PRIVATE]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, PRIVATE, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, PRIVATE)
 
 #define JavaxLangModelElementModifierEnum_ABSTRACT JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_ABSTRACT]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, ABSTRACT, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, ABSTRACT)
 
 #define JavaxLangModelElementModifierEnum_STATIC JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_STATIC]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, STATIC, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, STATIC)
 
 #define JavaxLangModelElementModifierEnum_FINAL JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_FINAL]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, FINAL, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, FINAL)
 
 #define JavaxLangModelElementModifierEnum_TRANSIENT JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_TRANSIENT]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, TRANSIENT, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, TRANSIENT)
 
 #define JavaxLangModelElementModifierEnum_VOLATILE JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_VOLATILE]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, VOLATILE, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, VOLATILE)
 
 #define JavaxLangModelElementModifierEnum_SYNCHRONIZED JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_SYNCHRONIZED]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, SYNCHRONIZED, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, SYNCHRONIZED)
 
 #define JavaxLangModelElementModifierEnum_NATIVE JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_NATIVE]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, NATIVE, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, NATIVE)
 
 #define JavaxLangModelElementModifierEnum_STRICTFP JavaxLangModelElementModifierEnum_values_[JavaxLangModelElementModifier_STRICTFP]
-J2OBJC_STATIC_FIELD_GETTER(JavaxLangModelElementModifierEnum, STRICTFP, JavaxLangModelElementModifierEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaxLangModelElementModifierEnum, STRICTFP)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxLangModelElementModifierEnum)
 
 #endif // _JavaxLangModelElementModifier_H_

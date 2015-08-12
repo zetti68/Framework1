@@ -6,16 +6,17 @@
 #ifndef _JavaSecurityProtectionDomain_H_
 #define _JavaSecurityProtectionDomain_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaLangClassLoader;
 @class JavaSecurityCodeSource;
 @class JavaSecurityPermission;
 @class JavaSecurityPermissionCollection;
 
-#import "JreEmulation.h"
+@interface JavaSecurityProtectionDomain : NSObject
 
-@interface JavaSecurityProtectionDomain : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs
           withJavaSecurityPermissionCollection:(JavaSecurityPermissionCollection *)permissions;
@@ -37,6 +38,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityProtectionDomain_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityProtectionDomain)
+
+FOUNDATION_EXPORT void JavaSecurityProtectionDomain_initWithJavaSecurityCodeSource_withJavaSecurityPermissionCollection_(JavaSecurityProtectionDomain *self, JavaSecurityCodeSource *cs, JavaSecurityPermissionCollection *permissions);
+
+FOUNDATION_EXPORT JavaSecurityProtectionDomain *new_JavaSecurityProtectionDomain_initWithJavaSecurityCodeSource_withJavaSecurityPermissionCollection_(JavaSecurityCodeSource *cs, JavaSecurityPermissionCollection *permissions) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityProtectionDomain_initWithJavaSecurityCodeSource_withJavaSecurityPermissionCollection_withJavaLangClassLoader_withJavaSecurityPrincipalArray_(JavaSecurityProtectionDomain *self, JavaSecurityCodeSource *cs, JavaSecurityPermissionCollection *permissions, JavaLangClassLoader *cl, IOSObjectArray *principals);
+
+FOUNDATION_EXPORT JavaSecurityProtectionDomain *new_JavaSecurityProtectionDomain_initWithJavaSecurityCodeSource_withJavaSecurityPermissionCollection_withJavaLangClassLoader_withJavaSecurityPrincipalArray_(JavaSecurityCodeSource *cs, JavaSecurityPermissionCollection *permissions, JavaLangClassLoader *cl, IOSObjectArray *principals) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityProtectionDomain)
 
 #endif // _JavaSecurityProtectionDomain_H_

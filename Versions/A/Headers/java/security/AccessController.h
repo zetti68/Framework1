@@ -6,15 +6,18 @@
 #ifndef _JavaSecurityAccessController_H_
 #define _JavaSecurityAccessController_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaSecurityAccessControlContext;
 @class JavaSecurityPermission;
 @protocol JavaSecurityPrivilegedAction;
 @protocol JavaSecurityPrivilegedExceptionAction;
 
-#import "JreEmulation.h"
+@interface JavaSecurityAccessController : NSObject
 
-@interface JavaSecurityAccessController : NSObject {
-}
+#pragma mark Public
+
++ (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
 + (id)doPrivilegedWithJavaSecurityPrivilegedAction:(id<JavaSecurityPrivilegedAction>)action;
 
@@ -30,20 +33,28 @@
 
 + (id)doPrivilegedWithCombinerWithJavaSecurityPrivilegedExceptionAction:(id<JavaSecurityPrivilegedExceptionAction>)action;
 
-+ (void)checkPermissionWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
-
 + (JavaSecurityAccessControlContext *)getContext;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityAccessController_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityAccessController)
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(id<JavaSecurityPrivilegedAction> action);
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_withJavaSecurityAccessControlContext_(id<JavaSecurityPrivilegedAction> action, JavaSecurityAccessControlContext *context);
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_(id<JavaSecurityPrivilegedExceptionAction> action);
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_withJavaSecurityAccessControlContext_(id<JavaSecurityPrivilegedExceptionAction> action, JavaSecurityAccessControlContext *context);
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithCombinerWithJavaSecurityPrivilegedAction_(id<JavaSecurityPrivilegedAction> action);
+
 FOUNDATION_EXPORT id JavaSecurityAccessController_doPrivilegedWithCombinerWithJavaSecurityPrivilegedExceptionAction_(id<JavaSecurityPrivilegedExceptionAction> action);
+
 FOUNDATION_EXPORT void JavaSecurityAccessController_checkPermissionWithJavaSecurityPermission_(JavaSecurityPermission *permission);
+
 FOUNDATION_EXPORT JavaSecurityAccessControlContext *JavaSecurityAccessController_getContext();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityAccessController)
 
 #endif // _JavaSecurityAccessController_H_

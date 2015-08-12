@@ -6,17 +6,19 @@
 #ifndef _LibcoreIoErrnoException_H_
 #define _LibcoreIoErrnoException_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Exception.h"
+
 @class JavaIoIOException;
 @class JavaLangThrowable;
 @class JavaNetSocketException;
-
-#import "JreEmulation.h"
-#include "java/lang/Exception.h"
 
 @interface LibcoreIoErrnoException : JavaLangException {
  @public
   jint errno__;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)functionName
                          withInt:(jint)errno_;
@@ -33,6 +35,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoErrnoException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoErrnoException)
+
+FOUNDATION_EXPORT void LibcoreIoErrnoException_initWithNSString_withInt_(LibcoreIoErrnoException *self, NSString *functionName, jint errno_);
+
+FOUNDATION_EXPORT LibcoreIoErrnoException *new_LibcoreIoErrnoException_initWithNSString_withInt_(NSString *functionName, jint errno_) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void LibcoreIoErrnoException_initWithNSString_withInt_withJavaLangThrowable_(LibcoreIoErrnoException *self, NSString *functionName, jint errno_, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT LibcoreIoErrnoException *new_LibcoreIoErrnoException_initWithNSString_withInt_withJavaLangThrowable_(NSString *functionName, jint errno_, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoErrnoException)
 
 #endif // _LibcoreIoErrnoException_H_

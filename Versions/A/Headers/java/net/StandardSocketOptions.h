@@ -6,23 +6,21 @@
 #ifndef _JavaNetStandardSocketOptions_H_
 #define _JavaNetStandardSocketOptions_H_
 
-@class IOSClass;
-@class JavaIoFileDescriptor;
-@class JavaLangInteger;
-@class JavaNetNetworkInterface;
-@protocol JavaUtilSet;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/SocketOption.h"
 
-@interface JavaNetStandardSocketOptions : NSObject {
-}
+@class IOSClass;
+@class JavaIoFileDescriptor;
+@protocol JavaUtilSet;
+
+@interface JavaNetStandardSocketOptions : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetStandardSocketOptions_initialized;
 J2OBJC_STATIC_INIT(JavaNetStandardSocketOptions)
 
 FOUNDATION_EXPORT id<JavaNetSocketOption> JavaNetStandardSocketOptions_IP_MULTICAST_IF_;
@@ -67,110 +65,51 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetStandardSocketOptions, SOCKET_OPTIONS_, id<Jav
 FOUNDATION_EXPORT id<JavaUtilSet> JavaNetStandardSocketOptions_SERVER_SOCKET_OPTIONS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetStandardSocketOptions, SERVER_SOCKET_OPTIONS_, id<JavaUtilSet>)
 
+FOUNDATION_EXPORT void JavaNetStandardSocketOptions_init(JavaNetStandardSocketOptions *self);
+
+FOUNDATION_EXPORT JavaNetStandardSocketOptions *new_JavaNetStandardSocketOptions_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetStandardSocketOptions)
+
 @interface JavaNetStandardSocketOptions_SocketOptionImpl : NSObject < JavaNetSocketOption > {
  @public
   NSString *name__;
   jint socketOption_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)name
                     withIOSClass:(IOSClass *)type
                          withInt:(jint)socketOption;
 
-- (NSString *)name;
+- (id)getValueWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
-- (IOSClass *)type;
+- (NSString *)name;
 
 - (void)setValueWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                   withId:(id)value;
 
-- (id)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                        withId:(id)value;
+- (IOSClass *)type;
 
-- (id)getValueWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
+#pragma mark Protected
 
 - (id)validateAndConvertValueAfterGetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                                        withId:(id)value;
 
+- (id)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                                                        withId:(id)value;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_SocketOptionImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetStandardSocketOptions_SocketOptionImpl)
 
 J2OBJC_FIELD_SETTER(JavaNetStandardSocketOptions_SocketOptionImpl, name__, NSString *)
 
-@interface JavaNetStandardSocketOptions_BooleanSocketOption : JavaNetStandardSocketOptions_SocketOptionImpl {
-}
+FOUNDATION_EXPORT void JavaNetStandardSocketOptions_SocketOptionImpl_initWithNSString_withIOSClass_withInt_(JavaNetStandardSocketOptions_SocketOptionImpl *self, NSString *name, IOSClass *type, jint socketOption);
 
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)socketOption;
+FOUNDATION_EXPORT JavaNetStandardSocketOptions_SocketOptionImpl *new_JavaNetStandardSocketOptions_SocketOptionImpl_initWithNSString_withIOSClass_withInt_(NSString *name, IOSClass *type, jint socketOption) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_BooleanSocketOption_init() {}
-
-@interface JavaNetStandardSocketOptions_NetworkInterfaceSocketOption : JavaNetStandardSocketOptions_SocketOptionImpl {
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)socketOption;
-
-- (JavaLangInteger *)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                       withId:(JavaNetNetworkInterface *)value;
-
-- (JavaNetNetworkInterface *)validateAndConvertValueAfterGetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                              withId:(id)value;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_NetworkInterfaceSocketOption_init() {}
-
-@interface JavaNetStandardSocketOptions_ByteRangeSocketOption : JavaNetStandardSocketOptions_SocketOptionImpl {
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)socketOption;
-
-- (id)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                        withId:(JavaLangInteger *)value;
-
-- (JavaLangInteger *)validateAndConvertValueAfterGetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                      withId:(id)value;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_ByteRangeSocketOption_init() {}
-
-@interface JavaNetStandardSocketOptions_PositiveIntegerSocketOption : JavaNetStandardSocketOptions_SocketOptionImpl {
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)socketOption;
-
-- (JavaLangInteger *)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                       withId:(JavaLangInteger *)value;
-
-- (JavaLangInteger *)validateAndConvertValueAfterGetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                      withId:(id)value;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_PositiveIntegerSocketOption_init() {}
-
-@interface JavaNetStandardSocketOptions_$1 : JavaNetStandardSocketOptions_SocketOptionImpl {
-}
-
-- (id)validateAndConvertValueBeforeSetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                        withId:(JavaLangInteger *)value;
-
-- (JavaLangInteger *)validateAndConvertValueAfterGetWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                                                                      withId:(id)value;
-
-- (instancetype)initWithNSString:(NSString *)arg$0
-                    withIOSClass:(IOSClass *)arg$1
-                         withInt:(jint)arg$2;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetStandardSocketOptions_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetStandardSocketOptions_SocketOptionImpl)
 
 #endif // _JavaNetStandardSocketOptions_H_

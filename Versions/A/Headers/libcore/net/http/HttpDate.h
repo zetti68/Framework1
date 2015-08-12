@@ -6,44 +6,32 @@
 #ifndef _LibcoreNetHttpHttpDate_H_
 #define _LibcoreNetHttpHttpDate_H_
 
-@class IOSObjectArray;
-@class JavaTextDateFormat;
+#include "J2ObjC_header.h"
+
 @class JavaUtilDate;
 
-#import "JreEmulation.h"
-#include "java/lang/ThreadLocal.h"
+@interface LibcoreNetHttpHttpDate : NSObject
 
-@interface LibcoreNetHttpHttpDate : NSObject {
-}
+#pragma mark Public
 
-+ (JavaUtilDate *)parseWithNSString:(NSString *)value;
+- (instancetype)init;
 
 + (NSString *)formatWithJavaUtilDate:(JavaUtilDate *)value;
 
-- (instancetype)init;
++ (JavaUtilDate *)parseWithNSString:(NSString *)value;
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreNetHttpHttpDate_initialized;
 J2OBJC_STATIC_INIT(LibcoreNetHttpHttpDate)
+
 FOUNDATION_EXPORT JavaUtilDate *LibcoreNetHttpHttpDate_parseWithNSString_(NSString *value);
+
 FOUNDATION_EXPORT NSString *LibcoreNetHttpHttpDate_formatWithJavaUtilDate_(JavaUtilDate *value);
 
-FOUNDATION_EXPORT JavaLangThreadLocal *LibcoreNetHttpHttpDate_STANDARD_DATE_FORMAT_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreNetHttpHttpDate, STANDARD_DATE_FORMAT_, JavaLangThreadLocal *)
+FOUNDATION_EXPORT void LibcoreNetHttpHttpDate_init(LibcoreNetHttpHttpDate *self);
 
-FOUNDATION_EXPORT IOSObjectArray *LibcoreNetHttpHttpDate_BROWSER_COMPATIBLE_DATE_FORMATS_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreNetHttpHttpDate, BROWSER_COMPATIBLE_DATE_FORMATS_, IOSObjectArray *)
+FOUNDATION_EXPORT LibcoreNetHttpHttpDate *new_LibcoreNetHttpHttpDate_init() NS_RETURNS_RETAINED;
 
-@interface LibcoreNetHttpHttpDate_$1 : JavaLangThreadLocal {
-}
-
-- (JavaTextDateFormat *)initialValue OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void LibcoreNetHttpHttpDate_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreNetHttpHttpDate)
 
 #endif // _LibcoreNetHttpHttpDate_H_

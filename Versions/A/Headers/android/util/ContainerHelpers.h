@@ -6,15 +6,18 @@
 #ifndef _AndroidUtilContainerHelpers_H_
 #define _AndroidUtilContainerHelpers_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSBooleanArray;
 @class IOSIntArray;
 @class IOSLongArray;
 @class IOSObjectArray;
 
-#import "JreEmulation.h"
+@interface AndroidUtilContainerHelpers : NSObject
 
-@interface AndroidUtilContainerHelpers : NSObject {
-}
+#pragma mark Package-Private
+
+- (instancetype)init;
 
 + (jint)binarySearchWithIntArray:(IOSIntArray *)array
                          withInt:(jint)size
@@ -24,14 +27,9 @@
                           withInt:(jint)size
                          withLong:(jlong)value;
 
-- (instancetype)init;
-
 @end
 
-FOUNDATION_EXPORT BOOL AndroidUtilContainerHelpers_initialized;
 J2OBJC_STATIC_INIT(AndroidUtilContainerHelpers)
-FOUNDATION_EXPORT jint AndroidUtilContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, jint size, jint value);
-FOUNDATION_EXPORT jint AndroidUtilContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, jint size, jlong value);
 
 FOUNDATION_EXPORT IOSBooleanArray *AndroidUtilContainerHelpers_EMPTY_BOOLEANS_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilContainerHelpers, EMPTY_BOOLEANS_, IOSBooleanArray *)
@@ -44,5 +42,15 @@ J2OBJC_STATIC_FIELD_GETTER(AndroidUtilContainerHelpers, EMPTY_LONGS_, IOSLongArr
 
 FOUNDATION_EXPORT IOSObjectArray *AndroidUtilContainerHelpers_EMPTY_OBJECTS_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilContainerHelpers, EMPTY_OBJECTS_, IOSObjectArray *)
+
+FOUNDATION_EXPORT jint AndroidUtilContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, jint size, jint value);
+
+FOUNDATION_EXPORT jint AndroidUtilContainerHelpers_binarySearchWithLongArray_withInt_withLong_(IOSLongArray *array, jint size, jlong value);
+
+FOUNDATION_EXPORT void AndroidUtilContainerHelpers_init(AndroidUtilContainerHelpers *self);
+
+FOUNDATION_EXPORT AndroidUtilContainerHelpers *new_AndroidUtilContainerHelpers_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilContainerHelpers)
 
 #endif // _AndroidUtilContainerHelpers_H_

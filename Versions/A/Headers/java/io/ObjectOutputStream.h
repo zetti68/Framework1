@@ -6,49 +6,29 @@
 #ifndef _JavaIoObjectOutputStream_H_
 #define _JavaIoObjectOutputStream_H_
 
-@class IOSByteArray;
-@class IOSClass;
-@class IOSObjectArray;
-@class JavaIoByteArrayOutputStream;
-@class JavaIoDataOutputStream;
-@class JavaIoEmulatedFieldsForDumping;
-@class JavaIoObjectOutputStream_PutField;
-@class JavaIoObjectStreamClass;
-@class JavaIoSerializationHandleMap;
-@class JavaIoStreamCorruptedException;
-@class JavaLangException;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectOutput.h"
 #include "java/io/ObjectStreamConstants.h"
 #include "java/io/OutputStream.h"
 
-#define JavaIoObjectOutputStream_NOT_SC_BLOCK_DATA -9
+@class IOSByteArray;
+@class IOSClass;
+@class JavaIoObjectOutputStream_PutField;
+@class JavaIoObjectStreamClass;
 
-@interface JavaIoObjectOutputStream : JavaIoOutputStream < JavaIoObjectOutput, JavaIoObjectStreamConstants > {
-}
+@interface JavaIoObjectOutputStream : JavaIoOutputStream < JavaIoObjectOutput, JavaIoObjectStreamConstants >
 
-- (instancetype)init;
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)output;
-
-- (void)annotateClassWithIOSClass:(IOSClass *)aClass;
-
-- (void)annotateProxyClassWithIOSClass:(IOSClass *)aClass;
 
 - (void)close;
 
 - (void)defaultWriteObject;
 
-- (void)drain;
-
-- (jboolean)enableReplaceObjectWithBoolean:(jboolean)enable;
-
 - (void)flush;
 
 - (JavaIoObjectOutputStream_PutField *)putFields;
-
-- (id)replaceObjectWithId:(id)object;
 
 - (void)reset;
 
@@ -80,44 +60,68 @@
 
 - (void)writeLongWithLong:(jlong)value;
 
-- (void)writeClassDescriptorWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)classDesc;
-
 - (void)writeObjectWithId:(id)object;
-
-- (void)writeUnsharedWithId:(id)object;
-
-- (void)writeObjectOverrideWithId:(id)object;
 
 - (void)writeShortWithInt:(jint)value;
 
-- (void)writeStreamHeader;
+- (void)writeUnsharedWithId:(id)object;
 
 - (void)writeUTFWithNSString:(NSString *)value;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
+- (void)annotateClassWithIOSClass:(IOSClass *)aClass;
+
+- (void)annotateProxyClassWithIOSClass:(IOSClass *)aClass;
+
+- (void)drain;
+
+- (jboolean)enableReplaceObjectWithBoolean:(jboolean)enable;
+
+- (id)replaceObjectWithId:(id)object;
+
+- (void)writeClassDescriptorWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)classDesc;
+
+- (void)writeObjectOverrideWithId:(id)object;
+
+- (void)writeStreamHeader;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoObjectOutputStream_initialized;
-J2OBJC_STATIC_INIT(JavaIoObjectOutputStream)
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectOutputStream)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaIoObjectOutputStream_WRITE_UNSHARED_PARAM_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectOutputStream, WRITE_UNSHARED_PARAM_TYPES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaIoObjectOutputStream_init(JavaIoObjectOutputStream *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectOutputStream, NOT_SC_BLOCK_DATA, jbyte)
+FOUNDATION_EXPORT JavaIoObjectOutputStream *new_JavaIoObjectOutputStream_init() NS_RETURNS_RETAINED;
 
-@interface JavaIoObjectOutputStream_PutField : NSObject {
-}
+FOUNDATION_EXPORT void JavaIoObjectOutputStream_initWithJavaIoOutputStream_(JavaIoObjectOutputStream *self, JavaIoOutputStream *output);
+
+FOUNDATION_EXPORT JavaIoObjectOutputStream *new_JavaIoObjectOutputStream_initWithJavaIoOutputStream_(JavaIoOutputStream *output) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectOutputStream)
+
+@interface JavaIoObjectOutputStream_PutField : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (void)putWithNSString:(NSString *)name
             withBoolean:(jboolean)value;
 
 - (void)putWithNSString:(NSString *)name
-               withChar:(jchar)value;
-
-- (void)putWithNSString:(NSString *)name
                withByte:(jbyte)value;
 
 - (void)putWithNSString:(NSString *)name
-              withShort:(jshort)value;
+               withChar:(jchar)value;
+
+- (void)putWithNSString:(NSString *)name
+             withDouble:(jdouble)value;
+
+- (void)putWithNSString:(NSString *)name
+              withFloat:(jfloat)value;
 
 - (void)putWithNSString:(NSString *)name
                 withInt:(jint)value;
@@ -126,20 +130,19 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectOutputStream, NOT_SC_BLOCK_DATA, jbyte)
                withLong:(jlong)value;
 
 - (void)putWithNSString:(NSString *)name
-              withFloat:(jfloat)value;
-
-- (void)putWithNSString:(NSString *)name
-             withDouble:(jdouble)value;
-
-- (void)putWithNSString:(NSString *)name
                  withId:(id)value;
+
+- (void)putWithNSString:(NSString *)name
+              withShort:(jshort)value;
 
 - (void)writeWithJavaIoObjectOutput:(id<JavaIoObjectOutput>)outArg;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectOutputStream_PutField_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectOutputStream_PutField)
+
+FOUNDATION_EXPORT void JavaIoObjectOutputStream_PutField_init(JavaIoObjectOutputStream_PutField *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectOutputStream_PutField)
 
 #endif // _JavaIoObjectOutputStream_H_

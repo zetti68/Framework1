@@ -6,23 +6,19 @@
 #ifndef _OrgApacheHarmonySecurityAsn1DerOutputStream_H_
 #define _OrgApacheHarmonySecurityAsn1DerOutputStream_H_
 
-@class IOSIntArray;
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/BerOutputStream.h"
+
 @class OrgApacheHarmonySecurityAsn1ASN1Choice;
 @class OrgApacheHarmonySecurityAsn1ASN1Explicit;
 @class OrgApacheHarmonySecurityAsn1ASN1Sequence;
 @class OrgApacheHarmonySecurityAsn1ASN1SequenceOf;
 @class OrgApacheHarmonySecurityAsn1ASN1SetOf;
 @class OrgApacheHarmonySecurityAsn1ASN1Type;
-@class OrgApacheHarmonySecurityAsn1ASN1ValueCollection;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/BerOutputStream.h"
+@interface OrgApacheHarmonySecurityAsn1DerOutputStream : OrgApacheHarmonySecurityAsn1BerOutputStream
 
-#define OrgApacheHarmonySecurityAsn1DerOutputStream_initSize 32
-
-@interface OrgApacheHarmonySecurityAsn1DerOutputStream : OrgApacheHarmonySecurityAsn1BerOutputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *)asn1
                                                       withId:(id)object;
@@ -49,8 +45,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1DerOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1DerOutputStream)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1DerOutputStream, initSize, jint)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1DerOutputStream_initWithOrgApacheHarmonySecurityAsn1ASN1Type_withId_(OrgApacheHarmonySecurityAsn1DerOutputStream *self, OrgApacheHarmonySecurityAsn1ASN1Type *asn1, id object);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1DerOutputStream *new_OrgApacheHarmonySecurityAsn1DerOutputStream_initWithOrgApacheHarmonySecurityAsn1ASN1Type_withId_(OrgApacheHarmonySecurityAsn1ASN1Type *asn1, id object) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1DerOutputStream)
 
 #endif // _OrgApacheHarmonySecurityAsn1DerOutputStream_H_

@@ -6,12 +6,13 @@
 #ifndef _JavaNetSocketPermission_H_
 #define _JavaNetSocketPermission_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/Permission.h"
 
-@interface JavaNetSocketPermission : JavaSecurityPermission < JavaIoSerializable > {
-}
+@interface JavaNetSocketPermission : JavaSecurityPermission < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)host
                     withNSString:(NSString *)action;
@@ -22,6 +23,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketPermission)
+
+FOUNDATION_EXPORT void JavaNetSocketPermission_initWithNSString_withNSString_(JavaNetSocketPermission *self, NSString *host, NSString *action);
+
+FOUNDATION_EXPORT JavaNetSocketPermission *new_JavaNetSocketPermission_initWithNSString_withNSString_(NSString *host, NSString *action) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketPermission)
 
 #endif // _JavaNetSocketPermission_H_

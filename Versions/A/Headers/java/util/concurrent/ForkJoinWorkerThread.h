@@ -6,20 +6,14 @@
 #ifndef _JavaUtilConcurrentForkJoinWorkerThread_H_
 #define _JavaUtilConcurrentForkJoinWorkerThread_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Thread.h"
+
 @class IOSObjectArray;
 @class JavaLangThrowable;
 @class JavaUtilConcurrentForkJoinPool;
 @class JavaUtilConcurrentForkJoinTask;
-@class SunMiscUnsafe;
 @protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
-#include "java/lang/Thread.h"
-
-#define JavaUtilConcurrentForkJoinWorkerThread_INITIAL_QUEUE_CAPACITY 8192
-#define JavaUtilConcurrentForkJoinWorkerThread_MAXIMUM_QUEUE_CAPACITY 16777216
-#define JavaUtilConcurrentForkJoinWorkerThread_MAX_HELP 16
-#define JavaUtilConcurrentForkJoinWorkerThread_SMASK 65535
 
 @interface JavaUtilConcurrentForkJoinWorkerThread : JavaLangThread {
  @public
@@ -40,49 +34,54 @@
   JavaUtilConcurrentForkJoinTask *currentJoin_;
 }
 
-- (instancetype)initWithJavaUtilConcurrentForkJoinPool:(JavaUtilConcurrentForkJoinPool *)pool;
+#pragma mark Public
 
 - (JavaUtilConcurrentForkJoinPool *)getPool;
 
 - (jint)getPoolIndex;
 
+- (void)run;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaUtilConcurrentForkJoinPool:(JavaUtilConcurrentForkJoinPool *)pool;
+
 - (void)onStart;
 
 - (void)onTerminationWithJavaLangThrowable:(JavaLangThrowable *)exception;
 
-- (void)run;
-
-- (void)pushTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
-
-- (JavaUtilConcurrentForkJoinTask *)deqTask;
-
-- (JavaUtilConcurrentForkJoinTask *)locallyDeqTask;
-
-- (jboolean)unpushTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
-
-- (JavaUtilConcurrentForkJoinTask *)peekTask;
-
-- (void)execTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
+#pragma mark Package-Private
 
 - (void)cancelTasks;
 
+- (JavaUtilConcurrentForkJoinTask *)deqTask;
+
 - (jint)drainTasksToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
+- (void)execTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
+
+- (jint)getEstimatedSurplusTaskCount;
+
 - (jint)getQueueSize;
+
+- (void)helpQuiescePool;
+
+- (jint)joinTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)joinMe;
+
+- (JavaUtilConcurrentForkJoinTask *)locallyDeqTask;
+
+- (JavaUtilConcurrentForkJoinTask *)peekTask;
 
 - (JavaUtilConcurrentForkJoinTask *)pollLocalTask;
 
 - (JavaUtilConcurrentForkJoinTask *)pollTask;
 
-- (jint)joinTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)joinMe;
+- (void)pushTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
 
-- (jint)getEstimatedSurplusTaskCount;
-
-- (void)helpQuiescePool;
+- (jboolean)unpushTaskWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentForkJoinWorkerThread_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentForkJoinWorkerThread)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinWorkerThread, queue_, IOSObjectArray *)
@@ -90,15 +89,10 @@ J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinWorkerThread, pool_, JavaUtilConcu
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinWorkerThread, currentSteal_, JavaUtilConcurrentForkJoinTask *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinWorkerThread, currentJoin_, JavaUtilConcurrentForkJoinTask *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinWorkerThread, SMASK, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinWorkerThread_initWithJavaUtilConcurrentForkJoinPool_(JavaUtilConcurrentForkJoinWorkerThread *self, JavaUtilConcurrentForkJoinPool *pool);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinWorkerThread, INITIAL_QUEUE_CAPACITY, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentForkJoinWorkerThread *new_JavaUtilConcurrentForkJoinWorkerThread_initWithJavaUtilConcurrentForkJoinPool_(JavaUtilConcurrentForkJoinPool *pool) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinWorkerThread, MAXIMUM_QUEUE_CAPACITY, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinWorkerThread, MAX_HELP, jint)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentForkJoinWorkerThread_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinWorkerThread, UNSAFE_, SunMiscUnsafe *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentForkJoinWorkerThread)
 
 #endif // _JavaUtilConcurrentForkJoinWorkerThread_H_

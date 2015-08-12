@@ -6,24 +6,22 @@
 #ifndef _LibcoreIcuTimeZones_H_
 #define _LibcoreIcuTimeZones_H_
 
-@class IOSObjectArray;
-@class JavaUtilHashMap;
-@class JavaUtilLocale;
-@class LibcoreIcuTimeZones_ZoneStringsCache;
-
-#import "JreEmulation.h"
-#include "java/util/Comparator.h"
+#include "J2ObjC_header.h"
 #include "libcore/util/BasicLruCache.h"
 
-#define LibcoreIcuTimeZones_LONG_NAME 1
-#define LibcoreIcuTimeZones_LONG_NAME_DST 3
-#define LibcoreIcuTimeZones_NAME_COUNT 5
-#define LibcoreIcuTimeZones_OLSON_NAME 0
-#define LibcoreIcuTimeZones_SHORT_NAME 2
-#define LibcoreIcuTimeZones_SHORT_NAME_DST 4
+@class IOSObjectArray;
+@class JavaUtilLocale;
 
-@interface LibcoreIcuTimeZones : NSObject {
-}
+#define LibcoreIcuTimeZones_OLSON_NAME 0
+#define LibcoreIcuTimeZones_LONG_NAME 1
+#define LibcoreIcuTimeZones_SHORT_NAME 2
+#define LibcoreIcuTimeZones_LONG_NAME_DST 3
+#define LibcoreIcuTimeZones_SHORT_NAME_DST 4
+#define LibcoreIcuTimeZones_NAME_COUNT 5
+
+@interface LibcoreIcuTimeZones : NSObject
+
+#pragma mark Public
 
 + (NSString *)getDisplayNameWithNSStringArray2:(IOSObjectArray *)zoneStrings
                                   withNSString:(NSString *)id_
@@ -34,13 +32,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIcuTimeZones_initialized;
 J2OBJC_STATIC_INIT(LibcoreIcuTimeZones)
-FOUNDATION_EXPORT NSString *LibcoreIcuTimeZones_getDisplayNameWithNSStringArray2_withNSString_withBoolean_withInt_(IOSObjectArray *zoneStrings, NSString *id_, jboolean daylight, jint style);
-FOUNDATION_EXPORT IOSObjectArray *LibcoreIcuTimeZones_getZoneStringsWithJavaUtilLocale_(JavaUtilLocale *locale);
-
-FOUNDATION_EXPORT IOSObjectArray *LibcoreIcuTimeZones_availableTimeZones_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, availableTimeZones_, IOSObjectArray *)
 
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, OLSON_NAME, jint)
 
@@ -54,31 +46,26 @@ J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, SHORT_NAME_DST, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, NAME_COUNT, jint)
 
-FOUNDATION_EXPORT LibcoreIcuTimeZones_ZoneStringsCache *LibcoreIcuTimeZones_cachedZoneStrings_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, cachedZoneStrings_, LibcoreIcuTimeZones_ZoneStringsCache *)
+FOUNDATION_EXPORT NSString *LibcoreIcuTimeZones_getDisplayNameWithNSStringArray2_withNSString_withBoolean_withInt_(IOSObjectArray *zoneStrings, NSString *id_, jboolean daylight, jint style);
 
-FOUNDATION_EXPORT id<JavaUtilComparator> LibcoreIcuTimeZones_ZONE_STRINGS_COMPARATOR_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuTimeZones, ZONE_STRINGS_COMPARATOR_, id<JavaUtilComparator>)
+FOUNDATION_EXPORT IOSObjectArray *LibcoreIcuTimeZones_getZoneStringsWithJavaUtilLocale_(JavaUtilLocale *locale);
 
-@interface LibcoreIcuTimeZones_ZoneStringsCache : LibcoreUtilBasicLruCache {
-}
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIcuTimeZones)
 
-- (instancetype)init;
+@interface LibcoreIcuTimeZones_ZoneStringsCache : LibcoreUtilBasicLruCache
 
-@end
-
-__attribute__((always_inline)) inline void LibcoreIcuTimeZones_ZoneStringsCache_init() {}
-
-@interface LibcoreIcuTimeZones_$1 : NSObject < JavaUtilComparator > {
-}
-
-- (jint)compareWithId:(IOSObjectArray *)lhs
-               withId:(IOSObjectArray *)rhs;
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIcuTimeZones_$1_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIcuTimeZones_ZoneStringsCache)
+
+FOUNDATION_EXPORT void LibcoreIcuTimeZones_ZoneStringsCache_init(LibcoreIcuTimeZones_ZoneStringsCache *self);
+
+FOUNDATION_EXPORT LibcoreIcuTimeZones_ZoneStringsCache *new_LibcoreIcuTimeZones_ZoneStringsCache_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIcuTimeZones_ZoneStringsCache)
 
 #endif // _LibcoreIcuTimeZones_H_

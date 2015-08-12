@@ -6,20 +6,14 @@
 #ifndef _JavaNioPipeImpl_H_
 #define _JavaNioPipeImpl_H_
 
-@class IOSObjectArray;
-@class JavaIoFileDescriptor;
-@class JavaNioByteBuffer;
-@class JavaNioChannelsSocketChannel;
-@class JavaNioChannelsSpiSelectorProvider;
-@class JavaNioPipeImpl_PipeSinkChannel;
-@class JavaNioPipeImpl_PipeSourceChannel;
-
-#import "JreEmulation.h"
-#include "java/nio/FileDescriptorChannel.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/Pipe.h"
 
-@interface JavaNioPipeImpl : JavaNioChannelsPipe {
-}
+@class JavaNioChannelsSpiSelectorProvider;
+
+@interface JavaNioPipeImpl : JavaNioChannelsPipe
+
+#pragma mark Public
 
 - (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
 
@@ -29,48 +23,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioPipeImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioPipeImpl)
 
-@interface JavaNioPipeImpl_PipeSourceChannel : JavaNioChannelsPipe_SourceChannel < JavaNioFileDescriptorChannel > {
-}
+FOUNDATION_EXPORT void JavaNioPipeImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioPipeImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
 
-- (void)implCloseSelectableChannel;
+FOUNDATION_EXPORT JavaNioPipeImpl *new_JavaNioPipeImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiSelectorProvider *selectorProvider) NS_RETURNS_RETAINED;
 
-- (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
-
-- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
-
-- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)buffers;
-
-- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
-                                withInt:(jint)offset
-                                withInt:(jint)length;
-
-- (JavaIoFileDescriptor *)getFD;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioPipeImpl_PipeSourceChannel_init() {}
-
-@interface JavaNioPipeImpl_PipeSinkChannel : JavaNioChannelsPipe_SinkChannel < JavaNioFileDescriptorChannel > {
-}
-
-- (void)implCloseSelectableChannel;
-
-- (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
-
-- (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
-
-- (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)buffers;
-
-- (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
-                                 withInt:(jint)offset
-                                 withInt:(jint)length;
-
-- (JavaIoFileDescriptor *)getFD;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioPipeImpl_PipeSinkChannel_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioPipeImpl)
 
 #endif // _JavaNioPipeImpl_H_

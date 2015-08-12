@@ -6,48 +6,42 @@
 #ifndef _JavaUtilCurrency_H_
 #define _JavaUtilCurrency_H_
 
-@class JavaUtilHashMap;
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class JavaUtilLocale;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
+@interface JavaUtilCurrency : NSObject < JavaIoSerializable >
 
-#define JavaUtilCurrency_serialVersionUID -158308464356906721LL
-
-@interface JavaUtilCurrency : NSObject < JavaIoSerializable > {
-}
-
-+ (JavaUtilCurrency *)getInstanceWithNSString:(NSString *)currencyCode;
-
-+ (JavaUtilCurrency *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
+#pragma mark Public
 
 + (id<JavaUtilSet>)getAvailableCurrencies;
 
 - (NSString *)getCurrencyCode;
 
+- (jint)getDefaultFractionDigits;
+
++ (JavaUtilCurrency *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
++ (JavaUtilCurrency *)getInstanceWithNSString:(NSString *)currencyCode;
+
 - (NSString *)getSymbol;
 
 - (NSString *)getSymbolWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-- (jint)getDefaultFractionDigits;
 
 - (NSString *)description;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilCurrency_initialized;
 J2OBJC_STATIC_INIT(JavaUtilCurrency)
+
 FOUNDATION_EXPORT JavaUtilCurrency *JavaUtilCurrency_getInstanceWithNSString_(NSString *currencyCode);
+
 FOUNDATION_EXPORT JavaUtilCurrency *JavaUtilCurrency_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
 FOUNDATION_EXPORT id<JavaUtilSet> JavaUtilCurrency_getAvailableCurrencies();
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilCurrency, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT JavaUtilHashMap *JavaUtilCurrency_codesToCurrencies_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilCurrency, codesToCurrencies_, JavaUtilHashMap *)
-
-FOUNDATION_EXPORT JavaUtilHashMap *JavaUtilCurrency_localesToCurrencies_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilCurrency, localesToCurrencies_, JavaUtilHashMap *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilCurrency)
 
 #endif // _JavaUtilCurrency_H_

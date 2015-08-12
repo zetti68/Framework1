@@ -6,15 +6,14 @@
 #ifndef _JavaLangReflectArray_H_
 #define _JavaLangReflectArray_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 @class IOSIntArray;
-@class JavaLangIllegalArgumentException;
-@class JavaLangRuntimeException;
 
-#import "JreEmulation.h"
+@interface JavaLangReflectArray : NSObject
 
-@interface JavaLangReflectArray : NSObject {
-}
+#pragma mark Public
 
 + (id)getWithId:(id)array
         withInt:(jint)index;
@@ -89,27 +88,50 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectArray)
+
 FOUNDATION_EXPORT id JavaLangReflectArray_getWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jboolean JavaLangReflectArray_getBooleanWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jbyte JavaLangReflectArray_getByteWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jchar JavaLangReflectArray_getCharWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jdouble JavaLangReflectArray_getDoubleWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jfloat JavaLangReflectArray_getFloatWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jint JavaLangReflectArray_getIntWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jint JavaLangReflectArray_getLengthWithId_(id array);
+
 FOUNDATION_EXPORT jlong JavaLangReflectArray_getLongWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT jshort JavaLangReflectArray_getShortWithId_withInt_(id array, jint index);
+
 FOUNDATION_EXPORT id JavaLangReflectArray_newInstanceWithIOSClass_withIntArray_(IOSClass *componentType, IOSIntArray *dimensions);
+
 FOUNDATION_EXPORT id JavaLangReflectArray_newInstanceWithIOSClass_withInt_(IOSClass *componentType, jint size);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setWithId_withInt_withId_(id array, jint index, id value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setBooleanWithId_withInt_withBoolean_(id array, jint index, jboolean value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setByteWithId_withInt_withByte_(id array, jint index, jbyte value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setCharWithId_withInt_withChar_(id array, jint index, jchar value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setDoubleWithId_withInt_withDouble_(id array, jint index, jdouble value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setFloatWithId_withInt_withFloat_(id array, jint index, jfloat value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setIntWithId_withInt_withInt_(id array, jint index, jint value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setLongWithId_withInt_withLong_(id array, jint index, jlong value);
+
 FOUNDATION_EXPORT void JavaLangReflectArray_setShortWithId_withInt_withShort_(id array, jint index, jshort value);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectArray)
 
 #endif // _JavaLangReflectArray_H_

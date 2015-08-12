@@ -6,11 +6,15 @@
 #ifndef _JavaLangOverride_H_
 #define _JavaLangOverride_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangOverride < JavaLangAnnotationAnnotation >
 
 @end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaLangOverride)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangOverride)
 
 #endif // _JavaLangOverride_H_

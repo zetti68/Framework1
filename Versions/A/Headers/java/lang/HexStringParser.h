@@ -6,19 +6,11 @@
 #ifndef _JavaLangHexStringParser_H_
 #define _JavaLangHexStringParser_H_
 
-@class JavaUtilRegexPattern;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface JavaLangHexStringParser : NSObject
 
-#define JavaLangHexStringParser_DOUBLE_EXPONENT_WIDTH 11
-#define JavaLangHexStringParser_DOUBLE_MANTISSA_WIDTH 52
-#define JavaLangHexStringParser_FLOAT_EXPONENT_WIDTH 8
-#define JavaLangHexStringParser_FLOAT_MANTISSA_WIDTH 23
-#define JavaLangHexStringParser_HEX_RADIX 16
-#define JavaLangHexStringParser_MAX_SIGNIFICANT_LENGTH 15
-
-@interface JavaLangHexStringParser : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)exponentWidth
                     withInt:(jint)mantissaWidth;
@@ -29,36 +21,16 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangHexStringParser_initialized;
 J2OBJC_STATIC_INIT(JavaLangHexStringParser)
+
+FOUNDATION_EXPORT void JavaLangHexStringParser_initWithInt_withInt_(JavaLangHexStringParser *self, jint exponentWidth, jint mantissaWidth);
+
+FOUNDATION_EXPORT JavaLangHexStringParser *new_JavaLangHexStringParser_initWithInt_withInt_(jint exponentWidth, jint mantissaWidth) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jdouble JavaLangHexStringParser_parseDoubleWithNSString_(NSString *hexString);
+
 FOUNDATION_EXPORT jfloat JavaLangHexStringParser_parseFloatWithNSString_(NSString *hexString);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, DOUBLE_EXPONENT_WIDTH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, DOUBLE_MANTISSA_WIDTH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, FLOAT_EXPONENT_WIDTH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, FLOAT_MANTISSA_WIDTH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, HEX_RADIX, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, MAX_SIGNIFICANT_LENGTH, jint)
-
-FOUNDATION_EXPORT NSString *JavaLangHexStringParser_HEX_SIGNIFICANT_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, HEX_SIGNIFICANT_, NSString *)
-
-FOUNDATION_EXPORT NSString *JavaLangHexStringParser_BINARY_EXPONENT_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, BINARY_EXPONENT_, NSString *)
-
-FOUNDATION_EXPORT NSString *JavaLangHexStringParser_FLOAT_TYPE_SUFFIX_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, FLOAT_TYPE_SUFFIX_, NSString *)
-
-FOUNDATION_EXPORT NSString *JavaLangHexStringParser_HEX_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, HEX_PATTERN_, NSString *)
-
-FOUNDATION_EXPORT JavaUtilRegexPattern *JavaLangHexStringParser_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangHexStringParser, PATTERN_, JavaUtilRegexPattern *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangHexStringParser)
 
 #endif // _JavaLangHexStringParser_H_

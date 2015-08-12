@@ -6,13 +6,12 @@
 #ifndef _JavaLangNoSuchFieldError_H_
 #define _JavaLangNoSuchFieldError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IncompatibleClassChangeError.h"
 
-#define JavaLangNoSuchFieldError_serialVersionUID -3456430195886129035LL
+@interface JavaLangNoSuchFieldError : JavaLangIncompatibleClassChangeError
 
-@interface JavaLangNoSuchFieldError : JavaLangIncompatibleClassChangeError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangNoSuchFieldError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangNoSuchFieldError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangNoSuchFieldError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangNoSuchFieldError_init(JavaLangNoSuchFieldError *self);
+
+FOUNDATION_EXPORT JavaLangNoSuchFieldError *new_JavaLangNoSuchFieldError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangNoSuchFieldError_initWithNSString_(JavaLangNoSuchFieldError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangNoSuchFieldError *new_JavaLangNoSuchFieldError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangNoSuchFieldError)
 
 #endif // _JavaLangNoSuchFieldError_H_

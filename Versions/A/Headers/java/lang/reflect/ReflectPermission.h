@@ -6,13 +6,14 @@
 #ifndef _JavaLangReflectReflectPermission_H_
 #define _JavaLangReflectReflectPermission_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/BasicPermission.h"
 
-@interface JavaLangReflectReflectPermission : JavaSecurityBasicPermission {
-}
+@class JavaSecurityPermission;
+
+@interface JavaLangReflectReflectPermission : JavaSecurityBasicPermission
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name;
 
@@ -25,6 +26,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectReflectPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectReflectPermission)
+
+FOUNDATION_EXPORT void JavaLangReflectReflectPermission_initWithNSString_(JavaLangReflectReflectPermission *self, NSString *name);
+
+FOUNDATION_EXPORT JavaLangReflectReflectPermission *new_JavaLangReflectReflectPermission_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangReflectReflectPermission_initWithNSString_withNSString_(JavaLangReflectReflectPermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaLangReflectReflectPermission *new_JavaLangReflectReflectPermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectReflectPermission)
 
 #endif // _JavaLangReflectReflectPermission_H_

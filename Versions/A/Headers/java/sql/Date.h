@@ -6,15 +6,12 @@
 #ifndef _JavaSqlDate_H_
 #define _JavaSqlDate_H_
 
-@class JavaLangStringBuilder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Date.h"
 
-#define JavaSqlDate_serialVersionUID 1511598038487230103LL
+@interface JavaSqlDate : JavaUtilDate
 
-@interface JavaSqlDate : JavaUtilDate {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)theYear
                     withInt:(jint)theMonth
@@ -42,12 +39,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlDate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlDate)
+
+FOUNDATION_EXPORT void JavaSqlDate_initWithInt_withInt_withInt_(JavaSqlDate *self, jint theYear, jint theMonth, jint theDay);
+
+FOUNDATION_EXPORT JavaSqlDate *new_JavaSqlDate_initWithInt_withInt_withInt_(jint theYear, jint theMonth, jint theDay) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlDate_initWithLong_(JavaSqlDate *self, jlong theDate);
+
+FOUNDATION_EXPORT JavaSqlDate *new_JavaSqlDate_initWithLong_(jlong theDate) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaSqlDate *JavaSqlDate_valueOfWithNSString_(NSString *dateString);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDate, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT NSString *JavaSqlDate_PADDING_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDate, PADDING_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDate)
 
 #endif // _JavaSqlDate_H_

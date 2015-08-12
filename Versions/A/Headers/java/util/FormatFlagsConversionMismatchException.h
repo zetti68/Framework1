@@ -6,28 +6,31 @@
 #ifndef _JavaUtilFormatFlagsConversionMismatchException_H_
 #define _JavaUtilFormatFlagsConversionMismatchException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilFormatFlagsConversionMismatchException_serialVersionUID 19120414LL
+@interface JavaUtilFormatFlagsConversionMismatchException : JavaUtilIllegalFormatException < JavaIoSerializable >
 
-@interface JavaUtilFormatFlagsConversionMismatchException : JavaUtilIllegalFormatException < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)f
                         withChar:(jchar)c;
 
-- (NSString *)getFlags;
-
 - (jchar)getConversion;
+
+- (NSString *)getFlags;
 
 - (NSString *)getMessage;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilFormatFlagsConversionMismatchException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilFormatFlagsConversionMismatchException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilFormatFlagsConversionMismatchException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilFormatFlagsConversionMismatchException_initWithNSString_withChar_(JavaUtilFormatFlagsConversionMismatchException *self, NSString *f, jchar c);
+
+FOUNDATION_EXPORT JavaUtilFormatFlagsConversionMismatchException *new_JavaUtilFormatFlagsConversionMismatchException_initWithNSString_withChar_(NSString *f, jchar c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilFormatFlagsConversionMismatchException)
 
 #endif // _JavaUtilFormatFlagsConversionMismatchException_H_

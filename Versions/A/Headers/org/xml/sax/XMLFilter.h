@@ -6,16 +6,19 @@
 #ifndef _OrgXmlSaxXMLFilter_H_
 #define _OrgXmlSaxXMLFilter_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/XMLReader.h"
 
 @protocol OrgXmlSaxXMLFilter < OrgXmlSaxXMLReader, NSObject, JavaObject >
+
 - (void)setParentWithOrgXmlSaxXMLReader:(id<OrgXmlSaxXMLReader>)parent;
 
 - (id<OrgXmlSaxXMLReader>)getParent;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxXMLFilter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxXMLFilter)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxXMLFilter)
 
 #endif // _OrgXmlSaxXMLFilter_H_

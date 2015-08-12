@@ -6,6 +6,9 @@
 #ifndef _JavaNioByteArrayBuffer_H_
 #define _JavaNioByteArrayBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/ByteBuffer.h"
+
 @class IOSByteArray;
 @class IOSCharArray;
 @class IOSDoubleArray;
@@ -20,63 +23,37 @@
 @class JavaNioLongBuffer;
 @class JavaNioShortBuffer;
 
-#import "JreEmulation.h"
-#include "java/nio/ByteBuffer.h"
-
 @interface JavaNioByteArrayBuffer : JavaNioByteBuffer {
  @public
   IOSByteArray *backingArray_;
   jint arrayOffset_;
 }
 
-- (instancetype)initWithByteArray:(IOSByteArray *)backingArray;
+#pragma mark Public
+
+- (JavaNioCharBuffer *)asCharBuffer;
+
+- (JavaNioDoubleBuffer *)asDoubleBuffer;
+
+- (JavaNioFloatBuffer *)asFloatBuffer;
+
+- (JavaNioIntBuffer *)asIntBuffer;
+
+- (JavaNioLongBuffer *)asLongBuffer;
 
 - (JavaNioByteBuffer *)asReadOnlyBuffer;
+
+- (JavaNioShortBuffer *)asShortBuffer;
 
 - (JavaNioByteBuffer *)compact;
 
 - (JavaNioByteBuffer *)duplicate;
 
-- (JavaNioByteBuffer *)slice;
-
-- (jboolean)isReadOnly;
-
-- (IOSByteArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
+- (jbyte)get;
 
 - (JavaNioByteBuffer *)getWithByteArray:(IOSByteArray *)dst
                                 withInt:(jint)dstOffset
                                 withInt:(jint)byteCount;
-
-
-- (void)getWithCharArray:(IOSCharArray *)dst
-                 withInt:(jint)dstOffset
-                 withInt:(jint)count;
-
-- (void)getWithDoubleArray:(IOSDoubleArray *)dst
-                   withInt:(jint)dstOffset
-                   withInt:(jint)count;
-
-- (void)getWithFloatArray:(IOSFloatArray *)dst
-                  withInt:(jint)dstOffset
-                  withInt:(jint)count;
-
-- (void)getWithIntArray:(IOSIntArray *)dst
-                withInt:(jint)dstOffset
-                withInt:(jint)count;
-
-- (void)getWithLongArray:(IOSLongArray *)dst
-                 withInt:(jint)dstOffset
-                 withInt:(jint)count;
-
-- (void)getWithShortArray:(IOSShortArray *)dst
-                  withInt:(jint)dstOffset
-                  withInt:(jint)count;
-
-- (jbyte)get;
 
 - (jbyte)getWithInt:(jint)index;
 
@@ -106,44 +83,21 @@
 
 - (jboolean)isDirect;
 
-- (JavaNioByteBuffer *)putWithByte:(jbyte)b;
+- (jboolean)isReadOnly;
 
-- (JavaNioByteBuffer *)putWithInt:(jint)index
-                         withByte:(jbyte)b;
+- (JavaNioByteBuffer *)putWithByte:(jbyte)b;
 
 - (JavaNioByteBuffer *)putWithByteArray:(IOSByteArray *)src
                                 withInt:(jint)srcOffset
                                 withInt:(jint)byteCount;
 
+- (JavaNioByteBuffer *)putWithInt:(jint)index
+                         withByte:(jbyte)b;
 
-- (void)putWithCharArray:(IOSCharArray *)src
-                 withInt:(jint)srcOffset
-                 withInt:(jint)count;
-
-- (void)putWithDoubleArray:(IOSDoubleArray *)src
-                   withInt:(jint)srcOffset
-                   withInt:(jint)count;
-
-- (void)putWithFloatArray:(IOSFloatArray *)src
-                  withInt:(jint)srcOffset
-                  withInt:(jint)count;
-
-- (void)putWithIntArray:(IOSIntArray *)src
-                withInt:(jint)srcOffset
-                withInt:(jint)count;
-
-- (void)putWithLongArray:(IOSLongArray *)src
-                 withInt:(jint)srcOffset
-                 withInt:(jint)count;
-
-- (void)putWithShortArray:(IOSShortArray *)src
-                  withInt:(jint)srcOffset
-                  withInt:(jint)count;
+- (JavaNioByteBuffer *)putCharWithChar:(jchar)value;
 
 - (JavaNioByteBuffer *)putCharWithInt:(jint)index
                              withChar:(jchar)value;
-
-- (JavaNioByteBuffer *)putCharWithChar:(jchar)value;
 
 - (JavaNioByteBuffer *)putDoubleWithDouble:(jdouble)value;
 
@@ -170,22 +124,78 @@
 
 - (JavaNioByteBuffer *)putShortWithShort:(jshort)value;
 
-- (JavaNioCharBuffer *)asCharBuffer;
+- (JavaNioByteBuffer *)slice;
 
-- (JavaNioDoubleBuffer *)asDoubleBuffer;
+#pragma mark Package-Private
 
-- (JavaNioFloatBuffer *)asFloatBuffer;
+- (instancetype)initWithByteArray:(IOSByteArray *)backingArray;
 
-- (JavaNioIntBuffer *)asIntBuffer;
+- (void)getWithCharArray:(IOSCharArray *)dst
+                 withInt:(jint)dstOffset
+                 withInt:(jint)count;
 
-- (JavaNioLongBuffer *)asLongBuffer;
+- (void)getWithDoubleArray:(IOSDoubleArray *)dst
+                   withInt:(jint)dstOffset
+                   withInt:(jint)count;
 
-- (JavaNioShortBuffer *)asShortBuffer;
+- (void)getWithFloatArray:(IOSFloatArray *)dst
+                  withInt:(jint)dstOffset
+                  withInt:(jint)count;
+
+- (void)getWithIntArray:(IOSIntArray *)dst
+                withInt:(jint)dstOffset
+                withInt:(jint)count;
+
+- (void)getWithLongArray:(IOSLongArray *)dst
+                 withInt:(jint)dstOffset
+                 withInt:(jint)count;
+
+- (void)getWithShortArray:(IOSShortArray *)dst
+                  withInt:(jint)dstOffset
+                  withInt:(jint)count;
+
+- (IOSByteArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
+
+- (void)putWithCharArray:(IOSCharArray *)src
+                 withInt:(jint)srcOffset
+                 withInt:(jint)count;
+
+- (void)putWithDoubleArray:(IOSDoubleArray *)src
+                   withInt:(jint)srcOffset
+                   withInt:(jint)count;
+
+- (void)putWithFloatArray:(IOSFloatArray *)src
+                  withInt:(jint)srcOffset
+                  withInt:(jint)count;
+
+- (void)putWithIntArray:(IOSIntArray *)src
+                withInt:(jint)srcOffset
+                withInt:(jint)count;
+
+- (void)putWithLongArray:(IOSLongArray *)src
+                 withInt:(jint)srcOffset
+                 withInt:(jint)count;
+
+- (void)putWithShortArray:(IOSShortArray *)src
+                  withInt:(jint)srcOffset
+                  withInt:(jint)count;
+
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioByteArrayBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioByteArrayBuffer)
 
 J2OBJC_FIELD_SETTER(JavaNioByteArrayBuffer, backingArray_, IOSByteArray *)
+
+FOUNDATION_EXPORT void JavaNioByteArrayBuffer_initWithByteArray_(JavaNioByteArrayBuffer *self, IOSByteArray *backingArray);
+
+FOUNDATION_EXPORT JavaNioByteArrayBuffer *new_JavaNioByteArrayBuffer_initWithByteArray_(IOSByteArray *backingArray) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteArrayBuffer)
 
 #endif // _JavaNioByteArrayBuffer_H_

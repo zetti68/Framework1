@@ -6,10 +6,11 @@
 #ifndef _JavaTextParsePosition_H_
 #define _JavaTextParsePosition_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface JavaTextParsePosition : NSObject {
-}
+@interface JavaTextParsePosition : NSObject
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)index;
 
@@ -29,6 +30,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextParsePosition_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextParsePosition)
+
+FOUNDATION_EXPORT void JavaTextParsePosition_initWithInt_(JavaTextParsePosition *self, jint index);
+
+FOUNDATION_EXPORT JavaTextParsePosition *new_JavaTextParsePosition_initWithInt_(jint index) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextParsePosition)
 
 #endif // _JavaTextParsePosition_H_

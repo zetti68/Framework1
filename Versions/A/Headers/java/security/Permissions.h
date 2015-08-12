@@ -6,15 +6,18 @@
 #ifndef _JavaSecurityPermissions_H_
 #define _JavaSecurityPermissions_H_
 
-@class JavaSecurityPermission;
-@protocol JavaUtilEnumeration;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/PermissionCollection.h"
 
-@interface JavaSecurityPermissions : JavaSecurityPermissionCollection < JavaIoSerializable > {
-}
+@class JavaSecurityPermission;
+@protocol JavaUtilEnumeration;
+
+@interface JavaSecurityPermissions : JavaSecurityPermissionCollection < JavaIoSerializable >
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (void)addWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
@@ -22,10 +25,14 @@
 
 - (jboolean)impliesWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPermissions_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPermissions)
+
+FOUNDATION_EXPORT void JavaSecurityPermissions_init(JavaSecurityPermissions *self);
+
+FOUNDATION_EXPORT JavaSecurityPermissions *new_JavaSecurityPermissions_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPermissions)
 
 #endif // _JavaSecurityPermissions_H_

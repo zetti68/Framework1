@@ -6,23 +6,18 @@
 #ifndef _JavaUtilConcurrentArrayBlockingQueue_H_
 #define _JavaUtilConcurrentArrayBlockingQueue_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/util/AbstractQueue.h"
+#include "java/util/concurrent/BlockingQueue.h"
+
 @class IOSObjectArray;
 @class JavaUtilConcurrentArrayBlockingQueue_Itr;
 @class JavaUtilConcurrentArrayBlockingQueue_Itrs;
-@class JavaUtilConcurrentArrayBlockingQueue_Itrs_Node;
 @class JavaUtilConcurrentLocksReentrantLock;
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaUtilCollection;
-@protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/lang/ref/WeakReference.h"
-#include "java/util/AbstractQueue.h"
-#include "java/util/Iterator.h"
-#include "java/util/concurrent/BlockingQueue.h"
-
-#define JavaUtilConcurrentArrayBlockingQueue_serialVersionUID -817911632652898426LL
+@protocol JavaUtilIterator;
 
 @interface JavaUtilConcurrentArrayBlockingQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue, JavaIoSerializable > {
  @public
@@ -34,13 +29,7 @@
   JavaUtilConcurrentArrayBlockingQueue_Itrs *itrs_;
 }
 
-- (jint)incWithInt:(jint)i;
-
-- (jint)decWithInt:(jint)i;
-
-- (id)itemAtWithInt:(jint)i;
-
-- (void)removeAtWithInt:(jint)removeIndex;
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)capacity;
 
@@ -53,38 +42,9 @@
 
 - (jboolean)addWithId:(id)e;
 
-- (jboolean)offerWithId:(id)e;
-
-- (void)putWithId:(id)e;
-
-- (jboolean)offerWithId:(id)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)poll;
-
-- (id)take;
-
-- (id)pollWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)peek;
-
-- (jint)size;
-
-- (jint)remainingCapacity;
-
-- (jboolean)removeWithId:(id)o;
+- (void)clear;
 
 - (jboolean)containsWithId:(id)o;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
-
-- (NSString *)description;
-
-- (void)clear;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
@@ -93,94 +53,98 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (id<JavaUtilIterator>)iterator;
 
+- (jboolean)offerWithId:(id)e;
+
+- (jboolean)offerWithId:(id)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id)peek;
+
+- (id)poll;
+
+- (id)pollWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id)e;
+
+- (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+- (id)take;
+
+- (IOSObjectArray *)toArray;
+
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (jint)decWithInt:(jint)i;
+
+- (jint)incWithInt:(jint)i;
+
+- (id)itemAtWithInt:(jint)i;
+
+- (void)removeAtWithInt:(jint)removeIndex;
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentArrayBlockingQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentArrayBlockingQueue)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentArrayBlockingQueue, items_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentArrayBlockingQueue, lock_, JavaUtilConcurrentLocksReentrantLock *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentArrayBlockingQueue, itrs_, JavaUtilConcurrentArrayBlockingQueue_Itrs *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentArrayBlockingQueue_initWithInt_(JavaUtilConcurrentArrayBlockingQueue *self, jint capacity);
 
-#define JavaUtilConcurrentArrayBlockingQueue_Itrs_LONG_SWEEP_PROBES 16
-#define JavaUtilConcurrentArrayBlockingQueue_Itrs_SHORT_SWEEP_PROBES 4
+FOUNDATION_EXPORT JavaUtilConcurrentArrayBlockingQueue *new_JavaUtilConcurrentArrayBlockingQueue_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentArrayBlockingQueue_initWithInt_withBoolean_(JavaUtilConcurrentArrayBlockingQueue *self, jint capacity, jboolean fair);
+
+FOUNDATION_EXPORT JavaUtilConcurrentArrayBlockingQueue *new_JavaUtilConcurrentArrayBlockingQueue_initWithInt_withBoolean_(jint capacity, jboolean fair) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentArrayBlockingQueue_initWithInt_withBoolean_withJavaUtilCollection_(JavaUtilConcurrentArrayBlockingQueue *self, jint capacity, jboolean fair, id<JavaUtilCollection> c);
+
+FOUNDATION_EXPORT JavaUtilConcurrentArrayBlockingQueue *new_JavaUtilConcurrentArrayBlockingQueue_initWithInt_withBoolean_withJavaUtilCollection_(jint capacity, jboolean fair, id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentArrayBlockingQueue)
 
 @interface JavaUtilConcurrentArrayBlockingQueue_Itrs : NSObject {
  @public
   jint cycles_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentArrayBlockingQueue:(JavaUtilConcurrentArrayBlockingQueue *)outer$
                 withJavaUtilConcurrentArrayBlockingQueue_Itr:(JavaUtilConcurrentArrayBlockingQueue_Itr *)initial;
 
 - (void)doSomeSweepingWithBoolean:(jboolean)tryHarder;
 
-- (void)register__WithJavaUtilConcurrentArrayBlockingQueue_Itr:(JavaUtilConcurrentArrayBlockingQueue_Itr *)itr;
-
-- (void)takeIndexWrapped;
-
-- (void)removedAtWithInt:(jint)removedIndex;
+- (void)elementDequeued;
 
 - (void)queueIsEmpty;
 
-- (void)elementDequeued;
+- (void)register__WithJavaUtilConcurrentArrayBlockingQueue_Itr:(JavaUtilConcurrentArrayBlockingQueue_Itr *)itr;
+
+- (void)removedAtWithInt:(jint)removedIndex;
+
+- (void)takeIndexWrapped;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentArrayBlockingQueue_Itrs_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentArrayBlockingQueue_Itrs)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue_Itrs, SHORT_SWEEP_PROBES, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentArrayBlockingQueue_Itrs_initWithJavaUtilConcurrentArrayBlockingQueue_withJavaUtilConcurrentArrayBlockingQueue_Itr_(JavaUtilConcurrentArrayBlockingQueue_Itrs *self, JavaUtilConcurrentArrayBlockingQueue *outer$, JavaUtilConcurrentArrayBlockingQueue_Itr *initial);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue_Itrs, LONG_SWEEP_PROBES, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentArrayBlockingQueue_Itrs *new_JavaUtilConcurrentArrayBlockingQueue_Itrs_initWithJavaUtilConcurrentArrayBlockingQueue_withJavaUtilConcurrentArrayBlockingQueue_Itr_(JavaUtilConcurrentArrayBlockingQueue *outer$, JavaUtilConcurrentArrayBlockingQueue_Itr *initial) NS_RETURNS_RETAINED;
 
-@interface JavaUtilConcurrentArrayBlockingQueue_Itrs_Node : JavaLangRefWeakReference {
- @public
-  JavaUtilConcurrentArrayBlockingQueue_Itrs_Node *next_;
-}
-
-- (instancetype)initWithJavaUtilConcurrentArrayBlockingQueue_Itrs:(JavaUtilConcurrentArrayBlockingQueue_Itrs *)outer$
-                     withJavaUtilConcurrentArrayBlockingQueue_Itr:(JavaUtilConcurrentArrayBlockingQueue_Itr *)iterator
-               withJavaUtilConcurrentArrayBlockingQueue_Itrs_Node:(JavaUtilConcurrentArrayBlockingQueue_Itrs_Node *)next;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentArrayBlockingQueue_Itrs_Node_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentArrayBlockingQueue_Itrs_Node, next_, JavaUtilConcurrentArrayBlockingQueue_Itrs_Node *)
-
-#define JavaUtilConcurrentArrayBlockingQueue_Itr_DETACHED -3
-#define JavaUtilConcurrentArrayBlockingQueue_Itr_NONE -1
-#define JavaUtilConcurrentArrayBlockingQueue_Itr_REMOVED -2
-
-@interface JavaUtilConcurrentArrayBlockingQueue_Itr : NSObject < JavaUtilIterator > {
-}
-
-- (instancetype)initWithJavaUtilConcurrentArrayBlockingQueue:(JavaUtilConcurrentArrayBlockingQueue *)outer$;
-
-- (jboolean)isDetached;
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-- (void)shutdown;
-
-- (jboolean)removedAtWithInt:(jint)removedIndex;
-
-- (jboolean)takeIndexWrapped;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentArrayBlockingQueue_Itr_init() {}
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue_Itr, NONE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue_Itr, REMOVED, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentArrayBlockingQueue_Itr, DETACHED, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentArrayBlockingQueue_Itrs)
 
 #endif // _JavaUtilConcurrentArrayBlockingQueue_H_

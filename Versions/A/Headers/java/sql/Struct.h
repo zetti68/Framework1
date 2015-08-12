@@ -6,10 +6,10 @@
 #ifndef _JavaSqlStruct_H_
 #define _JavaSqlStruct_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @protocol JavaUtilMap;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlStruct < NSObject, JavaObject >
 
@@ -21,6 +21,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlStruct_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlStruct)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlStruct)
 
 #endif // _JavaSqlStruct_H_

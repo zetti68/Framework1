@@ -6,15 +6,14 @@
 #ifndef _JavaNetMalformedURLException_H_
 #define _JavaNetMalformedURLException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetMalformedURLException_serialVersionUID -182787522200415866LL
+@class JavaLangThrowable;
 
-@interface JavaNetMalformedURLException : JavaIoIOException {
-}
+@interface JavaNetMalformedURLException : JavaIoIOException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetMalformedURLException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetMalformedURLException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetMalformedURLException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetMalformedURLException_init(JavaNetMalformedURLException *self);
+
+FOUNDATION_EXPORT JavaNetMalformedURLException *new_JavaNetMalformedURLException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetMalformedURLException_initWithNSString_(JavaNetMalformedURLException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetMalformedURLException *new_JavaNetMalformedURLException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetMalformedURLException_initWithNSString_withJavaLangThrowable_(JavaNetMalformedURLException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetMalformedURLException *new_JavaNetMalformedURLException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetMalformedURLException)
 
 #endif // _JavaNetMalformedURLException_H_

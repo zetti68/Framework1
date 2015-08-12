@@ -6,19 +6,16 @@
 #ifndef _OrgApacheHarmonyXmlParsersSAXParserImpl_H_
 #define _OrgApacheHarmonyXmlParsersSAXParserImpl_H_
 
+#include "J2ObjC_header.h"
+#include "javax/xml/parsers/SAXParser.h"
+
 @protocol JavaUtilMap;
 @protocol OrgXmlSaxParser;
 @protocol OrgXmlSaxXMLReader;
 
-#import "JreEmulation.h"
-#include "javax/xml/parsers/SAXParser.h"
+@interface OrgApacheHarmonyXmlParsersSAXParserImpl : JavaxXmlParsersSAXParser
 
-@interface OrgApacheHarmonyXmlParsersSAXParserImpl : JavaxXmlParsersSAXParser {
-}
-
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)initialFeatures;
-
-- (void)reset;
+#pragma mark Public
 
 - (id<OrgXmlSaxParser>)getParser;
 
@@ -30,11 +27,23 @@
 
 - (jboolean)isValidating;
 
+- (void)reset;
+
 - (void)setPropertyWithNSString:(NSString *)name
                          withId:(id)value;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)initialFeatures;
+
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonyXmlParsersSAXParserImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonyXmlParsersSAXParserImpl)
+
+FOUNDATION_EXPORT void OrgApacheHarmonyXmlParsersSAXParserImpl_initWithJavaUtilMap_(OrgApacheHarmonyXmlParsersSAXParserImpl *self, id<JavaUtilMap> initialFeatures);
+
+FOUNDATION_EXPORT OrgApacheHarmonyXmlParsersSAXParserImpl *new_OrgApacheHarmonyXmlParsersSAXParserImpl_initWithJavaUtilMap_(id<JavaUtilMap> initialFeatures) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonyXmlParsersSAXParserImpl)
 
 #endif // _OrgApacheHarmonyXmlParsersSAXParserImpl_H_

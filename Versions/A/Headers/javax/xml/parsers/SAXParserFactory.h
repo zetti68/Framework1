@@ -6,16 +6,25 @@
 #ifndef _JavaxXmlParsersSAXParserFactory_H_
 #define _JavaxXmlParsersSAXParserFactory_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangClassLoader;
 @class JavaxXmlParsersSAXParser;
 @class JavaxXmlValidationSchema;
 
-#import "JreEmulation.h"
+@interface JavaxXmlParsersSAXParserFactory : NSObject
 
-@interface JavaxXmlParsersSAXParserFactory : NSObject {
-}
+#pragma mark Public
 
-- (instancetype)init;
+- (jboolean)getFeatureWithNSString:(NSString *)name;
+
+- (JavaxXmlValidationSchema *)getSchema;
+
+- (jboolean)isNamespaceAware;
+
+- (jboolean)isValidating;
+
+- (jboolean)isXIncludeAware;
 
 + (JavaxXmlParsersSAXParserFactory *)newInstance OBJC_METHOD_FAMILY_NONE;
 
@@ -24,31 +33,31 @@
 
 - (JavaxXmlParsersSAXParser *)newSAXParser OBJC_METHOD_FAMILY_NONE;
 
-- (void)setNamespaceAwareWithBoolean:(jboolean)awareness;
-
-- (void)setValidatingWithBoolean:(jboolean)validating;
-
-- (jboolean)isNamespaceAware;
-
-- (jboolean)isValidating;
-
 - (void)setFeatureWithNSString:(NSString *)name
                    withBoolean:(jboolean)value;
 
-- (jboolean)getFeatureWithNSString:(NSString *)name;
-
-- (JavaxXmlValidationSchema *)getSchema;
+- (void)setNamespaceAwareWithBoolean:(jboolean)awareness;
 
 - (void)setSchemaWithJavaxXmlValidationSchema:(JavaxXmlValidationSchema *)schema;
 
+- (void)setValidatingWithBoolean:(jboolean)validating;
+
 - (void)setXIncludeAwareWithBoolean:(jboolean)state;
 
-- (jboolean)isXIncludeAware;
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlParsersSAXParserFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlParsersSAXParserFactory)
+
+FOUNDATION_EXPORT void JavaxXmlParsersSAXParserFactory_init(JavaxXmlParsersSAXParserFactory *self);
+
 FOUNDATION_EXPORT JavaxXmlParsersSAXParserFactory *JavaxXmlParsersSAXParserFactory_newInstance();
+
 FOUNDATION_EXPORT JavaxXmlParsersSAXParserFactory *JavaxXmlParsersSAXParserFactory_newInstanceWithNSString_withJavaLangClassLoader_(NSString *factoryClassName, JavaLangClassLoader *classLoader);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlParsersSAXParserFactory)
 
 #endif // _JavaxXmlParsersSAXParserFactory_H_

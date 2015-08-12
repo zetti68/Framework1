@@ -6,10 +6,11 @@
 #ifndef _LibcoreUtilObjects_H_
 #define _LibcoreUtilObjects_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface LibcoreUtilObjects : NSObject {
-}
+@interface LibcoreUtilObjects : NSObject
+
+#pragma mark Public
 
 + (jboolean)equalWithId:(id)a
                  withId:(id)b;
@@ -20,9 +21,14 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreUtilObjects_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreUtilObjects)
+
 FOUNDATION_EXPORT jboolean LibcoreUtilObjects_equalWithId_withId_(id a, id b);
+
 FOUNDATION_EXPORT jint LibcoreUtilObjects_hashCodeWithId_(id o);
+
 FOUNDATION_EXPORT NSString *LibcoreUtilObjects_toStringWithId_(id o);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilObjects)
 
 #endif // _LibcoreUtilObjects_H_

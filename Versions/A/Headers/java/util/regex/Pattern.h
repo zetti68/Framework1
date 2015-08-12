@@ -6,67 +6,59 @@
 #ifndef _JavaUtilRegexPattern_H_
 #define _JavaUtilRegexPattern_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
 @class JavaUtilRegexMatcher;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-
-#define JavaUtilRegexPattern_ALL_FLAGS 255
-#define JavaUtilRegexPattern_CANON_EQ 128
+#define JavaUtilRegexPattern_UNIX_LINES 1
 #define JavaUtilRegexPattern_CASE_INSENSITIVE 2
 #define JavaUtilRegexPattern_COMMENTS 4
-#define JavaUtilRegexPattern_DOTALL 32
-#define JavaUtilRegexPattern_LITERAL 16
 #define JavaUtilRegexPattern_MULTILINE 8
+#define JavaUtilRegexPattern_LITERAL 16
+#define JavaUtilRegexPattern_DOTALL 32
 #define JavaUtilRegexPattern_UNICODE_CASE 64
-#define JavaUtilRegexPattern_UNIX_LINES 1
-#define JavaUtilRegexPattern_serialVersionUID 5073258162644648461LL
+#define JavaUtilRegexPattern_CANON_EQ 128
 
 @interface JavaUtilRegexPattern : NSObject < JavaIoSerializable > {
  @public
-  id nativePattern_;
+  jlong address_;
 }
 
-- (JavaUtilRegexMatcher *)matcherWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
+#pragma mark Public
 
-- (IOSObjectArray *)splitWithJavaLangCharSequence:(id<JavaLangCharSequence>)input
-                                          withInt:(jint)limit;
-
-- (IOSObjectArray *)splitWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
-
-- (NSString *)pattern;
-
-- (NSString *)description;
-
-- (jint)flags;
++ (JavaUtilRegexPattern *)compileWithNSString:(NSString *)pattern;
 
 + (JavaUtilRegexPattern *)compileWithNSString:(NSString *)regularExpression
                                       withInt:(jint)flags;
 
-+ (JavaUtilRegexPattern *)compileWithNSString:(NSString *)pattern;
+- (jint)flags;
+
+- (JavaUtilRegexMatcher *)matcherWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
 + (jboolean)matchesWithNSString:(NSString *)regularExpression
        withJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
+- (NSString *)pattern;
+
 + (NSString *)quoteWithNSString:(NSString *)string;
+
+- (IOSObjectArray *)splitWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
+
+- (IOSObjectArray *)splitWithJavaLangCharSequence:(id<JavaLangCharSequence>)input
+                                          withInt:(jint)limit;
+
+- (NSString *)description;
+
+#pragma mark Protected
 
 - (void)dealloc;
 
-- (void)releaseNativePattern;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilRegexPattern_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilRegexPattern, nativePattern_, id)
-FOUNDATION_EXPORT JavaUtilRegexPattern *JavaUtilRegexPattern_compileWithNSString_withInt_(NSString *regularExpression, jint flags);
-FOUNDATION_EXPORT JavaUtilRegexPattern *JavaUtilRegexPattern_compileWithNSString_(NSString *pattern);
-FOUNDATION_EXPORT jboolean JavaUtilRegexPattern_matchesWithNSString_withJavaLangCharSequence_(NSString *regularExpression, id<JavaLangCharSequence> input);
-FOUNDATION_EXPORT NSString *JavaUtilRegexPattern_quoteWithNSString_(NSString *string);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexPattern, serialVersionUID, jlong)
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilRegexPattern)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexPattern, UNIX_LINES, jint)
 
@@ -84,6 +76,14 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexPattern, UNICODE_CASE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexPattern, CANON_EQ, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexPattern, ALL_FLAGS, jint)
+FOUNDATION_EXPORT JavaUtilRegexPattern *JavaUtilRegexPattern_compileWithNSString_withInt_(NSString *regularExpression, jint flags);
+
+FOUNDATION_EXPORT JavaUtilRegexPattern *JavaUtilRegexPattern_compileWithNSString_(NSString *pattern);
+
+FOUNDATION_EXPORT jboolean JavaUtilRegexPattern_matchesWithNSString_withJavaLangCharSequence_(NSString *regularExpression, id<JavaLangCharSequence> input);
+
+FOUNDATION_EXPORT NSString *JavaUtilRegexPattern_quoteWithNSString_(NSString *string);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilRegexPattern)
 
 #endif // _JavaUtilRegexPattern_H_

@@ -6,13 +6,16 @@
 #ifndef _JavaUtilConcurrentScheduledFuture_H_
 #define _JavaUtilConcurrentScheduledFuture_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/concurrent/Delayed.h"
 #include "java/util/concurrent/Future.h"
 
 @protocol JavaUtilConcurrentScheduledFuture < JavaUtilConcurrentDelayed, JavaUtilConcurrentFuture, NSObject, JavaObject >
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentScheduledFuture_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentScheduledFuture)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentScheduledFuture)
 
 #endif // _JavaUtilConcurrentScheduledFuture_H_

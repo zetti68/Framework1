@@ -6,10 +6,13 @@
 #ifndef _JavaNioDatagramChannelImpl_H_
 #define _JavaNioDatagramChannelImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/FileDescriptorChannel.h"
+#include "java/nio/channels/DatagramChannel.h"
+
 @class IOSObjectArray;
 @class JavaIoFileDescriptor;
-@class JavaNetDatagramPacket;
-@class JavaNetDatagramSocketImpl;
+@class JavaNetDatagramSocket;
 @class JavaNetInetAddress;
 @class JavaNetInetSocketAddress;
 @class JavaNetSocketAddress;
@@ -17,11 +20,6 @@
 @class JavaNioChannelsSpiSelectorProvider;
 @protocol JavaNetSocketOption;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/net/DatagramSocket.h"
-#include "java/nio/FileDescriptorChannel.h"
-#include "java/nio/channels/DatagramChannel.h"
 
 @interface JavaNioDatagramChannelImpl : JavaNioChannelsDatagramChannel < JavaNioFileDescriptorChannel > {
  @public
@@ -31,39 +29,21 @@
   jboolean isBound_;
 }
 
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
-
-- (JavaNetDatagramSocket *)socket;
+#pragma mark Public
 
 - (JavaNioChannelsDatagramChannel *)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)local;
 
-- (void)onBindWithBoolean:(jboolean)updateSocketState;
+- (JavaNioChannelsDatagramChannel *)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)address;
+
+- (JavaNioChannelsDatagramChannel *)disconnect;
+
+- (JavaIoFileDescriptor *)getFD;
 
 - (JavaNetSocketAddress *)getLocalAddress;
 
 - (id)getOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option;
 
-- (JavaNioChannelsDatagramChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
-                                                              withId:(id)value;
-
-- (id<JavaUtilSet>)supportedOptions;
-
 - (jboolean)isConnected;
-
-- (JavaNioChannelsDatagramChannel *)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)address;
-
-- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
-                                withInt:(jint)remotePort
-                            withBoolean:(jboolean)updateSocketState;
-
-- (JavaNioChannelsDatagramChannel *)disconnect;
-
-- (void)onDisconnectWithBoolean:(jboolean)updateSocketState;
-
-- (JavaNetSocketAddress *)receiveWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
-
-- (jint)sendWithJavaNioByteBuffer:(JavaNioByteBuffer *)source
-         withJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
 
 - (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
 
@@ -71,50 +51,53 @@
                                 withInt:(jint)offset
                                 withInt:(jint)length;
 
+- (JavaNetSocketAddress *)receiveWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
+
+- (jint)sendWithJavaNioByteBuffer:(JavaNioByteBuffer *)source
+         withJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
+
+- (JavaNioChannelsDatagramChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
+                                                              withId:(id)value;
+
+- (JavaNetDatagramSocket *)socket;
+
+- (id<JavaUtilSet>)supportedOptions;
+
 - (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)src;
 
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)sources
                                  withInt:(jint)offset
                                  withInt:(jint)length;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
+
 - (void)implCloseSelectableChannel;
 
 - (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
 
-- (JavaIoFileDescriptor *)getFD;
+#pragma mark Package-Private
+
+- (void)onBindWithBoolean:(jboolean)updateSocketState;
+
+- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
+                                withInt:(jint)remotePort
+                            withBoolean:(jboolean)updateSocketState;
+
+- (void)onDisconnectWithBoolean:(jboolean)updateSocketState;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioDatagramChannelImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioDatagramChannelImpl)
 
 J2OBJC_FIELD_SETTER(JavaNioDatagramChannelImpl, connectAddress_, JavaNetInetSocketAddress *)
 J2OBJC_FIELD_SETTER(JavaNioDatagramChannelImpl, localAddress_, JavaNetInetAddress *)
 
-@interface JavaNioDatagramChannelImpl_DatagramSocketAdapter : JavaNetDatagramSocket {
-}
+FOUNDATION_EXPORT void JavaNioDatagramChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioDatagramChannelImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
 
-- (instancetype)initWithJavaNetDatagramSocketImpl:(JavaNetDatagramSocketImpl *)socketimpl
-                   withJavaNioDatagramChannelImpl:(JavaNioDatagramChannelImpl *)channelImpl;
+FOUNDATION_EXPORT JavaNioDatagramChannelImpl *new_JavaNioDatagramChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiSelectorProvider *selectorProvider) NS_RETURNS_RETAINED;
 
-- (JavaNioChannelsDatagramChannel *)getChannel;
-
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
-
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)peer;
-
-- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)address
-                              withInt:(jint)port;
-
-- (void)receiveWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)packet;
-
-- (void)sendWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)packet;
-
-- (void)close;
-
-- (void)disconnect;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioDatagramChannelImpl_DatagramSocketAdapter_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioDatagramChannelImpl)
 
 #endif // _JavaNioDatagramChannelImpl_H_

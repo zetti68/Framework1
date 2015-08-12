@@ -6,19 +6,16 @@
 #ifndef _JavaNetURI_H_
 #define _JavaNetURI_H_
 
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaNetURL;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
-#include "libcore/net/UriCodec.h"
 
-#define JavaNetURI_serialVersionUID -6052424284110960213LL
+@class JavaNetURL;
+@class LibcoreNetUriCodec;
 
-@interface JavaNetURI : NSObject < JavaLangComparable, JavaIoSerializable > {
-}
+@interface JavaNetURI : NSObject < JavaLangComparable, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)spec;
 
@@ -51,40 +48,40 @@
 
 - (jboolean)isEqual:(id)o;
 
-- (NSString *)getScheme;
-
-- (NSString *)getSchemeSpecificPart;
-
-- (NSString *)getRawSchemeSpecificPart;
-
 - (NSString *)getAuthority;
-
-- (NSString *)getRawAuthority;
-
-- (NSString *)getUserInfo;
-
-- (NSString *)getRawUserInfo;
-
-- (NSString *)getHost;
-
-- (jint)getPort;
 
 - (jint)getEffectivePort;
 
 + (jint)getEffectivePortWithNSString:(NSString *)scheme
                              withInt:(jint)specifiedPort;
 
+- (NSString *)getFragment;
+
+- (NSString *)getHost;
+
 - (NSString *)getPath;
 
-- (NSString *)getRawPath;
+- (jint)getPort;
 
 - (NSString *)getQuery;
 
-- (NSString *)getRawQuery;
-
-- (NSString *)getFragment;
+- (NSString *)getRawAuthority;
 
 - (NSString *)getRawFragment;
+
+- (NSString *)getRawPath;
+
+- (NSString *)getRawQuery;
+
+- (NSString *)getRawSchemeSpecificPart;
+
+- (NSString *)getRawUserInfo;
+
+- (NSString *)getScheme;
+
+- (NSString *)getSchemeSpecificPart;
+
+- (NSString *)getUserInfo;
 
 - (NSUInteger)hash;
 
@@ -98,9 +95,9 @@
 
 - (JavaNetURI *)relativizeWithJavaNetURI:(JavaNetURI *)relative;
 
-- (JavaNetURI *)resolveWithJavaNetURI:(JavaNetURI *)relative;
-
 - (JavaNetURI *)resolveWithNSString:(NSString *)relative;
+
+- (JavaNetURI *)resolveWithJavaNetURI:(JavaNetURI *)relative;
 
 - (NSString *)toASCIIString;
 
@@ -110,12 +107,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetURI_initialized;
 J2OBJC_STATIC_INIT(JavaNetURI)
-FOUNDATION_EXPORT JavaNetURI *JavaNetURI_createWithNSString_(NSString *uri);
-FOUNDATION_EXPORT jint JavaNetURI_getEffectivePortWithNSString_withInt_(NSString *scheme, jint specifiedPort);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURI, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT NSString *JavaNetURI_UNRESERVED_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetURI, UNRESERVED_, NSString *)
@@ -138,29 +130,30 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetURI, FILE_AND_QUERY_ENCODER_, LibcoreNetUriCod
 FOUNDATION_EXPORT LibcoreNetUriCodec *JavaNetURI_ALL_LEGAL_ENCODER_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetURI, ALL_LEGAL_ENCODER_, LibcoreNetUriCodec *)
 
-FOUNDATION_EXPORT LibcoreNetUriCodec *JavaNetURI_ASCII_ONLY_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURI, ASCII_ONLY_, LibcoreNetUriCodec *)
+FOUNDATION_EXPORT void JavaNetURI_initWithNSString_(JavaNetURI *self, NSString *spec);
 
-@interface JavaNetURI_PartEncoder : LibcoreNetUriCodec {
-}
+FOUNDATION_EXPORT JavaNetURI *new_JavaNetURI_initWithNSString_(NSString *spec) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithNSString:(NSString *)extraLegalCharacters;
+FOUNDATION_EXPORT void JavaNetURI_initWithNSString_withNSString_withNSString_(JavaNetURI *self, NSString *scheme, NSString *schemeSpecificPart, NSString *fragment);
 
-- (jboolean)isRetainedWithChar:(jchar)c;
+FOUNDATION_EXPORT JavaNetURI *new_JavaNetURI_initWithNSString_withNSString_withNSString_(NSString *scheme, NSString *schemeSpecificPart, NSString *fragment) NS_RETURNS_RETAINED;
 
-@end
+FOUNDATION_EXPORT void JavaNetURI_initWithNSString_withNSString_withNSString_withInt_withNSString_withNSString_withNSString_(JavaNetURI *self, NSString *scheme, NSString *userInfo, NSString *host, jint port, NSString *path, NSString *query, NSString *fragment);
 
-__attribute__((always_inline)) inline void JavaNetURI_PartEncoder_init() {}
+FOUNDATION_EXPORT JavaNetURI *new_JavaNetURI_initWithNSString_withNSString_withNSString_withInt_withNSString_withNSString_withNSString_(NSString *scheme, NSString *userInfo, NSString *host, jint port, NSString *path, NSString *query, NSString *fragment) NS_RETURNS_RETAINED;
 
-@interface JavaNetURI_$1 : LibcoreNetUriCodec {
-}
+FOUNDATION_EXPORT void JavaNetURI_initWithNSString_withNSString_withNSString_withNSString_(JavaNetURI *self, NSString *scheme, NSString *host, NSString *path, NSString *fragment);
 
-- (jboolean)isRetainedWithChar:(jchar)c;
+FOUNDATION_EXPORT JavaNetURI *new_JavaNetURI_initWithNSString_withNSString_withNSString_withNSString_(NSString *scheme, NSString *host, NSString *path, NSString *fragment) NS_RETURNS_RETAINED;
 
-- (instancetype)init;
+FOUNDATION_EXPORT void JavaNetURI_initWithNSString_withNSString_withNSString_withNSString_withNSString_(JavaNetURI *self, NSString *scheme, NSString *authority, NSString *path, NSString *query, NSString *fragment);
 
-@end
+FOUNDATION_EXPORT JavaNetURI *new_JavaNetURI_initWithNSString_withNSString_withNSString_withNSString_withNSString_(NSString *scheme, NSString *authority, NSString *path, NSString *query, NSString *fragment) NS_RETURNS_RETAINED;
 
-__attribute__((always_inline)) inline void JavaNetURI_$1_init() {}
+FOUNDATION_EXPORT JavaNetURI *JavaNetURI_createWithNSString_(NSString *uri);
+
+FOUNDATION_EXPORT jint JavaNetURI_getEffectivePortWithNSString_withInt_(NSString *scheme, jint specifiedPort);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURI)
 
 #endif // _JavaNetURI_H_

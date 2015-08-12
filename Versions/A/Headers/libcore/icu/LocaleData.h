@@ -6,12 +6,11 @@
 #ifndef _LibcoreIcuLocaleData_H_
 #define _LibcoreIcuLocaleData_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaLangInteger;
-@class JavaUtilHashMap;
 @class JavaUtilLocale;
-
-#import "JreEmulation.h"
 
 @interface LibcoreIcuLocaleData : NSObject {
  @public
@@ -61,17 +60,18 @@
   NSString *percentPattern_;
 }
 
-+ (LibcoreIcuLocaleData *)getWithJavaUtilLocale:(JavaUtilLocale *)locale;
+#pragma mark Public
 
-- (NSString *)description;
++ (LibcoreIcuLocaleData *)getWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (NSString *)getDateFormatWithInt:(jint)style;
 
 - (NSString *)getTimeFormatWithInt:(jint)style;
 
+- (NSString *)description;
+
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIcuLocaleData_initialized;
 J2OBJC_STATIC_INIT(LibcoreIcuLocaleData)
 
 J2OBJC_FIELD_SETTER(LibcoreIcuLocaleData, firstDayOfWeek_, JavaLangInteger *)
@@ -110,9 +110,9 @@ J2OBJC_FIELD_SETTER(LibcoreIcuLocaleData, numberPattern_, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIcuLocaleData, integerPattern_, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIcuLocaleData, currencyPattern_, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIcuLocaleData, percentPattern_, NSString *)
+
 FOUNDATION_EXPORT LibcoreIcuLocaleData *LibcoreIcuLocaleData_getWithJavaUtilLocale_(JavaUtilLocale *locale);
 
-FOUNDATION_EXPORT JavaUtilHashMap *LibcoreIcuLocaleData_localeDataCache_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuLocaleData, localeDataCache_, JavaUtilHashMap *)
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIcuLocaleData)
 
 #endif // _LibcoreIcuLocaleData_H_

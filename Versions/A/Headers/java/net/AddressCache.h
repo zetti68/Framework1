@@ -6,16 +6,13 @@
 #ifndef _JavaNetAddressCache_H_
 #define _JavaNetAddressCache_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@class LibcoreUtilBasicLruCache;
 
-#import "JreEmulation.h"
+@interface JavaNetAddressCache : NSObject
 
-#define JavaNetAddressCache_MAX_ENTRIES 16
-#define JavaNetAddressCache_TTL_NANOS 2000000000LL
-
-@interface JavaNetAddressCache : NSObject {
-}
+#pragma mark Public
 
 - (void)clear;
 
@@ -27,15 +24,19 @@ withJavaNetInetAddressArray:(IOSObjectArray *)addresses;
 - (void)putUnknownHostWithNSString:(NSString *)hostname
                       withNSString:(NSString *)detailMessage;
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetAddressCache_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetAddressCache)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetAddressCache, MAX_ENTRIES, jint)
+FOUNDATION_EXPORT void JavaNetAddressCache_init(JavaNetAddressCache *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetAddressCache, TTL_NANOS, jlong)
+FOUNDATION_EXPORT JavaNetAddressCache *new_JavaNetAddressCache_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetAddressCache)
 
 @interface JavaNetAddressCache_AddressCacheEntry : NSObject {
  @public
@@ -43,12 +44,20 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetAddressCache, TTL_NANOS, jlong)
   jlong expiryNanos_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithId:(id)value;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetAddressCache_AddressCacheEntry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetAddressCache_AddressCacheEntry)
 
 J2OBJC_FIELD_SETTER(JavaNetAddressCache_AddressCacheEntry, value_, id)
+
+FOUNDATION_EXPORT void JavaNetAddressCache_AddressCacheEntry_initWithId_(JavaNetAddressCache_AddressCacheEntry *self, id value);
+
+FOUNDATION_EXPORT JavaNetAddressCache_AddressCacheEntry *new_JavaNetAddressCache_AddressCacheEntry_initWithId_(id value) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetAddressCache_AddressCacheEntry)
 
 #endif // _JavaNetAddressCache_H_

@@ -6,37 +6,28 @@
 #ifndef _JavaTextDecimalFormatSymbols_H_
 #define _JavaTextDecimalFormatSymbols_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
 @class JavaUtilCurrency;
 @class JavaUtilLocale;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
+@interface JavaTextDecimalFormatSymbols : NSObject < NSCopying, JavaIoSerializable >
 
-#define JavaTextDecimalFormatSymbols_serialVersionUID 5772796243397350300LL
-
-@interface JavaTextDecimalFormatSymbols : NSObject < NSCopying, JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
-+ (JavaTextDecimalFormatSymbols *)getInstance;
-
-+ (JavaTextDecimalFormatSymbols *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-+ (IOSObjectArray *)getAvailableLocales;
-
 - (id)clone;
 
 - (jboolean)isEqual:(id)object;
 
-- (NSString *)description;
++ (IOSObjectArray *)getAvailableLocales;
 
 - (JavaUtilCurrency *)getCurrency;
-
-- (NSString *)getInternationalCurrencySymbol;
 
 - (NSString *)getCurrencySymbol;
 
@@ -44,9 +35,17 @@
 
 - (jchar)getDigit;
 
+- (NSString *)getExponentSeparator;
+
 - (jchar)getGroupingSeparator;
 
 - (NSString *)getInfinity;
+
++ (JavaTextDecimalFormatSymbols *)getInstance;
+
++ (JavaTextDecimalFormatSymbols *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
+- (NSString *)getInternationalCurrencySymbol;
 
 - (jchar)getMinusSign;
 
@@ -62,13 +61,9 @@
 
 - (jchar)getZeroDigit;
 
-- (NSString *)getExponentSeparator;
-
 - (NSUInteger)hash;
 
 - (void)setCurrencyWithJavaUtilCurrency:(JavaUtilCurrency *)currency;
-
-- (void)setInternationalCurrencySymbolWithNSString:(NSString *)value;
 
 - (void)setCurrencySymbolWithNSString:(NSString *)value;
 
@@ -76,9 +71,13 @@
 
 - (void)setDigitWithChar:(jchar)value;
 
+- (void)setExponentSeparatorWithNSString:(NSString *)value;
+
 - (void)setGroupingSeparatorWithChar:(jchar)value;
 
 - (void)setInfinityWithNSString:(NSString *)value;
+
+- (void)setInternationalCurrencySymbolWithNSString:(NSString *)value;
 
 - (void)setMinusSignWithChar:(jchar)value;
 
@@ -94,15 +93,26 @@
 
 - (void)setZeroDigitWithChar:(jchar)value;
 
-- (void)setExponentSeparatorWithNSString:(NSString *)value;
+- (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextDecimalFormatSymbols_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextDecimalFormatSymbols)
+
+FOUNDATION_EXPORT void JavaTextDecimalFormatSymbols_init(JavaTextDecimalFormatSymbols *self);
+
+FOUNDATION_EXPORT JavaTextDecimalFormatSymbols *new_JavaTextDecimalFormatSymbols_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextDecimalFormatSymbols_initWithJavaUtilLocale_(JavaTextDecimalFormatSymbols *self, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextDecimalFormatSymbols *new_JavaTextDecimalFormatSymbols_initWithJavaUtilLocale_(JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaTextDecimalFormatSymbols *JavaTextDecimalFormatSymbols_getInstance();
+
 FOUNDATION_EXPORT JavaTextDecimalFormatSymbols *JavaTextDecimalFormatSymbols_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaTextDecimalFormatSymbols_getAvailableLocales();
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDecimalFormatSymbols, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextDecimalFormatSymbols)
 
 #endif // _JavaTextDecimalFormatSymbols_H_

@@ -6,11 +6,11 @@
 #ifndef _JavaIoCharArrayWriter_H_
 #define _JavaIoCharArrayWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Writer.h"
+
 @class IOSCharArray;
 @protocol JavaLangCharSequence;
-
-#import "JreEmulation.h"
-#include "java/io/Writer.h"
 
 @interface JavaIoCharArrayWriter : JavaIoWriter {
  @public
@@ -18,9 +18,19 @@
   jint count_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialSize;
+
+- (JavaIoCharArrayWriter *)appendWithChar:(jchar)c;
+
+- (JavaIoCharArrayWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+
+- (JavaIoCharArrayWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
+                                                  withInt:(jint)start
+                                                  withInt:(jint)end;
 
 - (void)close;
 
@@ -46,18 +56,20 @@
 
 - (void)writeToWithJavaIoWriter:(JavaIoWriter *)outArg;
 
-- (JavaIoCharArrayWriter *)appendWithChar:(jchar)c;
-
-- (JavaIoCharArrayWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
-
-- (JavaIoCharArrayWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                                  withInt:(jint)start
-                                                  withInt:(jint)end;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoCharArrayWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoCharArrayWriter)
 
 J2OBJC_FIELD_SETTER(JavaIoCharArrayWriter, buf_, IOSCharArray *)
+
+FOUNDATION_EXPORT void JavaIoCharArrayWriter_init(JavaIoCharArrayWriter *self);
+
+FOUNDATION_EXPORT JavaIoCharArrayWriter *new_JavaIoCharArrayWriter_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoCharArrayWriter_initWithInt_(JavaIoCharArrayWriter *self, jint initialSize);
+
+FOUNDATION_EXPORT JavaIoCharArrayWriter *new_JavaIoCharArrayWriter_initWithInt_(jint initialSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoCharArrayWriter)
 
 #endif // _JavaIoCharArrayWriter_H_

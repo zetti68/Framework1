@@ -6,37 +6,23 @@
 #ifndef _JavaNioSocketChannelImpl_H_
 #define _JavaNioSocketChannelImpl_H_
 
-@class IOSByteArray;
-@class IOSObjectArray;
-@class JavaIoFileDescriptor;
-@class JavaIoIOException;
-@class JavaIoInputStream;
-@class JavaIoOutputStream;
-@class JavaNetInetAddress;
-@class JavaNetInetSocketAddress;
-@class JavaNetPlainSocketImpl;
-@class JavaNetSocketAddress;
-@class JavaNioByteBuffer;
-@class JavaNioChannelsSpiSelectorProvider;
-@class JavaNioSocketChannelImpl_SocketAdapter;
-@protocol JavaNetSocketOption;
-@protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/io/FilterInputStream.h"
-#include "java/io/FilterOutputStream.h"
-#include "java/net/Socket.h"
+#include "J2ObjC_header.h"
 #include "java/nio/FileDescriptorChannel.h"
 #include "java/nio/channels/SocketChannel.h"
 
-#define JavaNioSocketChannelImpl_SOCKET_STATUS_CLOSED 3
-#define JavaNioSocketChannelImpl_SOCKET_STATUS_CONNECTED 2
-#define JavaNioSocketChannelImpl_SOCKET_STATUS_PENDING 1
-#define JavaNioSocketChannelImpl_SOCKET_STATUS_UNCONNECTED 0
-#define JavaNioSocketChannelImpl_SOCKET_STATUS_UNINITIALIZED -1
+@class IOSObjectArray;
+@class JavaIoFileDescriptor;
+@class JavaNetInetSocketAddress;
+@class JavaNetSocket;
+@class JavaNetSocketAddress;
+@class JavaNioByteBuffer;
+@class JavaNioChannelsSpiSelectorProvider;
+@protocol JavaNetSocketOption;
+@protocol JavaUtilSet;
 
-@interface JavaNioSocketChannelImpl : JavaNioChannelsSocketChannel < JavaNioFileDescriptorChannel > {
-}
+@interface JavaNioSocketChannelImpl : JavaNioChannelsSocketChannel < JavaNioFileDescriptorChannel >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
 
@@ -46,32 +32,24 @@
 - (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider
                                   withJavaIoFileDescriptor:(JavaIoFileDescriptor *)existingFd;
 
-- (JavaNetSocket *)socket;
-
 - (JavaNioChannelsSocketChannel *)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)local;
 
-- (void)onBindWithBoolean:(jboolean)updateSocketState;
+- (jboolean)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
+
+- (jboolean)finishConnect;
+
+- (JavaIoFileDescriptor *)getFD;
 
 - (JavaNetSocketAddress *)getLocalAddress;
 
 - (id)getOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option;
 
-- (JavaNioChannelsSocketChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
-                                                            withId:(id)value;
-
-- (id<JavaUtilSet>)supportedOptions;
-
 - (jboolean)isConnected;
 
 - (jboolean)isConnectionPending;
 
-- (jboolean)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
-
-- (void)onConnectStatusChangedWithJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)address
-                                                   withInt:(jint)status
-                                               withBoolean:(jboolean)updateSocketState;
-
-- (jboolean)finishConnect;
+- (void)onAcceptWithJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)remoteAddress
+                                 withBoolean:(jboolean)updateSocketState;
 
 - (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)dst;
 
@@ -79,101 +57,53 @@
                                 withInt:(jint)offset
                                 withInt:(jint)length;
 
+- (JavaNioChannelsSocketChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
+                                                            withId:(id)value;
+
+- (JavaNetSocket *)socket;
+
+- (id<JavaUtilSet>)supportedOptions;
+
 - (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)src;
 
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)sources
                                  withInt:(jint)offset
                                  withInt:(jint)length;
 
-+ (JavaNetInetSocketAddress *)validateAddressWithJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
+#pragma mark Protected
 
 - (void)implCloseSelectableChannel;
 
 - (void)implConfigureBlockingWithBoolean:(jboolean)blocking;
 
-- (JavaIoFileDescriptor *)getFD;
+#pragma mark Package-Private
 
-- (void)onAcceptWithJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)remoteAddress
-                                 withBoolean:(jboolean)updateSocketState;
+- (void)onBindWithBoolean:(jboolean)updateSocketState;
+
+- (void)onConnectStatusChangedWithJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)address
+                                                   withInt:(jint)status
+                                               withBoolean:(jboolean)updateSocketState;
+
++ (JavaNetInetSocketAddress *)validateAddressWithJavaNetSocketAddress:(JavaNetSocketAddress *)socketAddress;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioSocketChannelImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioSocketChannelImpl)
+
+FOUNDATION_EXPORT void JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioSocketChannelImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
+
+FOUNDATION_EXPORT JavaNioSocketChannelImpl *new_JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiSelectorProvider *selectorProvider) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_withBoolean_(JavaNioSocketChannelImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider, jboolean connect);
+
+FOUNDATION_EXPORT JavaNioSocketChannelImpl *new_JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_withBoolean_(JavaNioChannelsSpiSelectorProvider *selectorProvider, jboolean connect) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_withJavaIoFileDescriptor_(JavaNioSocketChannelImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider, JavaIoFileDescriptor *existingFd);
+
+FOUNDATION_EXPORT JavaNioSocketChannelImpl *new_JavaNioSocketChannelImpl_initWithJavaNioChannelsSpiSelectorProvider_withJavaIoFileDescriptor_(JavaNioChannelsSpiSelectorProvider *selectorProvider, JavaIoFileDescriptor *existingFd) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaNetInetSocketAddress *JavaNioSocketChannelImpl_validateAddressWithJavaNetSocketAddress_(JavaNetSocketAddress *socketAddress);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioSocketChannelImpl, SOCKET_STATUS_UNINITIALIZED, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioSocketChannelImpl, SOCKET_STATUS_UNCONNECTED, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioSocketChannelImpl, SOCKET_STATUS_PENDING, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioSocketChannelImpl, SOCKET_STATUS_CONNECTED, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioSocketChannelImpl, SOCKET_STATUS_CLOSED, jint)
-
-@interface JavaNioSocketChannelImpl_SocketAdapter : JavaNetSocket {
-}
-
-- (instancetype)initWithJavaNetPlainSocketImpl:(JavaNetPlainSocketImpl *)socketImpl
-                  withJavaNioSocketChannelImpl:(JavaNioSocketChannelImpl *)channel;
-
-- (JavaNioChannelsSocketChannel *)getChannel;
-
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
-                                withInt:(jint)timeout;
-
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
-
-- (void)close;
-
-- (JavaIoOutputStream *)getOutputStream;
-
-- (JavaIoInputStream *)getInputStream;
-
-- (JavaIoFileDescriptor *)getFileDescriptor$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioSocketChannelImpl_SocketAdapter_init() {}
-
-@interface JavaNioSocketChannelImpl_BlockingCheckOutputStream : JavaIoFilterOutputStream {
-}
-
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
-          withJavaNioChannelsSocketChannel:(JavaNioChannelsSocketChannel *)channel;
-
-- (void)writeWithByteArray:(IOSByteArray *)buffer
-                   withInt:(jint)offset
-                   withInt:(jint)byteCount;
-
-- (void)writeWithInt:(jint)oneByte;
-
-- (void)writeWithByteArray:(IOSByteArray *)buffer;
-
-- (void)close;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioSocketChannelImpl_BlockingCheckOutputStream_init() {}
-
-@interface JavaNioSocketChannelImpl_BlockingCheckInputStream : JavaIoFilterInputStream {
-}
-
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg
-         withJavaNioChannelsSocketChannel:(JavaNioChannelsSocketChannel *)channel;
-
-- (jint)read;
-
-- (jint)readWithByteArray:(IOSByteArray *)buffer
-                  withInt:(jint)byteOffset
-                  withInt:(jint)byteCount;
-
-- (jint)readWithByteArray:(IOSByteArray *)buffer;
-
-- (void)close;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioSocketChannelImpl_BlockingCheckInputStream_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioSocketChannelImpl)
 
 #endif // _JavaNioSocketChannelImpl_H_

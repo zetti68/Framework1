@@ -6,16 +6,14 @@
 #ifndef _JavaLangReflectProxy_H_
 #define _JavaLangReflectProxy_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaLangClassLoader;
 @protocol JavaLangReflectInvocationHandler;
 @protocol JavaUtilMap;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-
-#define JavaLangReflectProxy_serialVersionUID -2222568056686623797LL
 
 @interface JavaLangReflectProxy : NSObject < JavaIoSerializable > {
  @public
@@ -23,44 +21,47 @@
   id<JavaUtilMap> methodMap_;
 }
 
-- (instancetype)initWithJavaLangReflectInvocationHandler:(id<JavaLangReflectInvocationHandler>)h;
+#pragma mark Public
+
++ (id<JavaLangReflectInvocationHandler>)getInvocationHandlerWithId:(id)proxy;
 
 + (IOSClass *)getProxyClassWithJavaLangClassLoader:(JavaLangClassLoader *)loader
                                  withIOSClassArray:(IOSObjectArray *)interfaces;
+
++ (jboolean)isProxyClassWithIOSClass:(IOSClass *)cl;
 
 + (id)newProxyInstanceWithJavaLangClassLoader:(JavaLangClassLoader *)loader
                             withIOSClassArray:(IOSObjectArray *)interfaces
          withJavaLangReflectInvocationHandler:(id<JavaLangReflectInvocationHandler>)h OBJC_METHOD_FAMILY_NONE;
 
-+ (jboolean)isProxyClassWithIOSClass:(IOSClass *)cl;
+#pragma mark Protected
 
-+ (id<JavaLangReflectInvocationHandler>)getInvocationHandlerWithId:(id)proxy;
+- (instancetype)initWithJavaLangReflectInvocationHandler:(id<JavaLangReflectInvocationHandler>)h;
+
+#pragma mark Package-Private
 
 
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangReflectProxy_initialized;
 J2OBJC_STATIC_INIT(JavaLangReflectProxy)
 
 J2OBJC_FIELD_SETTER(JavaLangReflectProxy, handler_, id<JavaLangReflectInvocationHandler>)
 J2OBJC_FIELD_SETTER(JavaLangReflectProxy, methodMap_, id<JavaUtilMap>)
+
+FOUNDATION_EXPORT void JavaLangReflectProxy_initWithJavaLangReflectInvocationHandler_(JavaLangReflectProxy *self, id<JavaLangReflectInvocationHandler> h);
+
+FOUNDATION_EXPORT JavaLangReflectProxy *new_JavaLangReflectProxy_initWithJavaLangReflectInvocationHandler_(id<JavaLangReflectInvocationHandler> h) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT IOSClass *JavaLangReflectProxy_getProxyClassWithJavaLangClassLoader_withIOSClassArray_(JavaLangClassLoader *loader, IOSObjectArray *interfaces);
+
 FOUNDATION_EXPORT id JavaLangReflectProxy_newProxyInstanceWithJavaLangClassLoader_withIOSClassArray_withJavaLangReflectInvocationHandler_(JavaLangClassLoader *loader, IOSObjectArray *interfaces, id<JavaLangReflectInvocationHandler> h);
+
 FOUNDATION_EXPORT jboolean JavaLangReflectProxy_isProxyClassWithIOSClass_(IOSClass *cl);
+
 FOUNDATION_EXPORT id<JavaLangReflectInvocationHandler> JavaLangReflectProxy_getInvocationHandlerWithId_(id proxy);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectProxy, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT id<JavaUtilMap> JavaLangReflectProxy_loaderCache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectProxy, loaderCache_, id<JavaUtilMap>)
-
-FOUNDATION_EXPORT id<JavaUtilMap> JavaLangReflectProxy_proxyCache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectProxy, proxyCache_, id<JavaUtilMap>)
-
-FOUNDATION_EXPORT jint JavaLangReflectProxy_NextClassNameIndex_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectProxy, NextClassNameIndex_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaLangReflectProxy, NextClassNameIndex_, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectProxy)
 
 #endif // _JavaLangReflectProxy_H_

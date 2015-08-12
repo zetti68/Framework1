@@ -6,41 +6,32 @@
 #ifndef _JavaLangStringToReal_H_
 #define _JavaLangStringToReal_H_
 
-@class JavaLangNumberFormatException;
-@class JavaLangStringToReal_StringExponentPair;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface JavaLangStringToReal : NSObject
 
-@interface JavaLangStringToReal : NSObject {
-}
+#pragma mark Public
 
 + (jdouble)parseDoubleWithNSString:(NSString *)s;
 
 + (jfloat)parseFloatWithNSString:(NSString *)s;
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangStringToReal_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangStringToReal)
+
 FOUNDATION_EXPORT jdouble JavaLangStringToReal_parseDoubleWithNSString_(NSString *s);
+
 FOUNDATION_EXPORT jfloat JavaLangStringToReal_parseFloatWithNSString_(NSString *s);
 
-@interface JavaLangStringToReal_StringExponentPair : NSObject {
- @public
-  NSString *s_;
-  jlong e_;
-  jboolean negative_;
-  jboolean infinity_;
-  jboolean zero_;
-}
+FOUNDATION_EXPORT void JavaLangStringToReal_init(JavaLangStringToReal *self);
 
-- (jfloat)specialValue;
+FOUNDATION_EXPORT JavaLangStringToReal *new_JavaLangStringToReal_init() NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaLangStringToReal_StringExponentPair_init() {}
-
-J2OBJC_FIELD_SETTER(JavaLangStringToReal_StringExponentPair, s_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangStringToReal)
 
 #endif // _JavaLangStringToReal_H_

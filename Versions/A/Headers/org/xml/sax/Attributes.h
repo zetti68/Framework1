@@ -6,7 +6,7 @@
 #ifndef _OrgXmlSaxAttributes_H_
 #define _OrgXmlSaxAttributes_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol OrgXmlSaxAttributes < NSObject, JavaObject >
 
@@ -39,6 +39,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxAttributes_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxAttributes)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxAttributes)
 
 #endif // _OrgXmlSaxAttributes_H_

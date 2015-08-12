@@ -6,41 +6,36 @@
 #ifndef _JavaxSecurityCertX509Certificate_H_
 #define _JavaxSecurityCertX509Certificate_H_
 
+#include "J2ObjC_header.h"
+#include "javax/security/cert/Certificate.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaMathBigInteger;
-@class JavaSecurityCertX509Certificate;
 @class JavaUtilDate;
 @protocol JavaSecurityPrincipal;
-@protocol JavaSecurityPublicKey;
 
-#import "JreEmulation.h"
-#include "javax/security/cert/Certificate.h"
+@interface JavaxSecurityCertX509Certificate : JavaxSecurityCertCertificate
 
-@interface JavaxSecurityCertX509Certificate : JavaxSecurityCertCertificate {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
-+ (JavaxSecurityCertX509Certificate *)getInstanceWithJavaIoInputStream:(JavaIoInputStream *)inStream;
+- (void)checkValidity;
+
+- (void)checkValidityWithJavaUtilDate:(JavaUtilDate *)date;
 
 + (JavaxSecurityCertX509Certificate *)getInstanceWithByteArray:(IOSByteArray *)certData;
 
-- (void)checkValidity;
-
-- (void)checkValidityWithJavaUtilDate:(JavaUtilDate *)date;
-
-- (jint)getVersion;
-
-- (JavaMathBigInteger *)getSerialNumber;
++ (JavaxSecurityCertX509Certificate *)getInstanceWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
 - (id<JavaSecurityPrincipal>)getIssuerDN;
 
-- (id<JavaSecurityPrincipal>)getSubjectDN;
+- (JavaUtilDate *)getNotAfter;
 
 - (JavaUtilDate *)getNotBefore;
 
-- (JavaUtilDate *)getNotAfter;
+- (JavaMathBigInteger *)getSerialNumber;
 
 - (NSString *)getSigAlgName;
 
@@ -48,52 +43,20 @@
 
 - (IOSByteArray *)getSigAlgParams;
 
+- (id<JavaSecurityPrincipal>)getSubjectDN;
+
+- (jint)getVersion;
+
 @end
 
-__attribute__((always_inline)) inline void JavaxSecurityCertX509Certificate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxSecurityCertX509Certificate)
+
+FOUNDATION_EXPORT void JavaxSecurityCertX509Certificate_init(JavaxSecurityCertX509Certificate *self);
+
 FOUNDATION_EXPORT JavaxSecurityCertX509Certificate *JavaxSecurityCertX509Certificate_getInstanceWithJavaIoInputStream_(JavaIoInputStream *inStream);
+
 FOUNDATION_EXPORT JavaxSecurityCertX509Certificate *JavaxSecurityCertX509Certificate_getInstanceWithByteArray_(IOSByteArray *certData);
 
-@interface JavaxSecurityCertX509Certificate_$1 : JavaxSecurityCertX509Certificate {
-}
-
-- (IOSByteArray *)getEncoded;
-
-- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key;
-
-- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key
-                           withNSString:(NSString *)sigProvider;
-
-- (NSString *)description;
-
-- (id<JavaSecurityPublicKey>)getPublicKey;
-
-- (void)checkValidity;
-
-- (void)checkValidityWithJavaUtilDate:(JavaUtilDate *)date;
-
-- (jint)getVersion;
-
-- (JavaMathBigInteger *)getSerialNumber;
-
-- (id<JavaSecurityPrincipal>)getIssuerDN;
-
-- (id<JavaSecurityPrincipal>)getSubjectDN;
-
-- (JavaUtilDate *)getNotBefore;
-
-- (JavaUtilDate *)getNotAfter;
-
-- (NSString *)getSigAlgName;
-
-- (NSString *)getSigAlgOID;
-
-- (IOSByteArray *)getSigAlgParams;
-
-- (instancetype)initWithJavaSecurityCertX509Certificate:(JavaSecurityCertX509Certificate *)capture$0;
-
-@end
-
-__attribute__((always_inline)) inline void JavaxSecurityCertX509Certificate_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaxSecurityCertX509Certificate)
 
 #endif // _JavaxSecurityCertX509Certificate_H_

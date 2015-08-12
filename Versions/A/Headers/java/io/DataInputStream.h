@@ -6,15 +6,16 @@
 #ifndef _JavaIoDataInputStream_H_
 #define _JavaIoDataInputStream_H_
 
-@class IOSByteArray;
-@class JavaIoInputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/DataInput.h"
 #include "java/io/FilterInputStream.h"
 
-@interface JavaIoDataInputStream : JavaIoFilterInputStream < JavaIoDataInput > {
-}
+@class IOSByteArray;
+@class JavaIoInputStream;
+
+@interface JavaIoDataInputStream : JavaIoFilterInputStream < JavaIoDataInput >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
@@ -54,15 +55,24 @@
 
 - (NSString *)readUTF;
 
-- (NSString *)decodeUTFWithInt:(jint)utfSize;
-
 + (NSString *)readUTFWithJavaIoDataInput:(id<JavaIoDataInput>)inArg;
 
 - (jint)skipBytesWithInt:(jint)count;
 
+#pragma mark Package-Private
+
+- (NSString *)decodeUTFWithInt:(jint)utfSize;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoDataInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoDataInputStream)
+
+FOUNDATION_EXPORT void JavaIoDataInputStream_initWithJavaIoInputStream_(JavaIoDataInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaIoDataInputStream *new_JavaIoDataInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT NSString *JavaIoDataInputStream_readUTFWithJavaIoDataInput_(id<JavaIoDataInput> inArg);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoDataInputStream)
 
 #endif // _JavaIoDataInputStream_H_

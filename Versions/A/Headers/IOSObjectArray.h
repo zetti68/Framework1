@@ -29,6 +29,8 @@
 // An emulation class that represents a Java object array.  Like a Java array,
 // an IOSObjectArray is fixed-size but its elements are mutable.
 @interface IOSObjectArray : IOSArray <NSFastEnumeration> {
+ @package
+  BOOL isRetained_;
  @public
   IOSClass *elementType_;
   id __strong buffer_[0];
@@ -59,12 +61,8 @@
 + (instancetype)arrayWithArray:(IOSObjectArray *)array;
 + (instancetype)arrayWithNSArray:(NSArray *)array type:(IOSClass *)type;
 
-+ (id)iosClassWithType:(IOSClass *)type;
-+ (id)iosClassWithDimensions:(NSUInteger)dimensions type:(IOSClass *)type;
-
 // Return  at a specified index, throws IndexOutOfBoundsException
 // if out out range;
-FOUNDATION_EXPORT id IOSObjectArray_Get(IOSObjectArray *array, NSUInteger index);
 - (id)objectAtIndex:(NSUInteger)index;
 
 // Sets  at a specified index, throws IndexOutOfBoundsException
@@ -80,5 +78,11 @@ FOUNDATION_EXPORT id IOSObjectArray_SetAndConsume(
 - (void)getObjects:(NSObject **)buffer length:(NSUInteger)length;
 
 @end
+
+__attribute__((always_inline)) inline id IOSObjectArray_Get(
+    __unsafe_unretained IOSObjectArray *array, NSUInteger index) {
+  IOSArray_checkIndex(array->size_, (jint)index);
+  return array->buffer_[index];
+}
 
 #endif // _IOSObjectArray_H_

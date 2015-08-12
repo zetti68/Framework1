@@ -6,9 +6,9 @@
 #ifndef _OrgXmlSaxEntityResolver_H_
 #define _OrgXmlSaxEntityResolver_H_
 
-@class OrgXmlSaxInputSource;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class OrgXmlSaxInputSource;
 
 @protocol OrgXmlSaxEntityResolver < NSObject, JavaObject >
 
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxEntityResolver_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxEntityResolver)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxEntityResolver)
 
 #endif // _OrgXmlSaxEntityResolver_H_

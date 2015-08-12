@@ -6,17 +6,15 @@
 #ifndef _JavaSqlDataTruncation_H_
 #define _JavaSqlDataTruncation_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/sql/SQLWarning.h"
 
-#define JavaSqlDataTruncation_THE_ERROR_CODE 0
-#define JavaSqlDataTruncation_serialVersionUID 6464298989504059473LL
+@class JavaLangThrowable;
 
-@interface JavaSqlDataTruncation : JavaSqlSQLWarning < JavaIoSerializable > {
-}
+@interface JavaSqlDataTruncation : JavaSqlSQLWarning < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)index
                 withBoolean:(jboolean)parameter
@@ -41,22 +39,21 @@
 
 - (jint)getTransferSize;
 
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlDataTruncation_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlDataTruncation)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDataTruncation, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSqlDataTruncation_initWithInt_withBoolean_withBoolean_withInt_withInt_(JavaSqlDataTruncation *self, jint index, jboolean parameter, jboolean read, jint dataSize, jint transferSize);
 
-FOUNDATION_EXPORT NSString *JavaSqlDataTruncation_THE_REASON_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDataTruncation, THE_REASON_, NSString *)
+FOUNDATION_EXPORT JavaSqlDataTruncation *new_JavaSqlDataTruncation_initWithInt_withBoolean_withBoolean_withInt_withInt_(jint index, jboolean parameter, jboolean read, jint dataSize, jint transferSize) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT NSString *JavaSqlDataTruncation_THE_SQLSTATE_READ_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDataTruncation, THE_SQLSTATE_READ_, NSString *)
+FOUNDATION_EXPORT void JavaSqlDataTruncation_initWithInt_withBoolean_withBoolean_withInt_withInt_withJavaLangThrowable_(JavaSqlDataTruncation *self, jint index, jboolean parameter, jboolean read, jint dataSize, jint transferSize, JavaLangThrowable *cause);
 
-FOUNDATION_EXPORT NSString *JavaSqlDataTruncation_THE_SQLSTATE_WRITE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDataTruncation, THE_SQLSTATE_WRITE_, NSString *)
+FOUNDATION_EXPORT JavaSqlDataTruncation *new_JavaSqlDataTruncation_initWithInt_withBoolean_withBoolean_withInt_withInt_withJavaLangThrowable_(jint index, jboolean parameter, jboolean read, jint dataSize, jint transferSize, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlDataTruncation, THE_ERROR_CODE, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDataTruncation)
 
 #endif // _JavaSqlDataTruncation_H_

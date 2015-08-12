@@ -6,15 +6,14 @@
 #ifndef _JavaSqlSQLNonTransientException_H_
 #define _JavaSqlSQLNonTransientException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/sql/SQLException.h"
 
-#define JavaSqlSQLNonTransientException_serialVersionUID -9104382843534716547LL
+@class JavaLangThrowable;
 
-@interface JavaSqlSQLNonTransientException : JavaSqlSQLException {
-}
+@interface JavaSqlSQLNonTransientException : JavaSqlSQLException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,25 +26,59 @@
                     withNSString:(NSString *)sqlState
                          withInt:(jint)vendorCode;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithNSString:(NSString *)reason
-                    withNSString:(NSString *)sqlState
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
 - (instancetype)initWithNSString:(NSString *)reason
                     withNSString:(NSString *)sqlState
                          withInt:(jint)vendorCode
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
+- (instancetype)initWithNSString:(NSString *)reason
+                    withNSString:(NSString *)sqlState
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithNSString:(NSString *)reason
+           withJavaLangThrowable:(JavaLangThrowable *)cause;
+
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLNonTransientException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLNonTransientException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlSQLNonTransientException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_init(JavaSqlSQLNonTransientException *self);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_(JavaSqlSQLNonTransientException *self, NSString *reason);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_(NSString *reason) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_withNSString_(JavaSqlSQLNonTransientException *self, NSString *reason, NSString *sqlState);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_withNSString_(NSString *reason, NSString *sqlState) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_withNSString_withInt_(JavaSqlSQLNonTransientException *self, NSString *reason, NSString *sqlState, jint vendorCode);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_withNSString_withInt_(NSString *reason, NSString *sqlState, jint vendorCode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithJavaLangThrowable_(JavaSqlSQLNonTransientException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_withJavaLangThrowable_(JavaSqlSQLNonTransientException *self, NSString *reason, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_withJavaLangThrowable_(NSString *reason, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_withNSString_withJavaLangThrowable_(JavaSqlSQLNonTransientException *self, NSString *reason, NSString *sqlState, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_withNSString_withJavaLangThrowable_(NSString *reason, NSString *sqlState, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLNonTransientException_initWithNSString_withNSString_withInt_withJavaLangThrowable_(JavaSqlSQLNonTransientException *self, NSString *reason, NSString *sqlState, jint vendorCode, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSqlSQLNonTransientException *new_JavaSqlSQLNonTransientException_initWithNSString_withNSString_withInt_withJavaLangThrowable_(NSString *reason, NSString *sqlState, jint vendorCode, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLNonTransientException)
 
 #endif // _JavaSqlSQLNonTransientException_H_

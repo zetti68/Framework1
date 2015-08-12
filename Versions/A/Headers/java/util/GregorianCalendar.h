@@ -6,24 +6,20 @@
 #ifndef _JavaUtilGregorianCalendar_H_
 #define _JavaUtilGregorianCalendar_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/Calendar.h"
+
 @class IOSByteArray;
-@class IOSIntArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
 @class JavaUtilDate;
 @class JavaUtilLocale;
 @class JavaUtilTimeZone;
 
-#import "JreEmulation.h"
-#include "java/util/Calendar.h"
-
-#define JavaUtilGregorianCalendar_AD 1
 #define JavaUtilGregorianCalendar_BC 0
-#define JavaUtilGregorianCalendar_defaultGregorianCutover -12219292800000LL
-#define JavaUtilGregorianCalendar_serialVersionUID -8125100834729963327LL
+#define JavaUtilGregorianCalendar_AD 1
 
-@interface JavaUtilGregorianCalendar : JavaUtilCalendar {
-}
+@interface JavaUtilGregorianCalendar : JavaUtilCalendar
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -44,8 +40,6 @@
                     withInt:(jint)minute
                     withInt:(jint)second;
 
-- (instancetype)initWithLong:(jlong)milliseconds;
-
 - (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone;
@@ -53,14 +47,8 @@
 - (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone
                       withJavaUtilLocale:(JavaUtilLocale *)locale;
 
-- (instancetype)initWithBoolean:(jboolean)ignored;
-
 - (void)addWithInt:(jint)field
            withInt:(jint)value;
-
-- (void)computeFields;
-
-- (void)computeTime;
 
 - (jboolean)isEqual:(id)object;
 
@@ -83,44 +71,73 @@
 - (jboolean)isLeapYearWithInt:(jint)year;
 
 - (void)rollWithInt:(jint)field
-            withInt:(jint)value;
+        withBoolean:(jboolean)increment;
 
 - (void)rollWithInt:(jint)field
-        withBoolean:(jboolean)increment;
+            withInt:(jint)value;
 
 - (void)setGregorianChangeWithJavaUtilDate:(JavaUtilDate *)date;
 
+#pragma mark Protected
+
+- (void)computeFields;
+
+- (void)computeTime;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithBoolean:(jboolean)ignored;
+
+- (instancetype)initWithLong:(jlong)milliseconds;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilGregorianCalendar_initialized;
 J2OBJC_STATIC_INIT(JavaUtilGregorianCalendar)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, BC, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, AD, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, defaultGregorianCutover, jlong)
-
 FOUNDATION_EXPORT IOSByteArray *JavaUtilGregorianCalendar_DaysInMonth_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, DaysInMonth_, IOSByteArray *)
 J2OBJC_STATIC_FIELD_SETTER(JavaUtilGregorianCalendar, DaysInMonth_, IOSByteArray *)
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGregorianCalendar_DaysInYear_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, DaysInYear_, IOSIntArray *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilGregorianCalendar, DaysInYear_, IOSIntArray *)
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_init(JavaUtilGregorianCalendar *self);
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGregorianCalendar_maximums_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, maximums_, IOSIntArray *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilGregorianCalendar, maximums_, IOSIntArray *)
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGregorianCalendar_minimums_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, minimums_, IOSIntArray *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilGregorianCalendar, minimums_, IOSIntArray *)
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithInt_withInt_withInt_(JavaUtilGregorianCalendar *self, jint year, jint month, jint day);
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGregorianCalendar_leastMaximums_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGregorianCalendar, leastMaximums_, IOSIntArray *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilGregorianCalendar, leastMaximums_, IOSIntArray *)
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithInt_withInt_withInt_(jint year, jint month, jint day) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithInt_withInt_withInt_withInt_withInt_(JavaUtilGregorianCalendar *self, jint year, jint month, jint day, jint hour, jint minute);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithInt_withInt_withInt_withInt_withInt_(jint year, jint month, jint day, jint hour, jint minute) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithInt_withInt_withInt_withInt_withInt_withInt_(JavaUtilGregorianCalendar *self, jint year, jint month, jint day, jint hour, jint minute, jint second);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithInt_withInt_withInt_withInt_withInt_withInt_(jint year, jint month, jint day, jint hour, jint minute, jint second) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithLong_(JavaUtilGregorianCalendar *self, jlong milliseconds);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithLong_(jlong milliseconds) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithJavaUtilLocale_(JavaUtilGregorianCalendar *self, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithJavaUtilLocale_(JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithJavaUtilTimeZone_(JavaUtilGregorianCalendar *self, JavaUtilTimeZone *timezone);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithJavaUtilTimeZone_(JavaUtilTimeZone *timezone) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithJavaUtilTimeZone_withJavaUtilLocale_(JavaUtilGregorianCalendar *self, JavaUtilTimeZone *timezone, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithJavaUtilTimeZone_withJavaUtilLocale_(JavaUtilTimeZone *timezone, JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilGregorianCalendar_initWithBoolean_(JavaUtilGregorianCalendar *self, jboolean ignored);
+
+FOUNDATION_EXPORT JavaUtilGregorianCalendar *new_JavaUtilGregorianCalendar_initWithBoolean_(jboolean ignored) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilGregorianCalendar)
 
 #endif // _JavaUtilGregorianCalendar_H_

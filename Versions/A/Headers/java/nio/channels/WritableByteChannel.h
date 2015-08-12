@@ -6,16 +6,19 @@
 #ifndef _JavaNioChannelsWritableByteChannel_H_
 #define _JavaNioChannelsWritableByteChannel_H_
 
-@class JavaNioByteBuffer;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/Channel.h"
 
+@class JavaNioByteBuffer;
+
 @protocol JavaNioChannelsWritableByteChannel < JavaNioChannelsChannel, NSObject, JavaObject >
+
 - (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsWritableByteChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsWritableByteChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsWritableByteChannel)
 
 #endif // _JavaNioChannelsWritableByteChannel_H_

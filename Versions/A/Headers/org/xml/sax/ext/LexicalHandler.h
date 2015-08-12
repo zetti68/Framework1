@@ -6,9 +6,9 @@
 #ifndef _OrgXmlSaxExtLexicalHandler_H_
 #define _OrgXmlSaxExtLexicalHandler_H_
 
-@class IOSCharArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSCharArray;
 
 @protocol OrgXmlSaxExtLexicalHandler < NSObject, JavaObject >
 
@@ -32,6 +32,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtLexicalHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtLexicalHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtLexicalHandler)
 
 #endif // _OrgXmlSaxExtLexicalHandler_H_

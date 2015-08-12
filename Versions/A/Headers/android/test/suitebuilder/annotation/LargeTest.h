@@ -6,7 +6,7 @@
 #ifndef _AndroidTestSuitebuilderAnnotationLargeTest_H_
 #define _AndroidTestSuitebuilderAnnotationLargeTest_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol AndroidTestSuitebuilderAnnotationLargeTest < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTestSuitebuilderAnnotationLargeTest_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTestSuitebuilderAnnotationLargeTest)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTestSuitebuilderAnnotationLargeTest)
 
 #endif // _AndroidTestSuitebuilderAnnotationLargeTest_H_

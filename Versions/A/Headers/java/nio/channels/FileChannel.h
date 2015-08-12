@@ -6,6 +6,13 @@
 #ifndef _JavaNioChannelsFileChannel_H_
 #define _JavaNioChannelsFileChannel_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/ByteChannel.h"
+#include "java/nio/channels/GatheringByteChannel.h"
+#include "java/nio/channels/ScatteringByteChannel.h"
+#include "java/nio/channels/SeekableByteChannel.h"
+#include "java/nio/channels/spi/AbstractInterruptibleChannel.h"
+
 @class IOSObjectArray;
 @class JavaNioByteBuffer;
 @class JavaNioChannelsFileChannel_MapMode;
@@ -14,17 +21,9 @@
 @protocol JavaNioChannelsReadableByteChannel;
 @protocol JavaNioChannelsWritableByteChannel;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/ByteChannel.h"
-#include "java/nio/channels/GatheringByteChannel.h"
-#include "java/nio/channels/ScatteringByteChannel.h"
-#include "java/nio/channels/SeekableByteChannel.h"
-#include "java/nio/channels/spi/AbstractInterruptibleChannel.h"
+@interface JavaNioChannelsFileChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsGatheringByteChannel, JavaNioChannelsScatteringByteChannel, JavaNioChannelsByteChannel, JavaNioChannelsSeekableByteChannel >
 
-@interface JavaNioChannelsFileChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsGatheringByteChannel, JavaNioChannelsScatteringByteChannel, JavaNioChannelsByteChannel, JavaNioChannelsSeekableByteChannel > {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (void)forceWithBoolean:(jboolean)metadata;
 
@@ -82,18 +81,26 @@ withJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)t
                                  withInt:(jint)offset
                                  withInt:(jint)length;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsFileChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsFileChannel)
 
-@interface JavaNioChannelsFileChannel_MapMode : NSObject {
-}
+FOUNDATION_EXPORT void JavaNioChannelsFileChannel_init(JavaNioChannelsFileChannel *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsFileChannel)
+
+@interface JavaNioChannelsFileChannel_MapMode : NSObject
+
+#pragma mark Public
 
 - (NSString *)description;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioChannelsFileChannel_MapMode_initialized;
 J2OBJC_STATIC_INIT(JavaNioChannelsFileChannel_MapMode)
 
 FOUNDATION_EXPORT JavaNioChannelsFileChannel_MapMode *JavaNioChannelsFileChannel_MapMode_PRIVATE_;
@@ -104,5 +111,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsFileChannel_MapMode, READ_ONLY_, JavaN
 
 FOUNDATION_EXPORT JavaNioChannelsFileChannel_MapMode *JavaNioChannelsFileChannel_MapMode_READ_WRITE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsFileChannel_MapMode, READ_WRITE_, JavaNioChannelsFileChannel_MapMode *)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsFileChannel_MapMode)
 
 #endif // _JavaNioChannelsFileChannel_H_

@@ -6,6 +6,13 @@
 #ifndef _JavaNioChannelsDatagramChannel_H_
 #define _JavaNioChannelsDatagramChannel_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/ByteChannel.h"
+#include "java/nio/channels/GatheringByteChannel.h"
+#include "java/nio/channels/NetworkChannel.h"
+#include "java/nio/channels/ScatteringByteChannel.h"
+#include "java/nio/channels/spi/AbstractSelectableChannel.h"
+
 @class IOSObjectArray;
 @class JavaNetDatagramSocket;
 @class JavaNetSocketAddress;
@@ -14,65 +21,66 @@
 @protocol JavaNetSocketOption;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/ByteChannel.h"
-#include "java/nio/channels/GatheringByteChannel.h"
-#include "java/nio/channels/NetworkChannel.h"
-#include "java/nio/channels/ScatteringByteChannel.h"
-#include "java/nio/channels/spi/AbstractSelectableChannel.h"
+@interface JavaNioChannelsDatagramChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsByteChannel, JavaNioChannelsScatteringByteChannel, JavaNioChannelsGatheringByteChannel, JavaNioChannelsNetworkChannel >
 
-@interface JavaNioChannelsDatagramChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsByteChannel, JavaNioChannelsScatteringByteChannel, JavaNioChannelsGatheringByteChannel, JavaNioChannelsNetworkChannel > {
-}
-
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
-
-+ (JavaNioChannelsDatagramChannel *)open;
-
-- (jint)validOps;
-
-- (JavaNetDatagramSocket *)socket;
+#pragma mark Public
 
 - (JavaNioChannelsDatagramChannel *)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)local;
+
+- (JavaNioChannelsDatagramChannel *)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)address;
+
+- (JavaNioChannelsDatagramChannel *)disconnect;
 
 - (JavaNetSocketAddress *)getLocalAddress;
 
 - (id)getOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option;
 
-- (JavaNioChannelsDatagramChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
-                                                              withId:(id)value;
-
-- (id<JavaUtilSet>)supportedOptions;
-
 - (jboolean)isConnected;
 
-- (JavaNioChannelsDatagramChannel *)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)address;
++ (JavaNioChannelsDatagramChannel *)open;
 
-- (JavaNioChannelsDatagramChannel *)disconnect;
+- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
+
+- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)targets;
+
+- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)targets
+                                withInt:(jint)offset
+                                withInt:(jint)length;
 
 - (JavaNetSocketAddress *)receiveWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
 
 - (jint)sendWithJavaNioByteBuffer:(JavaNioByteBuffer *)source
          withJavaNetSocketAddress:(JavaNetSocketAddress *)address;
 
-- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
+- (JavaNioChannelsDatagramChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
+                                                              withId:(id)value;
 
-- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)targets
-                                withInt:(jint)offset
-                                withInt:(jint)length;
+- (JavaNetDatagramSocket *)socket;
 
-- (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)targets;
+- (id<JavaUtilSet>)supportedOptions;
+
+- (jint)validOps;
 
 - (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)source;
+
+- (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)sources;
 
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)sources
                                  withInt:(jint)offset
                                  withInt:(jint)length;
 
-- (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)sources;
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsDatagramChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsDatagramChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsDatagramChannel_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsDatagramChannel *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
+
 FOUNDATION_EXPORT JavaNioChannelsDatagramChannel *JavaNioChannelsDatagramChannel_open();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsDatagramChannel)
 
 #endif // _JavaNioChannelsDatagramChannel_H_

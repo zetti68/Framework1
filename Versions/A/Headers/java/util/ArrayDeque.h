@@ -6,130 +6,108 @@
 #ifndef _JavaUtilArrayDeque_H_
 #define _JavaUtilArrayDeque_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractCollection.h"
 #include "java/util/Deque.h"
-#include "java/util/Iterator.h"
 
-#define JavaUtilArrayDeque_MIN_INITIAL_CAPACITY 8
-#define JavaUtilArrayDeque_serialVersionUID 2340985798034038923LL
+@class IOSObjectArray;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
-@interface JavaUtilArrayDeque : JavaUtilAbstractCollection < JavaUtilDeque, NSCopying, JavaIoSerializable > {
-}
+@interface JavaUtilArrayDeque : JavaUtilAbstractCollection < JavaUtilDeque, NSCopying, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
 - (instancetype)initWithInt:(jint)numElements;
 
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (jboolean)addWithId:(id)e;
 
 - (void)addFirstWithId:(id)e;
 
 - (void)addLastWithId:(id)e;
 
-- (jboolean)offerFirstWithId:(id)e;
+- (void)clear;
 
-- (jboolean)offerLastWithId:(id)e;
+- (JavaUtilArrayDeque *)clone;
 
-- (id)removeFirst;
+- (jboolean)containsWithId:(id)o;
 
-- (id)removeLast;
+- (id<JavaUtilIterator>)descendingIterator;
 
-- (id)pollFirst;
-
-- (id)pollLast;
+- (id)element;
 
 - (id)getFirst;
 
 - (id)getLast;
 
-- (id)peekFirst;
-
-- (id)peekLast;
-
-- (jboolean)removeFirstOccurrenceWithId:(id)o;
-
-- (jboolean)removeLastOccurrenceWithId:(id)o;
-
-- (jboolean)addWithId:(id)e;
-
-- (jboolean)offerWithId:(id)e;
-
-- (id)remove;
-
-- (id)poll;
-
-- (id)element;
-
-- (id)peek;
-
-- (void)pushWithId:(id)e;
-
-- (id)pop;
-
-- (jint)size;
-
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (id<JavaUtilIterator>)descendingIterator;
+- (jboolean)offerWithId:(id)e;
 
-- (jboolean)containsWithId:(id)o;
+- (jboolean)offerFirstWithId:(id)e;
+
+- (jboolean)offerLastWithId:(id)e;
+
+- (id)peek;
+
+- (id)peekFirst;
+
+- (id)peekLast;
+
+- (id)poll;
+
+- (id)pollFirst;
+
+- (id)pollLast;
+
+- (id)pop;
+
+- (void)pushWithId:(id)e;
+
+- (id)remove;
 
 - (jboolean)removeWithId:(id)o;
 
-- (void)clear;
+- (id)removeFirst;
+
+- (jboolean)removeFirstOccurrenceWithId:(id)o;
+
+- (id)removeLast;
+
+- (jboolean)removeLastOccurrenceWithId:(id)o;
+
+- (jint)size;
 
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (JavaUtilArrayDeque *)clone;
+#pragma mark Package-Private
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilArrayDeque_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilArrayDeque)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilArrayDeque, MIN_INITIAL_CAPACITY, jint)
+FOUNDATION_EXPORT void JavaUtilArrayDeque_init(JavaUtilArrayDeque *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilArrayDeque, serialVersionUID, jlong)
+FOUNDATION_EXPORT JavaUtilArrayDeque *new_JavaUtilArrayDeque_init() NS_RETURNS_RETAINED;
 
-@interface JavaUtilArrayDeque_DeqIterator : NSObject < JavaUtilIterator > {
-}
+FOUNDATION_EXPORT void JavaUtilArrayDeque_initWithInt_(JavaUtilArrayDeque *self, jint numElements);
 
-- (jboolean)hasNext;
+FOUNDATION_EXPORT JavaUtilArrayDeque *new_JavaUtilArrayDeque_initWithInt_(jint numElements) NS_RETURNS_RETAINED;
 
-- (id)next;
+FOUNDATION_EXPORT void JavaUtilArrayDeque_initWithJavaUtilCollection_(JavaUtilArrayDeque *self, id<JavaUtilCollection> c);
 
-- (void)remove;
+FOUNDATION_EXPORT JavaUtilArrayDeque *new_JavaUtilArrayDeque_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilArrayDeque:(JavaUtilArrayDeque *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilArrayDeque_DeqIterator_init() {}
-
-@interface JavaUtilArrayDeque_DescendingIterator : NSObject < JavaUtilIterator > {
-}
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-- (instancetype)initWithJavaUtilArrayDeque:(JavaUtilArrayDeque *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilArrayDeque_DescendingIterator_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilArrayDeque)
 
 #endif // _JavaUtilArrayDeque_H_

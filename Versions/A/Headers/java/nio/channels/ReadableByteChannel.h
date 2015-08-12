@@ -6,16 +6,19 @@
 #ifndef _JavaNioChannelsReadableByteChannel_H_
 #define _JavaNioChannelsReadableByteChannel_H_
 
-@class JavaNioByteBuffer;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/Channel.h"
 
+@class JavaNioByteBuffer;
+
 @protocol JavaNioChannelsReadableByteChannel < JavaNioChannelsChannel, NSObject, JavaObject >
+
 - (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsReadableByteChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsReadableByteChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsReadableByteChannel)
 
 #endif // _JavaNioChannelsReadableByteChannel_H_

@@ -6,15 +6,15 @@
 #ifndef _JavaUtilMissingResourceException_H_
 #define _JavaUtilMissingResourceException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
-
-#define JavaUtilMissingResourceException_serialVersionUID -4876345176062000401LL
 
 @interface JavaUtilMissingResourceException : JavaLangRuntimeException {
  @public
   NSString *className__, *key_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detailMessage
                     withNSString:(NSString *)className_
@@ -26,11 +26,15 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilMissingResourceException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilMissingResourceException)
 
 J2OBJC_FIELD_SETTER(JavaUtilMissingResourceException, className__, NSString *)
 J2OBJC_FIELD_SETTER(JavaUtilMissingResourceException, key_, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilMissingResourceException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilMissingResourceException_initWithNSString_withNSString_withNSString_(JavaUtilMissingResourceException *self, NSString *detailMessage, NSString *className_, NSString *resourceName);
+
+FOUNDATION_EXPORT JavaUtilMissingResourceException *new_JavaUtilMissingResourceException_initWithNSString_withNSString_withNSString_(NSString *detailMessage, NSString *className_, NSString *resourceName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilMissingResourceException)
 
 #endif // _JavaUtilMissingResourceException_H_

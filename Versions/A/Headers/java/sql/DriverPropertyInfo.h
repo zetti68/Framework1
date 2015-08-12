@@ -6,9 +6,9 @@
 #ifndef _JavaSqlDriverPropertyInfo_H_
 #define _JavaSqlDriverPropertyInfo_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSObjectArray;
 
 @interface JavaSqlDriverPropertyInfo : NSObject {
  @public
@@ -19,16 +19,24 @@
   NSString *value_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlDriverPropertyInfo_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlDriverPropertyInfo)
 
 J2OBJC_FIELD_SETTER(JavaSqlDriverPropertyInfo, choices_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaSqlDriverPropertyInfo, description__, NSString *)
 J2OBJC_FIELD_SETTER(JavaSqlDriverPropertyInfo, name_, NSString *)
 J2OBJC_FIELD_SETTER(JavaSqlDriverPropertyInfo, value_, NSString *)
+
+FOUNDATION_EXPORT void JavaSqlDriverPropertyInfo_initWithNSString_withNSString_(JavaSqlDriverPropertyInfo *self, NSString *name, NSString *value);
+
+FOUNDATION_EXPORT JavaSqlDriverPropertyInfo *new_JavaSqlDriverPropertyInfo_initWithNSString_withNSString_(NSString *name, NSString *value) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDriverPropertyInfo)
 
 #endif // _JavaSqlDriverPropertyInfo_H_

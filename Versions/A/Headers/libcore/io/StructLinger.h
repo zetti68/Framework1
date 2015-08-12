@@ -6,13 +6,15 @@
 #ifndef _LibcoreIoStructLinger_H_
 #define _LibcoreIoStructLinger_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreIoStructLinger : NSObject {
  @public
   jint l_onoff_;
   jint l_linger_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)l_onoff
                     withInt:(jint)l_linger;
@@ -23,6 +25,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructLinger_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructLinger)
+
+FOUNDATION_EXPORT void LibcoreIoStructLinger_initWithInt_withInt_(LibcoreIoStructLinger *self, jint l_onoff, jint l_linger);
+
+FOUNDATION_EXPORT LibcoreIoStructLinger *new_LibcoreIoStructLinger_initWithInt_withInt_(jint l_onoff, jint l_linger) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructLinger)
 
 #endif // _LibcoreIoStructLinger_H_

@@ -6,20 +6,17 @@
 #ifndef _JavaNioCharsetCharsetDecoder_H_
 #define _JavaNioCharsetCharsetDecoder_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNioByteBuffer;
 @class JavaNioCharBuffer;
 @class JavaNioCharsetCharset;
 @class JavaNioCharsetCoderResult;
 @class JavaNioCharsetCodingErrorAction;
 
-#import "JreEmulation.h"
+@interface JavaNioCharsetCharsetDecoder : NSObject
 
-@interface JavaNioCharsetCharsetDecoder : NSObject {
-}
-
-- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                                    withFloat:(jfloat)averageCharsPerByte
-                                    withFloat:(jfloat)maxCharsPerByte;
+#pragma mark Public
 
 - (jfloat)averageCharsPerByte;
 
@@ -30,9 +27,6 @@
 - (JavaNioCharsetCoderResult *)decodeWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg
                                      withJavaNioCharBuffer:(JavaNioCharBuffer *)outArg
                                                withBoolean:(jboolean)endOfInput;
-
-- (JavaNioCharsetCoderResult *)decodeLoopWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg
-                                         withJavaNioCharBuffer:(JavaNioCharBuffer *)outArg;
 
 - (JavaNioCharsetCharset *)detectedCharset;
 
@@ -54,8 +48,21 @@
 
 - (JavaNioCharsetCharsetDecoder *)reset;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
+                                    withFloat:(jfloat)averageCharsPerByte
+                                    withFloat:(jfloat)maxCharsPerByte;
+
+- (JavaNioCharsetCoderResult *)decodeLoopWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg
+                                         withJavaNioCharBuffer:(JavaNioCharBuffer *)outArg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetCharsetDecoder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetCharsetDecoder)
+
+FOUNDATION_EXPORT void JavaNioCharsetCharsetDecoder_initWithJavaNioCharsetCharset_withFloat_withFloat_(JavaNioCharsetCharsetDecoder *self, JavaNioCharsetCharset *charset, jfloat averageCharsPerByte, jfloat maxCharsPerByte);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCharsetDecoder)
 
 #endif // _JavaNioCharsetCharsetDecoder_H_

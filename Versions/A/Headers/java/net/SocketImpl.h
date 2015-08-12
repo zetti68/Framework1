@@ -6,14 +6,14 @@
 #ifndef _JavaNetSocketImpl_H_
 #define _JavaNetSocketImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/net/SocketOptions.h"
+
 @class JavaIoFileDescriptor;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
 @class JavaNetInetAddress;
 @class JavaNetSocketAddress;
-
-#import "JreEmulation.h"
-#include "java/net/SocketOptions.h"
 
 @interface JavaNetSocketImpl : NSObject < JavaNetSocketOptions > {
  @public
@@ -22,6 +22,24 @@
   JavaIoFileDescriptor *fd_;
   jint localport_;
 }
+
+#pragma mark Public
+
+- (instancetype)init;
+
+- (JavaIoFileDescriptor *)getFD$;
+
+- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
+                             withInt:(jint)localPort;
+
+- (void)onClose;
+
+- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
+                                withInt:(jint)remotePort;
+
+- (NSString *)description;
+
+#pragma mark Protected
 
 - (void)acceptWithJavaNetSocketImpl:(JavaNetSocketImpl *)newSocket;
 
@@ -32,17 +50,18 @@
 
 - (void)close;
 
-- (void)connectWithNSString:(NSString *)host
-                    withInt:(jint)port;
-
 - (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)address
                               withInt:(jint)port;
+
+- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
+                                withInt:(jint)timeout;
+
+- (void)connectWithNSString:(NSString *)host
+                    withInt:(jint)port;
 
 - (void)createWithBoolean:(jboolean)isStreaming;
 
 - (JavaIoFileDescriptor *)getFileDescriptor;
-
-- (JavaIoFileDescriptor *)getFD$;
 
 - (JavaNetInetAddress *)getInetAddress;
 
@@ -56,38 +75,27 @@
 
 - (void)listenWithInt:(jint)backlog;
 
-- (NSString *)description;
-
-- (void)shutdownInput;
-
-- (void)shutdownOutput;
-
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
-                                withInt:(jint)timeout;
-
-- (jboolean)supportsUrgentData;
-
 - (void)sendUrgentDataWithInt:(jint)value;
 
 - (void)setPerformancePreferencesWithInt:(jint)connectionTime
                                  withInt:(jint)latency
                                  withInt:(jint)bandwidth;
 
-- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
-                             withInt:(jint)localPort;
+- (void)shutdownInput;
 
-- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
-                                withInt:(jint)remotePort;
+- (void)shutdownOutput;
 
-- (void)onClose;
-
-- (instancetype)init;
+- (jboolean)supportsUrgentData;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketImpl)
 
 J2OBJC_FIELD_SETTER(JavaNetSocketImpl, address_, JavaNetInetAddress *)
 J2OBJC_FIELD_SETTER(JavaNetSocketImpl, fd_, JavaIoFileDescriptor *)
+
+FOUNDATION_EXPORT void JavaNetSocketImpl_init(JavaNetSocketImpl *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketImpl)
 
 #endif // _JavaNetSocketImpl_H_

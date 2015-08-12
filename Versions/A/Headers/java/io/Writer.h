@@ -6,22 +6,28 @@
 #ifndef _JavaIoWriter_H_
 #define _JavaIoWriter_H_
 
-@class IOSCharArray;
-@protocol JavaLangCharSequence;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 #include "java/io/Flushable.h"
 #include "java/lang/Appendable.h"
+
+@class IOSCharArray;
+@protocol JavaLangCharSequence;
 
 @interface JavaIoWriter : NSObject < JavaLangAppendable, JavaIoCloseable, JavaIoFlushable > {
  @public
   id lock_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
-- (instancetype)initWithId:(id)lock;
+- (JavaIoWriter *)appendWithChar:(jchar)c;
+
+- (JavaIoWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+
+- (JavaIoWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
+                                         withInt:(jint)start
+                                         withInt:(jint)end;
 
 - (void)close;
 
@@ -41,20 +47,26 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
-- (JavaIoWriter *)appendWithChar:(jchar)c;
+#pragma mark Protected
 
-- (JavaIoWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+- (instancetype)init;
 
-- (JavaIoWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                         withInt:(jint)start
-                                         withInt:(jint)end;
+- (instancetype)initWithId:(id)lock;
+
+#pragma mark Package-Private
 
 - (jboolean)checkError;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoWriter)
 
 J2OBJC_FIELD_SETTER(JavaIoWriter, lock_, id)
+
+FOUNDATION_EXPORT void JavaIoWriter_init(JavaIoWriter *self);
+
+FOUNDATION_EXPORT void JavaIoWriter_initWithId_(JavaIoWriter *self, id lock);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoWriter)
 
 #endif // _JavaIoWriter_H_

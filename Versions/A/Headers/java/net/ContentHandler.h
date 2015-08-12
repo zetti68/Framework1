@@ -6,23 +6,28 @@
 #ifndef _JavaNetContentHandler_H_
 #define _JavaNetContentHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaNetURLConnection;
 
-#import "JreEmulation.h"
+@interface JavaNetContentHandler : NSObject
 
-@interface JavaNetContentHandler : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (id)getContentWithJavaNetURLConnection:(JavaNetURLConnection *)uConn;
 
 - (id)getContentWithJavaNetURLConnection:(JavaNetURLConnection *)uConn
                        withIOSClassArray:(IOSObjectArray *)types;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetContentHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetContentHandler)
+
+FOUNDATION_EXPORT void JavaNetContentHandler_init(JavaNetContentHandler *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetContentHandler)
 
 #endif // _JavaNetContentHandler_H_

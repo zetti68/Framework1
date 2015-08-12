@@ -6,6 +6,8 @@
 #ifndef _OrgApacheHarmonySecurityAsn1BerOutputStream_H_
 #define _OrgApacheHarmonySecurityAsn1BerOutputStream_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class OrgApacheHarmonySecurityAsn1ASN1Choice;
 @class OrgApacheHarmonySecurityAsn1ASN1Explicit;
@@ -13,8 +15,6 @@
 @class OrgApacheHarmonySecurityAsn1ASN1SequenceOf;
 @class OrgApacheHarmonySecurityAsn1ASN1Set;
 @class OrgApacheHarmonySecurityAsn1ASN1SetOf;
-
-#import "JreEmulation.h"
 
 @interface OrgApacheHarmonySecurityAsn1BerOutputStream : NSObject {
  @public
@@ -24,7 +24,9 @@
   id content_;
 }
 
-- (void)encodeTagWithInt:(jint)tag;
+#pragma mark Public
+
+- (instancetype)init;
 
 - (void)encodeANY;
 
@@ -37,8 +39,6 @@
 - (void)encodeExplicitWithOrgApacheHarmonySecurityAsn1ASN1Explicit:(OrgApacheHarmonySecurityAsn1ASN1Explicit *)explicit_;
 
 - (void)encodeGeneralizedTime;
-
-- (void)encodeUTCTime;
 
 - (void)encodeInteger;
 
@@ -56,6 +56,10 @@
 
 - (void)encodeString;
 
+- (void)encodeTagWithInt:(jint)tag;
+
+- (void)encodeUTCTime;
+
 - (void)getChoiceLengthWithOrgApacheHarmonySecurityAsn1ASN1Choice:(OrgApacheHarmonySecurityAsn1ASN1Choice *)choice;
 
 - (void)getExplicitLengthWithOrgApacheHarmonySecurityAsn1ASN1Explicit:(OrgApacheHarmonySecurityAsn1ASN1Explicit *)sequence;
@@ -68,13 +72,17 @@
 
 - (void)getSetOfLengthWithOrgApacheHarmonySecurityAsn1ASN1SetOf:(OrgApacheHarmonySecurityAsn1ASN1SetOf *)setOf;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1BerOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1BerOutputStream)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BerOutputStream, encoded_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BerOutputStream, content_, id)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BerOutputStream_init(OrgApacheHarmonySecurityAsn1BerOutputStream *self);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BerOutputStream *new_OrgApacheHarmonySecurityAsn1BerOutputStream_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1BerOutputStream)
 
 #endif // _OrgApacheHarmonySecurityAsn1BerOutputStream_H_

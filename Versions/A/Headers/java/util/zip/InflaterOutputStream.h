@@ -6,20 +6,20 @@
 #ifndef _JavaUtilZipInflaterOutputStream_H_
 #define _JavaUtilZipInflaterOutputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterOutputStream.h"
+
 @class IOSByteArray;
 @class JavaIoOutputStream;
 @class JavaUtilZipInflater;
-
-#import "JreEmulation.h"
-#include "java/io/FilterOutputStream.h"
-
-#define JavaUtilZipInflaterOutputStream_DEFAULT_BUFFER_SIZE 1024
 
 @interface JavaUtilZipInflaterOutputStream : JavaIoFilterOutputStream {
  @public
   JavaUtilZipInflater *inf_;
   IOSByteArray *buf_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
 
@@ -32,23 +32,35 @@
 
 - (void)close;
 
-- (void)flush;
-
 - (void)finish;
 
-- (void)writeWithInt:(jint)b;
+- (void)flush;
 
 - (void)writeWithByteArray:(IOSByteArray *)bytes
                    withInt:(jint)offset
                    withInt:(jint)byteCount;
 
+- (void)writeWithInt:(jint)b;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipInflaterOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipInflaterOutputStream)
 
 J2OBJC_FIELD_SETTER(JavaUtilZipInflaterOutputStream, inf_, JavaUtilZipInflater *)
 J2OBJC_FIELD_SETTER(JavaUtilZipInflaterOutputStream, buf_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipInflaterOutputStream, DEFAULT_BUFFER_SIZE, jint)
+FOUNDATION_EXPORT void JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_(JavaUtilZipInflaterOutputStream *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaUtilZipInflaterOutputStream *new_JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_withJavaUtilZipInflater_(JavaUtilZipInflaterOutputStream *self, JavaIoOutputStream *outArg, JavaUtilZipInflater *inf);
+
+FOUNDATION_EXPORT JavaUtilZipInflaterOutputStream *new_JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_withJavaUtilZipInflater_(JavaIoOutputStream *outArg, JavaUtilZipInflater *inf) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_withJavaUtilZipInflater_withInt_(JavaUtilZipInflaterOutputStream *self, JavaIoOutputStream *outArg, JavaUtilZipInflater *inf, jint bufferSize);
+
+FOUNDATION_EXPORT JavaUtilZipInflaterOutputStream *new_JavaUtilZipInflaterOutputStream_initWithJavaIoOutputStream_withJavaUtilZipInflater_withInt_(JavaIoOutputStream *outArg, JavaUtilZipInflater *inf, jint bufferSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipInflaterOutputStream)
 
 #endif // _JavaUtilZipInflaterOutputStream_H_

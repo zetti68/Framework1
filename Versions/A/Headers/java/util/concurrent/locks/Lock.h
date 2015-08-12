@@ -6,10 +6,10 @@
 #ifndef _JavaUtilConcurrentLocksLock_H_
 #define _JavaUtilConcurrentLocksLock_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilConcurrentLocksLock < NSObject, JavaObject >
 
@@ -28,6 +28,8 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksLock_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksLock)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksLock)
 
 #endif // _JavaUtilConcurrentLocksLock_H_

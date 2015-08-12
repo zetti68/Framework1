@@ -6,26 +6,18 @@
 #ifndef _JavaNioShortBuffer_H_
 #define _JavaNioShortBuffer_H_
 
-@class IOSShortArray;
-@class JavaNioByteOrder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
 #include "java/nio/Buffer.h"
 
-@interface JavaNioShortBuffer : JavaNioBuffer < JavaLangComparable > {
-}
+@class IOSShortArray;
+@class JavaNioByteOrder;
+
+@interface JavaNioShortBuffer : JavaNioBuffer < JavaLangComparable >
+
+#pragma mark Public
 
 + (JavaNioShortBuffer *)allocateWithInt:(jint)capacity OBJC_METHOD_FAMILY_NONE;
-
-+ (JavaNioShortBuffer *)wrapWithShortArray:(IOSShortArray *)array;
-
-+ (JavaNioShortBuffer *)wrapWithShortArray:(IOSShortArray *)array
-                                   withInt:(jint)start
-                                   withInt:(jint)shortCount;
-
-- (instancetype)initWithInt:(jint)capacity
-                   withLong:(jlong)effectiveDirectAddress;
 
 - (IOSShortArray *)array;
 
@@ -43,13 +35,13 @@
 
 - (jshort)get;
 
+- (jshort)getWithInt:(jint)index;
+
 - (JavaNioShortBuffer *)getWithShortArray:(IOSShortArray *)dst;
 
 - (JavaNioShortBuffer *)getWithShortArray:(IOSShortArray *)dst
                                   withInt:(jint)dstOffset
                                   withInt:(jint)shortCount;
-
-- (jshort)getWithInt:(jint)index;
 
 - (jboolean)hasArray;
 
@@ -59,11 +51,8 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSShortArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
+- (JavaNioShortBuffer *)putWithInt:(jint)index
+                         withShort:(jshort)s;
 
 - (JavaNioShortBuffer *)putWithShort:(jshort)s;
 
@@ -75,16 +64,37 @@
 
 - (JavaNioShortBuffer *)putWithJavaNioShortBuffer:(JavaNioShortBuffer *)src;
 
-- (JavaNioShortBuffer *)putWithInt:(jint)index
-                         withShort:(jshort)s;
-
 - (JavaNioShortBuffer *)slice;
+
++ (JavaNioShortBuffer *)wrapWithShortArray:(IOSShortArray *)array;
+
++ (JavaNioShortBuffer *)wrapWithShortArray:(IOSShortArray *)array
+                                   withInt:(jint)start
+                                   withInt:(jint)shortCount;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)capacity
+                   withLong:(jlong)effectiveDirectAddress;
+
+- (IOSShortArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioShortBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioShortBuffer)
+
 FOUNDATION_EXPORT JavaNioShortBuffer *JavaNioShortBuffer_allocateWithInt_(jint capacity);
+
 FOUNDATION_EXPORT JavaNioShortBuffer *JavaNioShortBuffer_wrapWithShortArray_(IOSShortArray *array);
+
 FOUNDATION_EXPORT JavaNioShortBuffer *JavaNioShortBuffer_wrapWithShortArray_withInt_withInt_(IOSShortArray *array, jint start, jint shortCount);
+
+FOUNDATION_EXPORT void JavaNioShortBuffer_initWithInt_withLong_(JavaNioShortBuffer *self, jint capacity, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioShortBuffer)
 
 #endif // _JavaNioShortBuffer_H_

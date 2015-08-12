@@ -6,15 +6,14 @@
 #ifndef _JavaUtilLoggingFormatter_H_
 #define _JavaUtilLoggingFormatter_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilLoggingHandler;
 @class JavaUtilLoggingLogRecord;
 
-#import "JreEmulation.h"
+@interface JavaUtilLoggingFormatter : NSObject
 
-@interface JavaUtilLoggingFormatter : NSObject {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (NSString *)formatWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)r;
 
@@ -24,8 +23,16 @@
 
 - (NSString *)getTailWithJavaUtilLoggingHandler:(JavaUtilLoggingHandler *)h;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingFormatter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingFormatter)
+
+FOUNDATION_EXPORT void JavaUtilLoggingFormatter_init(JavaUtilLoggingFormatter *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingFormatter)
 
 #endif // _JavaUtilLoggingFormatter_H_

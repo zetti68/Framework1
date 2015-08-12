@@ -6,24 +6,19 @@
 #ifndef _OrgJsonJSONTokener_H_
 #define _OrgJsonJSONTokener_H_
 
-@class OrgJsonJSONArray;
+#include "J2ObjC_header.h"
+
 @class OrgJsonJSONException;
-@class OrgJsonJSONObject;
 
-#import "JreEmulation.h"
+@interface OrgJsonJSONTokener : NSObject
 
-@interface OrgJsonJSONTokener : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)inArg;
 
-- (id)nextValue;
+- (void)back;
 
-- (NSString *)nextStringWithChar:(jchar)quote;
-
-- (OrgJsonJSONException *)syntaxErrorWithNSString:(NSString *)message;
-
-- (NSString *)description;
++ (jint)dehexcharWithChar:(jchar)hex;
 
 - (jboolean)more;
 
@@ -31,25 +26,36 @@
 
 - (jchar)nextWithChar:(jchar)c;
 
+- (NSString *)nextWithInt:(jint)length;
+
 - (jchar)nextClean;
 
-- (NSString *)nextWithInt:(jint)length;
+- (NSString *)nextStringWithChar:(jchar)quote;
+
+- (NSString *)nextToWithChar:(jchar)excluded;
 
 - (NSString *)nextToWithNSString:(NSString *)excluded;
 
-- (NSString *)nextToWithChar:(jchar)excluded;
+- (id)nextValue;
 
 - (void)skipPastWithNSString:(NSString *)thru;
 
 - (jchar)skipToWithChar:(jchar)to;
 
-- (void)back;
+- (OrgJsonJSONException *)syntaxErrorWithNSString:(NSString *)message;
 
-+ (jint)dehexcharWithChar:(jchar)hex;
+- (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void OrgJsonJSONTokener_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgJsonJSONTokener)
+
+FOUNDATION_EXPORT void OrgJsonJSONTokener_initWithNSString_(OrgJsonJSONTokener *self, NSString *inArg);
+
+FOUNDATION_EXPORT OrgJsonJSONTokener *new_OrgJsonJSONTokener_initWithNSString_(NSString *inArg) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jint OrgJsonJSONTokener_dehexcharWithChar_(jchar hex);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONTokener)
 
 #endif // _OrgJsonJSONTokener_H_

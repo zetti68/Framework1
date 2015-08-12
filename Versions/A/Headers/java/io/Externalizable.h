@@ -6,19 +6,22 @@
 #ifndef _JavaIoExternalizable_H_
 #define _JavaIoExternalizable_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @protocol JavaIoObjectInput;
 @protocol JavaIoObjectOutput;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-
 @protocol JavaIoExternalizable < JavaIoSerializable, NSObject, JavaObject >
+
 - (void)readExternalWithJavaIoObjectInput:(id<JavaIoObjectInput>)input;
 
 - (void)writeExternalWithJavaIoObjectOutput:(id<JavaIoObjectOutput>)output;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoExternalizable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoExternalizable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoExternalizable)
 
 #endif // _JavaIoExternalizable_H_

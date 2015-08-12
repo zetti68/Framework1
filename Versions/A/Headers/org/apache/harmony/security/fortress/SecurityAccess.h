@@ -6,11 +6,11 @@
 #ifndef _OrgApacheHarmonySecurityFortressSecurityAccess_H_
 #define _OrgApacheHarmonySecurityFortressSecurityAccess_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaSecurityProvider;
 @class JavaSecurityProvider_Service;
 @protocol JavaUtilList;
-
-#import "JreEmulation.h"
 
 @protocol OrgApacheHarmonySecurityFortressSecurityAccess < NSObject, JavaObject >
 
@@ -23,6 +23,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityFortressSecurityAccess_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityFortressSecurityAccess)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityFortressSecurityAccess)
 
 #endif // _OrgApacheHarmonySecurityFortressSecurityAccess_H_

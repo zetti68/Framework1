@@ -6,21 +6,24 @@
 #ifndef _JavaUtilIllegalFormatException_H_
 #define _JavaUtilIllegalFormatException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/IllegalArgumentException.h"
 
-#define JavaUtilIllegalFormatException_serialVersionUID 18830826LL
+@interface JavaUtilIllegalFormatException : JavaLangIllegalArgumentException < JavaIoSerializable >
 
-@interface JavaUtilIllegalFormatException : JavaLangIllegalArgumentException < JavaIoSerializable > {
-}
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilIllegalFormatException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilIllegalFormatException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilIllegalFormatException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilIllegalFormatException_init(JavaUtilIllegalFormatException *self);
+
+FOUNDATION_EXPORT JavaUtilIllegalFormatException *new_JavaUtilIllegalFormatException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilIllegalFormatException)
 
 #endif // _JavaUtilIllegalFormatException_H_

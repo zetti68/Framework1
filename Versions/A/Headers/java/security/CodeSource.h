@@ -6,27 +6,34 @@
 #ifndef _JavaSecurityCodeSource_H_
 #define _JavaSecurityCodeSource_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
 @class JavaNetURL;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
+@interface JavaSecurityCodeSource : NSObject < JavaIoSerializable >
 
-@interface JavaSecurityCodeSource : NSObject < JavaIoSerializable > {
-}
+#pragma mark Public
 
-- (IOSObjectArray *)getObjects;
+- (instancetype)init;
 
 - (IOSObjectArray *)getCodeSigners;
 
 - (JavaNetURL *)getLocation;
 
-- (jboolean)impliesWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs;
+- (IOSObjectArray *)getObjects;
 
-- (instancetype)init;
+- (jboolean)impliesWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCodeSource_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCodeSource)
+
+FOUNDATION_EXPORT void JavaSecurityCodeSource_init(JavaSecurityCodeSource *self);
+
+FOUNDATION_EXPORT JavaSecurityCodeSource *new_JavaSecurityCodeSource_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCodeSource)
 
 #endif // _JavaSecurityCodeSource_H_

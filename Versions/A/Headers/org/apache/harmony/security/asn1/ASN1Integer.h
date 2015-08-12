@@ -6,44 +6,51 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Integer_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Integer_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Primitive.h"
+
 @class JavaMathBigInteger;
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Primitive.h"
+@interface OrgApacheHarmonySecurityAsn1ASN1Integer : OrgApacheHarmonySecurityAsn1ASN1Primitive
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Integer : OrgApacheHarmonySecurityAsn1ASN1Primitive {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
-+ (OrgApacheHarmonySecurityAsn1ASN1Integer *)getInstance;
-
 - (id)decodeWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
 - (void)encodeContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
-- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
++ (id)fromIntValueWithInt:(jint)value;
 
-+ (jint)toIntValueWithId:(id)decoded;
+- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
+
++ (OrgApacheHarmonySecurityAsn1ASN1Integer *)getInstance;
+
+- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
 + (JavaMathBigInteger *)toBigIntegerValueWithId:(id)decoded;
 
-+ (id)fromIntValueWithInt:(jint)value;
++ (jint)toIntValueWithId:(id)decoded;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityAsn1ASN1Integer_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Integer)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Integer_init(OrgApacheHarmonySecurityAsn1ASN1Integer *self);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Integer *new_OrgApacheHarmonySecurityAsn1ASN1Integer_init() NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Integer *OrgApacheHarmonySecurityAsn1ASN1Integer_getInstance();
+
 FOUNDATION_EXPORT jint OrgApacheHarmonySecurityAsn1ASN1Integer_toIntValueWithId_(id decoded);
+
 FOUNDATION_EXPORT JavaMathBigInteger *OrgApacheHarmonySecurityAsn1ASN1Integer_toBigIntegerValueWithId_(id decoded);
+
 FOUNDATION_EXPORT id OrgApacheHarmonySecurityAsn1ASN1Integer_fromIntValueWithInt_(jint value);
 
-FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Integer *OrgApacheHarmonySecurityAsn1ASN1Integer_ASN1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1Integer, ASN1_, OrgApacheHarmonySecurityAsn1ASN1Integer *)
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Integer)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Integer_H_

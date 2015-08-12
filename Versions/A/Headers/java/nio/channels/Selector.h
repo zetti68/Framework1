@@ -6,24 +6,23 @@
 #ifndef _JavaNioChannelsSelector_H_
 #define _JavaNioChannelsSelector_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+
 @class JavaNioChannelsSpiSelectorProvider;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
+@interface JavaNioChannelsSelector : NSObject < JavaIoCloseable >
 
-@interface JavaNioChannelsSelector : NSObject < JavaIoCloseable > {
-}
-
-+ (JavaNioChannelsSelector *)open;
-
-- (instancetype)init;
+#pragma mark Public
 
 - (void)close;
 
 - (jboolean)isOpen;
 
 - (id<JavaUtilSet>)keys;
+
++ (JavaNioChannelsSelector *)open;
 
 - (JavaNioChannelsSpiSelectorProvider *)provider;
 
@@ -37,9 +36,18 @@
 
 - (JavaNioChannelsSelector *)wakeup;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSelector_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSelector)
+
 FOUNDATION_EXPORT JavaNioChannelsSelector *JavaNioChannelsSelector_open();
+
+FOUNDATION_EXPORT void JavaNioChannelsSelector_init(JavaNioChannelsSelector *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSelector)
 
 #endif // _JavaNioChannelsSelector_H_

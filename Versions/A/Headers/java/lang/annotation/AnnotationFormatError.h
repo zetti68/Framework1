@@ -6,15 +6,14 @@
 #ifndef _JavaLangAnnotationAnnotationFormatError_H_
 #define _JavaLangAnnotationAnnotationFormatError_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-#define JavaLangAnnotationAnnotationFormatError_serialVersionUID -4256701562333669892LL
+@class JavaLangThrowable;
 
-@interface JavaLangAnnotationAnnotationFormatError : JavaLangError {
-}
+@interface JavaLangAnnotationAnnotationFormatError : JavaLangError
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)message;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationAnnotationFormatError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationAnnotationFormatError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationAnnotationFormatError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangAnnotationAnnotationFormatError_initWithNSString_(JavaLangAnnotationAnnotationFormatError *self, NSString *message);
+
+FOUNDATION_EXPORT JavaLangAnnotationAnnotationFormatError *new_JavaLangAnnotationAnnotationFormatError_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangAnnotationAnnotationFormatError_initWithNSString_withJavaLangThrowable_(JavaLangAnnotationAnnotationFormatError *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaLangAnnotationAnnotationFormatError *new_JavaLangAnnotationAnnotationFormatError_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangAnnotationAnnotationFormatError_initWithJavaLangThrowable_(JavaLangAnnotationAnnotationFormatError *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaLangAnnotationAnnotationFormatError *new_JavaLangAnnotationAnnotationFormatError_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationAnnotationFormatError)
 
 #endif // _JavaLangAnnotationAnnotationFormatError_H_

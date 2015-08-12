@@ -6,12 +6,13 @@
 #ifndef _OrgXmlSaxHelpersXMLReaderFactory_H_
 #define _OrgXmlSaxHelpersXMLReaderFactory_H_
 
+#include "J2ObjC_header.h"
+
 @protocol OrgXmlSaxXMLReader;
 
-#import "JreEmulation.h"
+@interface OrgXmlSaxHelpersXMLReaderFactory : NSObject
 
-@interface OrgXmlSaxHelpersXMLReaderFactory : NSObject {
-}
+#pragma mark Public
 
 + (id<OrgXmlSaxXMLReader>)createXMLReader;
 
@@ -19,11 +20,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersXMLReaderFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersXMLReaderFactory)
+
 FOUNDATION_EXPORT id<OrgXmlSaxXMLReader> OrgXmlSaxHelpersXMLReaderFactory_createXMLReader();
+
 FOUNDATION_EXPORT id<OrgXmlSaxXMLReader> OrgXmlSaxHelpersXMLReaderFactory_createXMLReaderWithNSString_(NSString *className_);
 
-FOUNDATION_EXPORT NSString *OrgXmlSaxHelpersXMLReaderFactory_property_;
-J2OBJC_STATIC_FIELD_GETTER(OrgXmlSaxHelpersXMLReaderFactory, property_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersXMLReaderFactory)
 
 #endif // _OrgXmlSaxHelpersXMLReaderFactory_H_

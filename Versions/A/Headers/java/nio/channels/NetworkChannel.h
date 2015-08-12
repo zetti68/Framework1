@@ -6,16 +6,17 @@
 #ifndef _JavaNioChannelsNetworkChannel_H_
 #define _JavaNioChannelsNetworkChannel_H_
 
-@class JavaNetSocketAddress;
-@protocol JavaNetSocketOption;
-@protocol JavaUtilSet;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 #include "java/lang/AutoCloseable.h"
 #include "java/nio/channels/Channel.h"
 
+@class JavaNetSocketAddress;
+@protocol JavaNetSocketOption;
+@protocol JavaUtilSet;
+
 @protocol JavaNioChannelsNetworkChannel < JavaLangAutoCloseable, JavaNioChannelsChannel, JavaIoCloseable, NSObject, JavaObject >
+
 - (id<JavaNioChannelsNetworkChannel>)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)local;
 
 - (JavaNetSocketAddress *)getLocalAddress;
@@ -29,6 +30,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsNetworkChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsNetworkChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsNetworkChannel)
 
 #endif // _JavaNioChannelsNetworkChannel_H_

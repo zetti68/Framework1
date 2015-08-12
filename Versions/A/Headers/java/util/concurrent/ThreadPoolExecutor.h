@@ -6,52 +6,35 @@
 #ifndef _JavaUtilConcurrentThreadPoolExecutor_H_
 #define _JavaUtilConcurrentThreadPoolExecutor_H_
 
-@class JavaLangRuntimePermission;
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/AbstractExecutorService.h"
+#include "java/util/concurrent/RejectedExecutionHandler.h"
+
 @class JavaLangThread;
 @class JavaLangThrowable;
-@class JavaUtilConcurrentAtomicAtomicInteger;
-@class JavaUtilConcurrentLocksReentrantLock;
 @class JavaUtilConcurrentThreadPoolExecutor_Worker;
 @class JavaUtilConcurrentTimeUnitEnum;
-@class JavaUtilHashSet;
+@protocol JavaLangRunnable;
 @protocol JavaUtilConcurrentBlockingQueue;
-@protocol JavaUtilConcurrentLocksCondition;
 @protocol JavaUtilConcurrentThreadFactory;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/lang/Runnable.h"
-#include "java/util/concurrent/AbstractExecutorService.h"
-#include "java/util/concurrent/RejectedExecutionHandler.h"
-#include "java/util/concurrent/locks/AbstractQueuedSynchronizer.h"
+@interface JavaUtilConcurrentThreadPoolExecutor : JavaUtilConcurrentAbstractExecutorService
 
-#define JavaUtilConcurrentThreadPoolExecutor_CAPACITY 536870911
-#define JavaUtilConcurrentThreadPoolExecutor_COUNT_BITS 29
-#define JavaUtilConcurrentThreadPoolExecutor_ONLY_ONE YES
-#define JavaUtilConcurrentThreadPoolExecutor_RUNNING -536870912
-#define JavaUtilConcurrentThreadPoolExecutor_SHUTDOWN 0
-#define JavaUtilConcurrentThreadPoolExecutor_STOP 536870912
-#define JavaUtilConcurrentThreadPoolExecutor_TERMINATED 1610612736
-#define JavaUtilConcurrentThreadPoolExecutor_TIDYING 1073741824
-
-@interface JavaUtilConcurrentThreadPoolExecutor : JavaUtilConcurrentAbstractExecutorService {
-}
-
-- (void)tryTerminate;
-
-- (void)rejectWithJavaLangRunnable:(id<JavaLangRunnable>)command;
-
-- (void)onShutdown;
-
-- (jboolean)isRunningOrShutdownWithBoolean:(jboolean)shutdownOK;
-
-- (void)runWorkerWithJavaUtilConcurrentThreadPoolExecutor_Worker:(JavaUtilConcurrentThreadPoolExecutor_Worker *)w;
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)corePoolSize
                     withInt:(jint)maximumPoolSize
                    withLong:(jlong)keepAliveTime
 withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit
 withJavaUtilConcurrentBlockingQueue:(id<JavaUtilConcurrentBlockingQueue>)workQueue;
+
+- (instancetype)initWithInt:(jint)corePoolSize
+                    withInt:(jint)maximumPoolSize
+                   withLong:(jlong)keepAliveTime
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit
+withJavaUtilConcurrentBlockingQueue:(id<JavaUtilConcurrentBlockingQueue>)workQueue
+withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
 
 - (instancetype)initWithInt:(jint)corePoolSize
                     withInt:(jint)maximumPoolSize
@@ -65,156 +48,122 @@ withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadF
                    withLong:(jlong)keepAliveTime
 withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit
 withJavaUtilConcurrentBlockingQueue:(id<JavaUtilConcurrentBlockingQueue>)workQueue
-withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
-
-- (instancetype)initWithInt:(jint)corePoolSize
-                    withInt:(jint)maximumPoolSize
-                   withLong:(jlong)keepAliveTime
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit
-withJavaUtilConcurrentBlockingQueue:(id<JavaUtilConcurrentBlockingQueue>)workQueue
 withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory
 withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
 
+- (void)allowCoreThreadTimeOutWithBoolean:(jboolean)value;
+
+- (jboolean)allowsCoreThreadTimeOut;
+
+- (jboolean)awaitTerminationWithLong:(jlong)timeout
+  withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
 - (void)executeWithJavaLangRunnable:(id<JavaLangRunnable>)command;
+
+- (jint)getActiveCount;
+
+- (jlong)getCompletedTaskCount;
+
+- (jint)getCorePoolSize;
+
+- (jlong)getKeepAliveTimeWithJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (jint)getLargestPoolSize;
+
+- (jint)getMaximumPoolSize;
+
+- (jint)getPoolSize;
+
+- (id<JavaUtilConcurrentBlockingQueue>)getQueue;
+
+- (id<JavaUtilConcurrentRejectedExecutionHandler>)getRejectedExecutionHandler;
+
+- (jlong)getTaskCount;
+
+- (id<JavaUtilConcurrentThreadFactory>)getThreadFactory;
+
+- (jboolean)isShutdown;
+
+- (jboolean)isTerminated;
+
+- (jboolean)isTerminating;
+
+- (jint)prestartAllCoreThreads;
+
+- (jboolean)prestartCoreThread;
+
+- (void)purge;
+
+- (jboolean)removeWithJavaLangRunnable:(id<JavaLangRunnable>)task;
+
+- (void)setCorePoolSizeWithInt:(jint)corePoolSize;
+
+- (void)setKeepAliveTimeWithLong:(jlong)time
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)setMaximumPoolSizeWithInt:(jint)maximumPoolSize;
+
+- (void)setRejectedExecutionHandlerWithJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
+
+- (void)setThreadFactoryWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory;
 
 - (void)shutdown;
 
 - (id<JavaUtilList>)shutdownNow;
 
-- (jboolean)isShutdown;
-
-- (jboolean)isTerminating;
-
-- (jboolean)isTerminated;
-
-- (jboolean)awaitTerminationWithLong:(jlong)timeout
-  withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (void)dealloc;
-
-- (void)setThreadFactoryWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory;
-
-- (id<JavaUtilConcurrentThreadFactory>)getThreadFactory;
-
-- (void)setRejectedExecutionHandlerWithJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
-
-- (id<JavaUtilConcurrentRejectedExecutionHandler>)getRejectedExecutionHandler;
-
-- (void)setCorePoolSizeWithInt:(jint)corePoolSize;
-
-- (jint)getCorePoolSize;
-
-- (jboolean)prestartCoreThread;
-
-- (void)ensurePrestart;
-
-- (jint)prestartAllCoreThreads;
-
-- (jboolean)allowsCoreThreadTimeOut;
-
-- (void)allowCoreThreadTimeOutWithBoolean:(jboolean)value;
-
-- (void)setMaximumPoolSizeWithInt:(jint)maximumPoolSize;
-
-- (jint)getMaximumPoolSize;
-
-- (void)setKeepAliveTimeWithLong:(jlong)time
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (jlong)getKeepAliveTimeWithJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id<JavaUtilConcurrentBlockingQueue>)getQueue;
-
-- (jboolean)removeWithJavaLangRunnable:(id<JavaLangRunnable>)task;
-
-- (void)purge;
-
-- (jint)getPoolSize;
-
-- (jint)getActiveCount;
-
-- (jint)getLargestPoolSize;
-
-- (jlong)getTaskCount;
-
-- (jlong)getCompletedTaskCount;
-
 - (NSString *)description;
 
-- (void)beforeExecuteWithJavaLangThread:(JavaLangThread *)t
-                   withJavaLangRunnable:(id<JavaLangRunnable>)r;
+#pragma mark Protected
 
 - (void)afterExecuteWithJavaLangRunnable:(id<JavaLangRunnable>)r
                    withJavaLangThrowable:(JavaLangThrowable *)t;
 
+- (void)beforeExecuteWithJavaLangThread:(JavaLangThread *)t
+                   withJavaLangRunnable:(id<JavaLangRunnable>)r;
+
+- (void)dealloc;
+
 - (void)terminated;
 
+#pragma mark Package-Private
+
+- (void)ensurePrestart;
+
+- (jboolean)isRunningOrShutdownWithBoolean:(jboolean)shutdownOK;
+
+- (void)onShutdown;
+
+- (void)rejectWithJavaLangRunnable:(id<JavaLangRunnable>)command;
+
+- (void)runWorkerWithJavaUtilConcurrentThreadPoolExecutor_Worker:(JavaUtilConcurrentThreadPoolExecutor_Worker *)w;
+
+- (void)tryTerminate;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentThreadPoolExecutor_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentThreadPoolExecutor)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, COUNT_BITS, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_(JavaUtilConcurrentThreadPoolExecutor *self, jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, CAPACITY, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor *new_JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_(jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, RUNNING, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentThreadFactory_(JavaUtilConcurrentThreadPoolExecutor *self, jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentThreadFactory> threadFactory);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, SHUTDOWN, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor *new_JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentThreadFactory_(jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentThreadFactory> threadFactory) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, STOP, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentRejectedExecutionHandler_(JavaUtilConcurrentThreadPoolExecutor *self, jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentRejectedExecutionHandler> handler);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, TIDYING, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor *new_JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentRejectedExecutionHandler_(jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentRejectedExecutionHandler> handler) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, TERMINATED, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentThreadFactory_withJavaUtilConcurrentRejectedExecutionHandler_(JavaUtilConcurrentThreadPoolExecutor *self, jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentThreadFactory> threadFactory, id<JavaUtilConcurrentRejectedExecutionHandler> handler);
 
-FOUNDATION_EXPORT id<JavaUtilConcurrentRejectedExecutionHandler> JavaUtilConcurrentThreadPoolExecutor_defaultHandler_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, defaultHandler_, id<JavaUtilConcurrentRejectedExecutionHandler>)
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor *new_JavaUtilConcurrentThreadPoolExecutor_initWithInt_withInt_withLong_withJavaUtilConcurrentTimeUnitEnum_withJavaUtilConcurrentBlockingQueue_withJavaUtilConcurrentThreadFactory_withJavaUtilConcurrentRejectedExecutionHandler_(jint corePoolSize, jint maximumPoolSize, jlong keepAliveTime, JavaUtilConcurrentTimeUnitEnum *unit, id<JavaUtilConcurrentBlockingQueue> workQueue, id<JavaUtilConcurrentThreadFactory> threadFactory, id<JavaUtilConcurrentRejectedExecutionHandler> handler) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT JavaLangRuntimePermission *JavaUtilConcurrentThreadPoolExecutor_shutdownPerm_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, shutdownPerm_, JavaLangRuntimePermission *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadPoolExecutor)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor, ONLY_ONE, jboolean)
+@interface JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler >
 
-#define JavaUtilConcurrentThreadPoolExecutor_Worker_serialVersionUID 6138294804551838833LL
-
-@interface JavaUtilConcurrentThreadPoolExecutor_Worker : JavaUtilConcurrentLocksAbstractQueuedSynchronizer < JavaLangRunnable > {
- @public
-  JavaLangThread *thread_;
-  id<JavaLangRunnable> firstTask_;
-  jlong completedTasks_;
-}
-
-- (instancetype)initWithJavaUtilConcurrentThreadPoolExecutor:(JavaUtilConcurrentThreadPoolExecutor *)outer$
-                                        withJavaLangRunnable:(id<JavaLangRunnable>)firstTask;
-
-- (void)run;
-
-- (jboolean)isHeldExclusively;
-
-- (jboolean)tryAcquireWithInt:(jint)unused;
-
-- (jboolean)tryReleaseWithInt:(jint)unused;
-
-- (void)lock;
-
-- (jboolean)tryLock;
-
-- (void)unlock;
-
-- (jboolean)isLocked;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_Worker_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentThreadPoolExecutor_Worker, thread_, JavaLangThread *)
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentThreadPoolExecutor_Worker, firstTask_, id<JavaLangRunnable>)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor_Worker, serialVersionUID, jlong)
-
-@interface JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -223,22 +172,17 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadPoolExecutor_Worker, serialVe
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy)
 
-@interface JavaUtilConcurrentThreadPoolExecutor_AbortPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy_init(JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy *self);
 
-- (instancetype)init;
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy *new_JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy_init() NS_RETURNS_RETAINED;
 
-- (void)rejectedExecutionWithJavaLangRunnable:(id<JavaLangRunnable>)r
-     withJavaUtilConcurrentThreadPoolExecutor:(JavaUtilConcurrentThreadPoolExecutor *)e;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadPoolExecutor_CallerRunsPolicy)
 
-@end
+@interface JavaUtilConcurrentThreadPoolExecutor_AbortPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler >
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_AbortPolicy_init() {}
-
-@interface JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -247,10 +191,17 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentThreadPoolExecutor_AbortPolicy)
 
-@interface JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_AbortPolicy_init(JavaUtilConcurrentThreadPoolExecutor_AbortPolicy *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor_AbortPolicy *new_JavaUtilConcurrentThreadPoolExecutor_AbortPolicy_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadPoolExecutor_AbortPolicy)
+
+@interface JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -259,6 +210,31 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy_init(JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy *new_JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadPoolExecutor_DiscardPolicy)
+
+@interface JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy : NSObject < JavaUtilConcurrentRejectedExecutionHandler >
+
+#pragma mark Public
+
+- (instancetype)init;
+
+- (void)rejectedExecutionWithJavaLangRunnable:(id<JavaLangRunnable>)r
+     withJavaUtilConcurrentThreadPoolExecutor:(JavaUtilConcurrentThreadPoolExecutor *)e;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy_init(JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy *new_JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadPoolExecutor_DiscardOldestPolicy)
 
 #endif // _JavaUtilConcurrentThreadPoolExecutor_H_

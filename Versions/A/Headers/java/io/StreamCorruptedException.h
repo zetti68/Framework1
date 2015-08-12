@@ -6,13 +6,12 @@
 #ifndef _JavaIoStreamCorruptedException_H_
 #define _JavaIoStreamCorruptedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
 
-#define JavaIoStreamCorruptedException_serialVersionUID 8983558202217591746LL
+@interface JavaIoStreamCorruptedException : JavaIoObjectStreamException
 
-@interface JavaIoStreamCorruptedException : JavaIoObjectStreamException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoStreamCorruptedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoStreamCorruptedException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamCorruptedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoStreamCorruptedException_init(JavaIoStreamCorruptedException *self);
+
+FOUNDATION_EXPORT JavaIoStreamCorruptedException *new_JavaIoStreamCorruptedException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoStreamCorruptedException_initWithNSString_(JavaIoStreamCorruptedException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoStreamCorruptedException *new_JavaIoStreamCorruptedException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoStreamCorruptedException)
 
 #endif // _JavaIoStreamCorruptedException_H_

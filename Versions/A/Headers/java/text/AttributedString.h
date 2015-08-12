@@ -6,21 +6,20 @@
 #ifndef _JavaTextAttributedString_H_
 #define _JavaTextAttributedString_H_
 
+#include "J2ObjC_header.h"
+#include "java/text/AttributedCharacterIterator.h"
+
 @class IOSObjectArray;
-@class JavaTextAttributedCharacterIterator_Attribute;
-@class JavaUtilHashSet;
-@protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/text/AttributedCharacterIterator.h"
 
 @interface JavaTextAttributedString : NSObject {
  @public
   NSString *text_;
   id<JavaUtilMap> attributeMap_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaTextAttributedCharacterIterator:(id<JavaTextAttributedCharacterIterator>)iterator;
 
@@ -60,10 +59,32 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextAttributedString_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextAttributedString)
 
 J2OBJC_FIELD_SETTER(JavaTextAttributedString, text_, NSString *)
 J2OBJC_FIELD_SETTER(JavaTextAttributedString, attributeMap_, id<JavaUtilMap>)
+
+FOUNDATION_EXPORT void JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_(JavaTextAttributedString *self, id<JavaTextAttributedCharacterIterator> iterator);
+
+FOUNDATION_EXPORT JavaTextAttributedString *new_JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_(id<JavaTextAttributedCharacterIterator> iterator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_withInt_withInt_(JavaTextAttributedString *self, id<JavaTextAttributedCharacterIterator> iterator, jint start, jint end);
+
+FOUNDATION_EXPORT JavaTextAttributedString *new_JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_withInt_withInt_(id<JavaTextAttributedCharacterIterator> iterator, jint start, jint end) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_withInt_withInt_withJavaTextAttributedCharacterIterator_AttributeArray_(JavaTextAttributedString *self, id<JavaTextAttributedCharacterIterator> iterator, jint start, jint end, IOSObjectArray *attributes);
+
+FOUNDATION_EXPORT JavaTextAttributedString *new_JavaTextAttributedString_initWithJavaTextAttributedCharacterIterator_withInt_withInt_withJavaTextAttributedCharacterIterator_AttributeArray_(id<JavaTextAttributedCharacterIterator> iterator, jint start, jint end, IOSObjectArray *attributes) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextAttributedString_initWithNSString_(JavaTextAttributedString *self, NSString *value);
+
+FOUNDATION_EXPORT JavaTextAttributedString *new_JavaTextAttributedString_initWithNSString_(NSString *value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextAttributedString_initWithNSString_withJavaUtilMap_(JavaTextAttributedString *self, NSString *value, id<JavaUtilMap> attributes);
+
+FOUNDATION_EXPORT JavaTextAttributedString *new_JavaTextAttributedString_initWithNSString_withJavaUtilMap_(NSString *value, id<JavaUtilMap> attributes) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAttributedString)
 
 @interface JavaTextAttributedString_Range : NSObject {
  @public
@@ -72,25 +93,27 @@ J2OBJC_FIELD_SETTER(JavaTextAttributedString, attributeMap_, id<JavaUtilMap>)
   id value_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithInt:(jint)s
                     withInt:(jint)e
                      withId:(id)v;
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextAttributedString_Range_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextAttributedString_Range)
 
 J2OBJC_FIELD_SETTER(JavaTextAttributedString_Range, value_, id)
 
-@interface JavaTextAttributedString_AttributedIterator : NSObject < JavaTextAttributedCharacterIterator > {
-}
+FOUNDATION_EXPORT void JavaTextAttributedString_Range_initWithInt_withInt_withId_(JavaTextAttributedString_Range *self, jint s, jint e, id v);
 
-- (instancetype)initWithJavaTextAttributedString:(JavaTextAttributedString *)attrString;
+FOUNDATION_EXPORT JavaTextAttributedString_Range *new_JavaTextAttributedString_Range_initWithInt_withInt_withId_(jint s, jint e, id v) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaTextAttributedString:(JavaTextAttributedString *)attrString
-withJavaTextAttributedCharacterIterator_AttributeArray:(IOSObjectArray *)attributes
-                                         withInt:(jint)begin
-                                         withInt:(jint)end;
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAttributedString_Range)
+
+@interface JavaTextAttributedString_AttributedIterator : NSObject < JavaTextAttributedCharacterIterator >
+
+#pragma mark Public
 
 - (id)clone;
 
@@ -98,17 +121,17 @@ withJavaTextAttributedCharacterIterator_AttributeArray:(IOSObjectArray *)attribu
 
 - (jchar)first;
 
-- (jint)getBeginIndex;
-
-- (jint)getEndIndex;
-
-- (jint)getIndex;
-
 - (id<JavaUtilSet>)getAllAttributeKeys;
 
 - (id)getAttributeWithJavaTextAttributedCharacterIterator_Attribute:(JavaTextAttributedCharacterIterator_Attribute *)attribute;
 
 - (id<JavaUtilMap>)getAttributes;
+
+- (jint)getBeginIndex;
+
+- (jint)getEndIndex;
+
+- (jint)getIndex;
 
 - (jint)getRunLimit;
 
@@ -130,8 +153,27 @@ withJavaTextAttributedCharacterIterator_AttributeArray:(IOSObjectArray *)attribu
 
 - (jchar)setIndexWithInt:(jint)location;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaTextAttributedString:(JavaTextAttributedString *)attrString;
+
+- (instancetype)initWithJavaTextAttributedString:(JavaTextAttributedString *)attrString
+withJavaTextAttributedCharacterIterator_AttributeArray:(IOSObjectArray *)attributes
+                                         withInt:(jint)begin
+                                         withInt:(jint)end;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextAttributedString_AttributedIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextAttributedString_AttributedIterator)
+
+FOUNDATION_EXPORT void JavaTextAttributedString_AttributedIterator_initWithJavaTextAttributedString_(JavaTextAttributedString_AttributedIterator *self, JavaTextAttributedString *attrString);
+
+FOUNDATION_EXPORT JavaTextAttributedString_AttributedIterator *new_JavaTextAttributedString_AttributedIterator_initWithJavaTextAttributedString_(JavaTextAttributedString *attrString) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextAttributedString_AttributedIterator_initWithJavaTextAttributedString_withJavaTextAttributedCharacterIterator_AttributeArray_withInt_withInt_(JavaTextAttributedString_AttributedIterator *self, JavaTextAttributedString *attrString, IOSObjectArray *attributes, jint begin, jint end);
+
+FOUNDATION_EXPORT JavaTextAttributedString_AttributedIterator *new_JavaTextAttributedString_AttributedIterator_initWithJavaTextAttributedString_withJavaTextAttributedCharacterIterator_AttributeArray_withInt_withInt_(JavaTextAttributedString *attrString, IOSObjectArray *attributes, jint begin, jint end) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAttributedString_AttributedIterator)
 
 #endif // _JavaTextAttributedString_H_

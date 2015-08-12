@@ -6,13 +6,13 @@
 #ifndef _OrgApacheHarmonySecurityX501AttributeValue_H_
 #define _OrgApacheHarmonySecurityX501AttributeValue_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaLangStringBuilder;
 @class OrgApacheHarmonySecurityAsn1ASN1Type;
 @class OrgApacheHarmonySecurityUtilsObjectIdentifier;
 @protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
 
 @interface OrgApacheHarmonySecurityX501AttributeValue : NSObject {
  @public
@@ -23,6 +23,8 @@
   jboolean hasQE_;
   NSString *rawString_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)parsedString
                      withBoolean:(jboolean)hasQorE
@@ -35,25 +37,39 @@ withOrgApacheHarmonySecurityUtilsObjectIdentifier:(OrgApacheHarmonySecurityUtils
                    withByteArray:(IOSByteArray *)encoded
                          withInt:(jint)tag;
 
-- (jint)getTag;
+- (void)appendQEStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
 
 - (NSString *)getHexString;
 
-- (id<JavaUtilCollection>)getValuesWithOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *)type;
+- (NSString *)getRFC2253String;
 
-- (void)appendQEStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
+- (jint)getTag;
+
+- (id<JavaUtilCollection>)getValuesWithOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *)type;
 
 - (NSString *)makeCanonical;
 
-- (NSString *)getRFC2253String;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityX501AttributeValue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityX501AttributeValue)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityX501AttributeValue, escapedString_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityX501AttributeValue, encoded_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityX501AttributeValue, bytes_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityX501AttributeValue, rawString_, NSString *)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withBoolean_withOrgApacheHarmonySecurityUtilsObjectIdentifier_(OrgApacheHarmonySecurityX501AttributeValue *self, NSString *parsedString, jboolean hasQorE, OrgApacheHarmonySecurityUtilsObjectIdentifier *oid);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501AttributeValue *new_OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withBoolean_withOrgApacheHarmonySecurityUtilsObjectIdentifier_(NSString *parsedString, jboolean hasQorE, OrgApacheHarmonySecurityUtilsObjectIdentifier *oid) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withByteArray_(OrgApacheHarmonySecurityX501AttributeValue *self, NSString *hexString, IOSByteArray *encoded);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501AttributeValue *new_OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withByteArray_(NSString *hexString, IOSByteArray *encoded) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withByteArray_withInt_(OrgApacheHarmonySecurityX501AttributeValue *self, NSString *rawString, IOSByteArray *encoded, jint tag);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501AttributeValue *new_OrgApacheHarmonySecurityX501AttributeValue_initWithNSString_withByteArray_withInt_(NSString *rawString, IOSByteArray *encoded, jint tag) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityX501AttributeValue)
 
 #endif // _OrgApacheHarmonySecurityX501AttributeValue_H_

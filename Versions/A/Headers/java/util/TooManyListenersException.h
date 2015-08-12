@@ -6,13 +6,12 @@
 #ifndef _JavaUtilTooManyListenersException_H_
 #define _JavaUtilTooManyListenersException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaUtilTooManyListenersException_serialVersionUID 5074640544770687831LL
+@interface JavaUtilTooManyListenersException : JavaLangException
 
-@interface JavaUtilTooManyListenersException : JavaLangException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTooManyListenersException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTooManyListenersException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTooManyListenersException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTooManyListenersException_init(JavaUtilTooManyListenersException *self);
+
+FOUNDATION_EXPORT JavaUtilTooManyListenersException *new_JavaUtilTooManyListenersException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTooManyListenersException_initWithNSString_(JavaUtilTooManyListenersException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaUtilTooManyListenersException *new_JavaUtilTooManyListenersException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTooManyListenersException)
 
 #endif // _JavaUtilTooManyListenersException_H_

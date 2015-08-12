@@ -6,12 +6,13 @@
 #ifndef _JavaNioChannelsScatteringByteChannel_H_
 #define _JavaNioChannelsScatteringByteChannel_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/ReadableByteChannel.h"
 
+@class IOSObjectArray;
+
 @protocol JavaNioChannelsScatteringByteChannel < JavaNioChannelsReadableByteChannel, NSObject, JavaObject >
+
 - (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)buffers;
 
 - (jlong)readWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
@@ -20,6 +21,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsScatteringByteChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsScatteringByteChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsScatteringByteChannel)
 
 #endif // _JavaNioChannelsScatteringByteChannel_H_

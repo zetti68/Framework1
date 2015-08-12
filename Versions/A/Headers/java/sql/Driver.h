@@ -6,11 +6,11 @@
 #ifndef _JavaSqlDriver_H_
 #define _JavaSqlDriver_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaUtilProperties;
 @protocol JavaSqlConnection;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlDriver < NSObject, JavaObject >
 
@@ -30,6 +30,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlDriver_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlDriver)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDriver)
 
 #endif // _JavaSqlDriver_H_

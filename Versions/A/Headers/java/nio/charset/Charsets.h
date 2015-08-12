@@ -6,14 +6,15 @@
 #ifndef _JavaNioCharsetCharsets_H_
 #define _JavaNioCharsetCharsets_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class IOSCharArray;
 @class JavaNioCharsetCharset;
 
-#import "JreEmulation.h"
+@interface JavaNioCharsetCharsets : NSObject
 
-@interface JavaNioCharsetCharsets : NSObject {
-}
+#pragma mark Public
 
 + (IOSByteArray *)toBigEndianUtf16BytesWithCharArray:(IOSCharArray *)chars
                                              withInt:(jint)offset
@@ -21,9 +22,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioCharsetCharsets_initialized;
 J2OBJC_STATIC_INIT(JavaNioCharsetCharsets)
-FOUNDATION_EXPORT IOSByteArray *JavaNioCharsetCharsets_toBigEndianUtf16BytesWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length);
 
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharsets_ISO_8859_1_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsets, ISO_8859_1_, JavaNioCharsetCharset *)
@@ -33,5 +32,9 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsets, US_ASCII_, JavaNioCharsetChar
 
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharsets_UTF_8_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsets, UTF_8_, JavaNioCharsetCharset *)
+
+FOUNDATION_EXPORT IOSByteArray *JavaNioCharsetCharsets_toBigEndianUtf16BytesWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCharsets)
 
 #endif // _JavaNioCharsetCharsets_H_

@@ -6,9 +6,9 @@
 #ifndef _JavaUtilFormattable_H_
 #define _JavaUtilFormattable_H_
 
-@class JavaUtilFormatter;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaUtilFormatter;
 
 @protocol JavaUtilFormattable < NSObject, JavaObject >
 
@@ -19,6 +19,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilFormattable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilFormattable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilFormattable)
 
 #endif // _JavaUtilFormattable_H_

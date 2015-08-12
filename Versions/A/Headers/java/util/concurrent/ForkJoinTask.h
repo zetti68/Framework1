@@ -6,80 +6,71 @@
 #ifndef _JavaUtilConcurrentForkJoinTask_H_
 #define _JavaUtilConcurrentForkJoinTask_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangRefReferenceQueue;
-@class JavaLangThrowable;
-@class JavaUtilConcurrentForkJoinPool;
-@class JavaUtilConcurrentForkJoinTask;
-@class JavaUtilConcurrentLocksReentrantLock;
-@class JavaUtilConcurrentTimeUnitEnum;
-@class SunMiscUnsafe;
-@protocol JavaLangRunnable;
-@protocol JavaUtilCollection;
-@protocol JavaUtilConcurrentCallable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/ref/WeakReference.h"
 #include "java/util/concurrent/Future.h"
 #include "java/util/concurrent/RunnableFuture.h"
 
-@interface JavaUtilConcurrentForkJoinTask_ExceptionNode : JavaLangRefWeakReference {
- @public
-  JavaLangThrowable *ex_;
-  JavaUtilConcurrentForkJoinTask_ExceptionNode *next_;
-  jlong thrower_;
-}
-
-- (instancetype)initWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)task
-                                 withJavaLangThrowable:(JavaLangThrowable *)ex
-      withJavaUtilConcurrentForkJoinTask_ExceptionNode:(JavaUtilConcurrentForkJoinTask_ExceptionNode *)next;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentForkJoinTask_ExceptionNode_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_ExceptionNode, ex_, JavaLangThrowable *)
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_ExceptionNode, next_, JavaUtilConcurrentForkJoinTask_ExceptionNode *)
-
-#define JavaUtilConcurrentForkJoinTask_CANCELLED -2
-#define JavaUtilConcurrentForkJoinTask_EXCEPTIONAL -3
-#define JavaUtilConcurrentForkJoinTask_EXCEPTION_MAP_CAPACITY 32
-#define JavaUtilConcurrentForkJoinTask_NORMAL -1
-#define JavaUtilConcurrentForkJoinTask_SIGNAL 1
-#define JavaUtilConcurrentForkJoinTask_serialVersionUID -7721805057305804111LL
+@class IOSObjectArray;
+@class JavaLangThrowable;
+@class JavaUtilConcurrentForkJoinPool;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaLangRunnable;
+@protocol JavaUtilCollection;
+@protocol JavaUtilConcurrentCallable;
 
 @interface JavaUtilConcurrentForkJoinTask : NSObject < JavaUtilConcurrentFuture, JavaIoSerializable > {
  @public
   jint status_;
 }
 
-- (void)tryAwaitDoneWithLong:(jlong)millis;
+#pragma mark Public
 
-- (void)doExec;
+- (instancetype)init;
 
-+ (void)helpExpungeStaleExceptions;
++ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
 
-- (JavaUtilConcurrentForkJoinTask *)fork;
++ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
-- (id)join;
-
-- (id)invoke;
-
-+ (void)invokeAllWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t1
-                 withJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t2;
-
-+ (void)invokeAllWithJavaUtilConcurrentForkJoinTaskArray:(IOSObjectArray *)tasks;
-
-+ (id<JavaUtilCollection>)invokeAllWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
++ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                                       withId:(id)result;
 
 - (jboolean)cancelWithBoolean:(jboolean)mayInterruptIfRunning;
 
-- (void)cancelIgnoringExceptions;
+- (void)completeWithId:(id)value;
 
-- (jboolean)isDone;
+- (void)completeExceptionallyWithJavaLangThrowable:(JavaLangThrowable *)ex;
+
+- (JavaUtilConcurrentForkJoinTask *)fork;
+
+- (id)get;
+
+- (id)getWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (JavaLangThrowable *)getException;
+
++ (JavaUtilConcurrentForkJoinPool *)getPool;
+
++ (jint)getQueuedTaskCount;
+
+- (id)getRawResult;
+
++ (jint)getSurplusQueuedTaskCount;
+
++ (void)helpQuiesce;
+
++ (jboolean)inForkJoinPool;
+
+- (id)invoke;
+
++ (id<JavaUtilCollection>)invokeAllWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
+
++ (void)invokeAllWithJavaUtilConcurrentForkJoinTaskArray:(IOSObjectArray *)tasks;
+
++ (void)invokeAllWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t1
+                 withJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)t2;
 
 - (jboolean)isCancelled;
 
@@ -87,38 +78,19 @@ J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_ExceptionNode, next_, JavaUti
 
 - (jboolean)isCompletedNormally;
 
-- (JavaLangThrowable *)getException;
+- (jboolean)isDone;
 
-- (void)completeExceptionallyWithJavaLangThrowable:(JavaLangThrowable *)ex;
-
-- (void)completeWithId:(id)value;
-
-- (id)get;
-
-- (id)getWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (void)quietlyJoin;
+- (id)join;
 
 - (void)quietlyInvoke;
 
-+ (void)helpQuiesce;
+- (void)quietlyJoin;
 
 - (void)reinitialize;
 
-+ (JavaUtilConcurrentForkJoinPool *)getPool;
-
-+ (jboolean)inForkJoinPool;
-
 - (jboolean)tryUnfork;
 
-+ (jint)getQueuedTaskCount;
-
-+ (jint)getSurplusQueuedTaskCount;
-
-- (id)getRawResult;
-
-- (void)setRawResultWithId:(id)value;
+#pragma mark Protected
 
 - (jboolean)exec;
 
@@ -128,63 +100,81 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 + (JavaUtilConcurrentForkJoinTask *)pollTask;
 
-+ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
+- (void)setRawResultWithId:(id)value;
 
-+ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                                       withId:(id)result;
+#pragma mark Package-Private
 
-+ (JavaUtilConcurrentForkJoinTask *)adaptWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
+- (void)cancelIgnoringExceptions;
 
-- (instancetype)init;
+- (void)doExec;
+
++ (void)helpExpungeStaleExceptions;
+
+- (void)tryAwaitDoneWithLong:(jlong)millis;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentForkJoinTask_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentForkJoinTask)
+
 FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_helpExpungeStaleExceptions();
+
 FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_invokeAllWithJavaUtilConcurrentForkJoinTask_withJavaUtilConcurrentForkJoinTask_(JavaUtilConcurrentForkJoinTask *t1, JavaUtilConcurrentForkJoinTask *t2);
+
 FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_invokeAllWithJavaUtilConcurrentForkJoinTaskArray_(IOSObjectArray *tasks);
+
 FOUNDATION_EXPORT id<JavaUtilCollection> JavaUtilConcurrentForkJoinTask_invokeAllWithJavaUtilCollection_(id<JavaUtilCollection> tasks);
+
 FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_helpQuiesce();
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinPool *JavaUtilConcurrentForkJoinTask_getPool();
+
 FOUNDATION_EXPORT jboolean JavaUtilConcurrentForkJoinTask_inForkJoinPool();
+
 FOUNDATION_EXPORT jint JavaUtilConcurrentForkJoinTask_getQueuedTaskCount();
+
 FOUNDATION_EXPORT jint JavaUtilConcurrentForkJoinTask_getSurplusQueuedTaskCount();
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_peekNextLocalTask();
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_pollNextLocalTask();
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_pollTask();
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_adaptWithJavaLangRunnable_(id<JavaLangRunnable> runnable);
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_adaptWithJavaLangRunnable_withId_(id<JavaLangRunnable> runnable, id result);
+
 FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask *JavaUtilConcurrentForkJoinTask_adaptWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> callable);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, NORMAL, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_init(JavaUtilConcurrentForkJoinTask *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, CANCELLED, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentForkJoinTask)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, EXCEPTIONAL, jint)
+@interface JavaUtilConcurrentForkJoinTask_ExceptionNode : JavaLangRefWeakReference {
+ @public
+  JavaLangThrowable *ex_;
+  JavaUtilConcurrentForkJoinTask_ExceptionNode *next_;
+  jlong thrower_;
+}
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, SIGNAL, jint)
+#pragma mark Package-Private
 
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilConcurrentForkJoinTask_exceptionTable_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, exceptionTable_, IOSObjectArray *)
+- (instancetype)initWithJavaUtilConcurrentForkJoinTask:(JavaUtilConcurrentForkJoinTask *)task
+                                 withJavaLangThrowable:(JavaLangThrowable *)ex
+      withJavaUtilConcurrentForkJoinTask_ExceptionNode:(JavaUtilConcurrentForkJoinTask_ExceptionNode *)next;
 
-FOUNDATION_EXPORT JavaUtilConcurrentLocksReentrantLock *JavaUtilConcurrentForkJoinTask_exceptionTableLock_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, exceptionTableLock_, JavaUtilConcurrentLocksReentrantLock *)
+@end
 
-FOUNDATION_EXPORT JavaLangRefReferenceQueue *JavaUtilConcurrentForkJoinTask_exceptionTableRefQueue_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, exceptionTableRefQueue_, JavaLangRefReferenceQueue *)
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentForkJoinTask_ExceptionNode)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, EXCEPTION_MAP_CAPACITY, jint)
+J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_ExceptionNode, ex_, JavaLangThrowable *)
+J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_ExceptionNode, next_, JavaUtilConcurrentForkJoinTask_ExceptionNode *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_ExceptionNode_initWithJavaUtilConcurrentForkJoinTask_withJavaLangThrowable_withJavaUtilConcurrentForkJoinTask_ExceptionNode_(JavaUtilConcurrentForkJoinTask_ExceptionNode *self, JavaUtilConcurrentForkJoinTask *task, JavaLangThrowable *ex, JavaUtilConcurrentForkJoinTask_ExceptionNode *next);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentForkJoinTask_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask_ExceptionNode *new_JavaUtilConcurrentForkJoinTask_ExceptionNode_initWithJavaUtilConcurrentForkJoinTask_withJavaLangThrowable_withJavaUtilConcurrentForkJoinTask_ExceptionNode_(JavaUtilConcurrentForkJoinTask *task, JavaLangThrowable *ex, JavaUtilConcurrentForkJoinTask_ExceptionNode *next) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentForkJoinTask_statusOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, statusOffset_, jlong)
-
-#define JavaUtilConcurrentForkJoinTask_AdaptedRunnable_serialVersionUID 5232453952276885070LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentForkJoinTask_ExceptionNode)
 
 @interface JavaUtilConcurrentForkJoinTask_AdaptedRunnable : JavaUtilConcurrentForkJoinTask < JavaUtilConcurrentRunnableFuture > {
  @public
@@ -193,28 +183,34 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask, statusOffset_, jlong)
   id result_;
 }
 
-- (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                  withId:(id)result;
-
-- (id)getRawResult;
-
-- (void)setRawResultWithId:(id)v;
+#pragma mark Public
 
 - (jboolean)exec;
 
+- (id)getRawResult;
+
 - (void)run;
+
+- (void)setRawResultWithId:(id)v;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                  withId:(id)result;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentForkJoinTask_AdaptedRunnable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentForkJoinTask_AdaptedRunnable)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable, runnable_, id<JavaLangRunnable>)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable, resultOnCompletion_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable, result_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_AdaptedRunnable_initWithJavaLangRunnable_withId_(JavaUtilConcurrentForkJoinTask_AdaptedRunnable *self, id<JavaLangRunnable> runnable, id result);
 
-#define JavaUtilConcurrentForkJoinTask_AdaptedCallable_serialVersionUID 2838392045355241008LL
+FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask_AdaptedRunnable *new_JavaUtilConcurrentForkJoinTask_AdaptedRunnable_initWithJavaLangRunnable_withId_(id<JavaLangRunnable> runnable, id result) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable)
 
 @interface JavaUtilConcurrentForkJoinTask_AdaptedCallable : JavaUtilConcurrentForkJoinTask < JavaUtilConcurrentRunnableFuture > {
  @public
@@ -222,23 +218,31 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask_AdaptedRunnable, seria
   id result_;
 }
 
-- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
-
-- (id)getRawResult;
-
-- (void)setRawResultWithId:(id)v;
+#pragma mark Public
 
 - (jboolean)exec;
 
+- (id)getRawResult;
+
 - (void)run;
+
+- (void)setRawResultWithId:(id)v;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentForkJoinTask_AdaptedCallable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentForkJoinTask_AdaptedCallable)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_AdaptedCallable, callable_, id<JavaUtilConcurrentCallable>)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentForkJoinTask_AdaptedCallable, result_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentForkJoinTask_AdaptedCallable, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentForkJoinTask_AdaptedCallable_initWithJavaUtilConcurrentCallable_(JavaUtilConcurrentForkJoinTask_AdaptedCallable *self, id<JavaUtilConcurrentCallable> callable);
+
+FOUNDATION_EXPORT JavaUtilConcurrentForkJoinTask_AdaptedCallable *new_JavaUtilConcurrentForkJoinTask_AdaptedCallable_initWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> callable) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentForkJoinTask_AdaptedCallable)
 
 #endif // _JavaUtilConcurrentForkJoinTask_H_

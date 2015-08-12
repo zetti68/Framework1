@@ -6,6 +6,8 @@
 #ifndef _LibcoreUtilEmptyArray_H_
 #define _LibcoreUtilEmptyArray_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSBooleanArray;
 @class IOSByteArray;
 @class IOSCharArray;
@@ -13,14 +15,10 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 
-#import "JreEmulation.h"
-
-@interface LibcoreUtilEmptyArray : NSObject {
-}
+@interface LibcoreUtilEmptyArray : NSObject
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreUtilEmptyArray_initialized;
 J2OBJC_STATIC_INIT(LibcoreUtilEmptyArray)
 
 FOUNDATION_EXPORT IOSBooleanArray *LibcoreUtilEmptyArray_BOOLEAN_;
@@ -58,5 +56,7 @@ J2OBJC_STATIC_FIELD_GETTER(LibcoreUtilEmptyArray, TYPE_, IOSObjectArray *)
 
 FOUNDATION_EXPORT IOSObjectArray *LibcoreUtilEmptyArray_TYPE_VARIABLE_;
 J2OBJC_STATIC_FIELD_GETTER(LibcoreUtilEmptyArray, TYPE_VARIABLE_, IOSObjectArray *)
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilEmptyArray)
 
 #endif // _LibcoreUtilEmptyArray_H_

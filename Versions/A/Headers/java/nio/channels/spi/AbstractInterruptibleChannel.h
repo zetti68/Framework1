@@ -6,10 +6,7 @@
 #ifndef _JavaNioChannelsSpiAbstractInterruptibleChannel_H_
 #define _JavaNioChannelsSpiAbstractInterruptibleChannel_H_
 
-@class JavaNioChannelsSpiAbstractInterruptibleChannel_ChannelCloser;
-
-#import "JreEmulation.h"
-#include "java/lang/Runnable.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/Channel.h"
 #include "java/nio/channels/InterruptibleChannel.h"
 
@@ -18,11 +15,15 @@
   jboolean interrupted_;
 }
 
-- (instancetype)init;
+#pragma mark Public
+
+- (void)close;
 
 - (jboolean)isOpen;
 
-- (void)close;
+#pragma mark Protected
+
+- (instancetype)init;
 
 - (void)begin;
 
@@ -32,17 +33,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractInterruptibleChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSpiAbstractInterruptibleChannel)
 
-@interface JavaNioChannelsSpiAbstractInterruptibleChannel_ChannelCloser : NSObject < JavaLangRunnable > {
-}
+FOUNDATION_EXPORT void JavaNioChannelsSpiAbstractInterruptibleChannel_init(JavaNioChannelsSpiAbstractInterruptibleChannel *self);
 
-- (void)run;
-
-- (instancetype)initWithJavaNioChannelsSpiAbstractInterruptibleChannel:(JavaNioChannelsSpiAbstractInterruptibleChannel *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractInterruptibleChannel_ChannelCloser_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSpiAbstractInterruptibleChannel)
 
 #endif // _JavaNioChannelsSpiAbstractInterruptibleChannel_H_

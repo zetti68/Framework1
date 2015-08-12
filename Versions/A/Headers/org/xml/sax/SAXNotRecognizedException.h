@@ -6,11 +6,12 @@
 #ifndef _OrgXmlSaxSAXNotRecognizedException_H_
 #define _OrgXmlSaxSAXNotRecognizedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/SAXException.h"
 
-@interface OrgXmlSaxSAXNotRecognizedException : OrgXmlSaxSAXException {
-}
+@interface OrgXmlSaxSAXNotRecognizedException : OrgXmlSaxSAXException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -18,6 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxSAXNotRecognizedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxSAXNotRecognizedException)
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXNotRecognizedException_init(OrgXmlSaxSAXNotRecognizedException *self);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXNotRecognizedException *new_OrgXmlSaxSAXNotRecognizedException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXNotRecognizedException_initWithNSString_(OrgXmlSaxSAXNotRecognizedException *self, NSString *message);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXNotRecognizedException *new_OrgXmlSaxSAXNotRecognizedException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxSAXNotRecognizedException)
 
 #endif // _OrgXmlSaxSAXNotRecognizedException_H_

@@ -6,6 +6,8 @@
 #ifndef _JavaxXmlParsersSAXParser_H_
 #define _JavaxXmlParsersSAXParser_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoFile;
 @class JavaIoInputStream;
 @class JavaxXmlValidationSchema;
@@ -15,23 +17,35 @@
 @protocol OrgXmlSaxParser;
 @protocol OrgXmlSaxXMLReader;
 
-#import "JreEmulation.h"
+@interface JavaxXmlParsersSAXParser : NSObject
 
-#define JavaxXmlParsersSAXParser_DEBUG NO
+#pragma mark Public
 
-@interface JavaxXmlParsersSAXParser : NSObject {
-}
+- (id<OrgXmlSaxParser>)getParser;
 
-- (instancetype)init;
+- (id)getPropertyWithNSString:(NSString *)name;
 
-- (void)reset;
+- (JavaxXmlValidationSchema *)getSchema;
 
-- (void)parseWithJavaIoInputStream:(JavaIoInputStream *)is
-          withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
+- (id<OrgXmlSaxXMLReader>)getXMLReader;
 
-- (void)parseWithJavaIoInputStream:(JavaIoInputStream *)is
-          withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb
-                      withNSString:(NSString *)systemId;
+- (jboolean)isNamespaceAware;
+
+- (jboolean)isValidating;
+
+- (jboolean)isXIncludeAware;
+
+- (void)parseWithJavaIoFile:(JavaIoFile *)f
+withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
+
+- (void)parseWithJavaIoFile:(JavaIoFile *)f
+   withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
+
+- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)is
+   withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
+
+- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)is
+             withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
 
 - (void)parseWithJavaIoInputStream:(JavaIoInputStream *)is
 withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
@@ -40,45 +54,34 @@ withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
 withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh
                       withNSString:(NSString *)systemId;
 
+- (void)parseWithJavaIoInputStream:(JavaIoInputStream *)is
+          withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
+
+- (void)parseWithJavaIoInputStream:(JavaIoInputStream *)is
+          withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb
+                      withNSString:(NSString *)systemId;
+
+- (void)parseWithNSString:(NSString *)uri
+withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
+
 - (void)parseWithNSString:(NSString *)uri
  withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
 
-- (void)parseWithNSString:(NSString *)uri
-withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
-
-- (void)parseWithJavaIoFile:(JavaIoFile *)f
-   withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
-
-- (void)parseWithJavaIoFile:(JavaIoFile *)f
-withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
-
-- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)is
-             withOrgXmlSaxHandlerBase:(OrgXmlSaxHandlerBase *)hb;
-
-- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)is
-   withOrgXmlSaxHelpersDefaultHandler:(OrgXmlSaxHelpersDefaultHandler *)dh;
-
-- (id<OrgXmlSaxParser>)getParser;
-
-- (id<OrgXmlSaxXMLReader>)getXMLReader;
-
-- (jboolean)isNamespaceAware;
-
-- (jboolean)isValidating;
+- (void)reset;
 
 - (void)setPropertyWithNSString:(NSString *)name
                          withId:(id)value;
 
-- (id)getPropertyWithNSString:(NSString *)name;
+#pragma mark Protected
 
-- (JavaxXmlValidationSchema *)getSchema;
-
-- (jboolean)isXIncludeAware;
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlParsersSAXParser_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlParsersSAXParser)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaxXmlParsersSAXParser, DEBUG, jboolean)
+FOUNDATION_EXPORT void JavaxXmlParsersSAXParser_init(JavaxXmlParsersSAXParser *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlParsersSAXParser)
 
 #endif // _JavaxXmlParsersSAXParser_H_

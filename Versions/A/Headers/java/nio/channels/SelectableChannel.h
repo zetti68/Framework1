@@ -6,18 +6,17 @@
 #ifndef _JavaNioChannelsSelectableChannel_H_
 #define _JavaNioChannelsSelectableChannel_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/Channel.h"
+#include "java/nio/channels/spi/AbstractInterruptibleChannel.h"
+
 @class JavaNioChannelsSelectionKey;
 @class JavaNioChannelsSelector;
 @class JavaNioChannelsSpiSelectorProvider;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/Channel.h"
-#include "java/nio/channels/spi/AbstractInterruptibleChannel.h"
+@interface JavaNioChannelsSelectableChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsChannel >
 
-@interface JavaNioChannelsSelectableChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsChannel > {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (id)blockingLock;
 
@@ -40,8 +39,16 @@
 
 - (jint)validOps;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSelectableChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSelectableChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsSelectableChannel_init(JavaNioChannelsSelectableChannel *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSelectableChannel)
 
 #endif // _JavaNioChannelsSelectableChannel_H_

@@ -6,30 +6,29 @@
 #ifndef _JavaLangShort_H_
 #define _JavaLangShort_H_
 
-@class IOSClass;
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
+
+@class IOSClass;
 
 #define JavaLangShort_MAX_VALUE 32767
 #define JavaLangShort_MIN_VALUE -32768
 #define JavaLangShort_SIZE 16
-#define JavaLangShort_serialVersionUID 7515723908773894738LL
 
-@interface JavaLangShort : NSNumber < JavaLangComparable > {
-}
+@interface JavaLangShort : NSNumber < JavaLangComparable >
 
-- (instancetype)initWithNSString:(NSString *)string;
+#pragma mark Public
 
 - (instancetype)initWithShort:(jshort)value;
 
-- (jbyte)charValue;
+- (instancetype)initWithNSString:(NSString *)string;
 
-- (jint)compareToWithId:(JavaLangShort *)object;
+- (jbyte)charValue;
 
 + (jint)compareWithShort:(jshort)lhs
                withShort:(jshort)rhs;
+
+- (jint)compareToWithId:(JavaLangShort *)object;
 
 + (JavaLangShort *)decodeWithNSString:(NSString *)string;
 
@@ -50,37 +49,27 @@
 + (jshort)parseShortWithNSString:(NSString *)string
                          withInt:(jint)radix;
 
++ (jshort)reverseBytesWithShort:(jshort)s;
+
 - (jshort)shortValue;
 
 - (NSString *)description;
 
 + (NSString *)toStringWithShort:(jshort)value;
 
++ (JavaLangShort *)valueOfWithShort:(jshort)s;
+
 + (JavaLangShort *)valueOfWithNSString:(NSString *)string;
 
 + (JavaLangShort *)valueOfWithNSString:(NSString *)string
                                withInt:(jint)radix;
 
-+ (jshort)reverseBytesWithShort:(jshort)s;
-
-+ (JavaLangShort *)valueOfWithShort:(jshort)s;
+#pragma mark Package-Private
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangShort_initialized;
 J2OBJC_STATIC_INIT(JavaLangShort)
-FOUNDATION_EXPORT jint JavaLangShort_compareWithShort_withShort_(jshort lhs, jshort rhs);
-FOUNDATION_EXPORT JavaLangShort *JavaLangShort_decodeWithNSString_(NSString *string);
-FOUNDATION_EXPORT jshort JavaLangShort_parseShortWithNSString_(NSString *string);
-FOUNDATION_EXPORT jshort JavaLangShort_parseShortWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT NSString *JavaLangShort_toStringWithShort_(jshort value);
-FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT jshort JavaLangShort_reverseBytesWithShort_(jshort s);
-FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithShort_(jshort s);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangShort, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangShort, MAX_VALUE, jshort)
 
@@ -91,8 +80,33 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangShort, SIZE, jint)
 FOUNDATION_EXPORT IOSClass *JavaLangShort_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangShort, TYPE_, IOSClass *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangShort_SMALL_VALUES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangShort, SMALL_VALUES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaLangShort_initWithNSString_(JavaLangShort *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangShort *new_JavaLangShort_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangShort_initWithShort_(JavaLangShort *self, jshort value);
+
+FOUNDATION_EXPORT JavaLangShort *new_JavaLangShort_initWithShort_(jshort value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangShort_compareWithShort_withShort_(jshort lhs, jshort rhs);
+
+FOUNDATION_EXPORT JavaLangShort *JavaLangShort_decodeWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jshort JavaLangShort_parseShortWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jshort JavaLangShort_parseShortWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT NSString *JavaLangShort_toStringWithShort_(jshort value);
+
+FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT jshort JavaLangShort_reverseBytesWithShort_(jshort s);
+
+FOUNDATION_EXPORT JavaLangShort *JavaLangShort_valueOfWithShort_(jshort s);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangShort)
 
 BOXED_INC_AND_DEC(Short, shortValue, JavaLangShort)
 

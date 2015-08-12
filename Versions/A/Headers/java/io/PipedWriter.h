@@ -6,14 +6,15 @@
 #ifndef _JavaIoPipedWriter_H_
 #define _JavaIoPipedWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Writer.h"
+
 @class IOSCharArray;
 @class JavaIoPipedReader;
 
-#import "JreEmulation.h"
-#include "java/io/Writer.h"
+@interface JavaIoPipedWriter : JavaIoWriter
 
-@interface JavaIoPipedWriter : JavaIoWriter {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -33,6 +34,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoPipedWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPipedWriter)
+
+FOUNDATION_EXPORT void JavaIoPipedWriter_init(JavaIoPipedWriter *self);
+
+FOUNDATION_EXPORT JavaIoPipedWriter *new_JavaIoPipedWriter_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPipedWriter_initWithJavaIoPipedReader_(JavaIoPipedWriter *self, JavaIoPipedReader *destination);
+
+FOUNDATION_EXPORT JavaIoPipedWriter *new_JavaIoPipedWriter_initWithJavaIoPipedReader_(JavaIoPipedReader *destination) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPipedWriter)
 
 #endif // _JavaIoPipedWriter_H_

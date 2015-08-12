@@ -6,13 +6,12 @@
 #ifndef _JavaIoNotSerializableException_H_
 #define _JavaIoNotSerializableException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
 
-#define JavaIoNotSerializableException_serialVersionUID 2906642554793891381LL
+@interface JavaIoNotSerializableException : JavaIoObjectStreamException
 
-@interface JavaIoNotSerializableException : JavaIoObjectStreamException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoNotSerializableException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoNotSerializableException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoNotSerializableException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoNotSerializableException_init(JavaIoNotSerializableException *self);
+
+FOUNDATION_EXPORT JavaIoNotSerializableException *new_JavaIoNotSerializableException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoNotSerializableException_initWithNSString_(JavaIoNotSerializableException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoNotSerializableException *new_JavaIoNotSerializableException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoNotSerializableException)
 
 #endif // _JavaIoNotSerializableException_H_

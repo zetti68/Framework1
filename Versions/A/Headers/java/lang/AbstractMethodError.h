@@ -6,13 +6,12 @@
 #ifndef _JavaLangAbstractMethodError_H_
 #define _JavaLangAbstractMethodError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IncompatibleClassChangeError.h"
 
-#define JavaLangAbstractMethodError_serialVersionUID -1654391082989018462LL
+@interface JavaLangAbstractMethodError : JavaLangIncompatibleClassChangeError
 
-@interface JavaLangAbstractMethodError : JavaLangIncompatibleClassChangeError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAbstractMethodError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAbstractMethodError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAbstractMethodError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangAbstractMethodError_init(JavaLangAbstractMethodError *self);
+
+FOUNDATION_EXPORT JavaLangAbstractMethodError *new_JavaLangAbstractMethodError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangAbstractMethodError_initWithNSString_(JavaLangAbstractMethodError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangAbstractMethodError *new_JavaLangAbstractMethodError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAbstractMethodError)
 
 #endif // _JavaLangAbstractMethodError_H_

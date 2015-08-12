@@ -6,34 +6,28 @@
 #ifndef _JavaxXmlValidationValidator_H_
 #define _JavaxXmlValidationValidator_H_
 
+#include "J2ObjC_header.h"
+
 @protocol JavaxXmlTransformResult;
 @protocol JavaxXmlTransformSource;
 @protocol OrgW3cDomLsLSResourceResolver;
 @protocol OrgXmlSaxErrorHandler;
 
-#import "JreEmulation.h"
+@interface JavaxXmlValidationValidator : NSObject
 
-@interface JavaxXmlValidationValidator : NSObject {
-}
-
-- (instancetype)init;
-
-- (void)reset;
-
-- (void)validateWithJavaxXmlTransformSource:(id<JavaxXmlTransformSource>)source;
-
-- (void)validateWithJavaxXmlTransformSource:(id<JavaxXmlTransformSource>)source
-                withJavaxXmlTransformResult:(id<JavaxXmlTransformResult>)result;
-
-- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)errorHandler;
+#pragma mark Public
 
 - (id<OrgXmlSaxErrorHandler>)getErrorHandler;
 
-- (void)setResourceResolverWithOrgW3cDomLsLSResourceResolver:(id<OrgW3cDomLsLSResourceResolver>)resourceResolver;
+- (jboolean)getFeatureWithNSString:(NSString *)name;
+
+- (id)getPropertyWithNSString:(NSString *)name;
 
 - (id<OrgW3cDomLsLSResourceResolver>)getResourceResolver;
 
-- (jboolean)getFeatureWithNSString:(NSString *)name;
+- (void)reset;
+
+- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)errorHandler;
 
 - (void)setFeatureWithNSString:(NSString *)name
                    withBoolean:(jboolean)value;
@@ -41,10 +35,23 @@
 - (void)setPropertyWithNSString:(NSString *)name
                          withId:(id)object;
 
-- (id)getPropertyWithNSString:(NSString *)name;
+- (void)setResourceResolverWithOrgW3cDomLsLSResourceResolver:(id<OrgW3cDomLsLSResourceResolver>)resourceResolver;
+
+- (void)validateWithJavaxXmlTransformSource:(id<JavaxXmlTransformSource>)source;
+
+- (void)validateWithJavaxXmlTransformSource:(id<JavaxXmlTransformSource>)source
+                withJavaxXmlTransformResult:(id<JavaxXmlTransformResult>)result;
+
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlValidationValidator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlValidationValidator)
+
+FOUNDATION_EXPORT void JavaxXmlValidationValidator_init(JavaxXmlValidationValidator *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlValidationValidator)
 
 #endif // _JavaxXmlValidationValidator_H_

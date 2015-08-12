@@ -6,7 +6,7 @@
 #ifndef _JavaNioBuffer_H_
 #define _JavaNioBuffer_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 #define JavaNioBuffer_UNSET_MARK -1
 
@@ -20,9 +20,7 @@
   jlong effectiveDirectAddress_;
 }
 
-- (instancetype)initWithInt:(jint)elementSizeShift
-                    withInt:(jint)capacity
-                   withLong:(jlong)effectiveDirectAddress;
+#pragma mark Public
 
 - (id)array;
 
@@ -30,27 +28,11 @@
 
 - (jint)capacity;
 
-- (void)checkIndexWithInt:(jint)index;
-
-- (void)checkIndexWithInt:(jint)index
-                  withInt:(jint)sizeOfType;
-
-- (jint)checkGetBoundsWithInt:(jint)bytesPerElement
-                      withInt:(jint)length
-                      withInt:(jint)offset
-                      withInt:(jint)count;
-
-- (jint)checkPutBoundsWithInt:(jint)bytesPerElement
-                      withInt:(jint)length
-                      withInt:(jint)offset
-                      withInt:(jint)count;
-
-- (void)checkStartEndRemainingWithInt:(jint)start
-                              withInt:(jint)end;
-
 - (JavaNioBuffer *)clear;
 
 - (JavaNioBuffer *)flip;
+
+- (jint)getElementSizeShift;
 
 - (jboolean)hasArray;
 
@@ -59,8 +41,6 @@
 - (jboolean)isDirect;
 
 - (jboolean)isReadOnly;
-
-- (void)checkWritable;
 
 - (jint)limit;
 
@@ -72,8 +52,6 @@
 
 - (JavaNioBuffer *)positionWithInt:(jint)newPosition;
 
-- (void)positionImplWithInt:(jint)newPosition;
-
 - (jint)remaining;
 
 - (JavaNioBuffer *)reset;
@@ -82,12 +60,42 @@
 
 - (NSString *)description;
 
-- (jint)getElementSizeShift;
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)elementSizeShift
+                    withInt:(jint)capacity
+                   withLong:(jlong)effectiveDirectAddress;
+
+- (jint)checkGetBoundsWithInt:(jint)bytesPerElement
+                      withInt:(jint)length
+                      withInt:(jint)offset
+                      withInt:(jint)count;
+
+- (void)checkIndexWithInt:(jint)index;
+
+- (void)checkIndexWithInt:(jint)index
+                  withInt:(jint)sizeOfType;
+
+- (jint)checkPutBoundsWithInt:(jint)bytesPerElement
+                      withInt:(jint)length
+                      withInt:(jint)offset
+                      withInt:(jint)count;
+
+- (void)checkStartEndRemainingWithInt:(jint)start
+                              withInt:(jint)end;
+
+- (void)checkWritable;
+
+- (void)positionImplWithInt:(jint)newPosition;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioBuffer)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNioBuffer, UNSET_MARK, jint)
+
+FOUNDATION_EXPORT void JavaNioBuffer_initWithInt_withInt_withLong_(JavaNioBuffer *self, jint elementSizeShift, jint capacity, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioBuffer)
 
 #endif // _JavaNioBuffer_H_

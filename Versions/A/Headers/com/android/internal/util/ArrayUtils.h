@@ -6,101 +6,110 @@
 #ifndef _ComAndroidInternalUtilArrayUtils_H_
 #define _ComAndroidInternalUtilArrayUtils_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class IOSClass;
 @class IOSIntArray;
 @class IOSLongArray;
 @class IOSObjectArray;
 
-#import "JreEmulation.h"
+@interface ComAndroidInternalUtilArrayUtils : NSObject
 
-#define ComAndroidInternalUtilArrayUtils_CACHE_SIZE 73
-
-@interface ComAndroidInternalUtilArrayUtils : NSObject {
-}
-
-+ (jint)idealByteArraySizeWithInt:(jint)need;
-
-+ (jint)idealBooleanArraySizeWithInt:(jint)need;
-
-+ (jint)idealShortArraySizeWithInt:(jint)need;
-
-+ (jint)idealCharArraySizeWithInt:(jint)need;
-
-+ (jint)idealIntArraySizeWithInt:(jint)need;
-
-+ (jint)idealFloatArraySizeWithInt:(jint)need;
-
-+ (jint)idealObjectArraySizeWithInt:(jint)need;
-
-+ (jint)idealLongArraySizeWithInt:(jint)need;
-
-+ (jboolean)equalsWithByteArray:(IOSByteArray *)array1
-                  withByteArray:(IOSByteArray *)array2
-                        withInt:(jint)length;
-
-+ (IOSObjectArray *)emptyArrayWithIOSClass:(IOSClass *)kind;
-
-+ (jboolean)containsWithNSObjectArray:(IOSObjectArray *)array
-                               withId:(id)value;
-
-+ (jint)indexOfWithNSObjectArray:(IOSObjectArray *)array
-                          withId:(id)value;
-
-+ (jboolean)containsAllWithNSObjectArray:(IOSObjectArray *)array
-                       withNSObjectArray:(IOSObjectArray *)check;
-
-+ (jboolean)containsWithIntArray:(IOSIntArray *)array
-                         withInt:(jint)value;
-
-+ (jlong)totalWithLongArray:(IOSLongArray *)array;
+#pragma mark Public
 
 + (IOSObjectArray *)appendElementWithIOSClass:(IOSClass *)kind
-                            withNSObjectArray:(IOSObjectArray *)array
-                                       withId:(id)element;
-
-+ (IOSObjectArray *)removeElementWithIOSClass:(IOSClass *)kind
                             withNSObjectArray:(IOSObjectArray *)array
                                        withId:(id)element;
 
 + (IOSIntArray *)appendIntWithIntArray:(IOSIntArray *)cur
                                withInt:(jint)val;
 
++ (jboolean)containsWithIntArray:(IOSIntArray *)array
+                         withInt:(jint)value;
+
++ (jboolean)containsWithNSObjectArray:(IOSObjectArray *)array
+                               withId:(id)value;
+
++ (jboolean)containsAllWithNSObjectArray:(IOSObjectArray *)array
+                       withNSObjectArray:(IOSObjectArray *)check;
+
++ (IOSObjectArray *)emptyArrayWithIOSClass:(IOSClass *)kind;
+
++ (jboolean)equalsWithByteArray:(IOSByteArray *)array1
+                  withByteArray:(IOSByteArray *)array2
+                        withInt:(jint)length;
+
++ (jint)idealBooleanArraySizeWithInt:(jint)need;
+
++ (jint)idealByteArraySizeWithInt:(jint)need;
+
++ (jint)idealCharArraySizeWithInt:(jint)need;
+
++ (jint)idealFloatArraySizeWithInt:(jint)need;
+
++ (jint)idealIntArraySizeWithInt:(jint)need;
+
++ (jint)idealLongArraySizeWithInt:(jint)need;
+
++ (jint)idealObjectArraySizeWithInt:(jint)need;
+
++ (jint)idealShortArraySizeWithInt:(jint)need;
+
++ (jint)indexOfWithNSObjectArray:(IOSObjectArray *)array
+                          withId:(id)value;
+
++ (IOSObjectArray *)removeElementWithIOSClass:(IOSClass *)kind
+                            withNSObjectArray:(IOSObjectArray *)array
+                                       withId:(id)element;
+
 + (IOSIntArray *)removeIntWithIntArray:(IOSIntArray *)cur
                                withInt:(jint)val;
 
++ (jlong)totalWithLongArray:(IOSLongArray *)array;
+
 @end
 
-FOUNDATION_EXPORT BOOL ComAndroidInternalUtilArrayUtils_initialized;
 J2OBJC_STATIC_INIT(ComAndroidInternalUtilArrayUtils)
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealByteArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealBooleanArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealShortArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealCharArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealIntArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealFloatArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealObjectArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_idealLongArraySizeWithInt_(jint need);
+
 FOUNDATION_EXPORT jboolean ComAndroidInternalUtilArrayUtils_equalsWithByteArray_withByteArray_withInt_(IOSByteArray *array1, IOSByteArray *array2, jint length);
+
 FOUNDATION_EXPORT IOSObjectArray *ComAndroidInternalUtilArrayUtils_emptyArrayWithIOSClass_(IOSClass *kind);
+
 FOUNDATION_EXPORT jboolean ComAndroidInternalUtilArrayUtils_containsWithNSObjectArray_withId_(IOSObjectArray *array, id value);
+
 FOUNDATION_EXPORT jint ComAndroidInternalUtilArrayUtils_indexOfWithNSObjectArray_withId_(IOSObjectArray *array, id value);
+
 FOUNDATION_EXPORT jboolean ComAndroidInternalUtilArrayUtils_containsAllWithNSObjectArray_withNSObjectArray_(IOSObjectArray *array, IOSObjectArray *check);
+
 FOUNDATION_EXPORT jboolean ComAndroidInternalUtilArrayUtils_containsWithIntArray_withInt_(IOSIntArray *array, jint value);
+
 FOUNDATION_EXPORT jlong ComAndroidInternalUtilArrayUtils_totalWithLongArray_(IOSLongArray *array);
+
 FOUNDATION_EXPORT IOSObjectArray *ComAndroidInternalUtilArrayUtils_appendElementWithIOSClass_withNSObjectArray_withId_(IOSClass *kind, IOSObjectArray *array, id element);
+
 FOUNDATION_EXPORT IOSObjectArray *ComAndroidInternalUtilArrayUtils_removeElementWithIOSClass_withNSObjectArray_withId_(IOSClass *kind, IOSObjectArray *array, id element);
+
 FOUNDATION_EXPORT IOSIntArray *ComAndroidInternalUtilArrayUtils_appendIntWithIntArray_withInt_(IOSIntArray *cur, jint val);
+
 FOUNDATION_EXPORT IOSIntArray *ComAndroidInternalUtilArrayUtils_removeIntWithIntArray_withInt_(IOSIntArray *cur, jint val);
 
-FOUNDATION_EXPORT IOSObjectArray *ComAndroidInternalUtilArrayUtils_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(ComAndroidInternalUtilArrayUtils, EMPTY_, IOSObjectArray *)
-J2OBJC_STATIC_FIELD_SETTER(ComAndroidInternalUtilArrayUtils, EMPTY_, IOSObjectArray *)
-
-J2OBJC_STATIC_FIELD_GETTER(ComAndroidInternalUtilArrayUtils, CACHE_SIZE, jint)
-
-FOUNDATION_EXPORT IOSObjectArray *ComAndroidInternalUtilArrayUtils_sCache_;
-J2OBJC_STATIC_FIELD_GETTER(ComAndroidInternalUtilArrayUtils, sCache_, IOSObjectArray *)
-J2OBJC_STATIC_FIELD_SETTER(ComAndroidInternalUtilArrayUtils, sCache_, IOSObjectArray *)
+J2OBJC_TYPE_LITERAL_HEADER(ComAndroidInternalUtilArrayUtils)
 
 #endif // _ComAndroidInternalUtilArrayUtils_H_

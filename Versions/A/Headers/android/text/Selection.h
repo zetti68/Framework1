@@ -6,44 +6,36 @@
 #ifndef _AndroidTextSelection_H_
 #define _AndroidTextSelection_H_
 
+#include "J2ObjC_header.h"
+
 @protocol AndroidTextSpannable;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "android/text/NoCopySpan.h"
+@interface AndroidTextSelection : NSObject
 
-@interface AndroidTextSelection : NSObject {
-}
+#pragma mark Public
+
++ (void)extendSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
+                                        withInt:(jint)index;
+
++ (jint)getSelectionEndWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 + (jint)getSelectionStartWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
-+ (jint)getSelectionEndWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
++ (void)removeSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text;
+
++ (void)selectAllWithAndroidTextSpannable:(id<AndroidTextSpannable>)text;
+
++ (void)setSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
+                                     withInt:(jint)index;
 
 + (void)setSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
                                      withInt:(jint)start
                                      withInt:(jint)stop;
 
-+ (void)setSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
-                                     withInt:(jint)index;
-
-+ (void)selectAllWithAndroidTextSpannable:(id<AndroidTextSpannable>)text;
-
-+ (void)extendSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
-                                        withInt:(jint)index;
-
-+ (void)removeSelectionWithAndroidTextSpannable:(id<AndroidTextSpannable>)text;
-
 @end
 
-FOUNDATION_EXPORT BOOL AndroidTextSelection_initialized;
 J2OBJC_STATIC_INIT(AndroidTextSelection)
-FOUNDATION_EXPORT jint AndroidTextSelection_getSelectionStartWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
-FOUNDATION_EXPORT jint AndroidTextSelection_getSelectionEndWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
-FOUNDATION_EXPORT void AndroidTextSelection_setSelectionWithAndroidTextSpannable_withInt_withInt_(id<AndroidTextSpannable> text, jint start, jint stop);
-FOUNDATION_EXPORT void AndroidTextSelection_setSelectionWithAndroidTextSpannable_withInt_(id<AndroidTextSpannable> text, jint index);
-FOUNDATION_EXPORT void AndroidTextSelection_selectAllWithAndroidTextSpannable_(id<AndroidTextSpannable> text);
-FOUNDATION_EXPORT void AndroidTextSelection_extendSelectionWithAndroidTextSpannable_withInt_(id<AndroidTextSpannable> text, jint index);
-FOUNDATION_EXPORT void AndroidTextSelection_removeSelectionWithAndroidTextSpannable_(id<AndroidTextSpannable> text);
 
 FOUNDATION_EXPORT id AndroidTextSelection_SELECTION_START_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSelection, SELECTION_START_, id)
@@ -51,18 +43,20 @@ J2OBJC_STATIC_FIELD_GETTER(AndroidTextSelection, SELECTION_START_, id)
 FOUNDATION_EXPORT id AndroidTextSelection_SELECTION_END_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSelection, SELECTION_END_, id)
 
-@interface AndroidTextSelection_START : NSObject < AndroidTextNoCopySpan > {
-}
+FOUNDATION_EXPORT jint AndroidTextSelection_getSelectionStartWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
 
-@end
+FOUNDATION_EXPORT jint AndroidTextSelection_getSelectionEndWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
 
-__attribute__((always_inline)) inline void AndroidTextSelection_START_init() {}
+FOUNDATION_EXPORT void AndroidTextSelection_setSelectionWithAndroidTextSpannable_withInt_withInt_(id<AndroidTextSpannable> text, jint start, jint stop);
 
-@interface AndroidTextSelection_END : NSObject < AndroidTextNoCopySpan > {
-}
+FOUNDATION_EXPORT void AndroidTextSelection_setSelectionWithAndroidTextSpannable_withInt_(id<AndroidTextSpannable> text, jint index);
 
-@end
+FOUNDATION_EXPORT void AndroidTextSelection_selectAllWithAndroidTextSpannable_(id<AndroidTextSpannable> text);
 
-__attribute__((always_inline)) inline void AndroidTextSelection_END_init() {}
+FOUNDATION_EXPORT void AndroidTextSelection_extendSelectionWithAndroidTextSpannable_withInt_(id<AndroidTextSpannable> text, jint index);
+
+FOUNDATION_EXPORT void AndroidTextSelection_removeSelectionWithAndroidTextSpannable_(id<AndroidTextSpannable> text);
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextSelection)
 
 #endif // _AndroidTextSelection_H_

@@ -6,11 +6,11 @@
 #ifndef _JavaNioMappedByteBuffer_H_
 #define _JavaNioMappedByteBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/ByteBuffer.h"
+
 @class JavaNioChannelsFileChannel_MapMode;
 @class JavaNioMemoryBlock;
-
-#import "JreEmulation.h"
-#include "java/nio/ByteBuffer.h"
 
 @interface JavaNioMappedByteBuffer : JavaNioByteBuffer {
  @public
@@ -18,22 +18,30 @@
   JavaNioMemoryBlock *block_;
 }
 
-- (instancetype)initWithJavaNioMemoryBlock:(JavaNioMemoryBlock *)block
-                                   withInt:(jint)capacity
-    withJavaNioChannelsFileChannel_MapMode:(JavaNioChannelsFileChannel_MapMode *)mapMode
-                                  withLong:(jlong)effectiveDirectAddress;
+#pragma mark Public
+
+- (JavaNioMappedByteBuffer *)force;
 
 - (jboolean)isLoaded;
 
 - (JavaNioMappedByteBuffer *)load__;
 
-- (JavaNioMappedByteBuffer *)force;
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaNioMemoryBlock:(JavaNioMemoryBlock *)block
+                                   withInt:(jint)capacity
+    withJavaNioChannelsFileChannel_MapMode:(JavaNioChannelsFileChannel_MapMode *)mapMode
+                                  withLong:(jlong)effectiveDirectAddress;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioMappedByteBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioMappedByteBuffer)
 
 J2OBJC_FIELD_SETTER(JavaNioMappedByteBuffer, mapMode_, JavaNioChannelsFileChannel_MapMode *)
 J2OBJC_FIELD_SETTER(JavaNioMappedByteBuffer, block_, JavaNioMemoryBlock *)
+
+FOUNDATION_EXPORT void JavaNioMappedByteBuffer_initWithJavaNioMemoryBlock_withInt_withJavaNioChannelsFileChannel_MapMode_withLong_(JavaNioMappedByteBuffer *self, JavaNioMemoryBlock *block, jint capacity, JavaNioChannelsFileChannel_MapMode *mapMode, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioMappedByteBuffer)
 
 #endif // _JavaNioMappedByteBuffer_H_

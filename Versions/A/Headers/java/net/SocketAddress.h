@@ -6,20 +6,21 @@
 #ifndef _JavaNetSocketAddress_H_
 #define _JavaNetSocketAddress_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaNetSocketAddress_serialVersionUID 5215720748342549866LL
+@interface JavaNetSocketAddress : NSObject < JavaIoSerializable >
 
-@interface JavaNetSocketAddress : NSObject < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketAddress_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketAddress)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketAddress, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetSocketAddress_init(JavaNetSocketAddress *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketAddress)
 
 #endif // _JavaNetSocketAddress_H_

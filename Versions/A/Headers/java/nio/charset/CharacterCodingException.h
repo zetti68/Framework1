@@ -6,20 +6,23 @@
 #ifndef _JavaNioCharsetCharacterCodingException_H_
 #define _JavaNioCharsetCharacterCodingException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNioCharsetCharacterCodingException_serialVersionUID 8421532232154627783LL
+@interface JavaNioCharsetCharacterCodingException : JavaIoIOException
 
-@interface JavaNioCharsetCharacterCodingException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetCharacterCodingException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetCharacterCodingException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharacterCodingException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioCharsetCharacterCodingException_init(JavaNioCharsetCharacterCodingException *self);
+
+FOUNDATION_EXPORT JavaNioCharsetCharacterCodingException *new_JavaNioCharsetCharacterCodingException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCharacterCodingException)
 
 #endif // _JavaNioCharsetCharacterCodingException_H_

@@ -6,39 +6,46 @@
 #ifndef _JavaNetPlainSocketImpl_H_
 #define _JavaNetPlainSocketImpl_H_
 
-@class DalvikSystemCloseGuard;
-@class IOSByteArray;
+#include "J2ObjC_header.h"
+#include "java/net/SocketImpl.h"
+
 @class JavaIoFileDescriptor;
+@class JavaIoInputStream;
+@class JavaIoOutputStream;
 @class JavaNetInetAddress;
 @class JavaNetProxy;
 @class JavaNetSocketAddress;
-@class JavaNetSocks4Message;
 
-#import "JreEmulation.h"
-#include "java/io/InputStream.h"
-#include "java/io/OutputStream.h"
-#include "java/net/SocketImpl.h"
+@interface JavaNetPlainSocketImpl : JavaNetSocketImpl
 
-@interface JavaNetPlainSocketImpl : JavaNetSocketImpl {
-}
-
-- (instancetype)initWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
-
-- (instancetype)initWithJavaNetProxy:(JavaNetProxy *)proxy;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
 - (instancetype)initWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                      withInt:(jint)localport
                       withJavaNetInetAddress:(JavaNetInetAddress *)addr
                                      withInt:(jint)port;
 
-- (void)acceptWithJavaNetSocketImpl:(JavaNetSocketImpl *)newImpl;
+- (instancetype)initWithJavaNetProxy:(JavaNetProxy *)proxy;
+
+- (id)getOptionWithInt:(jint)option;
 
 - (void)initLocalPortWithInt:(jint)localPort OBJC_METHOD_FAMILY_NONE;
 
 - (void)initRemoteAddressAndPortWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
                                                withInt:(jint)remotePort OBJC_METHOD_FAMILY_NONE;
+
+- (void)setOptionWithInt:(jint)option
+                  withId:(id)value;
+
+- (void)socksAccept;
+
+#pragma mark Protected
+
+- (void)acceptWithJavaNetSocketImpl:(JavaNetSocketImpl *)newImpl;
 
 - (jint)available;
 
@@ -47,11 +54,14 @@
 
 - (void)close;
 
-- (void)connectWithNSString:(NSString *)aHost
-                    withInt:(jint)aPort;
-
 - (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)anAddr
                               withInt:(jint)aPort;
+
+- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
+                                withInt:(jint)timeout;
+
+- (void)connectWithNSString:(NSString *)aHost
+                    withInt:(jint)aPort;
 
 - (void)createWithBoolean:(jboolean)streaming;
 
@@ -59,74 +69,38 @@
 
 - (JavaIoInputStream *)getInputStream;
 
-- (id)getOptionWithInt:(jint)option;
-
 - (JavaIoOutputStream *)getOutputStream;
 
 - (void)listenWithInt:(jint)backlog;
 
-- (void)setOptionWithInt:(jint)option
-                  withId:(id)value;
-
-- (void)socksAccept;
+- (void)sendUrgentDataWithInt:(jint)value;
 
 - (void)shutdownInput;
 
 - (void)shutdownOutput;
 
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
-                                withInt:(jint)timeout;
-
 - (jboolean)supportsUrgentData;
 
-- (void)sendUrgentDataWithInt:(jint)value;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetPlainSocketImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetPlainSocketImpl)
 
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetPlainSocketImpl_lastConnectedAddress_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetPlainSocketImpl, lastConnectedAddress_, JavaNetInetAddress *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetPlainSocketImpl, lastConnectedAddress_, JavaNetInetAddress *)
+FOUNDATION_EXPORT void JavaNetPlainSocketImpl_initWithJavaIoFileDescriptor_(JavaNetPlainSocketImpl *self, JavaIoFileDescriptor *fd);
 
-FOUNDATION_EXPORT jint JavaNetPlainSocketImpl_lastConnectedPort_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetPlainSocketImpl, lastConnectedPort_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaNetPlainSocketImpl, lastConnectedPort_, jint)
+FOUNDATION_EXPORT JavaNetPlainSocketImpl *new_JavaNetPlainSocketImpl_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
 
-@interface JavaNetPlainSocketImpl_PlainSocketInputStream : JavaIoInputStream {
-}
+FOUNDATION_EXPORT void JavaNetPlainSocketImpl_initWithJavaNetProxy_(JavaNetPlainSocketImpl *self, JavaNetProxy *proxy);
 
-- (instancetype)initWithJavaNetPlainSocketImpl:(JavaNetPlainSocketImpl *)socketImpl;
+FOUNDATION_EXPORT JavaNetPlainSocketImpl *new_JavaNetPlainSocketImpl_initWithJavaNetProxy_(JavaNetProxy *proxy) NS_RETURNS_RETAINED;
 
-- (jint)available;
+FOUNDATION_EXPORT void JavaNetPlainSocketImpl_init(JavaNetPlainSocketImpl *self);
 
-- (void)close;
+FOUNDATION_EXPORT JavaNetPlainSocketImpl *new_JavaNetPlainSocketImpl_init() NS_RETURNS_RETAINED;
 
-- (jint)read;
+FOUNDATION_EXPORT void JavaNetPlainSocketImpl_initWithJavaIoFileDescriptor_withInt_withJavaNetInetAddress_withInt_(JavaNetPlainSocketImpl *self, JavaIoFileDescriptor *fd, jint localport, JavaNetInetAddress *addr, jint port);
 
-- (jint)readWithByteArray:(IOSByteArray *)buffer
-                  withInt:(jint)byteOffset
-                  withInt:(jint)byteCount;
+FOUNDATION_EXPORT JavaNetPlainSocketImpl *new_JavaNetPlainSocketImpl_initWithJavaIoFileDescriptor_withInt_withJavaNetInetAddress_withInt_(JavaIoFileDescriptor *fd, jint localport, JavaNetInetAddress *addr, jint port) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaNetPlainSocketImpl_PlainSocketInputStream_init() {}
-
-@interface JavaNetPlainSocketImpl_PlainSocketOutputStream : JavaIoOutputStream {
-}
-
-- (instancetype)initWithJavaNetPlainSocketImpl:(JavaNetPlainSocketImpl *)socketImpl;
-
-- (void)close;
-
-- (void)writeWithInt:(jint)oneByte;
-
-- (void)writeWithByteArray:(IOSByteArray *)buffer
-                   withInt:(jint)offset
-                   withInt:(jint)byteCount;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetPlainSocketImpl_PlainSocketOutputStream_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetPlainSocketImpl)
 
 #endif // _JavaNetPlainSocketImpl_H_

@@ -6,19 +6,13 @@
 #ifndef _JavaUtilComparableTimSort_H_
 #define _JavaUtilComparableTimSort_H_
 
-@class IOSIntArray;
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@protocol JavaLangComparable;
 
-#import "JreEmulation.h"
+@interface JavaUtilComparableTimSort : NSObject
 
-#define JavaUtilComparableTimSort_DEBUG NO
-#define JavaUtilComparableTimSort_INITIAL_TMP_STORAGE_LENGTH 256
-#define JavaUtilComparableTimSort_MIN_GALLOP 7
-#define JavaUtilComparableTimSort_MIN_MERGE 32
-
-@interface JavaUtilComparableTimSort : NSObject {
-}
+#pragma mark Package-Private
 
 + (void)sortWithNSObjectArray:(IOSObjectArray *)a;
 
@@ -28,16 +22,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilComparableTimSort_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilComparableTimSort)
+
 FOUNDATION_EXPORT void JavaUtilComparableTimSort_sortWithNSObjectArray_(IOSObjectArray *a);
+
 FOUNDATION_EXPORT void JavaUtilComparableTimSort_sortWithNSObjectArray_withInt_withInt_(IOSObjectArray *a, jint lo, jint hi);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilComparableTimSort, MIN_MERGE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilComparableTimSort, MIN_GALLOP, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilComparableTimSort, INITIAL_TMP_STORAGE_LENGTH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilComparableTimSort, DEBUG, jboolean)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilComparableTimSort)
 
 #endif // _JavaUtilComparableTimSort_H_

@@ -6,17 +6,13 @@
 #ifndef _JavaTextDateFormatSymbols_H_
 #define _JavaTextDateFormatSymbols_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
 @class JavaUtilLocale;
 @class JavaUtilTimeZone;
 @class LibcoreIcuLocaleData;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-
-#define JavaTextDateFormatSymbols_serialVersionUID -5987973545549424702LL
 
 @interface JavaTextDateFormatSymbols : NSObject < JavaIoSerializable, NSCopying > {
  @public
@@ -27,27 +23,25 @@
   JavaUtilLocale *locale_;
 }
 
-- (IOSObjectArray *)internalZoneStrings;
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
-+ (JavaTextDateFormatSymbols *)getInstance;
-
-+ (JavaTextDateFormatSymbols *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-+ (IOSObjectArray *)getAvailableLocales;
-
 - (id)clone;
 
 - (jboolean)isEqual:(id)object;
 
-- (NSString *)description;
-
 - (IOSObjectArray *)getAmPmStrings;
 
++ (IOSObjectArray *)getAvailableLocales;
+
 - (IOSObjectArray *)getEras;
+
++ (JavaTextDateFormatSymbols *)getInstance;
+
++ (JavaTextDateFormatSymbols *)getInstanceWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (NSString *)getLocalPatternChars;
 
@@ -79,13 +73,19 @@
 
 - (void)setZoneStringsWithNSStringArray2:(IOSObjectArray *)zoneStrings;
 
+- (NSString *)description;
+
+#pragma mark Package-Private
+
 - (NSString *)getTimeZoneDisplayNameWithJavaUtilTimeZone:(JavaUtilTimeZone *)tz
                                              withBoolean:(jboolean)daylight
                                                  withInt:(jint)style;
 
+- (IOSObjectArray *)internalZoneStrings;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextDateFormatSymbols_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextDateFormatSymbols)
 
 J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, ampms_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, eras_, IOSObjectArray *)
@@ -96,10 +96,21 @@ J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, weekdays_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, localeData_, LibcoreIcuLocaleData *)
 J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, zoneStrings_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaTextDateFormatSymbols, locale_, JavaUtilLocale *)
+
+FOUNDATION_EXPORT void JavaTextDateFormatSymbols_init(JavaTextDateFormatSymbols *self);
+
+FOUNDATION_EXPORT JavaTextDateFormatSymbols *new_JavaTextDateFormatSymbols_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextDateFormatSymbols_initWithJavaUtilLocale_(JavaTextDateFormatSymbols *self, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextDateFormatSymbols *new_JavaTextDateFormatSymbols_initWithJavaUtilLocale_(JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaTextDateFormatSymbols *JavaTextDateFormatSymbols_getInstance();
+
 FOUNDATION_EXPORT JavaTextDateFormatSymbols *JavaTextDateFormatSymbols_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaTextDateFormatSymbols_getAvailableLocales();
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDateFormatSymbols, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextDateFormatSymbols)
 
 #endif // _JavaTextDateFormatSymbols_H_

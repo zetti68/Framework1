@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsIllegalBlockingModeException_H_
 #define _JavaNioChannelsIllegalBlockingModeException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsIllegalBlockingModeException_serialVersionUID -3335774961855590474LL
+@interface JavaNioChannelsIllegalBlockingModeException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsIllegalBlockingModeException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsIllegalBlockingModeException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsIllegalBlockingModeException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsIllegalBlockingModeException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsIllegalBlockingModeException_init(JavaNioChannelsIllegalBlockingModeException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsIllegalBlockingModeException *new_JavaNioChannelsIllegalBlockingModeException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsIllegalBlockingModeException)
 
 #endif // _JavaNioChannelsIllegalBlockingModeException_H_

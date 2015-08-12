@@ -6,17 +6,16 @@
 #ifndef _JavaNioByteBufferAsIntBuffer_H_
 #define _JavaNioByteBufferAsIntBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/IntBuffer.h"
+
 @class IOSIntArray;
 @class JavaNioByteBuffer;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/IntBuffer.h"
+@interface JavaNioByteBufferAsIntBuffer : JavaNioIntBuffer
 
-@interface JavaNioByteBufferAsIntBuffer : JavaNioIntBuffer {
-}
-
-+ (JavaNioIntBuffer *)asIntBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+#pragma mark Public
 
 - (JavaNioIntBuffer *)asReadOnlyBuffer;
 
@@ -38,12 +37,6 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSIntArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
-
 - (JavaNioIntBuffer *)putWithInt:(jint)c;
 
 - (JavaNioIntBuffer *)putWithInt:(jint)index
@@ -55,9 +48,22 @@
 
 - (JavaNioIntBuffer *)slice;
 
+#pragma mark Package-Private
+
++ (JavaNioIntBuffer *)asIntBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
+
+- (IOSIntArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioByteBufferAsIntBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioByteBufferAsIntBuffer)
+
 FOUNDATION_EXPORT JavaNioIntBuffer *JavaNioByteBufferAsIntBuffer_asIntBufferWithJavaNioByteBuffer_(JavaNioByteBuffer *byteBuffer);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteBufferAsIntBuffer)
 
 #endif // _JavaNioByteBufferAsIntBuffer_H_

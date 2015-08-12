@@ -6,31 +6,31 @@
 #ifndef _JavaIoSerializationHandleMap_H_
 #define _JavaIoSerializationHandleMap_H_
 
-@class IOSIntArray;
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface JavaIoSerializationHandleMap : NSObject
 
-#define JavaIoSerializationHandleMap_LOAD_FACTOR 7500
-
-@interface JavaIoSerializationHandleMap : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (jint)getWithId:(id)key;
+
+- (jboolean)isEmpty;
 
 - (jint)putWithId:(id)key
           withInt:(jint)value;
 
 - (jint)removeWithId:(id)key;
 
-- (jboolean)isEmpty;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoSerializationHandleMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoSerializationHandleMap)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoSerializationHandleMap, LOAD_FACTOR, jint)
+FOUNDATION_EXPORT void JavaIoSerializationHandleMap_init(JavaIoSerializationHandleMap *self);
+
+FOUNDATION_EXPORT JavaIoSerializationHandleMap *new_JavaIoSerializationHandleMap_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoSerializationHandleMap)
 
 #endif // _JavaIoSerializationHandleMap_H_

@@ -6,9 +6,9 @@
 #ifndef _OrgW3cDomLsLSResourceResolver_H_
 #define _OrgW3cDomLsLSResourceResolver_H_
 
-@protocol OrgW3cDomLsLSInput;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@protocol OrgW3cDomLsLSInput;
 
 @protocol OrgW3cDomLsLSResourceResolver < NSObject, JavaObject >
 
@@ -20,6 +20,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgW3cDomLsLSResourceResolver_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgW3cDomLsLSResourceResolver)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgW3cDomLsLSResourceResolver)
 
 #endif // _OrgW3cDomLsLSResourceResolver_H_

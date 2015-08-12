@@ -6,54 +6,54 @@
 #ifndef _JavaUtilZipZipConstants_H_
 #define _JavaUtilZipZipConstants_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-#define JavaUtilZipZipConstants_CENATT 36
-#define JavaUtilZipZipConstants_CENATX 38
-#define JavaUtilZipZipConstants_CENCOM 32
-#define JavaUtilZipZipConstants_CENCRC 16
-#define JavaUtilZipZipConstants_CENDSK 34
-#define JavaUtilZipZipConstants_CENEXT 30
-#define JavaUtilZipZipConstants_CENFLG 8
-#define JavaUtilZipZipConstants_CENHDR 46
-#define JavaUtilZipZipConstants_CENHOW 10
-#define JavaUtilZipZipConstants_CENLEN 24
-#define JavaUtilZipZipConstants_CENNAM 28
-#define JavaUtilZipZipConstants_CENOFF 42
-#define JavaUtilZipZipConstants_CENSIG 33639248LL
-#define JavaUtilZipZipConstants_CENSIZ 20
-#define JavaUtilZipZipConstants_CENTIM 12
-#define JavaUtilZipZipConstants_CENVEM 4
-#define JavaUtilZipZipConstants_CENVER 6
-#define JavaUtilZipZipConstants_ENDCOM 20
-#define JavaUtilZipZipConstants_ENDHDR 22
-#define JavaUtilZipZipConstants_ENDOFF 16
-#define JavaUtilZipZipConstants_ENDSIG 101010256LL
-#define JavaUtilZipZipConstants_ENDSIZ 12
-#define JavaUtilZipZipConstants_ENDSUB 8
-#define JavaUtilZipZipConstants_ENDTOT 10
-#define JavaUtilZipZipConstants_EXTCRC 4
-#define JavaUtilZipZipConstants_EXTHDR 16
-#define JavaUtilZipZipConstants_EXTLEN 12
+#define JavaUtilZipZipConstants_LOCSIG 67324752LL
 #define JavaUtilZipZipConstants_EXTSIG 134695760LL
-#define JavaUtilZipZipConstants_EXTSIZ 8
-#define JavaUtilZipZipConstants_LOCCRC 14
-#define JavaUtilZipZipConstants_LOCEXT 28
-#define JavaUtilZipZipConstants_LOCFLG 6
+#define JavaUtilZipZipConstants_CENSIG 33639248LL
+#define JavaUtilZipZipConstants_ENDSIG 101010256LL
 #define JavaUtilZipZipConstants_LOCHDR 30
+#define JavaUtilZipZipConstants_EXTHDR 16
+#define JavaUtilZipZipConstants_CENHDR 46
+#define JavaUtilZipZipConstants_ENDHDR 22
+#define JavaUtilZipZipConstants_LOCVER 4
+#define JavaUtilZipZipConstants_LOCFLG 6
 #define JavaUtilZipZipConstants_LOCHOW 8
+#define JavaUtilZipZipConstants_LOCTIM 10
+#define JavaUtilZipZipConstants_LOCCRC 14
+#define JavaUtilZipZipConstants_LOCSIZ 18
 #define JavaUtilZipZipConstants_LOCLEN 22
 #define JavaUtilZipZipConstants_LOCNAM 26
-#define JavaUtilZipZipConstants_LOCSIG 67324752LL
-#define JavaUtilZipZipConstants_LOCSIZ 18
-#define JavaUtilZipZipConstants_LOCTIM 10
-#define JavaUtilZipZipConstants_LOCVER 4
+#define JavaUtilZipZipConstants_LOCEXT 28
+#define JavaUtilZipZipConstants_EXTCRC 4
+#define JavaUtilZipZipConstants_EXTSIZ 8
+#define JavaUtilZipZipConstants_EXTLEN 12
+#define JavaUtilZipZipConstants_CENVEM 4
+#define JavaUtilZipZipConstants_CENVER 6
+#define JavaUtilZipZipConstants_CENFLG 8
+#define JavaUtilZipZipConstants_CENHOW 10
+#define JavaUtilZipZipConstants_CENTIM 12
+#define JavaUtilZipZipConstants_CENCRC 16
+#define JavaUtilZipZipConstants_CENSIZ 20
+#define JavaUtilZipZipConstants_CENLEN 24
+#define JavaUtilZipZipConstants_CENNAM 28
+#define JavaUtilZipZipConstants_CENEXT 30
+#define JavaUtilZipZipConstants_CENCOM 32
+#define JavaUtilZipZipConstants_CENDSK 34
+#define JavaUtilZipZipConstants_CENATT 36
+#define JavaUtilZipZipConstants_CENATX 38
+#define JavaUtilZipZipConstants_CENOFF 42
+#define JavaUtilZipZipConstants_ENDSUB 8
+#define JavaUtilZipZipConstants_ENDTOT 10
+#define JavaUtilZipZipConstants_ENDSIZ 12
+#define JavaUtilZipZipConstants_ENDOFF 16
+#define JavaUtilZipZipConstants_ENDCOM 20
 
 @protocol JavaUtilZipZipConstants < NSObject, JavaObject >
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipConstants_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipConstants)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipConstants, LOCSIG, jlong)
 
@@ -134,5 +134,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipConstants, ENDSIZ, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipConstants, ENDOFF, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipConstants, ENDCOM, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipConstants)
 
 #endif // _JavaUtilZipZipConstants_H_

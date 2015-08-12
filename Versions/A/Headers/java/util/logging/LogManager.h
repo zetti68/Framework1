@@ -6,34 +6,30 @@
 #ifndef _JavaUtilLoggingLogManager_H_
 #define _JavaUtilLoggingLogManager_H_
 
-@class JavaBeansPropertyChangeSupport;
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
-@class JavaUtilHashtable;
 @class JavaUtilLoggingLevel;
 @class JavaUtilLoggingLogger;
-@class JavaUtilLoggingLoggingPermission;
-@class JavaUtilProperties;
 @protocol JavaBeansPropertyChangeListener;
 @protocol JavaUtilEnumeration;
 @protocol JavaUtilLoggingLoggingMXBean;
 
-#import "JreEmulation.h"
-#include "java/lang/Thread.h"
+@interface JavaUtilLoggingLogManager : NSObject
 
-@interface JavaUtilLoggingLogManager : NSObject {
-}
-
-+ (id<JavaUtilLoggingLoggingMXBean>)getLoggingMXBean;
-
-- (instancetype)init;
-
-- (void)checkAccess;
+#pragma mark Public
 
 - (jboolean)addLoggerWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)logger;
+
+- (void)addPropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)l;
+
+- (void)checkAccess;
 
 - (JavaUtilLoggingLogger *)getLoggerWithNSString:(NSString *)name;
 
 - (id<JavaUtilEnumeration>)getLoggerNames;
+
++ (id<JavaUtilLoggingLoggingMXBean>)getLoggingMXBean;
 
 + (JavaUtilLoggingLogManager *)getLogManager;
 
@@ -41,35 +37,32 @@
 
 - (void)readConfiguration;
 
-+ (id)getInstanceByClassWithNSString:(NSString *)className_;
-
 - (void)readConfigurationWithJavaIoInputStream:(JavaIoInputStream *)ins;
+
+- (void)removePropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)l;
 
 - (void)reset;
 
-- (void)addPropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)l;
+#pragma mark Protected
 
-- (void)removePropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)l;
+- (instancetype)init;
+
+#pragma mark Package-Private
+
++ (id)getInstanceByClassWithNSString:(NSString *)className_;
 
 - (JavaUtilLoggingLogger *)getOrCreateWithNSString:(NSString *)name
                                       withNSString:(NSString *)resourceBundleName;
 
-- (void)setParentWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)logger
-                 withJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)newParent;
-
 - (void)setLevelRecursivelyWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)logger
                             withJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)newLevel;
 
+- (void)setParentWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)logger
+                 withJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)newParent;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLoggingLogManager_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLoggingLogManager)
-FOUNDATION_EXPORT id<JavaUtilLoggingLoggingMXBean> JavaUtilLoggingLogManager_getLoggingMXBean();
-FOUNDATION_EXPORT JavaUtilLoggingLogManager *JavaUtilLoggingLogManager_getLogManager();
-FOUNDATION_EXPORT id JavaUtilLoggingLogManager_getInstanceByClassWithNSString_(NSString *className_);
-
-FOUNDATION_EXPORT JavaUtilLoggingLoggingPermission *JavaUtilLoggingLogManager_perm_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogManager, perm_, JavaUtilLoggingLoggingPermission *)
 
 FOUNDATION_EXPORT JavaUtilLoggingLogManager *JavaUtilLoggingLogManager_manager_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogManager, manager_, JavaUtilLoggingLogManager *)
@@ -78,15 +71,16 @@ J2OBJC_STATIC_FIELD_SETTER(JavaUtilLoggingLogManager, manager_, JavaUtilLoggingL
 FOUNDATION_EXPORT NSString *JavaUtilLoggingLogManager_LOGGING_MXBEAN_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogManager, LOGGING_MXBEAN_NAME_, NSString *)
 
-@interface JavaUtilLoggingLogManager_$1 : JavaLangThread {
-}
+FOUNDATION_EXPORT id<JavaUtilLoggingLoggingMXBean> JavaUtilLoggingLogManager_getLoggingMXBean();
 
-- (void)run;
+FOUNDATION_EXPORT void JavaUtilLoggingLogManager_init(JavaUtilLoggingLogManager *self);
 
-- (instancetype)initWithJavaUtilLoggingLogManager:(JavaUtilLoggingLogManager *)outer$;
+FOUNDATION_EXPORT JavaUtilLoggingLogManager *new_JavaUtilLoggingLogManager_init() NS_RETURNS_RETAINED;
 
-@end
+FOUNDATION_EXPORT JavaUtilLoggingLogManager *JavaUtilLoggingLogManager_getLogManager();
 
-__attribute__((always_inline)) inline void JavaUtilLoggingLogManager_$1_init() {}
+FOUNDATION_EXPORT id JavaUtilLoggingLogManager_getInstanceByClassWithNSString_(NSString *className_);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLogManager)
 
 #endif // _JavaUtilLoggingLogManager_H_

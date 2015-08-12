@@ -6,80 +6,68 @@
 #ifndef _JavaSecuritySecurity_H_
 #define _JavaSecuritySecurity_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaSecurityProvider;
-@class JavaSecurityProvider_Service;
-@class JavaUtilProperties;
-@protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/fortress/SecurityAccess.h"
+@interface JavaSecuritySecurity : NSObject
 
-@interface JavaSecuritySecurity : NSObject {
-}
+#pragma mark Public
+
++ (jint)addProviderWithJavaSecurityProvider:(JavaSecurityProvider *)provider;
 
 + (NSString *)getAlgorithmPropertyWithNSString:(NSString *)algName
                                   withNSString:(NSString *)propName;
 
-+ (jint)insertProviderAtWithJavaSecurityProvider:(JavaSecurityProvider *)provider
-                                         withInt:(jint)position;
++ (id<JavaUtilSet>)getAlgorithmsWithNSString:(NSString *)serviceName;
 
-+ (jint)addProviderWithJavaSecurityProvider:(JavaSecurityProvider *)provider;
-
-+ (void)removeProviderWithNSString:(NSString *)name;
-
-+ (IOSObjectArray *)getProviders;
++ (NSString *)getPropertyWithNSString:(NSString *)key;
 
 + (JavaSecurityProvider *)getProviderWithNSString:(NSString *)name;
 
-+ (IOSObjectArray *)getProvidersWithNSString:(NSString *)filter;
++ (IOSObjectArray *)getProviders;
 
 + (IOSObjectArray *)getProvidersWithJavaUtilMap:(id<JavaUtilMap>)filter;
 
-+ (NSString *)getPropertyWithNSString:(NSString *)key;
++ (IOSObjectArray *)getProvidersWithNSString:(NSString *)filter;
+
++ (jint)insertProviderAtWithJavaSecurityProvider:(JavaSecurityProvider *)provider
+                                         withInt:(jint)position;
+
++ (void)removeProviderWithNSString:(NSString *)name;
 
 + (void)setPropertyWithNSString:(NSString *)key
                    withNSString:(NSString *)value;
 
-+ (id<JavaUtilSet>)getAlgorithmsWithNSString:(NSString *)serviceName;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecuritySecurity_initialized;
 J2OBJC_STATIC_INIT(JavaSecuritySecurity)
+
 FOUNDATION_EXPORT NSString *JavaSecuritySecurity_getAlgorithmPropertyWithNSString_withNSString_(NSString *algName, NSString *propName);
+
 FOUNDATION_EXPORT jint JavaSecuritySecurity_insertProviderAtWithJavaSecurityProvider_withInt_(JavaSecurityProvider *provider, jint position);
+
 FOUNDATION_EXPORT jint JavaSecuritySecurity_addProviderWithJavaSecurityProvider_(JavaSecurityProvider *provider);
+
 FOUNDATION_EXPORT void JavaSecuritySecurity_removeProviderWithNSString_(NSString *name);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaSecuritySecurity_getProviders();
+
 FOUNDATION_EXPORT JavaSecurityProvider *JavaSecuritySecurity_getProviderWithNSString_(NSString *name);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaSecuritySecurity_getProvidersWithNSString_(NSString *filter);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaSecuritySecurity_getProvidersWithJavaUtilMap_(id<JavaUtilMap> filter);
+
 FOUNDATION_EXPORT NSString *JavaSecuritySecurity_getPropertyWithNSString_(NSString *key);
+
 FOUNDATION_EXPORT void JavaSecuritySecurity_setPropertyWithNSString_withNSString_(NSString *key, NSString *value);
+
 FOUNDATION_EXPORT id<JavaUtilSet> JavaSecuritySecurity_getAlgorithmsWithNSString_(NSString *serviceName);
 
-FOUNDATION_EXPORT JavaUtilProperties *JavaSecuritySecurity_secprops_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecurity, secprops_, JavaUtilProperties *)
-
-FOUNDATION_EXPORT IOSClass *JavaSecuritySecurity_unused_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecurity, unused_, IOSClass *)
-
-@interface JavaSecuritySecurity_SecurityDoor : NSObject < OrgApacheHarmonySecurityFortressSecurityAccess > {
-}
-
-- (void)renumProviders;
-
-- (id<JavaUtilList>)getAliasesWithJavaSecurityProvider_Service:(JavaSecurityProvider_Service *)s;
-
-- (JavaSecurityProvider_Service *)getServiceWithJavaSecurityProvider:(JavaSecurityProvider *)p
-                                                        withNSString:(NSString *)type;
-
-@end
-
-__attribute__((always_inline)) inline void JavaSecuritySecurity_SecurityDoor_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecuritySecurity)
 
 #endif // _JavaSecuritySecurity_H_

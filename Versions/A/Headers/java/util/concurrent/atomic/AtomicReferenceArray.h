@@ -6,47 +6,54 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicReferenceArray_H_
 #define _JavaUtilConcurrentAtomicAtomicReferenceArray_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicReferenceArray_serialVersionUID -6209656149925076980LL
+@class IOSObjectArray;
 
-@interface JavaUtilConcurrentAtomicAtomicReferenceArray : NSObject < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentAtomicAtomicReferenceArray : NSObject < JavaIoSerializable >
 
-- (instancetype)initWithInt:(jint)length;
+#pragma mark Public
 
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)array;
 
-- (jint)length;
-
-- (id)getWithInt:(jint)i;
-
-- (void)setWithInt:(jint)i
-            withId:(id)newValue;
-
-- (void)lazySetWithInt:(jint)i
-                withId:(id)newValue;
-
-- (id)getAndSetWithInt:(jint)i
-                withId:(id)newValue;
+- (instancetype)initWithInt:(jint)length;
 
 - (jboolean)compareAndSetWithInt:(jint)i
                           withId:(id)expect
                           withId:(id)update;
 
+- (id)getWithInt:(jint)i;
+
+- (id)getAndSetWithInt:(jint)i
+                withId:(id)newValue;
+
+- (void)lazySetWithInt:(jint)i
+                withId:(id)newValue;
+
+- (jint)length;
+
+- (void)setWithInt:(jint)i
+            withId:(id)newValue;
+
+- (NSString *)description;
+
 - (jboolean)weakCompareAndSetWithInt:(jint)i
                               withId:(id)expect
                               withId:(id)update;
 
-- (NSString *)description;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicReferenceArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicReferenceArray)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicReferenceArray, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicReferenceArray_initWithInt_(JavaUtilConcurrentAtomicAtomicReferenceArray *self, jint length);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReferenceArray *new_JavaUtilConcurrentAtomicAtomicReferenceArray_initWithInt_(jint length) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicReferenceArray_initWithNSObjectArray_(JavaUtilConcurrentAtomicAtomicReferenceArray *self, IOSObjectArray *array);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReferenceArray *new_JavaUtilConcurrentAtomicAtomicReferenceArray_initWithNSObjectArray_(IOSObjectArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicReferenceArray)
 
 #endif // _JavaUtilConcurrentAtomicAtomicReferenceArray_H_

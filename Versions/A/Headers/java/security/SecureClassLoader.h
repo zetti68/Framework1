@@ -6,25 +6,22 @@
 #ifndef _JavaSecuritySecureClassLoader_H_
 #define _JavaSecuritySecureClassLoader_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/ClassLoader.h"
+
 @class IOSByteArray;
 @class IOSClass;
 @class JavaNioByteBuffer;
 @class JavaSecurityCodeSource;
 @class JavaSecurityPermissionCollection;
-@class JavaSecurityProtectionDomain;
-@class JavaUtilHashMap;
 
-#import "JreEmulation.h"
-#include "java/lang/ClassLoader.h"
+@interface JavaSecuritySecureClassLoader : JavaLangClassLoader
 
-@interface JavaSecuritySecureClassLoader : JavaLangClassLoader {
-}
+#pragma mark Protected
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaLangClassLoader:(JavaLangClassLoader *)parent;
-
-- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)codesource;
 
 - (IOSClass *)defineClassWithNSString:(NSString *)name
                         withByteArray:(IOSByteArray *)b
@@ -36,8 +33,20 @@
                 withJavaNioByteBuffer:(JavaNioByteBuffer *)b
            withJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs;
 
+- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)codesource;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecuritySecureClassLoader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecuritySecureClassLoader)
+
+FOUNDATION_EXPORT void JavaSecuritySecureClassLoader_init(JavaSecuritySecureClassLoader *self);
+
+FOUNDATION_EXPORT JavaSecuritySecureClassLoader *new_JavaSecuritySecureClassLoader_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySecureClassLoader_initWithJavaLangClassLoader_(JavaSecuritySecureClassLoader *self, JavaLangClassLoader *parent);
+
+FOUNDATION_EXPORT JavaSecuritySecureClassLoader *new_JavaSecuritySecureClassLoader_initWithJavaLangClassLoader_(JavaLangClassLoader *parent) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecuritySecureClassLoader)
 
 #endif // _JavaSecuritySecureClassLoader_H_

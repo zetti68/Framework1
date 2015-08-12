@@ -6,13 +6,12 @@
 #ifndef _JavaIoUTFDataFormatException_H_
 #define _JavaIoUTFDataFormatException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoUTFDataFormatException_serialVersionUID 420743449228280612LL
+@interface JavaIoUTFDataFormatException : JavaIoIOException
 
-@interface JavaIoUTFDataFormatException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoUTFDataFormatException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoUTFDataFormatException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoUTFDataFormatException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoUTFDataFormatException_init(JavaIoUTFDataFormatException *self);
+
+FOUNDATION_EXPORT JavaIoUTFDataFormatException *new_JavaIoUTFDataFormatException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoUTFDataFormatException_initWithNSString_(JavaIoUTFDataFormatException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoUTFDataFormatException *new_JavaIoUTFDataFormatException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoUTFDataFormatException)
 
 #endif // _JavaIoUTFDataFormatException_H_

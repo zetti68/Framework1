@@ -6,22 +6,36 @@
 #ifndef _JavaUtilGrego_H_
 #define _JavaUtilGrego_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSIntArray;
-@class IOSLongArray;
 
-#import "JreEmulation.h"
-
-#define JavaUtilGrego_JULIAN_1970_CE 2440588
-#define JavaUtilGrego_JULIAN_1_CE 1721426
-#define JavaUtilGrego_MAX_MILLIS 183882168921600000LL
-#define JavaUtilGrego_MILLIS_PER_DAY 86400000
-#define JavaUtilGrego_MILLIS_PER_HOUR 3600000
-#define JavaUtilGrego_MILLIS_PER_MINUTE 60000
-#define JavaUtilGrego_MILLIS_PER_SECOND 1000
 #define JavaUtilGrego_MIN_MILLIS -184303902528000000LL
+#define JavaUtilGrego_MAX_MILLIS 183882168921600000LL
+#define JavaUtilGrego_MILLIS_PER_SECOND 1000
+#define JavaUtilGrego_MILLIS_PER_MINUTE 60000
+#define JavaUtilGrego_MILLIS_PER_HOUR 3600000
+#define JavaUtilGrego_MILLIS_PER_DAY 86400000
 
-@interface JavaUtilGrego : NSObject {
-}
+@interface JavaUtilGrego : NSObject
+
+#pragma mark Public
+
++ (jint)dayOfWeekWithLong:(jlong)day;
+
++ (IOSIntArray *)dayToFieldsWithLong:(jlong)day
+                        withIntArray:(IOSIntArray *)fields;
+
++ (jlong)fieldsToDayWithInt:(jint)year
+                    withInt:(jint)month
+                    withInt:(jint)dom;
+
++ (jlong)floorDivideWithLong:(jlong)numerator
+                    withLong:(jlong)denominator;
+
++ (jint)getDayOfWeekInMonthWithInt:(jint)year
+                           withInt:(jint)month
+                           withInt:(jint)dayOfMonth;
 
 + (jboolean)isLeapYearWithInt:(jint)year;
 
@@ -31,40 +45,16 @@
 + (jint)previousMonthLengthWithInt:(jint)year
                            withInt:(jint)month;
 
-+ (jlong)fieldsToDayWithInt:(jint)year
-                    withInt:(jint)month
-                    withInt:(jint)dom;
-
-+ (jint)dayOfWeekWithLong:(jlong)day;
-
-+ (IOSIntArray *)dayToFieldsWithLong:(jlong)day
-                        withIntArray:(IOSIntArray *)fields;
-
 + (IOSIntArray *)timeToFieldsWithLong:(jlong)time
                          withIntArray:(IOSIntArray *)fields;
 
-+ (jlong)floorDivideWithLong:(jlong)numerator
-                    withLong:(jlong)denominator;
-
-+ (jint)getDayOfWeekInMonthWithInt:(jint)year
-                           withInt:(jint)month
-                           withInt:(jint)dayOfMonth;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilGrego_initialized;
 J2OBJC_STATIC_INIT(JavaUtilGrego)
-FOUNDATION_EXPORT jboolean JavaUtilGrego_isLeapYearWithInt_(jint year);
-FOUNDATION_EXPORT jint JavaUtilGrego_monthLengthWithInt_withInt_(jint year, jint month);
-FOUNDATION_EXPORT jint JavaUtilGrego_previousMonthLengthWithInt_withInt_(jint year, jint month);
-FOUNDATION_EXPORT jlong JavaUtilGrego_fieldsToDayWithInt_withInt_withInt_(jint year, jint month, jint dom);
-FOUNDATION_EXPORT jint JavaUtilGrego_dayOfWeekWithLong_(jlong day);
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_dayToFieldsWithLong_withIntArray_(jlong day, IOSIntArray *fields);
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_timeToFieldsWithLong_withIntArray_(jlong time, IOSIntArray *fields);
-FOUNDATION_EXPORT jlong JavaUtilGrego_floorDivideWithLong_withLong_(jlong numerator, jlong denominator);
-FOUNDATION_EXPORT jint JavaUtilGrego_getDayOfWeekInMonthWithInt_withInt_withInt_(jint year, jint month, jint dayOfMonth);
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, MIN_MILLIS, jlong)
 
@@ -78,14 +68,28 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, MILLIS_PER_HOUR, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, MILLIS_PER_DAY, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, JULIAN_1_CE, jint)
+FOUNDATION_EXPORT jboolean JavaUtilGrego_isLeapYearWithInt_(jint year);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, JULIAN_1970_CE, jint)
+FOUNDATION_EXPORT jint JavaUtilGrego_monthLengthWithInt_withInt_(jint year, jint month);
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_MONTH_LENGTH_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, MONTH_LENGTH_, IOSIntArray *)
+FOUNDATION_EXPORT jint JavaUtilGrego_previousMonthLengthWithInt_withInt_(jint year, jint month);
 
-FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_DAYS_BEFORE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilGrego, DAYS_BEFORE_, IOSIntArray *)
+FOUNDATION_EXPORT jlong JavaUtilGrego_fieldsToDayWithInt_withInt_withInt_(jint year, jint month, jint dom);
+
+FOUNDATION_EXPORT jint JavaUtilGrego_dayOfWeekWithLong_(jlong day);
+
+FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_dayToFieldsWithLong_withIntArray_(jlong day, IOSIntArray *fields);
+
+FOUNDATION_EXPORT IOSIntArray *JavaUtilGrego_timeToFieldsWithLong_withIntArray_(jlong time, IOSIntArray *fields);
+
+FOUNDATION_EXPORT jlong JavaUtilGrego_floorDivideWithLong_withLong_(jlong numerator, jlong denominator);
+
+FOUNDATION_EXPORT jint JavaUtilGrego_getDayOfWeekInMonthWithInt_withInt_withInt_(jint year, jint month, jint dayOfMonth);
+
+FOUNDATION_EXPORT void JavaUtilGrego_init(JavaUtilGrego *self);
+
+FOUNDATION_EXPORT JavaUtilGrego *new_JavaUtilGrego_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilGrego)
 
 #endif // _JavaUtilGrego_H_

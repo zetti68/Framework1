@@ -6,9 +6,9 @@
 #ifndef _OrgXmlSaxErrorHandler_H_
 #define _OrgXmlSaxErrorHandler_H_
 
-@class OrgXmlSaxSAXParseException;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class OrgXmlSaxSAXParseException;
 
 @protocol OrgXmlSaxErrorHandler < NSObject, JavaObject >
 
@@ -20,6 +20,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxErrorHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxErrorHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxErrorHandler)
 
 #endif // _OrgXmlSaxErrorHandler_H_

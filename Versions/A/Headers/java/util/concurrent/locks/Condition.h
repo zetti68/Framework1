@@ -6,10 +6,10 @@
 #ifndef _JavaUtilConcurrentLocksCondition_H_
 #define _JavaUtilConcurrentLocksCondition_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @class JavaUtilDate;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilConcurrentLocksCondition < NSObject, JavaObject >
 
@@ -30,6 +30,8 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksCondition_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksCondition)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksCondition)
 
 #endif // _JavaUtilConcurrentLocksCondition_H_

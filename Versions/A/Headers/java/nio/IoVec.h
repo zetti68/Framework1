@@ -6,61 +6,67 @@
 #ifndef _JavaNioIoVec_H_
 #define _JavaNioIoVec_H_
 
-@class IOSIntArray;
+#include "J2ObjC_header.h"
+#include "java/lang/Enum.h"
+
 @class IOSObjectArray;
 @class JavaIoFileDescriptor;
 @class JavaNioIoVec_DirectionEnum;
 
-#import "JreEmulation.h"
-#include "java/lang/Enum.h"
+@interface JavaNioIoVec : NSObject
 
-@interface JavaNioIoVec : NSObject {
-}
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaNioByteBufferArray:(IOSObjectArray *)byteBuffers
                                        withInt:(jint)offset
                                        withInt:(jint)bufferCount
                 withJavaNioIoVec_DirectionEnum:(JavaNioIoVec_DirectionEnum *)direction;
 
-- (jint)init__ OBJC_METHOD_FAMILY_NONE;
+- (void)didTransferWithInt:(jint)byteCount;
 
 - (jint)doTransferWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
-- (void)didTransferWithInt:(jint)byteCount;
+- (jint)init__ OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioIoVec_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioIoVec)
 
-typedef enum {
+FOUNDATION_EXPORT void JavaNioIoVec_initWithJavaNioByteBufferArray_withInt_withInt_withJavaNioIoVec_DirectionEnum_(JavaNioIoVec *self, IOSObjectArray *byteBuffers, jint offset, jint bufferCount, JavaNioIoVec_DirectionEnum *direction);
+
+FOUNDATION_EXPORT JavaNioIoVec *new_JavaNioIoVec_initWithJavaNioByteBufferArray_withInt_withInt_withJavaNioIoVec_DirectionEnum_(IOSObjectArray *byteBuffers, jint offset, jint bufferCount, JavaNioIoVec_DirectionEnum *direction) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioIoVec)
+
+typedef NS_ENUM(NSUInteger, JavaNioIoVec_Direction) {
   JavaNioIoVec_Direction_READV = 0,
   JavaNioIoVec_Direction_WRITEV = 1,
-} JavaNioIoVec_Direction;
+};
 
-@interface JavaNioIoVec_DirectionEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaNioIoVec_DirectionEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaNioIoVec_DirectionEnum_values();
 
 + (JavaNioIoVec_DirectionEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaNioIoVec_DirectionEnum *JavaNioIoVec_DirectionEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaNioIoVec_DirectionEnum *JavaNioIoVec_DirectionEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioIoVec_DirectionEnum_initialized;
 J2OBJC_STATIC_INIT(JavaNioIoVec_DirectionEnum)
 
 FOUNDATION_EXPORT JavaNioIoVec_DirectionEnum *JavaNioIoVec_DirectionEnum_values_[];
 
 #define JavaNioIoVec_DirectionEnum_READV JavaNioIoVec_DirectionEnum_values_[JavaNioIoVec_Direction_READV]
-J2OBJC_STATIC_FIELD_GETTER(JavaNioIoVec_DirectionEnum, READV, JavaNioIoVec_DirectionEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNioIoVec_DirectionEnum, READV)
 
 #define JavaNioIoVec_DirectionEnum_WRITEV JavaNioIoVec_DirectionEnum_values_[JavaNioIoVec_Direction_WRITEV]
-J2OBJC_STATIC_FIELD_GETTER(JavaNioIoVec_DirectionEnum, WRITEV, JavaNioIoVec_DirectionEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNioIoVec_DirectionEnum, WRITEV)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioIoVec_DirectionEnum)
 
 #endif // _JavaNioIoVec_H_

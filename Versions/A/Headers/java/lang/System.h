@@ -6,29 +6,20 @@
 #ifndef _JavaLangSystem_H_
 #define _JavaLangSystem_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaIoPrintStream;
 @class JavaLangSecurityManager;
 @class JavaLangThrowable;
-@class JavaUtilLoggingLevel;
-@class JavaUtilLoggingLogger;
 @class JavaUtilProperties;
+@protocol JavaUtilMap;
 
-#import "JreEmulation.h"
+@interface JavaLangSystem : NSObject
 
-@interface JavaLangSystem : NSObject {
-}
+#pragma mark Public
 
-
-+ (void)setInWithJavaIoInputStream:(JavaIoInputStream *)newIn;
-
-+ (void)setOutWithJavaIoPrintStream:(JavaIoPrintStream *)newOut;
-
-+ (void)setErrWithJavaIoPrintStream:(JavaIoPrintStream *)newErr;
-
-+ (jlong)currentTimeMillis;
-
-+ (jint)identityHashCodeWithId:(id)anObject;
+- (instancetype)init;
 
 + (void)arraycopyWithId:(id)src
                 withInt:(jint)srcPos
@@ -36,9 +27,15 @@
                 withInt:(jint)destPos
                 withInt:(jint)length;
 
-+ (jlong)nanoTime;
++ (NSString *)clearPropertyWithNSString:(NSString *)key;
+
++ (jlong)currentTimeMillis;
 
 + (void)exitWithInt:(jint)status;
+
++ (id<JavaUtilMap>)getenv;
+
++ (NSString *)getenvWithNSString:(NSString *)name;
 
 + (JavaUtilProperties *)getProperties;
 
@@ -47,14 +44,9 @@
 + (NSString *)getPropertyWithNSString:(NSString *)key
                          withNSString:(NSString *)defaultValue;
 
-+ (void)setPropertyWithNSString:(NSString *)key
-                   withNSString:(NSString *)value;
-
-+ (void)setPropertiesWithJavaUtilProperties:(JavaUtilProperties *)properties;
-
-+ (NSString *)clearPropertyWithNSString:(NSString *)key;
-
 + (JavaLangSecurityManager *)getSecurityManager;
+
++ (jint)identityHashCodeWithId:(id)anObject;
 
 + (NSString *)lineSeparator;
 
@@ -73,38 +65,25 @@
 + (void)logWWithNSString:(NSString *)message
    withJavaLangThrowable:(JavaLangThrowable *)th;
 
-- (instancetype)init;
++ (jlong)nanoTime;
+
++ (void)setErrWithJavaIoPrintStream:(JavaIoPrintStream *)newErr;
+
++ (void)setInWithJavaIoInputStream:(JavaIoInputStream *)newIn;
+
++ (void)setOutWithJavaIoPrintStream:(JavaIoPrintStream *)newOut;
+
++ (void)setPropertiesWithJavaUtilProperties:(JavaUtilProperties *)properties;
+
++ (void)setPropertyWithNSString:(NSString *)key
+                   withNSString:(NSString *)value;
+
+#pragma mark Package-Private
+
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangSystem_initialized;
 J2OBJC_STATIC_INIT(JavaLangSystem)
-FOUNDATION_EXPORT void JavaLangSystem_setInWithJavaIoInputStream_(JavaIoInputStream *newIn);
-FOUNDATION_EXPORT void JavaLangSystem_setOutWithJavaIoPrintStream_(JavaIoPrintStream *newOut);
-FOUNDATION_EXPORT void JavaLangSystem_setErrWithJavaIoPrintStream_(JavaIoPrintStream *newErr);
-FOUNDATION_EXPORT jlong JavaLangSystem_currentTimeMillis();
-FOUNDATION_EXPORT jint JavaLangSystem_identityHashCodeWithId_(id anObject);
-FOUNDATION_EXPORT void JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(id src, jint srcPos, id dest, jint destPos, jint length);
-FOUNDATION_EXPORT jlong JavaLangSystem_nanoTime();
-FOUNDATION_EXPORT void JavaLangSystem_exitWithInt_(jint status);
-FOUNDATION_EXPORT JavaUtilProperties *JavaLangSystem_getProperties();
-FOUNDATION_EXPORT NSString *JavaLangSystem_getPropertyWithNSString_(NSString *key);
-FOUNDATION_EXPORT NSString *JavaLangSystem_getPropertyWithNSString_withNSString_(NSString *key, NSString *defaultValue);
-FOUNDATION_EXPORT void JavaLangSystem_setPropertyWithNSString_withNSString_(NSString *key, NSString *value);
-FOUNDATION_EXPORT void JavaLangSystem_setPropertiesWithJavaUtilProperties_(JavaUtilProperties *properties);
-FOUNDATION_EXPORT NSString *JavaLangSystem_clearPropertyWithNSString_(NSString *key);
-FOUNDATION_EXPORT JavaLangSecurityManager *JavaLangSystem_getSecurityManager();
-FOUNDATION_EXPORT NSString *JavaLangSystem_lineSeparator();
-FOUNDATION_EXPORT void JavaLangSystem_logEWithNSString_(NSString *message);
-FOUNDATION_EXPORT void JavaLangSystem_logEWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
-FOUNDATION_EXPORT void JavaLangSystem_logIWithNSString_(NSString *message);
-FOUNDATION_EXPORT void JavaLangSystem_logIWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
-FOUNDATION_EXPORT void JavaLangSystem_logWWithNSString_(NSString *message);
-FOUNDATION_EXPORT void JavaLangSystem_logWWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
-
-FOUNDATION_EXPORT JavaUtilProperties *JavaLangSystem_props_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangSystem, props_, JavaUtilProperties *)
-J2OBJC_STATIC_FIELD_SETTER(JavaLangSystem, props_, JavaUtilProperties *)
 
 FOUNDATION_EXPORT JavaIoInputStream *JavaLangSystem_in_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangSystem, in_, JavaIoInputStream *)
@@ -115,8 +94,58 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangSystem, out_, JavaIoPrintStream *)
 FOUNDATION_EXPORT JavaIoPrintStream *JavaLangSystem_err_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangSystem, err_, JavaIoPrintStream *)
 
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaLangSystem_systemLogger_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangSystem, systemLogger_, JavaUtilLoggingLogger *)
-J2OBJC_STATIC_FIELD_SETTER(JavaLangSystem, systemLogger_, JavaUtilLoggingLogger *)
+FOUNDATION_EXPORT void JavaLangSystem_setInWithJavaIoInputStream_(JavaIoInputStream *newIn);
+
+FOUNDATION_EXPORT void JavaLangSystem_setOutWithJavaIoPrintStream_(JavaIoPrintStream *newOut);
+
+FOUNDATION_EXPORT void JavaLangSystem_setErrWithJavaIoPrintStream_(JavaIoPrintStream *newErr);
+
+FOUNDATION_EXPORT jlong JavaLangSystem_currentTimeMillis();
+
+FOUNDATION_EXPORT jint JavaLangSystem_identityHashCodeWithId_(id anObject);
+
+FOUNDATION_EXPORT void JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(id src, jint srcPos, id dest, jint destPos, jint length);
+
+FOUNDATION_EXPORT jlong JavaLangSystem_nanoTime();
+
+FOUNDATION_EXPORT void JavaLangSystem_exitWithInt_(jint status);
+
+FOUNDATION_EXPORT JavaUtilProperties *JavaLangSystem_getProperties();
+
+FOUNDATION_EXPORT NSString *JavaLangSystem_getPropertyWithNSString_(NSString *key);
+
+FOUNDATION_EXPORT NSString *JavaLangSystem_getPropertyWithNSString_withNSString_(NSString *key, NSString *defaultValue);
+
+FOUNDATION_EXPORT void JavaLangSystem_setPropertyWithNSString_withNSString_(NSString *key, NSString *value);
+
+FOUNDATION_EXPORT void JavaLangSystem_setPropertiesWithJavaUtilProperties_(JavaUtilProperties *properties);
+
+FOUNDATION_EXPORT NSString *JavaLangSystem_clearPropertyWithNSString_(NSString *key);
+
+FOUNDATION_EXPORT NSString *JavaLangSystem_getenvWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT id<JavaUtilMap> JavaLangSystem_getenv();
+
+FOUNDATION_EXPORT JavaLangSecurityManager *JavaLangSystem_getSecurityManager();
+
+FOUNDATION_EXPORT NSString *JavaLangSystem_lineSeparator();
+
+FOUNDATION_EXPORT void JavaLangSystem_logEWithNSString_(NSString *message);
+
+FOUNDATION_EXPORT void JavaLangSystem_logEWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
+
+FOUNDATION_EXPORT void JavaLangSystem_logIWithNSString_(NSString *message);
+
+FOUNDATION_EXPORT void JavaLangSystem_logIWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
+
+FOUNDATION_EXPORT void JavaLangSystem_logWWithNSString_(NSString *message);
+
+FOUNDATION_EXPORT void JavaLangSystem_logWWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *th);
+
+FOUNDATION_EXPORT void JavaLangSystem_init(JavaLangSystem *self);
+
+FOUNDATION_EXPORT JavaLangSystem *new_JavaLangSystem_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangSystem)
 
 #endif // _JavaLangSystem_H_

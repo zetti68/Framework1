@@ -6,115 +6,62 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicLongFieldUpdater_H_
 #define _JavaUtilConcurrentAtomicAtomicLongFieldUpdater_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
-@class SunMiscUnsafe;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentAtomicAtomicLongFieldUpdater : NSObject
 
-@interface JavaUtilConcurrentAtomicAtomicLongFieldUpdater : NSObject {
-}
-
-+ (JavaUtilConcurrentAtomicAtomicLongFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
-                                                              withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
-
-- (jboolean)compareAndSetWithId:(id)obj
-                       withLong:(jlong)expect
-                       withLong:(jlong)update;
-
-- (jboolean)weakCompareAndSetWithId:(id)obj
-                           withLong:(jlong)expect
-                           withLong:(jlong)update;
-
-- (void)setWithId:(id)obj
-         withLong:(jlong)newValue;
-
-- (void)lazySetWithId:(id)obj
-             withLong:(jlong)newValue;
-
-- (jlong)getWithId:(id)obj;
-
-- (jlong)getAndSetWithId:(id)obj
-                withLong:(jlong)newValue;
-
-- (jlong)getAndIncrementWithId:(id)obj;
-
-- (jlong)getAndDecrementWithId:(id)obj;
-
-- (jlong)getAndAddWithId:(id)obj
-                withLong:(jlong)delta;
-
-- (jlong)incrementAndGetWithId:(id)obj;
-
-- (jlong)decrementAndGetWithId:(id)obj;
+#pragma mark Public
 
 - (jlong)addAndGetWithId:(id)obj
                 withLong:(jlong)delta;
 
+- (jboolean)compareAndSetWithId:(id)obj
+                       withLong:(jlong)expect
+                       withLong:(jlong)update;
+
+- (jlong)decrementAndGetWithId:(id)obj;
+
+- (jlong)getWithId:(id)obj;
+
+- (jlong)getAndAddWithId:(id)obj
+                withLong:(jlong)delta;
+
+- (jlong)getAndDecrementWithId:(id)obj;
+
+- (jlong)getAndIncrementWithId:(id)obj;
+
+- (jlong)getAndSetWithId:(id)obj
+                withLong:(jlong)newValue;
+
+- (jlong)incrementAndGetWithId:(id)obj;
+
+- (void)lazySetWithId:(id)obj
+             withLong:(jlong)newValue;
+
++ (JavaUtilConcurrentAtomicAtomicLongFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
+                                                              withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
+
+- (void)setWithId:(id)obj
+         withLong:(jlong)newValue;
+
+- (jboolean)weakCompareAndSetWithId:(id)obj
+                           withLong:(jlong)expect
+                           withLong:(jlong)update;
+
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicLongFieldUpdater_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicLongFieldUpdater)
+
 FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLongFieldUpdater *JavaUtilConcurrentAtomicAtomicLongFieldUpdater_newUpdaterWithIOSClass_withNSString_(IOSClass *tclass, NSString *fieldName);
 
-@interface JavaUtilConcurrentAtomicAtomicLongFieldUpdater_CASUpdater : JavaUtilConcurrentAtomicAtomicLongFieldUpdater {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicLongFieldUpdater_init(JavaUtilConcurrentAtomicAtomicLongFieldUpdater *self);
 
-- (instancetype)initWithIOSClass:(IOSClass *)tclass
-                    withNSString:(NSString *)fieldName;
-
-- (jboolean)compareAndSetWithId:(id)obj
-                       withLong:(jlong)expect
-                       withLong:(jlong)update;
-
-- (jboolean)weakCompareAndSetWithId:(id)obj
-                           withLong:(jlong)expect
-                           withLong:(jlong)update;
-
-- (void)setWithId:(id)obj
-         withLong:(jlong)newValue;
-
-- (void)lazySetWithId:(id)obj
-             withLong:(jlong)newValue;
-
-- (jlong)getWithId:(id)obj;
-
-@end
-
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentAtomicAtomicLongFieldUpdater_CASUpdater_initialized;
-J2OBJC_STATIC_INIT(JavaUtilConcurrentAtomicAtomicLongFieldUpdater_CASUpdater)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentAtomicAtomicLongFieldUpdater_CASUpdater_unsafe_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicLongFieldUpdater_CASUpdater, unsafe_, SunMiscUnsafe *)
-
-@interface JavaUtilConcurrentAtomicAtomicLongFieldUpdater_LockedUpdater : JavaUtilConcurrentAtomicAtomicLongFieldUpdater {
-}
-
-- (instancetype)initWithIOSClass:(IOSClass *)tclass
-                    withNSString:(NSString *)fieldName;
-
-- (jboolean)compareAndSetWithId:(id)obj
-                       withLong:(jlong)expect
-                       withLong:(jlong)update;
-
-- (jboolean)weakCompareAndSetWithId:(id)obj
-                           withLong:(jlong)expect
-                           withLong:(jlong)update;
-
-- (void)setWithId:(id)obj
-         withLong:(jlong)newValue;
-
-- (void)lazySetWithId:(id)obj
-             withLong:(jlong)newValue;
-
-- (jlong)getWithId:(id)obj;
-
-@end
-
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentAtomicAtomicLongFieldUpdater_LockedUpdater_initialized;
-J2OBJC_STATIC_INIT(JavaUtilConcurrentAtomicAtomicLongFieldUpdater_LockedUpdater)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentAtomicAtomicLongFieldUpdater_LockedUpdater_unsafe_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicLongFieldUpdater_LockedUpdater, unsafe_, SunMiscUnsafe *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicLongFieldUpdater)
 
 #endif // _JavaUtilConcurrentAtomicAtomicLongFieldUpdater_H_

@@ -6,6 +6,8 @@
 #ifndef _JavaUtilLoggingLogger_H_
 #define _JavaUtilLoggingLogger_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaLangThrowable;
 @class JavaUtilLoggingHandler;
@@ -16,8 +18,6 @@
 @protocol JavaUtilList;
 @protocol JavaUtilLoggingFilter;
 
-#import "JreEmulation.h"
-
 @interface JavaUtilLoggingLogger : NSObject {
  @public
   __weak JavaUtilLoggingLogger *parent_;
@@ -26,53 +26,11 @@
   id<JavaUtilList> children_;
 }
 
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)resourceBundleName;
-
-+ (JavaUtilResourceBundle *)loadResourceBundleWithNSString:(NSString *)resourceBundleName;
-
-+ (JavaUtilLoggingLogger *)getAnonymousLogger;
-
-+ (JavaUtilLoggingLogger *)getAnonymousLoggerWithNSString:(NSString *)resourceBundleName;
-
-+ (JavaUtilLoggingLogger *)getLoggerWithNSString:(NSString *)name;
-
-+ (JavaUtilLoggingLogger *)getLoggerWithNSString:(NSString *)name
-                                    withNSString:(NSString *)resourceBundleName;
-
-+ (JavaUtilLoggingLogger *)getGlobal;
+#pragma mark Public
 
 - (void)addHandlerWithJavaUtilLoggingHandler:(JavaUtilLoggingHandler *)handler;
 
-- (void)setManagerWithJavaUtilLoggingLogManager:(JavaUtilLoggingLogManager *)manager;
-
-- (IOSObjectArray *)getHandlers;
-
-- (void)removeHandlerWithJavaUtilLoggingHandler:(JavaUtilLoggingHandler *)handler;
-
-- (id<JavaUtilLoggingFilter>)getFilter;
-
-- (void)setFilterWithJavaUtilLoggingFilter:(id<JavaUtilLoggingFilter>)newFilter;
-
-- (JavaUtilLoggingLevel *)getLevel;
-
-- (void)setLevelWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)newLevel;
-
-- (jboolean)getUseParentHandlers;
-
-- (void)setUseParentHandlersWithBoolean:(jboolean)notifyParentHandlers;
-
-- (JavaUtilLoggingLogger *)getParent;
-
-- (void)setParentWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)parent;
-
-- (NSString *)getName;
-
-- (JavaUtilResourceBundle *)getResourceBundle;
-
-- (NSString *)getResourceBundleName;
-
-- (jboolean)isLoggableWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)l;
+- (void)configWithNSString:(NSString *)msg;
 
 - (void)enteringWithNSString:(NSString *)sourceClass
                 withNSString:(NSString *)sourceMethod;
@@ -92,23 +50,42 @@
                withNSString:(NSString *)sourceMethod
                      withId:(id)result;
 
-- (void)throwingWithNSString:(NSString *)sourceClass
-                withNSString:(NSString *)sourceMethod
-       withJavaLangThrowable:(JavaLangThrowable *)thrown;
-
-- (void)severeWithNSString:(NSString *)msg;
-
-- (void)warningWithNSString:(NSString *)msg;
-
-- (void)infoWithNSString:(NSString *)msg;
-
-- (void)configWithNSString:(NSString *)msg;
-
 - (void)fineWithNSString:(NSString *)msg;
 
 - (void)finerWithNSString:(NSString *)msg;
 
 - (void)finestWithNSString:(NSString *)msg;
+
++ (JavaUtilLoggingLogger *)getAnonymousLogger;
+
++ (JavaUtilLoggingLogger *)getAnonymousLoggerWithNSString:(NSString *)resourceBundleName;
+
+- (id<JavaUtilLoggingFilter>)getFilter;
+
++ (JavaUtilLoggingLogger *)getGlobal;
+
+- (IOSObjectArray *)getHandlers;
+
+- (JavaUtilLoggingLevel *)getLevel;
+
++ (JavaUtilLoggingLogger *)getLoggerWithNSString:(NSString *)name;
+
++ (JavaUtilLoggingLogger *)getLoggerWithNSString:(NSString *)name
+                                    withNSString:(NSString *)resourceBundleName;
+
+- (NSString *)getName;
+
+- (JavaUtilLoggingLogger *)getParent;
+
+- (JavaUtilResourceBundle *)getResourceBundle;
+
+- (NSString *)getResourceBundleName;
+
+- (jboolean)getUseParentHandlers;
+
+- (void)infoWithNSString:(NSString *)msg;
+
+- (jboolean)isLoggableWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)l;
 
 - (void)logWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)logLevel
                        withNSString:(NSString *)msg;
@@ -177,21 +154,43 @@
                          withNSString:(NSString *)msg
                 withJavaLangThrowable:(JavaLangThrowable *)thrown;
 
+- (void)removeHandlerWithJavaUtilLoggingHandler:(JavaUtilLoggingHandler *)handler;
+
+- (void)setFilterWithJavaUtilLoggingFilter:(id<JavaUtilLoggingFilter>)newFilter;
+
+- (void)setLevelWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)newLevel;
+
+- (void)setParentWithJavaUtilLoggingLogger:(JavaUtilLoggingLogger *)parent;
+
+- (void)setUseParentHandlersWithBoolean:(jboolean)notifyParentHandlers;
+
+- (void)severeWithNSString:(NSString *)msg;
+
+- (void)throwingWithNSString:(NSString *)sourceClass
+                withNSString:(NSString *)sourceMethod
+       withJavaLangThrowable:(JavaLangThrowable *)thrown;
+
+- (void)warningWithNSString:(NSString *)msg;
+
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)name
+                    withNSString:(NSString *)resourceBundleName;
+
+#pragma mark Package-Private
+
++ (JavaUtilResourceBundle *)loadResourceBundleWithNSString:(NSString *)resourceBundleName;
+
 - (void)reset;
+
+- (void)setManagerWithJavaUtilLoggingLogManager:(JavaUtilLoggingLogManager *)manager;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLoggingLogger_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLoggingLogger)
 
 J2OBJC_FIELD_SETTER(JavaUtilLoggingLogger, levelObjVal_, JavaUtilLoggingLevel *)
 J2OBJC_FIELD_SETTER(JavaUtilLoggingLogger, children_, id<JavaUtilList>)
-FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilLoggingLogger_loadResourceBundleWithNSString_(NSString *resourceBundleName);
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getAnonymousLogger();
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getAnonymousLoggerWithNSString_(NSString *resourceBundleName);
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getLoggerWithNSString_(NSString *name);
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getLoggerWithNSString_withNSString_(NSString *name, NSString *resourceBundleName);
-FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getGlobal();
 
 FOUNDATION_EXPORT NSString *JavaUtilLoggingLogger_GLOBAL_LOGGER_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogger, GLOBAL_LOGGER_NAME_, NSString *)
@@ -199,7 +198,22 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogger, GLOBAL_LOGGER_NAME_, NSString 
 FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_global_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogger, global_, JavaUtilLoggingLogger *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilLoggingLogger_EMPTY_HANDLERS_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogger, EMPTY_HANDLERS_ARRAY_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaUtilLoggingLogger_initWithNSString_withNSString_(JavaUtilLoggingLogger *self, NSString *name, NSString *resourceBundleName);
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *new_JavaUtilLoggingLogger_initWithNSString_withNSString_(NSString *name, NSString *resourceBundleName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilLoggingLogger_loadResourceBundleWithNSString_(NSString *resourceBundleName);
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getAnonymousLogger();
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getAnonymousLoggerWithNSString_(NSString *resourceBundleName);
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getLoggerWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getLoggerWithNSString_withNSString_(NSString *name, NSString *resourceBundleName);
+
+FOUNDATION_EXPORT JavaUtilLoggingLogger *JavaUtilLoggingLogger_getGlobal();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLogger)
 
 #endif // _JavaUtilLoggingLogger_H_

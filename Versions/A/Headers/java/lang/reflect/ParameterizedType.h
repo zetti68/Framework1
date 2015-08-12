@@ -6,12 +6,13 @@
 #ifndef _JavaLangReflectParameterizedType_H_
 #define _JavaLangReflectParameterizedType_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/reflect/Type.h"
 
+@class IOSObjectArray;
+
 @protocol JavaLangReflectParameterizedType < JavaLangReflectType, NSObject, JavaObject >
+
 - (IOSObjectArray *)getActualTypeArguments;
 
 - (id<JavaLangReflectType>)getOwnerType;
@@ -20,6 +21,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectParameterizedType_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectParameterizedType)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectParameterizedType)
 
 #endif // _JavaLangReflectParameterizedType_H_

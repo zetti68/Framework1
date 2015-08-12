@@ -6,62 +6,63 @@
 #ifndef _OrgKxml2IoKXmlParser_H_
 #define _OrgKxml2IoKXmlParser_H_
 
-@class IOSCharArray;
-@class IOSIntArray;
-@class IOSObjectArray;
-@class JavaIoInputStream;
-@class JavaIoReader;
-@class JavaLangBoolean;
-@class JavaLangStringBuilder;
-@class LibcoreInternalStringPool;
-@class OrgKxml2IoKXmlParser_ContentSource;
-@class OrgKxml2IoKXmlParser_ValueContextEnum;
-@protocol JavaUtilMap;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 #include "java/lang/Enum.h"
 #include "org/xmlpull/v1/XmlPullParser.h"
 
-#define OrgKxml2IoKXmlParser_ATTLISTDECL 13
-#define OrgKxml2IoKXmlParser_ELEMENTDECL 11
-#define OrgKxml2IoKXmlParser_ENTITYDECL 12
-#define OrgKxml2IoKXmlParser_NOTATIONDECL 14
-#define OrgKxml2IoKXmlParser_PARAMETER_ENTITY_REF 15
-#define OrgKxml2IoKXmlParser_XML_DECLARATION 998
+@class IOSCharArray;
+@class IOSIntArray;
+@class JavaIoInputStream;
+@class JavaIoReader;
+@class LibcoreInternalStringPool;
 
 @interface OrgKxml2IoKXmlParser : NSObject < OrgXmlpullV1XmlPullParser, JavaIoCloseable > {
  @public
   LibcoreInternalStringPool *stringPool_;
 }
 
-- (void)keepNamespaceAttributes;
+#pragma mark Public
 
-- (jint)next;
-
-- (jint)nextToken;
-
-- (void)setInputWithJavaIoReader:(JavaIoReader *)reader;
-
-- (void)setInputWithJavaIoInputStream:(JavaIoInputStream *)is
-                         withNSString:(NSString *)charset;
+- (instancetype)init;
 
 - (void)close;
+
+- (void)defineEntityReplacementTextWithNSString:(NSString *)entity
+                                   withNSString:(NSString *)value;
+
+- (jint)getAttributeCount;
+
+- (NSString *)getAttributeNameWithInt:(jint)index;
+
+- (NSString *)getAttributeNamespaceWithInt:(jint)index;
+
+- (NSString *)getAttributePrefixWithInt:(jint)index;
+
+- (NSString *)getAttributeTypeWithInt:(jint)index;
+
+- (NSString *)getAttributeValueWithInt:(jint)index;
+
+- (NSString *)getAttributeValueWithNSString:(NSString *)namespace_
+                               withNSString:(NSString *)name;
+
+- (jint)getColumnNumber;
+
+- (jint)getDepth;
+
+- (jint)getEventType;
 
 - (jboolean)getFeatureWithNSString:(NSString *)feature;
 
 - (NSString *)getInputEncoding;
 
-- (void)defineEntityReplacementTextWithNSString:(NSString *)entity
-                                   withNSString:(NSString *)value;
+- (jint)getLineNumber;
 
-- (id)getPropertyWithNSString:(NSString *)property;
+- (NSString *)getName;
 
-- (NSString *)getRootElementName;
+- (NSString *)getNamespace;
 
-- (NSString *)getSystemId;
-
-- (NSString *)getPublicId;
+- (NSString *)getNamespaceWithNSString:(NSString *)prefix;
 
 - (jint)getNamespaceCountWithInt:(jint)depth;
 
@@ -69,211 +70,103 @@
 
 - (NSString *)getNamespaceUriWithInt:(jint)pos;
 
-- (NSString *)getNamespaceWithNSString:(NSString *)prefix;
-
-- (jint)getDepth;
-
 - (NSString *)getPositionDescription;
 
-- (jint)getLineNumber;
+- (NSString *)getPrefix;
 
-- (jint)getColumnNumber;
+- (id)getPropertyWithNSString:(NSString *)property;
 
-- (jboolean)isWhitespace;
+- (NSString *)getPublicId;
+
+- (NSString *)getRootElementName;
+
+- (NSString *)getSystemId;
 
 - (NSString *)getText;
 
 - (IOSCharArray *)getTextCharactersWithIntArray:(IOSIntArray *)poslen;
 
-- (NSString *)getNamespace;
-
-- (NSString *)getName;
-
-- (NSString *)getPrefix;
+- (jboolean)isAttributeDefaultWithInt:(jint)index;
 
 - (jboolean)isEmptyElementTag;
 
-- (jint)getAttributeCount;
+- (jboolean)isWhitespace;
 
-- (NSString *)getAttributeTypeWithInt:(jint)index;
+- (void)keepNamespaceAttributes;
 
-- (jboolean)isAttributeDefaultWithInt:(jint)index;
-
-- (NSString *)getAttributeNamespaceWithInt:(jint)index;
-
-- (NSString *)getAttributeNameWithInt:(jint)index;
-
-- (NSString *)getAttributePrefixWithInt:(jint)index;
-
-- (NSString *)getAttributeValueWithInt:(jint)index;
-
-- (NSString *)getAttributeValueWithNSString:(NSString *)namespace_
-                               withNSString:(NSString *)name;
-
-- (jint)getEventType;
+- (jint)next;
 
 - (jint)nextTag;
+
+- (NSString *)nextText;
+
+- (jint)nextToken;
 
 - (void)requireWithInt:(jint)type
           withNSString:(NSString *)namespace_
           withNSString:(NSString *)name;
 
-- (NSString *)nextText;
-
 - (void)setFeatureWithNSString:(NSString *)feature
                    withBoolean:(jboolean)value;
+
+- (void)setInputWithJavaIoInputStream:(JavaIoInputStream *)is
+                         withNSString:(NSString *)charset;
+
+- (void)setInputWithJavaIoReader:(JavaIoReader *)reader;
 
 - (void)setPropertyWithNSString:(NSString *)property
                          withId:(id)value;
 
-- (instancetype)init;
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgKxml2IoKXmlParser_initialized;
 J2OBJC_STATIC_INIT(OrgKxml2IoKXmlParser)
 
 J2OBJC_FIELD_SETTER(OrgKxml2IoKXmlParser, stringPool_, LibcoreInternalStringPool *)
 
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_PROPERTY_XMLDECL_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, PROPERTY_XMLDECL_VERSION_, NSString *)
+FOUNDATION_EXPORT void OrgKxml2IoKXmlParser_init(OrgKxml2IoKXmlParser *self);
 
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_PROPERTY_XMLDECL_STANDALONE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, PROPERTY_XMLDECL_STANDALONE_, NSString *)
+FOUNDATION_EXPORT OrgKxml2IoKXmlParser *new_OrgKxml2IoKXmlParser_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_PROPERTY_LOCATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, PROPERTY_LOCATION_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(OrgKxml2IoKXmlParser)
 
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_FEATURE_RELAXED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, FEATURE_RELAXED_, NSString *)
-
-FOUNDATION_EXPORT id<JavaUtilMap> OrgKxml2IoKXmlParser_DEFAULT_ENTITIES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, DEFAULT_ENTITIES_, id<JavaUtilMap>)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, ELEMENTDECL, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, ENTITYDECL, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, ATTLISTDECL, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, NOTATIONDECL, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, PARAMETER_ENTITY_REF, jint)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_COMMENT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_COMMENT_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_END_COMMENT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, END_COMMENT_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_COMMENT_DOUBLE_DASH_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, COMMENT_DOUBLE_DASH_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_CDATA_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_CDATA_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_END_CDATA_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, END_CDATA_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_PROCESSING_INSTRUCTION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_PROCESSING_INSTRUCTION_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_END_PROCESSING_INSTRUCTION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, END_PROCESSING_INSTRUCTION_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_DOCTYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_DOCTYPE_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_SYSTEM_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, SYSTEM_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_PUBLIC_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, PUBLIC_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_ELEMENT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_ELEMENT_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_ATTLIST_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_ATTLIST_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_ENTITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_ENTITY_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_START_NOTATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, START_NOTATION_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, EMPTY_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_ANY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, ANY_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_NDATA_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, NDATA_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_NOTATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, NOTATION_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_REQUIRED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, REQUIRED_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_IMPLIED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, IMPLIED_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_FIXED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, FIXED_, IOSCharArray *)
-
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_UNEXPECTED_EOF_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, UNEXPECTED_EOF_, NSString *)
-
-FOUNDATION_EXPORT NSString *OrgKxml2IoKXmlParser_ILLEGAL_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, ILLEGAL_TYPE_, NSString *)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, XML_DECLARATION, jint)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_SINGLE_QUOTE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, SINGLE_QUOTE_, IOSCharArray *)
-
-FOUNDATION_EXPORT IOSCharArray *OrgKxml2IoKXmlParser_DOUBLE_QUOTE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser, DOUBLE_QUOTE_, IOSCharArray *)
-
-typedef enum {
+typedef NS_ENUM(NSUInteger, OrgKxml2IoKXmlParser_ValueContext) {
   OrgKxml2IoKXmlParser_ValueContext_ATTRIBUTE = 0,
   OrgKxml2IoKXmlParser_ValueContext_TEXT = 1,
   OrgKxml2IoKXmlParser_ValueContext_ENTITY_DECLARATION = 2,
-} OrgKxml2IoKXmlParser_ValueContext;
+};
 
-@interface OrgKxml2IoKXmlParser_ValueContextEnum : JavaLangEnum < NSCopying > {
-}
+@interface OrgKxml2IoKXmlParser_ValueContextEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *OrgKxml2IoKXmlParser_ValueContextEnum_values();
 
 + (OrgKxml2IoKXmlParser_ValueContextEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT OrgKxml2IoKXmlParser_ValueContextEnum *OrgKxml2IoKXmlParser_ValueContextEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT OrgKxml2IoKXmlParser_ValueContextEnum *OrgKxml2IoKXmlParser_ValueContextEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgKxml2IoKXmlParser_ValueContextEnum_initialized;
 J2OBJC_STATIC_INIT(OrgKxml2IoKXmlParser_ValueContextEnum)
 
 FOUNDATION_EXPORT OrgKxml2IoKXmlParser_ValueContextEnum *OrgKxml2IoKXmlParser_ValueContextEnum_values_[];
 
 #define OrgKxml2IoKXmlParser_ValueContextEnum_ATTRIBUTE OrgKxml2IoKXmlParser_ValueContextEnum_values_[OrgKxml2IoKXmlParser_ValueContext_ATTRIBUTE]
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, ATTRIBUTE, OrgKxml2IoKXmlParser_ValueContextEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, ATTRIBUTE)
 
 #define OrgKxml2IoKXmlParser_ValueContextEnum_TEXT OrgKxml2IoKXmlParser_ValueContextEnum_values_[OrgKxml2IoKXmlParser_ValueContext_TEXT]
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, TEXT, OrgKxml2IoKXmlParser_ValueContextEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, TEXT)
 
 #define OrgKxml2IoKXmlParser_ValueContextEnum_ENTITY_DECLARATION OrgKxml2IoKXmlParser_ValueContextEnum_values_[OrgKxml2IoKXmlParser_ValueContext_ENTITY_DECLARATION]
-J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, ENTITY_DECLARATION, OrgKxml2IoKXmlParser_ValueContextEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, ENTITY_DECLARATION)
 
-@interface OrgKxml2IoKXmlParser_ContentSource : NSObject {
-}
+J2OBJC_TYPE_LITERAL_HEADER(OrgKxml2IoKXmlParser_ValueContextEnum)
+
+@interface OrgKxml2IoKXmlParser_ContentSource : NSObject
+
+#pragma mark Package-Private
 
 - (instancetype)initWithOrgKxml2IoKXmlParser_ContentSource:(OrgKxml2IoKXmlParser_ContentSource *)next
                                              withCharArray:(IOSCharArray *)buffer
@@ -282,6 +175,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgKxml2IoKXmlParser_ValueContextEnum, ENTITY_DECLARA
 
 @end
 
-__attribute__((always_inline)) inline void OrgKxml2IoKXmlParser_ContentSource_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgKxml2IoKXmlParser_ContentSource)
+
+FOUNDATION_EXPORT void OrgKxml2IoKXmlParser_ContentSource_initWithOrgKxml2IoKXmlParser_ContentSource_withCharArray_withInt_withInt_(OrgKxml2IoKXmlParser_ContentSource *self, OrgKxml2IoKXmlParser_ContentSource *next, IOSCharArray *buffer, jint position, jint limit);
+
+FOUNDATION_EXPORT OrgKxml2IoKXmlParser_ContentSource *new_OrgKxml2IoKXmlParser_ContentSource_initWithOrgKxml2IoKXmlParser_ContentSource_withCharArray_withInt_withInt_(OrgKxml2IoKXmlParser_ContentSource *next, IOSCharArray *buffer, jint position, jint limit) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgKxml2IoKXmlParser_ContentSource)
 
 #endif // _OrgKxml2IoKXmlParser_H_

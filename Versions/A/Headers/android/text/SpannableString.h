@@ -6,31 +6,40 @@
 #ifndef _AndroidTextSpannableString_H_
 #define _AndroidTextSpannableString_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "android/text/GetChars.h"
 #include "android/text/Spannable.h"
 #include "android/text/SpannableStringInternal.h"
 #include "java/lang/CharSequence.h"
 
-@interface AndroidTextSpannableString : AndroidTextSpannableStringInternal < JavaLangCharSequence, AndroidTextGetChars, AndroidTextSpannable > {
-}
+@interface AndroidTextSpannableString : AndroidTextSpannableStringInternal < JavaLangCharSequence, AndroidTextGetChars, AndroidTextSpannable >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)source;
 
-+ (AndroidTextSpannableString *)valueOfWithJavaLangCharSequence:(id<JavaLangCharSequence>)source;
+- (void)removeSpanWithId:(id)what;
 
 - (void)setSpanWithId:(id)what
               withInt:(jint)start
               withInt:(jint)end
               withInt:(jint)flags;
 
-- (void)removeSpanWithId:(id)what;
+- (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
+                                         to:(jint)end;
 
-- (id<JavaLangCharSequence>)subSequenceFrom:(int)start to:(int)end;
++ (AndroidTextSpannableString *)valueOfWithJavaLangCharSequence:(id<JavaLangCharSequence>)source;
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextSpannableString_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextSpannableString)
+
+FOUNDATION_EXPORT void AndroidTextSpannableString_initWithJavaLangCharSequence_(AndroidTextSpannableString *self, id<JavaLangCharSequence> source);
+
+FOUNDATION_EXPORT AndroidTextSpannableString *new_AndroidTextSpannableString_initWithJavaLangCharSequence_(id<JavaLangCharSequence> source) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT AndroidTextSpannableString *AndroidTextSpannableString_valueOfWithJavaLangCharSequence_(id<JavaLangCharSequence> source);
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextSpannableString)
 
 #endif // _AndroidTextSpannableString_H_

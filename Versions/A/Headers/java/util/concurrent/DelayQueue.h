@@ -6,22 +6,19 @@
 #ifndef _JavaUtilConcurrentDelayQueue_H_
 #define _JavaUtilConcurrentDelayQueue_H_
 
-@class IOSObjectArray;
-@class JavaLangThread;
-@class JavaUtilConcurrentLocksReentrantLock;
-@class JavaUtilConcurrentTimeUnitEnum;
-@class JavaUtilPriorityQueue;
-@protocol JavaUtilCollection;
-@protocol JavaUtilConcurrentDelayed;
-@protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/AbstractQueue.h"
-#include "java/util/Iterator.h"
 #include "java/util/concurrent/BlockingQueue.h"
 
-@interface JavaUtilConcurrentDelayQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue > {
-}
+@class IOSObjectArray;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
+@protocol JavaUtilConcurrentDelayed;
+@protocol JavaUtilIterator;
+
+@interface JavaUtilConcurrentDelayQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -29,69 +26,59 @@
 
 - (jboolean)addWithId:(id<JavaUtilConcurrentDelayed>)e;
 
-- (jboolean)offerWithId:(id<JavaUtilConcurrentDelayed>)e;
-
-- (void)putWithId:(id<JavaUtilConcurrentDelayed>)e;
-
-- (jboolean)offerWithId:(id<JavaUtilConcurrentDelayed>)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)poll;
-
-- (id)take;
-
-- (id)pollWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)peek;
-
-- (jint)size;
+- (void)clear;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
                               withInt:(jint)maxElements;
 
-- (void)clear;
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id<JavaUtilConcurrentDelayed>)e;
+
+- (jboolean)offerWithId:(id<JavaUtilConcurrentDelayed>)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id)peek;
+
+- (id)poll;
+
+- (id)pollWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id<JavaUtilConcurrentDelayed>)e;
 
 - (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+- (id)take;
 
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (jboolean)removeWithId:(id)o;
+#pragma mark Package-Private
 
 - (void)removeEQWithId:(id)o;
 
-- (id<JavaUtilIterator>)iterator;
-
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentDelayQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentDelayQueue)
 
-@interface JavaUtilConcurrentDelayQueue_Itr : NSObject < JavaUtilIterator > {
- @public
-  IOSObjectArray *array_;
-  jint cursor_;
-  jint lastRet_;
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentDelayQueue_init(JavaUtilConcurrentDelayQueue *self);
 
-- (instancetype)initWithJavaUtilConcurrentDelayQueue:(JavaUtilConcurrentDelayQueue *)outer$
-                                   withNSObjectArray:(IOSObjectArray *)array;
+FOUNDATION_EXPORT JavaUtilConcurrentDelayQueue *new_JavaUtilConcurrentDelayQueue_init() NS_RETURNS_RETAINED;
 
-- (jboolean)hasNext;
+FOUNDATION_EXPORT void JavaUtilConcurrentDelayQueue_initWithJavaUtilCollection_(JavaUtilConcurrentDelayQueue *self, id<JavaUtilCollection> c);
 
-- (id)next;
+FOUNDATION_EXPORT JavaUtilConcurrentDelayQueue *new_JavaUtilConcurrentDelayQueue_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
 
-- (void)remove;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentDelayQueue_Itr_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentDelayQueue_Itr, array_, IOSObjectArray *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentDelayQueue)
 
 #endif // _JavaUtilConcurrentDelayQueue_H_

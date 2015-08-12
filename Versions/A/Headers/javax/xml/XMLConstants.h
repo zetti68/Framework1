@@ -6,14 +6,13 @@
 #ifndef _JavaxXmlXMLConstants_H_
 #define _JavaxXmlXMLConstants_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface JavaxXmlXMLConstants : NSObject {
-}
+@interface JavaxXmlXMLConstants : NSObject
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlXMLConstants_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlXMLConstants)
 
 FOUNDATION_EXPORT NSString *JavaxXmlXMLConstants_NULL_NS_URI_;
 J2OBJC_STATIC_FIELD_GETTER(JavaxXmlXMLConstants, NULL_NS_URI_, NSString *)
@@ -50,5 +49,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaxXmlXMLConstants, RELAXNG_NS_URI_, NSString *)
 
 FOUNDATION_EXPORT NSString *JavaxXmlXMLConstants_FEATURE_SECURE_PROCESSING_;
 J2OBJC_STATIC_FIELD_GETTER(JavaxXmlXMLConstants, FEATURE_SECURE_PROCESSING_, NSString *)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlXMLConstants)
 
 #endif // _JavaxXmlXMLConstants_H_

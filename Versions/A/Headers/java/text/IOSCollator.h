@@ -6,50 +6,68 @@
 #ifndef _JavaTextIOSCollator_H_
 #define _JavaTextIOSCollator_H_
 
-@class IOSByteArray;
-@class JavaUtilLocale;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/text/CollationKey.h"
 #include "java/text/Collator.h"
 
-@interface JavaTextIOSCollator : JavaTextCollator {
-}
+@class IOSByteArray;
+@class JavaUtilLocale;
 
-- (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
+@interface JavaTextIOSCollator : JavaTextCollator
+
+#pragma mark Public
 
 - (jint)compareWithNSString:(NSString *)string1
                withNSString:(NSString *)string2;
-
-- (jint)getDecomposition;
-
-- (jint)getStrength;
-
-- (void)setDecompositionWithInt:(jint)value;
-
-- (void)setStrengthWithInt:(jint)value;
-
-- (NSUInteger)hash;
 
 - (jboolean)isEqual:(id)obj;
 
 - (JavaTextCollationKey *)getCollationKeyWithNSString:(NSString *)string;
 
+- (jint)getDecomposition;
+
+- (jint)getStrength;
+
+- (NSUInteger)hash;
+
+- (void)setDecompositionWithInt:(jint)value;
+
+- (void)setStrengthWithInt:(jint)value;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextIOSCollator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextIOSCollator)
 
-@interface JavaTextIOSCollator_IOSCollationKey : JavaTextCollationKey {
-}
+FOUNDATION_EXPORT void JavaTextIOSCollator_initWithJavaUtilLocale_(JavaTextIOSCollator *self, JavaUtilLocale *locale);
 
-- (instancetype)initWithNSString:(NSString *)source;
+FOUNDATION_EXPORT JavaTextIOSCollator *new_JavaTextIOSCollator_initWithJavaUtilLocale_(JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextIOSCollator)
+
+@interface JavaTextIOSCollator_IOSCollationKey : JavaTextCollationKey
+
+#pragma mark Public
 
 - (jint)compareToWithId:(JavaTextCollationKey *)value;
 
 - (IOSByteArray *)toByteArray;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)source;
+
 @end
 
-__attribute__((always_inline)) inline void JavaTextIOSCollator_IOSCollationKey_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextIOSCollator_IOSCollationKey)
+
+FOUNDATION_EXPORT void JavaTextIOSCollator_IOSCollationKey_initWithNSString_(JavaTextIOSCollator_IOSCollationKey *self, NSString *source);
+
+FOUNDATION_EXPORT JavaTextIOSCollator_IOSCollationKey *new_JavaTextIOSCollator_IOSCollationKey_initWithNSString_(NSString *source) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextIOSCollator_IOSCollationKey)
 
 #endif // _JavaTextIOSCollator_H_

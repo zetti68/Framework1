@@ -6,7 +6,7 @@
 #ifndef _OrgXmlSaxDTDHandler_H_
 #define _OrgXmlSaxDTDHandler_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol OrgXmlSaxDTDHandler < NSObject, JavaObject >
 
@@ -21,6 +21,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxDTDHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxDTDHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxDTDHandler)
 
 #endif // _OrgXmlSaxDTDHandler_H_

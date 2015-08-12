@@ -6,20 +6,23 @@
 #ifndef _JavaIoSyncFailedException_H_
 #define _JavaIoSyncFailedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoSyncFailedException_serialVersionUID -2353342684412443330LL
+@interface JavaIoSyncFailedException : JavaIoIOException
 
-@interface JavaIoSyncFailedException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoSyncFailedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoSyncFailedException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoSyncFailedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoSyncFailedException_initWithNSString_(JavaIoSyncFailedException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoSyncFailedException *new_JavaIoSyncFailedException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoSyncFailedException)
 
 #endif // _JavaIoSyncFailedException_H_

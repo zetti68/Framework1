@@ -6,13 +6,12 @@
 #ifndef _JavaLangNoSuchFieldException_H_
 #define _JavaLangNoSuchFieldException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ReflectiveOperationException.h"
 
-#define JavaLangNoSuchFieldException_serialVersionUID -6143714805279938260LL
+@interface JavaLangNoSuchFieldException : JavaLangReflectiveOperationException
 
-@interface JavaLangNoSuchFieldException : JavaLangReflectiveOperationException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangNoSuchFieldException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangNoSuchFieldException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangNoSuchFieldException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangNoSuchFieldException_init(JavaLangNoSuchFieldException *self);
+
+FOUNDATION_EXPORT JavaLangNoSuchFieldException *new_JavaLangNoSuchFieldException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangNoSuchFieldException_initWithNSString_(JavaLangNoSuchFieldException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangNoSuchFieldException *new_JavaLangNoSuchFieldException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangNoSuchFieldException)
 
 #endif // _JavaLangNoSuchFieldException_H_

@@ -6,6 +6,9 @@
 #ifndef _JavaSqlCallableStatement_H_
 #define _JavaSqlCallableStatement_H_
 
+#include "J2ObjC_header.h"
+#include "java/sql/PreparedStatement.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
@@ -24,10 +27,8 @@
 @protocol JavaSqlSQLXML;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/sql/PreparedStatement.h"
-
 @protocol JavaSqlCallableStatement < JavaSqlPreparedStatement, NSObject, JavaObject >
+
 - (id<JavaSqlArray>)getArrayWithInt:(jint)parameterIndex;
 
 - (id<JavaSqlArray>)getArrayWithNSString:(NSString *)parameterName;
@@ -333,6 +334,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlCallableStatement_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlCallableStatement)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlCallableStatement)
 
 #endif // _JavaSqlCallableStatement_H_

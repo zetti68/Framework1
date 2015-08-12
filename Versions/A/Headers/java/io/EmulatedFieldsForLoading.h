@@ -6,20 +6,20 @@
 #ifndef _JavaIoEmulatedFieldsForLoading_H_
 #define _JavaIoEmulatedFieldsForLoading_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/ObjectInputStream.h"
+
 @class JavaIoEmulatedFields;
 @class JavaIoObjectStreamClass;
 
-#import "JreEmulation.h"
-#include "java/io/ObjectInputStream.h"
+@interface JavaIoEmulatedFieldsForLoading : JavaIoObjectInputStream_GetField
 
-@interface JavaIoEmulatedFieldsForLoading : JavaIoObjectInputStream_GetField {
-}
-
-- (instancetype)initWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)streamClass;
+#pragma mark Public
 
 - (jboolean)defaultedWithNSString:(NSString *)name;
 
-- (JavaIoEmulatedFields *)emulatedFields;
+- (jboolean)getWithNSString:(NSString *)name
+                withBoolean:(jboolean)defaultValue;
 
 - (jbyte)getWithNSString:(NSString *)name
                 withByte:(jbyte)defaultValue;
@@ -45,13 +45,22 @@
 - (jshort)getWithNSString:(NSString *)name
                 withShort:(jshort)defaultValue;
 
-- (jboolean)getWithNSString:(NSString *)name
-                withBoolean:(jboolean)defaultValue;
-
 - (JavaIoObjectStreamClass *)getObjectStreamClass;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)streamClass;
+
+- (JavaIoEmulatedFields *)emulatedFields;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoEmulatedFieldsForLoading_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoEmulatedFieldsForLoading)
+
+FOUNDATION_EXPORT void JavaIoEmulatedFieldsForLoading_initWithJavaIoObjectStreamClass_(JavaIoEmulatedFieldsForLoading *self, JavaIoObjectStreamClass *streamClass);
+
+FOUNDATION_EXPORT JavaIoEmulatedFieldsForLoading *new_JavaIoEmulatedFieldsForLoading_initWithJavaIoObjectStreamClass_(JavaIoObjectStreamClass *streamClass) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoEmulatedFieldsForLoading)
 
 #endif // _JavaIoEmulatedFieldsForLoading_H_

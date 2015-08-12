@@ -6,16 +6,19 @@
 #ifndef _OrgXmlSaxExtLocator2_H_
 #define _OrgXmlSaxExtLocator2_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/Locator.h"
 
 @protocol OrgXmlSaxExtLocator2 < OrgXmlSaxLocator, NSObject, JavaObject >
+
 - (NSString *)getXMLVersion;
 
 - (NSString *)getEncoding;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtLocator2_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtLocator2)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtLocator2)
 
 #endif // _OrgXmlSaxExtLocator2_H_

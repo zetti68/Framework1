@@ -6,9 +6,9 @@
 #ifndef _LibcoreIoStructGroupSourceReq_H_
 #define _LibcoreIoStructGroupSourceReq_H_
 
-@class JavaNetInetAddress;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaNetInetAddress;
 
 @interface LibcoreIoStructGroupSourceReq : NSObject {
  @public
@@ -16,6 +16,8 @@
   JavaNetInetAddress *gsr_group_;
   JavaNetInetAddress *gsr_source_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)gsr_interface
      withJavaNetInetAddress:(JavaNetInetAddress *)gsr_group
@@ -25,9 +27,15 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructGroupSourceReq_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructGroupSourceReq)
 
 J2OBJC_FIELD_SETTER(LibcoreIoStructGroupSourceReq, gsr_group_, JavaNetInetAddress *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructGroupSourceReq, gsr_source_, JavaNetInetAddress *)
+
+FOUNDATION_EXPORT void LibcoreIoStructGroupSourceReq_initWithInt_withJavaNetInetAddress_withJavaNetInetAddress_(LibcoreIoStructGroupSourceReq *self, jint gsr_interface, JavaNetInetAddress *gsr_group, JavaNetInetAddress *gsr_source);
+
+FOUNDATION_EXPORT LibcoreIoStructGroupSourceReq *new_LibcoreIoStructGroupSourceReq_initWithInt_withJavaNetInetAddress_withJavaNetInetAddress_(jint gsr_interface, JavaNetInetAddress *gsr_group, JavaNetInetAddress *gsr_source) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructGroupSourceReq)
 
 #endif // _LibcoreIoStructGroupSourceReq_H_

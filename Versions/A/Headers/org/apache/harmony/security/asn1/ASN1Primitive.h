@@ -6,13 +6,14 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Primitive_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Primitive_H_
 
-@class OrgApacheHarmonySecurityAsn1BerOutputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/apache/harmony/security/asn1/ASN1Type.h"
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Primitive : OrgApacheHarmonySecurityAsn1ASN1Type {
-}
+@class OrgApacheHarmonySecurityAsn1BerOutputStream;
+
+@interface OrgApacheHarmonySecurityAsn1ASN1Primitive : OrgApacheHarmonySecurityAsn1ASN1Type
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)tagNumber;
 
@@ -22,6 +23,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Primitive_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Primitive)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Primitive_initWithInt_(OrgApacheHarmonySecurityAsn1ASN1Primitive *self, jint tagNumber);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Primitive)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Primitive_H_

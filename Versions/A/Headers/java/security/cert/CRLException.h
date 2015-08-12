@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityCertCRLException_H_
 #define _JavaSecurityCertCRLException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityCertCRLException_serialVersionUID -6694728944094197147LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityCertCRLException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecurityCertCRLException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCRLException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCRLException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCRLException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCRLException_initWithNSString_(JavaSecurityCertCRLException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCRLException *new_JavaSecurityCertCRLException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCRLException_init(JavaSecurityCertCRLException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCRLException *new_JavaSecurityCertCRLException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCRLException_initWithNSString_withJavaLangThrowable_(JavaSecurityCertCRLException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCRLException *new_JavaSecurityCertCRLException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCRLException_initWithJavaLangThrowable_(JavaSecurityCertCRLException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityCertCRLException *new_JavaSecurityCertCRLException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCRLException)
 
 #endif // _JavaSecurityCertCRLException_H_

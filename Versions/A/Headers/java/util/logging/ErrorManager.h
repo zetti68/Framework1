@@ -6,20 +6,20 @@
 #ifndef _JavaUtilLoggingErrorManager_H_
 #define _JavaUtilLoggingErrorManager_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+
 @class JavaLangException;
 
-#import "JreEmulation.h"
-
-#define JavaUtilLoggingErrorManager_CLOSE_FAILURE 3
-#define JavaUtilLoggingErrorManager_FLUSH_FAILURE 2
-#define JavaUtilLoggingErrorManager_FORMAT_FAILURE 5
 #define JavaUtilLoggingErrorManager_GENERIC_FAILURE 0
-#define JavaUtilLoggingErrorManager_OPEN_FAILURE 4
 #define JavaUtilLoggingErrorManager_WRITE_FAILURE 1
+#define JavaUtilLoggingErrorManager_FLUSH_FAILURE 2
+#define JavaUtilLoggingErrorManager_CLOSE_FAILURE 3
+#define JavaUtilLoggingErrorManager_OPEN_FAILURE 4
+#define JavaUtilLoggingErrorManager_FORMAT_FAILURE 5
 
-@interface JavaUtilLoggingErrorManager : NSObject {
-}
+@interface JavaUtilLoggingErrorManager : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -29,7 +29,6 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLoggingErrorManager_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLoggingErrorManager)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingErrorManager, GENERIC_FAILURE, jint)
@@ -44,7 +43,10 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingErrorManager, OPEN_FAILURE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingErrorManager, FORMAT_FAILURE, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilLoggingErrorManager_FAILURES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingErrorManager, FAILURES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaUtilLoggingErrorManager_init(JavaUtilLoggingErrorManager *self);
+
+FOUNDATION_EXPORT JavaUtilLoggingErrorManager *new_JavaUtilLoggingErrorManager_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingErrorManager)
 
 #endif // _JavaUtilLoggingErrorManager_H_

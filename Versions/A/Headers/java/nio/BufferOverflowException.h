@@ -6,20 +6,23 @@
 #ifndef _JavaNioBufferOverflowException_H_
 #define _JavaNioBufferOverflowException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaNioBufferOverflowException_serialVersionUID -5484897634319144535LL
+@interface JavaNioBufferOverflowException : JavaLangRuntimeException
 
-@interface JavaNioBufferOverflowException : JavaLangRuntimeException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioBufferOverflowException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioBufferOverflowException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioBufferOverflowException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioBufferOverflowException_init(JavaNioBufferOverflowException *self);
+
+FOUNDATION_EXPORT JavaNioBufferOverflowException *new_JavaNioBufferOverflowException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioBufferOverflowException)
 
 #endif // _JavaNioBufferOverflowException_H_

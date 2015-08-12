@@ -6,7 +6,7 @@
 #ifndef _JavaSqlResultSetMetaData_H_
 #define _JavaSqlResultSetMetaData_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/sql/Wrapper.h"
 
 #define JavaSqlResultSetMetaData_columnNoNulls 0
@@ -14,6 +14,7 @@
 #define JavaSqlResultSetMetaData_columnNullableUnknown 2
 
 @protocol JavaSqlResultSetMetaData < JavaSqlWrapper, NSObject, JavaObject >
+
 - (NSString *)getCatalogNameWithInt:(jint)column;
 
 - (NSString *)getColumnClassNameWithInt:(jint)column;
@@ -58,12 +59,14 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlResultSetMetaData_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlResultSetMetaData)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSetMetaData, columnNoNulls, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSetMetaData, columnNullable, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSetMetaData, columnNullableUnknown, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlResultSetMetaData)
 
 #endif // _JavaSqlResultSetMetaData_H_

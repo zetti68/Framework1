@@ -6,7 +6,9 @@
 #ifndef _JavaTextDecimalFormat_H_
 #define _JavaTextDecimalFormat_H_
 
-@class JavaLangDouble;
+#include "J2ObjC_header.h"
+#include "java/text/NumberFormat.h"
+
 @class JavaLangStringBuffer;
 @class JavaMathRoundingModeEnum;
 @class JavaTextDecimalFormatSymbols;
@@ -14,16 +16,11 @@
 @class JavaTextParsePosition;
 @class JavaUtilCurrency;
 @class JavaUtilLocale;
-@class LibcoreIcuNativeDecimalFormat;
 @protocol JavaTextAttributedCharacterIterator;
 
-#import "JreEmulation.h"
-#include "java/text/NumberFormat.h"
+@interface JavaTextDecimalFormat : JavaTextNumberFormat
 
-#define JavaTextDecimalFormat_serialVersionUID 864413376551465018LL
-
-@interface JavaTextDecimalFormat : JavaTextNumberFormat {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -32,9 +29,6 @@
 - (instancetype)initWithNSString:(NSString *)pattern
 withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
 
-- (instancetype)initWithNSString:(NSString *)pattern
-              withJavaUtilLocale:(JavaUtilLocale *)locale;
-
 - (void)applyLocalizedPatternWithNSString:(NSString *)pattern;
 
 - (void)applyPatternWithNSString:(NSString *)pattern;
@@ -42,8 +36,6 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
 - (id)clone;
 
 - (jboolean)isEqual:(id)object;
-
-- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
 
 - (JavaLangStringBuffer *)formatWithDouble:(jdouble)value
                   withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
@@ -57,9 +49,11 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
               withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
              withJavaTextFieldPosition:(JavaTextFieldPosition *)position;
 
-- (JavaTextDecimalFormatSymbols *)getDecimalFormatSymbols;
+- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
 
 - (JavaUtilCurrency *)getCurrency;
+
+- (JavaTextDecimalFormatSymbols *)getDecimalFormatSymbols;
 
 - (jint)getGroupingSize;
 
@@ -73,30 +67,30 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
 
 - (NSString *)getPositiveSuffix;
 
+- (JavaMathRoundingModeEnum *)getRoundingMode;
+
 - (NSUInteger)hash;
 
 - (jboolean)isDecimalSeparatorAlwaysShown;
 
-- (jboolean)isParseBigDecimal;
+- (jboolean)isGroupingUsed;
 
-- (void)setParseIntegerOnlyWithBoolean:(jboolean)value;
+- (jboolean)isParseBigDecimal;
 
 - (jboolean)isParseIntegerOnly;
 
 - (NSNumber *)parseWithNSString:(NSString *)string
       withJavaTextParsePosition:(JavaTextParsePosition *)position;
 
-- (void)setDecimalFormatSymbolsWithJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
-
 - (void)setCurrencyWithJavaUtilCurrency:(JavaUtilCurrency *)currency;
+
+- (void)setDecimalFormatSymbolsWithJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
 
 - (void)setDecimalSeparatorAlwaysShownWithBoolean:(jboolean)value;
 
 - (void)setGroupingSizeWithInt:(jint)value;
 
 - (void)setGroupingUsedWithBoolean:(jboolean)value;
-
-- (jboolean)isGroupingUsed;
 
 - (void)setMaximumFractionDigitsWithInt:(jint)value;
 
@@ -112,28 +106,45 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)value;
 
 - (void)setNegativeSuffixWithNSString:(NSString *)value;
 
+- (void)setParseBigDecimalWithBoolean:(jboolean)newValue;
+
+- (void)setParseIntegerOnlyWithBoolean:(jboolean)value;
+
 - (void)setPositivePrefixWithNSString:(NSString *)value;
 
 - (void)setPositiveSuffixWithNSString:(NSString *)value;
 
-- (void)setParseBigDecimalWithBoolean:(jboolean)newValue;
+- (void)setRoundingModeWithJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode;
 
 - (NSString *)toLocalizedPattern;
 
 - (NSString *)toPattern;
 
-- (JavaMathRoundingModeEnum *)getRoundingMode;
+#pragma mark Package-Private
 
-- (void)setRoundingModeWithJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode;
+- (instancetype)initWithNSString:(NSString *)pattern
+              withJavaUtilLocale:(JavaUtilLocale *)locale;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextDecimalFormat_initialized;
 J2OBJC_STATIC_INIT(JavaTextDecimalFormat)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDecimalFormat, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaTextDecimalFormat_init(JavaTextDecimalFormat *self);
 
-FOUNDATION_EXPORT JavaLangDouble *JavaTextDecimalFormat_NEGATIVE_ZERO_DOUBLE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaTextDecimalFormat, NEGATIVE_ZERO_DOUBLE_, JavaLangDouble *)
+FOUNDATION_EXPORT JavaTextDecimalFormat *new_JavaTextDecimalFormat_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextDecimalFormat_initWithNSString_(JavaTextDecimalFormat *self, NSString *pattern);
+
+FOUNDATION_EXPORT JavaTextDecimalFormat *new_JavaTextDecimalFormat_initWithNSString_(NSString *pattern) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(JavaTextDecimalFormat *self, NSString *pattern, JavaTextDecimalFormatSymbols *value);
+
+FOUNDATION_EXPORT JavaTextDecimalFormat *new_JavaTextDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(NSString *pattern, JavaTextDecimalFormatSymbols *value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextDecimalFormat_initWithNSString_withJavaUtilLocale_(JavaTextDecimalFormat *self, NSString *pattern, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextDecimalFormat *new_JavaTextDecimalFormat_initWithNSString_withJavaUtilLocale_(NSString *pattern, JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextDecimalFormat)
 
 #endif // _JavaTextDecimalFormat_H_

@@ -6,20 +6,23 @@
 #ifndef _JavaUtilZipZipError_H_
 #define _JavaUtilZipZipError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/InternalError.h"
 
-#define JavaUtilZipZipError_serialVersionUID 853973422266861979LL
+@interface JavaUtilZipZipError : JavaLangInternalError
 
-@interface JavaUtilZipZipError : JavaLangInternalError {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)s;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilZipZipError_initWithNSString_(JavaUtilZipZipError *self, NSString *s);
+
+FOUNDATION_EXPORT JavaUtilZipZipError *new_JavaUtilZipZipError_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipError)
 
 #endif // _JavaUtilZipZipError_H_

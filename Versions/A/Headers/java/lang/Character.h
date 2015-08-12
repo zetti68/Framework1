@@ -6,119 +6,88 @@
 #ifndef _JavaLangCharacter_H_
 #define _JavaLangCharacter_H_
 
-@class IOSByteArray;
-@class IOSCharArray;
-@class IOSClass;
-@class IOSIntArray;
-@class IOSObjectArray;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilMap;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 
+@class IOSCharArray;
+@class IOSClass;
+@protocol JavaLangCharSequence;
+
+#define JavaLangCharacter_MIN_VALUE 0x0000
+#define JavaLangCharacter_MAX_VALUE 0xffff
+#define JavaLangCharacter_MIN_RADIX 2
+#define JavaLangCharacter_MAX_RADIX 36
+#define JavaLangCharacter_UNASSIGNED 0
+#define JavaLangCharacter_UPPERCASE_LETTER 1
+#define JavaLangCharacter_LOWERCASE_LETTER 2
+#define JavaLangCharacter_TITLECASE_LETTER 3
+#define JavaLangCharacter_MODIFIER_LETTER 4
+#define JavaLangCharacter_OTHER_LETTER 5
+#define JavaLangCharacter_NON_SPACING_MARK 6
+#define JavaLangCharacter_ENCLOSING_MARK 7
 #define JavaLangCharacter_COMBINING_SPACING_MARK 8
-#define JavaLangCharacter_CONNECTOR_PUNCTUATION 23
-#define JavaLangCharacter_CONTROL 15
-#define JavaLangCharacter_CURRENCY_SYMBOL 26
-#define JavaLangCharacter_DASH_PUNCTUATION 20
 #define JavaLangCharacter_DECIMAL_DIGIT_NUMBER 9
-#define JavaLangCharacter_DIRECTIONALITY_ARABIC_NUMBER 6
-#define JavaLangCharacter_DIRECTIONALITY_BOUNDARY_NEUTRAL 9
-#define JavaLangCharacter_DIRECTIONALITY_COMMON_NUMBER_SEPARATOR 7
+#define JavaLangCharacter_LETTER_NUMBER 10
+#define JavaLangCharacter_OTHER_NUMBER 11
+#define JavaLangCharacter_SPACE_SEPARATOR 12
+#define JavaLangCharacter_LINE_SEPARATOR 13
+#define JavaLangCharacter_PARAGRAPH_SEPARATOR 14
+#define JavaLangCharacter_CONTROL 15
+#define JavaLangCharacter_FORMAT 16
+#define JavaLangCharacter_PRIVATE_USE 18
+#define JavaLangCharacter_SURROGATE 19
+#define JavaLangCharacter_DASH_PUNCTUATION 20
+#define JavaLangCharacter_START_PUNCTUATION 21
+#define JavaLangCharacter_END_PUNCTUATION 22
+#define JavaLangCharacter_CONNECTOR_PUNCTUATION 23
+#define JavaLangCharacter_OTHER_PUNCTUATION 24
+#define JavaLangCharacter_MATH_SYMBOL 25
+#define JavaLangCharacter_CURRENCY_SYMBOL 26
+#define JavaLangCharacter_MODIFIER_SYMBOL 27
+#define JavaLangCharacter_OTHER_SYMBOL 28
+#define JavaLangCharacter_INITIAL_QUOTE_PUNCTUATION 29
+#define JavaLangCharacter_FINAL_QUOTE_PUNCTUATION 30
+#define JavaLangCharacter_DIRECTIONALITY_UNDEFINED -1
+#define JavaLangCharacter_DIRECTIONALITY_LEFT_TO_RIGHT 0
+#define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT 1
+#define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC 2
 #define JavaLangCharacter_DIRECTIONALITY_EUROPEAN_NUMBER 3
 #define JavaLangCharacter_DIRECTIONALITY_EUROPEAN_NUMBER_SEPARATOR 4
 #define JavaLangCharacter_DIRECTIONALITY_EUROPEAN_NUMBER_TERMINATOR 5
-#define JavaLangCharacter_DIRECTIONALITY_LEFT_TO_RIGHT 0
+#define JavaLangCharacter_DIRECTIONALITY_ARABIC_NUMBER 6
+#define JavaLangCharacter_DIRECTIONALITY_COMMON_NUMBER_SEPARATOR 7
+#define JavaLangCharacter_DIRECTIONALITY_NONSPACING_MARK 8
+#define JavaLangCharacter_DIRECTIONALITY_BOUNDARY_NEUTRAL 9
+#define JavaLangCharacter_DIRECTIONALITY_PARAGRAPH_SEPARATOR 10
+#define JavaLangCharacter_DIRECTIONALITY_SEGMENT_SEPARATOR 11
+#define JavaLangCharacter_DIRECTIONALITY_WHITESPACE 12
+#define JavaLangCharacter_DIRECTIONALITY_OTHER_NEUTRALS 13
 #define JavaLangCharacter_DIRECTIONALITY_LEFT_TO_RIGHT_EMBEDDING 14
 #define JavaLangCharacter_DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE 15
-#define JavaLangCharacter_DIRECTIONALITY_NONSPACING_MARK 8
-#define JavaLangCharacter_DIRECTIONALITY_OTHER_NEUTRALS 13
-#define JavaLangCharacter_DIRECTIONALITY_PARAGRAPH_SEPARATOR 10
-#define JavaLangCharacter_DIRECTIONALITY_POP_DIRECTIONAL_FORMAT 18
-#define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT 1
-#define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC 2
 #define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING 16
 #define JavaLangCharacter_DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE 17
-#define JavaLangCharacter_DIRECTIONALITY_SEGMENT_SEPARATOR 11
-#define JavaLangCharacter_DIRECTIONALITY_UNDEFINED -1
-#define JavaLangCharacter_DIRECTIONALITY_WHITESPACE 12
-#define JavaLangCharacter_ENCLOSING_MARK 7
-#define JavaLangCharacter_END_PUNCTUATION 22
-#define JavaLangCharacter_FINAL_QUOTE_PUNCTUATION 30
-#define JavaLangCharacter_FORMAT 16
-#define JavaLangCharacter_INITIAL_QUOTE_PUNCTUATION 29
-#define JavaLangCharacter_LETTER_NUMBER 10
-#define JavaLangCharacter_LINE_SEPARATOR 13
-#define JavaLangCharacter_LOWERCASE_LETTER 2
-#define JavaLangCharacter_MATH_SYMBOL 25
-#define JavaLangCharacter_MAX_CODE_POINT 1114111
-#define JavaLangCharacter_MAX_HIGH_SURROGATE 0xdbff
-#define JavaLangCharacter_MAX_LOW_SURROGATE 0xdfff
-#define JavaLangCharacter_MAX_RADIX 36
-#define JavaLangCharacter_MAX_SURROGATE 0xdfff
-#define JavaLangCharacter_MAX_VALUE 0xffff
-#define JavaLangCharacter_MIN_CODE_POINT 0
+#define JavaLangCharacter_DIRECTIONALITY_POP_DIRECTIONAL_FORMAT 18
 #define JavaLangCharacter_MIN_HIGH_SURROGATE 0xd800
+#define JavaLangCharacter_MAX_HIGH_SURROGATE 0xdbff
 #define JavaLangCharacter_MIN_LOW_SURROGATE 0xdc00
-#define JavaLangCharacter_MIN_RADIX 2
-#define JavaLangCharacter_MIN_SUPPLEMENTARY_CODE_POINT 65536
+#define JavaLangCharacter_MAX_LOW_SURROGATE 0xdfff
 #define JavaLangCharacter_MIN_SURROGATE 0xd800
-#define JavaLangCharacter_MIN_VALUE 0x0000
-#define JavaLangCharacter_MODIFIER_LETTER 4
-#define JavaLangCharacter_MODIFIER_SYMBOL 27
-#define JavaLangCharacter_NON_SPACING_MARK 6
-#define JavaLangCharacter_OTHER_LETTER 5
-#define JavaLangCharacter_OTHER_NUMBER 11
-#define JavaLangCharacter_OTHER_PUNCTUATION 24
-#define JavaLangCharacter_OTHER_SYMBOL 28
-#define JavaLangCharacter_PARAGRAPH_SEPARATOR 14
-#define JavaLangCharacter_PRIVATE_USE 18
+#define JavaLangCharacter_MAX_SURROGATE 0xdfff
+#define JavaLangCharacter_MIN_SUPPLEMENTARY_CODE_POINT 65536
+#define JavaLangCharacter_MIN_CODE_POINT 0
+#define JavaLangCharacter_MAX_CODE_POINT 1114111
 #define JavaLangCharacter_SIZE 16
-#define JavaLangCharacter_SPACE_SEPARATOR 12
-#define JavaLangCharacter_START_PUNCTUATION 21
-#define JavaLangCharacter_SURROGATE 19
-#define JavaLangCharacter_TITLECASE_LETTER 3
-#define JavaLangCharacter_UNASSIGNED 0
-#define JavaLangCharacter_UPPERCASE_LETTER 1
-#define JavaLangCharacter_serialVersionUID 3786198910865385080LL
 
-@interface JavaLangCharacter : NSObject < JavaIoSerializable, JavaLangComparable > {
-}
+@interface JavaLangCharacter : NSObject < JavaIoSerializable, JavaLangComparable >
+
+#pragma mark Public
 
 - (instancetype)initWithChar:(jchar)value;
 
-- (jchar)charValue;
-
-- (jint)compareToWithId:(JavaLangCharacter *)c;
-
-+ (jint)compareWithChar:(jchar)lhs
-               withChar:(jchar)rhs;
-
-+ (JavaLangCharacter *)valueOfWithChar:(jchar)c;
-
-+ (jboolean)isValidCodePointWithInt:(jint)codePoint;
-
-+ (jboolean)isSupplementaryCodePointWithInt:(jint)codePoint;
-
-+ (jboolean)isHighSurrogateWithChar:(jchar)ch;
-
-+ (jboolean)isLowSurrogateWithChar:(jchar)ch;
-
-+ (jboolean)isSurrogateWithChar:(jchar)ch;
-
-+ (jboolean)isSurrogatePairWithChar:(jchar)high
-                           withChar:(jchar)low;
-
 + (jint)charCountWithInt:(jint)codePoint;
 
-+ (jint)toCodePointWithChar:(jchar)high
-                   withChar:(jchar)low;
-
-+ (jint)codePointAtWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
-                                    withInt:(jint)index;
-
+- (jchar)charValue;
 
 + (jint)codePointAtWithCharArray:(IOSCharArray *)seq
                          withInt:(jint)index;
@@ -127,9 +96,8 @@
                          withInt:(jint)index
                          withInt:(jint)limit;
 
-+ (jint)codePointBeforeWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
-                                        withInt:(jint)index;
-
++ (jint)codePointAtWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
+                                    withInt:(jint)index;
 
 + (jint)codePointBeforeWithCharArray:(IOSCharArray *)seq
                              withInt:(jint)index;
@@ -138,31 +106,21 @@
                              withInt:(jint)index
                              withInt:(jint)start;
 
-+ (jint)toCharsWithInt:(jint)codePoint
-         withCharArray:(IOSCharArray *)dst
-               withInt:(jint)dstIndex;
-
-+ (IOSCharArray *)toCharsWithInt:(jint)codePoint;
-
-+ (jint)codePointCountWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
-                                       withInt:(jint)beginIndex
-                                       withInt:(jint)endIndex;
-
++ (jint)codePointBeforeWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
+                                        withInt:(jint)index;
 
 + (jint)codePointCountWithCharArray:(IOSCharArray *)seq
                             withInt:(jint)offset
                             withInt:(jint)count;
 
-+ (jint)offsetByCodePointsWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
-                                           withInt:(jint)index
-                                           withInt:(jint)codePointOffset;
++ (jint)codePointCountWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
+                                       withInt:(jint)beginIndex
+                                       withInt:(jint)endIndex;
 
++ (jint)compareWithChar:(jchar)lhs
+               withChar:(jchar)rhs;
 
-+ (jint)offsetByCodePointsWithCharArray:(IOSCharArray *)seq
-                                withInt:(jint)start
-                                withInt:(jint)count
-                                withInt:(jint)index
-                                withInt:(jint)codePointOffset;
+- (jint)compareToWithId:(JavaLangCharacter *)c;
 
 + (jint)digitWithChar:(jchar)c
               withInt:(jint)radix;
@@ -175,6 +133,10 @@
 + (jchar)forDigitWithInt:(jint)digit
                  withInt:(jint)radix;
 
++ (jbyte)getDirectionalityWithChar:(jchar)c;
+
++ (jbyte)getDirectionalityWithInt:(jint)codePoint;
+
 + (NSString *)getNameWithInt:(jint)codePoint;
 
 + (jint)getNumericValueWithChar:(jchar)c;
@@ -185,19 +147,9 @@
 
 + (jint)getTypeWithInt:(jint)codePoint;
 
-+ (jbyte)getDirectionalityWithChar:(jchar)c;
-
-+ (jbyte)getDirectionalityWithInt:(jint)codePoint;
-
-+ (jboolean)isMirroredWithChar:(jchar)c;
-
-+ (jboolean)isMirroredWithInt:(jint)codePoint;
-
 - (NSUInteger)hash;
 
 + (jchar)highSurrogateWithInt:(jint)codePoint;
-
-+ (jchar)lowSurrogateWithInt:(jint)codePoint;
 
 + (jboolean)isAlphabeticWithInt:(jint)codePoint;
 
@@ -211,11 +163,13 @@
 
 + (jboolean)isDigitWithInt:(jint)codePoint;
 
++ (jboolean)isHighSurrogateWithChar:(jchar)ch;
+
 + (jboolean)isIdentifierIgnorableWithChar:(jchar)c;
 
-+ (jboolean)isIdeographicWithInt:(jint)codePoint;
-
 + (jboolean)isIdentifierIgnorableWithInt:(jint)codePoint;
+
++ (jboolean)isIdeographicWithInt:(jint)codePoint;
 
 + (jboolean)isISOControlWithChar:(jchar)c;
 
@@ -245,11 +199,24 @@
 
 + (jboolean)isLowerCaseWithInt:(jint)codePoint;
 
++ (jboolean)isLowSurrogateWithChar:(jchar)ch;
+
++ (jboolean)isMirroredWithChar:(jchar)c;
+
++ (jboolean)isMirroredWithInt:(jint)codePoint;
+
 + (jboolean)isSpaceWithChar:(jchar)c;
 
 + (jboolean)isSpaceCharWithChar:(jchar)c;
 
 + (jboolean)isSpaceCharWithInt:(jint)codePoint;
+
++ (jboolean)isSupplementaryCodePointWithInt:(jint)codePoint;
+
++ (jboolean)isSurrogateWithChar:(jchar)ch;
+
++ (jboolean)isSurrogatePairWithChar:(jchar)high
+                           withChar:(jchar)low;
 
 + (jboolean)isTitleCaseWithChar:(jchar)c;
 
@@ -267,11 +234,34 @@
 
 + (jboolean)isUpperCaseWithInt:(jint)codePoint;
 
++ (jboolean)isValidCodePointWithInt:(jint)codePoint;
+
 + (jboolean)isWhitespaceWithChar:(jchar)c;
 
 + (jboolean)isWhitespaceWithInt:(jint)codePoint;
 
++ (jchar)lowSurrogateWithInt:(jint)codePoint;
+
++ (jint)offsetByCodePointsWithCharArray:(IOSCharArray *)seq
+                                withInt:(jint)start
+                                withInt:(jint)count
+                                withInt:(jint)index
+                                withInt:(jint)codePointOffset;
+
++ (jint)offsetByCodePointsWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
+                                           withInt:(jint)index
+                                           withInt:(jint)codePointOffset;
+
 + (jchar)reverseBytesWithChar:(jchar)c;
+
++ (IOSCharArray *)toCharsWithInt:(jint)codePoint;
+
++ (jint)toCharsWithInt:(jint)codePoint
+         withCharArray:(IOSCharArray *)dst
+               withInt:(jint)dstIndex;
+
++ (jint)toCodePointWithChar:(jchar)high
+                   withChar:(jchar)low;
 
 + (jchar)toLowerCaseWithChar:(jchar)c;
 
@@ -289,92 +279,17 @@
 
 + (jint)toUpperCaseWithInt:(jint)codePoint;
 
++ (JavaLangCharacter *)valueOfWithChar:(jchar)c;
+
+#pragma mark Package-Private
+
+
+
+
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangCharacter_initialized;
 J2OBJC_STATIC_INIT(JavaLangCharacter)
-FOUNDATION_EXPORT jint JavaLangCharacter_compareWithChar_withChar_(jchar lhs, jchar rhs);
-FOUNDATION_EXPORT JavaLangCharacter *JavaLangCharacter_valueOfWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isValidCodePointWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSupplementaryCodePointWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isHighSurrogateWithChar_(jchar ch);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowSurrogateWithChar_(jchar ch);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSurrogateWithChar_(jchar ch);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSurrogatePairWithChar_withChar_(jchar high, jchar low);
-FOUNDATION_EXPORT jint JavaLangCharacter_charCountWithInt_(jint codePoint);
-FOUNDATION_EXPORT jint JavaLangCharacter_toCodePointWithChar_withChar_(jchar high, jchar low);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> seq, jint index);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithCharArray_withInt_(IOSCharArray *seq, jint index);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(IOSCharArray *seq, jint index, jint limit);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> seq, jint index);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithCharArray_withInt_(IOSCharArray *seq, jint index);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithCharArray_withInt_withInt_(IOSCharArray *seq, jint index, jint start);
-FOUNDATION_EXPORT jint JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(jint codePoint, IOSCharArray *dst, jint dstIndex);
-FOUNDATION_EXPORT IOSCharArray *JavaLangCharacter_toCharsWithInt_(jint codePoint);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointCountWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> seq, jint beginIndex, jint endIndex);
-FOUNDATION_EXPORT jint JavaLangCharacter_codePointCountWithCharArray_withInt_withInt_(IOSCharArray *seq, jint offset, jint count);
-FOUNDATION_EXPORT jint JavaLangCharacter_offsetByCodePointsWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> seq, jint index, jint codePointOffset);
-FOUNDATION_EXPORT jint JavaLangCharacter_offsetByCodePointsWithCharArray_withInt_withInt_withInt_withInt_(IOSCharArray *seq, jint start, jint count, jint index, jint codePointOffset);
-FOUNDATION_EXPORT jint JavaLangCharacter_digitWithChar_withInt_(jchar c, jint radix);
-FOUNDATION_EXPORT jint JavaLangCharacter_digitWithInt_withInt_(jint codePoint, jint radix);
-FOUNDATION_EXPORT jchar JavaLangCharacter_forDigitWithInt_withInt_(jint digit, jint radix);
-FOUNDATION_EXPORT NSString *JavaLangCharacter_getNameWithInt_(jint codePoint);
-FOUNDATION_EXPORT jint JavaLangCharacter_getNumericValueWithChar_(jchar c);
-FOUNDATION_EXPORT jint JavaLangCharacter_getNumericValueWithInt_(jint codePoint);
-FOUNDATION_EXPORT jint JavaLangCharacter_getTypeWithChar_(jchar c);
-FOUNDATION_EXPORT jint JavaLangCharacter_getTypeWithInt_(jint codePoint);
-FOUNDATION_EXPORT jbyte JavaLangCharacter_getDirectionalityWithChar_(jchar c);
-FOUNDATION_EXPORT jbyte JavaLangCharacter_getDirectionalityWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isMirroredWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isMirroredWithInt_(jint codePoint);
-FOUNDATION_EXPORT jchar JavaLangCharacter_highSurrogateWithInt_(jint codePoint);
-FOUNDATION_EXPORT jchar JavaLangCharacter_lowSurrogateWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isAlphabeticWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isBmpCodePointWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isDefinedWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isDefinedWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isDigitWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isDigitWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdentifierIgnorableWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdeographicWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdentifierIgnorableWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isISOControlWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isISOControlWithInt_(jint c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierPartWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierPartWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierStartWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierStartWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaLetterWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaLetterOrDigitWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterOrDigitWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterOrDigitWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowerCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowerCaseWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceCharWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceCharWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isTitleCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isTitleCaseWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierPartWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierPartWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierStartWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierStartWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUpperCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isUpperCaseWithInt_(jint codePoint);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isWhitespaceWithChar_(jchar c);
-FOUNDATION_EXPORT jboolean JavaLangCharacter_isWhitespaceWithInt_(jint codePoint);
-FOUNDATION_EXPORT jchar JavaLangCharacter_reverseBytesWithChar_(jchar c);
-FOUNDATION_EXPORT jchar JavaLangCharacter_toLowerCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jint JavaLangCharacter_toLowerCaseWithInt_(jint codePoint);
-FOUNDATION_EXPORT NSString *JavaLangCharacter_toStringWithChar_(jchar value);
-FOUNDATION_EXPORT jchar JavaLangCharacter_toTitleCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jint JavaLangCharacter_toTitleCaseWithInt_(jint codePoint);
-FOUNDATION_EXPORT jchar JavaLangCharacter_toUpperCaseWithChar_(jchar c);
-FOUNDATION_EXPORT jint JavaLangCharacter_toUpperCaseWithInt_(jint codePoint);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, MIN_VALUE, jchar)
 
@@ -507,51 +422,177 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, MAX_CODE_POINT, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, SIZE, jint)
 
-FOUNDATION_EXPORT IOSByteArray *JavaLangCharacter_DIRECTIONALITY_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, DIRECTIONALITY_, IOSByteArray *)
+FOUNDATION_EXPORT void JavaLangCharacter_initWithChar_(JavaLangCharacter *self, jchar value);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_digitKeys_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, digitKeys_, IOSIntArray *)
+FOUNDATION_EXPORT JavaLangCharacter *new_JavaLangCharacter_initWithChar_(jchar value) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_digitValues_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, digitValues_, IOSIntArray *)
+FOUNDATION_EXPORT jint JavaLangCharacter_compareWithChar_withChar_(jchar lhs, jchar rhs);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_bidiKeys_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, bidiKeys_, IOSIntArray *)
+FOUNDATION_EXPORT JavaLangCharacter *JavaLangCharacter_valueOfWithChar_(jchar c);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_bidiValues_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, bidiValues_, IOSIntArray *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isValidCodePointWithInt_(jint codePoint);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_mirrored_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, mirrored_, IOSIntArray *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSupplementaryCodePointWithInt_(jint codePoint);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_typeKeys_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, typeKeys_, IOSIntArray *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isHighSurrogateWithChar_(jchar ch);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_typeValues_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, typeValues_, IOSIntArray *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowSurrogateWithChar_(jchar ch);
 
-FOUNDATION_EXPORT IOSIntArray *JavaLangCharacter_typeValuesCache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, typeValuesCache_, IOSIntArray *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSurrogateWithChar_(jchar ch);
 
-FOUNDATION_EXPORT NSString *JavaLangCharacter_titlecaseKeys_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, titlecaseKeys_, NSString *)
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSurrogatePairWithChar_withChar_(jchar high, jchar low);
 
-FOUNDATION_EXPORT IOSCharArray *JavaLangCharacter_titlecaseValues_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, titlecaseValues_, IOSCharArray *)
+FOUNDATION_EXPORT jint JavaLangCharacter_charCountWithInt_(jint codePoint);
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangCharacter_ideographRanges_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, ideographRanges_, IOSObjectArray *)
+FOUNDATION_EXPORT jint JavaLangCharacter_toCodePointWithChar_withChar_(jchar high, jchar low);
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangCharacter_SMALL_VALUES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter, SMALL_VALUES_, IOSObjectArray *)
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> seq, jint index);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithCharArray_withInt_(IOSCharArray *seq, jint index);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(IOSCharArray *seq, jint index, jint limit);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> seq, jint index);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithCharArray_withInt_(IOSCharArray *seq, jint index);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointBeforeWithCharArray_withInt_withInt_(IOSCharArray *seq, jint index, jint start);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(jint codePoint, IOSCharArray *dst, jint dstIndex);
+
+FOUNDATION_EXPORT IOSCharArray *JavaLangCharacter_toCharsWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointCountWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> seq, jint beginIndex, jint endIndex);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_codePointCountWithCharArray_withInt_withInt_(IOSCharArray *seq, jint offset, jint count);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_offsetByCodePointsWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> seq, jint index, jint codePointOffset);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_offsetByCodePointsWithCharArray_withInt_withInt_withInt_withInt_(IOSCharArray *seq, jint start, jint count, jint index, jint codePointOffset);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_digitWithChar_withInt_(jchar c, jint radix);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_digitWithInt_withInt_(jint codePoint, jint radix);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_forDigitWithInt_withInt_(jint digit, jint radix);
+
+FOUNDATION_EXPORT NSString *JavaLangCharacter_getNameWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_getNumericValueWithChar_(jchar c);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_getNumericValueWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_getTypeWithChar_(jchar c);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_getTypeWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jbyte JavaLangCharacter_getDirectionalityWithChar_(jchar c);
+
+FOUNDATION_EXPORT jbyte JavaLangCharacter_getDirectionalityWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isMirroredWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isMirroredWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_highSurrogateWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_lowSurrogateWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isAlphabeticWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isBmpCodePointWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isDefinedWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isDefinedWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isDigitWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isDigitWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdentifierIgnorableWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdeographicWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isIdentifierIgnorableWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isISOControlWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isISOControlWithInt_(jint c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierPartWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierPartWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierStartWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaIdentifierStartWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaLetterWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isJavaLetterOrDigitWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterOrDigitWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLetterOrDigitWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowerCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isLowerCaseWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceCharWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isSpaceCharWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isTitleCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isTitleCaseWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierPartWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierPartWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierStartWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUnicodeIdentifierStartWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUpperCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isUpperCaseWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isWhitespaceWithChar_(jchar c);
+
+FOUNDATION_EXPORT jboolean JavaLangCharacter_isWhitespaceWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_reverseBytesWithChar_(jchar c);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_toLowerCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_toLowerCaseWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT NSString *JavaLangCharacter_toStringWithChar_(jchar value);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_toTitleCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_toTitleCaseWithInt_(jint codePoint);
+
+FOUNDATION_EXPORT jchar JavaLangCharacter_toUpperCaseWithChar_(jchar c);
+
+FOUNDATION_EXPORT jint JavaLangCharacter_toUpperCaseWithInt_(jint codePoint);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangCharacter)
 
 BOXED_INC_AND_DEC(Char, charValue, JavaLangCharacter)
 
-@interface JavaLangCharacter_Subset : NSObject {
-}
+@interface JavaLangCharacter_Subset : NSObject
 
-- (instancetype)initWithNSString:(NSString *)name;
+#pragma mark Public
 
 - (jboolean)isEqual:(id)object;
 
@@ -559,15 +600,27 @@ BOXED_INC_AND_DEC(Char, charValue, JavaLangCharacter)
 
 - (NSString *)description;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)name;
+
 @end
 
-__attribute__((always_inline)) inline void JavaLangCharacter_Subset_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangCharacter_Subset)
+
+FOUNDATION_EXPORT void JavaLangCharacter_Subset_initWithNSString_(JavaLangCharacter_Subset *self, NSString *name);
+
+FOUNDATION_EXPORT JavaLangCharacter_Subset *new_JavaLangCharacter_Subset_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangCharacter_Subset)
 
 @interface JavaLangCharacter_UnicodeBlock : JavaLangCharacter_Subset {
  @public
   jint rangeStart_;
   jint rangeEnd_;
 }
+
+#pragma mark Public
 
 + (JavaLangCharacter_UnicodeBlock *)forNameWithNSString:(NSString *)blockName;
 
@@ -577,11 +630,7 @@ __attribute__((always_inline)) inline void JavaLangCharacter_Subset_init() {}
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangCharacter_UnicodeBlock_initialized;
 J2OBJC_STATIC_INIT(JavaLangCharacter_UnicodeBlock)
-FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_forNameWithNSString_(NSString *blockName);
-FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_ofWithChar_(jchar c);
-FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_ofWithInt_(jint codePoint);
 
 FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_SURROGATES_AREA_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter_UnicodeBlock, SURROGATES_AREA_, JavaLangCharacter_UnicodeBlock *)
@@ -1213,11 +1262,12 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter_UnicodeBlock, ALCHEMICAL_SYMBOLS_, 
 FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter_UnicodeBlock, CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D_, JavaLangCharacter_UnicodeBlock *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangCharacter_UnicodeBlock_BLOCKS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter_UnicodeBlock, BLOCKS_, IOSObjectArray *)
-J2OBJC_STATIC_FIELD_SETTER(JavaLangCharacter_UnicodeBlock, BLOCKS_, IOSObjectArray *)
+FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_forNameWithNSString_(NSString *blockName);
 
-FOUNDATION_EXPORT id<JavaUtilMap> JavaLangCharacter_UnicodeBlock_blockAliasMap_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangCharacter_UnicodeBlock, blockAliasMap_, id<JavaUtilMap>)
+FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_ofWithChar_(jchar c);
+
+FOUNDATION_EXPORT JavaLangCharacter_UnicodeBlock *JavaLangCharacter_UnicodeBlock_ofWithInt_(jint codePoint);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangCharacter_UnicodeBlock)
 
 #endif // _JavaLangCharacter_H_

@@ -6,26 +6,26 @@
 #ifndef _JavaIoFileDescriptor_H_
 #define _JavaIoFileDescriptor_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface JavaIoFileDescriptor : NSObject {
-}
+@interface JavaIoFileDescriptor : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
-
-- (void)sync;
-
-- (jboolean)valid;
 
 - (jint)getInt$;
 
 - (void)setInt$WithInt:(jint)fd;
 
+- (void)sync;
+
 - (NSString *)description;
+
+- (jboolean)valid;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoFileDescriptor_initialized;
 J2OBJC_STATIC_INIT(JavaIoFileDescriptor)
 
 FOUNDATION_EXPORT JavaIoFileDescriptor *JavaIoFileDescriptor_in_;
@@ -36,5 +36,11 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoFileDescriptor, out_, JavaIoFileDescriptor *)
 
 FOUNDATION_EXPORT JavaIoFileDescriptor *JavaIoFileDescriptor_err_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoFileDescriptor, err_, JavaIoFileDescriptor *)
+
+FOUNDATION_EXPORT void JavaIoFileDescriptor_init(JavaIoFileDescriptor *self);
+
+FOUNDATION_EXPORT JavaIoFileDescriptor *new_JavaIoFileDescriptor_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileDescriptor)
 
 #endif // _JavaIoFileDescriptor_H_

@@ -6,12 +6,15 @@
 #ifndef _JavaSqlNClob_H_
 #define _JavaSqlNClob_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/sql/Clob.h"
 
 @protocol JavaSqlNClob < JavaSqlClob, NSObject, JavaObject >
+
 @end
 
-__attribute__((always_inline)) inline void JavaSqlNClob_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlNClob)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlNClob)
 
 #endif // _JavaSqlNClob_H_

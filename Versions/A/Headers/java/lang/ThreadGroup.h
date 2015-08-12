@@ -6,12 +6,11 @@
 #ifndef _JavaLangThreadGroup_H_
 #define _JavaLangThreadGroup_H_
 
-@class IOSObjectArray;
-@class JavaLangThread;
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Thread.h"
+
+@class IOSObjectArray;
+@class JavaLangThrowable;
 
 @interface JavaLangThreadGroup : NSObject < JavaLangThread_UncaughtExceptionHandler > {
  @public
@@ -20,18 +19,16 @@
   jint numGroups_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)name;
 
 - (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)parent
                                withNSString:(NSString *)name;
 
-- (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)parent;
-
 - (jint)activeCount;
 
 - (jint)activeGroupCount;
-
-- (void)addWithJavaLangThread:(JavaLangThread *)thread;
 
 - (void)checkAccess;
 
@@ -59,8 +56,6 @@
 
 - (jboolean)parentOfWithJavaLangThreadGroup:(JavaLangThreadGroup *)g;
 
-- (void)removeWithJavaLangThread:(JavaLangThread *)thread;
-
 - (void)setMaxPriorityWithInt:(jint)newMax;
 
 - (NSString *)description;
@@ -68,28 +63,32 @@
 - (void)uncaughtExceptionWithJavaLangThread:(JavaLangThread *)t
                       withJavaLangThrowable:(JavaLangThrowable *)e;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)parent;
+
+- (void)addWithJavaLangThread:(JavaLangThread *)thread;
+
+- (void)removeWithJavaLangThread:(JavaLangThread *)thread;
+
 @end
 
-__attribute__((always_inline)) inline void JavaLangThreadGroup_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangThreadGroup)
 
 J2OBJC_FIELD_SETTER(JavaLangThreadGroup, parent_, JavaLangThreadGroup *)
 
-@interface JavaLangThreadGroup_ChildrenGroupsLock : NSObject {
-}
+FOUNDATION_EXPORT void JavaLangThreadGroup_initWithNSString_(JavaLangThreadGroup *self, NSString *name);
 
-- (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)outer$;
+FOUNDATION_EXPORT JavaLangThreadGroup *new_JavaLangThreadGroup_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
 
-@end
+FOUNDATION_EXPORT void JavaLangThreadGroup_initWithJavaLangThreadGroup_withNSString_(JavaLangThreadGroup *self, JavaLangThreadGroup *parent, NSString *name);
 
-__attribute__((always_inline)) inline void JavaLangThreadGroup_ChildrenGroupsLock_init() {}
+FOUNDATION_EXPORT JavaLangThreadGroup *new_JavaLangThreadGroup_initWithJavaLangThreadGroup_withNSString_(JavaLangThreadGroup *parent, NSString *name) NS_RETURNS_RETAINED;
 
-@interface JavaLangThreadGroup_ChildrenThreadsLock : NSObject {
-}
+FOUNDATION_EXPORT void JavaLangThreadGroup_initWithJavaLangThreadGroup_(JavaLangThreadGroup *self, JavaLangThreadGroup *parent);
 
-- (instancetype)initWithJavaLangThreadGroup:(JavaLangThreadGroup *)outer$;
+FOUNDATION_EXPORT JavaLangThreadGroup *new_JavaLangThreadGroup_initWithJavaLangThreadGroup_(JavaLangThreadGroup *parent) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaLangThreadGroup_ChildrenThreadsLock_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangThreadGroup)
 
 #endif // _JavaLangThreadGroup_H_

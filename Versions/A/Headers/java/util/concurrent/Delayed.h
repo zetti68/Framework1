@@ -6,16 +6,19 @@
 #ifndef _JavaUtilConcurrentDelayed_H_
 #define _JavaUtilConcurrentDelayed_H_
 
-@class JavaUtilConcurrentTimeUnitEnum;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
 
+@class JavaUtilConcurrentTimeUnitEnum;
+
 @protocol JavaUtilConcurrentDelayed < JavaLangComparable, NSObject, JavaObject >
+
 - (jlong)getDelayWithJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentDelayed_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentDelayed)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentDelayed)
 
 #endif // _JavaUtilConcurrentDelayed_H_

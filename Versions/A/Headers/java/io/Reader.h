@@ -6,21 +6,19 @@
 #ifndef _JavaIoReader_H_
 #define _JavaIoReader_H_
 
-@class IOSCharArray;
-@class JavaNioCharBuffer;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Closeable.h"
 #include "java/lang/Readable.h"
+
+@class IOSCharArray;
+@class JavaNioCharBuffer;
 
 @interface JavaIoReader : NSObject < JavaLangReadable, JavaIoCloseable > {
  @public
   id lock_;
 }
 
-- (instancetype)init;
-
-- (instancetype)initWithId:(id)lock;
+#pragma mark Public
 
 - (void)close;
 
@@ -36,18 +34,30 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
+- (jint)readWithJavaNioCharBuffer:(JavaNioCharBuffer *)target;
+
 - (jboolean)ready;
 
 - (void)reset;
 
 - (jlong)skipWithLong:(jlong)charCount;
 
-- (jint)readWithJavaNioCharBuffer:(JavaNioCharBuffer *)target;
+#pragma mark Protected
+
+- (instancetype)init;
+
+- (instancetype)initWithId:(id)lock;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoReader)
 
 J2OBJC_FIELD_SETTER(JavaIoReader, lock_, id)
+
+FOUNDATION_EXPORT void JavaIoReader_init(JavaIoReader *self);
+
+FOUNDATION_EXPORT void JavaIoReader_initWithId_(JavaIoReader *self, id lock);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoReader)
 
 #endif // _JavaIoReader_H_

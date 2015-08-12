@@ -6,14 +6,14 @@
 #ifndef _JavaSqlDatabaseMetaData_H_
 #define _JavaSqlDatabaseMetaData_H_
 
+#include "J2ObjC_header.h"
+#include "java/sql/Wrapper.h"
+
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaSqlRowIdLifetimeEnum;
 @protocol JavaSqlConnection;
 @protocol JavaSqlResultSet;
-
-#import "JreEmulation.h"
-#include "java/sql/Wrapper.h"
 
 #define JavaSqlDatabaseMetaData_attributeNoNulls 0
 #define JavaSqlDatabaseMetaData_attributeNullable 1
@@ -27,18 +27,6 @@
 #define JavaSqlDatabaseMetaData_columnNoNulls 0
 #define JavaSqlDatabaseMetaData_columnNullable 1
 #define JavaSqlDatabaseMetaData_columnNullableUnknown 2
-#define JavaSqlDatabaseMetaData_functionColumnIn 1
-#define JavaSqlDatabaseMetaData_functionColumnInOut 2
-#define JavaSqlDatabaseMetaData_functionColumnOut 3
-#define JavaSqlDatabaseMetaData_functionColumnResult 5
-#define JavaSqlDatabaseMetaData_functionColumnUnknown 0
-#define JavaSqlDatabaseMetaData_functionNoNulls 0
-#define JavaSqlDatabaseMetaData_functionNoTable 1
-#define JavaSqlDatabaseMetaData_functionNullable 1
-#define JavaSqlDatabaseMetaData_functionNullableUnknown 2
-#define JavaSqlDatabaseMetaData_functionResultUnknown 0
-#define JavaSqlDatabaseMetaData_functionReturn 4
-#define JavaSqlDatabaseMetaData_functionReturnsTable 2
 #define JavaSqlDatabaseMetaData_importedKeyCascade 0
 #define JavaSqlDatabaseMetaData_importedKeyInitiallyDeferred 5
 #define JavaSqlDatabaseMetaData_importedKeyInitiallyImmediate 6
@@ -59,7 +47,6 @@
 #define JavaSqlDatabaseMetaData_procedureNullableUnknown 2
 #define JavaSqlDatabaseMetaData_procedureResultUnknown 0
 #define JavaSqlDatabaseMetaData_procedureReturnsResult 2
-#define JavaSqlDatabaseMetaData_sqlStateSQL 2
 #define JavaSqlDatabaseMetaData_sqlStateSQL99 2
 #define JavaSqlDatabaseMetaData_sqlStateXOpen 1
 #define JavaSqlDatabaseMetaData_tableIndexClustered 1
@@ -76,8 +63,22 @@
 #define JavaSqlDatabaseMetaData_versionColumnNotPseudo 1
 #define JavaSqlDatabaseMetaData_versionColumnPseudo 2
 #define JavaSqlDatabaseMetaData_versionColumnUnknown 0
+#define JavaSqlDatabaseMetaData_sqlStateSQL 2
+#define JavaSqlDatabaseMetaData_functionColumnIn 1
+#define JavaSqlDatabaseMetaData_functionColumnInOut 2
+#define JavaSqlDatabaseMetaData_functionColumnOut 3
+#define JavaSqlDatabaseMetaData_functionReturn 4
+#define JavaSqlDatabaseMetaData_functionColumnUnknown 0
+#define JavaSqlDatabaseMetaData_functionColumnResult 5
+#define JavaSqlDatabaseMetaData_functionNoNulls 0
+#define JavaSqlDatabaseMetaData_functionNullable 1
+#define JavaSqlDatabaseMetaData_functionNullableUnknown 2
+#define JavaSqlDatabaseMetaData_functionResultUnknown 0
+#define JavaSqlDatabaseMetaData_functionNoTable 1
+#define JavaSqlDatabaseMetaData_functionReturnsTable 2
 
 @protocol JavaSqlDatabaseMetaData < JavaSqlWrapper, NSObject, JavaObject >
+
 - (jboolean)allProceduresAreCallable;
 
 - (jboolean)allTablesAreSelectable;
@@ -479,7 +480,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlDatabaseMetaData_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlDatabaseMetaData)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlDatabaseMetaData, attributeNoNulls, jshort)
 
@@ -602,5 +603,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlDatabaseMetaData, functionResultUnknown, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlDatabaseMetaData, functionNoTable, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlDatabaseMetaData, functionReturnsTable, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlDatabaseMetaData)
 
 #endif // _JavaSqlDatabaseMetaData_H_

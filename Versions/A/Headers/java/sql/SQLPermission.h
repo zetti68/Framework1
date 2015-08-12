@@ -6,15 +6,16 @@
 #ifndef _JavaSqlSQLPermission_H_
 #define _JavaSqlSQLPermission_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/BasicPermission.h"
 #include "java/security/Guard.h"
 
-@interface JavaSqlSQLPermission : JavaSecurityBasicPermission < JavaSecurityGuard, JavaIoSerializable > {
-}
+@class JavaSecurityPermission;
+
+@interface JavaSqlSQLPermission : JavaSecurityBasicPermission < JavaSecurityGuard, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name;
 
@@ -27,6 +28,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLPermission)
+
+FOUNDATION_EXPORT void JavaSqlSQLPermission_initWithNSString_(JavaSqlSQLPermission *self, NSString *name);
+
+FOUNDATION_EXPORT JavaSqlSQLPermission *new_JavaSqlSQLPermission_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlSQLPermission_initWithNSString_withNSString_(JavaSqlSQLPermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaSqlSQLPermission *new_JavaSqlSQLPermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLPermission)
 
 #endif // _JavaSqlSQLPermission_H_

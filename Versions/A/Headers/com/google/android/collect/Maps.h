@@ -6,24 +6,33 @@
 #ifndef _ComGoogleAndroidCollectMaps_H_
 #define _ComGoogleAndroidCollectMaps_H_
 
+#include "J2ObjC_header.h"
+
 @class AndroidUtilArrayMap;
 @class JavaUtilHashMap;
 
-#import "JreEmulation.h"
+@interface ComGoogleAndroidCollectMaps : NSObject
 
-@interface ComGoogleAndroidCollectMaps : NSObject {
-}
-
-+ (JavaUtilHashMap *)newHashMap OBJC_METHOD_FAMILY_NONE;
-
-+ (AndroidUtilArrayMap *)newArrayMap OBJC_METHOD_FAMILY_NONE;
+#pragma mark Public
 
 - (instancetype)init;
 
++ (AndroidUtilArrayMap *)newArrayMap OBJC_METHOD_FAMILY_NONE;
+
++ (JavaUtilHashMap *)newHashMap OBJC_METHOD_FAMILY_NONE;
+
 @end
 
-__attribute__((always_inline)) inline void ComGoogleAndroidCollectMaps_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleAndroidCollectMaps)
+
 FOUNDATION_EXPORT JavaUtilHashMap *ComGoogleAndroidCollectMaps_newHashMap();
+
 FOUNDATION_EXPORT AndroidUtilArrayMap *ComGoogleAndroidCollectMaps_newArrayMap();
+
+FOUNDATION_EXPORT void ComGoogleAndroidCollectMaps_init(ComGoogleAndroidCollectMaps *self);
+
+FOUNDATION_EXPORT ComGoogleAndroidCollectMaps *new_ComGoogleAndroidCollectMaps_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleAndroidCollectMaps)
 
 #endif // _ComGoogleAndroidCollectMaps_H_

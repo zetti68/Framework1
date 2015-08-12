@@ -6,13 +6,12 @@
 #ifndef _JavaLangIllegalAccessError_H_
 #define _JavaLangIllegalAccessError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IncompatibleClassChangeError.h"
 
-#define JavaLangIllegalAccessError_serialVersionUID -8988904074992417891LL
+@interface JavaLangIllegalAccessError : JavaLangIncompatibleClassChangeError
 
-@interface JavaLangIllegalAccessError : JavaLangIncompatibleClassChangeError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangIllegalAccessError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangIllegalAccessError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangIllegalAccessError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangIllegalAccessError_init(JavaLangIllegalAccessError *self);
+
+FOUNDATION_EXPORT JavaLangIllegalAccessError *new_JavaLangIllegalAccessError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangIllegalAccessError_initWithNSString_(JavaLangIllegalAccessError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangIllegalAccessError *new_JavaLangIllegalAccessError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangIllegalAccessError)
 
 #endif // _JavaLangIllegalAccessError_H_

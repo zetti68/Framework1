@@ -6,25 +6,34 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Constructed_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Constructed_H_
 
-@class OrgApacheHarmonySecurityAsn1BerOutputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/apache/harmony/security/asn1/ASN1Type.h"
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Constructed : OrgApacheHarmonySecurityAsn1ASN1Type {
-}
+@class OrgApacheHarmonySecurityAsn1BerOutputStream;
+
+@interface OrgApacheHarmonySecurityAsn1ASN1Constructed : OrgApacheHarmonySecurityAsn1ASN1Type
+
+#pragma mark Public
+
+- (jboolean)checkTagWithInt:(jint)identifier;
+
+- (void)encodeASNWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
+
+#pragma mark Protected
 
 - (instancetype)initWithInt:(jint)tagNumber;
 
 - (instancetype)initWithInt:(jint)tagClass
                     withInt:(jint)tagNumber;
 
-- (jboolean)checkTagWithInt:(jint)identifier;
-
-- (void)encodeASNWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Constructed_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Constructed)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Constructed_initWithInt_(OrgApacheHarmonySecurityAsn1ASN1Constructed *self, jint tagNumber);
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Constructed_initWithInt_withInt_(OrgApacheHarmonySecurityAsn1ASN1Constructed *self, jint tagClass, jint tagNumber);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Constructed)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Constructed_H_

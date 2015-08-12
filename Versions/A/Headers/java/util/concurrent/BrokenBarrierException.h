@@ -6,13 +6,12 @@
 #ifndef _JavaUtilConcurrentBrokenBarrierException_H_
 #define _JavaUtilConcurrentBrokenBarrierException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaUtilConcurrentBrokenBarrierException_serialVersionUID 7117394618823254244LL
+@interface JavaUtilConcurrentBrokenBarrierException : JavaLangException
 
-@interface JavaUtilConcurrentBrokenBarrierException : JavaLangException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentBrokenBarrierException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentBrokenBarrierException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentBrokenBarrierException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentBrokenBarrierException_init(JavaUtilConcurrentBrokenBarrierException *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentBrokenBarrierException *new_JavaUtilConcurrentBrokenBarrierException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentBrokenBarrierException_initWithNSString_(JavaUtilConcurrentBrokenBarrierException *self, NSString *message);
+
+FOUNDATION_EXPORT JavaUtilConcurrentBrokenBarrierException *new_JavaUtilConcurrentBrokenBarrierException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentBrokenBarrierException)
 
 #endif // _JavaUtilConcurrentBrokenBarrierException_H_

@@ -6,74 +6,26 @@
 #ifndef _JavaUtilConcurrentCopyOnWriteArrayList_H_
 #define _JavaUtilConcurrentCopyOnWriteArrayList_H_
 
-@class IOSObjectArray;
-@class JavaUtilConcurrentCopyOnWriteArrayList_Slice;
-@protocol JavaUtilCollection;
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractList.h"
 #include "java/util/List.h"
 #include "java/util/ListIterator.h"
 #include "java/util/RandomAccess.h"
 
-#define JavaUtilConcurrentCopyOnWriteArrayList_serialVersionUID 8673264195747942595LL
+@class IOSObjectArray;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
-@interface JavaUtilConcurrentCopyOnWriteArrayList : NSObject < JavaUtilList, JavaUtilRandomAccess, NSCopying, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentCopyOnWriteArrayList : NSObject < JavaUtilList, JavaUtilRandomAccess, NSCopying, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)array;
-
-- (id)clone;
-
-- (jint)size;
-
-- (id)getWithInt:(jint)index;
-
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-+ (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection
-                            withNSObjectArray:(IOSObjectArray *)snapshot
-                                      withInt:(jint)from
-                                      withInt:(jint)to;
-
-- (jint)indexOfWithId:(id)object
-              withInt:(jint)from;
-
-- (jint)indexOfWithId:(id)object;
-
-- (jint)lastIndexOfWithId:(id)object
-                  withInt:(jint)to;
-
-- (jint)lastIndexOfWithId:(id)object;
-
-- (jboolean)isEmpty;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
-
-- (id<JavaUtilListIterator>)listIterator;
-
-- (id<JavaUtilList>)subListWithInt:(jint)from
-                           withInt:(jint)to;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)contents;
-
-- (jboolean)isEqual:(id)other;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
 
 - (jboolean)addWithId:(id)e;
 
@@ -91,6 +43,36 @@
 
 - (void)clear;
 
+- (id)clone;
+
+- (jboolean)containsWithId:(id)o;
+
+- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (jboolean)isEqual:(id)other;
+
+- (id)getWithInt:(jint)index;
+
+- (NSUInteger)hash;
+
+- (jint)indexOfWithId:(id)object
+              withInt:(jint)from;
+
+- (jint)indexOfWithId:(id)object;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jint)lastIndexOfWithId:(id)object
+                  withInt:(jint)to;
+
+- (jint)lastIndexOfWithId:(id)object;
+
+- (id<JavaUtilListIterator>)listIterator;
+
+- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
+
 - (id)removeWithInt:(jint)index;
 
 - (jboolean)removeWithId:(id)o;
@@ -102,75 +84,101 @@
 - (id)setWithInt:(jint)index
           withId:(id)e;
 
-+ (jint)lastIndexOfWithId:(id)o
-        withNSObjectArray:(IOSObjectArray *)data
-                  withInt:(jint)from
-                  withInt:(jint)to;
+- (jint)size;
+
+- (id<JavaUtilList>)subListWithInt:(jint)from
+                           withInt:(jint)to;
+
+- (IOSObjectArray *)toArray;
+
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)contents;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
++ (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection
+                            withNSObjectArray:(IOSObjectArray *)snapshot
+                                      withInt:(jint)from
+                                      withInt:(jint)to;
+
+- (IOSObjectArray *)getArray;
 
 + (jint)indexOfWithId:(id)o
     withNSObjectArray:(IOSObjectArray *)data
               withInt:(jint)from
               withInt:(jint)to;
 
-- (IOSObjectArray *)getArray;
++ (jint)lastIndexOfWithId:(id)o
+        withNSObjectArray:(IOSObjectArray *)data
+                  withInt:(jint)from
+                  withInt:(jint)to;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArrayList_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCopyOnWriteArrayList)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_init(JavaUtilConcurrentCopyOnWriteArrayList *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList *new_JavaUtilConcurrentCopyOnWriteArrayList_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_initWithJavaUtilCollection_(JavaUtilConcurrentCopyOnWriteArrayList *self, id<JavaUtilCollection> collection);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList *new_JavaUtilConcurrentCopyOnWriteArrayList_initWithJavaUtilCollection_(id<JavaUtilCollection> collection) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_initWithNSObjectArray_(JavaUtilConcurrentCopyOnWriteArrayList *self, IOSObjectArray *array);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList *new_JavaUtilConcurrentCopyOnWriteArrayList_initWithNSObjectArray_(IOSObjectArray *array) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jboolean JavaUtilConcurrentCopyOnWriteArrayList_containsAllWithJavaUtilCollection_withNSObjectArray_withInt_withInt_(id<JavaUtilCollection> collection, IOSObjectArray *snapshot, jint from, jint to);
+
 FOUNDATION_EXPORT jint JavaUtilConcurrentCopyOnWriteArrayList_lastIndexOfWithId_withNSObjectArray_withInt_withInt_(id o, IOSObjectArray *data, jint from, jint to);
+
 FOUNDATION_EXPORT jint JavaUtilConcurrentCopyOnWriteArrayList_indexOfWithId_withNSObjectArray_withInt_withInt_(id o, IOSObjectArray *data, jint from, jint to);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentCopyOnWriteArrayList, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCopyOnWriteArrayList)
 
-@interface JavaUtilConcurrentCopyOnWriteArrayList_CowSubList : JavaUtilAbstractList {
-}
+@interface JavaUtilConcurrentCopyOnWriteArrayList_CowSubList : JavaUtilAbstractList
+
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilConcurrentCopyOnWriteArrayList:(JavaUtilConcurrentCopyOnWriteArrayList *)outer$
                                              withNSObjectArray:(IOSObjectArray *)expectedElements
                                                        withInt:(jint)from
                                                        withInt:(jint)to;
 
-- (jint)size;
+- (jboolean)addWithId:(id)object;
 
-- (jboolean)isEmpty;
+- (void)addWithInt:(jint)index
+            withId:(id)object;
 
-- (id)getWithInt:(jint)index;
+- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (id<JavaUtilIterator>)iterator;
+- (jboolean)addAllWithInt:(jint)index
+   withJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (id<JavaUtilListIterator>)listIterator;
-
-- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
-
-- (jint)indexOfWithId:(id)object;
-
-- (jint)lastIndexOfWithId:(id)object;
+- (void)clear;
 
 - (jboolean)containsWithId:(id)object;
 
 - (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
-- (id<JavaUtilList>)subListWithInt:(jint)from
-                           withInt:(jint)to;
+- (id)getWithInt:(jint)index;
+
+- (jint)indexOfWithId:(id)object;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jint)lastIndexOfWithId:(id)object;
+
+- (id<JavaUtilListIterator>)listIterator;
+
+- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
 
 - (id)removeWithInt:(jint)index;
-
-- (void)clear;
-
-- (void)addWithInt:(jint)index
-            withId:(id)object;
-
-- (jboolean)addWithId:(id)object;
-
-- (jboolean)addAllWithInt:(jint)index
-   withJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (id)setWithInt:(jint)index
-          withId:(id)object;
 
 - (jboolean)removeWithId:(id)object;
 
@@ -178,34 +186,54 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentCopyOnWriteArrayList, serialVersion
 
 - (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
+- (id)setWithInt:(jint)index
+          withId:(id)object;
+
+- (jint)size;
+
+- (id<JavaUtilList>)subListWithInt:(jint)from
+                           withInt:(jint)to;
+
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArrayList_CowSubList_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCopyOnWriteArrayList_CowSubList)
 
-@interface JavaUtilConcurrentCopyOnWriteArrayList_Slice : NSObject {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_CowSubList_initWithJavaUtilConcurrentCopyOnWriteArrayList_withNSObjectArray_withInt_withInt_(JavaUtilConcurrentCopyOnWriteArrayList_CowSubList *self, JavaUtilConcurrentCopyOnWriteArrayList *outer$, IOSObjectArray *expectedElements, jint from, jint to);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList_CowSubList *new_JavaUtilConcurrentCopyOnWriteArrayList_CowSubList_initWithJavaUtilConcurrentCopyOnWriteArrayList_withNSObjectArray_withInt_withInt_(JavaUtilConcurrentCopyOnWriteArrayList *outer$, IOSObjectArray *expectedElements, jint from, jint to) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCopyOnWriteArrayList_CowSubList)
+
+@interface JavaUtilConcurrentCopyOnWriteArrayList_Slice : NSObject
+
+#pragma mark Package-Private
 
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)expectedElements
                               withInt:(jint)from
                               withInt:(jint)to;
 
+- (void)checkConcurrentModificationWithNSObjectArray:(IOSObjectArray *)snapshot;
+
 - (void)checkElementIndexWithInt:(jint)index;
 
 - (void)checkPositionIndexWithInt:(jint)index;
 
-- (void)checkConcurrentModificationWithNSObjectArray:(IOSObjectArray *)snapshot;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArrayList_Slice_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCopyOnWriteArrayList_Slice)
 
-@interface JavaUtilConcurrentCopyOnWriteArrayList_CowIterator : NSObject < JavaUtilListIterator > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_Slice_initWithNSObjectArray_withInt_withInt_(JavaUtilConcurrentCopyOnWriteArrayList_Slice *self, IOSObjectArray *expectedElements, jint from, jint to);
 
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)snapshot
-                              withInt:(jint)from
-                              withInt:(jint)to;
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList_Slice *new_JavaUtilConcurrentCopyOnWriteArrayList_Slice_initWithNSObjectArray_withInt_withInt_(IOSObjectArray *expectedElements, jint from, jint to) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCopyOnWriteArrayList_Slice)
+
+@interface JavaUtilConcurrentCopyOnWriteArrayList_CowIterator : NSObject < JavaUtilListIterator >
+
+#pragma mark Public
 
 - (void)addWithId:(id)object;
 
@@ -225,8 +253,20 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArrayLis
 
 - (void)setWithId:(id)object;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithNSObjectArray:(IOSObjectArray *)snapshot
+                              withInt:(jint)from
+                              withInt:(jint)to;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArrayList_CowIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCopyOnWriteArrayList_CowIterator)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArrayList_CowIterator_initWithNSObjectArray_withInt_withInt_(JavaUtilConcurrentCopyOnWriteArrayList_CowIterator *self, IOSObjectArray *snapshot, jint from, jint to);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArrayList_CowIterator *new_JavaUtilConcurrentCopyOnWriteArrayList_CowIterator_initWithNSObjectArray_withInt_withInt_(IOSObjectArray *snapshot, jint from, jint to) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCopyOnWriteArrayList_CowIterator)
 
 #endif // _JavaUtilConcurrentCopyOnWriteArrayList_H_

@@ -6,24 +6,27 @@
 #ifndef _JavaUtilTimeZone_H_
 #define _JavaUtilTimeZone_H_
 
-@class IOSObjectArray;
-@class JavaLangStringBuilder;
-@class JavaUtilDate;
-@class JavaUtilLocale;
-@class JavaUtilRegexPattern;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilTimeZone_LONG 1
-#define JavaUtilTimeZone_SHORT 0
+@class IOSObjectArray;
+@class JavaUtilDate;
+@class JavaUtilLocale;
 
-@interface JavaUtilTimeZone : NSObject < JavaIoSerializable, NSCopying > {
-}
+#define JavaUtilTimeZone_SHORT 0
+#define JavaUtilTimeZone_LONG 1
+
+@interface JavaUtilTimeZone : NSObject < JavaIoSerializable, NSCopying >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (id)clone;
+
++ (NSString *)createGmtOffsetStringWithBoolean:(jboolean)includeGmt
+                                   withBoolean:(jboolean)includeMinuteSeparator
+                                       withInt:(jint)offsetMillis;
 
 + (IOSObjectArray *)getAvailableIDs;
 
@@ -33,8 +36,6 @@
 
 - (NSString *)getDisplayName;
 
-- (NSString *)getDisplayNameWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
 - (NSString *)getDisplayNameWithBoolean:(jboolean)daylightTime
                                 withInt:(jint)style;
 
@@ -42,15 +43,11 @@
                                 withInt:(jint)style
                      withJavaUtilLocale:(JavaUtilLocale *)locale;
 
-+ (NSString *)createGmtOffsetStringWithBoolean:(jboolean)includeGmt
-                                   withBoolean:(jboolean)includeMinuteSeparator
-                                       withInt:(jint)offsetMillis;
-
-- (NSString *)getID;
+- (NSString *)getDisplayNameWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (jint)getDSTSavings;
 
-- (jint)getOffsetWithLong:(jlong)time;
+- (NSString *)getID;
 
 - (jint)getOffsetWithInt:(jint)era
                  withInt:(jint)year
@@ -58,6 +55,8 @@
                  withInt:(jint)day
                  withInt:(jint)dayOfWeek
                  withInt:(jint)timeOfDayMillis;
+
+- (jint)getOffsetWithLong:(jlong)time;
 
 - (jint)getRawOffset;
 
@@ -77,30 +76,26 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilTimeZone_initialized;
 J2OBJC_STATIC_INIT(JavaUtilTimeZone)
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilTimeZone_getAvailableIDs();
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilTimeZone_getAvailableIDsWithInt_(jint offsetMillis);
-FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_getDefault();
-FOUNDATION_EXPORT NSString *JavaUtilTimeZone_createGmtOffsetStringWithBoolean_withBoolean_withInt_(jboolean includeGmt, jboolean includeMinuteSeparator, jint offsetMillis);
-FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_getTimeZoneWithNSString_(NSString *id_);
-FOUNDATION_EXPORT void JavaUtilTimeZone_setDefaultWithJavaUtilTimeZone_(JavaUtilTimeZone *timeZone);
-
-FOUNDATION_EXPORT JavaUtilRegexPattern *JavaUtilTimeZone_CUSTOM_ZONE_ID_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, CUSTOM_ZONE_ID_PATTERN_, JavaUtilRegexPattern *)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, SHORT, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, LONG, jint)
 
-FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_GMT_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, GMT_, JavaUtilTimeZone *)
+FOUNDATION_EXPORT void JavaUtilTimeZone_init(JavaUtilTimeZone *self);
 
-FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_UTC_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, UTC_, JavaUtilTimeZone *)
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilTimeZone_getAvailableIDs();
 
-FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_defaultTimeZone_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimeZone, defaultTimeZone_, JavaUtilTimeZone *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilTimeZone, defaultTimeZone_, JavaUtilTimeZone *)
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilTimeZone_getAvailableIDsWithInt_(jint offsetMillis);
+
+FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_getDefault();
+
+FOUNDATION_EXPORT NSString *JavaUtilTimeZone_createGmtOffsetStringWithBoolean_withBoolean_withInt_(jboolean includeGmt, jboolean includeMinuteSeparator, jint offsetMillis);
+
+FOUNDATION_EXPORT JavaUtilTimeZone *JavaUtilTimeZone_getTimeZoneWithNSString_(NSString *id_);
+
+FOUNDATION_EXPORT void JavaUtilTimeZone_setDefaultWithJavaUtilTimeZone_(JavaUtilTimeZone *timeZone);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTimeZone)
 
 #endif // _JavaUtilTimeZone_H_

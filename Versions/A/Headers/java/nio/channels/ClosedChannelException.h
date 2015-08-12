@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsClosedChannelException_H_
 #define _JavaNioChannelsClosedChannelException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNioChannelsClosedChannelException_serialVersionUID 882777185433553857LL
+@interface JavaNioChannelsClosedChannelException : JavaIoIOException
 
-@interface JavaNioChannelsClosedChannelException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsClosedChannelException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsClosedChannelException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsClosedChannelException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsClosedChannelException_init(JavaNioChannelsClosedChannelException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsClosedChannelException *new_JavaNioChannelsClosedChannelException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsClosedChannelException)
 
 #endif // _JavaNioChannelsClosedChannelException_H_

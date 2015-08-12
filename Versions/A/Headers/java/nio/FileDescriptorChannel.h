@@ -6,9 +6,9 @@
 #ifndef _JavaNioFileDescriptorChannel_H_
 #define _JavaNioFileDescriptorChannel_H_
 
-@class JavaIoFileDescriptor;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaIoFileDescriptor;
 
 @protocol JavaNioFileDescriptorChannel < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioFileDescriptorChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioFileDescriptorChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioFileDescriptorChannel)
 
 #endif // _JavaNioFileDescriptorChannel_H_

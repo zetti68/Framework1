@@ -6,69 +6,58 @@
 #ifndef _JavaUtilConcurrentScheduledThreadPoolExecutor_H_
 #define _JavaUtilConcurrentScheduledThreadPoolExecutor_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/AbstractQueue.h"
+#include "java/util/concurrent/BlockingQueue.h"
+#include "java/util/concurrent/ScheduledExecutorService.h"
+#include "java/util/concurrent/ThreadPoolExecutor.h"
+
 @class IOSObjectArray;
-@class JavaLangThread;
-@class JavaUtilConcurrentAtomicAtomicLong;
-@class JavaUtilConcurrentLocksReentrantLock;
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilCollection;
 @protocol JavaUtilConcurrentCallable;
-@protocol JavaUtilConcurrentDelayed;
 @protocol JavaUtilConcurrentFuture;
-@protocol JavaUtilConcurrentLocksCondition;
 @protocol JavaUtilConcurrentRejectedExecutionHandler;
+@protocol JavaUtilConcurrentRunnableScheduledFuture;
 @protocol JavaUtilConcurrentScheduledFuture;
 @protocol JavaUtilConcurrentThreadFactory;
+@protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/util/AbstractQueue.h"
-#include "java/util/Iterator.h"
-#include "java/util/concurrent/BlockingQueue.h"
-#include "java/util/concurrent/FutureTask.h"
-#include "java/util/concurrent/RunnableScheduledFuture.h"
-#include "java/util/concurrent/ScheduledExecutorService.h"
-#include "java/util/concurrent/ThreadPoolExecutor.h"
+@interface JavaUtilConcurrentScheduledThreadPoolExecutor : JavaUtilConcurrentThreadPoolExecutor < JavaUtilConcurrentScheduledExecutorService >
 
-@interface JavaUtilConcurrentScheduledThreadPoolExecutor : JavaUtilConcurrentThreadPoolExecutor < JavaUtilConcurrentScheduledExecutorService > {
-}
-
-- (jlong)now;
-
-- (jboolean)canRunInCurrentRunStateWithBoolean:(jboolean)periodic;
-
-- (void)reExecutePeriodicWithJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
-
-- (void)onShutdown;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)decorateTaskWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
-                                    withJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)decorateTaskWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable
-                                              withJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)corePoolSize;
+
+- (instancetype)initWithInt:(jint)corePoolSize
+withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
 
 - (instancetype)initWithInt:(jint)corePoolSize
 withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory;
 
 - (instancetype)initWithInt:(jint)corePoolSize
-withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
-
-- (instancetype)initWithInt:(jint)corePoolSize
 withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory
 withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExecutionHandler>)handler;
 
-- (jlong)triggerTimeWithLong:(jlong)delay;
+- (void)executeWithJavaLangRunnable:(id<JavaLangRunnable>)command;
 
-- (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaLangRunnable:(id<JavaLangRunnable>)command
-                                                             withLong:(jlong)delay
-                                   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+- (jboolean)getContinueExistingPeriodicTasksAfterShutdownPolicy;
+
+- (jboolean)getExecuteExistingDelayedTasksAfterShutdownPolicy;
+
+- (id<JavaUtilConcurrentBlockingQueue>)getQueue;
+
+- (jboolean)getRemoveOnCancelPolicy;
 
 - (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable
                                                                        withLong:(jlong)delay
                                              withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaLangRunnable:(id<JavaLangRunnable>)command
+                                                             withLong:(jlong)delay
+                                   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (id<JavaUtilConcurrentScheduledFuture>)scheduleAtFixedRateWithJavaLangRunnable:(id<JavaLangRunnable>)command
                                                                         withLong:(jlong)initialDelay
@@ -80,154 +69,124 @@ withJavaUtilConcurrentRejectedExecutionHandler:(id<JavaUtilConcurrentRejectedExe
                                                                            withLong:(jlong)delay
                                                  withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-- (void)executeWithJavaLangRunnable:(id<JavaLangRunnable>)command;
+- (void)setContinueExistingPeriodicTasksAfterShutdownPolicyWithBoolean:(jboolean)value;
+
+- (void)setExecuteExistingDelayedTasksAfterShutdownPolicyWithBoolean:(jboolean)value;
+
+- (void)setRemoveOnCancelPolicyWithBoolean:(jboolean)value;
+
+- (void)shutdown;
+
+- (id<JavaUtilList>)shutdownNow;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
 
 - (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task;
 
 - (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task
                                                     withId:(id)result;
 
-- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+#pragma mark Protected
 
-- (void)setContinueExistingPeriodicTasksAfterShutdownPolicyWithBoolean:(jboolean)value;
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)decorateTaskWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable
+                                              withJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
 
-- (jboolean)getContinueExistingPeriodicTasksAfterShutdownPolicy;
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)decorateTaskWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                    withJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
 
-- (void)setExecuteExistingDelayedTasksAfterShutdownPolicyWithBoolean:(jboolean)value;
+#pragma mark Package-Private
 
-- (jboolean)getExecuteExistingDelayedTasksAfterShutdownPolicy;
+- (jboolean)canRunInCurrentRunStateWithBoolean:(jboolean)periodic;
 
-- (void)setRemoveOnCancelPolicyWithBoolean:(jboolean)value;
+- (jlong)now;
 
-- (jboolean)getRemoveOnCancelPolicy;
+- (void)onShutdown;
 
-- (void)shutdown;
+- (void)reExecutePeriodicWithJavaUtilConcurrentRunnableScheduledFuture:(id<JavaUtilConcurrentRunnableScheduledFuture>)task;
 
-- (id<JavaUtilList>)shutdownNow;
-
-- (id<JavaUtilConcurrentBlockingQueue>)getQueue;
+- (jlong)triggerTimeWithLong:(jlong)delay;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentScheduledThreadPoolExecutor_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentScheduledThreadPoolExecutor)
 
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLong *JavaUtilConcurrentScheduledThreadPoolExecutor_sequencer_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentScheduledThreadPoolExecutor, sequencer_, JavaUtilConcurrentAtomicAtomicLong *)
+FOUNDATION_EXPORT void JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_(JavaUtilConcurrentScheduledThreadPoolExecutor *self, jint corePoolSize);
 
-@interface JavaUtilConcurrentScheduledThreadPoolExecutor_ScheduledFutureTask : JavaUtilConcurrentFutureTask < JavaUtilConcurrentRunnableScheduledFuture > {
- @public
-  id<JavaUtilConcurrentRunnableScheduledFuture> outerTask_;
-  jint heapIndex_;
-}
+FOUNDATION_EXPORT JavaUtilConcurrentScheduledThreadPoolExecutor *new_JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_(jint corePoolSize) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilConcurrentScheduledThreadPoolExecutor:(JavaUtilConcurrentScheduledThreadPoolExecutor *)outer$
-                                                 withJavaLangRunnable:(id<JavaLangRunnable>)r
-                                                               withId:(id)result
-                                                             withLong:(jlong)ns;
+FOUNDATION_EXPORT void JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentThreadFactory_(JavaUtilConcurrentScheduledThreadPoolExecutor *self, jint corePoolSize, id<JavaUtilConcurrentThreadFactory> threadFactory);
 
-- (instancetype)initWithJavaUtilConcurrentScheduledThreadPoolExecutor:(JavaUtilConcurrentScheduledThreadPoolExecutor *)outer$
-                                                 withJavaLangRunnable:(id<JavaLangRunnable>)r
-                                                               withId:(id)result
-                                                             withLong:(jlong)ns
-                                                             withLong:(jlong)period;
+FOUNDATION_EXPORT JavaUtilConcurrentScheduledThreadPoolExecutor *new_JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentThreadFactory_(jint corePoolSize, id<JavaUtilConcurrentThreadFactory> threadFactory) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilConcurrentScheduledThreadPoolExecutor:(JavaUtilConcurrentScheduledThreadPoolExecutor *)outer$
-                                       withJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable
-                                                             withLong:(jlong)ns;
+FOUNDATION_EXPORT void JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentRejectedExecutionHandler_(JavaUtilConcurrentScheduledThreadPoolExecutor *self, jint corePoolSize, id<JavaUtilConcurrentRejectedExecutionHandler> handler);
 
-- (jlong)getDelayWithJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+FOUNDATION_EXPORT JavaUtilConcurrentScheduledThreadPoolExecutor *new_JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentRejectedExecutionHandler_(jint corePoolSize, id<JavaUtilConcurrentRejectedExecutionHandler> handler) NS_RETURNS_RETAINED;
 
-- (jint)compareToWithId:(id<JavaUtilConcurrentDelayed>)other;
+FOUNDATION_EXPORT void JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentThreadFactory_withJavaUtilConcurrentRejectedExecutionHandler_(JavaUtilConcurrentScheduledThreadPoolExecutor *self, jint corePoolSize, id<JavaUtilConcurrentThreadFactory> threadFactory, id<JavaUtilConcurrentRejectedExecutionHandler> handler);
 
-- (jboolean)isPeriodic;
+FOUNDATION_EXPORT JavaUtilConcurrentScheduledThreadPoolExecutor *new_JavaUtilConcurrentScheduledThreadPoolExecutor_initWithInt_withJavaUtilConcurrentThreadFactory_withJavaUtilConcurrentRejectedExecutionHandler_(jint corePoolSize, id<JavaUtilConcurrentThreadFactory> threadFactory, id<JavaUtilConcurrentRejectedExecutionHandler> handler) NS_RETURNS_RETAINED;
 
-- (jboolean)cancelWithBoolean:(jboolean)mayInterruptIfRunning;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentScheduledThreadPoolExecutor)
 
-- (void)run;
+@interface JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue >
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentScheduledThreadPoolExecutor_ScheduledFutureTask_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentScheduledThreadPoolExecutor_ScheduledFutureTask, outerTask_, id<JavaUtilConcurrentRunnableScheduledFuture>)
-
-#define JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_INITIAL_CAPACITY 16
-
-@interface JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue > {
-}
-
-- (jboolean)containsWithId:(id)x;
-
-- (jboolean)removeWithId:(id)x;
-
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (jint)remainingCapacity;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)peek;
-
-- (jboolean)offerWithId:(id<JavaLangRunnable>)x;
-
-- (void)putWithId:(id<JavaLangRunnable>)e;
+#pragma mark Public
 
 - (jboolean)addWithId:(id<JavaLangRunnable>)e;
 
-- (jboolean)offerWithId:(id<JavaLangRunnable>)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)poll;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)take;
-
-- (id<JavaUtilConcurrentRunnableScheduledFuture>)pollWithLong:(jlong)timeout
-                           withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
 - (void)clear;
+
+- (jboolean)containsWithId:(id)x;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
                               withInt:(jint)maxElements;
 
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id<JavaLangRunnable>)x;
+
+- (jboolean)offerWithId:(id<JavaLangRunnable>)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)peek;
+
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)poll;
+
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)pollWithLong:(jlong)timeout
+                           withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id<JavaLangRunnable>)e;
+
+- (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)x;
+
+- (jint)size;
+
+- (id<JavaUtilConcurrentRunnableScheduledFuture>)take;
+
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (id<JavaUtilIterator>)iterator;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue, INITIAL_CAPACITY, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_init(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue *self);
 
-@interface JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_Itr : NSObject < JavaUtilIterator > {
- @public
-  IOSObjectArray *array_;
-  jint cursor_;
-  jint lastRet_;
-}
+FOUNDATION_EXPORT JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue *new_JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_init() NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue:(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue *)outer$
-                                    withJavaUtilConcurrentRunnableScheduledFutureArray:(IOSObjectArray *)array;
-
-- (jboolean)hasNext;
-
-- (id<JavaLangRunnable>)next;
-
-- (void)remove;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_Itr_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue_Itr, array_, IOSObjectArray *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentScheduledThreadPoolExecutor_DelayedWorkQueue)
 
 #endif // _JavaUtilConcurrentScheduledThreadPoolExecutor_H_

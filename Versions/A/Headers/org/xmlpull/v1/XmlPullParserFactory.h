@@ -6,13 +6,13 @@
 #ifndef _OrgXmlpullV1XmlPullParserFactory_H_
 #define _OrgXmlpullV1XmlPullParserFactory_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 @class JavaUtilArrayList;
 @class JavaUtilHashMap;
 @protocol OrgXmlpullV1XmlPullParser;
 @protocol OrgXmlpullV1XmlSerializer;
-
-#import "JreEmulation.h"
 
 @interface OrgXmlpullV1XmlPullParserFactory : NSObject {
  @public
@@ -22,41 +22,42 @@
   JavaUtilHashMap *features_;
 }
 
-- (instancetype)init;
-
-- (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)state;
+#pragma mark Public
 
 - (jboolean)getFeatureWithNSString:(NSString *)name;
 
-- (void)setNamespaceAwareWithBoolean:(jboolean)awareness;
-
 - (jboolean)isNamespaceAware;
 
-- (void)setValidatingWithBoolean:(jboolean)validating;
-
 - (jboolean)isValidating;
-
-- (id<OrgXmlpullV1XmlPullParser>)newPullParser OBJC_METHOD_FAMILY_NONE;
-
-- (id<OrgXmlpullV1XmlSerializer>)newSerializer OBJC_METHOD_FAMILY_NONE;
 
 + (OrgXmlpullV1XmlPullParserFactory *)newInstance OBJC_METHOD_FAMILY_NONE;
 
 + (OrgXmlpullV1XmlPullParserFactory *)newInstanceWithNSString:(NSString *)classNames
                                                  withIOSClass:(IOSClass *)context OBJC_METHOD_FAMILY_NONE;
 
+- (id<OrgXmlpullV1XmlPullParser>)newPullParser OBJC_METHOD_FAMILY_NONE;
+
+- (id<OrgXmlpullV1XmlSerializer>)newSerializer OBJC_METHOD_FAMILY_NONE;
+
+- (void)setFeatureWithNSString:(NSString *)name
+                   withBoolean:(jboolean)state;
+
+- (void)setNamespaceAwareWithBoolean:(jboolean)awareness;
+
+- (void)setValidatingWithBoolean:(jboolean)validating;
+
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-FOUNDATION_EXPORT BOOL OrgXmlpullV1XmlPullParserFactory_initialized;
 J2OBJC_STATIC_INIT(OrgXmlpullV1XmlPullParserFactory)
 
 J2OBJC_FIELD_SETTER(OrgXmlpullV1XmlPullParserFactory, parserClasses_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(OrgXmlpullV1XmlPullParserFactory, classNamesLocation_, NSString *)
 J2OBJC_FIELD_SETTER(OrgXmlpullV1XmlPullParserFactory, serializerClasses_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(OrgXmlpullV1XmlPullParserFactory, features_, JavaUtilHashMap *)
-FOUNDATION_EXPORT OrgXmlpullV1XmlPullParserFactory *OrgXmlpullV1XmlPullParserFactory_newInstance();
-FOUNDATION_EXPORT OrgXmlpullV1XmlPullParserFactory *OrgXmlpullV1XmlPullParserFactory_newInstanceWithNSString_withIOSClass_(NSString *classNames, IOSClass *context);
 
 FOUNDATION_EXPORT IOSClass *OrgXmlpullV1XmlPullParserFactory_referenceContextClass_;
 J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParserFactory, referenceContextClass_, IOSClass *)
@@ -64,7 +65,14 @@ J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParserFactory, referenceContextCla
 FOUNDATION_EXPORT NSString *OrgXmlpullV1XmlPullParserFactory_PROPERTY_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParserFactory, PROPERTY_NAME_, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgXmlpullV1XmlPullParserFactory_RESOURCE_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParserFactory, RESOURCE_NAME_, NSString *)
+FOUNDATION_EXPORT void OrgXmlpullV1XmlPullParserFactory_init(OrgXmlpullV1XmlPullParserFactory *self);
+
+FOUNDATION_EXPORT OrgXmlpullV1XmlPullParserFactory *new_OrgXmlpullV1XmlPullParserFactory_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgXmlpullV1XmlPullParserFactory *OrgXmlpullV1XmlPullParserFactory_newInstance();
+
+FOUNDATION_EXPORT OrgXmlpullV1XmlPullParserFactory *OrgXmlpullV1XmlPullParserFactory_newInstanceWithNSString_withIOSClass_(NSString *classNames, IOSClass *context);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlpullV1XmlPullParserFactory)
 
 #endif // _OrgXmlpullV1XmlPullParserFactory_H_

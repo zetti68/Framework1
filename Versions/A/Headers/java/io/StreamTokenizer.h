@@ -6,21 +6,14 @@
 #ifndef _JavaIoStreamTokenizer_H_
 #define _JavaIoStreamTokenizer_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaIoReader;
 
-#import "JreEmulation.h"
-
-#define JavaIoStreamTokenizer_TOKEN_COMMENT 1
-#define JavaIoStreamTokenizer_TOKEN_DIGIT 16
-#define JavaIoStreamTokenizer_TOKEN_QUOTE 2
-#define JavaIoStreamTokenizer_TOKEN_WHITE 4
-#define JavaIoStreamTokenizer_TOKEN_WORD 8
 #define JavaIoStreamTokenizer_TT_EOF -1
 #define JavaIoStreamTokenizer_TT_EOL 10
 #define JavaIoStreamTokenizer_TT_NUMBER -2
-#define JavaIoStreamTokenizer_TT_UNKNOWN -4
 #define JavaIoStreamTokenizer_TT_WORD -3
 
 @interface JavaIoStreamTokenizer : NSObject {
@@ -29,6 +22,8 @@
   NSString *sval_;
   jint ttype_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)is;
 
@@ -71,7 +66,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoStreamTokenizer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoStreamTokenizer)
 
 J2OBJC_FIELD_SETTER(JavaIoStreamTokenizer, sval_, NSString *)
 
@@ -83,16 +78,14 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TT_NUMBER, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TT_WORD, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TT_UNKNOWN, jint)
+FOUNDATION_EXPORT void JavaIoStreamTokenizer_initWithJavaIoInputStream_(JavaIoStreamTokenizer *self, JavaIoInputStream *is);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TOKEN_COMMENT, jbyte)
+FOUNDATION_EXPORT JavaIoStreamTokenizer *new_JavaIoStreamTokenizer_initWithJavaIoInputStream_(JavaIoInputStream *is) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TOKEN_QUOTE, jbyte)
+FOUNDATION_EXPORT void JavaIoStreamTokenizer_initWithJavaIoReader_(JavaIoStreamTokenizer *self, JavaIoReader *r);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TOKEN_WHITE, jbyte)
+FOUNDATION_EXPORT JavaIoStreamTokenizer *new_JavaIoStreamTokenizer_initWithJavaIoReader_(JavaIoReader *r) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TOKEN_WORD, jbyte)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoStreamTokenizer, TOKEN_DIGIT, jbyte)
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoStreamTokenizer)
 
 #endif // _JavaIoStreamTokenizer_H_

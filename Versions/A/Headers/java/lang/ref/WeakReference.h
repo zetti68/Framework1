@@ -6,13 +6,14 @@
 #ifndef _JavaLangRefWeakReference_H_
 #define _JavaLangRefWeakReference_H_
 
-@class JavaLangRefReferenceQueue;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ref/Reference.h"
 
-@interface JavaLangRefWeakReference : JavaLangRefReference {
-}
+@class JavaLangRefReferenceQueue;
+
+@interface JavaLangRefWeakReference : JavaLangRefReference
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)r;
 
@@ -21,6 +22,16 @@ withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangRefWeakReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRefWeakReference)
+
+FOUNDATION_EXPORT void JavaLangRefWeakReference_initWithId_(JavaLangRefWeakReference *self, id r);
+
+FOUNDATION_EXPORT JavaLangRefWeakReference *new_JavaLangRefWeakReference_initWithId_(id r) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangRefWeakReference_initWithId_withJavaLangRefReferenceQueue_(JavaLangRefWeakReference *self, id r, JavaLangRefReferenceQueue *q);
+
+FOUNDATION_EXPORT JavaLangRefWeakReference *new_JavaLangRefWeakReference_initWithId_withJavaLangRefReferenceQueue_(id r, JavaLangRefReferenceQueue *q) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRefWeakReference)
 
 #endif // _JavaLangRefWeakReference_H_

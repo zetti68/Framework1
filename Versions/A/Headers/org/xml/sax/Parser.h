@@ -6,14 +6,14 @@
 #ifndef _OrgXmlSaxParser_H_
 #define _OrgXmlSaxParser_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilLocale;
 @class OrgXmlSaxInputSource;
 @protocol OrgXmlSaxDTDHandler;
 @protocol OrgXmlSaxDocumentHandler;
 @protocol OrgXmlSaxEntityResolver;
 @protocol OrgXmlSaxErrorHandler;
-
-#import "JreEmulation.h"
 
 @protocol OrgXmlSaxParser < NSObject, JavaObject >
 
@@ -33,6 +33,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxParser_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxParser)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxParser)
 
 #endif // _OrgXmlSaxParser_H_

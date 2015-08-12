@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsUnsupportedAddressTypeException_H_
 #define _JavaNioChannelsUnsupportedAddressTypeException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalArgumentException.h"
 
-#define JavaNioChannelsUnsupportedAddressTypeException_serialVersionUID -2964323842829700493LL
+@interface JavaNioChannelsUnsupportedAddressTypeException : JavaLangIllegalArgumentException
 
-@interface JavaNioChannelsUnsupportedAddressTypeException : JavaLangIllegalArgumentException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsUnsupportedAddressTypeException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsUnsupportedAddressTypeException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsUnsupportedAddressTypeException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsUnsupportedAddressTypeException_init(JavaNioChannelsUnsupportedAddressTypeException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsUnsupportedAddressTypeException *new_JavaNioChannelsUnsupportedAddressTypeException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsUnsupportedAddressTypeException)
 
 #endif // _JavaNioChannelsUnsupportedAddressTypeException_H_

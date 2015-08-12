@@ -6,6 +6,9 @@
 #ifndef _ComGoogleJ2objcSecurityCertIosX509Certificate_H_
 #define _ComGoogleJ2objcSecurityCertIosX509Certificate_H_
 
+#include "J2ObjC_header.h"
+#include "java/security/cert/X509Certificate.h"
+
 @class IOSBooleanArray;
 @class IOSByteArray;
 @class JavaMathBigInteger;
@@ -14,53 +17,39 @@
 @protocol JavaSecurityPublicKey;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/security/cert/X509Certificate.h"
+@interface ComGoogleJ2objcSecurityCertIosX509Certificate : JavaSecurityCertX509Certificate
 
-@interface ComGoogleJ2objcSecurityCertIosX509Certificate : JavaSecurityCertX509Certificate {
-}
+#pragma mark Public
 
 - (instancetype)initWithLong:(jlong)secCertificateRef;
-
 
 - (void)checkValidity;
 
 - (void)checkValidityWithJavaUtilDate:(JavaUtilDate *)date;
 
-- (NSString *)description;
+- (jint)getBasicConstraints;
+
+- (id<JavaUtilSet>)getCriticalExtensionOIDs;
 
 - (IOSByteArray *)getEncoded;
 
-- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key;
+- (IOSByteArray *)getExtensionValueWithNSString:(NSString *)oid;
 
-- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key
-                           withNSString:(NSString *)sigProvider;
+- (id<JavaSecurityPrincipal>)getIssuerDN;
+
+- (IOSBooleanArray *)getIssuerUniqueID;
+
+- (IOSBooleanArray *)getKeyUsage;
+
+- (id<JavaUtilSet>)getNonCriticalExtensionOIDs;
+
+- (JavaUtilDate *)getNotAfter;
+
+- (JavaUtilDate *)getNotBefore;
 
 - (id<JavaSecurityPublicKey>)getPublicKey;
 
 - (JavaMathBigInteger *)getSerialNumber;
-
-- (id<JavaUtilSet>)getCriticalExtensionOIDs;
-
-- (IOSByteArray *)getExtensionValueWithNSString:(NSString *)oid;
-
-- (id<JavaUtilSet>)getNonCriticalExtensionOIDs;
-
-- (jboolean)hasUnsupportedCriticalExtension;
-
-- (jint)getVersion;
-
-- (id<JavaSecurityPrincipal>)getIssuerDN;
-
-- (id<JavaSecurityPrincipal>)getSubjectDN;
-
-- (JavaUtilDate *)getNotBefore;
-
-- (JavaUtilDate *)getNotAfter;
-
-- (IOSByteArray *)getTBSCertificate;
-
-- (IOSByteArray *)getSignature;
 
 - (NSString *)getSigAlgName;
 
@@ -68,16 +57,36 @@
 
 - (IOSByteArray *)getSigAlgParams;
 
-- (IOSBooleanArray *)getIssuerUniqueID;
+- (IOSByteArray *)getSignature;
+
+- (id<JavaSecurityPrincipal>)getSubjectDN;
 
 - (IOSBooleanArray *)getSubjectUniqueID;
 
-- (IOSBooleanArray *)getKeyUsage;
+- (IOSByteArray *)getTBSCertificate;
 
-- (jint)getBasicConstraints;
+- (jint)getVersion;
+
+- (jboolean)hasUnsupportedCriticalExtension;
+
+- (NSString *)description;
+
+- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key;
+
+- (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key
+                           withNSString:(NSString *)sigProvider;
+
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void ComGoogleJ2objcSecurityCertIosX509Certificate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleJ2objcSecurityCertIosX509Certificate)
+
+FOUNDATION_EXPORT void ComGoogleJ2objcSecurityCertIosX509Certificate_initWithLong_(ComGoogleJ2objcSecurityCertIosX509Certificate *self, jlong secCertificateRef);
+
+FOUNDATION_EXPORT ComGoogleJ2objcSecurityCertIosX509Certificate *new_ComGoogleJ2objcSecurityCertIosX509Certificate_initWithLong_(jlong secCertificateRef) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcSecurityCertIosX509Certificate)
 
 #endif // _ComGoogleJ2objcSecurityCertIosX509Certificate_H_

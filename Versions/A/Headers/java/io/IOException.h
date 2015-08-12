@@ -6,15 +6,14 @@
 #ifndef _JavaIoIOException_H_
 #define _JavaIoIOException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaIoIOException_serialVersionUID 7818375828146090155LL
+@class JavaLangThrowable;
 
-@interface JavaIoIOException : JavaLangException {
-}
+@interface JavaIoIOException : JavaLangException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoIOException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoIOException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoIOException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoIOException_init(JavaIoIOException *self);
+
+FOUNDATION_EXPORT JavaIoIOException *new_JavaIoIOException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoIOException_initWithNSString_(JavaIoIOException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoIOException *new_JavaIoIOException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoIOException_initWithNSString_withJavaLangThrowable_(JavaIoIOException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaIoIOException *new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoIOException_initWithJavaLangThrowable_(JavaIoIOException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaIoIOException *new_JavaIoIOException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoIOException)
 
 #endif // _JavaIoIOException_H_

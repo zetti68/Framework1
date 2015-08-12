@@ -6,85 +6,100 @@
 #ifndef _JavaUtilRegexMatcher_H_
 #define _JavaUtilRegexMatcher_H_
 
-@class IOSIntArray;
+#include "J2ObjC_header.h"
+#include "java/util/regex/MatchResult.h"
+
 @class JavaLangStringBuffer;
 @class JavaUtilRegexPattern;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "java/util/regex/MatchResult.h"
+@interface JavaUtilRegexMatcher : NSObject < JavaUtilRegexMatchResult >
 
-@interface JavaUtilRegexMatcher : NSObject < JavaUtilRegexMatchResult > {
-}
-
-- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)input;
+#pragma mark Public
 
 - (JavaUtilRegexMatcher *)appendReplacementWithJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
                                                        withNSString:(NSString *)replacement;
 
-- (JavaUtilRegexMatcher *)reset;
-
-- (JavaUtilRegexMatcher *)resetWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
-
-- (JavaUtilRegexMatcher *)usePatternWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern;
-
-- (JavaUtilRegexMatcher *)regionWithInt:(jint)start
-                                withInt:(jint)end;
-
 - (JavaLangStringBuffer *)appendTailWithJavaLangStringBuffer:(JavaLangStringBuffer *)buffer;
 
-- (NSString *)replaceFirstWithNSString:(NSString *)replacement;
+- (jint)end;
 
-- (NSString *)replaceAllWithNSString:(NSString *)replacement;
+- (jint)endWithInt:(jint)group;
 
-- (JavaUtilRegexPattern *)pattern;
-
-- (NSString *)groupWithInt:(jint)group;
-
-- (NSString *)group;
+- (jboolean)find;
 
 - (jboolean)findWithInt:(jint)start;
 
-- (jboolean)find;
+- (NSString *)group;
+
+- (NSString *)groupWithInt:(jint)group;
+
+- (jint)groupCount;
+
+- (jboolean)hasAnchoringBounds;
+
+- (jboolean)hasTransparentBounds;
+
+- (jboolean)hitEnd;
 
 - (jboolean)lookingAt;
 
 - (jboolean)matches;
 
-- (jint)startWithInt:(jint)group;
-
-- (jint)endWithInt:(jint)group;
+- (JavaUtilRegexPattern *)pattern;
 
 + (NSString *)quoteReplacementWithNSString:(NSString *)s;
 
-- (jint)start;
-
-- (jint)groupCount;
-
-- (jint)end;
-
-- (id<JavaUtilRegexMatchResult>)toMatchResult;
-
-- (JavaUtilRegexMatcher *)useAnchoringBoundsWithBoolean:(jboolean)value;
-
-- (jboolean)hasAnchoringBounds;
-
-- (JavaUtilRegexMatcher *)useTransparentBoundsWithBoolean:(jboolean)value;
-
-- (jboolean)hasTransparentBounds;
-
-- (jint)regionStart;
+- (JavaUtilRegexMatcher *)regionWithInt:(jint)start
+                                withInt:(jint)end;
 
 - (jint)regionEnd;
 
+- (jint)regionStart;
+
+- (NSString *)replaceAllWithNSString:(NSString *)replacement;
+
+- (NSString *)replaceFirstWithNSString:(NSString *)replacement;
+
 - (jboolean)requireEnd;
 
-- (jboolean)hitEnd;
+- (JavaUtilRegexMatcher *)reset;
+
+- (JavaUtilRegexMatcher *)resetWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
+
+- (jint)start;
+
+- (jint)startWithInt:(jint)group;
+
+- (id<JavaUtilRegexMatchResult>)toMatchResult;
+
+- (NSString *)description;
+
+- (JavaUtilRegexMatcher *)useAnchoringBoundsWithBoolean:(jboolean)value;
+
+- (JavaUtilRegexMatcher *)usePatternWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern;
+
+- (JavaUtilRegexMatcher *)useTransparentBoundsWithBoolean:(jboolean)value;
+
+#pragma mark Protected
+
+- (void)dealloc;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
+                    withJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilRegexMatcher_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilRegexMatcher)
+
+FOUNDATION_EXPORT void JavaUtilRegexMatcher_initWithJavaUtilRegexPattern_withJavaLangCharSequence_(JavaUtilRegexMatcher *self, JavaUtilRegexPattern *pattern, id<JavaLangCharSequence> input);
+
+FOUNDATION_EXPORT JavaUtilRegexMatcher *new_JavaUtilRegexMatcher_initWithJavaUtilRegexPattern_withJavaLangCharSequence_(JavaUtilRegexPattern *pattern, id<JavaLangCharSequence> input) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT NSString *JavaUtilRegexMatcher_quoteReplacementWithNSString_(NSString *s);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilRegexMatcher)
 
 #endif // _JavaUtilRegexMatcher_H_

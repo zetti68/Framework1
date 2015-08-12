@@ -6,15 +6,32 @@
 #ifndef _LibcoreNetUriCodec_H_
 #define _LibcoreNetUriCodec_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangStringBuilder;
 @class JavaNioCharsetCharset;
 
-#import "JreEmulation.h"
+@interface LibcoreNetUriCodec : NSObject
 
-@interface LibcoreNetUriCodec : NSObject {
-}
+#pragma mark Public
 
-- (jboolean)isRetainedWithChar:(jchar)c;
+- (instancetype)init;
+
+- (void)appendEncodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
+                                  withNSString:(NSString *)s;
+
+- (void)appendPartiallyEncodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
+                                           withNSString:(NSString *)s;
+
++ (NSString *)decodeWithNSString:(NSString *)s;
+
++ (NSString *)decodeWithNSString:(NSString *)s
+                     withBoolean:(jboolean)convertPlus
+       withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
+                     withBoolean:(jboolean)throwOnFailure;
+
+- (NSString *)encodeWithNSString:(NSString *)s
+       withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
 
 - (NSString *)validateWithNSString:(NSString *)uri
                            withInt:(jint)start
@@ -24,29 +41,22 @@
 + (void)validateSimpleWithNSString:(NSString *)s
                       withNSString:(NSString *)legal;
 
-- (NSString *)encodeWithNSString:(NSString *)s
-       withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
+#pragma mark Protected
 
-- (void)appendEncodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
-                                  withNSString:(NSString *)s;
-
-- (void)appendPartiallyEncodedWithJavaLangStringBuilder:(JavaLangStringBuilder *)builder
-                                           withNSString:(NSString *)s;
-
-+ (NSString *)decodeWithNSString:(NSString *)s
-                     withBoolean:(jboolean)convertPlus
-       withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
-                     withBoolean:(jboolean)throwOnFailure;
-
-+ (NSString *)decodeWithNSString:(NSString *)s;
-
-- (instancetype)init;
+- (jboolean)isRetainedWithChar:(jchar)c;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreNetUriCodec_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreNetUriCodec)
+
 FOUNDATION_EXPORT void LibcoreNetUriCodec_validateSimpleWithNSString_withNSString_(NSString *s, NSString *legal);
+
 FOUNDATION_EXPORT NSString *LibcoreNetUriCodec_decodeWithNSString_withBoolean_withJavaNioCharsetCharset_withBoolean_(NSString *s, jboolean convertPlus, JavaNioCharsetCharset *charset, jboolean throwOnFailure);
+
 FOUNDATION_EXPORT NSString *LibcoreNetUriCodec_decodeWithNSString_(NSString *s);
+
+FOUNDATION_EXPORT void LibcoreNetUriCodec_init(LibcoreNetUriCodec *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreNetUriCodec)
 
 #endif // _LibcoreNetUriCodec_H_

@@ -6,14 +6,13 @@
 #ifndef _JavaUtilIllegalFormatCodePointException_H_
 #define _JavaUtilIllegalFormatCodePointException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilIllegalFormatCodePointException_serialVersionUID 19080630LL
+@interface JavaUtilIllegalFormatCodePointException : JavaUtilIllegalFormatException < JavaIoSerializable >
 
-@interface JavaUtilIllegalFormatCodePointException : JavaUtilIllegalFormatException < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)c;
 
@@ -23,8 +22,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilIllegalFormatCodePointException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilIllegalFormatCodePointException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilIllegalFormatCodePointException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilIllegalFormatCodePointException_initWithInt_(JavaUtilIllegalFormatCodePointException *self, jint c);
+
+FOUNDATION_EXPORT JavaUtilIllegalFormatCodePointException *new_JavaUtilIllegalFormatCodePointException_initWithInt_(jint c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilIllegalFormatCodePointException)
 
 #endif // _JavaUtilIllegalFormatCodePointException_H_

@@ -6,21 +6,12 @@
 #ifndef _JavaNetInetAddress_H_
 #define _JavaNetInetAddress_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSByteArray;
 @class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaNetAddressCache;
 @class JavaNetNetworkInterface;
-@class JavaNetUnknownHostException;
-@class JavaUtilConcurrentAtomicAtomicBoolean;
-@class JavaUtilConcurrentCountDownLatch;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/lang/Thread.h"
-
-#define JavaNetInetAddress_serialVersionUID 3286316764910316507LL
 
 @interface JavaNetInetAddress : NSObject < JavaIoSerializable > {
  @public
@@ -28,9 +19,9 @@
   NSString *hostName_;
 }
 
-- (instancetype)initWithInt:(jint)family
-              withByteArray:(IOSByteArray *)ipaddress
-               withNSString:(NSString *)hostName;
+#pragma mark Public
+
++ (void)clearDnsCache;
 
 - (jboolean)isEqual:(id)obj;
 
@@ -38,27 +29,30 @@
 
 + (IOSObjectArray *)getAllByNameWithNSString:(NSString *)host;
 
++ (JavaNetInetAddress *)getByAddressWithByteArray:(IOSByteArray *)ipAddress;
+
++ (JavaNetInetAddress *)getByAddressWithNSString:(NSString *)hostName
+                                   withByteArray:(IOSByteArray *)ipAddress;
+
++ (JavaNetInetAddress *)getByAddressWithNSString:(NSString *)hostName
+                                   withByteArray:(IOSByteArray *)ipAddress
+                                         withInt:(jint)scopeId;
+
 + (JavaNetInetAddress *)getByNameWithNSString:(NSString *)host;
+
+- (NSString *)getCanonicalHostName;
+
+- (jint)getFamily;
 
 - (NSString *)getHostAddress;
 
 - (NSString *)getHostName;
 
-- (NSString *)getCanonicalHostName;
-
 + (JavaNetInetAddress *)getLocalHost;
 
-- (NSUInteger)hash;
-
-+ (void)clearDnsCache;
-
-- (NSString *)description;
-
-+ (jboolean)isNumericWithNSString:(NSString *)address;
-
-+ (JavaNetInetAddress *)parseNumericAddressWithNSString:(NSString *)numericAddress;
-
 + (JavaNetInetAddress *)getLoopbackAddress;
+
+- (NSUInteger)hash;
 
 - (jboolean)isAnyLocalAddress;
 
@@ -78,7 +72,7 @@
 
 - (jboolean)isMulticastAddress;
 
-- (jboolean)isSiteLocalAddress;
++ (jboolean)isNumericWithNSString:(NSString *)address;
 
 - (jboolean)isReachableWithInt:(jint)timeout;
 
@@ -86,60 +80,52 @@
                                            withInt:(jint)ttl
                                            withInt:(jint)timeout;
 
-+ (JavaNetInetAddress *)getByAddressWithByteArray:(IOSByteArray *)ipAddress;
+- (jboolean)isSiteLocalAddress;
 
-+ (JavaNetInetAddress *)getByAddressWithNSString:(NSString *)hostName
-                                   withByteArray:(IOSByteArray *)ipAddress;
++ (JavaNetInetAddress *)parseNumericAddressWithNSString:(NSString *)numericAddress;
 
-+ (JavaNetInetAddress *)getByAddressWithNSString:(NSString *)hostName
-                                   withByteArray:(IOSByteArray *)ipAddress
-                                         withInt:(jint)scopeId;
+- (NSString *)description;
 
-- (jint)getFamily;
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)family
+              withByteArray:(IOSByteArray *)ipaddress
+               withNSString:(NSString *)hostName;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetInetAddress_initialized;
 J2OBJC_STATIC_INIT(JavaNetInetAddress)
 
 J2OBJC_FIELD_SETTER(JavaNetInetAddress, ipaddress_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(JavaNetInetAddress, hostName_, NSString *)
-FOUNDATION_EXPORT IOSObjectArray *JavaNetInetAddress_getAllByNameWithNSString_(NSString *host);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByNameWithNSString_(NSString *host);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getLocalHost();
-FOUNDATION_EXPORT void JavaNetInetAddress_clearDnsCache();
-FOUNDATION_EXPORT jboolean JavaNetInetAddress_isNumericWithNSString_(NSString *address);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_parseNumericAddressWithNSString_(NSString *numericAddress);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getLoopbackAddress();
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithByteArray_(IOSByteArray *ipAddress);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithNSString_withByteArray_(NSString *hostName, IOSByteArray *ipAddress);
-FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithNSString_withByteArray_withInt_(NSString *hostName, IOSByteArray *ipAddress, jint scopeId);
-
-FOUNDATION_EXPORT JavaNetAddressCache *JavaNetInetAddress_addressCache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInetAddress, addressCache_, JavaNetAddressCache *)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInetAddress, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_UNSPECIFIED_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetInetAddress, UNSPECIFIED_, JavaNetInetAddress *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaNetInetAddress_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInetAddress, serialPersistentFields_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaNetInetAddress_initWithInt_withByteArray_withNSString_(JavaNetInetAddress *self, jint family, IOSByteArray *ipaddress, NSString *hostName);
 
-@interface JavaNetInetAddress_$1 : JavaLangThread {
-}
+FOUNDATION_EXPORT JavaNetInetAddress *new_JavaNetInetAddress_initWithInt_withByteArray_withNSString_(jint family, IOSByteArray *ipaddress, NSString *hostName) NS_RETURNS_RETAINED;
 
-- (void)run;
+FOUNDATION_EXPORT IOSObjectArray *JavaNetInetAddress_getAllByNameWithNSString_(NSString *host);
 
-- (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)outer$
-                    withJavaNetInetAddress:(JavaNetInetAddress *)capture$0
-                    withJavaNetInetAddress:(JavaNetInetAddress *)capture$1
-                                   withInt:(jint)capture$2
- withJavaUtilConcurrentAtomicAtomicBoolean:(JavaUtilConcurrentAtomicAtomicBoolean *)capture$3
-      withJavaUtilConcurrentCountDownLatch:(JavaUtilConcurrentCountDownLatch *)capture$4;
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByNameWithNSString_(NSString *host);
 
-@end
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getLocalHost();
 
-__attribute__((always_inline)) inline void JavaNetInetAddress_$1_init() {}
+FOUNDATION_EXPORT void JavaNetInetAddress_clearDnsCache();
+
+FOUNDATION_EXPORT jboolean JavaNetInetAddress_isNumericWithNSString_(NSString *address);
+
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_parseNumericAddressWithNSString_(NSString *numericAddress);
+
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getLoopbackAddress();
+
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithByteArray_(IOSByteArray *ipAddress);
+
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithNSString_withByteArray_(NSString *hostName, IOSByteArray *ipAddress);
+
+FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInetAddress_getByAddressWithNSString_withByteArray_withInt_(NSString *hostName, IOSByteArray *ipAddress, jint scopeId);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInetAddress)
 
 #endif // _JavaNetInetAddress_H_

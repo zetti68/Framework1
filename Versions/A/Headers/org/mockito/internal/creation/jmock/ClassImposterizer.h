@@ -6,23 +6,23 @@
 #ifndef _OrgMockitoInternalCreationJmockClassImposterizer_H_
 #define _OrgMockitoInternalCreationJmockClassImposterizer_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 
-#import "JreEmulation.h"
+@interface OrgMockitoInternalCreationJmockClassImposterizer : NSObject
 
-@interface OrgMockitoInternalCreationJmockClassImposterizer : NSObject {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (jboolean)canImposteriseWithIOSClass:(IOSClass *)type;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgMockitoInternalCreationJmockClassImposterizer_initialized;
 J2OBJC_STATIC_INIT(OrgMockitoInternalCreationJmockClassImposterizer)
 
 FOUNDATION_EXPORT OrgMockitoInternalCreationJmockClassImposterizer *OrgMockitoInternalCreationJmockClassImposterizer_INSTANCE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgMockitoInternalCreationJmockClassImposterizer, INSTANCE_, OrgMockitoInternalCreationJmockClassImposterizer *)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalCreationJmockClassImposterizer)
 
 #endif // _OrgMockitoInternalCreationJmockClassImposterizer_H_

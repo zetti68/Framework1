@@ -6,13 +6,12 @@
 #ifndef _JavaSecurityPrivilegedActionException_H_
 #define _JavaSecurityPrivilegedActionException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaSecurityPrivilegedActionException_serialVersionUID 4724086851538908602LL
+@interface JavaSecurityPrivilegedActionException : JavaLangException
 
-@interface JavaSecurityPrivilegedActionException : JavaLangException {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaLangException:(JavaLangException *)ex;
 
@@ -20,8 +19,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPrivilegedActionException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPrivilegedActionException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityPrivilegedActionException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityPrivilegedActionException_initWithJavaLangException_(JavaSecurityPrivilegedActionException *self, JavaLangException *ex);
+
+FOUNDATION_EXPORT JavaSecurityPrivilegedActionException *new_JavaSecurityPrivilegedActionException_initWithJavaLangException_(JavaLangException *ex) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPrivilegedActionException)
 
 #endif // _JavaSecurityPrivilegedActionException_H_

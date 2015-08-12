@@ -6,34 +6,42 @@
 #ifndef _LibcoreNetUrlUrlUtils_H_
 #define _LibcoreNetUrlUrlUtils_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface LibcoreNetUrlUrlUtils : NSObject {
-}
+@interface LibcoreNetUrlUrlUtils : NSObject
 
-+ (NSString *)canonicalizePathWithNSString:(NSString *)path
-                               withBoolean:(jboolean)discardRelativePrefix;
+#pragma mark Public
 
 + (NSString *)authoritySafePathWithNSString:(NSString *)authority
                                withNSString:(NSString *)path;
 
-+ (NSString *)getSchemePrefixWithNSString:(NSString *)spec;
-
-+ (jboolean)isValidSchemeCharWithInt:(jint)index
-                            withChar:(jchar)c;
++ (NSString *)canonicalizePathWithNSString:(NSString *)path
+                               withBoolean:(jboolean)discardRelativePrefix;
 
 + (jint)findFirstOfWithNSString:(NSString *)string
                    withNSString:(NSString *)chars
                         withInt:(jint)start
                         withInt:(jint)end;
 
++ (NSString *)getSchemePrefixWithNSString:(NSString *)spec;
+
++ (jboolean)isValidSchemeCharWithInt:(jint)index
+                            withChar:(jchar)c;
+
 @end
 
-__attribute__((always_inline)) inline void LibcoreNetUrlUrlUtils_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreNetUrlUrlUtils)
+
 FOUNDATION_EXPORT NSString *LibcoreNetUrlUrlUtils_canonicalizePathWithNSString_withBoolean_(NSString *path, jboolean discardRelativePrefix);
+
 FOUNDATION_EXPORT NSString *LibcoreNetUrlUrlUtils_authoritySafePathWithNSString_withNSString_(NSString *authority, NSString *path);
+
 FOUNDATION_EXPORT NSString *LibcoreNetUrlUrlUtils_getSchemePrefixWithNSString_(NSString *spec);
+
 FOUNDATION_EXPORT jboolean LibcoreNetUrlUrlUtils_isValidSchemeCharWithInt_withChar_(jint index, jchar c);
+
 FOUNDATION_EXPORT jint LibcoreNetUrlUrlUtils_findFirstOfWithNSString_withNSString_withInt_withInt_(NSString *string, NSString *chars, jint start, jint end);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreNetUrlUrlUtils)
 
 #endif // _LibcoreNetUrlUrlUtils_H_

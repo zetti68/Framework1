@@ -6,15 +6,14 @@
 #ifndef _JavaLangAnnotationAnnotationTypeMismatchException_H_
 #define _JavaLangAnnotationAnnotationTypeMismatchException_H_
 
-@class JavaLangReflectMethod;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangAnnotationAnnotationTypeMismatchException_serialVersionUID 8125925355765570191LL
+@class JavaLangReflectMethod;
 
-@interface JavaLangAnnotationAnnotationTypeMismatchException : JavaLangRuntimeException {
-}
+@interface JavaLangAnnotationAnnotationTypeMismatchException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)initWithJavaLangReflectMethod:(JavaLangReflectMethod *)element
                                  withNSString:(NSString *)foundType;
@@ -25,8 +24,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationAnnotationTypeMismatchException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationAnnotationTypeMismatchException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangAnnotationAnnotationTypeMismatchException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangAnnotationAnnotationTypeMismatchException_initWithJavaLangReflectMethod_withNSString_(JavaLangAnnotationAnnotationTypeMismatchException *self, JavaLangReflectMethod *element, NSString *foundType);
+
+FOUNDATION_EXPORT JavaLangAnnotationAnnotationTypeMismatchException *new_JavaLangAnnotationAnnotationTypeMismatchException_initWithJavaLangReflectMethod_withNSString_(JavaLangReflectMethod *element, NSString *foundType) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationAnnotationTypeMismatchException)
 
 #endif // _JavaLangAnnotationAnnotationTypeMismatchException_H_

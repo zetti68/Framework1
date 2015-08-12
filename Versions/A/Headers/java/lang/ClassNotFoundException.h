@@ -6,15 +6,14 @@
 #ifndef _JavaLangClassNotFoundException_H_
 #define _JavaLangClassNotFoundException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ReflectiveOperationException.h"
 
-#define JavaLangClassNotFoundException_serialVersionUID 9176873029745254542LL
+@class JavaLangThrowable;
 
-@interface JavaLangClassNotFoundException : JavaLangReflectiveOperationException {
-}
+@interface JavaLangClassNotFoundException : JavaLangReflectiveOperationException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -23,14 +22,26 @@
 - (instancetype)initWithNSString:(NSString *)detailMessage
            withJavaLangThrowable:(JavaLangThrowable *)exception;
 
-- (JavaLangThrowable *)getException;
-
 - (JavaLangThrowable *)getCause;
+
+- (JavaLangThrowable *)getException;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangClassNotFoundException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangClassNotFoundException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangClassNotFoundException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangClassNotFoundException_init(JavaLangClassNotFoundException *self);
+
+FOUNDATION_EXPORT JavaLangClassNotFoundException *new_JavaLangClassNotFoundException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangClassNotFoundException_initWithNSString_(JavaLangClassNotFoundException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangClassNotFoundException *new_JavaLangClassNotFoundException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangClassNotFoundException_initWithNSString_withJavaLangThrowable_(JavaLangClassNotFoundException *self, NSString *detailMessage, JavaLangThrowable *exception);
+
+FOUNDATION_EXPORT JavaLangClassNotFoundException *new_JavaLangClassNotFoundException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *exception) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangClassNotFoundException)
 
 #endif // _JavaLangClassNotFoundException_H_

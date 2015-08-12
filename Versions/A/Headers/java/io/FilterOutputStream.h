@@ -6,15 +6,17 @@
 #ifndef _JavaIoFilterOutputStream_H_
 #define _JavaIoFilterOutputStream_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/OutputStream.h"
+
+@class IOSByteArray;
 
 @interface JavaIoFilterOutputStream : JavaIoOutputStream {
  @public
   JavaIoOutputStream *out_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
 
@@ -30,8 +32,14 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFilterOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFilterOutputStream)
 
 J2OBJC_FIELD_SETTER(JavaIoFilterOutputStream, out_, JavaIoOutputStream *)
+
+FOUNDATION_EXPORT void JavaIoFilterOutputStream_initWithJavaIoOutputStream_(JavaIoFilterOutputStream *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaIoFilterOutputStream *new_JavaIoFilterOutputStream_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFilterOutputStream)
 
 #endif // _JavaIoFilterOutputStream_H_

@@ -6,13 +6,12 @@
 #ifndef _JavaNioInvalidMarkException_H_
 #define _JavaNioInvalidMarkException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioInvalidMarkException_serialVersionUID 1698329710438510774LL
+@interface JavaNioInvalidMarkException : JavaLangIllegalStateException
 
-@interface JavaNioInvalidMarkException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioInvalidMarkException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioInvalidMarkException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioInvalidMarkException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioInvalidMarkException_init(JavaNioInvalidMarkException *self);
+
+FOUNDATION_EXPORT JavaNioInvalidMarkException *new_JavaNioInvalidMarkException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNioInvalidMarkException_initWithNSString_(JavaNioInvalidMarkException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNioInvalidMarkException *new_JavaNioInvalidMarkException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioInvalidMarkException)
 
 #endif // _JavaNioInvalidMarkException_H_

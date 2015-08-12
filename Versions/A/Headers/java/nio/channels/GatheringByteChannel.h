@@ -6,12 +6,13 @@
 #ifndef _JavaNioChannelsGatheringByteChannel_H_
 #define _JavaNioChannelsGatheringByteChannel_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/WritableByteChannel.h"
 
+@class IOSObjectArray;
+
 @protocol JavaNioChannelsGatheringByteChannel < JavaNioChannelsWritableByteChannel, NSObject, JavaObject >
+
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)buffers;
 
 - (jlong)writeWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
@@ -20,6 +21,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsGatheringByteChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsGatheringByteChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsGatheringByteChannel)
 
 #endif // _JavaNioChannelsGatheringByteChannel_H_

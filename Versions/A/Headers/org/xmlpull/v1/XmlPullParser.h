@@ -6,25 +6,25 @@
 #ifndef _OrgXmlpullV1XmlPullParser_H_
 #define _OrgXmlpullV1XmlPullParser_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSCharArray;
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
 
-#import "JreEmulation.h"
-
-#define OrgXmlpullV1XmlPullParser_CDSECT 5
-#define OrgXmlpullV1XmlPullParser_COMMENT 9
-#define OrgXmlpullV1XmlPullParser_DOCDECL 10
+#define OrgXmlpullV1XmlPullParser_START_DOCUMENT 0
 #define OrgXmlpullV1XmlPullParser_END_DOCUMENT 1
+#define OrgXmlpullV1XmlPullParser_START_TAG 2
 #define OrgXmlpullV1XmlPullParser_END_TAG 3
+#define OrgXmlpullV1XmlPullParser_TEXT 4
+#define OrgXmlpullV1XmlPullParser_CDSECT 5
 #define OrgXmlpullV1XmlPullParser_ENTITY_REF 6
 #define OrgXmlpullV1XmlPullParser_IGNORABLE_WHITESPACE 7
 #define OrgXmlpullV1XmlPullParser_PROCESSING_INSTRUCTION 8
-#define OrgXmlpullV1XmlPullParser_START_DOCUMENT 0
-#define OrgXmlpullV1XmlPullParser_START_TAG 2
-#define OrgXmlpullV1XmlPullParser_TEXT 4
+#define OrgXmlpullV1XmlPullParser_COMMENT 9
+#define OrgXmlpullV1XmlPullParser_DOCDECL 10
 
 @protocol OrgXmlpullV1XmlPullParser < NSObject, JavaObject >
 
@@ -112,10 +112,8 @@
 @end
 
 @interface OrgXmlpullV1XmlPullParser : NSObject
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgXmlpullV1XmlPullParser_initialized;
 J2OBJC_STATIC_INIT(OrgXmlpullV1XmlPullParser)
 
 FOUNDATION_EXPORT NSString *OrgXmlpullV1XmlPullParser_NO_NAMESPACE_;
@@ -157,5 +155,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParser, FEATURE_PROCESS_DOCDECL_, 
 
 FOUNDATION_EXPORT NSString *OrgXmlpullV1XmlPullParser_FEATURE_VALIDATION_;
 J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1XmlPullParser, FEATURE_VALIDATION_, NSString *)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlpullV1XmlPullParser)
 
 #endif // _OrgXmlpullV1XmlPullParser_H_

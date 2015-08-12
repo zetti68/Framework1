@@ -6,13 +6,12 @@
 #ifndef _JavaLangIncompatibleClassChangeError_H_
 #define _JavaLangIncompatibleClassChangeError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/LinkageError.h"
 
-#define JavaLangIncompatibleClassChangeError_serialVersionUID -4914975503642802119LL
+@interface JavaLangIncompatibleClassChangeError : JavaLangLinkageError
 
-@interface JavaLangIncompatibleClassChangeError : JavaLangLinkageError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangIncompatibleClassChangeError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangIncompatibleClassChangeError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangIncompatibleClassChangeError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangIncompatibleClassChangeError_init(JavaLangIncompatibleClassChangeError *self);
+
+FOUNDATION_EXPORT JavaLangIncompatibleClassChangeError *new_JavaLangIncompatibleClassChangeError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangIncompatibleClassChangeError_initWithNSString_(JavaLangIncompatibleClassChangeError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangIncompatibleClassChangeError *new_JavaLangIncompatibleClassChangeError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangIncompatibleClassChangeError)
 
 #endif // _JavaLangIncompatibleClassChangeError_H_

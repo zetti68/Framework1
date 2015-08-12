@@ -6,17 +6,19 @@
 #ifndef _ComGoogleJ2objcSecurityCertIosCertificateFactory_H_
 #define _ComGoogleJ2objcSecurityCertIosCertificateFactory_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
+#include "java/security/cert/CertificateFactorySpi.h"
+
 @class JavaIoInputStream;
 @class JavaSecurityCertCRL;
 @class JavaSecurityCertCertificate;
 @protocol JavaUtilCollection;
 
-#import "JreEmulation.h"
-#include "java/security/cert/CertificateFactorySpi.h"
+@interface ComGoogleJ2objcSecurityCertIosCertificateFactory : JavaSecurityCertCertificateFactorySpi
 
-@interface ComGoogleJ2objcSecurityCertIosCertificateFactory : JavaSecurityCertCertificateFactorySpi {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (JavaSecurityCertCertificate *)engineGenerateCertificateWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
@@ -26,10 +28,14 @@
 
 - (id<JavaUtilCollection>)engineGenerateCRLsWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void ComGoogleJ2objcSecurityCertIosCertificateFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(ComGoogleJ2objcSecurityCertIosCertificateFactory)
+
+FOUNDATION_EXPORT void ComGoogleJ2objcSecurityCertIosCertificateFactory_init(ComGoogleJ2objcSecurityCertIosCertificateFactory *self);
+
+FOUNDATION_EXPORT ComGoogleJ2objcSecurityCertIosCertificateFactory *new_ComGoogleJ2objcSecurityCertIosCertificateFactory_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcSecurityCertIosCertificateFactory)
 
 #endif // _ComGoogleJ2objcSecurityCertIosCertificateFactory_H_

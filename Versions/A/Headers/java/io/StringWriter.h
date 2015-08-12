@@ -6,19 +6,28 @@
 #ifndef _JavaIoStringWriter_H_
 #define _JavaIoStringWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Writer.h"
+
 @class IOSCharArray;
 @class JavaLangStringBuffer;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "java/io/Writer.h"
+@interface JavaIoStringWriter : JavaIoWriter
 
-@interface JavaIoStringWriter : JavaIoWriter {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialSize;
+
+- (JavaIoStringWriter *)appendWithChar:(jchar)c;
+
+- (JavaIoStringWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
+
+- (JavaIoStringWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
+                                               withInt:(jint)start
+                                               withInt:(jint)end;
 
 - (void)close;
 
@@ -40,16 +49,18 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
-- (JavaIoStringWriter *)appendWithChar:(jchar)c;
-
-- (JavaIoStringWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
-
-- (JavaIoStringWriter *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                               withInt:(jint)start
-                                               withInt:(jint)end;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoStringWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoStringWriter)
+
+FOUNDATION_EXPORT void JavaIoStringWriter_init(JavaIoStringWriter *self);
+
+FOUNDATION_EXPORT JavaIoStringWriter *new_JavaIoStringWriter_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoStringWriter_initWithInt_(JavaIoStringWriter *self, jint initialSize);
+
+FOUNDATION_EXPORT JavaIoStringWriter *new_JavaIoStringWriter_initWithInt_(jint initialSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoStringWriter)
 
 #endif // _JavaIoStringWriter_H_

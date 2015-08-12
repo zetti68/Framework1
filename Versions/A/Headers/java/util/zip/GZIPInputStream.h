@@ -6,25 +6,22 @@
 #ifndef _JavaUtilZipGZIPInputStream_H_
 #define _JavaUtilZipGZIPInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/zip/InflaterInputStream.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaUtilZipCRC32;
 
-#import "JreEmulation.h"
-#include "java/util/zip/InflaterInputStream.h"
-
-#define JavaUtilZipGZIPInputStream_FCOMMENT 16
-#define JavaUtilZipGZIPInputStream_FEXTRA 4
-#define JavaUtilZipGZIPInputStream_FHCRC 2
-#define JavaUtilZipGZIPInputStream_FNAME 8
 #define JavaUtilZipGZIPInputStream_GZIP_MAGIC 35615
-#define JavaUtilZipGZIPInputStream_GZIP_TRAILER_SIZE 8
 
 @interface JavaUtilZipGZIPInputStream : JavaUtilZipInflaterInputStream {
  @public
   JavaUtilZipCRC32 *crc_;
   jboolean eos_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)is;
 
@@ -39,20 +36,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipGZIPInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipGZIPInputStream)
 
 J2OBJC_FIELD_SETTER(JavaUtilZipGZIPInputStream, crc_, JavaUtilZipCRC32 *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, FCOMMENT, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, FEXTRA, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, FHCRC, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, FNAME, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, GZIP_TRAILER_SIZE, jint)
-
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipGZIPInputStream, GZIP_MAGIC, jint)
+
+FOUNDATION_EXPORT void JavaUtilZipGZIPInputStream_initWithJavaIoInputStream_(JavaUtilZipGZIPInputStream *self, JavaIoInputStream *is);
+
+FOUNDATION_EXPORT JavaUtilZipGZIPInputStream *new_JavaUtilZipGZIPInputStream_initWithJavaIoInputStream_(JavaIoInputStream *is) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipGZIPInputStream_initWithJavaIoInputStream_withInt_(JavaUtilZipGZIPInputStream *self, JavaIoInputStream *is, jint size);
+
+FOUNDATION_EXPORT JavaUtilZipGZIPInputStream *new_JavaUtilZipGZIPInputStream_initWithJavaIoInputStream_withInt_(JavaIoInputStream *is, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipGZIPInputStream)
 
 #endif // _JavaUtilZipGZIPInputStream_H_

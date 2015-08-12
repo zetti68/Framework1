@@ -6,53 +6,42 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Oid_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Oid_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Primitive.h"
+
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Primitive.h"
+@interface OrgApacheHarmonySecurityAsn1ASN1Oid : OrgApacheHarmonySecurityAsn1ASN1Primitive
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Oid : OrgApacheHarmonySecurityAsn1ASN1Primitive {
-}
+#pragma mark Public
 
 - (instancetype)init;
-
-+ (OrgApacheHarmonySecurityAsn1ASN1Oid *)getInstance;
 
 - (id)decodeWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
 - (void)encodeContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
-- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
+- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
+
++ (OrgApacheHarmonySecurityAsn1ASN1Oid *)getInstance;
 
 + (OrgApacheHarmonySecurityAsn1ASN1Oid *)getInstanceForString;
 
-@end
-
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityAsn1ASN1Oid_initialized;
-J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Oid)
-FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_getInstance();
-FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_getInstanceForString();
-
-FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_ASN1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1Oid, ASN1_, OrgApacheHarmonySecurityAsn1ASN1Oid *)
-
-FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_STRING_OID_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1Oid, STRING_OID_, OrgApacheHarmonySecurityAsn1ASN1Oid *)
-
-@interface OrgApacheHarmonySecurityAsn1ASN1Oid_$1 : OrgApacheHarmonySecurityAsn1ASN1Oid {
-}
-
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
 - (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Oid_$1_init() {}
+J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Oid)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Oid_init(OrgApacheHarmonySecurityAsn1ASN1Oid *self);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *new_OrgApacheHarmonySecurityAsn1ASN1Oid_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_getInstance();
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Oid *OrgApacheHarmonySecurityAsn1ASN1Oid_getInstanceForString();
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Oid)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Oid_H_

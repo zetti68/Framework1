@@ -6,47 +6,42 @@
 #ifndef _DalvikSystemCloseGuard_H_
 #define _DalvikSystemCloseGuard_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangThrowable;
 @protocol DalvikSystemCloseGuard_Reporter;
 
-#import "JreEmulation.h"
+@interface DalvikSystemCloseGuard : NSObject
 
-@interface DalvikSystemCloseGuard : NSObject {
-}
+#pragma mark Public
+
+- (void)close;
 
 + (DalvikSystemCloseGuard *)get;
-
-+ (void)setEnabledWithBoolean:(jboolean)enabled;
-
-+ (void)setReporterWithDalvikSystemCloseGuard_Reporter:(id<DalvikSystemCloseGuard_Reporter>)reporter;
 
 + (id<DalvikSystemCloseGuard_Reporter>)getReporter;
 
 - (void)openWithNSString:(NSString *)closer;
 
-- (void)close;
++ (void)setEnabledWithBoolean:(jboolean)enabled;
+
++ (void)setReporterWithDalvikSystemCloseGuard_Reporter:(id<DalvikSystemCloseGuard_Reporter>)reporter;
 
 - (void)warnIfOpen;
 
 @end
 
-FOUNDATION_EXPORT BOOL DalvikSystemCloseGuard_initialized;
 J2OBJC_STATIC_INIT(DalvikSystemCloseGuard)
+
 FOUNDATION_EXPORT DalvikSystemCloseGuard *DalvikSystemCloseGuard_get();
+
 FOUNDATION_EXPORT void DalvikSystemCloseGuard_setEnabledWithBoolean_(jboolean enabled);
+
 FOUNDATION_EXPORT void DalvikSystemCloseGuard_setReporterWithDalvikSystemCloseGuard_Reporter_(id<DalvikSystemCloseGuard_Reporter> reporter);
+
 FOUNDATION_EXPORT id<DalvikSystemCloseGuard_Reporter> DalvikSystemCloseGuard_getReporter();
 
-FOUNDATION_EXPORT DalvikSystemCloseGuard *DalvikSystemCloseGuard_NOOP_;
-J2OBJC_STATIC_FIELD_GETTER(DalvikSystemCloseGuard, NOOP_, DalvikSystemCloseGuard *)
-
-FOUNDATION_EXPORT jboolean DalvikSystemCloseGuard_ENABLED_;
-J2OBJC_STATIC_FIELD_GETTER(DalvikSystemCloseGuard, ENABLED_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(DalvikSystemCloseGuard, ENABLED_, jboolean)
-
-FOUNDATION_EXPORT id<DalvikSystemCloseGuard_Reporter> DalvikSystemCloseGuard_REPORTER_;
-J2OBJC_STATIC_FIELD_GETTER(DalvikSystemCloseGuard, REPORTER_, id<DalvikSystemCloseGuard_Reporter>)
-J2OBJC_STATIC_FIELD_SETTER(DalvikSystemCloseGuard, REPORTER_, id<DalvikSystemCloseGuard_Reporter>)
+J2OBJC_TYPE_LITERAL_HEADER(DalvikSystemCloseGuard)
 
 @protocol DalvikSystemCloseGuard_Reporter < NSObject, JavaObject >
 
@@ -55,16 +50,8 @@ J2OBJC_STATIC_FIELD_SETTER(DalvikSystemCloseGuard, REPORTER_, id<DalvikSystemClo
 
 @end
 
-__attribute__((always_inline)) inline void DalvikSystemCloseGuard_Reporter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(DalvikSystemCloseGuard_Reporter)
 
-@interface DalvikSystemCloseGuard_DefaultReporter : NSObject < DalvikSystemCloseGuard_Reporter > {
-}
-
-- (void)reportWithNSString:(NSString *)message
-     withJavaLangThrowable:(JavaLangThrowable *)allocationSite;
-
-@end
-
-__attribute__((always_inline)) inline void DalvikSystemCloseGuard_DefaultReporter_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(DalvikSystemCloseGuard_Reporter)
 
 #endif // _DalvikSystemCloseGuard_H_

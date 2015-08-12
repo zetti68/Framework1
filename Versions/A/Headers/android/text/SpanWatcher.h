@@ -6,12 +6,13 @@
 #ifndef _AndroidTextSpanWatcher_H_
 #define _AndroidTextSpanWatcher_H_
 
-@protocol AndroidTextSpannable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "android/text/NoCopySpan.h"
 
+@protocol AndroidTextSpannable;
+
 @protocol AndroidTextSpanWatcher < AndroidTextNoCopySpan, NSObject, JavaObject >
+
 - (void)onSpanAddedWithAndroidTextSpannable:(id<AndroidTextSpannable>)text
                                      withId:(id)what
                                     withInt:(jint)start
@@ -31,6 +32,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextSpanWatcher_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextSpanWatcher)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextSpanWatcher)
 
 #endif // _AndroidTextSpanWatcher_H_

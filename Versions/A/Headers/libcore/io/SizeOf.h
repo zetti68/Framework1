@@ -6,32 +6,33 @@
 #ifndef _LibcoreIoSizeOf_H_
 #define _LibcoreIoSizeOf_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface LibcoreIoSizeOf : NSObject {
-}
+#define LibcoreIoSizeOf_CHAR 2
+#define LibcoreIoSizeOf_DOUBLE 8
+#define LibcoreIoSizeOf_FLOAT 4
+#define LibcoreIoSizeOf_INT 4
+#define LibcoreIoSizeOf_LONG 8
+#define LibcoreIoSizeOf_SHORT 2
+
+@interface LibcoreIoSizeOf : NSObject
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIoSizeOf_initialized;
-J2OBJC_STATIC_INIT(LibcoreIoSizeOf)
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoSizeOf)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_CHAR_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, CHAR_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, CHAR, jint)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_DOUBLE_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, DOUBLE_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, DOUBLE, jint)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_FLOAT_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, FLOAT_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, FLOAT, jint)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_INT_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, INT_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, INT, jint)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_LONG_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, LONG_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, LONG, jint)
 
-FOUNDATION_EXPORT jint LibcoreIoSizeOf_SHORT_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, SHORT_, jint)
+J2OBJC_STATIC_FIELD_GETTER(LibcoreIoSizeOf, SHORT, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoSizeOf)
 
 #endif // _LibcoreIoSizeOf_H_

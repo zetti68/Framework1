@@ -6,22 +6,33 @@
 #ifndef _JavaNetInetUnixAddress_H_
 #define _JavaNetInetUnixAddress_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/InetAddress.h"
 
-@interface JavaNetInetUnixAddress : JavaNetInetAddress {
-}
+@class IOSByteArray;
 
-- (instancetype)initWithNSString:(NSString *)path;
+@interface JavaNetInetUnixAddress : JavaNetInetAddress
+
+#pragma mark Public
 
 - (instancetype)initWithByteArray:(IOSByteArray *)path;
+
+- (instancetype)initWithNSString:(NSString *)path;
 
 - (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetInetUnixAddress_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetInetUnixAddress)
+
+FOUNDATION_EXPORT void JavaNetInetUnixAddress_initWithNSString_(JavaNetInetUnixAddress *self, NSString *path);
+
+FOUNDATION_EXPORT JavaNetInetUnixAddress *new_JavaNetInetUnixAddress_initWithNSString_(NSString *path) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetInetUnixAddress_initWithByteArray_(JavaNetInetUnixAddress *self, IOSByteArray *path);
+
+FOUNDATION_EXPORT JavaNetInetUnixAddress *new_JavaNetInetUnixAddress_initWithByteArray_(IOSByteArray *path) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInetUnixAddress)
 
 #endif // _JavaNetInetUnixAddress_H_

@@ -6,11 +6,11 @@
 #ifndef _JavaSqlBlob_H_
 #define _JavaSqlBlob_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlBlob < NSObject, JavaObject >
 
@@ -46,6 +46,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlBlob_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlBlob)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlBlob)
 
 #endif // _JavaSqlBlob_H_

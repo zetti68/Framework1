@@ -6,25 +6,32 @@
 #ifndef _JavaxXmlValidationTypeInfoProvider_H_
 #define _JavaxXmlValidationTypeInfoProvider_H_
 
+#include "J2ObjC_header.h"
+
 @protocol OrgW3cDomTypeInfo;
 
-#import "JreEmulation.h"
+@interface JavaxXmlValidationTypeInfoProvider : NSObject
 
-@interface JavaxXmlValidationTypeInfoProvider : NSObject {
-}
-
-- (instancetype)init;
-
-- (id<OrgW3cDomTypeInfo>)getElementTypeInfo;
+#pragma mark Public
 
 - (id<OrgW3cDomTypeInfo>)getAttributeTypeInfoWithInt:(jint)index;
+
+- (id<OrgW3cDomTypeInfo>)getElementTypeInfo;
 
 - (jboolean)isIdAttributeWithInt:(jint)index;
 
 - (jboolean)isSpecifiedWithInt:(jint)index;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlValidationTypeInfoProvider_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlValidationTypeInfoProvider)
+
+FOUNDATION_EXPORT void JavaxXmlValidationTypeInfoProvider_init(JavaxXmlValidationTypeInfoProvider *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlValidationTypeInfoProvider)
 
 #endif // _JavaxXmlValidationTypeInfoProvider_H_

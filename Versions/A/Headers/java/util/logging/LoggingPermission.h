@@ -6,15 +6,16 @@
 #ifndef _JavaUtilLoggingLoggingPermission_H_
 #define _JavaUtilLoggingLoggingPermission_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/BasicPermission.h"
 #include "java/security/Guard.h"
 
-@interface JavaUtilLoggingLoggingPermission : JavaSecurityBasicPermission < JavaSecurityGuard, JavaIoSerializable > {
-}
+@class JavaSecurityPermission;
+
+@interface JavaUtilLoggingLoggingPermission : JavaSecurityBasicPermission < JavaSecurityGuard, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)actions;
@@ -25,6 +26,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingLoggingPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingLoggingPermission)
+
+FOUNDATION_EXPORT void JavaUtilLoggingLoggingPermission_initWithNSString_withNSString_(JavaUtilLoggingLoggingPermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaUtilLoggingLoggingPermission *new_JavaUtilLoggingLoggingPermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLoggingPermission)
 
 #endif // _JavaUtilLoggingLoggingPermission_H_

@@ -6,7 +6,7 @@
 #ifndef _JavaSecurityPrivilegedExceptionAction_H_
 #define _JavaSecurityPrivilegedExceptionAction_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaSecurityPrivilegedExceptionAction < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPrivilegedExceptionAction_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPrivilegedExceptionAction)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPrivilegedExceptionAction)
 
 #endif // _JavaSecurityPrivilegedExceptionAction_H_

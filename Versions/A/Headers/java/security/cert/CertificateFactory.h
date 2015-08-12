@@ -6,41 +6,25 @@
 #ifndef _JavaSecurityCertCertificateFactory_H_
 #define _JavaSecurityCertCertificateFactory_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaSecurityCertCRL;
 @class JavaSecurityCertCertPath;
 @class JavaSecurityCertCertificate;
 @class JavaSecurityCertCertificateFactorySpi;
 @class JavaSecurityProvider;
-@class OrgApacheHarmonySecurityFortressEngine;
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaSecurityCertCertificateFactory : NSObject
 
-@interface JavaSecurityCertCertificateFactory : NSObject {
-}
-
-- (instancetype)initWithJavaSecurityCertCertificateFactorySpi:(JavaSecurityCertCertificateFactorySpi *)certFacSpi
-                                     withJavaSecurityProvider:(JavaSecurityProvider *)provider
-                                                 withNSString:(NSString *)type;
-
-+ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type;
-
-+ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type
-                                                   withNSString:(NSString *)provider;
-
-+ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type
-                                       withJavaSecurityProvider:(JavaSecurityProvider *)provider;
-
-- (JavaSecurityProvider *)getProvider;
-
-- (NSString *)getType;
+#pragma mark Public
 
 - (JavaSecurityCertCertificate *)generateCertificateWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
-- (id<JavaUtilIterator>)getCertPathEncodings;
+- (id<JavaUtilCollection>)generateCertificatesWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
 - (JavaSecurityCertCertPath *)generateCertPathWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
@@ -49,24 +33,44 @@
 
 - (JavaSecurityCertCertPath *)generateCertPathWithJavaUtilList:(id<JavaUtilList>)certificates;
 
-- (id<JavaUtilCollection>)generateCertificatesWithJavaIoInputStream:(JavaIoInputStream *)inStream;
-
 - (JavaSecurityCertCRL *)generateCRLWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
 - (id<JavaUtilCollection>)generateCRLsWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
+- (id<JavaUtilIterator>)getCertPathEncodings;
+
++ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type;
+
++ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type
+                                       withJavaSecurityProvider:(JavaSecurityProvider *)provider;
+
++ (JavaSecurityCertCertificateFactory *)getInstanceWithNSString:(NSString *)type
+                                                   withNSString:(NSString *)provider;
+
+- (JavaSecurityProvider *)getProvider;
+
+- (NSString *)getType;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaSecurityCertCertificateFactorySpi:(JavaSecurityCertCertificateFactorySpi *)certFacSpi
+                                     withJavaSecurityProvider:(JavaSecurityProvider *)provider
+                                                 withNSString:(NSString *)type;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecurityCertCertificateFactory_initialized;
 J2OBJC_STATIC_INIT(JavaSecurityCertCertificateFactory)
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateFactory_initWithJavaSecurityCertCertificateFactorySpi_withJavaSecurityProvider_withNSString_(JavaSecurityCertCertificateFactory *self, JavaSecurityCertCertificateFactorySpi *certFacSpi, JavaSecurityProvider *provider, NSString *type);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateFactory *new_JavaSecurityCertCertificateFactory_initWithJavaSecurityCertCertificateFactorySpi_withJavaSecurityProvider_withNSString_(JavaSecurityCertCertificateFactorySpi *certFacSpi, JavaSecurityProvider *provider, NSString *type) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaSecurityCertCertificateFactory *JavaSecurityCertCertificateFactory_getInstanceWithNSString_(NSString *type);
+
 FOUNDATION_EXPORT JavaSecurityCertCertificateFactory *JavaSecurityCertCertificateFactory_getInstanceWithNSString_withNSString_(NSString *type, NSString *provider);
+
 FOUNDATION_EXPORT JavaSecurityCertCertificateFactory *JavaSecurityCertCertificateFactory_getInstanceWithNSString_withJavaSecurityProvider_(NSString *type, JavaSecurityProvider *provider);
 
-FOUNDATION_EXPORT NSString *JavaSecurityCertCertificateFactory_SERVICE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateFactory, SERVICE_, NSString *)
-
-FOUNDATION_EXPORT OrgApacheHarmonySecurityFortressEngine *JavaSecurityCertCertificateFactory_ENGINE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateFactory, ENGINE_, OrgApacheHarmonySecurityFortressEngine *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateFactory)
 
 #endif // _JavaSecurityCertCertificateFactory_H_

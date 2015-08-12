@@ -6,7 +6,7 @@
 #ifndef _JavaSqlSavepoint_H_
 #define _JavaSqlSavepoint_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaSqlSavepoint < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSavepoint_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSavepoint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSavepoint)
 
 #endif // _JavaSqlSavepoint_H_

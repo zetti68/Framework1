@@ -6,17 +6,25 @@
 #ifndef _LibcoreUtilMutableLong_H_
 #define _LibcoreUtilMutableLong_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreUtilMutableLong : NSObject {
  @public
   jlong value_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithLong:(jlong)value;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreUtilMutableLong_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreUtilMutableLong)
+
+FOUNDATION_EXPORT void LibcoreUtilMutableLong_initWithLong_(LibcoreUtilMutableLong *self, jlong value);
+
+FOUNDATION_EXPORT LibcoreUtilMutableLong *new_LibcoreUtilMutableLong_initWithLong_(jlong value) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilMutableLong)
 
 #endif // _LibcoreUtilMutableLong_H_

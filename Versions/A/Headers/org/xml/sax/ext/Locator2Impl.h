@@ -6,29 +6,40 @@
 #ifndef _OrgXmlSaxExtLocator2Impl_H_
 #define _OrgXmlSaxExtLocator2Impl_H_
 
-@protocol OrgXmlSaxLocator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/ext/Locator2.h"
 #include "org/xml/sax/helpers/LocatorImpl.h"
 
-@interface OrgXmlSaxExtLocator2Impl : OrgXmlSaxHelpersLocatorImpl < OrgXmlSaxExtLocator2 > {
-}
+@protocol OrgXmlSaxLocator;
+
+@interface OrgXmlSaxExtLocator2Impl : OrgXmlSaxHelpersLocatorImpl < OrgXmlSaxExtLocator2 >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
 
-- (NSString *)getXMLVersion;
-
 - (NSString *)getEncoding;
 
-- (void)setXMLVersionWithNSString:(NSString *)version_;
+- (NSString *)getXMLVersion;
 
 - (void)setEncodingWithNSString:(NSString *)encoding;
 
+- (void)setXMLVersionWithNSString:(NSString *)version_;
+
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtLocator2Impl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtLocator2Impl)
+
+FOUNDATION_EXPORT void OrgXmlSaxExtLocator2Impl_init(OrgXmlSaxExtLocator2Impl *self);
+
+FOUNDATION_EXPORT OrgXmlSaxExtLocator2Impl *new_OrgXmlSaxExtLocator2Impl_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxExtLocator2Impl_initWithOrgXmlSaxLocator_(OrgXmlSaxExtLocator2Impl *self, id<OrgXmlSaxLocator> locator);
+
+FOUNDATION_EXPORT OrgXmlSaxExtLocator2Impl *new_OrgXmlSaxExtLocator2Impl_initWithOrgXmlSaxLocator_(id<OrgXmlSaxLocator> locator) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtLocator2Impl)
 
 #endif // _OrgXmlSaxExtLocator2Impl_H_

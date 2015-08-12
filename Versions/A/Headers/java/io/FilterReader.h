@@ -6,17 +6,17 @@
 #ifndef _JavaIoFilterReader_H_
 #define _JavaIoFilterReader_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Reader.h"
+
+@class IOSCharArray;
 
 @interface JavaIoFilterReader : JavaIoReader {
  @public
   JavaIoReader *in_;
 }
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+#pragma mark Public
 
 - (void)close;
 
@@ -36,10 +36,18 @@
 
 - (jlong)skipWithLong:(jlong)charCount;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoFilterReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFilterReader)
 
 J2OBJC_FIELD_SETTER(JavaIoFilterReader, in_, JavaIoReader *)
+
+FOUNDATION_EXPORT void JavaIoFilterReader_initWithJavaIoReader_(JavaIoFilterReader *self, JavaIoReader *inArg);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFilterReader)
 
 #endif // _JavaIoFilterReader_H_

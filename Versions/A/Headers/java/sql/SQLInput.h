@@ -6,6 +6,8 @@
 #ifndef _JavaSqlSQLInput_H_
 #define _JavaSqlSQLInput_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
@@ -21,8 +23,6 @@
 @protocol JavaSqlRef;
 @protocol JavaSqlRowId;
 @protocol JavaSqlSQLXML;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlSQLInput < NSObject, JavaObject >
 
@@ -82,6 +82,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLInput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLInput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLInput)
 
 #endif // _JavaSqlSQLInput_H_

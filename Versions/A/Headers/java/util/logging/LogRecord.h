@@ -6,96 +6,77 @@
 #ifndef _JavaUtilLoggingLogRecord_H_
 #define _JavaUtilLoggingLogRecord_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangThreadLocal;
 @class JavaLangThrowable;
 @class JavaUtilLoggingLevel;
 @class JavaUtilResourceBundle;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
+@interface JavaUtilLoggingLogRecord : NSObject < JavaIoSerializable >
 
-#define JavaUtilLoggingLogRecord_MAJOR 1
-#define JavaUtilLoggingLogRecord_MINOR 4
-#define JavaUtilLoggingLogRecord_serialVersionUID 5372048053134512534LL
-
-@interface JavaUtilLoggingLogRecord : NSObject < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)level
                                 withNSString:(NSString *)msg;
 
 - (JavaUtilLoggingLevel *)getLevel;
 
-- (void)setLevelWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)level;
-
 - (NSString *)getLoggerName;
-
-- (void)setLoggerNameWithNSString:(NSString *)loggerName;
 
 - (NSString *)getMessage;
 
-- (void)setMessageWithNSString:(NSString *)message;
-
 - (jlong)getMillis;
-
-- (void)setMillisWithLong:(jlong)millis;
 
 - (IOSObjectArray *)getParameters;
 
-- (void)setParametersWithNSObjectArray:(IOSObjectArray *)parameters;
-
 - (JavaUtilResourceBundle *)getResourceBundle;
-
-- (void)setResourceBundleWithJavaUtilResourceBundle:(JavaUtilResourceBundle *)resourceBundle;
 
 - (NSString *)getResourceBundleName;
 
-- (void)setResourceBundleNameWithNSString:(NSString *)resourceBundleName;
-
 - (jlong)getSequenceNumber;
-
-- (void)setSequenceNumberWithLong:(jlong)sequenceNumber;
 
 - (NSString *)getSourceClassName;
 
-- (void)setSourceClassNameWithNSString:(NSString *)sourceClassName;
-
 - (NSString *)getSourceMethodName;
-
-- (void)setSourceMethodNameWithNSString:(NSString *)sourceMethodName;
 
 - (jint)getThreadID;
 
-- (void)setThreadIDWithInt:(jint)threadID;
-
 - (JavaLangThrowable *)getThrown;
+
+- (void)setLevelWithJavaUtilLoggingLevel:(JavaUtilLoggingLevel *)level;
+
+- (void)setLoggerNameWithNSString:(NSString *)loggerName;
+
+- (void)setMessageWithNSString:(NSString *)message;
+
+- (void)setMillisWithLong:(jlong)millis;
+
+- (void)setParametersWithNSObjectArray:(IOSObjectArray *)parameters;
+
+- (void)setResourceBundleWithJavaUtilResourceBundle:(JavaUtilResourceBundle *)resourceBundle;
+
+- (void)setResourceBundleNameWithNSString:(NSString *)resourceBundleName;
+
+- (void)setSequenceNumberWithLong:(jlong)sequenceNumber;
+
+- (void)setSourceClassNameWithNSString:(NSString *)sourceClassName;
+
+- (void)setSourceMethodNameWithNSString:(NSString *)sourceMethodName;
+
+- (void)setThreadIDWithInt:(jint)threadID;
 
 - (void)setThrownWithJavaLangThrowable:(JavaLangThrowable *)thrown;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLoggingLogRecord_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLoggingLogRecord)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilLoggingLogRecord_initWithJavaUtilLoggingLevel_withNSString_(JavaUtilLoggingLogRecord *self, JavaUtilLoggingLevel *level, NSString *msg);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, MAJOR, jint)
+FOUNDATION_EXPORT JavaUtilLoggingLogRecord *new_JavaUtilLoggingLogRecord_initWithJavaUtilLoggingLevel_withNSString_(JavaUtilLoggingLevel *level, NSString *msg) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, MINOR, jint)
-
-FOUNDATION_EXPORT jlong JavaUtilLoggingLogRecord_currentSequenceNumber_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, currentSequenceNumber_, jlong)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaUtilLoggingLogRecord, currentSequenceNumber_, jlong)
-
-FOUNDATION_EXPORT JavaLangThreadLocal *JavaUtilLoggingLogRecord_currentThreadId_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, currentThreadId_, JavaLangThreadLocal *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilLoggingLogRecord, currentThreadId_, JavaLangThreadLocal *)
-
-FOUNDATION_EXPORT jint JavaUtilLoggingLogRecord_initThreadId_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingLogRecord, initThreadId_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaUtilLoggingLogRecord, initThreadId_, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingLogRecord)
 
 #endif // _JavaUtilLoggingLogRecord_H_

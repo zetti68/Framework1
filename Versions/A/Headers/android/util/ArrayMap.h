@@ -6,18 +6,14 @@
 #ifndef _AndroidUtilArrayMap_H_
 #define _AndroidUtilArrayMap_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/Map.h"
+
+@class AndroidUtilMapCollections;
 @class IOSIntArray;
 @class IOSObjectArray;
 @protocol JavaUtilCollection;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "android/util/MapCollections.h"
-#include "java/util/Map.h"
-
-#define AndroidUtilArrayMap_BASE_SIZE 4
-#define AndroidUtilArrayMap_CACHE_SIZE 10
-#define AndroidUtilArrayMap_DEBUG NO
 
 @interface AndroidUtilArrayMap : NSObject < JavaUtilMap > {
  @public
@@ -27,91 +23,85 @@
   AndroidUtilMapCollections *mCollections_;
 }
 
+#pragma mark Public
+
+- (instancetype)init;
+
+- (instancetype)initWithAndroidUtilArrayMap:(AndroidUtilArrayMap *)map;
+
+- (instancetype)initWithInt:(jint)capacity;
+
+- (void)appendWithId:(id)key
+              withId:(id)value;
+
+- (void)clear;
+
+- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (jboolean)containsKeyWithId:(id)key;
+
+- (jboolean)containsValueWithId:(id)value;
+
+- (void)ensureCapacityWithInt:(jint)minimumCapacity;
+
+- (id<JavaUtilSet>)entrySet;
+
+- (jboolean)isEqual:(id)object;
+
+- (void)erase;
+
+- (id)getWithId:(id)key;
+
+- (NSUInteger)hash;
+
+- (jboolean)isEmpty;
+
+- (id)keyAtWithInt:(jint)index;
+
+- (id<JavaUtilSet>)keySet;
+
+- (id)putWithId:(id)key
+         withId:(id)value;
+
+- (void)putAllWithAndroidUtilArrayMap:(AndroidUtilArrayMap *)array;
+
+- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)map;
+
+- (id)removeWithId:(id)key;
+
+- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (id)removeAtWithInt:(jint)index;
+
+- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (id)setValueAtWithInt:(jint)index
+                 withId:(id)value;
+
+- (jint)size;
+
+- (NSString *)description;
+
+- (id)valueAtWithInt:(jint)index;
+
+- (id<JavaUtilCollection>)values;
+
+#pragma mark Package-Private
+
 - (jint)indexOfWithId:(id)key
               withInt:(jint)hash_;
 
 - (jint)indexOfNull;
 
-- (instancetype)init;
-
-- (instancetype)initWithInt:(jint)capacity;
-
-- (instancetype)initWithAndroidUtilArrayMap:(AndroidUtilArrayMap *)map;
-
-- (void)clear;
-
-- (void)erase;
-
-- (void)ensureCapacityWithInt:(jint)minimumCapacity;
-
-- (jboolean)containsKeyWithId:(id)key;
-
 - (jint)indexOfValueWithId:(id)value;
-
-- (jboolean)containsValueWithId:(id)value;
-
-- (id)getWithId:(id)key;
-
-- (id)keyAtWithInt:(jint)index;
-
-- (id)valueAtWithInt:(jint)index;
-
-- (id)setValueAtWithInt:(jint)index
-                 withId:(id)value;
-
-- (jboolean)isEmpty;
-
-- (id)putWithId:(id)key
-         withId:(id)value;
-
-- (void)appendWithId:(id)key
-              withId:(id)value;
-
-- (void)putAllWithAndroidUtilArrayMap:(AndroidUtilArrayMap *)array;
-
-- (id)removeWithId:(id)key;
-
-- (id)removeAtWithInt:(jint)index;
-
-- (jint)size;
-
-- (jboolean)isEqual:(id)object;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)map;
-
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilSet>)keySet;
-
-- (id<JavaUtilCollection>)values;
 
 @end
 
-FOUNDATION_EXPORT BOOL AndroidUtilArrayMap_initialized;
 J2OBJC_STATIC_INIT(AndroidUtilArrayMap)
 
 J2OBJC_FIELD_SETTER(AndroidUtilArrayMap, mHashes_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(AndroidUtilArrayMap, mArray_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(AndroidUtilArrayMap, mCollections_, AndroidUtilMapCollections *)
-
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, DEBUG, jboolean)
-
-FOUNDATION_EXPORT NSString *AndroidUtilArrayMap_TAG_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, TAG_, NSString *)
-
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, BASE_SIZE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, CACHE_SIZE, jint)
 
 FOUNDATION_EXPORT AndroidUtilArrayMap *AndroidUtilArrayMap_EMPTY_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, EMPTY_, AndroidUtilArrayMap *)
@@ -135,34 +125,18 @@ J2OBJC_STATIC_FIELD_REF_GETTER(AndroidUtilArrayMap, mTwiceBaseCacheSize_, jint)
 FOUNDATION_EXPORT IOSIntArray *AndroidUtilArrayMap_EMPTY_IMMUTABLE_INTS_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilArrayMap, EMPTY_IMMUTABLE_INTS_, IOSIntArray *)
 
-@interface AndroidUtilArrayMap_getCollection_InteropMapCollections : AndroidUtilMapCollections {
-}
+FOUNDATION_EXPORT void AndroidUtilArrayMap_init(AndroidUtilArrayMap *self);
 
-- (jint)colGetSize;
+FOUNDATION_EXPORT AndroidUtilArrayMap *new_AndroidUtilArrayMap_init() NS_RETURNS_RETAINED;
 
-- (id)colGetEntryWithInt:(jint)index
-                 withInt:(jint)offset;
+FOUNDATION_EXPORT void AndroidUtilArrayMap_initWithInt_(AndroidUtilArrayMap *self, jint capacity);
 
-- (jint)colIndexOfKeyWithId:(id)key;
+FOUNDATION_EXPORT AndroidUtilArrayMap *new_AndroidUtilArrayMap_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
 
-- (jint)colIndexOfValueWithId:(id)value;
+FOUNDATION_EXPORT void AndroidUtilArrayMap_initWithAndroidUtilArrayMap_(AndroidUtilArrayMap *self, AndroidUtilArrayMap *map);
 
-- (id<JavaUtilMap>)colGetMap;
+FOUNDATION_EXPORT AndroidUtilArrayMap *new_AndroidUtilArrayMap_initWithAndroidUtilArrayMap_(AndroidUtilArrayMap *map) NS_RETURNS_RETAINED;
 
-- (void)colPutWithId:(id)key
-              withId:(id)value;
-
-- (id)colSetValueWithInt:(jint)index
-                  withId:(id)value;
-
-- (void)colRemoveAtWithInt:(jint)index;
-
-- (void)colClear;
-
-- (instancetype)initWithAndroidUtilArrayMap:(AndroidUtilArrayMap *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void AndroidUtilArrayMap_getCollection_InteropMapCollections_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilArrayMap)
 
 #endif // _AndroidUtilArrayMap_H_

@@ -6,6 +6,10 @@
 #ifndef _JavaNioChannelsServerSocketChannel_H_
 #define _JavaNioChannelsServerSocketChannel_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/NetworkChannel.h"
+#include "java/nio/channels/spi/AbstractSelectableChannel.h"
+
 @class JavaNetServerSocket;
 @class JavaNetSocketAddress;
 @class JavaNioChannelsSocketChannel;
@@ -13,20 +17,11 @@
 @protocol JavaNetSocketOption;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/NetworkChannel.h"
-#include "java/nio/channels/spi/AbstractSelectableChannel.h"
+@interface JavaNioChannelsServerSocketChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsNetworkChannel >
 
-@interface JavaNioChannelsServerSocketChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsNetworkChannel > {
-}
+#pragma mark Public
 
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
-
-+ (JavaNioChannelsServerSocketChannel *)open;
-
-- (jint)validOps;
-
-- (JavaNetServerSocket *)socket;
+- (JavaNioChannelsSocketChannel *)accept;
 
 - (JavaNioChannelsServerSocketChannel *)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)local;
 
@@ -37,16 +32,29 @@
 
 - (id)getOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option;
 
++ (JavaNioChannelsServerSocketChannel *)open;
+
 - (JavaNioChannelsServerSocketChannel *)setOptionWithJavaNetSocketOption:(id<JavaNetSocketOption>)option
                                                                   withId:(id)value;
 
+- (JavaNetServerSocket *)socket;
+
 - (id<JavaUtilSet>)supportedOptions;
 
-- (JavaNioChannelsSocketChannel *)accept;
+- (jint)validOps;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsServerSocketChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsServerSocketChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsServerSocketChannel_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsServerSocketChannel *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
+
 FOUNDATION_EXPORT JavaNioChannelsServerSocketChannel *JavaNioChannelsServerSocketChannel_open();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsServerSocketChannel)
 
 #endif // _JavaNioChannelsServerSocketChannel_H_

@@ -6,7 +6,7 @@
 #ifndef _JavaIoFlushable_H_
 #define _JavaIoFlushable_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaIoFlushable < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFlushable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFlushable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFlushable)
 
 #endif // _JavaIoFlushable_H_

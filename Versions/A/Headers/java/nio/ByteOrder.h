@@ -6,12 +6,14 @@
 #ifndef _JavaNioByteOrder_H_
 #define _JavaNioByteOrder_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface JavaNioByteOrder : NSObject {
  @public
   jboolean needsSwap_;
 }
+
+#pragma mark Public
 
 + (JavaNioByteOrder *)nativeOrder;
 
@@ -19,17 +21,16 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioByteOrder_initialized;
 J2OBJC_STATIC_INIT(JavaNioByteOrder)
-FOUNDATION_EXPORT JavaNioByteOrder *JavaNioByteOrder_nativeOrder();
-
-FOUNDATION_EXPORT JavaNioByteOrder *JavaNioByteOrder_NATIVE_ORDER_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNioByteOrder, NATIVE_ORDER_, JavaNioByteOrder *)
 
 FOUNDATION_EXPORT JavaNioByteOrder *JavaNioByteOrder_BIG_ENDIAN__;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioByteOrder, BIG_ENDIAN__, JavaNioByteOrder *)
 
 FOUNDATION_EXPORT JavaNioByteOrder *JavaNioByteOrder_LITTLE_ENDIAN__;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioByteOrder, LITTLE_ENDIAN__, JavaNioByteOrder *)
+
+FOUNDATION_EXPORT JavaNioByteOrder *JavaNioByteOrder_nativeOrder();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioByteOrder)
 
 #endif // _JavaNioByteOrder_H_

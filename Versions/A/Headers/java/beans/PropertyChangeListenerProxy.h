@@ -6,16 +6,18 @@
 #ifndef _JavaBeansPropertyChangeListenerProxy_H_
 #define _JavaBeansPropertyChangeListenerProxy_H_
 
-@class JavaBeansPropertyChangeEvent;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/beans/PropertyChangeListener.h"
 #include "java/util/EventListenerProxy.h"
+
+@class JavaBeansPropertyChangeEvent;
 
 @interface JavaBeansPropertyChangeListenerProxy : JavaUtilEventListenerProxy < JavaBeansPropertyChangeListener > {
  @public
   NSString *propertyName_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)propertyName
 withJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
@@ -26,8 +28,14 @@ withJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listene
 
 @end
 
-__attribute__((always_inline)) inline void JavaBeansPropertyChangeListenerProxy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaBeansPropertyChangeListenerProxy)
 
 J2OBJC_FIELD_SETTER(JavaBeansPropertyChangeListenerProxy, propertyName_, NSString *)
+
+FOUNDATION_EXPORT void JavaBeansPropertyChangeListenerProxy_initWithNSString_withJavaBeansPropertyChangeListener_(JavaBeansPropertyChangeListenerProxy *self, NSString *propertyName, id<JavaBeansPropertyChangeListener> listener);
+
+FOUNDATION_EXPORT JavaBeansPropertyChangeListenerProxy *new_JavaBeansPropertyChangeListenerProxy_initWithNSString_withJavaBeansPropertyChangeListener_(NSString *propertyName, id<JavaBeansPropertyChangeListener> listener) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaBeansPropertyChangeListenerProxy)
 
 #endif // _JavaBeansPropertyChangeListenerProxy_H_

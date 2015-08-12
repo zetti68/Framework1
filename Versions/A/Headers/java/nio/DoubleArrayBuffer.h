@@ -6,16 +6,15 @@
 #ifndef _JavaNioDoubleArrayBuffer_H_
 #define _JavaNioDoubleArrayBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/DoubleBuffer.h"
+
 @class IOSDoubleArray;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/DoubleBuffer.h"
+@interface JavaNioDoubleArrayBuffer : JavaNioDoubleBuffer
 
-@interface JavaNioDoubleArrayBuffer : JavaNioDoubleBuffer {
-}
-
-- (instancetype)initWithDoubleArray:(IOSDoubleArray *)array;
+#pragma mark Public
 
 - (JavaNioDoubleBuffer *)asReadOnlyBuffer;
 
@@ -23,9 +22,34 @@
 
 - (JavaNioDoubleBuffer *)duplicate;
 
-- (JavaNioDoubleBuffer *)slice;
+- (jdouble)get;
+
+- (JavaNioDoubleBuffer *)getWithDoubleArray:(IOSDoubleArray *)dst
+                                    withInt:(jint)dstOffset
+                                    withInt:(jint)doubleCount;
+
+- (jdouble)getWithInt:(jint)index;
+
+- (jboolean)isDirect;
 
 - (jboolean)isReadOnly;
+
+- (JavaNioByteOrder *)order;
+
+- (JavaNioDoubleBuffer *)putWithDouble:(jdouble)c;
+
+- (JavaNioDoubleBuffer *)putWithDoubleArray:(IOSDoubleArray *)src
+                                    withInt:(jint)srcOffset
+                                    withInt:(jint)doubleCount;
+
+- (JavaNioDoubleBuffer *)putWithInt:(jint)index
+                         withDouble:(jdouble)c;
+
+- (JavaNioDoubleBuffer *)slice;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithDoubleArray:(IOSDoubleArray *)array;
 
 - (IOSDoubleArray *)protectedArray;
 
@@ -33,29 +57,14 @@
 
 - (jboolean)protectedHasArray;
 
-- (jdouble)get;
-
-- (jdouble)getWithInt:(jint)index;
-
-- (JavaNioDoubleBuffer *)getWithDoubleArray:(IOSDoubleArray *)dst
-                                    withInt:(jint)dstOffset
-                                    withInt:(jint)doubleCount;
-
-- (jboolean)isDirect;
-
-- (JavaNioByteOrder *)order;
-
-- (JavaNioDoubleBuffer *)putWithDouble:(jdouble)c;
-
-- (JavaNioDoubleBuffer *)putWithInt:(jint)index
-                         withDouble:(jdouble)c;
-
-- (JavaNioDoubleBuffer *)putWithDoubleArray:(IOSDoubleArray *)src
-                                    withInt:(jint)srcOffset
-                                    withInt:(jint)doubleCount;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioDoubleArrayBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioDoubleArrayBuffer)
+
+FOUNDATION_EXPORT void JavaNioDoubleArrayBuffer_initWithDoubleArray_(JavaNioDoubleArrayBuffer *self, IOSDoubleArray *array);
+
+FOUNDATION_EXPORT JavaNioDoubleArrayBuffer *new_JavaNioDoubleArrayBuffer_initWithDoubleArray_(IOSDoubleArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioDoubleArrayBuffer)
 
 #endif // _JavaNioDoubleArrayBuffer_H_

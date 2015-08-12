@@ -6,15 +6,13 @@
 #ifndef _JavaNetHttpURLConnection_H_
 #define _JavaNetHttpURLConnection_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+#include "java/net/URLConnection.h"
+
 @class JavaIoInputStream;
 @class JavaNetURL;
 @class JavaSecurityPermission;
 
-#import "JreEmulation.h"
-#include "java/net/URLConnection.h"
-
-#define JavaNetHttpURLConnection_DEFAULT_CHUNK_LENGTH 1024
 #define JavaNetHttpURLConnection_HTTP_ACCEPTED 202
 #define JavaNetHttpURLConnection_HTTP_BAD_GATEWAY 502
 #define JavaNetHttpURLConnection_HTTP_BAD_METHOD 405
@@ -31,12 +29,12 @@
 #define JavaNetHttpURLConnection_HTTP_MOVED_PERM 301
 #define JavaNetHttpURLConnection_HTTP_MOVED_TEMP 302
 #define JavaNetHttpURLConnection_HTTP_MULT_CHOICE 300
+#define JavaNetHttpURLConnection_HTTP_NO_CONTENT 204
 #define JavaNetHttpURLConnection_HTTP_NOT_ACCEPTABLE 406
 #define JavaNetHttpURLConnection_HTTP_NOT_AUTHORITATIVE 203
 #define JavaNetHttpURLConnection_HTTP_NOT_FOUND 404
 #define JavaNetHttpURLConnection_HTTP_NOT_IMPLEMENTED 501
 #define JavaNetHttpURLConnection_HTTP_NOT_MODIFIED 304
-#define JavaNetHttpURLConnection_HTTP_NO_CONTENT 204
 #define JavaNetHttpURLConnection_HTTP_OK 200
 #define JavaNetHttpURLConnection_HTTP_PARTIAL 206
 #define JavaNetHttpURLConnection_HTTP_PAYMENT_REQUIRED 402
@@ -46,10 +44,10 @@
 #define JavaNetHttpURLConnection_HTTP_RESET 205
 #define JavaNetHttpURLConnection_HTTP_SEE_OTHER 303
 #define JavaNetHttpURLConnection_HTTP_SERVER_ERROR 500
-#define JavaNetHttpURLConnection_HTTP_UNAUTHORIZED 401
-#define JavaNetHttpURLConnection_HTTP_UNAVAILABLE 503
-#define JavaNetHttpURLConnection_HTTP_UNSUPPORTED_TYPE 415
 #define JavaNetHttpURLConnection_HTTP_USE_PROXY 305
+#define JavaNetHttpURLConnection_HTTP_UNAUTHORIZED 401
+#define JavaNetHttpURLConnection_HTTP_UNSUPPORTED_TYPE 415
+#define JavaNetHttpURLConnection_HTTP_UNAVAILABLE 503
 #define JavaNetHttpURLConnection_HTTP_VERSION 505
 
 @interface JavaNetHttpURLConnection : JavaNetURLConnection {
@@ -63,13 +61,20 @@
   jlong fixedContentLengthLong_;
 }
 
-- (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
+#pragma mark Public
 
 - (void)disconnect;
+
+- (NSString *)getContentEncoding;
 
 - (JavaIoInputStream *)getErrorStream;
 
 + (jboolean)getFollowRedirects;
+
+- (jlong)getHeaderFieldDateWithNSString:(NSString *)field
+                               withLong:(jlong)defaultValue;
+
+- (jboolean)getInstanceFollowRedirects;
 
 - (JavaSecurityPermission *)getPermission;
 
@@ -79,45 +84,30 @@
 
 - (NSString *)getResponseMessage;
 
+- (void)setChunkedStreamingModeWithInt:(jint)chunkLength;
+
+- (void)setFixedLengthStreamingModeWithInt:(jint)contentLength;
+
+- (void)setFixedLengthStreamingModeWithLong:(jlong)contentLength;
+
 + (void)setFollowRedirectsWithBoolean:(jboolean)auto_;
+
+- (void)setInstanceFollowRedirectsWithBoolean:(jboolean)followRedirects;
 
 - (void)setRequestMethodWithNSString:(NSString *)method;
 
 - (jboolean)usingProxy;
 
-- (NSString *)getContentEncoding;
+#pragma mark Protected
 
-- (jboolean)getInstanceFollowRedirects;
-
-- (void)setInstanceFollowRedirectsWithBoolean:(jboolean)followRedirects;
-
-- (jlong)getHeaderFieldDateWithNSString:(NSString *)field
-                               withLong:(jlong)defaultValue;
-
-- (void)setFixedLengthStreamingModeWithLong:(jlong)contentLength;
-
-- (void)setFixedLengthStreamingModeWithInt:(jint)contentLength;
-
-- (void)setChunkedStreamingModeWithInt:(jint)chunkLength;
+- (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetHttpURLConnection_initialized;
 J2OBJC_STATIC_INIT(JavaNetHttpURLConnection)
 
 J2OBJC_FIELD_SETTER(JavaNetHttpURLConnection, method_, NSString *)
 J2OBJC_FIELD_SETTER(JavaNetHttpURLConnection, responseMessage_, NSString *)
-FOUNDATION_EXPORT jboolean JavaNetHttpURLConnection_getFollowRedirects();
-FOUNDATION_EXPORT void JavaNetHttpURLConnection_setFollowRedirectsWithBoolean_(jboolean auto_);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, DEFAULT_CHUNK_LENGTH, jint)
-
-FOUNDATION_EXPORT IOSObjectArray *JavaNetHttpURLConnection_PERMITTED_USER_METHODS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, PERMITTED_USER_METHODS_, IOSObjectArray *)
-
-FOUNDATION_EXPORT jboolean JavaNetHttpURLConnection_followRedirects_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, followRedirects_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaNetHttpURLConnection, followRedirects_, jboolean)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, HTTP_ACCEPTED, jint)
 
@@ -190,5 +180,13 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, HTTP_UNSUPPORTED_TYPE, jint
 J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, HTTP_UNAVAILABLE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNetHttpURLConnection, HTTP_VERSION, jint)
+
+FOUNDATION_EXPORT void JavaNetHttpURLConnection_initWithJavaNetURL_(JavaNetHttpURLConnection *self, JavaNetURL *url);
+
+FOUNDATION_EXPORT jboolean JavaNetHttpURLConnection_getFollowRedirects();
+
+FOUNDATION_EXPORT void JavaNetHttpURLConnection_setFollowRedirectsWithBoolean_(jboolean auto_);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetHttpURLConnection)
 
 #endif // _JavaNetHttpURLConnection_H_

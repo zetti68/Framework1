@@ -6,16 +6,18 @@
 #ifndef _JavaIoByteArrayOutputStream_H_
 #define _JavaIoByteArrayOutputStream_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/OutputStream.h"
+
+@class IOSByteArray;
 
 @interface JavaIoByteArrayOutputStream : JavaIoOutputStream {
  @public
   IOSByteArray *buf_;
   jint count_;
 }
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -45,8 +47,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoByteArrayOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoByteArrayOutputStream)
 
 J2OBJC_FIELD_SETTER(JavaIoByteArrayOutputStream, buf_, IOSByteArray *)
+
+FOUNDATION_EXPORT void JavaIoByteArrayOutputStream_init(JavaIoByteArrayOutputStream *self);
+
+FOUNDATION_EXPORT JavaIoByteArrayOutputStream *new_JavaIoByteArrayOutputStream_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoByteArrayOutputStream_initWithInt_(JavaIoByteArrayOutputStream *self, jint size);
+
+FOUNDATION_EXPORT JavaIoByteArrayOutputStream *new_JavaIoByteArrayOutputStream_initWithInt_(jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoByteArrayOutputStream)
 
 #endif // _JavaIoByteArrayOutputStream_H_

@@ -6,57 +6,65 @@
 #ifndef _JavaUtilConcurrentCopyOnWriteArraySet_H_
 #define _JavaUtilConcurrentCopyOnWriteArraySet_H_
 
-@class IOSObjectArray;
-@class JavaUtilConcurrentCopyOnWriteArrayList;
-@protocol JavaUtilCollection;
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractSet.h"
 
-#define JavaUtilConcurrentCopyOnWriteArraySet_serialVersionUID 5457747651344034263LL
+@class IOSObjectArray;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
-@interface JavaUtilConcurrentCopyOnWriteArraySet : JavaUtilAbstractSet < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentCopyOnWriteArraySet : JavaUtilAbstractSet < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (jint)size;
+- (jboolean)addWithId:(id)e;
 
-- (jboolean)isEmpty;
-
-- (jboolean)containsWithId:(id)o;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
+- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (void)clear;
 
-- (jboolean)removeWithId:(id)o;
-
-- (jboolean)addWithId:(id)e;
+- (jboolean)containsWithId:(id)o;
 
 - (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (jboolean)isEqual:(id)o;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)removeWithId:(id)o;
 
 - (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (id<JavaUtilIterator>)iterator;
+- (jint)size;
 
-- (jboolean)isEqual:(id)o;
+- (IOSObjectArray *)toArray;
+
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
+
+#pragma mark Package-Private
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCopyOnWriteArraySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCopyOnWriteArraySet)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentCopyOnWriteArraySet, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArraySet_init(JavaUtilConcurrentCopyOnWriteArraySet *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArraySet *new_JavaUtilConcurrentCopyOnWriteArraySet_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCopyOnWriteArraySet_initWithJavaUtilCollection_(JavaUtilConcurrentCopyOnWriteArraySet *self, id<JavaUtilCollection> c);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCopyOnWriteArraySet *new_JavaUtilConcurrentCopyOnWriteArraySet_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCopyOnWriteArraySet)
 
 #endif // _JavaUtilConcurrentCopyOnWriteArraySet_H_

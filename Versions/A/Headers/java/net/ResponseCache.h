@@ -6,38 +6,41 @@
 #ifndef _JavaNetResponseCache_H_
 #define _JavaNetResponseCache_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNetCacheRequest;
 @class JavaNetCacheResponse;
 @class JavaNetURI;
 @class JavaNetURLConnection;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
+@interface JavaNetResponseCache : NSObject
 
-@interface JavaNetResponseCache : NSObject {
-}
+#pragma mark Public
 
-+ (JavaNetResponseCache *)getDefault;
-
-+ (void)setDefaultWithJavaNetResponseCache:(JavaNetResponseCache *)responseCache;
+- (instancetype)init;
 
 - (JavaNetCacheResponse *)getWithJavaNetURI:(JavaNetURI *)uri
                                withNSString:(NSString *)requestMethod
                             withJavaUtilMap:(id<JavaUtilMap>)requestHeaders;
 
++ (JavaNetResponseCache *)getDefault;
+
 - (JavaNetCacheRequest *)putWithJavaNetURI:(JavaNetURI *)uri
                   withJavaNetURLConnection:(JavaNetURLConnection *)connection;
 
-- (instancetype)init;
++ (void)setDefaultWithJavaNetResponseCache:(JavaNetResponseCache *)responseCache;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetResponseCache_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetResponseCache)
+
 FOUNDATION_EXPORT JavaNetResponseCache *JavaNetResponseCache_getDefault();
+
 FOUNDATION_EXPORT void JavaNetResponseCache_setDefaultWithJavaNetResponseCache_(JavaNetResponseCache *responseCache);
 
-FOUNDATION_EXPORT JavaNetResponseCache *JavaNetResponseCache_defaultResponseCache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetResponseCache, defaultResponseCache_, JavaNetResponseCache *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetResponseCache, defaultResponseCache_, JavaNetResponseCache *)
+FOUNDATION_EXPORT void JavaNetResponseCache_init(JavaNetResponseCache *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetResponseCache)
 
 #endif // _JavaNetResponseCache_H_

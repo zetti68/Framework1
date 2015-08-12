@@ -6,45 +6,25 @@
 #ifndef _AndroidTextSpannableStringInternal_H_
 #define _AndroidTextSpannableStringInternal_H_
 
-@class IOSCharArray;
-@class IOSClass;
-@class IOSIntArray;
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/CharSequence.h"
 
-#define AndroidTextSpannableStringInternal_COLUMNS 3
-#define AndroidTextSpannableStringInternal_END 1
-#define AndroidTextSpannableStringInternal_FLAGS 2
-#define AndroidTextSpannableStringInternal_START 0
+@class IOSCharArray;
+@class IOSClass;
+@class IOSObjectArray;
 
-@interface AndroidTextSpannableStringInternal : NSObject < JavaLangCharSequence > {
-}
+@interface AndroidTextSpannableStringInternal : NSObject < JavaLangCharSequence >
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)source
-                                     withInt:(jint)start
-                                     withInt:(jint)end;
-
-- (jint)sequenceLength;
+#pragma mark Public
 
 - (jchar)charAtWithInt:(jint)i;
 
-- (NSString *)description;
+- (jboolean)isEqual:(id)o;
 
 - (void)getCharsWithInt:(jint)start
                 withInt:(jint)end
           withCharArray:(IOSCharArray *)dest
                 withInt:(jint)off;
-
-- (void)setSpanWithId:(id)what
-              withInt:(jint)start
-              withInt:(jint)end
-              withInt:(jint)flags;
-
-- (void)removeSpanWithId:(id)what;
-
-- (jint)getSpanStartWithId:(id)what;
 
 - (jint)getSpanEndWithId:(id)what;
 
@@ -54,28 +34,40 @@
                             withInt:(jint)queryEnd
                        withIOSClass:(IOSClass *)kind;
 
+- (jint)getSpanStartWithId:(id)what;
+
+- (NSUInteger)hash;
+
+- (jint)length;
+
 - (jint)nextSpanTransitionWithInt:(jint)start
                           withInt:(jint)limit
                      withIOSClass:(IOSClass *)kind;
 
-- (jboolean)isEqual:(id)o;
+- (NSString *)description;
 
-- (NSUInteger)hash;
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)source
+                                     withInt:(jint)start
+                                     withInt:(jint)end;
+
+- (void)removeSpanWithId:(id)what;
+
+- (void)setSpanWithId:(id)what
+              withInt:(jint)start
+              withInt:(jint)end
+              withInt:(jint)flags;
 
 @end
 
-FOUNDATION_EXPORT BOOL AndroidTextSpannableStringInternal_initialized;
 J2OBJC_STATIC_INIT(AndroidTextSpannableStringInternal)
 
 FOUNDATION_EXPORT IOSObjectArray *AndroidTextSpannableStringInternal_EMPTY_;
 J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpannableStringInternal, EMPTY_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpannableStringInternal, START, jint)
+FOUNDATION_EXPORT void AndroidTextSpannableStringInternal_initWithJavaLangCharSequence_withInt_withInt_(AndroidTextSpannableStringInternal *self, id<JavaLangCharSequence> source, jint start, jint end);
 
-J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpannableStringInternal, END, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpannableStringInternal, FLAGS, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(AndroidTextSpannableStringInternal, COLUMNS, jint)
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextSpannableStringInternal)
 
 #endif // _AndroidTextSpannableStringInternal_H_

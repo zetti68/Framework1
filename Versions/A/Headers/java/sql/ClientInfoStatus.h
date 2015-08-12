@@ -6,46 +6,46 @@
 #ifndef _JavaSqlClientInfoStatus_H_
 #define _JavaSqlClientInfoStatus_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Enum.h"
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaSqlClientInfoStatus) {
   JavaSqlClientInfoStatus_REASON_UNKNOWN = 0,
   JavaSqlClientInfoStatus_REASON_UNKNOWN_PROPERTY = 1,
   JavaSqlClientInfoStatus_REASON_VALUE_INVALID = 2,
   JavaSqlClientInfoStatus_REASON_VALUE_TRUNCATED = 3,
-} JavaSqlClientInfoStatus;
+};
 
-@interface JavaSqlClientInfoStatusEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaSqlClientInfoStatusEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaSqlClientInfoStatusEnum_values();
 
 + (JavaSqlClientInfoStatusEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaSqlClientInfoStatusEnum *JavaSqlClientInfoStatusEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaSqlClientInfoStatusEnum *JavaSqlClientInfoStatusEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaSqlClientInfoStatusEnum_initialized;
 J2OBJC_STATIC_INIT(JavaSqlClientInfoStatusEnum)
 
 FOUNDATION_EXPORT JavaSqlClientInfoStatusEnum *JavaSqlClientInfoStatusEnum_values_[];
 
 #define JavaSqlClientInfoStatusEnum_REASON_UNKNOWN JavaSqlClientInfoStatusEnum_values_[JavaSqlClientInfoStatus_REASON_UNKNOWN]
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlClientInfoStatusEnum, REASON_UNKNOWN, JavaSqlClientInfoStatusEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaSqlClientInfoStatusEnum, REASON_UNKNOWN)
 
 #define JavaSqlClientInfoStatusEnum_REASON_UNKNOWN_PROPERTY JavaSqlClientInfoStatusEnum_values_[JavaSqlClientInfoStatus_REASON_UNKNOWN_PROPERTY]
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlClientInfoStatusEnum, REASON_UNKNOWN_PROPERTY, JavaSqlClientInfoStatusEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaSqlClientInfoStatusEnum, REASON_UNKNOWN_PROPERTY)
 
 #define JavaSqlClientInfoStatusEnum_REASON_VALUE_INVALID JavaSqlClientInfoStatusEnum_values_[JavaSqlClientInfoStatus_REASON_VALUE_INVALID]
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlClientInfoStatusEnum, REASON_VALUE_INVALID, JavaSqlClientInfoStatusEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaSqlClientInfoStatusEnum, REASON_VALUE_INVALID)
 
 #define JavaSqlClientInfoStatusEnum_REASON_VALUE_TRUNCATED JavaSqlClientInfoStatusEnum_values_[JavaSqlClientInfoStatus_REASON_VALUE_TRUNCATED]
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlClientInfoStatusEnum, REASON_VALUE_TRUNCATED, JavaSqlClientInfoStatusEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaSqlClientInfoStatusEnum, REASON_VALUE_TRUNCATED)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlClientInfoStatusEnum)
 
 #endif // _JavaSqlClientInfoStatus_H_

@@ -6,14 +6,14 @@
 #ifndef _JavaUtilRegexSplitter_H_
 #define _JavaUtilRegexSplitter_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaUtilRegexPattern;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaUtilRegexSplitter : NSObject
 
-@interface JavaUtilRegexSplitter : NSObject {
-}
+#pragma mark Public
 
 + (IOSObjectArray *)fastSplitWithNSString:(NSString *)re
                              withNSString:(NSString *)input
@@ -26,11 +26,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilRegexSplitter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilRegexSplitter)
+
 FOUNDATION_EXPORT IOSObjectArray *JavaUtilRegexSplitter_fastSplitWithNSString_withNSString_withInt_(NSString *re, NSString *input, jint limit);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaUtilRegexSplitter_splitWithJavaUtilRegexPattern_withNSString_withNSString_withInt_(JavaUtilRegexPattern *pattern, NSString *re, NSString *input, jint limit);
 
-FOUNDATION_EXPORT NSString *JavaUtilRegexSplitter_METACHARACTERS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilRegexSplitter, METACHARACTERS_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilRegexSplitter)
 
 #endif // _JavaUtilRegexSplitter_H_

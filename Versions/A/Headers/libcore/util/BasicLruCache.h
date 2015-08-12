@@ -6,32 +6,40 @@
 #ifndef _LibcoreUtilBasicLruCache_H_
 #define _LibcoreUtilBasicLruCache_H_
 
-@class JavaUtilLinkedHashMap;
+#include "J2ObjC_header.h"
+
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
+@interface LibcoreUtilBasicLruCache : NSObject
 
-@interface LibcoreUtilBasicLruCache : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)maxSize;
+
+- (void)evictAll;
 
 - (id)getWithId:(id)key;
 
 - (id)putWithId:(id)key
          withId:(id)value;
 
-- (void)entryEvictedWithId:(id)key
-                    withId:(id)value;
+- (id<JavaUtilMap>)snapshot;
+
+#pragma mark Protected
 
 - (id)createWithId:(id)key;
 
-- (id<JavaUtilMap>)snapshot;
-
-- (void)evictAll;
+- (void)entryEvictedWithId:(id)key
+                    withId:(id)value;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreUtilBasicLruCache_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreUtilBasicLruCache)
+
+FOUNDATION_EXPORT void LibcoreUtilBasicLruCache_initWithInt_(LibcoreUtilBasicLruCache *self, jint maxSize);
+
+FOUNDATION_EXPORT LibcoreUtilBasicLruCache *new_LibcoreUtilBasicLruCache_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilBasicLruCache)
 
 #endif // _LibcoreUtilBasicLruCache_H_

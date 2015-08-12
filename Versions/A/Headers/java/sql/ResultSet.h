@@ -6,6 +6,10 @@
 #ifndef _JavaSqlResultSet_H_
 #define _JavaSqlResultSet_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/AutoCloseable.h"
+#include "java/sql/Wrapper.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
@@ -27,22 +31,19 @@
 @protocol JavaSqlStatement;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/lang/AutoCloseable.h"
-#include "java/sql/Wrapper.h"
-
 #define JavaSqlResultSet_CLOSE_CURSORS_AT_COMMIT 2
+#define JavaSqlResultSet_HOLD_CURSORS_OVER_COMMIT 1
 #define JavaSqlResultSet_CONCUR_READ_ONLY 1007
 #define JavaSqlResultSet_CONCUR_UPDATABLE 1008
 #define JavaSqlResultSet_FETCH_FORWARD 1000
 #define JavaSqlResultSet_FETCH_REVERSE 1001
 #define JavaSqlResultSet_FETCH_UNKNOWN 1002
-#define JavaSqlResultSet_HOLD_CURSORS_OVER_COMMIT 1
 #define JavaSqlResultSet_TYPE_FORWARD_ONLY 1003
 #define JavaSqlResultSet_TYPE_SCROLL_INSENSITIVE 1004
 #define JavaSqlResultSet_TYPE_SCROLL_SENSITIVE 1005
 
 @protocol JavaSqlResultSet < JavaSqlWrapper, JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (jboolean)absoluteWithInt:(jint)row;
 
 - (void)afterLast;
@@ -531,7 +532,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlResultSet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlResultSet)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSet, CLOSE_CURSORS_AT_COMMIT, jint)
 
@@ -552,5 +553,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSet, TYPE_FORWARD_ONLY, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSet, TYPE_SCROLL_INSENSITIVE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlResultSet, TYPE_SCROLL_SENSITIVE, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlResultSet)
 
 #endif // _JavaSqlResultSet_H_

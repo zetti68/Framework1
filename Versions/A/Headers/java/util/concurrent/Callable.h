@@ -6,7 +6,7 @@
 #ifndef _JavaUtilConcurrentCallable_H_
 #define _JavaUtilConcurrentCallable_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaUtilConcurrentCallable < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCallable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCallable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCallable)
 
 #endif // _JavaUtilConcurrentCallable_H_

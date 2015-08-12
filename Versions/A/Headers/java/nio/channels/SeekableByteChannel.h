@@ -6,12 +6,13 @@
 #ifndef _JavaNioChannelsSeekableByteChannel_H_
 #define _JavaNioChannelsSeekableByteChannel_H_
 
-@class JavaNioByteBuffer;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/ByteChannel.h"
 
+@class JavaNioByteBuffer;
+
 @protocol JavaNioChannelsSeekableByteChannel < JavaNioChannelsByteChannel, NSObject, JavaObject >
+
 - (jlong)position;
 
 - (id<JavaNioChannelsSeekableByteChannel>)positionWithLong:(jlong)newPosition;
@@ -26,6 +27,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSeekableByteChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSeekableByteChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSeekableByteChannel)
 
 #endif // _JavaNioChannelsSeekableByteChannel_H_

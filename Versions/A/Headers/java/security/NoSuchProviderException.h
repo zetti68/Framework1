@@ -6,22 +6,29 @@
 #ifndef _JavaSecurityNoSuchProviderException_H_
 #define _JavaSecurityNoSuchProviderException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityNoSuchProviderException_serialVersionUID 8488111756688534474LL
+@interface JavaSecurityNoSuchProviderException : JavaSecurityGeneralSecurityException
 
-@interface JavaSecurityNoSuchProviderException : JavaSecurityGeneralSecurityException {
-}
-
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithNSString:(NSString *)msg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityNoSuchProviderException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityNoSuchProviderException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityNoSuchProviderException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityNoSuchProviderException_initWithNSString_(JavaSecurityNoSuchProviderException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchProviderException *new_JavaSecurityNoSuchProviderException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityNoSuchProviderException_init(JavaSecurityNoSuchProviderException *self);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchProviderException *new_JavaSecurityNoSuchProviderException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityNoSuchProviderException)
 
 #endif // _JavaSecurityNoSuchProviderException_H_

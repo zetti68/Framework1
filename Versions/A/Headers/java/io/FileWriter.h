@@ -6,14 +6,15 @@
 #ifndef _JavaIoFileWriter_H_
 #define _JavaIoFileWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/OutputStreamWriter.h"
+
 @class JavaIoFile;
 @class JavaIoFileDescriptor;
 
-#import "JreEmulation.h"
-#include "java/io/OutputStreamWriter.h"
+@interface JavaIoFileWriter : JavaIoOutputStreamWriter
 
-@interface JavaIoFileWriter : JavaIoOutputStreamWriter {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
@@ -29,6 +30,28 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileWriter)
+
+FOUNDATION_EXPORT void JavaIoFileWriter_initWithJavaIoFile_(JavaIoFileWriter *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoFileWriter *new_JavaIoFileWriter_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileWriter_initWithJavaIoFile_withBoolean_(JavaIoFileWriter *self, JavaIoFile *file, jboolean append);
+
+FOUNDATION_EXPORT JavaIoFileWriter *new_JavaIoFileWriter_initWithJavaIoFile_withBoolean_(JavaIoFile *file, jboolean append) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileWriter_initWithJavaIoFileDescriptor_(JavaIoFileWriter *self, JavaIoFileDescriptor *fd);
+
+FOUNDATION_EXPORT JavaIoFileWriter *new_JavaIoFileWriter_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileWriter_initWithNSString_(JavaIoFileWriter *self, NSString *filename);
+
+FOUNDATION_EXPORT JavaIoFileWriter *new_JavaIoFileWriter_initWithNSString_(NSString *filename) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileWriter_initWithNSString_withBoolean_(JavaIoFileWriter *self, NSString *filename, jboolean append);
+
+FOUNDATION_EXPORT JavaIoFileWriter *new_JavaIoFileWriter_initWithNSString_withBoolean_(NSString *filename, jboolean append) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileWriter)
 
 #endif // _JavaIoFileWriter_H_

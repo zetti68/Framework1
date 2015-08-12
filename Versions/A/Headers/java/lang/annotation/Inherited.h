@@ -6,7 +6,7 @@
 #ifndef _JavaLangAnnotationInherited_H_
 #define _JavaLangAnnotationInherited_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangAnnotationInherited < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationInherited_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationInherited)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationInherited)
 
 #endif // _JavaLangAnnotationInherited_H_

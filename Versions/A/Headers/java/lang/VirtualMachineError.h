@@ -6,13 +6,12 @@
 #ifndef _JavaLangVirtualMachineError_H_
 #define _JavaLangVirtualMachineError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-#define JavaLangVirtualMachineError_serialVersionUID 4161983926571568670LL
+@interface JavaLangVirtualMachineError : JavaLangError
 
-@interface JavaLangVirtualMachineError : JavaLangError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangVirtualMachineError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangVirtualMachineError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangVirtualMachineError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangVirtualMachineError_init(JavaLangVirtualMachineError *self);
+
+FOUNDATION_EXPORT void JavaLangVirtualMachineError_initWithNSString_(JavaLangVirtualMachineError *self, NSString *detailMessage);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangVirtualMachineError)
 
 #endif // _JavaLangVirtualMachineError_H_

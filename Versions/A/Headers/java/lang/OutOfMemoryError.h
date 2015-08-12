@@ -6,13 +6,12 @@
 #ifndef _JavaLangOutOfMemoryError_H_
 #define _JavaLangOutOfMemoryError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/VirtualMachineError.h"
 
-#define JavaLangOutOfMemoryError_serialVersionUID 8228564086184010517LL
+@interface JavaLangOutOfMemoryError : JavaLangVirtualMachineError
 
-@interface JavaLangOutOfMemoryError : JavaLangVirtualMachineError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangOutOfMemoryError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangOutOfMemoryError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangOutOfMemoryError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangOutOfMemoryError_init(JavaLangOutOfMemoryError *self);
+
+FOUNDATION_EXPORT JavaLangOutOfMemoryError *new_JavaLangOutOfMemoryError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangOutOfMemoryError_initWithNSString_(JavaLangOutOfMemoryError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangOutOfMemoryError *new_JavaLangOutOfMemoryError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangOutOfMemoryError)
 
 #endif // _JavaLangOutOfMemoryError_H_

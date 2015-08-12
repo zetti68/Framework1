@@ -6,29 +6,36 @@
 #ifndef _JavaLangReflectUndeclaredThrowableException_H_
 #define _JavaLangReflectUndeclaredThrowableException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangReflectUndeclaredThrowableException_serialVersionUID 330127114055056639LL
+@class JavaLangThrowable;
 
-@interface JavaLangReflectUndeclaredThrowableException : JavaLangRuntimeException {
-}
+@interface JavaLangReflectUndeclaredThrowableException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exception;
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exception
                              withNSString:(NSString *)detailMessage;
 
-- (JavaLangThrowable *)getUndeclaredThrowable;
-
 - (JavaLangThrowable *)getCause;
+
+- (JavaLangThrowable *)getUndeclaredThrowable;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectUndeclaredThrowableException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectUndeclaredThrowableException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectUndeclaredThrowableException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangReflectUndeclaredThrowableException_initWithJavaLangThrowable_(JavaLangReflectUndeclaredThrowableException *self, JavaLangThrowable *exception);
+
+FOUNDATION_EXPORT JavaLangReflectUndeclaredThrowableException *new_JavaLangReflectUndeclaredThrowableException_initWithJavaLangThrowable_(JavaLangThrowable *exception) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangReflectUndeclaredThrowableException_initWithJavaLangThrowable_withNSString_(JavaLangReflectUndeclaredThrowableException *self, JavaLangThrowable *exception, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangReflectUndeclaredThrowableException *new_JavaLangReflectUndeclaredThrowableException_initWithJavaLangThrowable_withNSString_(JavaLangThrowable *exception, NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectUndeclaredThrowableException)
 
 #endif // _JavaLangReflectUndeclaredThrowableException_H_

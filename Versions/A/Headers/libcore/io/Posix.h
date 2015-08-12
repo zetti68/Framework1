@@ -6,6 +6,9 @@
 #ifndef _LibcoreIoPosix_H_
 #define _LibcoreIoPosix_H_
 
+#include "J2ObjC_header.h"
+#include "libcore/io/Os.h"
+
 @class IOSByteArray;
 @class IOSIntArray;
 @class IOSObjectArray;
@@ -26,14 +29,9 @@
 @class LibcoreUtilMutableInt;
 @class LibcoreUtilMutableLong;
 
-#import "JreEmulation.h"
-#include "libcore/io/Os.h"
+@interface LibcoreIoPosix : NSObject < LibcoreIoOs >
 
-@interface LibcoreIoPosix : NSObject < LibcoreIoOs > {
-}
-
-- (instancetype)init;
-
+#pragma mark Public
 
 - (JavaIoFileDescriptor *)acceptWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                             withJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)peerAddress;
@@ -101,6 +99,10 @@
 - (NSString *)getnameinfoWithJavaNetInetAddress:(JavaNetInetAddress *)address
                                         withInt:(jint)flags;
 
+- (jint)getpid;
+
+- (jint)getppid;
+
 - (JavaNetSocketAddress *)getsocknameWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
 - (jint)getsockoptByteWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
@@ -138,14 +140,14 @@
 
 - (jboolean)isattyWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
+- (void)listenWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                               withInt:(jint)backlog;
+
 - (jlong)lseekWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                               withLong:(jlong)offset
                                withInt:(jint)whence;
 
 - (LibcoreIoStructStat *)lstatWithNSString:(NSString *)path;
-
-- (void)listenWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                               withInt:(jint)backlog;
 
 - (void)mincoreWithLong:(jlong)address
                withLong:(jlong)byteCount
@@ -184,18 +186,14 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                    withInt:(jint)timeoutMs;
 
 - (jint)preadWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
-                             withLong:(jlong)offset;
-
-- (jint)preadWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                         withByteArray:(IOSByteArray *)bytes
                               withInt:(jint)byteOffset
                               withInt:(jint)byteCount
                              withLong:(jlong)offset;
 
-- (jint)pwriteWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                 withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
-                              withLong:(jlong)offset;
+- (jint)preadWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                             withLong:(jlong)offset;
 
 - (jint)pwriteWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                          withByteArray:(IOSByteArray *)bytes
@@ -203,13 +201,17 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                withInt:(jint)byteCount
                               withLong:(jlong)offset;
 
-- (jint)readWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-               withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
+- (jint)pwriteWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                 withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                              withLong:(jlong)offset;
 
 - (jint)readWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                        withByteArray:(IOSByteArray *)bytes
                              withInt:(jint)byteOffset
                              withInt:(jint)byteCount;
+
+- (jint)readWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+               withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 - (jint)readvWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                     withNSObjectArray:(IOSObjectArray *)buffers
@@ -219,14 +221,14 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
 - (NSString *)realpathWithNSString:(NSString *)path;
 
 - (jint)recvfromWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                   withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                           withByteArray:(IOSByteArray *)bytes
+                                 withInt:(jint)byteOffset
+                                 withInt:(jint)byteCount
                                  withInt:(jint)flags
             withJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)srcAddress;
 
 - (jint)recvfromWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                           withByteArray:(IOSByteArray *)bytes
-                                 withInt:(jint)byteOffset
-                                 withInt:(jint)byteCount
+                   withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
                                  withInt:(jint)flags
             withJavaNetInetSocketAddress:(JavaNetInetSocketAddress *)srcAddress;
 
@@ -241,15 +243,15 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                  withLong:(jlong)byteCount;
 
 - (jint)sendtoWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                 withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
+                         withByteArray:(IOSByteArray *)bytes
+                               withInt:(jint)byteOffset
+                               withInt:(jint)byteCount
                                withInt:(jint)flags
                 withJavaNetInetAddress:(JavaNetInetAddress *)inetAddress
                                withInt:(jint)port;
 
 - (jint)sendtoWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                         withByteArray:(IOSByteArray *)bytes
-                               withInt:(jint)byteOffset
-                               withInt:(jint)byteCount
+                 withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
                                withInt:(jint)flags
                 withJavaNetInetAddress:(JavaNetInetAddress *)inetAddress
                                withInt:(jint)port;
@@ -313,30 +315,41 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
 
 - (NSString *)strerrorWithInt:(jint)errno_;
 
-- (jlong)sysconfWithInt:(jint)name;
-
 - (void)symlinkWithNSString:(NSString *)oldPath
                withNSString:(NSString *)newPath;
+
+- (jlong)sysconfWithInt:(jint)name;
 
 - (void)tcdrainWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
 
 - (LibcoreIoStructUtsname *)uname;
 
 - (jint)writeWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
-                withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
-
-- (jint)writeWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                         withByteArray:(IOSByteArray *)bytes
                               withInt:(jint)byteOffset
                               withInt:(jint)byteCount;
+
+- (jint)writeWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
+                withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
 - (jint)writevWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                      withNSObjectArray:(IOSObjectArray *)buffers
                           withIntArray:(IOSIntArray *)offsets
                           withIntArray:(IOSIntArray *)byteCounts;
 
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoPosix_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoPosix)
+
+FOUNDATION_EXPORT void LibcoreIoPosix_init(LibcoreIoPosix *self);
+
+FOUNDATION_EXPORT LibcoreIoPosix *new_LibcoreIoPosix_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoPosix)
 
 #endif // _LibcoreIoPosix_H_

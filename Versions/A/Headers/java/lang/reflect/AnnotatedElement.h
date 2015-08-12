@@ -6,11 +6,11 @@
 #ifndef _JavaLangReflectAnnotatedElement_H_
 #define _JavaLangReflectAnnotatedElement_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @protocol JavaLangAnnotationAnnotation;
-
-#import "JreEmulation.h"
 
 @protocol JavaLangReflectAnnotatedElement < NSObject, JavaObject >
 
@@ -24,6 +24,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectAnnotatedElement_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectAnnotatedElement)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectAnnotatedElement)
 
 #endif // _JavaLangReflectAnnotatedElement_H_

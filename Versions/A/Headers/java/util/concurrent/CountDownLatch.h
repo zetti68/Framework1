@@ -6,14 +6,13 @@
 #ifndef _JavaUtilConcurrentCountDownLatch_H_
 #define _JavaUtilConcurrentCountDownLatch_H_
 
-@class JavaUtilConcurrentCountDownLatch_Sync;
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/locks/AbstractQueuedSynchronizer.h"
+@interface JavaUtilConcurrentCountDownLatch : NSObject
 
-@interface JavaUtilConcurrentCountDownLatch : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)count;
 
@@ -30,25 +29,12 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCountDownLatch_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCountDownLatch)
 
-#define JavaUtilConcurrentCountDownLatch_Sync_serialVersionUID 4982264981922014374LL
+FOUNDATION_EXPORT void JavaUtilConcurrentCountDownLatch_initWithInt_(JavaUtilConcurrentCountDownLatch *self, jint count);
 
-@interface JavaUtilConcurrentCountDownLatch_Sync : JavaUtilConcurrentLocksAbstractQueuedSynchronizer {
-}
+FOUNDATION_EXPORT JavaUtilConcurrentCountDownLatch *new_JavaUtilConcurrentCountDownLatch_initWithInt_(jint count) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithInt:(jint)count;
-
-- (jint)getCount;
-
-- (jint)tryAcquireSharedWithInt:(jint)acquires;
-
-- (jboolean)tryReleaseSharedWithInt:(jint)releases;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentCountDownLatch_Sync_init() {}
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentCountDownLatch_Sync, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCountDownLatch)
 
 #endif // _JavaUtilConcurrentCountDownLatch_H_

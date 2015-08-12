@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsClosedSelectorException_H_
 #define _JavaNioChannelsClosedSelectorException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsClosedSelectorException_serialVersionUID 6466297122317847835LL
+@interface JavaNioChannelsClosedSelectorException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsClosedSelectorException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsClosedSelectorException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsClosedSelectorException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsClosedSelectorException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsClosedSelectorException_init(JavaNioChannelsClosedSelectorException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsClosedSelectorException *new_JavaNioChannelsClosedSelectorException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsClosedSelectorException)
 
 #endif // _JavaNioChannelsClosedSelectorException_H_

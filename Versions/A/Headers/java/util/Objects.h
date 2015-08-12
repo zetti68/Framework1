@@ -6,13 +6,14 @@
 #ifndef _JavaUtilObjects_H_
 #define _JavaUtilObjects_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @protocol JavaUtilComparator;
 
-#import "JreEmulation.h"
+@interface JavaUtilObjects : NSObject
 
-@interface JavaUtilObjects : NSObject {
-}
+#pragma mark Public
 
 + (jint)compareWithId:(id)a
                withId:(id)b
@@ -40,15 +41,26 @@ withJavaUtilComparator:(id<JavaUtilComparator>)c;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilObjects_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilObjects)
+
 FOUNDATION_EXPORT jint JavaUtilObjects_compareWithId_withId_withJavaUtilComparator_(id a, id b, id<JavaUtilComparator> c);
+
 FOUNDATION_EXPORT jboolean JavaUtilObjects_deepEqualsWithId_withId_(id a, id b);
+
 FOUNDATION_EXPORT jboolean JavaUtilObjects_equalsWithId_withId_(id a, id b);
+
 FOUNDATION_EXPORT jint JavaUtilObjects_hash__WithNSObjectArray_(IOSObjectArray *values);
+
 FOUNDATION_EXPORT jint JavaUtilObjects_hashCodeWithId_(id o);
+
 FOUNDATION_EXPORT id JavaUtilObjects_requireNonNullWithId_(id o);
+
 FOUNDATION_EXPORT id JavaUtilObjects_requireNonNullWithId_withNSString_(id o, NSString *message);
+
 FOUNDATION_EXPORT NSString *JavaUtilObjects_toStringWithId_(id o);
+
 FOUNDATION_EXPORT NSString *JavaUtilObjects_toStringWithId_withNSString_(id o, NSString *nullString);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilObjects)
 
 #endif // _JavaUtilObjects_H_

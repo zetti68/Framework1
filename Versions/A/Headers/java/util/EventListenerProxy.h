@@ -6,11 +6,12 @@
 #ifndef _JavaUtilEventListenerProxy_H_
 #define _JavaUtilEventListenerProxy_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/EventListener.h"
 
-@interface JavaUtilEventListenerProxy : NSObject < JavaUtilEventListener > {
-}
+@interface JavaUtilEventListenerProxy : NSObject < JavaUtilEventListener >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilEventListener:(id<JavaUtilEventListener>)listener;
 
@@ -18,6 +19,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilEventListenerProxy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilEventListenerProxy)
+
+FOUNDATION_EXPORT void JavaUtilEventListenerProxy_initWithJavaUtilEventListener_(JavaUtilEventListenerProxy *self, id<JavaUtilEventListener> listener);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilEventListenerProxy)
 
 #endif // _JavaUtilEventListenerProxy_H_

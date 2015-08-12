@@ -6,21 +6,19 @@
 #ifndef _JavaIoEmulatedFieldsForDumping_H_
 #define _JavaIoEmulatedFieldsForDumping_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/ObjectOutputStream.h"
+
 @class JavaIoEmulatedFields;
-@class JavaIoObjectOutputStream;
 @class JavaIoObjectStreamClass;
 @protocol JavaIoObjectOutput;
 
-#import "JreEmulation.h"
-#include "java/io/ObjectOutputStream.h"
+@interface JavaIoEmulatedFieldsForDumping : JavaIoObjectOutputStream_PutField
 
-@interface JavaIoEmulatedFieldsForDumping : JavaIoObjectOutputStream_PutField {
-}
+#pragma mark Public
 
-- (instancetype)initWithJavaIoObjectOutputStream:(JavaIoObjectOutputStream *)oos
-                     withJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)streamClass;
-
-- (JavaIoEmulatedFields *)emulatedFields;
+- (void)putWithNSString:(NSString *)name
+            withBoolean:(jboolean)value;
 
 - (void)putWithNSString:(NSString *)name
                withByte:(jbyte)value;
@@ -46,13 +44,23 @@
 - (void)putWithNSString:(NSString *)name
               withShort:(jshort)value;
 
-- (void)putWithNSString:(NSString *)name
-            withBoolean:(jboolean)value;
-
 - (void)writeWithJavaIoObjectOutput:(id<JavaIoObjectOutput>)output;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaIoObjectOutputStream:(JavaIoObjectOutputStream *)oos
+                     withJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)streamClass;
+
+- (JavaIoEmulatedFields *)emulatedFields;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoEmulatedFieldsForDumping_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoEmulatedFieldsForDumping)
+
+FOUNDATION_EXPORT void JavaIoEmulatedFieldsForDumping_initWithJavaIoObjectOutputStream_withJavaIoObjectStreamClass_(JavaIoEmulatedFieldsForDumping *self, JavaIoObjectOutputStream *oos, JavaIoObjectStreamClass *streamClass);
+
+FOUNDATION_EXPORT JavaIoEmulatedFieldsForDumping *new_JavaIoEmulatedFieldsForDumping_initWithJavaIoObjectOutputStream_withJavaIoObjectStreamClass_(JavaIoObjectOutputStream *oos, JavaIoObjectStreamClass *streamClass) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoEmulatedFieldsForDumping)
 
 #endif // _JavaIoEmulatedFieldsForDumping_H_

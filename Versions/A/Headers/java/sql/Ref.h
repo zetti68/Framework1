@@ -6,9 +6,9 @@
 #ifndef _JavaSqlRef_H_
 #define _JavaSqlRef_H_
 
-@protocol JavaUtilMap;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@protocol JavaUtilMap;
 
 @protocol JavaSqlRef < NSObject, JavaObject >
 
@@ -22,6 +22,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlRef_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlRef)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlRef)
 
 #endif // _JavaSqlRef_H_

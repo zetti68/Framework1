@@ -6,15 +6,14 @@
 #ifndef _JavaNetProtocolException_H_
 #define _JavaNetProtocolException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetProtocolException_serialVersionUID -6098449442062388080LL
+@class JavaLangThrowable;
 
-@interface JavaNetProtocolException : JavaIoIOException {
-}
+@interface JavaNetProtocolException : JavaIoIOException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetProtocolException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetProtocolException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetProtocolException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetProtocolException_init(JavaNetProtocolException *self);
+
+FOUNDATION_EXPORT JavaNetProtocolException *new_JavaNetProtocolException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetProtocolException_initWithNSString_(JavaNetProtocolException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetProtocolException *new_JavaNetProtocolException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetProtocolException_initWithNSString_withJavaLangThrowable_(JavaNetProtocolException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetProtocolException *new_JavaNetProtocolException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetProtocolException)
 
 #endif // _JavaNetProtocolException_H_

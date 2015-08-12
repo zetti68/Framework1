@@ -6,22 +6,29 @@
 #ifndef _JavaSecurityInvalidParameterException_H_
 #define _JavaSecurityInvalidParameterException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalArgumentException.h"
 
-#define JavaSecurityInvalidParameterException_serialVersionUID -857968536935667808LL
+@interface JavaSecurityInvalidParameterException : JavaLangIllegalArgumentException
 
-@interface JavaSecurityInvalidParameterException : JavaLangIllegalArgumentException {
-}
-
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithNSString:(NSString *)msg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityInvalidParameterException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityInvalidParameterException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityInvalidParameterException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityInvalidParameterException_initWithNSString_(JavaSecurityInvalidParameterException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityInvalidParameterException *new_JavaSecurityInvalidParameterException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityInvalidParameterException_init(JavaSecurityInvalidParameterException *self);
+
+FOUNDATION_EXPORT JavaSecurityInvalidParameterException *new_JavaSecurityInvalidParameterException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityInvalidParameterException)
 
 #endif // _JavaSecurityInvalidParameterException_H_

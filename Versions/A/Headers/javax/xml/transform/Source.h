@@ -6,7 +6,7 @@
 #ifndef _JavaxXmlTransformSource_H_
 #define _JavaxXmlTransformSource_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaxXmlTransformSource < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlTransformSource_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlTransformSource)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlTransformSource)
 
 #endif // _JavaxXmlTransformSource_H_

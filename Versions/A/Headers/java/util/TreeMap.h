@@ -6,36 +6,24 @@
 #ifndef _JavaUtilTreeMap_H_
 #define _JavaUtilTreeMap_H_
 
-@class JavaLangIllegalArgumentException;
-@class JavaUtilAbstractMap_SimpleImmutableEntry;
-@class JavaUtilTreeMap_BoundedMap_BoundedEntrySet;
-@class JavaUtilTreeMap_BoundedMap_BoundedKeySet;
-@class JavaUtilTreeMap_BoundedMap_BoundedValuesCollection;
-@class JavaUtilTreeMap_EntrySet;
-@class JavaUtilTreeMap_KeySet;
-@class JavaUtilTreeMap_Node;
-@class JavaUtilTreeMap_RelationEnum;
-@class JavaUtilTreeMap_ValuesCollection;
-@protocol JavaLangComparable;
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-@protocol JavaUtilSortedSet;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Enum.h"
 #include "java/util/AbstractCollection.h"
 #include "java/util/AbstractMap.h"
 #include "java/util/AbstractSet.h"
-#include "java/util/Comparator.h"
 #include "java/util/Iterator.h"
 #include "java/util/Map.h"
 #include "java/util/NavigableMap.h"
 #include "java/util/NavigableSet.h"
 #include "java/util/SortedMap.h"
 
-#define JavaUtilTreeMap_serialVersionUID 919286545866124006LL
+@class JavaUtilTreeMap_Node;
+@class JavaUtilTreeMap_RelationEnum;
+@protocol JavaUtilCollection;
+@protocol JavaUtilComparator;
+@protocol JavaUtilSet;
+@protocol JavaUtilSortedSet;
 
 @interface JavaUtilTreeMap : JavaUtilAbstractMap < JavaUtilSortedMap, JavaUtilNavigableMap, NSCopying, JavaIoSerializable > {
  @public
@@ -45,54 +33,58 @@
   jint modCount_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)copyFrom;
+- (instancetype)init;
 
 - (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
+- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)copyFrom;
+
 - (instancetype)initWithJavaUtilSortedMap:(id<JavaUtilSortedMap>)copyFrom;
 
-- (id)clone;
+- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
 
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (id)getWithId:(id)key;
-
-- (jboolean)containsKeyWithId:(id)key;
-
-- (id)putWithId:(id)key
-         withId:(id)value;
+- (id)ceilingKeyWithId:(id)key;
 
 - (void)clear;
 
-- (id)removeWithId:(id)key;
+- (id)clone;
 
-- (id)putInternalWithId:(id)key
-                 withId:(id)value;
+- (id<JavaUtilComparator>)comparator;
 
-- (JavaUtilTreeMap_Node *)findWithId:(id)key
-    withJavaUtilTreeMap_RelationEnum:(JavaUtilTreeMap_RelationEnum *)relation;
+- (jboolean)containsKeyWithId:(id)key;
 
-- (JavaUtilTreeMap_Node *)findByObjectWithId:(id)key;
+- (id<JavaUtilNavigableSet>)descendingKeySet;
 
-- (JavaUtilTreeMap_Node *)findByEntryWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)entry_;
+- (id<JavaUtilNavigableMap>)descendingMap;
 
-- (void)removeInternalWithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)node;
-
-- (JavaUtilTreeMap_Node *)removeInternalByKeyWithId:(id)key;
+- (id<JavaUtilSet>)entrySet;
 
 - (id<JavaUtilMap_Entry>)firstEntry;
 
-- (id<JavaUtilMap_Entry>)pollFirstEntry;
-
 - (id)firstKey;
 
-- (id<JavaUtilMap_Entry>)lastEntry;
+- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
 
-- (id<JavaUtilMap_Entry>)pollLastEntry;
+- (id)floorKeyWithId:(id)key;
+
+- (id)getWithId:(id)key;
+
+- (id<JavaUtilSortedMap>)headMapWithId:(id)toExclusive;
+
+- (id<JavaUtilNavigableMap>)headMapWithId:(id)to
+                              withBoolean:(jboolean)inclusive;
+
+- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
+
+- (id)higherKeyWithId:(id)key;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilSet>)keySet;
+
+- (id<JavaUtilMap_Entry>)lastEntry;
 
 - (id)lastKey;
 
@@ -100,27 +92,18 @@
 
 - (id)lowerKeyWithId:(id)key;
 
-- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
-
-- (id)floorKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
-
-- (id)ceilingKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
-
-- (id)higherKeyWithId:(id)key;
-
-- (id<JavaUtilComparator>)comparator;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilSet>)keySet;
-
 - (id<JavaUtilNavigableSet>)navigableKeySet;
 
-- (id<JavaUtilCollection>)values;
+- (id<JavaUtilMap_Entry>)pollFirstEntry;
+
+- (id<JavaUtilMap_Entry>)pollLastEntry;
+
+- (id)putWithId:(id)key
+         withId:(id)value;
+
+- (id)removeWithId:(id)key;
+
+- (jint)size;
 
 - (id<JavaUtilNavigableMap>)subMapWithId:(id)from
                              withBoolean:(jboolean)fromInclusive
@@ -130,87 +113,109 @@
 - (id<JavaUtilSortedMap>)subMapWithId:(id)fromInclusive
                                withId:(id)toExclusive;
 
-- (id<JavaUtilNavigableMap>)headMapWithId:(id)to
-                              withBoolean:(jboolean)inclusive;
-
-- (id<JavaUtilSortedMap>)headMapWithId:(id)toExclusive;
+- (id<JavaUtilSortedMap>)tailMapWithId:(id)fromInclusive;
 
 - (id<JavaUtilNavigableMap>)tailMapWithId:(id)from
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilSortedMap>)tailMapWithId:(id)fromInclusive;
+- (id<JavaUtilCollection>)values;
 
-- (id<JavaUtilNavigableMap>)descendingMap;
-
-- (id<JavaUtilNavigableSet>)descendingKeySet;
+#pragma mark Package-Private
 
 + (jint)countWithJavaUtilIterator:(id<JavaUtilIterator>)iterator;
+
+- (JavaUtilTreeMap_Node *)findWithId:(id)key
+    withJavaUtilTreeMap_RelationEnum:(JavaUtilTreeMap_RelationEnum *)relation;
+
+- (JavaUtilTreeMap_Node *)findByEntryWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)entry_;
+
+- (JavaUtilTreeMap_Node *)findByObjectWithId:(id)key;
+
+- (id)putInternalWithId:(id)key
+                 withId:(id)value;
+
+- (void)removeInternalWithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)node;
+
+- (JavaUtilTreeMap_Node *)removeInternalByKeyWithId:(id)key;
 
 
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilTreeMap_initialized;
 J2OBJC_STATIC_INIT(JavaUtilTreeMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap, comparator__, id<JavaUtilComparator>)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap, root_, JavaUtilTreeMap_Node *)
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_init(JavaUtilTreeMap *self);
+
+FOUNDATION_EXPORT JavaUtilTreeMap *new_JavaUtilTreeMap_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_initWithJavaUtilMap_(JavaUtilTreeMap *self, id<JavaUtilMap> copyFrom);
+
+FOUNDATION_EXPORT JavaUtilTreeMap *new_JavaUtilTreeMap_initWithJavaUtilMap_(id<JavaUtilMap> copyFrom) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_initWithJavaUtilComparator_(JavaUtilTreeMap *self, id<JavaUtilComparator> comparator);
+
+FOUNDATION_EXPORT JavaUtilTreeMap *new_JavaUtilTreeMap_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_initWithJavaUtilSortedMap_(JavaUtilTreeMap *self, id<JavaUtilSortedMap> copyFrom);
+
+FOUNDATION_EXPORT JavaUtilTreeMap *new_JavaUtilTreeMap_initWithJavaUtilSortedMap_(id<JavaUtilSortedMap> copyFrom) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jint JavaUtilTreeMap_countWithJavaUtilIterator_(id<JavaUtilIterator> iterator);
 
-FOUNDATION_EXPORT id<JavaUtilComparator> JavaUtilTreeMap_NATURAL_ORDER_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap, NATURAL_ORDER_, id<JavaUtilComparator>)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap, serialVersionUID, jlong)
-
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaUtilTreeMap_Relation) {
   JavaUtilTreeMap_Relation_LOWER = 0,
   JavaUtilTreeMap_Relation_FLOOR = 1,
   JavaUtilTreeMap_Relation_EQUAL = 2,
   JavaUtilTreeMap_Relation_CREATE = 3,
   JavaUtilTreeMap_Relation_CEILING = 4,
   JavaUtilTreeMap_Relation_HIGHER = 5,
-} JavaUtilTreeMap_Relation;
+};
 
-@interface JavaUtilTreeMap_RelationEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaUtilTreeMap_RelationEnum : JavaLangEnum < NSCopying >
+
+#pragma mark Package-Private
 
 - (JavaUtilTreeMap_RelationEnum *)forOrderWithBoolean:(jboolean)ascending;
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaUtilTreeMap_RelationEnum_values();
 
 + (JavaUtilTreeMap_RelationEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaUtilTreeMap_RelationEnum *JavaUtilTreeMap_RelationEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaUtilTreeMap_RelationEnum *JavaUtilTreeMap_RelationEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilTreeMap_RelationEnum_initialized;
 J2OBJC_STATIC_INIT(JavaUtilTreeMap_RelationEnum)
 
 FOUNDATION_EXPORT JavaUtilTreeMap_RelationEnum *JavaUtilTreeMap_RelationEnum_values_[];
 
 #define JavaUtilTreeMap_RelationEnum_LOWER JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_LOWER]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, LOWER, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, LOWER)
 
 #define JavaUtilTreeMap_RelationEnum_FLOOR JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_FLOOR]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, FLOOR, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, FLOOR)
 
 #define JavaUtilTreeMap_RelationEnum_EQUAL JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_EQUAL]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, EQUAL, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, EQUAL)
 
 #define JavaUtilTreeMap_RelationEnum_CREATE JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_CREATE]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, CREATE, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, CREATE)
 
 #define JavaUtilTreeMap_RelationEnum_CEILING JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_CEILING]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, CEILING, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, CEILING)
 
 #define JavaUtilTreeMap_RelationEnum_HIGHER JavaUtilTreeMap_RelationEnum_values_[JavaUtilTreeMap_Relation_HIGHER]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, HIGHER, JavaUtilTreeMap_RelationEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_RelationEnum, HIGHER)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_RelationEnum)
 
 @interface JavaUtilTreeMap_Node : NSObject < JavaUtilMap_Entry > {
  @public
@@ -222,59 +227,49 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_RelationEnum, HIGHER, JavaUtilTreeMap
   jint height_;
 }
 
-- (instancetype)initWithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)parent
-                                      withId:(id)key;
+#pragma mark Public
 
-- (JavaUtilTreeMap_Node *)copy__WithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)parent OBJC_METHOD_FAMILY_NONE;
+- (jboolean)isEqual:(id)o;
+
+- (JavaUtilTreeMap_Node *)first;
 
 - (id)getKey;
 
 - (id)getValue;
 
-- (id)setValueWithId:(id)value;
-
-- (jboolean)isEqual:(id)o;
-
 - (NSUInteger)hash;
-
-- (NSString *)description;
-
-- (JavaUtilTreeMap_Node *)next;
-
-- (JavaUtilTreeMap_Node *)prev;
-
-- (JavaUtilTreeMap_Node *)first;
 
 - (JavaUtilTreeMap_Node *)last;
 
+- (JavaUtilTreeMap_Node *)prev;
+
+- (id)setValueWithId:(id)value;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)parent
+                                      withId:(id)key;
+
+- (JavaUtilTreeMap_Node *)copy__WithJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)parent OBJC_METHOD_FAMILY_NONE;
+
+- (JavaUtilTreeMap_Node *)next;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_Node_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_Node, left_, JavaUtilTreeMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_Node, right_, JavaUtilTreeMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_Node, key_, id)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_Node, value_, id)
 
-@interface JavaUtilTreeMap_EntrySet : JavaUtilAbstractSet {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_Node_initWithJavaUtilTreeMap_Node_withId_(JavaUtilTreeMap_Node *self, JavaUtilTreeMap_Node *parent, id key);
 
-- (jint)size;
+FOUNDATION_EXPORT JavaUtilTreeMap_Node *new_JavaUtilTreeMap_Node_initWithJavaUtilTreeMap_Node_withId_(JavaUtilTreeMap_Node *parent, id key) NS_RETURNS_RETAINED;
 
-- (id<JavaUtilIterator>)iterator;
-
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)removeWithId:(id)o;
-
-- (void)clear;
-
-- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_EntrySet_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_Node)
 
 @interface JavaUtilTreeMap_MapIterator : NSObject < JavaUtilIterator > {
  @public
@@ -283,68 +278,103 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_EntrySet_init() {}
   jint expectedModCount_;
 }
 
-- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$
-               withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)next;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
-- (JavaUtilTreeMap_Node *)stepForward;
+- (void)remove;
+
+#pragma mark Protected
 
 - (JavaUtilTreeMap_Node *)stepBackward;
 
-- (void)remove;
+- (JavaUtilTreeMap_Node *)stepForward;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$
+               withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)next;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_MapIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_MapIterator)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_MapIterator, next_, JavaUtilTreeMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_MapIterator, last_, JavaUtilTreeMap_Node *)
 
-@interface JavaUtilTreeMap_EntrySet_$1 : JavaUtilTreeMap_MapIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_MapIterator_initWithJavaUtilTreeMap_withJavaUtilTreeMap_Node_(JavaUtilTreeMap_MapIterator *self, JavaUtilTreeMap *outer$, JavaUtilTreeMap_Node *next);
 
-- (id<JavaUtilMap_Entry>)next;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_MapIterator)
 
-- (instancetype)initWithJavaUtilTreeMap_EntrySet:(JavaUtilTreeMap_EntrySet *)outer$
-                        withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
+@interface JavaUtilTreeMap_EntrySet : JavaUtilAbstractSet
 
-@end
+#pragma mark Public
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_EntrySet_$1_init() {}
-
-@interface JavaUtilTreeMap_KeySet : JavaUtilAbstractSet < JavaUtilNavigableSet > {
-}
-
-- (jint)size;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (id<JavaUtilIterator>)descendingIterator;
+- (void)clear;
 
 - (jboolean)containsWithId:(id)o;
 
-- (jboolean)removeWithId:(id)key;
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$;
+
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_EntrySet)
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_EntrySet_initWithJavaUtilTreeMap_(JavaUtilTreeMap_EntrySet *self, JavaUtilTreeMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilTreeMap_EntrySet *new_JavaUtilTreeMap_EntrySet_initWithJavaUtilTreeMap_(JavaUtilTreeMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_EntrySet)
+
+@interface JavaUtilTreeMap_KeySet : JavaUtilAbstractSet < JavaUtilNavigableSet >
+
+#pragma mark Public
+
+- (id)ceilingWithId:(id)key;
 
 - (void)clear;
 
 - (id<JavaUtilComparator>)comparator;
 
+- (jboolean)containsWithId:(id)o;
+
+- (id<JavaUtilIterator>)descendingIterator;
+
+- (id<JavaUtilNavigableSet>)descendingSet;
+
 - (id)first;
+
+- (id)floorWithId:(id)key;
+
+- (id<JavaUtilSortedSet>)headSetWithId:(id)toExclusive;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)to
+                              withBoolean:(jboolean)inclusive;
+
+- (id)higherWithId:(id)key;
+
+- (id<JavaUtilIterator>)iterator;
 
 - (id)last;
 
 - (id)lowerWithId:(id)key;
 
-- (id)floorWithId:(id)key;
-
-- (id)ceilingWithId:(id)key;
-
-- (id)higherWithId:(id)key;
-
 - (id)pollFirst;
 
 - (id)pollLast;
+
+- (jboolean)removeWithId:(id)key;
+
+- (jint)size;
 
 - (id<JavaUtilNavigableSet>)subSetWithId:(id)from
                              withBoolean:(jboolean)fromInclusive
@@ -354,188 +384,132 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_EntrySet_$1_init() {}
 - (id<JavaUtilSortedSet>)subSetWithId:(id)fromInclusive
                                withId:(id)toExclusive;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)to
-                              withBoolean:(jboolean)inclusive;
-
-- (id<JavaUtilSortedSet>)headSetWithId:(id)toExclusive;
+- (id<JavaUtilSortedSet>)tailSetWithId:(id)fromInclusive;
 
 - (id<JavaUtilNavigableSet>)tailSetWithId:(id)from
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilSortedSet>)tailSetWithId:(id)fromInclusive;
-
-- (id<JavaUtilNavigableSet>)descendingSet;
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_KeySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_KeySet)
 
-@interface JavaUtilTreeMap_KeySet_$1 : JavaUtilTreeMap_MapIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_KeySet_initWithJavaUtilTreeMap_(JavaUtilTreeMap_KeySet *self, JavaUtilTreeMap *outer$);
 
-- (id)next;
+FOUNDATION_EXPORT JavaUtilTreeMap_KeySet *new_JavaUtilTreeMap_KeySet_initWithJavaUtilTreeMap_(JavaUtilTreeMap *outer$) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilTreeMap_KeySet:(JavaUtilTreeMap_KeySet *)outer$
-                      withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_KeySet)
 
-@end
+@interface JavaUtilTreeMap_ValuesCollection : JavaUtilAbstractCollection
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_KeySet_$1_init() {}
-
-@interface JavaUtilTreeMap_KeySet_$2 : JavaUtilTreeMap_MapIterator {
-}
-
-- (id)next;
-
-- (instancetype)initWithJavaUtilTreeMap_KeySet:(JavaUtilTreeMap_KeySet *)outer$
-                      withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_KeySet_$2_init() {}
-
-@interface JavaUtilTreeMap_ValuesCollection : JavaUtilAbstractCollection {
-}
-
-- (jint)size;
+#pragma mark Public
 
 - (id<JavaUtilIterator>)iterator;
 
+- (jint)size;
+
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_ValuesCollection_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_ValuesCollection)
 
-@interface JavaUtilTreeMap_ValuesCollection_$1 : JavaUtilTreeMap_MapIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_ValuesCollection_initWithJavaUtilTreeMap_(JavaUtilTreeMap_ValuesCollection *self, JavaUtilTreeMap *outer$);
 
-- (id)next;
+FOUNDATION_EXPORT JavaUtilTreeMap_ValuesCollection *new_JavaUtilTreeMap_ValuesCollection_initWithJavaUtilTreeMap_(JavaUtilTreeMap *outer$) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilTreeMap_ValuesCollection:(JavaUtilTreeMap_ValuesCollection *)outer$
-                                withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_ValuesCollection)
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_ValuesCollection_$1_init() {}
-
-typedef enum {
+typedef NS_ENUM(NSUInteger, JavaUtilTreeMap_Bound) {
   JavaUtilTreeMap_Bound_INCLUSIVE = 0,
   JavaUtilTreeMap_Bound_EXCLUSIVE = 1,
   JavaUtilTreeMap_Bound_NO_BOUND = 2,
-} JavaUtilTreeMap_Bound;
+};
 
-@interface JavaUtilTreeMap_BoundEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaUtilTreeMap_BoundEnum : JavaLangEnum < NSCopying >
+
+#pragma mark Public
 
 - (NSString *)leftCapWithId:(id)from;
 
 - (NSString *)rightCapWithId:(id)to;
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaUtilTreeMap_BoundEnum_values();
 
 + (JavaUtilTreeMap_BoundEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaUtilTreeMap_BoundEnum *JavaUtilTreeMap_BoundEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaUtilTreeMap_BoundEnum *JavaUtilTreeMap_BoundEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilTreeMap_BoundEnum_initialized;
 J2OBJC_STATIC_INIT(JavaUtilTreeMap_BoundEnum)
 
 FOUNDATION_EXPORT JavaUtilTreeMap_BoundEnum *JavaUtilTreeMap_BoundEnum_values_[];
 
 #define JavaUtilTreeMap_BoundEnum_INCLUSIVE JavaUtilTreeMap_BoundEnum_values_[JavaUtilTreeMap_Bound_INCLUSIVE]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_BoundEnum, INCLUSIVE, JavaUtilTreeMap_BoundEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_BoundEnum, INCLUSIVE)
 
 #define JavaUtilTreeMap_BoundEnum_EXCLUSIVE JavaUtilTreeMap_BoundEnum_values_[JavaUtilTreeMap_Bound_EXCLUSIVE]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_BoundEnum, EXCLUSIVE, JavaUtilTreeMap_BoundEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_BoundEnum, EXCLUSIVE)
 
 #define JavaUtilTreeMap_BoundEnum_NO_BOUND JavaUtilTreeMap_BoundEnum_values_[JavaUtilTreeMap_Bound_NO_BOUND]
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_BoundEnum, NO_BOUND, JavaUtilTreeMap_BoundEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaUtilTreeMap_BoundEnum, NO_BOUND)
 
-@interface JavaUtilTreeMap_BoundEnum_$1 : JavaUtilTreeMap_BoundEnum {
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundEnum)
 
-- (NSString *)leftCapWithId:(id)from;
+@interface JavaUtilTreeMap_BoundedMap : JavaUtilAbstractMap < JavaUtilNavigableMap, JavaIoSerializable >
 
-- (NSString *)rightCapWithId:(id)to;
+#pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
 
-@end
+- (id)ceilingKeyWithId:(id)key;
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundEnum_$1_init() {}
-
-@interface JavaUtilTreeMap_BoundEnum_$2 : JavaUtilTreeMap_BoundEnum {
-}
-
-- (NSString *)leftCapWithId:(id)from;
-
-- (NSString *)rightCapWithId:(id)to;
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundEnum_$2_init() {}
-
-@interface JavaUtilTreeMap_BoundEnum_$3 : JavaUtilTreeMap_BoundEnum {
-}
-
-- (NSString *)leftCapWithId:(id)from;
-
-- (NSString *)rightCapWithId:(id)to;
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundEnum_$3_init() {}
-
-@interface JavaUtilTreeMap_BoundedMap : JavaUtilAbstractMap < JavaUtilNavigableMap, JavaIoSerializable > {
-}
-
-- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$
-                            withBoolean:(jboolean)ascending
-                                 withId:(id)from
-          withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)fromBound
-                                 withId:(id)to
-          withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)toBound;
-
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (id)getWithId:(id)key;
+- (id<JavaUtilComparator>)comparator;
 
 - (jboolean)containsKeyWithId:(id)key;
 
-- (id)putWithId:(id)key
-         withId:(id)value;
+- (id<JavaUtilNavigableSet>)descendingKeySet;
 
-- (id)removeWithId:(id)key;
+- (id<JavaUtilNavigableMap>)descendingMap;
+
+- (id<JavaUtilSet>)entrySet;
 
 - (id<JavaUtilMap_Entry>)firstEntry;
 
-- (id<JavaUtilMap_Entry>)pollFirstEntry;
-
 - (id)firstKey;
 
-- (id<JavaUtilMap_Entry>)lastEntry;
+- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
 
-- (id<JavaUtilMap_Entry>)pollLastEntry;
+- (id)floorKeyWithId:(id)key;
+
+- (id)getWithId:(id)key;
+
+- (id<JavaUtilNavigableMap>)headMapWithId:(id)toExclusive;
+
+- (id<JavaUtilNavigableMap>)headMapWithId:(id)to
+                              withBoolean:(jboolean)inclusive;
+
+- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
+
+- (id)higherKeyWithId:(id)key;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilSet>)keySet;
+
+- (id<JavaUtilMap_Entry>)lastEntry;
 
 - (id)lastKey;
 
@@ -543,31 +517,18 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_BoundEnum_$3_init() {
 
 - (id)lowerKeyWithId:(id)key;
 
-- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
-
-- (id)floorKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
-
-- (id)ceilingKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
-
-- (id)higherKeyWithId:(id)key;
-
-- (id<JavaUtilComparator>)comparator;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilSet>)keySet;
-
 - (id<JavaUtilNavigableSet>)navigableKeySet;
 
-- (id<JavaUtilCollection>)values;
+- (id<JavaUtilMap_Entry>)pollFirstEntry;
 
-- (id<JavaUtilNavigableMap>)descendingMap;
+- (id<JavaUtilMap_Entry>)pollLastEntry;
 
-- (id<JavaUtilNavigableSet>)descendingKeySet;
+- (id)putWithId:(id)key
+         withId:(id)value;
+
+- (id)removeWithId:(id)key;
+
+- (jint)size;
 
 - (id<JavaUtilNavigableMap>)subMapWithId:(id)from
                              withBoolean:(jboolean)fromInclusive
@@ -577,100 +538,122 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_BoundEnum_$3_init() {
 - (id<JavaUtilNavigableMap>)subMapWithId:(id)fromInclusive
                                   withId:(id)toExclusive;
 
-- (id<JavaUtilNavigableMap>)headMapWithId:(id)to
-                              withBoolean:(jboolean)inclusive;
-
-- (id<JavaUtilNavigableMap>)headMapWithId:(id)toExclusive;
+- (id<JavaUtilNavigableMap>)tailMapWithId:(id)fromInclusive;
 
 - (id<JavaUtilNavigableMap>)tailMapWithId:(id)from
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilNavigableMap>)tailMapWithId:(id)fromInclusive;
+- (id<JavaUtilCollection>)values;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$
+                            withBoolean:(jboolean)ascending
+                                 withId:(id)from
+          withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)fromBound
+                                 withId:(id)to
+          withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)toBound;
 
 - (id)writeReplace;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_BoundedMap)
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedEntrySet : JavaUtilAbstractSet {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_BoundedMap_initWithJavaUtilTreeMap_withBoolean_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap_BoundedMap *self, JavaUtilTreeMap *outer$, jboolean ascending, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound);
 
-- (jint)size;
+FOUNDATION_EXPORT JavaUtilTreeMap_BoundedMap *new_JavaUtilTreeMap_BoundedMap_initWithJavaUtilTreeMap_withBoolean_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap *outer$, jboolean ascending, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundedMap)
+
+@interface JavaUtilTreeMap_BoundedMap_BoundedIterator : JavaUtilTreeMap_MapIterator
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaUtilTreeMap_BoundedMap:(JavaUtilTreeMap_BoundedMap *)outer$
+                          withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)next;
+
+- (JavaUtilTreeMap_Node *)stepBackward;
+
+- (JavaUtilTreeMap_Node *)stepForward;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_BoundedMap_BoundedIterator)
+
+FOUNDATION_EXPORT void JavaUtilTreeMap_BoundedMap_BoundedIterator_initWithJavaUtilTreeMap_BoundedMap_withJavaUtilTreeMap_Node_(JavaUtilTreeMap_BoundedMap_BoundedIterator *self, JavaUtilTreeMap_BoundedMap *outer$, JavaUtilTreeMap_Node *next);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundedMap_BoundedIterator)
+
+@interface JavaUtilTreeMap_BoundedMap_BoundedEntrySet : JavaUtilAbstractSet
+
+#pragma mark Public
+
+- (jboolean)containsWithId:(id)o;
 
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (jboolean)containsWithId:(id)o;
-
 - (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilTreeMap_BoundedMap:(JavaUtilTreeMap_BoundedMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedEntrySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_BoundedMap_BoundedEntrySet)
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedIterator : JavaUtilTreeMap_MapIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_BoundedMap_BoundedEntrySet_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap_BoundedEntrySet *self, JavaUtilTreeMap_BoundedMap *outer$);
 
-- (instancetype)initWithJavaUtilTreeMap_BoundedMap:(JavaUtilTreeMap_BoundedMap *)outer$
-                          withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)next;
+FOUNDATION_EXPORT JavaUtilTreeMap_BoundedMap_BoundedEntrySet *new_JavaUtilTreeMap_BoundedMap_BoundedEntrySet_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap *outer$) NS_RETURNS_RETAINED;
 
-- (JavaUtilTreeMap_Node *)stepForward;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundedMap_BoundedEntrySet)
 
-- (JavaUtilTreeMap_Node *)stepBackward;
+@interface JavaUtilTreeMap_BoundedMap_BoundedKeySet : JavaUtilAbstractSet < JavaUtilNavigableSet >
 
-@end
+#pragma mark Public
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedIterator_init() {}
+- (id)ceilingWithId:(id)key;
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedEntrySet_$1 : JavaUtilTreeMap_BoundedMap_BoundedIterator {
-}
+- (id<JavaUtilComparator>)comparator;
 
-- (id<JavaUtilMap_Entry>)next;
+- (jboolean)containsWithId:(id)key;
 
-- (instancetype)initWithJavaUtilTreeMap_BoundedMap_BoundedEntrySet:(JavaUtilTreeMap_BoundedMap_BoundedEntrySet *)outer$
-                                          withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
+- (id<JavaUtilIterator>)descendingIterator;
 
-@end
+- (id<JavaUtilNavigableSet>)descendingSet;
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedEntrySet_$1_init() {}
+- (id)first;
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedKeySet : JavaUtilAbstractSet < JavaUtilNavigableSet > {
-}
+- (id)floorWithId:(id)key;
 
-- (jint)size;
+- (id<JavaUtilSortedSet>)headSetWithId:(id)toExclusive;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)to
+                              withBoolean:(jboolean)inclusive;
+
+- (id)higherWithId:(id)key;
 
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (id<JavaUtilIterator>)descendingIterator;
-
-- (jboolean)containsWithId:(id)key;
-
-- (jboolean)removeWithId:(id)key;
-
-- (id)first;
-
-- (id)pollFirst;
-
 - (id)last;
-
-- (id)pollLast;
 
 - (id)lowerWithId:(id)key;
 
-- (id)floorWithId:(id)key;
+- (id)pollFirst;
 
-- (id)ceilingWithId:(id)key;
+- (id)pollLast;
 
-- (id)higherWithId:(id)key;
+- (jboolean)removeWithId:(id)key;
 
-- (id<JavaUtilComparator>)comparator;
+- (jint)size;
 
 - (id<JavaUtilNavigableSet>)subSetWithId:(id)from
                              withBoolean:(jboolean)fromInclusive
@@ -680,78 +663,50 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedEnt
 - (id<JavaUtilSortedSet>)subSetWithId:(id)fromInclusive
                                withId:(id)toExclusive;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)to
-                              withBoolean:(jboolean)inclusive;
-
-- (id<JavaUtilSortedSet>)headSetWithId:(id)toExclusive;
+- (id<JavaUtilSortedSet>)tailSetWithId:(id)fromInclusive;
 
 - (id<JavaUtilNavigableSet>)tailSetWithId:(id)from
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilSortedSet>)tailSetWithId:(id)fromInclusive;
-
-- (id<JavaUtilNavigableSet>)descendingSet;
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilTreeMap_BoundedMap:(JavaUtilTreeMap_BoundedMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedKeySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_BoundedMap_BoundedKeySet)
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedKeySet_$1 : JavaUtilTreeMap_BoundedMap_BoundedIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_BoundedMap_BoundedKeySet_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap_BoundedKeySet *self, JavaUtilTreeMap_BoundedMap *outer$);
 
-- (id)next;
+FOUNDATION_EXPORT JavaUtilTreeMap_BoundedMap_BoundedKeySet *new_JavaUtilTreeMap_BoundedMap_BoundedKeySet_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap *outer$) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilTreeMap_BoundedMap_BoundedKeySet:(JavaUtilTreeMap_BoundedMap_BoundedKeySet *)outer$
-                                        withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundedMap_BoundedKeySet)
 
-@end
+@interface JavaUtilTreeMap_BoundedMap_BoundedValuesCollection : JavaUtilAbstractCollection
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedKeySet_$1_init() {}
-
-@interface JavaUtilTreeMap_BoundedMap_BoundedKeySet_$2 : JavaUtilTreeMap_BoundedMap_BoundedIterator {
-}
-
-- (id)next;
-
-- (instancetype)initWithJavaUtilTreeMap_BoundedMap_BoundedKeySet:(JavaUtilTreeMap_BoundedMap_BoundedKeySet *)outer$
-                                        withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedKeySet_$2_init() {}
-
-@interface JavaUtilTreeMap_BoundedMap_BoundedValuesCollection : JavaUtilAbstractCollection {
-}
-
-- (jint)size;
+#pragma mark Public
 
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
+- (jint)size;
+
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilTreeMap_BoundedMap:(JavaUtilTreeMap_BoundedMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedValuesCollection_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_BoundedMap_BoundedValuesCollection)
 
-@interface JavaUtilTreeMap_BoundedMap_BoundedValuesCollection_$1 : JavaUtilTreeMap_BoundedMap_BoundedIterator {
-}
+FOUNDATION_EXPORT void JavaUtilTreeMap_BoundedMap_BoundedValuesCollection_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap_BoundedValuesCollection *self, JavaUtilTreeMap_BoundedMap *outer$);
 
-- (id)next;
+FOUNDATION_EXPORT JavaUtilTreeMap_BoundedMap_BoundedValuesCollection *new_JavaUtilTreeMap_BoundedMap_BoundedValuesCollection_initWithJavaUtilTreeMap_BoundedMap_(JavaUtilTreeMap_BoundedMap *outer$) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilTreeMap_BoundedMap_BoundedValuesCollection:(JavaUtilTreeMap_BoundedMap_BoundedValuesCollection *)outer$
-                                                  withJavaUtilTreeMap_Node:(JavaUtilTreeMap_Node *)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedValuesCollection_$1_init() {}
-
-#define JavaUtilTreeMap_NavigableSubMap_serialVersionUID -2102997345730753016LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_BoundedMap_BoundedValuesCollection)
 
 @interface JavaUtilTreeMap_NavigableSubMap : JavaUtilAbstractMap < JavaIoSerializable > {
  @public
@@ -764,33 +719,41 @@ __attribute__((always_inline)) inline void JavaUtilTreeMap_BoundedMap_BoundedVal
   jboolean hiInclusive_;
 }
 
+#pragma mark Public
+
+- (id<JavaUtilSet>)entrySet;
+
+#pragma mark Protected
+
+- (id)readResolve;
+
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)delegate
                                  withId:(id)from
           withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)fromBound
                                  withId:(id)to
           withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)toBound;
 
-- (id<JavaUtilSet>)entrySet;
-
-- (id)readResolve;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_NavigableSubMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_NavigableSubMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_NavigableSubMap, m_, JavaUtilTreeMap *)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_NavigableSubMap, lo_, id)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_NavigableSubMap, hi_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_NavigableSubMap, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTreeMap_NavigableSubMap_initWithJavaUtilTreeMap_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap_NavigableSubMap *self, JavaUtilTreeMap *delegate, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound);
 
-#define JavaUtilTreeMap_DescendingSubMap_serialVersionUID 912986545866120460LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_NavigableSubMap)
 
 @interface JavaUtilTreeMap_DescendingSubMap : JavaUtilTreeMap_NavigableSubMap {
  @public
   id<JavaUtilComparator> reverseComparator_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)delegate
                                  withId:(id)from
           withJavaUtilTreeMap_BoundEnum:(JavaUtilTreeMap_BoundEnum *)fromBound
@@ -799,16 +762,19 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_NavigableSubMap, serialVersionUID, jl
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_DescendingSubMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_DescendingSubMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_DescendingSubMap, reverseComparator_, id<JavaUtilComparator>)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_DescendingSubMap, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTreeMap_DescendingSubMap_initWithJavaUtilTreeMap_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap_DescendingSubMap *self, JavaUtilTreeMap *delegate, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound);
 
-#define JavaUtilTreeMap_AscendingSubMap_serialVersionUID 912986545866124060LL
+FOUNDATION_EXPORT JavaUtilTreeMap_DescendingSubMap *new_JavaUtilTreeMap_DescendingSubMap_initWithJavaUtilTreeMap_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap *delegate, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound) NS_RETURNS_RETAINED;
 
-@interface JavaUtilTreeMap_AscendingSubMap : JavaUtilTreeMap_NavigableSubMap {
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_DescendingSubMap)
+
+@interface JavaUtilTreeMap_AscendingSubMap : JavaUtilTreeMap_NavigableSubMap
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)delegate
                                  withId:(id)from
@@ -818,11 +784,13 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_DescendingSubMap, serialVersionUID, j
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_AscendingSubMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_AscendingSubMap)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_AscendingSubMap, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTreeMap_AscendingSubMap_initWithJavaUtilTreeMap_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap_AscendingSubMap *self, JavaUtilTreeMap *delegate, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound);
 
-#define JavaUtilTreeMap_SubMap_serialVersionUID -6520786458950516097LL
+FOUNDATION_EXPORT JavaUtilTreeMap_AscendingSubMap *new_JavaUtilTreeMap_AscendingSubMap_initWithJavaUtilTreeMap_withId_withJavaUtilTreeMap_BoundEnum_withId_withJavaUtilTreeMap_BoundEnum_(JavaUtilTreeMap *delegate, id from, JavaUtilTreeMap_BoundEnum *fromBound, id to, JavaUtilTreeMap_BoundEnum *toBound) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_AscendingSubMap)
 
 @interface JavaUtilTreeMap_SubMap : JavaUtilAbstractMap < JavaIoSerializable > {
  @public
@@ -832,31 +800,29 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_AscendingSubMap, serialVersionUID, jl
   jboolean toEnd_;
 }
 
+#pragma mark Public
+
 - (id<JavaUtilSet>)entrySet;
 
+#pragma mark Protected
+
 - (id)readResolve;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilTreeMap:(JavaUtilTreeMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeMap_SubMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeMap_SubMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_SubMap, fromKey_, id)
 J2OBJC_FIELD_SETTER(JavaUtilTreeMap_SubMap, toKey_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeMap_SubMap, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTreeMap_SubMap_initWithJavaUtilTreeMap_(JavaUtilTreeMap_SubMap *self, JavaUtilTreeMap *outer$);
 
-@interface JavaUtilTreeMap_$1 : NSObject < JavaUtilComparator > {
-}
+FOUNDATION_EXPORT JavaUtilTreeMap_SubMap *new_JavaUtilTreeMap_SubMap_initWithJavaUtilTreeMap_(JavaUtilTreeMap *outer$) NS_RETURNS_RETAINED;
 
-- (jint)compareWithId:(id<JavaLangComparable>)a
-               withId:(id<JavaLangComparable>)b;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTreeMap_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeMap_SubMap)
 
 #endif // _JavaUtilTreeMap_H_

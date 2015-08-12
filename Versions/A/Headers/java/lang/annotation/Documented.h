@@ -6,7 +6,7 @@
 #ifndef _JavaLangAnnotationDocumented_H_
 #define _JavaLangAnnotationDocumented_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangAnnotationDocumented < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationDocumented_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationDocumented)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationDocumented)
 
 #endif // _JavaLangAnnotationDocumented_H_

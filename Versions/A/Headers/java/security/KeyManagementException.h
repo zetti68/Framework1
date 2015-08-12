@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityKeyManagementException_H_
 #define _JavaSecurityKeyManagementException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/KeyException.h"
 
-#define JavaSecurityKeyManagementException_serialVersionUID 947674216157062695LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityKeyManagementException : JavaSecurityKeyException {
-}
+@interface JavaSecurityKeyManagementException : JavaSecurityKeyException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityKeyManagementException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityKeyManagementException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityKeyManagementException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityKeyManagementException_initWithNSString_(JavaSecurityKeyManagementException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityKeyManagementException *new_JavaSecurityKeyManagementException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyManagementException_init(JavaSecurityKeyManagementException *self);
+
+FOUNDATION_EXPORT JavaSecurityKeyManagementException *new_JavaSecurityKeyManagementException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyManagementException_initWithNSString_withJavaLangThrowable_(JavaSecurityKeyManagementException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityKeyManagementException *new_JavaSecurityKeyManagementException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityKeyManagementException_initWithJavaLangThrowable_(JavaSecurityKeyManagementException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityKeyManagementException *new_JavaSecurityKeyManagementException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityKeyManagementException)
 
 #endif // _JavaSecurityKeyManagementException_H_

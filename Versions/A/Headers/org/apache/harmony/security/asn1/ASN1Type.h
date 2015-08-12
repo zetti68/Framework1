@@ -6,13 +6,13 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Type_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Type_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Constants.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
-
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Constants.h"
 
 @interface OrgApacheHarmonySecurityAsn1ASN1Type : NSObject < OrgApacheHarmonySecurityAsn1ASN1Constants > {
  @public
@@ -20,10 +20,16 @@
   jint constrId_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithInt:(jint)tagNumber;
 
 - (instancetype)initWithInt:(jint)tagClass
                     withInt:(jint)tagNumber;
+
+- (jboolean)checkTagWithInt:(jint)identifier;
+
+- (id)decodeWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
 - (id)decodeWithByteArray:(IOSByteArray *)encoded;
 
@@ -33,30 +39,34 @@
 
 - (id)decodeWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
-- (void)verifyWithByteArray:(IOSByteArray *)encoded;
-
-- (void)verifyWithJavaIoInputStream:(JavaIoInputStream *)inArg;
-
 - (IOSByteArray *)encodeWithId:(id)object;
-
-- (id)decodeWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
-- (jboolean)checkTagWithInt:(jint)identifier;
-
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
 - (void)encodeASNWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
 - (void)encodeContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
-- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
-
 - (jint)getEncodedLengthWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
+
+- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
 - (NSString *)description;
 
+- (void)verifyWithByteArray:(IOSByteArray *)encoded;
+
+- (void)verifyWithJavaIoInputStream:(JavaIoInputStream *)inArg;
+
+#pragma mark Protected
+
+- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
+
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Type_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Type)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Type_initWithInt_(OrgApacheHarmonySecurityAsn1ASN1Type *self, jint tagNumber);
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Type_initWithInt_withInt_(OrgApacheHarmonySecurityAsn1ASN1Type *self, jint tagClass, jint tagNumber);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Type)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Type_H_

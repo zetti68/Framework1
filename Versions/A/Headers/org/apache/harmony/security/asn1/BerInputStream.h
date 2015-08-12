@@ -6,21 +6,17 @@
 #ifndef _OrgApacheHarmonySecurityAsn1BerInputStream_H_
 #define _OrgApacheHarmonySecurityAsn1BerInputStream_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class IOSIntArray;
-@class IOSObjectArray;
 @class JavaIoInputStream;
-@class OrgApacheHarmonySecurityAsn1ASN1Exception;
 @class OrgApacheHarmonySecurityAsn1ASN1Sequence;
 @class OrgApacheHarmonySecurityAsn1ASN1SequenceOf;
 @class OrgApacheHarmonySecurityAsn1ASN1Set;
 @class OrgApacheHarmonySecurityAsn1ASN1SetOf;
 @class OrgApacheHarmonySecurityAsn1ASN1StringType;
-@class OrgApacheHarmonySecurityAsn1ASN1ValueCollection;
 
-#import "JreEmulation.h"
-
-#define OrgApacheHarmonySecurityAsn1BerInputStream_BUF_INCREASE_SIZE 16384
 #define OrgApacheHarmonySecurityAsn1BerInputStream_INDEFINIT_LENGTH -1
 
 @interface OrgApacheHarmonySecurityAsn1BerInputStream : NSObject {
@@ -39,6 +35,8 @@
   jboolean isIndefinedLength_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithByteArray:(IOSByteArray *)encoded;
 
 - (instancetype)initWithByteArray:(IOSByteArray *)encoded
@@ -50,21 +48,38 @@
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg
                                   withInt:(jint)initialSize;
 
-- (void)resetWithByteArray:(IOSByteArray *)encoded;
+- (void)compactBuffer;
 
-- (jint)next;
+- (id)getWithId:(id)key;
+
+- (IOSByteArray *)getBuffer;
+
+- (IOSByteArray *)getEncoded;
+
+- (jint)getEndOffset;
+
+- (jint)getLength;
 
 + (jint)getLengthWithByteArray:(IOSByteArray *)encoding;
 
-- (void)readBitString;
+- (jint)getOffset;
 
-- (void)readEnumerated;
+- (jint)getTagOffset;
+
+- (jint)next;
+
+- (void)putWithId:(id)key
+           withId:(id)entry_;
+
+- (void)readBitString;
 
 - (void)readBoolean;
 
-- (void)readGeneralizedTime;
+- (void)readContent;
 
-- (void)readUTCTime;
+- (void)readEnumerated;
+
+- (void)readGeneralizedTime;
 
 - (void)readInteger;
 
@@ -82,42 +97,44 @@
 
 - (void)readStringWithOrgApacheHarmonySecurityAsn1ASN1StringType:(OrgApacheHarmonySecurityAsn1ASN1StringType *)type;
 
-- (IOSByteArray *)getEncoded;
+- (void)readUTCTime;
 
-- (IOSByteArray *)getBuffer;
-
-- (jint)getLength;
-
-- (jint)getOffset;
-
-- (jint)getEndOffset;
-
-- (jint)getTagOffset;
+- (void)resetWithByteArray:(IOSByteArray *)encoded;
 
 - (void)setVerify;
 
+#pragma mark Protected
+
 - (jint)read;
-
-- (void)readContent;
-
-- (void)compactBuffer;
-
-- (void)putWithId:(id)key
-           withId:(id)entry_;
-
-- (id)getWithId:(id)key;
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1BerInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1BerInputStream)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BerInputStream, buffer_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BerInputStream, content_, id)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BerInputStream, times_, IOSIntArray *)
-FOUNDATION_EXPORT jint OrgApacheHarmonySecurityAsn1BerInputStream_getLengthWithByteArray_(IOSByteArray *encoding);
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1BerInputStream, BUF_INCREASE_SIZE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1BerInputStream, INDEFINIT_LENGTH, jint)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BerInputStream_initWithByteArray_(OrgApacheHarmonySecurityAsn1BerInputStream *self, IOSByteArray *encoded);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BerInputStream *new_OrgApacheHarmonySecurityAsn1BerInputStream_initWithByteArray_(IOSByteArray *encoded) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BerInputStream_initWithByteArray_withInt_withInt_(OrgApacheHarmonySecurityAsn1BerInputStream *self, IOSByteArray *encoded, jint offset, jint expectedLength);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BerInputStream *new_OrgApacheHarmonySecurityAsn1BerInputStream_initWithByteArray_withInt_withInt_(IOSByteArray *encoded, jint offset, jint expectedLength) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BerInputStream_initWithJavaIoInputStream_(OrgApacheHarmonySecurityAsn1BerInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BerInputStream *new_OrgApacheHarmonySecurityAsn1BerInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BerInputStream_initWithJavaIoInputStream_withInt_(OrgApacheHarmonySecurityAsn1BerInputStream *self, JavaIoInputStream *inArg, jint initialSize);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BerInputStream *new_OrgApacheHarmonySecurityAsn1BerInputStream_initWithJavaIoInputStream_withInt_(JavaIoInputStream *inArg, jint initialSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint OrgApacheHarmonySecurityAsn1BerInputStream_getLengthWithByteArray_(IOSByteArray *encoding);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1BerInputStream)
 
 #endif // _OrgApacheHarmonySecurityAsn1BerInputStream_H_

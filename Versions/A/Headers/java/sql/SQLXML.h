@@ -6,6 +6,8 @@
 #ifndef _JavaSqlSQLXML_H_
 #define _JavaSqlSQLXML_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
@@ -13,8 +15,6 @@
 @class JavaIoWriter;
 @protocol JavaxXmlTransformResult;
 @protocol JavaxXmlTransformSource;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlSQLXML < NSObject, JavaObject >
 
@@ -38,6 +38,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLXML_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLXML)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLXML)
 
 #endif // _JavaSqlSQLXML_H_

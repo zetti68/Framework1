@@ -6,9 +6,9 @@
 #ifndef _JavaIoDataOutput_H_
 #define _JavaIoDataOutput_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSByteArray;
 
 @protocol JavaIoDataOutput < NSObject, JavaObject >
 
@@ -44,6 +44,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoDataOutput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoDataOutput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoDataOutput)
 
 #endif // _JavaIoDataOutput_H_

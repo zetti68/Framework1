@@ -6,15 +6,16 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1SequenceOf_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1SequenceOf_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1ValueCollection.h"
+
 @class OrgApacheHarmonySecurityAsn1ASN1Type;
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1ValueCollection.h"
+@interface OrgApacheHarmonySecurityAsn1ASN1SequenceOf : OrgApacheHarmonySecurityAsn1ASN1ValueCollection
 
-@interface OrgApacheHarmonySecurityAsn1ASN1SequenceOf : OrgApacheHarmonySecurityAsn1ASN1ValueCollection {
-}
+#pragma mark Public
 
 - (instancetype)initWithOrgApacheHarmonySecurityAsn1ASN1Type:(OrgApacheHarmonySecurityAsn1ASN1Type *)type;
 
@@ -26,6 +27,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1SequenceOf_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1SequenceOf)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1SequenceOf_initWithOrgApacheHarmonySecurityAsn1ASN1Type_(OrgApacheHarmonySecurityAsn1ASN1SequenceOf *self, OrgApacheHarmonySecurityAsn1ASN1Type *type);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1SequenceOf *new_OrgApacheHarmonySecurityAsn1ASN1SequenceOf_initWithOrgApacheHarmonySecurityAsn1ASN1Type_(OrgApacheHarmonySecurityAsn1ASN1Type *type) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1SequenceOf)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1SequenceOf_H_

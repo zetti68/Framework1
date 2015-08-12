@@ -6,12 +6,12 @@
 #ifndef _JavaUtilConcurrentCompletionService_H_
 #define _JavaUtilConcurrentCompletionService_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilConcurrentCallable;
 @protocol JavaUtilConcurrentFuture;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilConcurrentCompletionService < NSObject, JavaObject >
 
@@ -29,6 +29,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCompletionService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCompletionService)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCompletionService)
 
 #endif // _JavaUtilConcurrentCompletionService_H_

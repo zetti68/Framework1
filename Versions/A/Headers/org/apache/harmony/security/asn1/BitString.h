@@ -6,10 +6,10 @@
 #ifndef _OrgApacheHarmonySecurityAsn1BitString_H_
 #define _OrgApacheHarmonySecurityAsn1BitString_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSBooleanArray;
 @class IOSByteArray;
-
-#import "JreEmulation.h"
 
 @interface OrgApacheHarmonySecurityAsn1BitString : NSObject {
  @public
@@ -17,10 +17,12 @@
   jint unusedBits_;
 }
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes
-                          withInt:(jint)unusedBits;
+#pragma mark Public
 
 - (instancetype)initWithBooleanArray:(IOSBooleanArray *)values;
+
+- (instancetype)initWithByteArray:(IOSByteArray *)bytes
+                          withInt:(jint)unusedBits;
 
 - (jboolean)getBitWithInt:(jint)bit;
 
@@ -31,15 +33,18 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityAsn1BitString_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1BitString)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1BitString, bytes_, IOSByteArray *)
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheHarmonySecurityAsn1BitString_SET_MASK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1BitString, SET_MASK_, IOSByteArray *)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BitString_initWithByteArray_withInt_(OrgApacheHarmonySecurityAsn1BitString *self, IOSByteArray *bytes, jint unusedBits);
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheHarmonySecurityAsn1BitString_RESET_MASK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1BitString, RESET_MASK_, IOSByteArray *)
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BitString *new_OrgApacheHarmonySecurityAsn1BitString_initWithByteArray_withInt_(IOSByteArray *bytes, jint unusedBits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1BitString_initWithBooleanArray_(OrgApacheHarmonySecurityAsn1BitString *self, IOSBooleanArray *values);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1BitString *new_OrgApacheHarmonySecurityAsn1BitString_initWithBooleanArray_(IOSBooleanArray *values) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1BitString)
 
 #endif // _OrgApacheHarmonySecurityAsn1BitString_H_

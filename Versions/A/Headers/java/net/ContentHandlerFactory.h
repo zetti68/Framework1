@@ -6,9 +6,9 @@
 #ifndef _JavaNetContentHandlerFactory_H_
 #define _JavaNetContentHandlerFactory_H_
 
-@class JavaNetContentHandler;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaNetContentHandler;
 
 @protocol JavaNetContentHandlerFactory < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetContentHandlerFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetContentHandlerFactory)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetContentHandlerFactory)
 
 #endif // _JavaNetContentHandlerFactory_H_

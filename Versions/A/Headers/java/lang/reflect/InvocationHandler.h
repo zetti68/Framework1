@@ -6,10 +6,10 @@
 #ifndef _JavaLangReflectInvocationHandler_H_
 #define _JavaLangReflectInvocationHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaLangReflectMethod;
-
-#import "JreEmulation.h"
 
 @protocol JavaLangReflectInvocationHandler < NSObject, JavaObject >
 
@@ -19,6 +19,8 @@ withJavaLangReflectMethod:(JavaLangReflectMethod *)method
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectInvocationHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectInvocationHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectInvocationHandler)
 
 #endif // _JavaLangReflectInvocationHandler_H_

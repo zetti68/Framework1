@@ -6,32 +6,23 @@
 #ifndef _JavaNioSelectorImpl_H_
 #define _JavaNioSelectorImpl_H_
 
-@class IOSObjectArray;
-@class JavaIoFileDescriptor;
+#include "J2ObjC_header.h"
+#include "java/nio/channels/spi/AbstractSelector.h"
+
 @class JavaNioChannelsSelectionKey;
 @class JavaNioChannelsSelector;
 @class JavaNioChannelsSpiAbstractSelectableChannel;
 @class JavaNioChannelsSpiSelectorProvider;
-@class JavaUtilUnsafeArrayList;
-@protocol JavaUtilCollection;
-@protocol JavaUtilIterator;
-
-#import "JreEmulation.h"
-#include "java/nio/channels/spi/AbstractSelector.h"
-#include "java/util/Set.h"
+@protocol JavaUtilSet;
 
 @interface JavaNioSelectorImpl : JavaNioChannelsSpiAbstractSelector {
  @public
   id keysLock_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
-
-- (void)implCloseSelector;
-
-- (JavaNioChannelsSelectionKey *)register__WithJavaNioChannelsSpiAbstractSelectableChannel:(JavaNioChannelsSpiAbstractSelectableChannel *)channel
-                                                                                   withInt:(jint)operations
-                                                                                    withId:(id)attachment;
 
 - (id<JavaUtilSet>)keys;
 
@@ -39,56 +30,30 @@
 
 - (jint)selectWithLong:(jlong)timeout;
 
-- (jint)selectNow;
-
 - (id<JavaUtilSet>)selectedKeys;
+
+- (jint)selectNow;
 
 - (JavaNioChannelsSelector *)wakeup;
 
+#pragma mark Protected
+
+- (void)implCloseSelector;
+
+- (JavaNioChannelsSelectionKey *)register__WithJavaNioChannelsSpiAbstractSelectableChannel:(JavaNioChannelsSpiAbstractSelectableChannel *)channel
+                                                                                   withInt:(jint)operations
+                                                                                    withId:(id)attachment;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioSelectorImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioSelectorImpl)
 
 J2OBJC_FIELD_SETTER(JavaNioSelectorImpl, keysLock_, id)
 
-@interface JavaNioSelectorImpl_UnaddableSet : NSObject < JavaUtilSet > {
-}
+FOUNDATION_EXPORT void JavaNioSelectorImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioSelectorImpl *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
 
-- (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)set;
+FOUNDATION_EXPORT JavaNioSelectorImpl *new_JavaNioSelectorImpl_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiSelectorProvider *selectorProvider) NS_RETURNS_RETAINED;
 
-- (jboolean)isEqual:(id)object;
-
-- (NSUInteger)hash;
-
-- (jboolean)addWithId:(id)object;
-
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (void)clear;
-
-- (jboolean)containsWithId:(id)object;
-
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jboolean)isEmpty;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (jboolean)removeWithId:(id)object;
-
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jint)size;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioSelectorImpl_UnaddableSet_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioSelectorImpl)
 
 #endif // _JavaNioSelectorImpl_H_

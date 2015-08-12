@@ -6,17 +6,15 @@
 #ifndef _JavaSecurityPermissionsHash_H_
 #define _JavaSecurityPermissionsHash_H_
 
-@class JavaSecurityPermission;
-@class JavaUtilHashtable;
-@protocol JavaUtilEnumeration;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/PermissionCollection.h"
 
-#define JavaSecurityPermissionsHash_serialVersionUID -8491988220802933440LL
+@class JavaSecurityPermission;
+@protocol JavaUtilEnumeration;
 
-@interface JavaSecurityPermissionsHash : JavaSecurityPermissionCollection {
-}
+@interface JavaSecurityPermissionsHash : JavaSecurityPermissionCollection
+
+#pragma mark Public
 
 - (void)addWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
@@ -24,12 +22,18 @@
 
 - (jboolean)impliesWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPermissionsHash_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPermissionsHash)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityPermissionsHash, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityPermissionsHash_init(JavaSecurityPermissionsHash *self);
+
+FOUNDATION_EXPORT JavaSecurityPermissionsHash *new_JavaSecurityPermissionsHash_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPermissionsHash)
 
 #endif // _JavaSecurityPermissionsHash_H_

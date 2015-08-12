@@ -6,9 +6,9 @@
 #ifndef _JavaNetURLStreamHandlerFactory_H_
 #define _JavaNetURLStreamHandlerFactory_H_
 
-@class JavaNetURLStreamHandler;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaNetURLStreamHandler;
 
 @protocol JavaNetURLStreamHandlerFactory < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetURLStreamHandlerFactory_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetURLStreamHandlerFactory)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURLStreamHandlerFactory)
 
 #endif // _JavaNetURLStreamHandlerFactory_H_

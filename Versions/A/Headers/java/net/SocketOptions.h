@@ -6,22 +6,22 @@
 #ifndef _JavaNetSocketOptions_H_
 #define _JavaNetSocketOptions_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-#define JavaNetSocketOptions_IP_MULTICAST_IF 16
-#define JavaNetSocketOptions_IP_MULTICAST_IF2 31
-#define JavaNetSocketOptions_IP_MULTICAST_LOOP 18
-#define JavaNetSocketOptions_IP_TOS 3
-#define JavaNetSocketOptions_SO_BINDADDR 15
-#define JavaNetSocketOptions_SO_BROADCAST 32
-#define JavaNetSocketOptions_SO_KEEPALIVE 8
 #define JavaNetSocketOptions_SO_LINGER 128
-#define JavaNetSocketOptions_SO_OOBINLINE 4099
-#define JavaNetSocketOptions_SO_RCVBUF 4098
-#define JavaNetSocketOptions_SO_REUSEADDR 4
-#define JavaNetSocketOptions_SO_SNDBUF 4097
 #define JavaNetSocketOptions_SO_TIMEOUT 4102
 #define JavaNetSocketOptions_TCP_NODELAY 1
+#define JavaNetSocketOptions_IP_MULTICAST_IF 16
+#define JavaNetSocketOptions_SO_BINDADDR 15
+#define JavaNetSocketOptions_SO_REUSEADDR 4
+#define JavaNetSocketOptions_SO_SNDBUF 4097
+#define JavaNetSocketOptions_SO_RCVBUF 4098
+#define JavaNetSocketOptions_SO_KEEPALIVE 8
+#define JavaNetSocketOptions_IP_TOS 3
+#define JavaNetSocketOptions_IP_MULTICAST_LOOP 18
+#define JavaNetSocketOptions_SO_BROADCAST 32
+#define JavaNetSocketOptions_SO_OOBINLINE 4099
+#define JavaNetSocketOptions_IP_MULTICAST_IF2 31
 
 @protocol JavaNetSocketOptions < NSObject, JavaObject >
 
@@ -32,7 +32,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketOptions_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketOptions)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketOptions, SO_LINGER, jint)
 
@@ -61,5 +61,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketOptions, SO_BROADCAST, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketOptions, SO_OOBINLINE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketOptions, IP_MULTICAST_IF2, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketOptions)
 
 #endif // _JavaNetSocketOptions_H_

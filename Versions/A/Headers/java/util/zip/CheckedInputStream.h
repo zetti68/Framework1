@@ -6,18 +6,21 @@
 #ifndef _JavaUtilZipCheckedInputStream_H_
 #define _JavaUtilZipCheckedInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterInputStream.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @protocol JavaUtilZipChecksum;
 
-#import "JreEmulation.h"
-#include "java/io/FilterInputStream.h"
+@interface JavaUtilZipCheckedInputStream : JavaIoFilterInputStream
 
-@interface JavaUtilZipCheckedInputStream : JavaIoFilterInputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)is
                   withJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)csum;
+
+- (id<JavaUtilZipChecksum>)getChecksum;
 
 - (jint)read;
 
@@ -25,12 +28,16 @@
                   withInt:(jint)byteOffset
                   withInt:(jint)byteCount;
 
-- (id<JavaUtilZipChecksum>)getChecksum;
-
 - (jlong)skipWithLong:(jlong)byteCount;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipCheckedInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipCheckedInputStream)
+
+FOUNDATION_EXPORT void JavaUtilZipCheckedInputStream_initWithJavaIoInputStream_withJavaUtilZipChecksum_(JavaUtilZipCheckedInputStream *self, JavaIoInputStream *is, id<JavaUtilZipChecksum> csum);
+
+FOUNDATION_EXPORT JavaUtilZipCheckedInputStream *new_JavaUtilZipCheckedInputStream_initWithJavaIoInputStream_withJavaUtilZipChecksum_(JavaIoInputStream *is, id<JavaUtilZipChecksum> csum) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipCheckedInputStream)
 
 #endif // _JavaUtilZipCheckedInputStream_H_

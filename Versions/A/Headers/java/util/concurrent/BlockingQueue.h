@@ -6,13 +6,14 @@
 #ifndef _JavaUtilConcurrentBlockingQueue_H_
 #define _JavaUtilConcurrentBlockingQueue_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/Queue.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaUtilCollection;
 
-#import "JreEmulation.h"
-#include "java/util/Queue.h"
-
 @protocol JavaUtilConcurrentBlockingQueue < JavaUtilQueue, NSObject, JavaObject >
+
 - (jboolean)addWithId:(id)e;
 
 - (jboolean)offerWithId:(id)e;
@@ -39,9 +40,10 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
                               withInt:(jint)maxElements;
 
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentBlockingQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentBlockingQueue)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentBlockingQueue)
 
 #endif // _JavaUtilConcurrentBlockingQueue_H_

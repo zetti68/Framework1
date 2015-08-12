@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsClosedByInterruptException_H_
 #define _JavaNioChannelsClosedByInterruptException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/AsynchronousCloseException.h"
 
-#define JavaNioChannelsClosedByInterruptException_serialVersionUID -4488191543534286750LL
+@interface JavaNioChannelsClosedByInterruptException : JavaNioChannelsAsynchronousCloseException
 
-@interface JavaNioChannelsClosedByInterruptException : JavaNioChannelsAsynchronousCloseException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsClosedByInterruptException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsClosedByInterruptException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsClosedByInterruptException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsClosedByInterruptException_init(JavaNioChannelsClosedByInterruptException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsClosedByInterruptException *new_JavaNioChannelsClosedByInterruptException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsClosedByInterruptException)
 
 #endif // _JavaNioChannelsClosedByInterruptException_H_

@@ -6,77 +6,72 @@
 #ifndef _JavaBeansPropertyChangeSupport_H_
 #define _JavaBeansPropertyChangeSupport_H_
 
-@class IOSObjectArray;
-@class JavaBeansPropertyChangeEvent;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@protocol JavaBeansPropertyChangeListener;
-@protocol JavaUtilEventListener;
-@protocol JavaUtilList;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaBeansPropertyChangeSupport_serialVersionUID 6401253773779951803LL
+@class IOSObjectArray;
+@class JavaBeansPropertyChangeEvent;
+@protocol JavaBeansPropertyChangeListener;
 
-@interface JavaBeansPropertyChangeSupport : NSObject < JavaIoSerializable > {
-}
+@interface JavaBeansPropertyChangeSupport : NSObject < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)sourceBean;
 
-- (void)firePropertyChangeWithNSString:(NSString *)propertyName
-                                withId:(id)oldValue
-                                withId:(id)newValue;
-
-- (void)fireIndexedPropertyChangeWithNSString:(NSString *)propertyName
-                                      withInt:(jint)index
-                                       withId:(id)oldValue
-                                       withId:(id)newValue;
-
-- (void)removePropertyChangeListenerWithNSString:(NSString *)propertyName
-             withJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
+- (void)addPropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
 
 - (void)addPropertyChangeListenerWithNSString:(NSString *)propertyName
           withJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
-
-- (IOSObjectArray *)getPropertyChangeListenersWithNSString:(NSString *)propertyName;
-
-- (void)firePropertyChangeWithNSString:(NSString *)propertyName
-                           withBoolean:(jboolean)oldValue
-                           withBoolean:(jboolean)newValue;
 
 - (void)fireIndexedPropertyChangeWithNSString:(NSString *)propertyName
                                       withInt:(jint)index
                                   withBoolean:(jboolean)oldValue
                                   withBoolean:(jboolean)newValue;
 
-- (void)firePropertyChangeWithNSString:(NSString *)propertyName
-                               withInt:(jint)oldValue
-                               withInt:(jint)newValue;
-
 - (void)fireIndexedPropertyChangeWithNSString:(NSString *)propertyName
                                       withInt:(jint)index
                                       withInt:(jint)oldValue
                                       withInt:(jint)newValue;
 
+- (void)fireIndexedPropertyChangeWithNSString:(NSString *)propertyName
+                                      withInt:(jint)index
+                                       withId:(id)oldValue
+                                       withId:(id)newValue;
+
+- (void)firePropertyChangeWithJavaBeansPropertyChangeEvent:(JavaBeansPropertyChangeEvent *)event;
+
+- (void)firePropertyChangeWithNSString:(NSString *)propertyName
+                           withBoolean:(jboolean)oldValue
+                           withBoolean:(jboolean)newValue;
+
+- (void)firePropertyChangeWithNSString:(NSString *)propertyName
+                               withInt:(jint)oldValue
+                               withInt:(jint)newValue;
+
+- (void)firePropertyChangeWithNSString:(NSString *)propertyName
+                                withId:(id)oldValue
+                                withId:(id)newValue;
+
+- (IOSObjectArray *)getPropertyChangeListeners;
+
+- (IOSObjectArray *)getPropertyChangeListenersWithNSString:(NSString *)propertyName;
+
 - (jboolean)hasListenersWithNSString:(NSString *)propertyName;
 
 - (void)removePropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
 
-- (void)addPropertyChangeListenerWithJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
-
-- (IOSObjectArray *)getPropertyChangeListeners;
-
-- (void)firePropertyChangeWithJavaBeansPropertyChangeEvent:(JavaBeansPropertyChangeEvent *)event;
+- (void)removePropertyChangeListenerWithNSString:(NSString *)propertyName
+             withJavaBeansPropertyChangeListener:(id<JavaBeansPropertyChangeListener>)listener;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaBeansPropertyChangeSupport_initialized;
 J2OBJC_STATIC_INIT(JavaBeansPropertyChangeSupport)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaBeansPropertyChangeSupport, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaBeansPropertyChangeSupport_initWithId_(JavaBeansPropertyChangeSupport *self, id sourceBean);
 
-FOUNDATION_EXPORT IOSObjectArray *JavaBeansPropertyChangeSupport_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaBeansPropertyChangeSupport, serialPersistentFields_, IOSObjectArray *)
+FOUNDATION_EXPORT JavaBeansPropertyChangeSupport *new_JavaBeansPropertyChangeSupport_initWithId_(id sourceBean) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaBeansPropertyChangeSupport)
 
 #endif // _JavaBeansPropertyChangeSupport_H_

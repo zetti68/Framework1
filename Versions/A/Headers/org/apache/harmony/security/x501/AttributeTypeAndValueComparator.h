@@ -6,27 +6,29 @@
 #ifndef _OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_H_
 #define _OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_H_
 
-@class OrgApacheHarmonySecurityUtilsObjectIdentifier;
-@class OrgApacheHarmonySecurityX501AttributeTypeAndValue;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/Comparator.h"
 
-#define OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_serialVersionUID -1286471842007103132LL
+@class OrgApacheHarmonySecurityX501AttributeTypeAndValue;
 
-@interface OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator : NSObject < JavaUtilComparator, JavaIoSerializable > {
-}
+@interface OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator : NSObject < JavaUtilComparator, JavaIoSerializable >
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheHarmonySecurityX501AttributeTypeAndValue *)atav1
                withId:(OrgApacheHarmonySecurityX501AttributeTypeAndValue *)atav2;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator, serialVersionUID, jlong)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_init(OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator *self);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator *new_OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator)
 
 #endif // _OrgApacheHarmonySecurityX501AttributeTypeAndValueComparator_H_

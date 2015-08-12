@@ -6,17 +6,17 @@
 #ifndef _JavaIoInterruptedIOException_H_
 #define _JavaIoInterruptedIOException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoInterruptedIOException_serialVersionUID 4020568460727500567LL
+@class JavaLangThrowable;
 
 @interface JavaIoInterruptedIOException : JavaIoIOException {
  @public
   jint bytesTransferred_;
 }
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,8 +27,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoInterruptedIOException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoInterruptedIOException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoInterruptedIOException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoInterruptedIOException_init(JavaIoInterruptedIOException *self);
+
+FOUNDATION_EXPORT JavaIoInterruptedIOException *new_JavaIoInterruptedIOException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInterruptedIOException_initWithNSString_(JavaIoInterruptedIOException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoInterruptedIOException *new_JavaIoInterruptedIOException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInterruptedIOException_initWithNSString_withJavaLangThrowable_(JavaIoInterruptedIOException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaIoInterruptedIOException *new_JavaIoInterruptedIOException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoInterruptedIOException)
 
 #endif // _JavaIoInterruptedIOException_H_

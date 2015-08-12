@@ -6,12 +6,12 @@
 #ifndef _OrgW3cDomTypeInfo_H_
 #define _OrgW3cDomTypeInfo_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-#define OrgW3cDomTypeInfo_DERIVATION_EXTENSION 2
-#define OrgW3cDomTypeInfo_DERIVATION_LIST 8
 #define OrgW3cDomTypeInfo_DERIVATION_RESTRICTION 1
+#define OrgW3cDomTypeInfo_DERIVATION_EXTENSION 2
 #define OrgW3cDomTypeInfo_DERIVATION_UNION 4
+#define OrgW3cDomTypeInfo_DERIVATION_LIST 8
 
 @protocol OrgW3cDomTypeInfo < NSObject, JavaObject >
 
@@ -25,7 +25,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgW3cDomTypeInfo_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgW3cDomTypeInfo)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgW3cDomTypeInfo, DERIVATION_RESTRICTION, jint)
 
@@ -34,5 +34,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgW3cDomTypeInfo, DERIVATION_EXTENSION, jint)
 J2OBJC_STATIC_FIELD_GETTER(OrgW3cDomTypeInfo, DERIVATION_UNION, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgW3cDomTypeInfo, DERIVATION_LIST, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgW3cDomTypeInfo)
 
 #endif // _OrgW3cDomTypeInfo_H_

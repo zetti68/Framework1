@@ -6,33 +6,38 @@
 #ifndef _JavaxSecurityCertCertificate_H_
 #define _JavaxSecurityCertCertificate_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @protocol JavaSecurityPublicKey;
 
-#import "JreEmulation.h"
+@interface JavaxSecurityCertCertificate : NSObject
 
-@interface JavaxSecurityCertCertificate : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (jboolean)isEqual:(id)obj;
 
+- (IOSByteArray *)getEncoded;
+
+- (id<JavaSecurityPublicKey>)getPublicKey;
+
 - (NSUInteger)hash;
 
-- (IOSByteArray *)getEncoded;
+- (NSString *)description;
 
 - (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key;
 
 - (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key
                            withNSString:(NSString *)sigProvider;
 
-- (NSString *)description;
-
-- (id<JavaSecurityPublicKey>)getPublicKey;
-
 @end
 
-__attribute__((always_inline)) inline void JavaxSecurityCertCertificate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxSecurityCertCertificate)
+
+FOUNDATION_EXPORT void JavaxSecurityCertCertificate_init(JavaxSecurityCertCertificate *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxSecurityCertCertificate)
 
 #endif // _JavaxSecurityCertCertificate_H_

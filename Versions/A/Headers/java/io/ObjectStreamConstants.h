@@ -6,47 +6,45 @@
 #ifndef _JavaIoObjectStreamConstants_H_
 #define _JavaIoObjectStreamConstants_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoSerializablePermission;
 
-#import "JreEmulation.h"
-
-#define JavaIoObjectStreamConstants_PROTOCOL_VERSION_1 1
-#define JavaIoObjectStreamConstants_PROTOCOL_VERSION_2 2
-#define JavaIoObjectStreamConstants_SC_BLOCK_DATA 8
-#define JavaIoObjectStreamConstants_SC_ENUM 16
-#define JavaIoObjectStreamConstants_SC_EXTERNALIZABLE 4
-#define JavaIoObjectStreamConstants_SC_SERIALIZABLE 2
-#define JavaIoObjectStreamConstants_SC_WRITE_METHOD 1
 #define JavaIoObjectStreamConstants_STREAM_MAGIC -21267
 #define JavaIoObjectStreamConstants_STREAM_VERSION 5
-#define JavaIoObjectStreamConstants_TC_ARRAY 117
 #define JavaIoObjectStreamConstants_TC_BASE 112
-#define JavaIoObjectStreamConstants_TC_BLOCKDATA 119
-#define JavaIoObjectStreamConstants_TC_BLOCKDATALONG 122
-#define JavaIoObjectStreamConstants_TC_CLASS 118
+#define JavaIoObjectStreamConstants_TC_NULL 112
+#define JavaIoObjectStreamConstants_TC_REFERENCE 113
 #define JavaIoObjectStreamConstants_TC_CLASSDESC 114
+#define JavaIoObjectStreamConstants_TC_OBJECT 115
+#define JavaIoObjectStreamConstants_TC_STRING 116
+#define JavaIoObjectStreamConstants_TC_ARRAY 117
+#define JavaIoObjectStreamConstants_TC_CLASS 118
+#define JavaIoObjectStreamConstants_TC_BLOCKDATA 119
 #define JavaIoObjectStreamConstants_TC_ENDBLOCKDATA 120
-#define JavaIoObjectStreamConstants_TC_ENUM 126
+#define JavaIoObjectStreamConstants_TC_RESET 121
+#define JavaIoObjectStreamConstants_TC_BLOCKDATALONG 122
 #define JavaIoObjectStreamConstants_TC_EXCEPTION 123
 #define JavaIoObjectStreamConstants_TC_LONGSTRING 124
-#define JavaIoObjectStreamConstants_TC_MAX 126
-#define JavaIoObjectStreamConstants_TC_NULL 112
-#define JavaIoObjectStreamConstants_TC_OBJECT 115
 #define JavaIoObjectStreamConstants_TC_PROXYCLASSDESC 125
-#define JavaIoObjectStreamConstants_TC_REFERENCE 113
-#define JavaIoObjectStreamConstants_TC_RESET 121
-#define JavaIoObjectStreamConstants_TC_STRING 116
+#define JavaIoObjectStreamConstants_TC_MAX 126
 #define JavaIoObjectStreamConstants_baseWireHandle 8257536
+#define JavaIoObjectStreamConstants_PROTOCOL_VERSION_1 1
+#define JavaIoObjectStreamConstants_PROTOCOL_VERSION_2 2
+#define JavaIoObjectStreamConstants_SC_WRITE_METHOD 1
+#define JavaIoObjectStreamConstants_SC_SERIALIZABLE 2
+#define JavaIoObjectStreamConstants_SC_EXTERNALIZABLE 4
+#define JavaIoObjectStreamConstants_SC_BLOCK_DATA 8
+#define JavaIoObjectStreamConstants_TC_ENUM 126
+#define JavaIoObjectStreamConstants_SC_ENUM 16
 
 @protocol JavaIoObjectStreamConstants < NSObject, JavaObject >
 
 @end
 
 @interface JavaIoObjectStreamConstants : NSObject
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoObjectStreamConstants_initialized;
 J2OBJC_STATIC_INIT(JavaIoObjectStreamConstants)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamConstants, STREAM_MAGIC, jshort)
@@ -108,5 +106,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamConstants, SC_BLOCK_DATA, jbyte)
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamConstants, TC_ENUM, jbyte)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamConstants, SC_ENUM, jbyte)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectStreamConstants)
 
 #endif // _JavaIoObjectStreamConstants_H_

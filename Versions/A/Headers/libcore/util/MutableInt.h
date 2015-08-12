@@ -6,17 +6,25 @@
 #ifndef _LibcoreUtilMutableInt_H_
 #define _LibcoreUtilMutableInt_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreUtilMutableInt : NSObject {
  @public
   jint value_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithInt:(jint)value;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreUtilMutableInt_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreUtilMutableInt)
+
+FOUNDATION_EXPORT void LibcoreUtilMutableInt_initWithInt_(LibcoreUtilMutableInt *self, jint value);
+
+FOUNDATION_EXPORT LibcoreUtilMutableInt *new_LibcoreUtilMutableInt_initWithInt_(jint value) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilMutableInt)
 
 #endif // _LibcoreUtilMutableInt_H_

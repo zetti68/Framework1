@@ -6,27 +6,23 @@
 #ifndef _JavaUtilTimer_H_
 #define _JavaUtilTimer_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+
 @class JavaUtilDate;
 @class JavaUtilTimerTask;
-@class JavaUtilTimer_FinalizerHelper;
-@class JavaUtilTimer_TimerImpl;
-@class JavaUtilTimer_TimerImpl_TimerHeap;
 
-#import "JreEmulation.h"
-#include "java/lang/Thread.h"
+@interface JavaUtilTimer : NSObject
 
-@interface JavaUtilTimer : NSObject {
-}
+#pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                     withBoolean:(jboolean)isDaemon;
-
-- (instancetype)initWithNSString:(NSString *)name;
+- (instancetype)init;
 
 - (instancetype)initWithBoolean:(jboolean)isDaemon;
 
-- (instancetype)init;
+- (instancetype)initWithNSString:(NSString *)name;
+
+- (instancetype)initWithNSString:(NSString *)name
+                     withBoolean:(jboolean)isDaemon;
 
 - (void)cancel;
 
@@ -36,78 +32,44 @@
                      withJavaUtilDate:(JavaUtilDate *)when;
 
 - (void)scheduleWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
+                     withJavaUtilDate:(JavaUtilDate *)when
+                             withLong:(jlong)period;
+
+- (void)scheduleWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
                              withLong:(jlong)delay;
 
 - (void)scheduleWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
                              withLong:(jlong)delay
                              withLong:(jlong)period;
 
-- (void)scheduleWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
-                     withJavaUtilDate:(JavaUtilDate *)when
-                             withLong:(jlong)period;
+- (void)scheduleAtFixedRateWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
+                                withJavaUtilDate:(JavaUtilDate *)when
+                                        withLong:(jlong)period;
 
 - (void)scheduleAtFixedRateWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
                                         withLong:(jlong)delay
                                         withLong:(jlong)period;
 
-- (void)scheduleAtFixedRateWithJavaUtilTimerTask:(JavaUtilTimerTask *)task
-                                withJavaUtilDate:(JavaUtilDate *)when
-                                        withLong:(jlong)period;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTimer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTimer)
 
-FOUNDATION_EXPORT jlong JavaUtilTimer_timerId_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTimer, timerId_, jlong)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaUtilTimer, timerId_, jlong)
+FOUNDATION_EXPORT void JavaUtilTimer_initWithNSString_withBoolean_(JavaUtilTimer *self, NSString *name, jboolean isDaemon);
 
-@interface JavaUtilTimer_TimerImpl : JavaLangThread {
-}
+FOUNDATION_EXPORT JavaUtilTimer *new_JavaUtilTimer_initWithNSString_withBoolean_(NSString *name, jboolean isDaemon) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithNSString:(NSString *)name
-                     withBoolean:(jboolean)isDaemon;
+FOUNDATION_EXPORT void JavaUtilTimer_initWithNSString_(JavaUtilTimer *self, NSString *name);
 
-- (void)run;
+FOUNDATION_EXPORT JavaUtilTimer *new_JavaUtilTimer_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
 
-- (void)cancel;
+FOUNDATION_EXPORT void JavaUtilTimer_initWithBoolean_(JavaUtilTimer *self, jboolean isDaemon);
 
-- (jint)purge;
+FOUNDATION_EXPORT JavaUtilTimer *new_JavaUtilTimer_initWithBoolean_(jboolean isDaemon) NS_RETURNS_RETAINED;
 
-@end
+FOUNDATION_EXPORT void JavaUtilTimer_init(JavaUtilTimer *self);
 
-__attribute__((always_inline)) inline void JavaUtilTimer_TimerImpl_init() {}
+FOUNDATION_EXPORT JavaUtilTimer *new_JavaUtilTimer_init() NS_RETURNS_RETAINED;
 
-@interface JavaUtilTimer_TimerImpl_TimerHeap : NSObject {
-}
-
-- (JavaUtilTimerTask *)minimum;
-
-- (jboolean)isEmpty;
-
-- (void)insertWithJavaUtilTimerTask:(JavaUtilTimerTask *)task;
-
-- (void)delete__WithInt:(jint)pos;
-
-- (void)reset;
-
-- (void)adjustMinimum;
-
-- (void)deleteIfCancelled;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTimer_TimerImpl_TimerHeap_init() {}
-
-@interface JavaUtilTimer_FinalizerHelper : NSObject {
-}
-
-- (instancetype)initWithJavaUtilTimer_TimerImpl:(JavaUtilTimer_TimerImpl *)impl;
-
-- (void)dealloc;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilTimer_FinalizerHelper_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTimer)
 
 #endif // _JavaUtilTimer_H_

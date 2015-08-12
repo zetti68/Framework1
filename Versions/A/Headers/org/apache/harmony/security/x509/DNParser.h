@@ -6,23 +6,30 @@
 #ifndef _OrgApacheHarmonySecurityX509DNParser_H_
 #define _OrgApacheHarmonySecurityX509DNParser_H_
 
-@class IOSByteArray;
-@class IOSCharArray;
+#include "J2ObjC_header.h"
+
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface OrgApacheHarmonySecurityX509DNParser : NSObject
 
-@interface OrgApacheHarmonySecurityX509DNParser : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)dn;
 
-- (jchar)getUTF8;
-
 - (id<JavaUtilList>)parse;
+
+#pragma mark Protected
+
+- (jchar)getUTF8;
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityX509DNParser_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityX509DNParser)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX509DNParser_initWithNSString_(OrgApacheHarmonySecurityX509DNParser *self, NSString *dn);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX509DNParser *new_OrgApacheHarmonySecurityX509DNParser_initWithNSString_(NSString *dn) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityX509DNParser)
 
 #endif // _OrgApacheHarmonySecurityX509DNParser_H_

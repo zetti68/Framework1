@@ -6,10 +6,10 @@
 #ifndef _JavaSqlArray_H_
 #define _JavaSqlArray_H_
 
+#include "J2ObjC_header.h"
+
 @protocol JavaSqlResultSet;
 @protocol JavaUtilMap;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlArray < NSObject, JavaObject >
 
@@ -43,6 +43,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlArray)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlArray)
 
 #endif // _JavaSqlArray_H_

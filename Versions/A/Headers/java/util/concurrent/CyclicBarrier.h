@@ -6,46 +6,45 @@
 #ifndef _JavaUtilConcurrentCyclicBarrier_H_
 #define _JavaUtilConcurrentCyclicBarrier_H_
 
-@class JavaUtilConcurrentCyclicBarrier_Generation;
-@class JavaUtilConcurrentLocksReentrantLock;
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
-@protocol JavaUtilConcurrentLocksCondition;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentCyclicBarrier : NSObject
 
-@interface JavaUtilConcurrentCyclicBarrier : NSObject {
-}
-
-- (instancetype)initWithInt:(jint)parties
-       withJavaLangRunnable:(id<JavaLangRunnable>)barrierAction;
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)parties;
 
-- (jint)getParties;
+- (instancetype)initWithInt:(jint)parties
+       withJavaLangRunnable:(id<JavaLangRunnable>)barrierAction;
 
 - (jint)await;
 
 - (jint)awaitWithLong:(jlong)timeout
 withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
+- (jint)getNumberWaiting;
+
+- (jint)getParties;
+
 - (jboolean)isBroken;
 
 - (void)reset;
 
-- (jint)getNumberWaiting;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCyclicBarrier_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCyclicBarrier)
 
-@interface JavaUtilConcurrentCyclicBarrier_Generation : NSObject {
- @public
-  jboolean broken_;
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentCyclicBarrier_initWithInt_withJavaLangRunnable_(JavaUtilConcurrentCyclicBarrier *self, jint parties, id<JavaLangRunnable> barrierAction);
 
-@end
+FOUNDATION_EXPORT JavaUtilConcurrentCyclicBarrier *new_JavaUtilConcurrentCyclicBarrier_initWithInt_withJavaLangRunnable_(jint parties, id<JavaLangRunnable> barrierAction) NS_RETURNS_RETAINED;
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCyclicBarrier_Generation_init() {}
+FOUNDATION_EXPORT void JavaUtilConcurrentCyclicBarrier_initWithInt_(JavaUtilConcurrentCyclicBarrier *self, jint parties);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCyclicBarrier *new_JavaUtilConcurrentCyclicBarrier_initWithInt_(jint parties) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCyclicBarrier)
 
 #endif // _JavaUtilConcurrentCyclicBarrier_H_

@@ -6,20 +6,22 @@
 #ifndef _JavaIoEmulatedFields_H_
 #define _JavaIoEmulatedFields_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@class JavaIoEmulatedFields_ObjectSlot;
 @class JavaIoObjectStreamField;
 
-#import "JreEmulation.h"
+@interface JavaIoEmulatedFields : NSObject
 
-@interface JavaIoEmulatedFields : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoObjectStreamFieldArray:(IOSObjectArray *)fields
                     withJavaIoObjectStreamFieldArray:(IOSObjectArray *)declared;
 
 - (jboolean)defaultedWithNSString:(NSString *)name;
+
+- (jboolean)getWithNSString:(NSString *)name
+                withBoolean:(jboolean)defaultValue;
 
 - (jbyte)getWithNSString:(NSString *)name
                 withByte:(jbyte)defaultValue;
@@ -45,8 +47,8 @@
 - (jshort)getWithNSString:(NSString *)name
                 withShort:(jshort)defaultValue;
 
-- (jboolean)getWithNSString:(NSString *)name
-                withBoolean:(jboolean)defaultValue;
+- (void)putWithNSString:(NSString *)name
+            withBoolean:(jboolean)value;
 
 - (void)putWithNSString:(NSString *)name
                withByte:(jbyte)value;
@@ -72,14 +74,17 @@
 - (void)putWithNSString:(NSString *)name
               withShort:(jshort)value;
 
-- (void)putWithNSString:(NSString *)name
-            withBoolean:(jboolean)value;
-
 - (IOSObjectArray *)slots;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoEmulatedFields_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoEmulatedFields)
+
+FOUNDATION_EXPORT void JavaIoEmulatedFields_initWithJavaIoObjectStreamFieldArray_withJavaIoObjectStreamFieldArray_(JavaIoEmulatedFields *self, IOSObjectArray *fields, IOSObjectArray *declared);
+
+FOUNDATION_EXPORT JavaIoEmulatedFields *new_JavaIoEmulatedFields_initWithJavaIoObjectStreamFieldArray_withJavaIoObjectStreamFieldArray_(IOSObjectArray *fields, IOSObjectArray *declared) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoEmulatedFields)
 
 @interface JavaIoEmulatedFields_ObjectSlot : NSObject {
  @public
@@ -88,17 +93,27 @@ __attribute__((always_inline)) inline void JavaIoEmulatedFields_init() {}
   jboolean defaulted_;
 }
 
+#pragma mark Public
+
 - (JavaIoObjectStreamField *)getField;
 
 - (id)getFieldValue;
+
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoEmulatedFields_ObjectSlot_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoEmulatedFields_ObjectSlot)
 
 J2OBJC_FIELD_SETTER(JavaIoEmulatedFields_ObjectSlot, field_, JavaIoObjectStreamField *)
 J2OBJC_FIELD_SETTER(JavaIoEmulatedFields_ObjectSlot, fieldValue_, id)
+
+FOUNDATION_EXPORT void JavaIoEmulatedFields_ObjectSlot_init(JavaIoEmulatedFields_ObjectSlot *self);
+
+FOUNDATION_EXPORT JavaIoEmulatedFields_ObjectSlot *new_JavaIoEmulatedFields_ObjectSlot_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoEmulatedFields_ObjectSlot)
 
 #endif // _JavaIoEmulatedFields_H_

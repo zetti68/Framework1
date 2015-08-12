@@ -6,40 +6,47 @@
 #ifndef _JavaNioChannelsFileLock_H_
 #define _JavaNioChannelsFileLock_H_
 
-@class JavaNioChannelsFileChannel;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/AutoCloseable.h"
 
-@interface JavaNioChannelsFileLock : NSObject < JavaLangAutoCloseable > {
-}
+@class JavaNioChannelsFileChannel;
+
+@interface JavaNioChannelsFileLock : NSObject < JavaLangAutoCloseable >
+
+#pragma mark Public
+
+- (JavaNioChannelsFileChannel *)channel;
+
+- (void)close;
+
+- (jboolean)isShared;
+
+- (jboolean)isValid;
+
+- (jboolean)overlapsWithLong:(jlong)start
+                    withLong:(jlong)length;
+
+- (jlong)position;
+
+- (void)release__;
+
+- (jlong)size;
+
+- (NSString *)description;
+
+#pragma mark Protected
 
 - (instancetype)initWithJavaNioChannelsFileChannel:(JavaNioChannelsFileChannel *)channel
                                           withLong:(jlong)position
                                           withLong:(jlong)size
                                        withBoolean:(jboolean)shared;
 
-- (JavaNioChannelsFileChannel *)channel;
-
-- (jlong)position;
-
-- (jlong)size;
-
-- (jboolean)isShared;
-
-- (jboolean)overlapsWithLong:(jlong)start
-                    withLong:(jlong)length;
-
-- (jboolean)isValid;
-
-- (void)release__;
-
-- (void)close;
-
-- (NSString *)description;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsFileLock_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsFileLock)
+
+FOUNDATION_EXPORT void JavaNioChannelsFileLock_initWithJavaNioChannelsFileChannel_withLong_withLong_withBoolean_(JavaNioChannelsFileLock *self, JavaNioChannelsFileChannel *channel, jlong position, jlong size, jboolean shared);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsFileLock)
 
 #endif // _JavaNioChannelsFileLock_H_

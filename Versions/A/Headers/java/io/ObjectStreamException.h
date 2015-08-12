@@ -6,13 +6,12 @@
 #ifndef _JavaIoObjectStreamException_H_
 #define _JavaIoObjectStreamException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoObjectStreamException_serialVersionUID 7260898174833392607LL
+@interface JavaIoObjectStreamException : JavaIoIOException
 
-@interface JavaIoObjectStreamException : JavaIoIOException {
-}
+#pragma mark Protected
 
 - (instancetype)init;
 
@@ -20,8 +19,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectStreamException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectStreamException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoObjectStreamException_init(JavaIoObjectStreamException *self);
+
+FOUNDATION_EXPORT void JavaIoObjectStreamException_initWithNSString_(JavaIoObjectStreamException *self, NSString *detailMessage);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectStreamException)
 
 #endif // _JavaIoObjectStreamException_H_

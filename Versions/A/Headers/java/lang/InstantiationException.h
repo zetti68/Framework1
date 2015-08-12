@@ -6,26 +6,39 @@
 #ifndef _JavaLangInstantiationException_H_
 #define _JavaLangInstantiationException_H_
 
-@class IOSClass;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ReflectiveOperationException.h"
 
-#define JavaLangInstantiationException_serialVersionUID -8441929162975509110LL
+@class IOSClass;
 
-@interface JavaLangInstantiationException : JavaLangReflectiveOperationException {
-}
+@interface JavaLangInstantiationException : JavaLangReflectiveOperationException
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithIOSClass:(IOSClass *)clazz;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangInstantiationException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangInstantiationException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangInstantiationException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangInstantiationException_init(JavaLangInstantiationException *self);
+
+FOUNDATION_EXPORT JavaLangInstantiationException *new_JavaLangInstantiationException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangInstantiationException_initWithNSString_(JavaLangInstantiationException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangInstantiationException *new_JavaLangInstantiationException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangInstantiationException_initWithIOSClass_(JavaLangInstantiationException *self, IOSClass *clazz);
+
+FOUNDATION_EXPORT JavaLangInstantiationException *new_JavaLangInstantiationException_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangInstantiationException)
 
 #endif // _JavaLangInstantiationException_H_

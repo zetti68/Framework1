@@ -6,14 +6,15 @@
 #ifndef _OrgXmlSaxSAXParseException_H_
 #define _OrgXmlSaxSAXParseException_H_
 
+#include "J2ObjC_header.h"
+#include "org/xml/sax/SAXException.h"
+
 @class JavaLangException;
 @protocol OrgXmlSaxLocator;
 
-#import "JreEmulation.h"
-#include "org/xml/sax/SAXException.h"
+@interface OrgXmlSaxSAXParseException : OrgXmlSaxSAXException
 
-@interface OrgXmlSaxSAXParseException : OrgXmlSaxSAXException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)message
             withOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
@@ -35,16 +36,34 @@
                          withInt:(jint)columnNumber
            withJavaLangException:(JavaLangException *)e;
 
+- (jint)getColumnNumber;
+
+- (jint)getLineNumber;
+
 - (NSString *)getPublicId;
 
 - (NSString *)getSystemId;
 
-- (jint)getLineNumber;
-
-- (jint)getColumnNumber;
-
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxSAXParseException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxSAXParseException)
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXParseException_initWithNSString_withOrgXmlSaxLocator_(OrgXmlSaxSAXParseException *self, NSString *message, id<OrgXmlSaxLocator> locator);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXParseException *new_OrgXmlSaxSAXParseException_initWithNSString_withOrgXmlSaxLocator_(NSString *message, id<OrgXmlSaxLocator> locator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXParseException_initWithNSString_withOrgXmlSaxLocator_withJavaLangException_(OrgXmlSaxSAXParseException *self, NSString *message, id<OrgXmlSaxLocator> locator, JavaLangException *e);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXParseException *new_OrgXmlSaxSAXParseException_initWithNSString_withOrgXmlSaxLocator_withJavaLangException_(NSString *message, id<OrgXmlSaxLocator> locator, JavaLangException *e) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXParseException_initWithNSString_withNSString_withNSString_withInt_withInt_(OrgXmlSaxSAXParseException *self, NSString *message, NSString *publicId, NSString *systemId, jint lineNumber, jint columnNumber);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXParseException *new_OrgXmlSaxSAXParseException_initWithNSString_withNSString_withNSString_withInt_withInt_(NSString *message, NSString *publicId, NSString *systemId, jint lineNumber, jint columnNumber) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXParseException_initWithNSString_withNSString_withNSString_withInt_withInt_withJavaLangException_(OrgXmlSaxSAXParseException *self, NSString *message, NSString *publicId, NSString *systemId, jint lineNumber, jint columnNumber, JavaLangException *e);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXParseException *new_OrgXmlSaxSAXParseException_initWithNSString_withNSString_withNSString_withInt_withInt_withJavaLangException_(NSString *message, NSString *publicId, NSString *systemId, jint lineNumber, jint columnNumber, JavaLangException *e) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxSAXParseException)
 
 #endif // _OrgXmlSaxSAXParseException_H_

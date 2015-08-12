@@ -6,11 +6,11 @@
 #ifndef _OrgXmlSaxDocumentHandler_H_
 #define _OrgXmlSaxDocumentHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSCharArray;
 @protocol OrgXmlSaxAttributeList;
 @protocol OrgXmlSaxLocator;
-
-#import "JreEmulation.h"
 
 @protocol OrgXmlSaxDocumentHandler < NSObject, JavaObject >
 
@@ -38,6 +38,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxDocumentHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxDocumentHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxDocumentHandler)
 
 #endif // _OrgXmlSaxDocumentHandler_H_

@@ -6,19 +6,16 @@
 #ifndef _OrgMockitoInternalStubbingAnswersThrowsExceptionClass_H_
 #define _OrgMockitoInternalStubbingAnswersThrowsExceptionClass_H_
 
-@class IOSClass;
-@class OrgMockitoInternalExceptionsStacktraceConditionalStackTraceFilter;
-@protocol OrgMockitoInvocationInvocationOnMock;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "org/mockito/stubbing/Answer.h"
 
-@interface OrgMockitoInternalStubbingAnswersThrowsExceptionClass : NSObject < OrgMockitoStubbingAnswer, JavaIoSerializable > {
- @public
-  IOSClass *throwableClass_;
-  OrgMockitoInternalExceptionsStacktraceConditionalStackTraceFilter *filter_;
-}
+@class IOSClass;
+@protocol OrgMockitoInvocationInvocationOnMock;
+
+@interface OrgMockitoInternalStubbingAnswersThrowsExceptionClass : NSObject < OrgMockitoStubbingAnswer, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithIOSClass:(IOSClass *)throwableClass;
 
@@ -26,15 +23,14 @@
 
 - (IOSClass *)getThrowableClass;
 
-- (void)dealloc;
-
-- (void)copyAllFieldsTo:(OrgMockitoInternalStubbingAnswersThrowsExceptionClass *)other;
-
 @end
 
-__attribute__((always_inline)) inline void OrgMockitoInternalStubbingAnswersThrowsExceptionClass_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgMockitoInternalStubbingAnswersThrowsExceptionClass)
 
-J2OBJC_FIELD_SETTER(OrgMockitoInternalStubbingAnswersThrowsExceptionClass, throwableClass_, IOSClass *)
-J2OBJC_FIELD_SETTER(OrgMockitoInternalStubbingAnswersThrowsExceptionClass, filter_, OrgMockitoInternalExceptionsStacktraceConditionalStackTraceFilter *)
+FOUNDATION_EXPORT void OrgMockitoInternalStubbingAnswersThrowsExceptionClass_initWithIOSClass_(OrgMockitoInternalStubbingAnswersThrowsExceptionClass *self, IOSClass *throwableClass);
+
+FOUNDATION_EXPORT OrgMockitoInternalStubbingAnswersThrowsExceptionClass *new_OrgMockitoInternalStubbingAnswersThrowsExceptionClass_initWithIOSClass_(IOSClass *throwableClass) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalStubbingAnswersThrowsExceptionClass)
 
 #endif // _OrgMockitoInternalStubbingAnswersThrowsExceptionClass_H_

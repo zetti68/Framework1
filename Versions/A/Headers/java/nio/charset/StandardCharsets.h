@@ -6,16 +6,14 @@
 #ifndef _JavaNioCharsetStandardCharsets_H_
 #define _JavaNioCharsetStandardCharsets_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNioCharsetCharset;
 
-#import "JreEmulation.h"
-
-@interface JavaNioCharsetStandardCharsets : NSObject {
-}
+@interface JavaNioCharsetStandardCharsets : NSObject
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioCharsetStandardCharsets_initialized;
 J2OBJC_STATIC_INIT(JavaNioCharsetStandardCharsets)
 
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetStandardCharsets_ISO_8859_1_;
@@ -35,5 +33,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetStandardCharsets, UTF_16LE_, JavaNioCha
 
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetStandardCharsets_UTF_8_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetStandardCharsets, UTF_8_, JavaNioCharsetCharset *)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetStandardCharsets)
 
 #endif // _JavaNioCharsetStandardCharsets_H_

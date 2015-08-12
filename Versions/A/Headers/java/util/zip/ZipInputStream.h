@@ -6,22 +6,21 @@
 #ifndef _JavaUtilZipZipInputStream_H_
 #define _JavaUtilZipZipInputStream_H_
 
-@class IOSByteArray;
-@class IOSCharArray;
-@class JavaIoInputStream;
-@class JavaUtilZipCRC32;
-@class JavaUtilZipZipEntry;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/zip/InflaterInputStream.h"
 #include "java/util/zip/ZipConstants.h"
 
-#define JavaUtilZipZipInputStream_ZIPLocalHeaderVersionNeeded 20
+@class IOSByteArray;
+@class JavaIoInputStream;
+@class JavaUtilZipZipEntry;
 
-@interface JavaUtilZipZipInputStream : JavaUtilZipInflaterInputStream < JavaUtilZipZipConstants > {
-}
+@interface JavaUtilZipZipInputStream : JavaUtilZipInflaterInputStream < JavaUtilZipZipConstants >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)stream;
+
+- (jint)available;
 
 - (void)close;
 
@@ -33,14 +32,18 @@
                   withInt:(jint)byteOffset
                   withInt:(jint)byteCount;
 
-- (jint)available;
+#pragma mark Protected
 
 - (JavaUtilZipZipEntry *)createZipEntryWithNSString:(NSString *)name;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipInputStream)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipInputStream, ZIPLocalHeaderVersionNeeded, jint)
+FOUNDATION_EXPORT void JavaUtilZipZipInputStream_initWithJavaIoInputStream_(JavaUtilZipZipInputStream *self, JavaIoInputStream *stream);
+
+FOUNDATION_EXPORT JavaUtilZipZipInputStream *new_JavaUtilZipZipInputStream_initWithJavaIoInputStream_(JavaIoInputStream *stream) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipInputStream)
 
 #endif // _JavaUtilZipZipInputStream_H_

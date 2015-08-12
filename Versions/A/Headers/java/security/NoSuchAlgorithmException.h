@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityNoSuchAlgorithmException_H_
 #define _JavaSecurityNoSuchAlgorithmException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/GeneralSecurityException.h"
 
-#define JavaSecurityNoSuchAlgorithmException_serialVersionUID -7443947487218346562LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityNoSuchAlgorithmException : JavaSecurityGeneralSecurityException {
-}
+@interface JavaSecurityNoSuchAlgorithmException : JavaSecurityGeneralSecurityException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityNoSuchAlgorithmException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityNoSuchAlgorithmException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityNoSuchAlgorithmException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityNoSuchAlgorithmException_initWithNSString_(JavaSecurityNoSuchAlgorithmException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchAlgorithmException *new_JavaSecurityNoSuchAlgorithmException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityNoSuchAlgorithmException_init(JavaSecurityNoSuchAlgorithmException *self);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchAlgorithmException *new_JavaSecurityNoSuchAlgorithmException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityNoSuchAlgorithmException_initWithNSString_withJavaLangThrowable_(JavaSecurityNoSuchAlgorithmException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchAlgorithmException *new_JavaSecurityNoSuchAlgorithmException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityNoSuchAlgorithmException_initWithJavaLangThrowable_(JavaSecurityNoSuchAlgorithmException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityNoSuchAlgorithmException *new_JavaSecurityNoSuchAlgorithmException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityNoSuchAlgorithmException)
 
 #endif // _JavaSecurityNoSuchAlgorithmException_H_

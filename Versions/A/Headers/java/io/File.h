@@ -6,23 +6,19 @@
 #ifndef _JavaIoFile_H_
 #define _JavaIoFile_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaNetURI;
-@class JavaNetURL;
-@class JavaUtilRandom;
-@protocol JavaIoFileFilter;
-@protocol JavaIoFilenameFilter;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 
-#define JavaIoFile_serialVersionUID 301077366599181567LL
+@class IOSObjectArray;
+@class JavaNetURI;
+@class JavaNetURL;
+@protocol JavaIoFileFilter;
+@protocol JavaIoFilenameFilter;
 
-@interface JavaIoFile : NSObject < JavaIoSerializable, JavaLangComparable > {
-}
+@interface JavaIoFile : NSObject < JavaIoSerializable, JavaLangComparable >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)dir
                       withNSString:(NSString *)name;
@@ -34,8 +30,6 @@
 
 - (instancetype)initWithJavaNetURI:(JavaNetURI *)uri;
 
-+ (IOSObjectArray *)listRoots;
-
 - (jboolean)canExecute;
 
 - (jboolean)canRead;
@@ -43,78 +37,6 @@
 - (jboolean)canWrite;
 
 - (jint)compareToWithId:(JavaIoFile *)another;
-
-- (jboolean)delete__;
-
-- (void)deleteOnExit;
-
-- (jboolean)isEqual:(id)obj;
-
-- (jboolean)exists;
-
-- (NSString *)getAbsolutePath;
-
-- (JavaIoFile *)getAbsoluteFile;
-
-- (NSString *)getCanonicalPath;
-
-- (JavaIoFile *)getCanonicalFile;
-
-- (NSString *)getName;
-
-- (NSString *)getParent;
-
-- (JavaIoFile *)getParentFile;
-
-- (NSString *)getPath;
-
-- (NSUInteger)hash;
-
-- (jboolean)isAbsolute;
-
-
-- (jboolean)isDirectory;
-
-- (jboolean)isFile;
-
-- (jboolean)isHidden;
-
-- (jlong)lastModified;
-
-- (jboolean)setLastModifiedWithLong:(jlong)time;
-
-- (jboolean)setReadOnly;
-
-- (jboolean)setExecutableWithBoolean:(jboolean)executable
-                         withBoolean:(jboolean)ownerOnly;
-
-- (jboolean)setExecutableWithBoolean:(jboolean)executable;
-
-- (jboolean)setReadableWithBoolean:(jboolean)readable
-                       withBoolean:(jboolean)ownerOnly;
-
-- (jboolean)setReadableWithBoolean:(jboolean)readable;
-
-- (jboolean)setWritableWithBoolean:(jboolean)writable
-                       withBoolean:(jboolean)ownerOnly;
-
-- (jboolean)setWritableWithBoolean:(jboolean)writable;
-
-- (jlong)length;
-
-- (IOSObjectArray *)list;
-
-- (IOSObjectArray *)listWithJavaIoFilenameFilter:(id<JavaIoFilenameFilter>)filter;
-
-- (IOSObjectArray *)listFiles;
-
-- (IOSObjectArray *)listFilesWithJavaIoFilenameFilter:(id<JavaIoFilenameFilter>)filter;
-
-- (IOSObjectArray *)listFilesWithJavaIoFileFilter:(id<JavaIoFileFilter>)filter;
-
-- (jboolean)mkdir;
-
-- (jboolean)mkdirs;
 
 - (jboolean)createNewFile;
 
@@ -125,7 +47,86 @@
                               withNSString:(NSString *)suffix
                             withJavaIoFile:(JavaIoFile *)directory;
 
+- (jboolean)delete__;
+
+- (void)deleteOnExit;
+
+- (jboolean)isEqual:(id)obj;
+
+- (jboolean)exists;
+
+- (JavaIoFile *)getAbsoluteFile;
+
+- (NSString *)getAbsolutePath;
+
+- (JavaIoFile *)getCanonicalFile;
+
+- (NSString *)getCanonicalPath;
+
+- (jlong)getFreeSpace;
+
+- (NSString *)getName;
+
+- (NSString *)getParent;
+
+- (JavaIoFile *)getParentFile;
+
+- (NSString *)getPath;
+
+- (jlong)getTotalSpace;
+
+- (jlong)getUsableSpace;
+
+- (NSUInteger)hash;
+
+- (jboolean)isAbsolute;
+
+- (jboolean)isDirectory;
+
+- (jboolean)isFile;
+
+- (jboolean)isHidden;
+
+- (jlong)lastModified;
+
+- (jlong)length;
+
+- (IOSObjectArray *)list;
+
+- (IOSObjectArray *)listWithJavaIoFilenameFilter:(id<JavaIoFilenameFilter>)filter;
+
+- (IOSObjectArray *)listFiles;
+
+- (IOSObjectArray *)listFilesWithJavaIoFileFilter:(id<JavaIoFileFilter>)filter;
+
+- (IOSObjectArray *)listFilesWithJavaIoFilenameFilter:(id<JavaIoFilenameFilter>)filter;
+
++ (IOSObjectArray *)listRoots;
+
+- (jboolean)mkdir;
+
+- (jboolean)mkdirs;
+
 - (jboolean)renameToWithJavaIoFile:(JavaIoFile *)newPath;
+
+- (jboolean)setExecutableWithBoolean:(jboolean)executable;
+
+- (jboolean)setExecutableWithBoolean:(jboolean)executable
+                         withBoolean:(jboolean)ownerOnly;
+
+- (jboolean)setLastModifiedWithLong:(jlong)time;
+
+- (jboolean)setReadableWithBoolean:(jboolean)readable;
+
+- (jboolean)setReadableWithBoolean:(jboolean)readable
+                       withBoolean:(jboolean)ownerOnly;
+
+- (jboolean)setReadOnly;
+
+- (jboolean)setWritableWithBoolean:(jboolean)writable;
+
+- (jboolean)setWritableWithBoolean:(jboolean)writable
+                       withBoolean:(jboolean)ownerOnly;
 
 - (NSString *)description;
 
@@ -133,24 +134,12 @@
 
 - (JavaNetURL *)toURL;
 
-- (jlong)getTotalSpace;
+#pragma mark Package-Private
 
-- (jlong)getUsableSpace;
-
-- (jlong)getFreeSpace;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoFile_initialized;
 J2OBJC_STATIC_INIT(JavaIoFile)
-FOUNDATION_EXPORT IOSObjectArray *JavaIoFile_listRoots();
-FOUNDATION_EXPORT JavaIoFile *JavaIoFile_createTempFileWithNSString_withNSString_(NSString *prefix, NSString *suffix);
-FOUNDATION_EXPORT JavaIoFile *JavaIoFile_createTempFileWithNSString_withNSString_withJavaIoFile_(NSString *prefix, NSString *suffix, JavaIoFile *directory);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT JavaUtilRandom *JavaIoFile_tempFileRandom_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, tempFileRandom_, JavaUtilRandom *)
 
 FOUNDATION_EXPORT jchar JavaIoFile_separatorChar_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, separatorChar_, jchar)
@@ -164,8 +153,28 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, pathSeparatorChar_, jchar)
 FOUNDATION_EXPORT NSString *JavaIoFile_pathSeparator_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, pathSeparator_, NSString *)
 
-FOUNDATION_EXPORT jboolean JavaIoFile_caseSensitive_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoFile, caseSensitive_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaIoFile, caseSensitive_, jboolean)
+FOUNDATION_EXPORT void JavaIoFile_initWithJavaIoFile_withNSString_(JavaIoFile *self, JavaIoFile *dir, NSString *name);
+
+FOUNDATION_EXPORT JavaIoFile *new_JavaIoFile_initWithJavaIoFile_withNSString_(JavaIoFile *dir, NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFile_initWithNSString_(JavaIoFile *self, NSString *path);
+
+FOUNDATION_EXPORT JavaIoFile *new_JavaIoFile_initWithNSString_(NSString *path) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFile_initWithNSString_withNSString_(JavaIoFile *self, NSString *dirPath, NSString *name);
+
+FOUNDATION_EXPORT JavaIoFile *new_JavaIoFile_initWithNSString_withNSString_(NSString *dirPath, NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFile_initWithJavaNetURI_(JavaIoFile *self, JavaNetURI *uri);
+
+FOUNDATION_EXPORT JavaIoFile *new_JavaIoFile_initWithJavaNetURI_(JavaNetURI *uri) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT IOSObjectArray *JavaIoFile_listRoots();
+
+FOUNDATION_EXPORT JavaIoFile *JavaIoFile_createTempFileWithNSString_withNSString_(NSString *prefix, NSString *suffix);
+
+FOUNDATION_EXPORT JavaIoFile *JavaIoFile_createTempFileWithNSString_withNSString_withJavaIoFile_(NSString *prefix, NSString *suffix, JavaIoFile *directory);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFile)
 
 #endif // _JavaIoFile_H_

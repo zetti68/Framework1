@@ -6,6 +6,9 @@
 #ifndef _JavaNetURLConnection_H_
 #define _JavaNetURLConnection_H_
 
+#include "J2ObjC_header.h"
+#include "java/net/ContentHandler.h"
+
 @class IOSObjectArray;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
@@ -15,9 +18,6 @@
 @protocol JavaNetContentHandlerFactory;
 @protocol JavaNetFileNameMap;
 @protocol JavaUtilMap;
-
-#import "JreEmulation.h"
-#include "java/net/ContentHandler.h"
 
 @interface JavaNetURLConnection : NSObject {
  @public
@@ -31,11 +31,16 @@
   jboolean allowUserInteraction_;
 }
 
-- (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
+#pragma mark Public
+
+- (void)addRequestPropertyWithNSString:(NSString *)field
+                          withNSString:(NSString *)newValue;
 
 - (void)connect;
 
 - (jboolean)getAllowUserInteraction;
+
+- (jint)getConnectTimeout;
 
 - (id)getContent;
 
@@ -67,13 +72,6 @@
 
 - (NSString *)getHeaderFieldWithInt:(jint)pos;
 
-- (id<JavaUtilMap>)getHeaderFields;
-
-- (id<JavaUtilMap>)getRequestProperties;
-
-- (void)addRequestPropertyWithNSString:(NSString *)field
-                          withNSString:(NSString *)newValue;
-
 - (NSString *)getHeaderFieldWithNSString:(NSString *)key;
 
 - (jlong)getHeaderFieldDateWithNSString:(NSString *)field
@@ -82,10 +80,12 @@
 - (jint)getHeaderFieldIntWithNSString:(NSString *)field
                               withInt:(jint)defaultValue;
 
+- (NSString *)getHeaderFieldKeyWithInt:(jint)posn;
+
 - (jlong)getHeaderFieldLongWithNSString:(NSString *)field
                                withLong:(jlong)defaultValue;
 
-- (NSString *)getHeaderFieldKeyWithInt:(jint)posn;
+- (id<JavaUtilMap>)getHeaderFields;
 
 - (jlong)getIfModifiedSince;
 
@@ -96,6 +96,10 @@
 - (JavaIoOutputStream *)getOutputStream;
 
 - (JavaSecurityPermission *)getPermission;
+
+- (jint)getReadTimeout;
+
+- (id<JavaUtilMap>)getRequestProperties;
 
 - (NSString *)getRequestPropertyWithNSString:(NSString *)field;
 
@@ -108,6 +112,8 @@
 + (NSString *)guessContentTypeFromStreamWithJavaIoInputStream:(JavaIoInputStream *)is;
 
 - (void)setAllowUserInteractionWithBoolean:(jboolean)newValue;
+
+- (void)setConnectTimeoutWithInt:(jint)timeoutMillis;
 
 + (void)setContentHandlerFactoryWithJavaNetContentHandlerFactory:(id<JavaNetContentHandlerFactory>)contentFactory;
 
@@ -126,67 +132,70 @@
 
 - (void)setIfModifiedSinceWithLong:(jlong)newValue;
 
+- (void)setReadTimeoutWithInt:(jint)timeoutMillis;
+
 - (void)setRequestPropertyWithNSString:(NSString *)field
                           withNSString:(NSString *)newValue;
 
 - (void)setUseCachesWithBoolean:(jboolean)newValue;
 
-- (void)setConnectTimeoutWithInt:(jint)timeoutMillis;
-
-- (jint)getConnectTimeout;
-
-- (void)setReadTimeoutWithInt:(jint)timeoutMillis;
-
-- (jint)getReadTimeout;
-
 - (NSString *)description;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetURLConnection_initialized;
 J2OBJC_STATIC_INIT(JavaNetURLConnection)
 
 J2OBJC_FIELD_SETTER(JavaNetURLConnection, url_, JavaNetURL *)
 J2OBJC_FIELD_SETTER(JavaNetURLConnection, defaultHandler_, JavaNetContentHandler *)
-FOUNDATION_EXPORT jboolean JavaNetURLConnection_getDefaultAllowUserInteraction();
-FOUNDATION_EXPORT NSString *JavaNetURLConnection_getDefaultRequestPropertyWithNSString_(NSString *field);
-FOUNDATION_EXPORT id<JavaNetFileNameMap> JavaNetURLConnection_getFileNameMap();
-FOUNDATION_EXPORT NSString *JavaNetURLConnection_guessContentTypeFromNameWithNSString_(NSString *url);
-FOUNDATION_EXPORT NSString *JavaNetURLConnection_guessContentTypeFromStreamWithJavaIoInputStream_(JavaIoInputStream *is);
-FOUNDATION_EXPORT void JavaNetURLConnection_setContentHandlerFactoryWithJavaNetContentHandlerFactory_(id<JavaNetContentHandlerFactory> contentFactory);
-FOUNDATION_EXPORT void JavaNetURLConnection_setDefaultAllowUserInteractionWithBoolean_(jboolean allows);
-FOUNDATION_EXPORT void JavaNetURLConnection_setDefaultRequestPropertyWithNSString_withNSString_(NSString *field, NSString *value);
-FOUNDATION_EXPORT void JavaNetURLConnection_setFileNameMapWithJavaNetFileNameMap_(id<JavaNetFileNameMap> map);
-
-FOUNDATION_EXPORT jboolean JavaNetURLConnection_defaultAllowUserInteraction_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURLConnection, defaultAllowUserInteraction_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaNetURLConnection, defaultAllowUserInteraction_, jboolean)
-
-FOUNDATION_EXPORT jboolean JavaNetURLConnection_defaultUseCaches_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURLConnection, defaultUseCaches_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(JavaNetURLConnection, defaultUseCaches_, jboolean)
-
-FOUNDATION_EXPORT id<JavaNetContentHandlerFactory> JavaNetURLConnection_contentHandlerFactory_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURLConnection, contentHandlerFactory_, id<JavaNetContentHandlerFactory>)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetURLConnection, contentHandlerFactory_, id<JavaNetContentHandlerFactory>)
 
 FOUNDATION_EXPORT JavaUtilHashtable *JavaNetURLConnection_contentHandlers_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetURLConnection, contentHandlers_, JavaUtilHashtable *)
 J2OBJC_STATIC_FIELD_SETTER(JavaNetURLConnection, contentHandlers_, JavaUtilHashtable *)
 
-FOUNDATION_EXPORT id<JavaNetFileNameMap> JavaNetURLConnection_fileNameMap_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURLConnection, fileNameMap_, id<JavaNetFileNameMap>)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetURLConnection, fileNameMap_, id<JavaNetFileNameMap>)
+FOUNDATION_EXPORT void JavaNetURLConnection_initWithJavaNetURL_(JavaNetURLConnection *self, JavaNetURL *url);
 
-@interface JavaNetURLConnection_DefaultContentHandler : JavaNetContentHandler {
-}
+FOUNDATION_EXPORT jboolean JavaNetURLConnection_getDefaultAllowUserInteraction();
+
+FOUNDATION_EXPORT NSString *JavaNetURLConnection_getDefaultRequestPropertyWithNSString_(NSString *field);
+
+FOUNDATION_EXPORT id<JavaNetFileNameMap> JavaNetURLConnection_getFileNameMap();
+
+FOUNDATION_EXPORT NSString *JavaNetURLConnection_guessContentTypeFromNameWithNSString_(NSString *url);
+
+FOUNDATION_EXPORT NSString *JavaNetURLConnection_guessContentTypeFromStreamWithJavaIoInputStream_(JavaIoInputStream *is);
+
+FOUNDATION_EXPORT void JavaNetURLConnection_setContentHandlerFactoryWithJavaNetContentHandlerFactory_(id<JavaNetContentHandlerFactory> contentFactory);
+
+FOUNDATION_EXPORT void JavaNetURLConnection_setDefaultAllowUserInteractionWithBoolean_(jboolean allows);
+
+FOUNDATION_EXPORT void JavaNetURLConnection_setDefaultRequestPropertyWithNSString_withNSString_(NSString *field, NSString *value);
+
+FOUNDATION_EXPORT void JavaNetURLConnection_setFileNameMapWithJavaNetFileNameMap_(id<JavaNetFileNameMap> map);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURLConnection)
+
+@interface JavaNetURLConnection_DefaultContentHandler : JavaNetContentHandler
+
+#pragma mark Public
 
 - (id)getContentWithJavaNetURLConnection:(JavaNetURLConnection *)u;
+
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetURLConnection_DefaultContentHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetURLConnection_DefaultContentHandler)
+
+FOUNDATION_EXPORT void JavaNetURLConnection_DefaultContentHandler_init(JavaNetURLConnection_DefaultContentHandler *self);
+
+FOUNDATION_EXPORT JavaNetURLConnection_DefaultContentHandler *new_JavaNetURLConnection_DefaultContentHandler_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURLConnection_DefaultContentHandler)
 
 #endif // _JavaNetURLConnection_H_

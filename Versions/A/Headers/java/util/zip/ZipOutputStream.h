@@ -6,23 +6,20 @@
 #ifndef _JavaUtilZipZipOutputStream_H_
 #define _JavaUtilZipZipOutputStream_H_
 
-@class IOSByteArray;
-@class JavaIoByteArrayOutputStream;
-@class JavaIoOutputStream;
-@class JavaUtilHashSet;
-@class JavaUtilZipCRC32;
-@class JavaUtilZipZipEntry;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/zip/DeflaterOutputStream.h"
 #include "java/util/zip/ZipConstants.h"
 
+@class IOSByteArray;
+@class JavaIoOutputStream;
+@class JavaUtilZipZipEntry;
+
 #define JavaUtilZipZipOutputStream_DEFLATED 8
 #define JavaUtilZipZipOutputStream_STORED 0
-#define JavaUtilZipZipOutputStream_ZIP_VERSION_2_0 20
 
-@interface JavaUtilZipZipOutputStream : JavaUtilZipDeflaterOutputStream < JavaUtilZipZipConstants > {
-}
+@interface JavaUtilZipZipOutputStream : JavaUtilZipDeflaterOutputStream < JavaUtilZipZipConstants >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)os;
 
@@ -46,12 +43,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipOutputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipOutputStream)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipOutputStream, DEFLATED, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipOutputStream, STORED, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipOutputStream, ZIP_VERSION_2_0, jint)
+FOUNDATION_EXPORT void JavaUtilZipZipOutputStream_initWithJavaIoOutputStream_(JavaUtilZipZipOutputStream *self, JavaIoOutputStream *os);
+
+FOUNDATION_EXPORT JavaUtilZipZipOutputStream *new_JavaUtilZipZipOutputStream_initWithJavaIoOutputStream_(JavaIoOutputStream *os) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipOutputStream)
 
 #endif // _JavaUtilZipZipOutputStream_H_

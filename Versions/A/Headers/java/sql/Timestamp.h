@@ -6,16 +6,12 @@
 #ifndef _JavaSqlTimestamp_H_
 #define _JavaSqlTimestamp_H_
 
-@class JavaLangIllegalArgumentException;
-@class JavaLangStringBuilder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Date.h"
 
-#define JavaSqlTimestamp_serialVersionUID 2745179027874758501LL
+@interface JavaSqlTimestamp : JavaUtilDate
 
-@interface JavaSqlTimestamp : JavaUtilDate {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)theYear
                     withInt:(jint)theMonth
@@ -53,15 +49,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlTimestamp_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlTimestamp)
+
+FOUNDATION_EXPORT void JavaSqlTimestamp_initWithInt_withInt_withInt_withInt_withInt_withInt_withInt_(JavaSqlTimestamp *self, jint theYear, jint theMonth, jint theDate, jint theHour, jint theMinute, jint theSecond, jint theNano);
+
+FOUNDATION_EXPORT JavaSqlTimestamp *new_JavaSqlTimestamp_initWithInt_withInt_withInt_withInt_withInt_withInt_withInt_(jint theYear, jint theMonth, jint theDate, jint theHour, jint theMinute, jint theSecond, jint theNano) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlTimestamp_initWithLong_(JavaSqlTimestamp *self, jlong theTime);
+
+FOUNDATION_EXPORT JavaSqlTimestamp *new_JavaSqlTimestamp_initWithLong_(jlong theTime) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaSqlTimestamp *JavaSqlTimestamp_valueOfWithNSString_(NSString *s);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlTimestamp, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT NSString *JavaSqlTimestamp_TIME_FORMAT_REGEX_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlTimestamp, TIME_FORMAT_REGEX_, NSString *)
-
-FOUNDATION_EXPORT NSString *JavaSqlTimestamp_PADDING_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlTimestamp, PADDING_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlTimestamp)
 
 #endif // _JavaSqlTimestamp_H_

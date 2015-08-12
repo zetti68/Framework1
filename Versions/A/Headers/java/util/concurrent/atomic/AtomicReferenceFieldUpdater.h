@@ -6,78 +6,49 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_H_
 #define _JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSClass;
-@class SunMiscUnsafe;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater : NSObject
 
-@interface JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater : NSObject {
-}
-
-+ (JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
-                                                                   withIOSClass:(IOSClass *)vclass
-                                                                   withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
+#pragma mark Public
 
 - (jboolean)compareAndSetWithId:(id)obj
                          withId:(id)expect
                          withId:(id)update;
-
-- (jboolean)weakCompareAndSetWithId:(id)obj
-                             withId:(id)expect
-                             withId:(id)update;
-
-- (void)setWithId:(id)obj
-           withId:(id)newValue;
-
-- (void)lazySetWithId:(id)obj
-               withId:(id)newValue;
 
 - (id)getWithId:(id)obj;
 
 - (id)getAndSetWithId:(id)obj
                withId:(id)newValue;
 
-@end
+- (void)lazySetWithId:(id)obj
+               withId:(id)newValue;
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_init() {}
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_newUpdaterWithIOSClass_withIOSClass_withNSString_(IOSClass *tclass, IOSClass *vclass, NSString *fieldName);
++ (JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *)newUpdaterWithIOSClass:(IOSClass *)tclass
+                                                                   withIOSClass:(IOSClass *)vclass
+                                                                   withNSString:(NSString *)fieldName OBJC_METHOD_FAMILY_NONE;
 
-@interface JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_AtomicReferenceFieldUpdaterImpl : JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater {
-}
-
-- (instancetype)initWithIOSClass:(IOSClass *)tclass
-                    withIOSClass:(IOSClass *)vclass
-                    withNSString:(NSString *)fieldName;
-
-- (void)targetCheckWithId:(id)obj;
-
-- (void)updateCheckWithId:(id)obj
-                   withId:(id)update;
-
-- (jboolean)compareAndSetWithId:(id)obj
-                         withId:(id)expect
-                         withId:(id)update;
+- (void)setWithId:(id)obj
+           withId:(id)newValue;
 
 - (jboolean)weakCompareAndSetWithId:(id)obj
                              withId:(id)expect
                              withId:(id)update;
 
-- (void)setWithId:(id)obj
-           withId:(id)newValue;
+#pragma mark Protected
 
-- (void)lazySetWithId:(id)obj
-               withId:(id)newValue;
-
-- (id)getWithId:(id)obj;
+- (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_AtomicReferenceFieldUpdaterImpl_initialized;
-J2OBJC_STATIC_INIT(JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_AtomicReferenceFieldUpdaterImpl)
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_AtomicReferenceFieldUpdaterImpl_unsafe_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_AtomicReferenceFieldUpdaterImpl, unsafe_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_newUpdaterWithIOSClass_withIOSClass_withNSString_(IOSClass *tclass, IOSClass *vclass, NSString *fieldName);
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_init(JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater)
 
 #endif // _JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater_H_

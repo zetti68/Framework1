@@ -6,7 +6,7 @@
 #ifndef _LibcoreIoStructTimeval_H_
 #define _LibcoreIoStructTimeval_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreIoStructTimeval : NSObject {
  @public
@@ -14,8 +14,7 @@
   jlong tv_usec_;
 }
 
-- (instancetype)initWithLong:(jlong)tv_sec
-                    withLong:(jlong)tv_usec;
+#pragma mark Public
 
 + (LibcoreIoStructTimeval *)fromMillisWithLong:(jlong)millis;
 
@@ -23,9 +22,21 @@
 
 - (NSString *)description;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithLong:(jlong)tv_sec
+                    withLong:(jlong)tv_usec;
+
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructTimeval_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructTimeval)
+
+FOUNDATION_EXPORT void LibcoreIoStructTimeval_initWithLong_withLong_(LibcoreIoStructTimeval *self, jlong tv_sec, jlong tv_usec);
+
+FOUNDATION_EXPORT LibcoreIoStructTimeval *new_LibcoreIoStructTimeval_initWithLong_withLong_(jlong tv_sec, jlong tv_usec) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT LibcoreIoStructTimeval *LibcoreIoStructTimeval_fromMillisWithLong_(jlong millis);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructTimeval)
 
 #endif // _LibcoreIoStructTimeval_H_

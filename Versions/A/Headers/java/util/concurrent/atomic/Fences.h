@@ -6,25 +6,32 @@
 #ifndef _JavaUtilConcurrentAtomicFences_H_
 #define _JavaUtilConcurrentAtomicFences_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface JavaUtilConcurrentAtomicFences : NSObject {
-}
+@interface JavaUtilConcurrentAtomicFences : NSObject
+
+#pragma mark Public
+
++ (id)orderAccessesWithId:(id)ref;
 
 + (id)orderReadsWithId:(id)ref;
 
 + (id)orderWritesWithId:(id)ref;
 
-+ (id)orderAccessesWithId:(id)ref;
-
 + (void)reachabilityFenceWithId:(id)ref;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicFences_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicFences)
+
 FOUNDATION_EXPORT id JavaUtilConcurrentAtomicFences_orderReadsWithId_(id ref);
+
 FOUNDATION_EXPORT id JavaUtilConcurrentAtomicFences_orderWritesWithId_(id ref);
+
 FOUNDATION_EXPORT id JavaUtilConcurrentAtomicFences_orderAccessesWithId_(id ref);
+
 FOUNDATION_EXPORT void JavaUtilConcurrentAtomicFences_reachabilityFenceWithId_(id ref);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicFences)
 
 #endif // _JavaUtilConcurrentAtomicFences_H_

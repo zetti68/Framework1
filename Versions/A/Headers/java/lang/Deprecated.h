@@ -6,7 +6,7 @@
 #ifndef _JavaLangDeprecated_H_
 #define _JavaLangDeprecated_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangDeprecated < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangDeprecated_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangDeprecated)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangDeprecated)
 
 #endif // _JavaLangDeprecated_H_

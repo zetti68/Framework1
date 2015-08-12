@@ -6,22 +6,20 @@
 #ifndef _JavaUtilZipInflater_H_
 #define _JavaUtilZipInflater_H_
 
-@class DalvikSystemCloseGuard;
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoFileDescriptor;
 
-#import "JreEmulation.h"
+@interface JavaUtilZipInflater : NSObject
 
-@interface JavaUtilZipInflater : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithBoolean:(jboolean)noHeader;
 
 - (void)end;
-
-- (void)dealloc;
 
 - (jboolean)finished;
 
@@ -32,8 +30,6 @@
 - (jlong)getBytesWritten;
 
 - (jint)getRemaining;
-
-- (jint)getCurrentOffset;
 
 - (jint)getTotalIn;
 
@@ -63,12 +59,30 @@
                       withInt:(jint)offset
                       withInt:(jint)byteCount;
 
+#pragma mark Protected
+
+- (void)dealloc;
+
+#pragma mark Package-Private
+
+- (jint)getCurrentOffset;
+
 - (jint)setFileInputWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                     withLong:(jlong)offset
                                      withInt:(jint)byteCount;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipInflater_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipInflater)
+
+FOUNDATION_EXPORT void JavaUtilZipInflater_init(JavaUtilZipInflater *self);
+
+FOUNDATION_EXPORT JavaUtilZipInflater *new_JavaUtilZipInflater_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipInflater_initWithBoolean_(JavaUtilZipInflater *self, jboolean noHeader);
+
+FOUNDATION_EXPORT JavaUtilZipInflater *new_JavaUtilZipInflater_initWithBoolean_(jboolean noHeader) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipInflater)
 
 #endif // _JavaUtilZipInflater_H_

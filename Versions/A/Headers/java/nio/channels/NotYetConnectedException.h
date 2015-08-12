@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsNotYetConnectedException_H_
 #define _JavaNioChannelsNotYetConnectedException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsNotYetConnectedException_serialVersionUID 4697316551909513464LL
+@interface JavaNioChannelsNotYetConnectedException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsNotYetConnectedException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsNotYetConnectedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsNotYetConnectedException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsNotYetConnectedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsNotYetConnectedException_init(JavaNioChannelsNotYetConnectedException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsNotYetConnectedException *new_JavaNioChannelsNotYetConnectedException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsNotYetConnectedException)
 
 #endif // _JavaNioChannelsNotYetConnectedException_H_

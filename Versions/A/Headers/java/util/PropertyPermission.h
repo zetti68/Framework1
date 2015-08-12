@@ -6,13 +6,14 @@
 #ifndef _JavaUtilPropertyPermission_H_
 #define _JavaUtilPropertyPermission_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/BasicPermission.h"
 
-@interface JavaUtilPropertyPermission : JavaSecurityBasicPermission {
-}
+@class JavaSecurityPermission;
+
+@interface JavaUtilPropertyPermission : JavaSecurityBasicPermission
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)actions;
@@ -23,6 +24,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilPropertyPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilPropertyPermission)
+
+FOUNDATION_EXPORT void JavaUtilPropertyPermission_initWithNSString_withNSString_(JavaUtilPropertyPermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaUtilPropertyPermission *new_JavaUtilPropertyPermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilPropertyPermission)
 
 #endif // _JavaUtilPropertyPermission_H_

@@ -6,6 +6,8 @@
 #ifndef _JavaSecurityCertCertificateFactorySpi_H_
 #define _JavaSecurityCertCertificateFactorySpi_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaSecurityCertCRL;
 @class JavaSecurityCertCertPath;
@@ -14,20 +16,15 @@
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaSecurityCertCertificateFactorySpi : NSObject
 
-@interface JavaSecurityCertCertificateFactorySpi : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (JavaSecurityCertCertificate *)engineGenerateCertificateWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
 - (id<JavaUtilCollection>)engineGenerateCertificatesWithJavaIoInputStream:(JavaIoInputStream *)inStream;
-
-- (JavaSecurityCertCRL *)engineGenerateCRLWithJavaIoInputStream:(JavaIoInputStream *)inStream;
-
-- (id<JavaUtilCollection>)engineGenerateCRLsWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
 - (JavaSecurityCertCertPath *)engineGenerateCertPathWithJavaIoInputStream:(JavaIoInputStream *)inStream;
 
@@ -36,10 +33,18 @@
 
 - (JavaSecurityCertCertPath *)engineGenerateCertPathWithJavaUtilList:(id<JavaUtilList>)certificates;
 
+- (JavaSecurityCertCRL *)engineGenerateCRLWithJavaIoInputStream:(JavaIoInputStream *)inStream;
+
+- (id<JavaUtilCollection>)engineGenerateCRLsWithJavaIoInputStream:(JavaIoInputStream *)inStream;
+
 - (id<JavaUtilIterator>)engineGetCertPathEncodings;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateFactorySpi_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateFactorySpi)
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateFactorySpi_init(JavaSecurityCertCertificateFactorySpi *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateFactorySpi)
 
 #endif // _JavaSecurityCertCertificateFactorySpi_H_

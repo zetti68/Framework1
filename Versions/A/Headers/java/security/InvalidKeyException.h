@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityInvalidKeyException_H_
 #define _JavaSecurityInvalidKeyException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/KeyException.h"
 
-#define JavaSecurityInvalidKeyException_serialVersionUID 5698479920593359816LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityInvalidKeyException : JavaSecurityKeyException {
-}
+@interface JavaSecurityInvalidKeyException : JavaSecurityKeyException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityInvalidKeyException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityInvalidKeyException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityInvalidKeyException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityInvalidKeyException_initWithNSString_(JavaSecurityInvalidKeyException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityInvalidKeyException *new_JavaSecurityInvalidKeyException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityInvalidKeyException_init(JavaSecurityInvalidKeyException *self);
+
+FOUNDATION_EXPORT JavaSecurityInvalidKeyException *new_JavaSecurityInvalidKeyException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityInvalidKeyException_initWithNSString_withJavaLangThrowable_(JavaSecurityInvalidKeyException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityInvalidKeyException *new_JavaSecurityInvalidKeyException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityInvalidKeyException_initWithJavaLangThrowable_(JavaSecurityInvalidKeyException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityInvalidKeyException *new_JavaSecurityInvalidKeyException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityInvalidKeyException)
 
 #endif // _JavaSecurityInvalidKeyException_H_

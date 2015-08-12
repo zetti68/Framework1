@@ -6,55 +6,48 @@
 #ifndef _JavaUtilPropertyResourceBundle_H_
 #define _JavaUtilPropertyResourceBundle_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/ResourceBundle.h"
+
 @class JavaIoInputStream;
 @class JavaIoReader;
 @class JavaUtilProperties;
+@protocol JavaUtilEnumeration;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/util/Enumeration.h"
-#include "java/util/ResourceBundle.h"
 
 @interface JavaUtilPropertyResourceBundle : JavaUtilResourceBundle {
  @public
   JavaUtilProperties *resources_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)stream;
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)reader;
-
-- (id<JavaUtilSet>)handleKeySet;
 
 - (id<JavaUtilEnumeration>)getKeys;
 
 - (id)handleGetObjectWithNSString:(NSString *)key;
 
+#pragma mark Protected
+
+- (id<JavaUtilSet>)handleKeySet;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilPropertyResourceBundle_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilPropertyResourceBundle)
 
 J2OBJC_FIELD_SETTER(JavaUtilPropertyResourceBundle, resources_, JavaUtilProperties *)
 
-@interface JavaUtilPropertyResourceBundle_$1 : NSObject < JavaUtilEnumeration > {
- @public
-  id<JavaUtilEnumeration> local_;
-  id<JavaUtilEnumeration> pEnum_;
-  NSString *nextElement__;
-}
+FOUNDATION_EXPORT void JavaUtilPropertyResourceBundle_initWithJavaIoInputStream_(JavaUtilPropertyResourceBundle *self, JavaIoInputStream *stream);
 
-- (jboolean)hasMoreElements;
+FOUNDATION_EXPORT JavaUtilPropertyResourceBundle *new_JavaUtilPropertyResourceBundle_initWithJavaIoInputStream_(JavaIoInputStream *stream) NS_RETURNS_RETAINED;
 
-- (NSString *)nextElement;
+FOUNDATION_EXPORT void JavaUtilPropertyResourceBundle_initWithJavaIoReader_(JavaUtilPropertyResourceBundle *self, JavaIoReader *reader);
 
-- (instancetype)initWithJavaUtilPropertyResourceBundle:(JavaUtilPropertyResourceBundle *)outer$;
+FOUNDATION_EXPORT JavaUtilPropertyResourceBundle *new_JavaUtilPropertyResourceBundle_initWithJavaIoReader_(JavaIoReader *reader) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilPropertyResourceBundle_$1_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilPropertyResourceBundle_$1, local_, id<JavaUtilEnumeration>)
-J2OBJC_FIELD_SETTER(JavaUtilPropertyResourceBundle_$1, pEnum_, id<JavaUtilEnumeration>)
-J2OBJC_FIELD_SETTER(JavaUtilPropertyResourceBundle_$1, nextElement__, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilPropertyResourceBundle)
 
 #endif // _JavaUtilPropertyResourceBundle_H_

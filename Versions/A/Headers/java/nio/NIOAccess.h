@@ -6,26 +6,36 @@
 #ifndef _JavaNioNIOAccess_H_
 #define _JavaNioNIOAccess_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNioBuffer;
 
-#import "JreEmulation.h"
+@interface JavaNioNIOAccess : NSObject
 
-@interface JavaNioNIOAccess : NSObject {
-}
+#pragma mark Package-Private
 
-+ (jlong)getBasePointerWithJavaNioBuffer:(JavaNioBuffer *)b;
+- (instancetype)init;
 
 + (id)getBaseArrayWithJavaNioBuffer:(JavaNioBuffer *)b;
 
 + (jint)getBaseArrayOffsetWithJavaNioBuffer:(JavaNioBuffer *)b;
 
-- (instancetype)init;
++ (jlong)getBasePointerWithJavaNioBuffer:(JavaNioBuffer *)b;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioNIOAccess_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioNIOAccess)
+
 FOUNDATION_EXPORT jlong JavaNioNIOAccess_getBasePointerWithJavaNioBuffer_(JavaNioBuffer *b);
+
 FOUNDATION_EXPORT id JavaNioNIOAccess_getBaseArrayWithJavaNioBuffer_(JavaNioBuffer *b);
+
 FOUNDATION_EXPORT jint JavaNioNIOAccess_getBaseArrayOffsetWithJavaNioBuffer_(JavaNioBuffer *b);
+
+FOUNDATION_EXPORT void JavaNioNIOAccess_init(JavaNioNIOAccess *self);
+
+FOUNDATION_EXPORT JavaNioNIOAccess *new_JavaNioNIOAccess_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioNIOAccess)
 
 #endif // _JavaNioNIOAccess_H_

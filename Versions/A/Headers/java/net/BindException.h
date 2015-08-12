@@ -6,15 +6,14 @@
 #ifndef _JavaNetBindException_H_
 #define _JavaNetBindException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/SocketException.h"
 
-#define JavaNetBindException_serialVersionUID -5945005768251722951LL
+@class JavaLangThrowable;
 
-@interface JavaNetBindException : JavaNetSocketException {
-}
+@interface JavaNetBindException : JavaNetSocketException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetBindException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetBindException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetBindException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetBindException_init(JavaNetBindException *self);
+
+FOUNDATION_EXPORT JavaNetBindException *new_JavaNetBindException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetBindException_initWithNSString_(JavaNetBindException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetBindException *new_JavaNetBindException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetBindException_initWithNSString_withJavaLangThrowable_(JavaNetBindException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetBindException *new_JavaNetBindException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetBindException)
 
 #endif // _JavaNetBindException_H_

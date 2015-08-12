@@ -6,29 +6,36 @@
 #ifndef _JavaNioCharsetIOSCharsetEncoder_H_
 #define _JavaNioCharsetIOSCharsetEncoder_H_
 
-@class IOSByteArray;
-@class IOSCharArray;
+#include "J2ObjC_header.h"
+#include "java/nio/charset/CharsetEncoder.h"
+
 @class JavaNioByteBuffer;
 @class JavaNioCharBuffer;
 @class JavaNioCharsetCharset;
 @class JavaNioCharsetCoderResult;
 
-#import "JreEmulation.h"
-#include "java/nio/charset/CharsetEncoder.h"
+@interface JavaNioCharsetIOSCharsetEncoder : JavaNioCharsetCharsetEncoder
 
-@interface JavaNioCharsetIOSCharsetEncoder : JavaNioCharsetCharsetEncoder {
-}
+#pragma mark Public
+
+- (JavaNioByteBuffer *)encodeWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg;
+
+#pragma mark Protected
 
 - (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset
                                     withFloat:(jfloat)maxBytesPerChar;
-
-- (JavaNioByteBuffer *)encodeWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg;
 
 - (JavaNioCharsetCoderResult *)encodeLoopWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg
                                          withJavaNioByteBuffer:(JavaNioByteBuffer *)outArg;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetIOSCharsetEncoder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetIOSCharsetEncoder)
+
+FOUNDATION_EXPORT void JavaNioCharsetIOSCharsetEncoder_initWithJavaNioCharsetCharset_withFloat_(JavaNioCharsetIOSCharsetEncoder *self, JavaNioCharsetCharset *charset, jfloat maxBytesPerChar);
+
+FOUNDATION_EXPORT JavaNioCharsetIOSCharsetEncoder *new_JavaNioCharsetIOSCharsetEncoder_initWithJavaNioCharsetCharset_withFloat_(JavaNioCharsetCharset *charset, jfloat maxBytesPerChar) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetIOSCharsetEncoder)
 
 #endif // _JavaNioCharsetIOSCharsetEncoder_H_

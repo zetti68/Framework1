@@ -6,25 +6,22 @@
 #ifndef _LibcoreIcuNativeDecimalFormat_H_
 #define _LibcoreIcuNativeDecimalFormat_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSCharArray;
-@class IOSIntArray;
-@class IOSObjectArray;
 @class JavaMathBigDecimal;
 @class JavaMathBigInteger;
 @class JavaMathRoundingModeEnum;
 @class JavaTextDecimalFormatSymbols;
 @class JavaTextFieldPosition;
-@class JavaTextFormat_Field;
 @class JavaTextParsePosition;
 @class JavaUtilCurrency;
 @class LibcoreIcuLocaleData;
-@class LibcoreIcuNativeDecimalFormat_FieldPositionIterator;
 @protocol JavaTextAttributedCharacterIterator;
 
-#import "JreEmulation.h"
+@interface LibcoreIcuNativeDecimalFormat : NSObject < NSCopying >
 
-@interface LibcoreIcuNativeDecimalFormat : NSObject < NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)pattern
 withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
@@ -32,17 +29,15 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
 - (instancetype)initWithNSString:(NSString *)pattern
         withLibcoreIcuLocaleData:(LibcoreIcuLocaleData *)data;
 
-- (void)close;
+- (void)applyLocalizedPatternWithNSString:(NSString *)pattern;
 
-- (void)dealloc;
+- (void)applyPatternWithNSString:(NSString *)pattern;
 
 - (id)clone;
 
+- (void)close;
+
 - (jboolean)isEqual:(id)object;
-
-- (void)setDecimalFormatSymbolsWithJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
-
-- (void)setDecimalFormatSymbolsWithLibcoreIcuLocaleData:(LibcoreIcuLocaleData *)localeData;
 
 - (IOSCharArray *)formatBigDecimalWithJavaMathBigDecimal:(JavaMathBigDecimal *)value
                                withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
@@ -50,24 +45,15 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
 - (IOSCharArray *)formatBigIntegerWithJavaMathBigInteger:(JavaMathBigInteger *)value
                                withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
-- (IOSCharArray *)formatLongWithLong:(jlong)value
-           withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
-
 - (IOSCharArray *)formatDoubleWithDouble:(jdouble)value
                withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
-- (void)applyLocalizedPatternWithNSString:(NSString *)pattern;
-
-- (void)applyPatternWithNSString:(NSString *)pattern;
+- (IOSCharArray *)formatLongWithLong:(jlong)value
+           withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
 - (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
 
-- (NSString *)toLocalizedPattern;
-
-- (NSString *)toPattern;
-
-- (NSNumber *)parseWithNSString:(NSString *)string
-      withJavaTextParsePosition:(JavaTextParsePosition *)position;
+- (jint)getGroupingSize;
 
 - (jint)getMaximumFractionDigits;
 
@@ -76,8 +62,6 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
 - (jint)getMinimumFractionDigits;
 
 - (jint)getMinimumIntegerDigits;
-
-- (jint)getGroupingSize;
 
 - (jint)getMultiplier;
 
@@ -91,15 +75,22 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
 
 - (jboolean)isDecimalSeparatorAlwaysShown;
 
+- (jboolean)isGroupingUsed;
+
 - (jboolean)isParseBigDecimal;
 
 - (jboolean)isParseIntegerOnly;
 
-- (jboolean)isGroupingUsed;
-
-- (void)setDecimalSeparatorAlwaysShownWithBoolean:(jboolean)value;
+- (NSNumber *)parseWithNSString:(NSString *)string
+      withJavaTextParsePosition:(JavaTextParsePosition *)position;
 
 - (void)setCurrencyWithJavaUtilCurrency:(JavaUtilCurrency *)currency;
+
+- (void)setDecimalFormatSymbolsWithJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
+
+- (void)setDecimalFormatSymbolsWithLibcoreIcuLocaleData:(LibcoreIcuLocaleData *)localeData;
+
+- (void)setDecimalSeparatorAlwaysShownWithBoolean:(jboolean)value;
 
 - (void)setGroupingSizeWithInt:(jint)value;
 
@@ -119,44 +110,37 @@ withJavaTextDecimalFormatSymbols:(JavaTextDecimalFormatSymbols *)dfs;
 
 - (void)setNegativeSuffixWithNSString:(NSString *)value;
 
-- (void)setPositivePrefixWithNSString:(NSString *)value;
-
-- (void)setPositiveSuffixWithNSString:(NSString *)value;
-
 - (void)setParseBigDecimalWithBoolean:(jboolean)value;
 
 - (void)setParseIntegerOnlyWithBoolean:(jboolean)value;
 
+- (void)setPositivePrefixWithNSString:(NSString *)value;
+
+- (void)setPositiveSuffixWithNSString:(NSString *)value;
+
 - (void)setRoundingModeWithJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode
                                          withDouble:(jdouble)roundingIncrement;
 
-@end
+- (NSString *)toLocalizedPattern;
 
-__attribute__((always_inline)) inline void LibcoreIcuNativeDecimalFormat_init() {}
+- (NSString *)toPattern;
 
-@interface LibcoreIcuNativeDecimalFormat_FieldPositionIterator : NSObject {
-}
+#pragma mark Protected
 
-+ (LibcoreIcuNativeDecimalFormat_FieldPositionIterator *)forFieldPositionWithJavaTextFieldPosition:(JavaTextFieldPosition *)fp;
-
-- (jboolean)next;
-
-- (jint)fieldId;
-
-- (JavaTextFormat_Field *)field;
-
-- (jint)start;
-
-- (jint)limit;
+- (void)dealloc;
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIcuNativeDecimalFormat_FieldPositionIterator_initialized;
-J2OBJC_STATIC_INIT(LibcoreIcuNativeDecimalFormat_FieldPositionIterator)
-FOUNDATION_EXPORT LibcoreIcuNativeDecimalFormat_FieldPositionIterator *LibcoreIcuNativeDecimalFormat_FieldPositionIterator_forFieldPositionWithJavaTextFieldPosition_(JavaTextFieldPosition *fp);
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIcuNativeDecimalFormat)
 
-FOUNDATION_EXPORT IOSObjectArray *LibcoreIcuNativeDecimalFormat_FieldPositionIterator_fields_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIcuNativeDecimalFormat_FieldPositionIterator, fields_, IOSObjectArray *)
-J2OBJC_STATIC_FIELD_SETTER(LibcoreIcuNativeDecimalFormat_FieldPositionIterator, fields_, IOSObjectArray *)
+FOUNDATION_EXPORT void LibcoreIcuNativeDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(LibcoreIcuNativeDecimalFormat *self, NSString *pattern, JavaTextDecimalFormatSymbols *dfs);
+
+FOUNDATION_EXPORT LibcoreIcuNativeDecimalFormat *new_LibcoreIcuNativeDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(NSString *pattern, JavaTextDecimalFormatSymbols *dfs) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void LibcoreIcuNativeDecimalFormat_initWithNSString_withLibcoreIcuLocaleData_(LibcoreIcuNativeDecimalFormat *self, NSString *pattern, LibcoreIcuLocaleData *data);
+
+FOUNDATION_EXPORT LibcoreIcuNativeDecimalFormat *new_LibcoreIcuNativeDecimalFormat_initWithNSString_withLibcoreIcuLocaleData_(NSString *pattern, LibcoreIcuLocaleData *data) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIcuNativeDecimalFormat)
 
 #endif // _LibcoreIcuNativeDecimalFormat_H_

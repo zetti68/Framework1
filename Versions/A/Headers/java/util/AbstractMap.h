@@ -6,15 +6,12 @@
 #ifndef _JavaUtilAbstractMap_H_
 #define _JavaUtilAbstractMap_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/util/Map.h"
+
 @protocol JavaUtilCollection;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/util/AbstractCollection.h"
-#include "java/util/AbstractSet.h"
-#include "java/util/Iterator.h"
-#include "java/util/Map.h"
 
 @interface JavaUtilAbstractMap : NSObject < JavaUtilMap > {
  @public
@@ -22,7 +19,7 @@
   id<JavaUtilCollection> valuesCollection_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
 - (void)clear;
 
@@ -55,139 +52,91 @@
 
 - (id<JavaUtilCollection>)values;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 - (id)clone;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilAbstractMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilAbstractMap, keySet__, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(JavaUtilAbstractMap, valuesCollection_, id<JavaUtilCollection>)
 
-#define JavaUtilAbstractMap_SimpleImmutableEntry_serialVersionUID 7138329143949025153LL
+FOUNDATION_EXPORT void JavaUtilAbstractMap_init(JavaUtilAbstractMap *self);
 
-@interface JavaUtilAbstractMap_SimpleImmutableEntry : NSObject < JavaUtilMap_Entry, JavaIoSerializable > {
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilAbstractMap)
+
+@interface JavaUtilAbstractMap_SimpleImmutableEntry : NSObject < JavaUtilMap_Entry, JavaIoSerializable >
+
+#pragma mark Public
+
+- (instancetype)initWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)copyFrom;
 
 - (instancetype)initWithId:(id)theKey
                     withId:(id)theValue;
 
-- (instancetype)initWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)copyFrom;
+- (jboolean)isEqual:(id)object;
 
 - (id)getKey;
 
 - (id)getValue;
 
-- (id)setValueWithId:(id)object;
-
-- (jboolean)isEqual:(id)object;
-
 - (NSUInteger)hash;
+
+- (id)setValueWithId:(id)object;
 
 - (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_SimpleImmutableEntry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilAbstractMap_SimpleImmutableEntry)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilAbstractMap_SimpleImmutableEntry, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilAbstractMap_SimpleImmutableEntry_initWithId_withId_(JavaUtilAbstractMap_SimpleImmutableEntry *self, id theKey, id theValue);
 
-#define JavaUtilAbstractMap_SimpleEntry_serialVersionUID -8499721149061103585LL
+FOUNDATION_EXPORT JavaUtilAbstractMap_SimpleImmutableEntry *new_JavaUtilAbstractMap_SimpleImmutableEntry_initWithId_withId_(id theKey, id theValue) NS_RETURNS_RETAINED;
 
-@interface JavaUtilAbstractMap_SimpleEntry : NSObject < JavaUtilMap_Entry, JavaIoSerializable > {
-}
+FOUNDATION_EXPORT void JavaUtilAbstractMap_SimpleImmutableEntry_initWithJavaUtilMap_Entry_(JavaUtilAbstractMap_SimpleImmutableEntry *self, id<JavaUtilMap_Entry> copyFrom);
+
+FOUNDATION_EXPORT JavaUtilAbstractMap_SimpleImmutableEntry *new_JavaUtilAbstractMap_SimpleImmutableEntry_initWithJavaUtilMap_Entry_(id<JavaUtilMap_Entry> copyFrom) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilAbstractMap_SimpleImmutableEntry)
+
+@interface JavaUtilAbstractMap_SimpleEntry : NSObject < JavaUtilMap_Entry, JavaIoSerializable >
+
+#pragma mark Public
+
+- (instancetype)initWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)copyFrom;
 
 - (instancetype)initWithId:(id)theKey
                     withId:(id)theValue;
 
-- (instancetype)initWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)copyFrom;
+- (jboolean)isEqual:(id)object;
 
 - (id)getKey;
 
 - (id)getValue;
 
-- (id)setValueWithId:(id)object;
-
-- (jboolean)isEqual:(id)object;
-
 - (NSUInteger)hash;
+
+- (id)setValueWithId:(id)object;
 
 - (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_SimpleEntry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilAbstractMap_SimpleEntry)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilAbstractMap_SimpleEntry, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilAbstractMap_SimpleEntry_initWithId_withId_(JavaUtilAbstractMap_SimpleEntry *self, id theKey, id theValue);
 
-@interface JavaUtilAbstractMap_keySet_AbstractMapKeySet : JavaUtilAbstractSet {
-}
+FOUNDATION_EXPORT JavaUtilAbstractMap_SimpleEntry *new_JavaUtilAbstractMap_SimpleEntry_initWithId_withId_(id theKey, id theValue) NS_RETURNS_RETAINED;
 
-- (jboolean)containsWithId:(id)object;
+FOUNDATION_EXPORT void JavaUtilAbstractMap_SimpleEntry_initWithJavaUtilMap_Entry_(JavaUtilAbstractMap_SimpleEntry *self, id<JavaUtilMap_Entry> copyFrom);
 
-- (jint)size;
+FOUNDATION_EXPORT JavaUtilAbstractMap_SimpleEntry *new_JavaUtilAbstractMap_SimpleEntry_initWithJavaUtilMap_Entry_(id<JavaUtilMap_Entry> copyFrom) NS_RETURNS_RETAINED;
 
-- (id<JavaUtilIterator>)iterator;
-
-- (instancetype)initWithJavaUtilAbstractMap:(JavaUtilAbstractMap *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_keySet_AbstractMapKeySet_init() {}
-
-@interface JavaUtilAbstractMap_keySet_AbstractMapKeySet_$1 : NSObject < JavaUtilIterator > {
- @public
-  id<JavaUtilIterator> setIterator_;
-}
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-- (instancetype)initWithJavaUtilAbstractMap_keySet_AbstractMapKeySet:(JavaUtilAbstractMap_keySet_AbstractMapKeySet *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_keySet_AbstractMapKeySet_$1_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilAbstractMap_keySet_AbstractMapKeySet_$1, setIterator_, id<JavaUtilIterator>)
-
-@interface JavaUtilAbstractMap_values_AbstractMapValuesCollection : JavaUtilAbstractCollection {
-}
-
-- (jint)size;
-
-- (jboolean)containsWithId:(id)object;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (instancetype)initWithJavaUtilAbstractMap:(JavaUtilAbstractMap *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_values_AbstractMapValuesCollection_init() {}
-
-@interface JavaUtilAbstractMap_values_AbstractMapValuesCollection_$1 : NSObject < JavaUtilIterator > {
- @public
-  id<JavaUtilIterator> setIterator_;
-}
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-- (instancetype)initWithJavaUtilAbstractMap_values_AbstractMapValuesCollection:(JavaUtilAbstractMap_values_AbstractMapValuesCollection *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilAbstractMap_values_AbstractMapValuesCollection_$1_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilAbstractMap_values_AbstractMapValuesCollection_$1, setIterator_, id<JavaUtilIterator>)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilAbstractMap_SimpleEntry)
 
 #endif // _JavaUtilAbstractMap_H_

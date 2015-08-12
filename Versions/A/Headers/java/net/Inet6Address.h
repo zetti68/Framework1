@@ -6,23 +6,15 @@
 #ifndef _JavaNetInet6Address_H_
 #define _JavaNetInet6Address_H_
 
-@class IOSByteArray;
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaNetNetworkInterface;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/InetAddress.h"
 
-#define JavaNetInet6Address_serialVersionUID 6880410070516793377LL
+@class IOSByteArray;
+@class JavaNetNetworkInterface;
 
-@interface JavaNetInet6Address : JavaNetInetAddress {
-}
+@interface JavaNetInet6Address : JavaNetInetAddress
 
-- (instancetype)initWithByteArray:(IOSByteArray *)ipaddress
-                     withNSString:(NSString *)hostName
-                          withInt:(jint)scope_id;
+#pragma mark Public
 
 + (JavaNetInet6Address *)getByAddressWithNSString:(NSString *)host
                                     withByteArray:(IOSByteArray *)addr
@@ -31,6 +23,10 @@
 + (JavaNetInet6Address *)getByAddressWithNSString:(NSString *)host
                                     withByteArray:(IOSByteArray *)addr
                       withJavaNetNetworkInterface:(JavaNetNetworkInterface *)nif;
+
+- (JavaNetNetworkInterface *)getScopedInterface;
+
+- (jint)getScopeId;
 
 - (jboolean)isAnyLocalAddress;
 
@@ -54,20 +50,17 @@
 
 - (jboolean)isSiteLocalAddress;
 
-- (jint)getScopeId;
-
-- (JavaNetNetworkInterface *)getScopedInterface;
-
 - (NSString *)description;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithByteArray:(IOSByteArray *)ipaddress
+                     withNSString:(NSString *)hostName
+                          withInt:(jint)scope_id;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetInet6Address_initialized;
 J2OBJC_STATIC_INIT(JavaNetInet6Address)
-FOUNDATION_EXPORT JavaNetInet6Address *JavaNetInet6Address_getByAddressWithNSString_withByteArray_withInt_(NSString *host, IOSByteArray *addr, jint scope_id);
-FOUNDATION_EXPORT JavaNetInet6Address *JavaNetInet6Address_getByAddressWithNSString_withByteArray_withJavaNetNetworkInterface_(NSString *host, IOSByteArray *addr, JavaNetNetworkInterface *nif);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInet6Address, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInet6Address_ANY_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetInet6Address, ANY_, JavaNetInetAddress *)
@@ -75,7 +68,14 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetInet6Address, ANY_, JavaNetInetAddress *)
 FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInet6Address_LOOPBACK_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetInet6Address, LOOPBACK_, JavaNetInetAddress *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaNetInet6Address_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInet6Address, serialPersistentFields_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaNetInet6Address_initWithByteArray_withNSString_withInt_(JavaNetInet6Address *self, IOSByteArray *ipaddress, NSString *hostName, jint scope_id);
+
+FOUNDATION_EXPORT JavaNetInet6Address *new_JavaNetInet6Address_initWithByteArray_withNSString_withInt_(IOSByteArray *ipaddress, NSString *hostName, jint scope_id) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT JavaNetInet6Address *JavaNetInet6Address_getByAddressWithNSString_withByteArray_withInt_(NSString *host, IOSByteArray *addr, jint scope_id);
+
+FOUNDATION_EXPORT JavaNetInet6Address *JavaNetInet6Address_getByAddressWithNSString_withByteArray_withJavaNetNetworkInterface_(NSString *host, IOSByteArray *addr, JavaNetNetworkInterface *nif);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInet6Address)
 
 #endif // _JavaNetInet6Address_H_

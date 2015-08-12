@@ -6,9 +6,9 @@
 #ifndef _JavaLangRefReference_H_
 #define _JavaLangRefReference_H_
 
-@class JavaLangRefReferenceQueue;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaLangRefReferenceQueue;
 
 @interface JavaLangRefReference : NSObject {
  @public
@@ -18,22 +18,28 @@
   JavaLangRefReference *pendingNext_;
 }
 
-- (instancetype)init;
-
-- (instancetype)initWithId:(id)r
-withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
+#pragma mark Public
 
 - (void)clear;
 
-- (jboolean)enqueueInternal;
-
 - (jboolean)enqueue;
+
+- (jboolean)enqueueInternal;
 
 - (id)get;
 
 - (jboolean)isEnqueued;
 
+#pragma mark Protected
+
 - (void)dealloc;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+- (instancetype)initWithId:(id)r
+withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
 
 - (void)strengthenReferent;
 
@@ -41,9 +47,15 @@ withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangRefReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRefReference)
 
 J2OBJC_FIELD_SETTER(JavaLangRefReference, queueNext_, JavaLangRefReference *)
 J2OBJC_FIELD_SETTER(JavaLangRefReference, pendingNext_, JavaLangRefReference *)
+
+FOUNDATION_EXPORT void JavaLangRefReference_init(JavaLangRefReference *self);
+
+FOUNDATION_EXPORT void JavaLangRefReference_initWithId_withJavaLangRefReferenceQueue_(JavaLangRefReference *self, id r, JavaLangRefReferenceQueue *q);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRefReference)
 
 #endif // _JavaLangRefReference_H_

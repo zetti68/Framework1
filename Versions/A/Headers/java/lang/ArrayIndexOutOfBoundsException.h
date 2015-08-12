@@ -6,19 +6,16 @@
 #ifndef _JavaLangArrayIndexOutOfBoundsException_H_
 #define _JavaLangArrayIndexOutOfBoundsException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IndexOutOfBoundsException.h"
 
-#define JavaLangArrayIndexOutOfBoundsException_serialVersionUID -5116101128118950844LL
+@interface JavaLangArrayIndexOutOfBoundsException : JavaLangIndexOutOfBoundsException
 
-@interface JavaLangArrayIndexOutOfBoundsException : JavaLangIndexOutOfBoundsException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)index;
-
-- (instancetype)initWithNSString:(NSString *)detailMessage;
 
 - (instancetype)initWithInt:(jint)sourceLength
                     withInt:(jint)index;
@@ -27,10 +24,32 @@
                     withInt:(jint)offset
                     withInt:(jint)count;
 
+- (instancetype)initWithNSString:(NSString *)detailMessage;
+
 @end
 
-__attribute__((always_inline)) inline void JavaLangArrayIndexOutOfBoundsException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangArrayIndexOutOfBoundsException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangArrayIndexOutOfBoundsException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangArrayIndexOutOfBoundsException_init(JavaLangArrayIndexOutOfBoundsException *self);
+
+FOUNDATION_EXPORT JavaLangArrayIndexOutOfBoundsException *new_JavaLangArrayIndexOutOfBoundsException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangArrayIndexOutOfBoundsException_initWithInt_(JavaLangArrayIndexOutOfBoundsException *self, jint index);
+
+FOUNDATION_EXPORT JavaLangArrayIndexOutOfBoundsException *new_JavaLangArrayIndexOutOfBoundsException_initWithInt_(jint index) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangArrayIndexOutOfBoundsException_initWithNSString_(JavaLangArrayIndexOutOfBoundsException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangArrayIndexOutOfBoundsException *new_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangArrayIndexOutOfBoundsException_initWithInt_withInt_(JavaLangArrayIndexOutOfBoundsException *self, jint sourceLength, jint index);
+
+FOUNDATION_EXPORT JavaLangArrayIndexOutOfBoundsException *new_JavaLangArrayIndexOutOfBoundsException_initWithInt_withInt_(jint sourceLength, jint index) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangArrayIndexOutOfBoundsException_initWithInt_withInt_withInt_(JavaLangArrayIndexOutOfBoundsException *self, jint sourceLength, jint offset, jint count);
+
+FOUNDATION_EXPORT JavaLangArrayIndexOutOfBoundsException *new_JavaLangArrayIndexOutOfBoundsException_initWithInt_withInt_withInt_(jint sourceLength, jint offset, jint count) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangArrayIndexOutOfBoundsException)
 
 #endif // _JavaLangArrayIndexOutOfBoundsException_H_

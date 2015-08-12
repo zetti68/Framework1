@@ -6,15 +6,14 @@
 #ifndef _JavaUtilLocale_H_
 #define _JavaUtilLocale_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilLocale_serialVersionUID 9149081749638150636LL
+@class IOSObjectArray;
 
-@interface JavaUtilLocale : NSObject < NSCopying, JavaIoSerializable > {
-}
+@interface JavaUtilLocale : NSObject < NSCopying, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)language;
 
@@ -71,15 +70,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilLocale_initialized;
 J2OBJC_STATIC_INIT(JavaUtilLocale)
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getAvailableLocales();
-FOUNDATION_EXPORT JavaUtilLocale *JavaUtilLocale_getDefault();
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getISOCountries();
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getISOLanguages();
-FOUNDATION_EXPORT void JavaUtilLocale_setDefaultWithJavaUtilLocale_(JavaUtilLocale *locale);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLocale, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaUtilLocale *JavaUtilLocale_CANADA_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLocale, CANADA_, JavaUtilLocale *)
@@ -147,8 +138,28 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilLocale, UK_, JavaUtilLocale *)
 FOUNDATION_EXPORT JavaUtilLocale *JavaUtilLocale_US_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilLocale, US_, JavaUtilLocale *)
 
-FOUNDATION_EXPORT JavaUtilLocale *JavaUtilLocale_defaultLocale_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLocale, defaultLocale_, JavaUtilLocale *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilLocale, defaultLocale_, JavaUtilLocale *)
+FOUNDATION_EXPORT void JavaUtilLocale_initWithNSString_(JavaUtilLocale *self, NSString *language);
+
+FOUNDATION_EXPORT JavaUtilLocale *new_JavaUtilLocale_initWithNSString_(NSString *language) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilLocale_initWithNSString_withNSString_(JavaUtilLocale *self, NSString *language, NSString *country);
+
+FOUNDATION_EXPORT JavaUtilLocale *new_JavaUtilLocale_initWithNSString_withNSString_(NSString *language, NSString *country) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilLocale_initWithNSString_withNSString_withNSString_(JavaUtilLocale *self, NSString *language, NSString *country, NSString *variant);
+
+FOUNDATION_EXPORT JavaUtilLocale *new_JavaUtilLocale_initWithNSString_withNSString_withNSString_(NSString *language, NSString *country, NSString *variant) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getAvailableLocales();
+
+FOUNDATION_EXPORT JavaUtilLocale *JavaUtilLocale_getDefault();
+
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getISOCountries();
+
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilLocale_getISOLanguages();
+
+FOUNDATION_EXPORT void JavaUtilLocale_setDefaultWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLocale)
 
 #endif // _JavaUtilLocale_H_

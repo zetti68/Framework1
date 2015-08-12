@@ -6,29 +6,48 @@
 #ifndef _OrgXmlSaxSAXException_H_
 #define _OrgXmlSaxSAXException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-@interface OrgXmlSaxSAXException : JavaLangException {
-}
+@interface OrgXmlSaxSAXException : JavaLangException
+
+#pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithNSString:(NSString *)message;
-
 - (instancetype)initWithJavaLangException:(JavaLangException *)e;
+
+- (instancetype)initWithNSString:(NSString *)message;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangException:(JavaLangException *)e;
 
-- (NSString *)getMessage;
-
 - (JavaLangException *)getException;
+
+- (NSString *)getMessage;
 
 - (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxSAXException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxSAXException)
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXException_init(OrgXmlSaxSAXException *self);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXException *new_OrgXmlSaxSAXException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXException_initWithNSString_(OrgXmlSaxSAXException *self, NSString *message);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXException *new_OrgXmlSaxSAXException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXException_initWithJavaLangException_(OrgXmlSaxSAXException *self, JavaLangException *e);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXException *new_OrgXmlSaxSAXException_initWithJavaLangException_(JavaLangException *e) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxSAXException_initWithNSString_withJavaLangException_(OrgXmlSaxSAXException *self, NSString *message, JavaLangException *e);
+
+FOUNDATION_EXPORT OrgXmlSaxSAXException *new_OrgXmlSaxSAXException_initWithNSString_withJavaLangException_(NSString *message, JavaLangException *e) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxSAXException)
 
 #endif // _OrgXmlSaxSAXException_H_

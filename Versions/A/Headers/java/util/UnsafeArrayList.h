@@ -6,14 +6,15 @@
 #ifndef _JavaUtilUnsafeArrayList_H_
 #define _JavaUtilUnsafeArrayList_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/AbstractList.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 
-#import "JreEmulation.h"
-#include "java/util/AbstractList.h"
+@interface JavaUtilUnsafeArrayList : JavaUtilAbstractList
 
-@interface JavaUtilUnsafeArrayList : JavaUtilAbstractList {
-}
+#pragma mark Public
 
 - (instancetype)initWithIOSClass:(IOSClass *)elementType
                          withInt:(jint)initialCapacity;
@@ -26,9 +27,17 @@
 
 - (jint)size;
 
+#pragma mark Package-Private
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilUnsafeArrayList_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilUnsafeArrayList)
+
+FOUNDATION_EXPORT void JavaUtilUnsafeArrayList_initWithIOSClass_withInt_(JavaUtilUnsafeArrayList *self, IOSClass *elementType, jint initialCapacity);
+
+FOUNDATION_EXPORT JavaUtilUnsafeArrayList *new_JavaUtilUnsafeArrayList_initWithIOSClass_withInt_(IOSClass *elementType, jint initialCapacity) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilUnsafeArrayList)
 
 #endif // _JavaUtilUnsafeArrayList_H_

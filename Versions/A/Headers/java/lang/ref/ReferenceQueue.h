@@ -6,14 +6,13 @@
 #ifndef _JavaLangRefReferenceQueue_H_
 #define _JavaLangRefReferenceQueue_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangRefReference;
 
-#import "JreEmulation.h"
+@interface JavaLangRefReferenceQueue : NSObject
 
-#define JavaLangRefReferenceQueue_NANOS_PER_MILLI 1000000
-
-@interface JavaLangRefReferenceQueue : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -23,19 +22,26 @@
 
 - (JavaLangRefReference *)removeWithLong:(jlong)timeoutMillis;
 
-- (void)enqueueWithJavaLangRefReference:(JavaLangRefReference *)reference;
+#pragma mark Package-Private
 
 + (void)addWithJavaLangRefReference:(JavaLangRefReference *)list;
 
+- (void)enqueueWithJavaLangRefReference:(JavaLangRefReference *)reference;
+
 @end
 
-__attribute__((always_inline)) inline void JavaLangRefReferenceQueue_init() {}
-FOUNDATION_EXPORT void JavaLangRefReferenceQueue_addWithJavaLangRefReference_(JavaLangRefReference *list);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangRefReferenceQueue, NANOS_PER_MILLI, jint)
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRefReferenceQueue)
 
 FOUNDATION_EXPORT JavaLangRefReference *JavaLangRefReferenceQueue_unenqueued_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangRefReferenceQueue, unenqueued_, JavaLangRefReference *)
 J2OBJC_STATIC_FIELD_SETTER(JavaLangRefReferenceQueue, unenqueued_, JavaLangRefReference *)
+
+FOUNDATION_EXPORT void JavaLangRefReferenceQueue_init(JavaLangRefReferenceQueue *self);
+
+FOUNDATION_EXPORT JavaLangRefReferenceQueue *new_JavaLangRefReferenceQueue_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangRefReferenceQueue_addWithJavaLangRefReference_(JavaLangRefReference *list);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRefReferenceQueue)
 
 #endif // _JavaLangRefReferenceQueue_H_

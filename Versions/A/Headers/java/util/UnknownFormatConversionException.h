@@ -6,13 +6,12 @@
 #ifndef _JavaUtilUnknownFormatConversionException_H_
 #define _JavaUtilUnknownFormatConversionException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilUnknownFormatConversionException_serialVersionUID 19060418LL
+@interface JavaUtilUnknownFormatConversionException : JavaUtilIllegalFormatException
 
-@interface JavaUtilUnknownFormatConversionException : JavaUtilIllegalFormatException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)s;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilUnknownFormatConversionException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilUnknownFormatConversionException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilUnknownFormatConversionException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilUnknownFormatConversionException_initWithNSString_(JavaUtilUnknownFormatConversionException *self, NSString *s);
+
+FOUNDATION_EXPORT JavaUtilUnknownFormatConversionException *new_JavaUtilUnknownFormatConversionException_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilUnknownFormatConversionException)
 
 #endif // _JavaUtilUnknownFormatConversionException_H_

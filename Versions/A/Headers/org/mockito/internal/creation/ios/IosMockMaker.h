@@ -6,19 +6,20 @@
 #ifndef _OrgMockitoInternalCreationIosIosMockMaker_H_
 #define _OrgMockitoInternalCreationIosIosMockMaker_H_
 
+#include "J2ObjC_header.h"
+#include "org/mockito/plugins/MockMaker.h"
+
 @class IOSClass;
 @class IOSObjectArray;
-@class OrgMockitoInternalCreationIosInvocationHandlerAdapter;
 @protocol JavaLangReflectInvocationHandler;
-@protocol JavaUtilMap;
 @protocol OrgMockitoInvocationMockHandler;
 @protocol OrgMockitoMockMockCreationSettings;
 
-#import "JreEmulation.h"
-#include "org/mockito/plugins/MockMaker.h"
+@interface OrgMockitoInternalCreationIosIosMockMaker : NSObject < OrgMockitoPluginsMockMaker >
 
-@interface OrgMockitoInternalCreationIosIosMockMaker : NSObject < OrgMockitoPluginsMockMaker > {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (id)createMockWithOrgMockitoMockMockCreationSettings:(id<OrgMockitoMockMockCreationSettings>)settings
                    withOrgMockitoInvocationMockHandler:(id<OrgMockitoInvocationMockHandler>)handler;
@@ -29,53 +30,45 @@
 withOrgMockitoInvocationMockHandler:(id<OrgMockitoInvocationMockHandler>)newHandler
 withOrgMockitoMockMockCreationSettings:(id<OrgMockitoMockMockCreationSettings>)settings;
 
-- (OrgMockitoInternalCreationIosInvocationHandlerAdapter *)getInvocationHandlerAdapterWithId:(id)mock;
+#pragma mark Package-Private
 
 - (IOSClass *)getProxyClassWithIOSClass:(IOSClass *)typeToMock
                       withIOSClassArray:(IOSObjectArray *)interfaces;
 
-+ (IOSClass *)generateClassProxyWithNSString:(NSString *)name
-                                withIOSClass:(IOSClass *)classToMock
-                           withIOSClassArray:(IOSObjectArray *)interfaces;
-
-- (instancetype)init;
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgMockitoInternalCreationIosIosMockMaker_initialized;
 J2OBJC_STATIC_INIT(OrgMockitoInternalCreationIosIosMockMaker)
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgMockitoInternalCreationIosIosMockMaker_classCache_;
-J2OBJC_STATIC_FIELD_GETTER(OrgMockitoInternalCreationIosIosMockMaker, classCache_, id<JavaUtilMap>)
-J2OBJC_STATIC_FIELD_SETTER(OrgMockitoInternalCreationIosIosMockMaker, classCache_, id<JavaUtilMap>)
+FOUNDATION_EXPORT void OrgMockitoInternalCreationIosIosMockMaker_init(OrgMockitoInternalCreationIosIosMockMaker *self);
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgMockitoInternalCreationIosIosMockMaker_proxyCache_;
-J2OBJC_STATIC_FIELD_GETTER(OrgMockitoInternalCreationIosIosMockMaker, proxyCache_, id<JavaUtilMap>)
+FOUNDATION_EXPORT OrgMockitoInternalCreationIosIosMockMaker *new_OrgMockitoInternalCreationIosIosMockMaker_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jint OrgMockitoInternalCreationIosIosMockMaker_nextClassNameIndex_;
-J2OBJC_STATIC_FIELD_GETTER(OrgMockitoInternalCreationIosIosMockMaker, nextClassNameIndex_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgMockitoInternalCreationIosIosMockMaker, nextClassNameIndex_, jint)
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalCreationIosIosMockMaker)
 
 @interface OrgMockitoInternalCreationIosIosMockMaker_ClassProxy : NSObject {
  @public
   id<JavaLangReflectInvocationHandler> $__handler_;
 }
 
+#pragma mark Package-Private
+
+- (instancetype)init;
+
 - (id<JavaLangReflectInvocationHandler>)getHandler;
 
 - (void)setHandlerWithJavaLangReflectInvocationHandler:(id<JavaLangReflectInvocationHandler>)handler;
 
-- (instancetype)init;
-
-- (void)dealloc;
-
-- (void)copyAllFieldsTo:(OrgMockitoInternalCreationIosIosMockMaker_ClassProxy *)other;
-
 
 @end
 
-__attribute__((always_inline)) inline void OrgMockitoInternalCreationIosIosMockMaker_ClassProxy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgMockitoInternalCreationIosIosMockMaker_ClassProxy)
 
 J2OBJC_FIELD_SETTER(OrgMockitoInternalCreationIosIosMockMaker_ClassProxy, $__handler_, id<JavaLangReflectInvocationHandler>)
+
+FOUNDATION_EXPORT void OrgMockitoInternalCreationIosIosMockMaker_ClassProxy_init(OrgMockitoInternalCreationIosIosMockMaker_ClassProxy *self);
+
+FOUNDATION_EXPORT OrgMockitoInternalCreationIosIosMockMaker_ClassProxy *new_OrgMockitoInternalCreationIosIosMockMaker_ClassProxy_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalCreationIosIosMockMaker_ClassProxy)
 
 #endif // _OrgMockitoInternalCreationIosIosMockMaker_H_

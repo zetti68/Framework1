@@ -6,7 +6,7 @@
 #ifndef _LibcoreIoStructUtsname_H_
 #define _LibcoreIoStructUtsname_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreIoStructUtsname : NSObject {
  @public
@@ -17,6 +17,8 @@
   NSString *machine_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)sysname
                     withNSString:(NSString *)nodename
                     withNSString:(NSString *)release_
@@ -25,12 +27,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructUtsname_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructUtsname)
 
 J2OBJC_FIELD_SETTER(LibcoreIoStructUtsname, sysname_, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructUtsname, nodename_, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructUtsname, release__, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructUtsname, version__, NSString *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructUtsname, machine_, NSString *)
+
+FOUNDATION_EXPORT void LibcoreIoStructUtsname_initWithNSString_withNSString_withNSString_withNSString_withNSString_(LibcoreIoStructUtsname *self, NSString *sysname, NSString *nodename, NSString *release_, NSString *version_, NSString *machine);
+
+FOUNDATION_EXPORT LibcoreIoStructUtsname *new_LibcoreIoStructUtsname_initWithNSString_withNSString_withNSString_withNSString_withNSString_(NSString *sysname, NSString *nodename, NSString *release_, NSString *version_, NSString *machine) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructUtsname)
 
 #endif // _LibcoreIoStructUtsname_H_

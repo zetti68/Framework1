@@ -6,19 +6,19 @@
 #ifndef _JavaIoRandomAccessFile_H_
 #define _JavaIoRandomAccessFile_H_
 
-@class DalvikSystemCloseGuard;
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+#include "java/io/DataInput.h"
+#include "java/io/DataOutput.h"
+
 @class IOSByteArray;
 @class JavaIoFile;
 @class JavaIoFileDescriptor;
 @class JavaNioChannelsFileChannel;
 
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
-#include "java/io/DataInput.h"
-#include "java/io/DataOutput.h"
+@interface JavaIoRandomAccessFile : NSObject < JavaIoDataInput, JavaIoDataOutput, JavaIoCloseable >
 
-@interface JavaIoRandomAccessFile : NSObject < JavaIoDataInput, JavaIoDataOutput, JavaIoCloseable > {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file
                       withNSString:(NSString *)mode;
@@ -27,8 +27,6 @@
                     withNSString:(NSString *)mode;
 
 - (void)close;
-
-- (void)dealloc;
 
 - (JavaNioChannelsFileChannel *)getChannel;
 
@@ -112,8 +110,22 @@
 
 - (void)writeUTFWithNSString:(NSString *)str;
 
+#pragma mark Protected
+
+- (void)dealloc;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoRandomAccessFile_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoRandomAccessFile)
+
+FOUNDATION_EXPORT void JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_(JavaIoRandomAccessFile *self, JavaIoFile *file, NSString *mode);
+
+FOUNDATION_EXPORT JavaIoRandomAccessFile *new_JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_(JavaIoFile *file, NSString *mode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoRandomAccessFile_initWithNSString_withNSString_(JavaIoRandomAccessFile *self, NSString *fileName, NSString *mode);
+
+FOUNDATION_EXPORT JavaIoRandomAccessFile *new_JavaIoRandomAccessFile_initWithNSString_withNSString_(NSString *fileName, NSString *mode) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoRandomAccessFile)
 
 #endif // _JavaIoRandomAccessFile_H_

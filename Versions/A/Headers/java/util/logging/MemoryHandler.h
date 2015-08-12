@@ -6,18 +6,15 @@
 #ifndef _JavaUtilLoggingMemoryHandler_H_
 #define _JavaUtilLoggingMemoryHandler_H_
 
-@class IOSObjectArray;
-@class JavaUtilLoggingLevel;
-@class JavaUtilLoggingLogManager;
-@class JavaUtilLoggingLogRecord;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/logging/Handler.h"
 
-#define JavaUtilLoggingMemoryHandler_DEFAULT_SIZE 1000
+@class JavaUtilLoggingLevel;
+@class JavaUtilLoggingLogRecord;
 
-@interface JavaUtilLoggingMemoryHandler : JavaUtilLoggingHandler {
-}
+@interface JavaUtilLoggingMemoryHandler : JavaUtilLoggingHandler
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -29,11 +26,11 @@
 
 - (void)flush;
 
-- (void)publishWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)record;
-
 - (JavaUtilLoggingLevel *)getPushLevel;
 
 - (jboolean)isLoggableWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)record;
+
+- (void)publishWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)record;
 
 - (void)push;
 
@@ -41,8 +38,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingMemoryHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingMemoryHandler)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingMemoryHandler, DEFAULT_SIZE, jint)
+FOUNDATION_EXPORT void JavaUtilLoggingMemoryHandler_init(JavaUtilLoggingMemoryHandler *self);
+
+FOUNDATION_EXPORT JavaUtilLoggingMemoryHandler *new_JavaUtilLoggingMemoryHandler_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilLoggingMemoryHandler_initWithJavaUtilLoggingHandler_withInt_withJavaUtilLoggingLevel_(JavaUtilLoggingMemoryHandler *self, JavaUtilLoggingHandler *target, jint size, JavaUtilLoggingLevel *pushLevel);
+
+FOUNDATION_EXPORT JavaUtilLoggingMemoryHandler *new_JavaUtilLoggingMemoryHandler_initWithJavaUtilLoggingHandler_withInt_withJavaUtilLoggingLevel_(JavaUtilLoggingHandler *target, jint size, JavaUtilLoggingLevel *pushLevel) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingMemoryHandler)
 
 #endif // _JavaUtilLoggingMemoryHandler_H_

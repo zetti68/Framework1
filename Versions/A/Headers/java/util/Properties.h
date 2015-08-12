@@ -6,35 +6,24 @@
 #ifndef _JavaUtilProperties_H_
 #define _JavaUtilProperties_H_
 
-@class IOSCharArray;
+#include "J2ObjC_header.h"
+#include "java/util/Hashtable.h"
+
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
 @class JavaIoPrintStream;
 @class JavaIoPrintWriter;
 @class JavaIoReader;
 @class JavaIoWriter;
-@class JavaLangStringBuilder;
-@protocol JavaLangAppendable;
 @protocol JavaUtilEnumeration;
 @protocol JavaUtilSet;
-@protocol OrgXmlSaxAttributes;
-
-#import "JreEmulation.h"
-#include "java/util/Hashtable.h"
-#include "org/xml/sax/helpers/DefaultHandler.h"
-
-#define JavaUtilProperties_CONTINUE 3
-#define JavaUtilProperties_IGNORE 5
-#define JavaUtilProperties_KEY_DONE 4
-#define JavaUtilProperties_NONE 0
-#define JavaUtilProperties_SLASH 1
-#define JavaUtilProperties_UNICODE 2
-#define JavaUtilProperties_serialVersionUID 4112578634029874840LL
 
 @interface JavaUtilProperties : JavaUtilHashtable {
  @public
   JavaUtilProperties *defaults_;
 }
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -53,9 +42,9 @@
 
 - (void)load__WithJavaIoReader:(JavaIoReader *)inArg;
 
-- (id<JavaUtilEnumeration>)propertyNames;
+- (void)loadFromXMLWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
-- (id<JavaUtilSet>)stringPropertyNames;
+- (id<JavaUtilEnumeration>)propertyNames;
 
 - (void)saveWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
                       withNSString:(NSString *)comment;
@@ -69,8 +58,6 @@
 - (void)storeWithJavaIoWriter:(JavaIoWriter *)writer
                  withNSString:(NSString *)comment;
 
-- (void)loadFromXMLWithJavaIoInputStream:(JavaIoInputStream *)inArg;
-
 - (void)storeToXMLWithJavaIoOutputStream:(JavaIoOutputStream *)os
                             withNSString:(NSString *)comment;
 
@@ -78,48 +65,22 @@
                             withNSString:(NSString *)comment
                             withNSString:(NSString *)encoding;
 
+- (id<JavaUtilSet>)stringPropertyNames;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilProperties_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilProperties)
 
 J2OBJC_FIELD_SETTER(JavaUtilProperties, defaults_, JavaUtilProperties *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilProperties_init(JavaUtilProperties *self);
 
-FOUNDATION_EXPORT NSString *JavaUtilProperties_PROP_DTD_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, PROP_DTD_NAME_, NSString *)
+FOUNDATION_EXPORT JavaUtilProperties *new_JavaUtilProperties_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT NSString *JavaUtilProperties_PROP_DTD_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, PROP_DTD_, NSString *)
+FOUNDATION_EXPORT void JavaUtilProperties_initWithJavaUtilProperties_(JavaUtilProperties *self, JavaUtilProperties *properties);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, NONE, jint)
+FOUNDATION_EXPORT JavaUtilProperties *new_JavaUtilProperties_initWithJavaUtilProperties_(JavaUtilProperties *properties) NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, SLASH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, UNICODE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, CONTINUE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, KEY_DONE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilProperties, IGNORE, jint)
-
-@interface JavaUtilProperties_$1 : OrgXmlSaxHelpersDefaultHandler {
-}
-
-- (void)startElementWithNSString:(NSString *)uri
-                    withNSString:(NSString *)localName
-                    withNSString:(NSString *)qName
-         withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attributes;
-
-- (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
-
-- (instancetype)initWithJavaUtilProperties:(JavaUtilProperties *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilProperties_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilProperties)
 
 #endif // _JavaUtilProperties_H_

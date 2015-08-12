@@ -6,13 +6,17 @@
 #ifndef _JavaLangSuppressWarnings_H_
 #define _JavaLangSuppressWarnings_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
+
+@class IOSObjectArray;
 
 @protocol JavaLangSuppressWarnings < JavaLangAnnotationAnnotation >
 
 @end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaLangSuppressWarnings)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangSuppressWarnings)
 
 #endif // _JavaLangSuppressWarnings_H_

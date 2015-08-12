@@ -6,71 +6,78 @@
 #ifndef _JavaNetNetworkInterface_H_
 #define _JavaNetNetworkInterface_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
-@class IOSObjectArray;
-@class JavaLangException;
 @class JavaNetInetAddress;
-@class JavaNetSocketException;
 @protocol JavaUtilEnumeration;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaNetNetworkInterface : NSObject
 
-@interface JavaNetNetworkInterface : NSObject {
-}
-
-
-+ (JavaNetNetworkInterface *)forUnboundMulticastSocket;
-
-- (jint)getIndex;
-
-- (NSString *)getName;
-
-- (id<JavaUtilEnumeration>)getInetAddresses;
-
-- (NSString *)getDisplayName;
-
-+ (JavaNetNetworkInterface *)getByNameWithNSString:(NSString *)interfaceName;
-
-+ (JavaNetNetworkInterface *)getByInetAddressWithJavaNetInetAddress:(JavaNetInetAddress *)address;
-
-+ (JavaNetNetworkInterface *)getByIndexWithInt:(jint)index;
-
-+ (id<JavaUtilEnumeration>)getNetworkInterfaces;
+#pragma mark Public
 
 - (jboolean)isEqual:(id)obj;
 
-- (NSUInteger)hash;
++ (JavaNetNetworkInterface *)getByIndexWithInt:(jint)index;
 
-- (NSString *)description;
++ (JavaNetNetworkInterface *)getByInetAddressWithJavaNetInetAddress:(JavaNetInetAddress *)address;
+
++ (JavaNetNetworkInterface *)getByNameWithNSString:(NSString *)interfaceName;
+
+- (NSString *)getDisplayName;
+
+- (IOSByteArray *)getHardwareAddress;
+
+- (jint)getIndex;
+
+- (id<JavaUtilEnumeration>)getInetAddresses;
 
 - (id<JavaUtilList>)getInterfaceAddresses;
 
-- (id<JavaUtilEnumeration>)getSubInterfaces;
+- (jint)getMTU;
+
+- (NSString *)getName;
+
++ (id<JavaUtilEnumeration>)getNetworkInterfaces;
 
 - (JavaNetNetworkInterface *)getParent;
 
-- (jboolean)isUp;
+- (id<JavaUtilEnumeration>)getSubInterfaces;
+
+- (NSUInteger)hash;
 
 - (jboolean)isLoopback;
 
 - (jboolean)isPointToPoint;
 
-- (jboolean)supportsMulticast;
-
-- (IOSByteArray *)getHardwareAddress;
-
-- (jint)getMTU;
+- (jboolean)isUp;
 
 - (jboolean)isVirtual;
 
+- (jboolean)supportsMulticast;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
++ (JavaNetNetworkInterface *)forUnboundMulticastSocket;
+
+
 @end
 
-__attribute__((always_inline)) inline void JavaNetNetworkInterface_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetNetworkInterface)
+
 FOUNDATION_EXPORT JavaNetNetworkInterface *JavaNetNetworkInterface_forUnboundMulticastSocket();
+
 FOUNDATION_EXPORT JavaNetNetworkInterface *JavaNetNetworkInterface_getByNameWithNSString_(NSString *interfaceName);
+
 FOUNDATION_EXPORT JavaNetNetworkInterface *JavaNetNetworkInterface_getByInetAddressWithJavaNetInetAddress_(JavaNetInetAddress *address);
+
 FOUNDATION_EXPORT JavaNetNetworkInterface *JavaNetNetworkInterface_getByIndexWithInt_(jint index);
+
 FOUNDATION_EXPORT id<JavaUtilEnumeration> JavaNetNetworkInterface_getNetworkInterfaces();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetNetworkInterface)
 
 #endif // _JavaNetNetworkInterface_H_

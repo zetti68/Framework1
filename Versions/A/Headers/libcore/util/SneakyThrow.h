@@ -6,18 +6,22 @@
 #ifndef _LibcoreUtilSneakyThrow_H_
 #define _LibcoreUtilSneakyThrow_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangThrowable;
 
-#import "JreEmulation.h"
+@interface LibcoreUtilSneakyThrow : NSObject
 
-@interface LibcoreUtilSneakyThrow : NSObject {
-}
+#pragma mark Public
 
 + (void)sneakyThrowWithJavaLangThrowable:(JavaLangThrowable *)t;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreUtilSneakyThrow_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreUtilSneakyThrow)
+
 FOUNDATION_EXPORT void LibcoreUtilSneakyThrow_sneakyThrowWithJavaLangThrowable_(JavaLangThrowable *t);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreUtilSneakyThrow)
 
 #endif // _LibcoreUtilSneakyThrow_H_

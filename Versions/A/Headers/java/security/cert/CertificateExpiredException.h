@@ -6,22 +6,29 @@
 #ifndef _JavaSecurityCertCertificateExpiredException_H_
 #define _JavaSecurityCertCertificateExpiredException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/cert/CertificateException.h"
 
-#define JavaSecurityCertCertificateExpiredException_serialVersionUID 9071001339691533771LL
+@interface JavaSecurityCertCertificateExpiredException : JavaSecurityCertCertificateException
 
-@interface JavaSecurityCertCertificateExpiredException : JavaSecurityCertCertificateException {
-}
-
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithNSString:(NSString *)msg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificateExpiredException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificateExpiredException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificateExpiredException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificateExpiredException_initWithNSString_(JavaSecurityCertCertificateExpiredException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateExpiredException *new_JavaSecurityCertCertificateExpiredException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityCertCertificateExpiredException_init(JavaSecurityCertCertificateExpiredException *self);
+
+FOUNDATION_EXPORT JavaSecurityCertCertificateExpiredException *new_JavaSecurityCertCertificateExpiredException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificateExpiredException)
 
 #endif // _JavaSecurityCertCertificateExpiredException_H_

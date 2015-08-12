@@ -6,10 +6,10 @@
 #ifndef _JavaUtilConcurrentRejectedExecutionHandler_H_
 #define _JavaUtilConcurrentRejectedExecutionHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaUtilConcurrentThreadPoolExecutor;
 @protocol JavaLangRunnable;
-
-#import "JreEmulation.h"
 
 @protocol JavaUtilConcurrentRejectedExecutionHandler < NSObject, JavaObject >
 
@@ -18,6 +18,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentRejectedExecutionHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentRejectedExecutionHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentRejectedExecutionHandler)
 
 #endif // _JavaUtilConcurrentRejectedExecutionHandler_H_

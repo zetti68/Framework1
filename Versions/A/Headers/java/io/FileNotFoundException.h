@@ -6,13 +6,12 @@
 #ifndef _JavaIoFileNotFoundException_H_
 #define _JavaIoFileNotFoundException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoFileNotFoundException_serialVersionUID -897856973823710492LL
+@interface JavaIoFileNotFoundException : JavaIoIOException
 
-@interface JavaIoFileNotFoundException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileNotFoundException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileNotFoundException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoFileNotFoundException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoFileNotFoundException_init(JavaIoFileNotFoundException *self);
+
+FOUNDATION_EXPORT JavaIoFileNotFoundException *new_JavaIoFileNotFoundException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileNotFoundException_initWithNSString_(JavaIoFileNotFoundException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoFileNotFoundException *new_JavaIoFileNotFoundException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileNotFoundException)
 
 #endif // _JavaIoFileNotFoundException_H_

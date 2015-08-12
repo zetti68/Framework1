@@ -6,23 +6,19 @@
 #ifndef _JavaUtilConcurrentConcurrentLinkedQueue_H_
 #define _JavaUtilConcurrentConcurrentLinkedQueue_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilConcurrentConcurrentLinkedQueue_Node;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractQueue.h"
-#include "java/util/Iterator.h"
 #include "java/util/Queue.h"
 
-#define JavaUtilConcurrentConcurrentLinkedQueue_serialVersionUID 196745693267521676LL
+@class IOSObjectArray;
+@class JavaUtilConcurrentConcurrentLinkedQueue_Node;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
-@interface JavaUtilConcurrentConcurrentLinkedQueue : JavaUtilAbstractQueue < JavaUtilQueue, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentConcurrentLinkedQueue : JavaUtilAbstractQueue < JavaUtilQueue, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -30,98 +26,58 @@
 
 - (jboolean)addWithId:(id)e;
 
-- (void)updateHeadWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)h
-                  withJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)p;
-
-- (JavaUtilConcurrentConcurrentLinkedQueue_Node *)succWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)p;
-
-- (jboolean)offerWithId:(id)e;
-
-- (id)poll;
-
-- (id)peek;
-
-- (JavaUtilConcurrentConcurrentLinkedQueue_Node *)first;
-
-- (jboolean)isEmpty;
-
-- (jint)size;
+- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (jboolean)containsWithId:(id)o;
 
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id)e;
+
+- (id)peek;
+
+- (id)poll;
+
 - (jboolean)removeWithId:(id)o;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (jint)size;
 
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (id<JavaUtilIterator>)iterator;
+#pragma mark Package-Private
+
+- (JavaUtilConcurrentConcurrentLinkedQueue_Node *)first;
+
+- (JavaUtilConcurrentConcurrentLinkedQueue_Node *)succWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)p;
+
+- (void)updateHeadWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)h
+                  withJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)p;
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentLinkedQueue_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentLinkedQueue)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedQueue_init(JavaUtilConcurrentConcurrentLinkedQueue *self);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentLinkedQueue_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedQueue *new_JavaUtilConcurrentConcurrentLinkedQueue_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedQueue_headOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue, headOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedQueue_initWithJavaUtilCollection_(JavaUtilConcurrentConcurrentLinkedQueue *self, id<JavaUtilCollection> c);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedQueue_tailOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue, tailOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedQueue *new_JavaUtilConcurrentConcurrentLinkedQueue_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
 
-@interface JavaUtilConcurrentConcurrentLinkedQueue_Node : NSObject {
- @public
-  id item_;
-  JavaUtilConcurrentConcurrentLinkedQueue_Node *next_;
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentLinkedQueue)
 
-- (instancetype)initWithId:(id)item;
-
-- (jboolean)casItemWithId:(id)cmp
-                   withId:(id)val;
-
-- (void)lazySetNextWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)val;
-
-- (jboolean)casNextWithJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)cmp
-                   withJavaUtilConcurrentConcurrentLinkedQueue_Node:(JavaUtilConcurrentConcurrentLinkedQueue_Node *)val;
+@interface JavaUtilConcurrentConcurrentLinkedQueue_Node : NSObject
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentLinkedQueue_Node_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentLinkedQueue_Node)
 
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentLinkedQueue_Node, item_, id)
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentLinkedQueue_Node, next_, JavaUtilConcurrentConcurrentLinkedQueue_Node *)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentLinkedQueue_Node_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue_Node, UNSAFE_, SunMiscUnsafe *)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedQueue_Node_itemOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue_Node, itemOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedQueue_Node_nextOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedQueue_Node, nextOffset_, jlong)
-
-@interface JavaUtilConcurrentConcurrentLinkedQueue_Itr : NSObject < JavaUtilIterator > {
-}
-
-- (instancetype)initWithJavaUtilConcurrentConcurrentLinkedQueue:(JavaUtilConcurrentConcurrentLinkedQueue *)outer$;
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentLinkedQueue_Itr_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentLinkedQueue_Node)
 
 #endif // _JavaUtilConcurrentConcurrentLinkedQueue_H_

@@ -6,7 +6,7 @@
 #ifndef _JavaUtilRegexMatchResult_H_
 #define _JavaUtilRegexMatchResult_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaUtilRegexMatchResult < NSObject, JavaObject >
 
@@ -26,6 +26,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilRegexMatchResult_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilRegexMatchResult)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilRegexMatchResult)
 
 #endif // _JavaUtilRegexMatchResult_H_

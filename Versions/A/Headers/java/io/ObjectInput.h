@@ -6,13 +6,14 @@
 #ifndef _JavaIoObjectInput_H_
 #define _JavaIoObjectInput_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/DataInput.h"
 #include "java/lang/AutoCloseable.h"
 
+@class IOSByteArray;
+
 @protocol JavaIoObjectInput < JavaIoDataInput, JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (jint)available;
 
 - (void)close;
@@ -31,6 +32,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectInput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectInput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectInput)
 
 #endif // _JavaIoObjectInput_H_

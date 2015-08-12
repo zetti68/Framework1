@@ -6,14 +6,15 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1StringType_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1StringType_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Type.h"
+
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Type.h"
+@interface OrgApacheHarmonySecurityAsn1ASN1StringType : OrgApacheHarmonySecurityAsn1ASN1Type
 
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType : OrgApacheHarmonySecurityAsn1ASN1Type {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)tagNumber;
 
@@ -21,17 +22,16 @@
 
 - (id)decodeWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
 - (void)encodeASNWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
 - (void)encodeContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
+
+- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
 
 - (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityAsn1ASN1StringType_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1StringType)
 
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1StringType *OrgApacheHarmonySecurityAsn1ASN1StringType_BMPSTRING_;
@@ -55,80 +55,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1StringType, UNIVERSAL
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1StringType *OrgApacheHarmonySecurityAsn1ASN1StringType_UTF8STRING_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1ASN1StringType, UTF8STRING_, OrgApacheHarmonySecurityAsn1ASN1StringType *)
 
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$1 : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1StringType_initWithInt_(OrgApacheHarmonySecurityAsn1ASN1StringType *self, jint tagNumber);
 
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$1_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$2 : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$2_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$3 : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$3_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$4 : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$4_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_ASN1StringUTF8Type : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
-
-- (instancetype)initWithInt:(jint)tagNumber;
-
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
-
-- (void)setEncodingContentWithOrgApacheHarmonySecurityAsn1BerOutputStream:(OrgApacheHarmonySecurityAsn1BerOutputStream *)outArg;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_ASN1StringUTF8Type_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$5 : OrgApacheHarmonySecurityAsn1ASN1StringType_ASN1StringUTF8Type {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$5_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$6 : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$6_init() {}
-
-@interface OrgApacheHarmonySecurityAsn1ASN1StringType_$7 : OrgApacheHarmonySecurityAsn1ASN1StringType_ASN1StringUTF8Type {
-}
-
-- (instancetype)initWithInt:(jint)arg$0;
-
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1StringType_$7_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1StringType)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1StringType_H_

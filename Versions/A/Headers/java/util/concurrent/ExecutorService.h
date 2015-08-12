@@ -6,6 +6,9 @@
 #ifndef _JavaUtilConcurrentExecutorService_H_
 #define _JavaUtilConcurrentExecutorService_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/Executor.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilCollection;
@@ -13,10 +16,8 @@
 @protocol JavaUtilConcurrentFuture;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/Executor.h"
-
 @protocol JavaUtilConcurrentExecutorService < JavaUtilConcurrentExecutor, NSObject, JavaObject >
+
 - (void)shutdown;
 
 - (id<JavaUtilList>)shutdownNow;
@@ -49,6 +50,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutorService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutorService)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutorService)
 
 #endif // _JavaUtilConcurrentExecutorService_H_

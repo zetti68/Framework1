@@ -6,21 +6,30 @@
 #ifndef _AndroidTextNoCopySpan_H_
 #define _AndroidTextNoCopySpan_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol AndroidTextNoCopySpan < NSObject, JavaObject >
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextNoCopySpan_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextNoCopySpan)
 
-@interface AndroidTextNoCopySpan_Concrete : NSObject < AndroidTextNoCopySpan > {
-}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextNoCopySpan)
+
+@interface AndroidTextNoCopySpan_Concrete : NSObject < AndroidTextNoCopySpan >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextNoCopySpan_Concrete_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextNoCopySpan_Concrete)
+
+FOUNDATION_EXPORT void AndroidTextNoCopySpan_Concrete_init(AndroidTextNoCopySpan_Concrete *self);
+
+FOUNDATION_EXPORT AndroidTextNoCopySpan_Concrete *new_AndroidTextNoCopySpan_Concrete_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextNoCopySpan_Concrete)
 
 #endif // _AndroidTextNoCopySpan_H_

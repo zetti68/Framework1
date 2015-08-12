@@ -6,9 +6,9 @@
 #ifndef _JavaLangAnnotationAnnotation_H_
 #define _JavaLangAnnotationAnnotation_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSClass;
 
 @protocol JavaLangAnnotationAnnotation < NSObject, JavaObject >
 
@@ -22,6 +22,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationAnnotation_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationAnnotation)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationAnnotation)
 
 #endif // _JavaLangAnnotationAnnotation_H_

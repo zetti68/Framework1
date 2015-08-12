@@ -6,82 +6,85 @@
 #ifndef _JavaNioCharsetCharset_H_
 #define _JavaNioCharsetCharset_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Comparable.h"
+
 @class IOSObjectArray;
 @class JavaNioByteBuffer;
 @class JavaNioCharBuffer;
 @class JavaNioCharsetCharsetDecoder;
 @class JavaNioCharsetCharsetEncoder;
-@class JavaUtilHashMap;
-@class JavaUtilHashSet;
 @class JavaUtilLocale;
 @protocol JavaUtilSet;
 @protocol JavaUtilSortedMap;
 
-#import "JreEmulation.h"
-#include "java/lang/Comparable.h"
+@interface JavaNioCharsetCharset : NSObject < JavaLangComparable >
 
-@interface JavaNioCharsetCharset : NSObject < JavaLangComparable > {
-}
+#pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)canonicalName
-               withNSStringArray:(IOSObjectArray *)aliases;
+- (id<JavaUtilSet>)aliases;
 
 + (id<JavaUtilSortedMap>)availableCharsets;
 
-+ (JavaNioCharsetCharset *)forNameWithNSString:(NSString *)charsetName;
+- (jboolean)canEncode;
 
-+ (JavaNioCharsetCharset *)forNameUEEWithNSString:(NSString *)charsetName;
-
-+ (jboolean)isSupportedWithNSString:(NSString *)charsetName;
+- (jint)compareToWithId:(JavaNioCharsetCharset *)charset;
 
 - (jboolean)containsWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
 
-- (JavaNioCharsetCharsetEncoder *)newEncoder OBJC_METHOD_FAMILY_NONE;
+- (JavaNioCharBuffer *)decodeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
 
-- (JavaNioCharsetCharsetDecoder *)newDecoder OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)name;
-
-- (id<JavaUtilSet>)aliases;
++ (JavaNioCharsetCharset *)defaultCharset;
 
 - (NSString *)displayName;
 
 - (NSString *)displayNameWithJavaUtilLocale:(JavaUtilLocale *)l;
 
-- (jboolean)isRegistered;
-
-- (jboolean)canEncode;
-
 - (JavaNioByteBuffer *)encodeWithJavaNioCharBuffer:(JavaNioCharBuffer *)buffer;
 
 - (JavaNioByteBuffer *)encodeWithNSString:(NSString *)s;
 
-- (JavaNioCharBuffer *)decodeWithJavaNioByteBuffer:(JavaNioByteBuffer *)buffer;
-
-- (jint)compareToWithId:(JavaNioCharsetCharset *)charset;
-
 - (jboolean)isEqual:(id)obj;
+
++ (JavaNioCharsetCharset *)forNameWithNSString:(NSString *)charsetName;
+
++ (JavaNioCharsetCharset *)forNameUEEWithNSString:(NSString *)charsetName;
 
 - (NSUInteger)hash;
 
+- (jboolean)isRegistered;
+
++ (jboolean)isSupportedWithNSString:(NSString *)charsetName;
+
+- (NSString *)name;
+
+- (JavaNioCharsetCharsetDecoder *)newDecoder OBJC_METHOD_FAMILY_NONE;
+
+- (JavaNioCharsetCharsetEncoder *)newEncoder OBJC_METHOD_FAMILY_NONE;
+
 - (NSString *)description;
 
-+ (JavaNioCharsetCharset *)defaultCharset;
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)canonicalName
+               withNSStringArray:(IOSObjectArray *)aliases;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNioCharsetCharset_initialized;
 J2OBJC_STATIC_INIT(JavaNioCharsetCharset)
+
+FOUNDATION_EXPORT void JavaNioCharsetCharset_initWithNSString_withNSStringArray_(JavaNioCharsetCharset *self, NSString *canonicalName, IOSObjectArray *aliases);
+
 FOUNDATION_EXPORT id<JavaUtilSortedMap> JavaNioCharsetCharset_availableCharsets();
+
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharset_forNameWithNSString_(NSString *charsetName);
+
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharset_forNameUEEWithNSString_(NSString *charsetName);
+
 FOUNDATION_EXPORT jboolean JavaNioCharsetCharset_isSupportedWithNSString_(NSString *charsetName);
+
 FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharset_defaultCharset();
 
-FOUNDATION_EXPORT JavaUtilHashMap *JavaNioCharsetCharset_CACHED_CHARSETS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharset, CACHED_CHARSETS_, JavaUtilHashMap *)
-
-FOUNDATION_EXPORT JavaNioCharsetCharset *JavaNioCharsetCharset_DEFAULT_CHARSET_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharset, DEFAULT_CHARSET_, JavaNioCharsetCharset *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCharset)
 
 #endif // _JavaNioCharsetCharset_H_

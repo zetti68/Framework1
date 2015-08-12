@@ -6,13 +6,12 @@
 #ifndef _JavaIoEOFException_H_
 #define _JavaIoEOFException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaIoEOFException_serialVersionUID 6433858223774886977LL
+@interface JavaIoEOFException : JavaIoIOException
 
-@interface JavaIoEOFException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoEOFException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoEOFException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoEOFException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoEOFException_init(JavaIoEOFException *self);
+
+FOUNDATION_EXPORT JavaIoEOFException *new_JavaIoEOFException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoEOFException_initWithNSString_(JavaIoEOFException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoEOFException *new_JavaIoEOFException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoEOFException)
 
 #endif // _JavaIoEOFException_H_

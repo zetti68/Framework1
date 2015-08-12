@@ -6,105 +6,118 @@
 #ifndef _JavaUtilConcurrentConcurrentSkipListSet_H_
 #define _JavaUtilConcurrentConcurrentSkipListSet_H_
 
-@class SunMiscUnsafe;
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/util/AbstractSet.h"
+#include "java/util/NavigableSet.h"
+
 @protocol JavaUtilCollection;
 @protocol JavaUtilComparator;
 @protocol JavaUtilConcurrentConcurrentNavigableMap;
 @protocol JavaUtilIterator;
 @protocol JavaUtilSortedSet;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/util/AbstractSet.h"
-#include "java/util/NavigableSet.h"
+@interface JavaUtilConcurrentConcurrentSkipListSet : JavaUtilAbstractSet < JavaUtilNavigableSet, NSCopying, JavaIoSerializable >
 
-#define JavaUtilConcurrentConcurrentSkipListSet_serialVersionUID -2479143111061671589LL
-
-@interface JavaUtilConcurrentConcurrentSkipListSet : JavaUtilAbstractSet < JavaUtilNavigableSet, NSCopying, JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
+- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
 - (instancetype)initWithJavaUtilSortedSet:(id<JavaUtilSortedSet>)s;
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)m;
-
-- (JavaUtilConcurrentConcurrentSkipListSet *)clone;
-
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (jboolean)containsWithId:(id)o;
-
 - (jboolean)addWithId:(id)e;
-
-- (jboolean)removeWithId:(id)o;
-
-- (void)clear;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (id<JavaUtilIterator>)descendingIterator;
-
-- (jboolean)isEqual:(id)o;
-
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (id)lowerWithId:(id)e;
-
-- (id)floorWithId:(id)e;
 
 - (id)ceilingWithId:(id)e;
 
+- (void)clear;
+
+- (JavaUtilConcurrentConcurrentSkipListSet *)clone;
+
+- (id<JavaUtilComparator>)comparator;
+
+- (jboolean)containsWithId:(id)o;
+
+- (id<JavaUtilIterator>)descendingIterator;
+
+- (id<JavaUtilNavigableSet>)descendingSet;
+
+- (jboolean)isEqual:(id)o;
+
+- (id)first;
+
+- (id)floorWithId:(id)e;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement
+                              withBoolean:(jboolean)inclusive;
+
 - (id)higherWithId:(id)e;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (id)last;
+
+- (id)lowerWithId:(id)e;
 
 - (id)pollFirst;
 
 - (id)pollLast;
 
-- (id<JavaUtilComparator>)comparator;
+- (jboolean)removeWithId:(id)o;
 
-- (id)first;
+- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
-- (id)last;
+- (jint)size;
 
 - (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
                              withBoolean:(jboolean)fromInclusive
                                   withId:(id)toElement
                              withBoolean:(jboolean)toInclusive;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement
-                              withBoolean:(jboolean)inclusive;
+- (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
+                                  withId:(id)toElement;
+
+- (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement;
 
 - (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
-                                  withId:(id)toElement;
+#pragma mark Package-Private
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement;
-
-- (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement;
-
-- (id<JavaUtilNavigableSet>)descendingSet;
+- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)m;
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentSkipListSet_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListSet)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListSet, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListSet_init(JavaUtilConcurrentConcurrentSkipListSet *self);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentSkipListSet_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListSet, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListSet *new_JavaUtilConcurrentConcurrentSkipListSet_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentSkipListSet_mapOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListSet, mapOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilComparator_(JavaUtilConcurrentConcurrentSkipListSet *self, id<JavaUtilComparator> comparator);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListSet *new_JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilCollection_(JavaUtilConcurrentConcurrentSkipListSet *self, id<JavaUtilCollection> c);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListSet *new_JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilSortedSet_(JavaUtilConcurrentConcurrentSkipListSet *self, id<JavaUtilSortedSet> s);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListSet *new_JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilSortedSet_(id<JavaUtilSortedSet> s) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilConcurrentConcurrentNavigableMap_(JavaUtilConcurrentConcurrentSkipListSet *self, id<JavaUtilConcurrentConcurrentNavigableMap> m);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListSet *new_JavaUtilConcurrentConcurrentSkipListSet_initWithJavaUtilConcurrentConcurrentNavigableMap_(id<JavaUtilConcurrentConcurrentNavigableMap> m) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListSet)
 
 #endif // _JavaUtilConcurrentConcurrentSkipListSet_H_

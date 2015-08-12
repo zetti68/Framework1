@@ -6,37 +6,39 @@
 #ifndef _JavaNetProxySelector_H_
 #define _JavaNetProxySelector_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoIOException;
 @class JavaNetSocketAddress;
 @class JavaNetURI;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaNetProxySelector : NSObject
 
-@interface JavaNetProxySelector : NSObject {
-}
+#pragma mark Public
 
-+ (JavaNetProxySelector *)getDefault;
-
-+ (void)setDefaultWithJavaNetProxySelector:(JavaNetProxySelector *)selector;
-
-- (id<JavaUtilList>)selectWithJavaNetURI:(JavaNetURI *)uri;
+- (instancetype)init;
 
 - (void)connectFailedWithJavaNetURI:(JavaNetURI *)uri
            withJavaNetSocketAddress:(JavaNetSocketAddress *)address
               withJavaIoIOException:(JavaIoIOException *)failure;
 
-- (instancetype)init;
++ (JavaNetProxySelector *)getDefault;
+
+- (id<JavaUtilList>)selectWithJavaNetURI:(JavaNetURI *)uri;
+
++ (void)setDefaultWithJavaNetProxySelector:(JavaNetProxySelector *)selector;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetProxySelector_initialized;
 J2OBJC_STATIC_INIT(JavaNetProxySelector)
+
 FOUNDATION_EXPORT JavaNetProxySelector *JavaNetProxySelector_getDefault();
+
 FOUNDATION_EXPORT void JavaNetProxySelector_setDefaultWithJavaNetProxySelector_(JavaNetProxySelector *selector);
 
-FOUNDATION_EXPORT JavaNetProxySelector *JavaNetProxySelector_defaultSelector_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetProxySelector, defaultSelector_, JavaNetProxySelector *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetProxySelector, defaultSelector_, JavaNetProxySelector *)
+FOUNDATION_EXPORT void JavaNetProxySelector_init(JavaNetProxySelector *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetProxySelector)
 
 #endif // _JavaNetProxySelector_H_

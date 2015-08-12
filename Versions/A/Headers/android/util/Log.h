@@ -6,35 +6,26 @@
 #ifndef _AndroidUtilLog_H_
 #define _AndroidUtilLog_H_
 
+#include "J2ObjC_header.h"
+
+@class AndroidUtilLog_TerribleFailure;
 @class JavaLangThrowable;
-@class JavaUtilLoggingLevel;
-@class JavaUtilLoggingLogger;
 @protocol AndroidUtilLog_TerribleFailureHandler;
-@protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/lang/Exception.h"
-
-#define AndroidUtilLog_ASSERT 7
+#define AndroidUtilLog_VERBOSE 2
 #define AndroidUtilLog_DEBUG 3
-#define AndroidUtilLog_ERROR 6
 #define AndroidUtilLog_INFO 4
-#define AndroidUtilLog_LOG_ID_EVENTS 2
+#define AndroidUtilLog_WARN 5
+#define AndroidUtilLog_ERROR 6
+#define AndroidUtilLog_ASSERT 7
 #define AndroidUtilLog_LOG_ID_MAIN 0
 #define AndroidUtilLog_LOG_ID_RADIO 1
+#define AndroidUtilLog_LOG_ID_EVENTS 2
 #define AndroidUtilLog_LOG_ID_SYSTEM 3
-#define AndroidUtilLog_VERBOSE 2
-#define AndroidUtilLog_WARN 5
 
-@interface AndroidUtilLog : NSObject {
-}
+@interface AndroidUtilLog : NSObject
 
-+ (jint)vWithNSString:(NSString *)tag
-         withNSString:(NSString *)msg;
-
-+ (jint)vWithNSString:(NSString *)tag
-         withNSString:(NSString *)msg
-withJavaLangThrowable:(JavaLangThrowable *)tr;
+#pragma mark Public
 
 + (jint)dWithNSString:(NSString *)tag
          withNSString:(NSString *)msg;
@@ -43,55 +34,24 @@ withJavaLangThrowable:(JavaLangThrowable *)tr;
          withNSString:(NSString *)msg
 withJavaLangThrowable:(JavaLangThrowable *)tr;
 
-+ (jint)iWithNSString:(NSString *)tag
++ (jint)eWithNSString:(NSString *)tag
          withNSString:(NSString *)msg;
 
-+ (jint)iWithNSString:(NSString *)tag
++ (jint)eWithNSString:(NSString *)tag
          withNSString:(NSString *)msg
 withJavaLangThrowable:(JavaLangThrowable *)tr;
 
-+ (jint)wWithNSString:(NSString *)tag
++ (NSString *)getStackTraceStringWithJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)iWithNSString:(NSString *)tag
          withNSString:(NSString *)msg;
 
-+ (jint)wWithNSString:(NSString *)tag
++ (jint)iWithNSString:(NSString *)tag
          withNSString:(NSString *)msg
 withJavaLangThrowable:(JavaLangThrowable *)tr;
 
 + (jboolean)isLoggableWithNSString:(NSString *)tag
                            withInt:(jint)level;
-
-+ (jint)wWithNSString:(NSString *)tag
-withJavaLangThrowable:(JavaLangThrowable *)tr;
-
-+ (jint)eWithNSString:(NSString *)tag
-         withNSString:(NSString *)msg;
-
-+ (jint)eWithNSString:(NSString *)tag
-         withNSString:(NSString *)msg
-withJavaLangThrowable:(JavaLangThrowable *)tr;
-
-+ (jint)wtfWithNSString:(NSString *)tag
-           withNSString:(NSString *)msg;
-
-+ (jint)wtfStackWithNSString:(NSString *)tag
-                withNSString:(NSString *)msg;
-
-+ (jint)wtfWithNSString:(NSString *)tag
-  withJavaLangThrowable:(JavaLangThrowable *)tr;
-
-+ (jint)wtfWithNSString:(NSString *)tag
-           withNSString:(NSString *)msg
-  withJavaLangThrowable:(JavaLangThrowable *)tr;
-
-+ (jint)wtfWithInt:(jint)logId
-      withNSString:(NSString *)tag
-      withNSString:(NSString *)msg
-withJavaLangThrowable:(JavaLangThrowable *)tr
-       withBoolean:(jboolean)localStack;
-
-+ (id<AndroidUtilLog_TerribleFailureHandler>)setWtfHandlerWithAndroidUtilLog_TerribleFailureHandler:(id<AndroidUtilLog_TerribleFailureHandler>)handler;
-
-+ (NSString *)getStackTraceStringWithJavaLangThrowable:(JavaLangThrowable *)tr;
 
 + (jint)printlnWithInt:(jint)priority
           withNSString:(NSString *)tag
@@ -102,31 +62,49 @@ withJavaLangThrowable:(JavaLangThrowable *)tr
                  withNSString:(NSString *)tag
                  withNSString:(NSString *)msg;
 
++ (id<AndroidUtilLog_TerribleFailureHandler>)setWtfHandlerWithAndroidUtilLog_TerribleFailureHandler:(id<AndroidUtilLog_TerribleFailureHandler>)handler;
+
++ (jint)vWithNSString:(NSString *)tag
+         withNSString:(NSString *)msg;
+
++ (jint)vWithNSString:(NSString *)tag
+         withNSString:(NSString *)msg
+withJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)wWithNSString:(NSString *)tag
+         withNSString:(NSString *)msg;
+
++ (jint)wWithNSString:(NSString *)tag
+         withNSString:(NSString *)msg
+withJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)wWithNSString:(NSString *)tag
+withJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)wtfWithNSString:(NSString *)tag
+           withNSString:(NSString *)msg;
+
++ (jint)wtfWithNSString:(NSString *)tag
+           withNSString:(NSString *)msg
+  withJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)wtfWithNSString:(NSString *)tag
+  withJavaLangThrowable:(JavaLangThrowable *)tr;
+
++ (jint)wtfStackWithNSString:(NSString *)tag
+                withNSString:(NSString *)msg;
+
+#pragma mark Package-Private
+
++ (jint)wtfWithInt:(jint)logId
+      withNSString:(NSString *)tag
+      withNSString:(NSString *)msg
+withJavaLangThrowable:(JavaLangThrowable *)tr
+       withBoolean:(jboolean)localStack;
+
 @end
 
-FOUNDATION_EXPORT BOOL AndroidUtilLog_initialized;
 J2OBJC_STATIC_INIT(AndroidUtilLog)
-FOUNDATION_EXPORT jint AndroidUtilLog_vWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_vWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_dWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_dWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_iWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_iWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jboolean AndroidUtilLog_isLoggableWithNSString_withInt_(NSString *tag, jint level);
-FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withJavaLangThrowable_(NSString *tag, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_eWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_eWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_wtfStackWithNSString_withNSString_(NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withJavaLangThrowable_(NSString *tag, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithInt_withNSString_withNSString_withJavaLangThrowable_withBoolean_(jint logId, NSString *tag, NSString *msg, JavaLangThrowable *tr, jboolean localStack);
-FOUNDATION_EXPORT id<AndroidUtilLog_TerribleFailureHandler> AndroidUtilLog_setWtfHandlerWithAndroidUtilLog_TerribleFailureHandler_(id<AndroidUtilLog_TerribleFailureHandler> handler);
-FOUNDATION_EXPORT NSString *AndroidUtilLog_getStackTraceStringWithJavaLangThrowable_(JavaLangThrowable *tr);
-FOUNDATION_EXPORT jint AndroidUtilLog_printlnWithInt_withNSString_withNSString_(jint priority, NSString *tag, NSString *msg);
-FOUNDATION_EXPORT jint AndroidUtilLog_println_nativeWithInt_withInt_withNSString_withNSString_(jint bufID, jint priority, NSString *tag, NSString *msg);
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, VERBOSE, jint)
 
@@ -140,21 +118,6 @@ J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, ERROR, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, ASSERT, jint)
 
-FOUNDATION_EXPORT JavaUtilLoggingLogger *AndroidUtilLog_globalLogger_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, globalLogger_, JavaUtilLoggingLogger *)
-J2OBJC_STATIC_FIELD_SETTER(AndroidUtilLog, globalLogger_, JavaUtilLoggingLogger *)
-
-FOUNDATION_EXPORT id<JavaUtilMap> AndroidUtilLog_tagLevels_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, tagLevels_, id<JavaUtilMap>)
-J2OBJC_STATIC_FIELD_SETTER(AndroidUtilLog, tagLevels_, id<JavaUtilMap>)
-
-FOUNDATION_EXPORT NSString *AndroidUtilLog_LOG_TAG_PREFIX_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, LOG_TAG_PREFIX_, NSString *)
-
-FOUNDATION_EXPORT id<AndroidUtilLog_TerribleFailureHandler> AndroidUtilLog_sWtfHandler_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, sWtfHandler_, id<AndroidUtilLog_TerribleFailureHandler>)
-J2OBJC_STATIC_FIELD_SETTER(AndroidUtilLog, sWtfHandler_, id<AndroidUtilLog_TerribleFailureHandler>)
-
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, LOG_ID_MAIN, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, LOG_ID_RADIO, jint)
@@ -163,15 +126,49 @@ J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, LOG_ID_EVENTS, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(AndroidUtilLog, LOG_ID_SYSTEM, jint)
 
-@interface AndroidUtilLog_TerribleFailure : JavaLangException {
-}
+FOUNDATION_EXPORT jint AndroidUtilLog_vWithNSString_withNSString_(NSString *tag, NSString *msg);
 
-- (instancetype)initWithNSString:(NSString *)msg
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+FOUNDATION_EXPORT jint AndroidUtilLog_vWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
 
-@end
+FOUNDATION_EXPORT jint AndroidUtilLog_dWithNSString_withNSString_(NSString *tag, NSString *msg);
 
-__attribute__((always_inline)) inline void AndroidUtilLog_TerribleFailure_init() {}
+FOUNDATION_EXPORT jint AndroidUtilLog_dWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_iWithNSString_withNSString_(NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_iWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withNSString_(NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jboolean AndroidUtilLog_isLoggableWithNSString_withInt_(NSString *tag, jint level);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wWithNSString_withJavaLangThrowable_(NSString *tag, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_eWithNSString_withNSString_(NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_eWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withNSString_(NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wtfStackWithNSString_withNSString_(NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withJavaLangThrowable_(NSString *tag, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithNSString_withNSString_withJavaLangThrowable_(NSString *tag, NSString *msg, JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_wtfWithInt_withNSString_withNSString_withJavaLangThrowable_withBoolean_(jint logId, NSString *tag, NSString *msg, JavaLangThrowable *tr, jboolean localStack);
+
+FOUNDATION_EXPORT id<AndroidUtilLog_TerribleFailureHandler> AndroidUtilLog_setWtfHandlerWithAndroidUtilLog_TerribleFailureHandler_(id<AndroidUtilLog_TerribleFailureHandler> handler);
+
+FOUNDATION_EXPORT NSString *AndroidUtilLog_getStackTraceStringWithJavaLangThrowable_(JavaLangThrowable *tr);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_printlnWithInt_withNSString_withNSString_(jint priority, NSString *tag, NSString *msg);
+
+FOUNDATION_EXPORT jint AndroidUtilLog_println_nativeWithInt_withInt_withNSString_withNSString_(jint bufID, jint priority, NSString *tag, NSString *msg);
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilLog)
 
 @protocol AndroidUtilLog_TerribleFailureHandler < NSObject, JavaObject >
 
@@ -180,18 +177,8 @@ __attribute__((always_inline)) inline void AndroidUtilLog_TerribleFailure_init()
 
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilLog_TerribleFailureHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilLog_TerribleFailureHandler)
 
-@interface AndroidUtilLog_$1 : NSObject < AndroidUtilLog_TerribleFailureHandler > {
-}
-
-- (void)onTerribleFailureWithNSString:(NSString *)tag
-   withAndroidUtilLog_TerribleFailure:(AndroidUtilLog_TerribleFailure *)what;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void AndroidUtilLog_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilLog_TerribleFailureHandler)
 
 #endif // _AndroidUtilLog_H_

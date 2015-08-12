@@ -6,22 +6,29 @@
 #ifndef _JavaxSecurityCertCertificateEncodingException_H_
 #define _JavaxSecurityCertCertificateEncodingException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "javax/security/cert/CertificateException.h"
 
-#define JavaxSecurityCertCertificateEncodingException_serialVersionUID -8187642723048403470LL
+@interface JavaxSecurityCertCertificateEncodingException : JavaxSecurityCertCertificateException
 
-@interface JavaxSecurityCertCertificateEncodingException : JavaxSecurityCertCertificateException {
-}
-
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithNSString:(NSString *)msg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaxSecurityCertCertificateEncodingException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxSecurityCertCertificateEncodingException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaxSecurityCertCertificateEncodingException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaxSecurityCertCertificateEncodingException_initWithNSString_(JavaxSecurityCertCertificateEncodingException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaxSecurityCertCertificateEncodingException *new_JavaxSecurityCertCertificateEncodingException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaxSecurityCertCertificateEncodingException_init(JavaxSecurityCertCertificateEncodingException *self);
+
+FOUNDATION_EXPORT JavaxSecurityCertCertificateEncodingException *new_JavaxSecurityCertCertificateEncodingException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxSecurityCertCertificateEncodingException)
 
 #endif // _JavaxSecurityCertCertificateEncodingException_H_

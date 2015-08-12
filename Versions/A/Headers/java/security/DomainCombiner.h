@@ -6,9 +6,9 @@
 #ifndef _JavaSecurityDomainCombiner_H_
 #define _JavaSecurityDomainCombiner_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSObjectArray;
 
 @protocol JavaSecurityDomainCombiner < NSObject, JavaObject >
 
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityDomainCombiner_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityDomainCombiner)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityDomainCombiner)
 
 #endif // _JavaSecurityDomainCombiner_H_

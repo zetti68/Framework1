@@ -6,17 +6,17 @@
 #ifndef _OrgXmlpullV1Sax2Driver_H_
 #define _OrgXmlpullV1Sax2Driver_H_
 
+#include "J2ObjC_header.h"
+#include "org/xml/sax/Attributes.h"
+#include "org/xml/sax/Locator.h"
+#include "org/xml/sax/XMLReader.h"
+
 @class OrgXmlSaxInputSource;
 @protocol OrgXmlSaxContentHandler;
 @protocol OrgXmlSaxDTDHandler;
 @protocol OrgXmlSaxEntityResolver;
 @protocol OrgXmlSaxErrorHandler;
 @protocol OrgXmlpullV1XmlPullParser;
-
-#import "JreEmulation.h"
-#include "org/xml/sax/Attributes.h"
-#include "org/xml/sax/Locator.h"
-#include "org/xml/sax/XMLReader.h"
 
 @interface OrgXmlpullV1Sax2Driver : NSObject < OrgXmlSaxLocator, OrgXmlSaxXMLReader, OrgXmlSaxAttributes > {
  @public
@@ -26,70 +26,58 @@
   id<OrgXmlpullV1XmlPullParser> pp_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (instancetype)initWithOrgXmlpullV1XmlPullParser:(id<OrgXmlpullV1XmlPullParser>)pp;
 
-- (jint)getLength;
+- (jint)getColumnNumber;
 
-- (NSString *)getURIWithInt:(jint)index;
+- (id<OrgXmlSaxContentHandler>)getContentHandler;
 
-- (NSString *)getLocalNameWithInt:(jint)index;
+- (id<OrgXmlSaxDTDHandler>)getDTDHandler;
 
-- (NSString *)getQNameWithInt:(jint)index;
+- (id<OrgXmlSaxEntityResolver>)getEntityResolver;
 
-- (NSString *)getTypeWithInt:(jint)index;
+- (id<OrgXmlSaxErrorHandler>)getErrorHandler;
 
-- (NSString *)getValueWithInt:(jint)index;
+- (jboolean)getFeatureWithNSString:(NSString *)name;
+
+- (jint)getIndexWithNSString:(NSString *)qName;
 
 - (jint)getIndexWithNSString:(NSString *)uri
                 withNSString:(NSString *)localName;
 
-- (jint)getIndexWithNSString:(NSString *)qName;
+- (jint)getLength;
+
+- (jint)getLineNumber;
+
+- (NSString *)getLocalNameWithInt:(jint)index;
+
+- (id)getPropertyWithNSString:(NSString *)name;
+
+- (NSString *)getPublicId;
+
+- (NSString *)getQNameWithInt:(jint)index;
+
+- (NSString *)getSystemId;
+
+- (NSString *)getTypeWithInt:(jint)index;
+
+- (NSString *)getTypeWithNSString:(NSString *)qName;
 
 - (NSString *)getTypeWithNSString:(NSString *)uri
                      withNSString:(NSString *)localName;
 
-- (NSString *)getTypeWithNSString:(NSString *)qName;
+- (NSString *)getURIWithInt:(jint)index;
 
-- (NSString *)getValueWithNSString:(NSString *)uri
-                      withNSString:(NSString *)localName;
+- (NSString *)getValueWithInt:(jint)index;
 
 - (NSString *)getValueWithNSString:(NSString *)qName;
 
-- (NSString *)getPublicId;
-
-- (NSString *)getSystemId;
-
-- (jint)getLineNumber;
-
-- (jint)getColumnNumber;
-
-- (jboolean)getFeatureWithNSString:(NSString *)name;
-
-- (void)setFeatureWithNSString:(NSString *)name
-                   withBoolean:(jboolean)value;
-
-- (id)getPropertyWithNSString:(NSString *)name;
-
-- (void)setPropertyWithNSString:(NSString *)name
-                         withId:(id)value;
-
-- (void)setEntityResolverWithOrgXmlSaxEntityResolver:(id<OrgXmlSaxEntityResolver>)resolver;
-
-- (id<OrgXmlSaxEntityResolver>)getEntityResolver;
-
-- (void)setDTDHandlerWithOrgXmlSaxDTDHandler:(id<OrgXmlSaxDTDHandler>)handler;
-
-- (id<OrgXmlSaxDTDHandler>)getDTDHandler;
-
-- (void)setContentHandlerWithOrgXmlSaxContentHandler:(id<OrgXmlSaxContentHandler>)handler;
-
-- (id<OrgXmlSaxContentHandler>)getContentHandler;
-
-- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler;
-
-- (id<OrgXmlSaxErrorHandler>)getErrorHandler;
+- (NSString *)getValueWithNSString:(NSString *)uri
+                      withNSString:(NSString *)localName;
 
 - (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source;
 
@@ -97,13 +85,29 @@
 
 - (void)parseSubTreeWithOrgXmlpullV1XmlPullParser:(id<OrgXmlpullV1XmlPullParser>)pp;
 
+- (void)setContentHandlerWithOrgXmlSaxContentHandler:(id<OrgXmlSaxContentHandler>)handler;
+
+- (void)setDTDHandlerWithOrgXmlSaxDTDHandler:(id<OrgXmlSaxDTDHandler>)handler;
+
+- (void)setEntityResolverWithOrgXmlSaxEntityResolver:(id<OrgXmlSaxEntityResolver>)resolver;
+
+- (void)setErrorHandlerWithOrgXmlSaxErrorHandler:(id<OrgXmlSaxErrorHandler>)handler;
+
+- (void)setFeatureWithNSString:(NSString *)name
+                   withBoolean:(jboolean)value;
+
+- (void)setPropertyWithNSString:(NSString *)name
+                         withId:(id)value;
+
+#pragma mark Protected
+
 - (void)startElementWithNSString:(NSString *)namespace_
                     withNSString:(NSString *)localName
                     withNSString:(NSString *)qName;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlpullV1Sax2Driver_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlpullV1Sax2Driver)
 
 J2OBJC_FIELD_SETTER(OrgXmlpullV1Sax2Driver, contentHandler_, id<OrgXmlSaxContentHandler>)
 J2OBJC_FIELD_SETTER(OrgXmlpullV1Sax2Driver, errorHandler_, id<OrgXmlSaxErrorHandler>)
@@ -130,5 +134,15 @@ J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1Sax2Driver, APACHE_SCHEMA_VALIDATION_FEAT
 
 FOUNDATION_EXPORT NSString *OrgXmlpullV1Sax2Driver_APACHE_DYNAMIC_VALIDATION_FEATURE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgXmlpullV1Sax2Driver, APACHE_DYNAMIC_VALIDATION_FEATURE_, NSString *)
+
+FOUNDATION_EXPORT void OrgXmlpullV1Sax2Driver_init(OrgXmlpullV1Sax2Driver *self);
+
+FOUNDATION_EXPORT OrgXmlpullV1Sax2Driver *new_OrgXmlpullV1Sax2Driver_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlpullV1Sax2Driver_initWithOrgXmlpullV1XmlPullParser_(OrgXmlpullV1Sax2Driver *self, id<OrgXmlpullV1XmlPullParser> pp);
+
+FOUNDATION_EXPORT OrgXmlpullV1Sax2Driver *new_OrgXmlpullV1Sax2Driver_initWithOrgXmlpullV1XmlPullParser_(id<OrgXmlpullV1XmlPullParser> pp) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlpullV1Sax2Driver)
 
 #endif // _OrgXmlpullV1Sax2Driver_H_

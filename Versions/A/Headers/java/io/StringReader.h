@@ -6,13 +6,14 @@
 #ifndef _JavaIoStringReader_H_
 #define _JavaIoStringReader_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Reader.h"
 
-@interface JavaIoStringReader : JavaIoReader {
-}
+@class IOSCharArray;
+
+@interface JavaIoStringReader : JavaIoReader
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)str;
 
@@ -36,6 +37,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoStringReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoStringReader)
+
+FOUNDATION_EXPORT void JavaIoStringReader_initWithNSString_(JavaIoStringReader *self, NSString *str);
+
+FOUNDATION_EXPORT JavaIoStringReader *new_JavaIoStringReader_initWithNSString_(NSString *str) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoStringReader)
 
 #endif // _JavaIoStringReader_H_

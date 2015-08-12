@@ -6,13 +6,12 @@
 #ifndef _JavaUtilConcurrentTimeoutException_H_
 #define _JavaUtilConcurrentTimeoutException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaUtilConcurrentTimeoutException_serialVersionUID 1900926677490660714LL
+@interface JavaUtilConcurrentTimeoutException : JavaLangException
 
-@interface JavaUtilConcurrentTimeoutException : JavaLangException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentTimeoutException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentTimeoutException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentTimeoutException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentTimeoutException_init(JavaUtilConcurrentTimeoutException *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentTimeoutException *new_JavaUtilConcurrentTimeoutException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentTimeoutException_initWithNSString_(JavaUtilConcurrentTimeoutException *self, NSString *message);
+
+FOUNDATION_EXPORT JavaUtilConcurrentTimeoutException *new_JavaUtilConcurrentTimeoutException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentTimeoutException)
 
 #endif // _JavaUtilConcurrentTimeoutException_H_

@@ -6,27 +6,35 @@
 #ifndef _JavaUtilResourceBundle_H_
 #define _JavaUtilResourceBundle_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaLangClassLoader;
-@class JavaUtilHashtable;
 @class JavaUtilLocale;
-@class JavaUtilMissingResourceException;
 @class JavaUtilResourceBundle_Control;
-@class JavaUtilWeakHashMap;
 @protocol JavaUtilEnumeration;
 @protocol JavaUtilList;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
 
 @interface JavaUtilResourceBundle : NSObject {
  @public
   JavaUtilResourceBundle *parent_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
++ (void)clearCache;
+
++ (void)clearCacheWithJavaLangClassLoader:(JavaLangClassLoader *)loader;
+
+- (jboolean)containsKeyWithNSString:(NSString *)key;
+
 + (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)bundleName;
+
++ (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)baseName
+               withJavaUtilResourceBundle_Control:(JavaUtilResourceBundle_Control *)control;
 
 + (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)bundleName
                                withJavaUtilLocale:(JavaUtilLocale *)locale;
@@ -36,15 +44,12 @@
                           withJavaLangClassLoader:(JavaLangClassLoader *)loader;
 
 + (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)baseName
-               withJavaUtilResourceBundle_Control:(JavaUtilResourceBundle_Control *)control;
-
-+ (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)baseName
-                               withJavaUtilLocale:(JavaUtilLocale *)targetLocale
-               withJavaUtilResourceBundle_Control:(JavaUtilResourceBundle_Control *)control;
-
-+ (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)baseName
                                withJavaUtilLocale:(JavaUtilLocale *)targetLocale
                           withJavaLangClassLoader:(JavaLangClassLoader *)loader
+               withJavaUtilResourceBundle_Control:(JavaUtilResourceBundle_Control *)control;
+
++ (JavaUtilResourceBundle *)getBundleWithNSString:(NSString *)baseName
+                               withJavaUtilLocale:(JavaUtilLocale *)targetLocale
                withJavaUtilResourceBundle_Control:(JavaUtilResourceBundle_Control *)control;
 
 - (id<JavaUtilEnumeration>)getKeys;
@@ -57,66 +62,63 @@
 
 - (IOSObjectArray *)getStringArrayWithNSString:(NSString *)key;
 
-- (id)handleGetObjectWithNSString:(NSString *)key;
-
-- (void)setParentWithJavaUtilResourceBundle:(JavaUtilResourceBundle *)bundle;
-
-+ (void)clearCache;
-
-+ (void)clearCacheWithJavaLangClassLoader:(JavaLangClassLoader *)loader;
-
-- (jboolean)containsKeyWithNSString:(NSString *)key;
-
 - (id<JavaUtilSet>)keySet;
+
+#pragma mark Protected
+
+- (id)handleGetObjectWithNSString:(NSString *)key;
 
 - (id<JavaUtilSet>)handleKeySet;
 
+- (void)setParentWithJavaUtilResourceBundle:(JavaUtilResourceBundle *)bundle;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilResourceBundle_initialized;
 J2OBJC_STATIC_INIT(JavaUtilResourceBundle)
 
 J2OBJC_FIELD_SETTER(JavaUtilResourceBundle, parent_, JavaUtilResourceBundle *)
+
+FOUNDATION_EXPORT void JavaUtilResourceBundle_init(JavaUtilResourceBundle *self);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_(NSString *bundleName);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_(NSString *bundleName, JavaUtilLocale *locale);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_withJavaLangClassLoader_(NSString *bundleName, JavaUtilLocale *locale, JavaLangClassLoader *loader);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilResourceBundle_Control_(NSString *baseName, JavaUtilResourceBundle_Control *control);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_withJavaUtilResourceBundle_Control_(NSString *baseName, JavaUtilLocale *targetLocale, JavaUtilResourceBundle_Control *control);
+
 FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_getBundleWithNSString_withJavaUtilLocale_withJavaLangClassLoader_withJavaUtilResourceBundle_Control_(NSString *baseName, JavaUtilLocale *targetLocale, JavaLangClassLoader *loader, JavaUtilResourceBundle_Control *control);
+
 FOUNDATION_EXPORT void JavaUtilResourceBundle_clearCache();
+
 FOUNDATION_EXPORT void JavaUtilResourceBundle_clearCacheWithJavaLangClassLoader_(JavaLangClassLoader *loader);
 
-FOUNDATION_EXPORT NSString *JavaUtilResourceBundle_UNDER_SCORE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, UNDER_SCORE_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilResourceBundle)
 
-FOUNDATION_EXPORT NSString *JavaUtilResourceBundle_EMPTY_STRING_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, EMPTY_STRING_, NSString *)
+@interface JavaUtilResourceBundle_MissingBundle : JavaUtilResourceBundle
 
-FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_MISSING_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, MISSING_, JavaUtilResourceBundle *)
-
-FOUNDATION_EXPORT JavaUtilResourceBundle *JavaUtilResourceBundle_MISSINGBASE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, MISSINGBASE_, JavaUtilResourceBundle *)
-
-FOUNDATION_EXPORT JavaUtilWeakHashMap *JavaUtilResourceBundle_cache_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, cache_, JavaUtilWeakHashMap *)
-
-FOUNDATION_EXPORT JavaUtilLocale *JavaUtilResourceBundle_cacheLocale_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle, cacheLocale_, JavaUtilLocale *)
-J2OBJC_STATIC_FIELD_SETTER(JavaUtilResourceBundle, cacheLocale_, JavaUtilLocale *)
-
-@interface JavaUtilResourceBundle_MissingBundle : JavaUtilResourceBundle {
-}
+#pragma mark Public
 
 - (id<JavaUtilEnumeration>)getKeys;
 
 - (id)handleGetObjectWithNSString:(NSString *)name;
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilResourceBundle_MissingBundle_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilResourceBundle_MissingBundle)
+
+FOUNDATION_EXPORT void JavaUtilResourceBundle_MissingBundle_init(JavaUtilResourceBundle_MissingBundle *self);
+
+FOUNDATION_EXPORT JavaUtilResourceBundle_MissingBundle *new_JavaUtilResourceBundle_MissingBundle_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilResourceBundle_MissingBundle)
 
 #define JavaUtilResourceBundle_Control_TTL_DONT_CACHE -1LL
 #define JavaUtilResourceBundle_Control_TTL_NO_EXPIRATION_CONTROL -2LL
@@ -126,25 +128,19 @@ __attribute__((always_inline)) inline void JavaUtilResourceBundle_MissingBundle_
   id<JavaUtilList> format_;
 }
 
-- (instancetype)init;
-
-+ (JavaUtilResourceBundle_Control *)getControlWithJavaUtilList:(id<JavaUtilList>)formats;
-
-+ (JavaUtilResourceBundle_Control *)getNoFallbackControlWithJavaUtilList:(id<JavaUtilList>)formats;
+#pragma mark Public
 
 - (id<JavaUtilList>)getCandidateLocalesWithNSString:(NSString *)baseName
                                  withJavaUtilLocale:(JavaUtilLocale *)locale;
 
-- (id<JavaUtilList>)getFormatsWithNSString:(NSString *)baseName;
++ (JavaUtilResourceBundle_Control *)getControlWithJavaUtilList:(id<JavaUtilList>)formats;
 
 - (JavaUtilLocale *)getFallbackLocaleWithNSString:(NSString *)baseName
                                withJavaUtilLocale:(JavaUtilLocale *)locale;
 
-- (JavaUtilResourceBundle *)newBundleWithNSString:(NSString *)baseName
-                               withJavaUtilLocale:(JavaUtilLocale *)locale
-                                     withNSString:(NSString *)format
-                          withJavaLangClassLoader:(JavaLangClassLoader *)loader
-                                      withBoolean:(jboolean)reload OBJC_METHOD_FAMILY_NONE;
+- (id<JavaUtilList>)getFormatsWithNSString:(NSString *)baseName;
+
++ (JavaUtilResourceBundle_Control *)getNoFallbackControlWithJavaUtilList:(id<JavaUtilList>)formats;
 
 - (jlong)getTimeToLiveWithNSString:(NSString *)baseName
                 withJavaUtilLocale:(JavaUtilLocale *)locale;
@@ -156,20 +152,27 @@ __attribute__((always_inline)) inline void JavaUtilResourceBundle_MissingBundle_
          withJavaUtilResourceBundle:(JavaUtilResourceBundle *)bundle
                            withLong:(jlong)loadTime;
 
+- (JavaUtilResourceBundle *)newBundleWithNSString:(NSString *)baseName
+                               withJavaUtilLocale:(JavaUtilLocale *)locale
+                                     withNSString:(NSString *)format
+                          withJavaLangClassLoader:(JavaLangClassLoader *)loader
+                                      withBoolean:(jboolean)reload OBJC_METHOD_FAMILY_NONE;
+
 - (NSString *)toBundleNameWithNSString:(NSString *)baseName
                     withJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (NSString *)toResourceNameWithNSString:(NSString *)bundleName
                             withNSString:(NSString *)suffix;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilResourceBundle_Control_initialized;
 J2OBJC_STATIC_INIT(JavaUtilResourceBundle_Control)
 
 J2OBJC_FIELD_SETTER(JavaUtilResourceBundle_Control, format_, id<JavaUtilList>)
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_getControlWithJavaUtilList_(id<JavaUtilList> formats);
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_getNoFallbackControlWithJavaUtilList_(id<JavaUtilList> formats);
 
 FOUNDATION_EXPORT id<JavaUtilList> JavaUtilResourceBundle_Control_listDefault_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, listDefault_, id<JavaUtilList>)
@@ -204,46 +207,14 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, TTL_DONT_CACHE, jlong
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, TTL_NO_EXPIRATION_CONTROL, jlong)
 
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_FORMAT_PROPERTIES_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, FORMAT_PROPERTIES_CONTROL_, JavaUtilResourceBundle_Control *)
+FOUNDATION_EXPORT void JavaUtilResourceBundle_Control_init(JavaUtilResourceBundle_Control *self);
 
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_FORMAT_CLASS_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, FORMAT_CLASS_CONTROL_, JavaUtilResourceBundle_Control *)
+FOUNDATION_EXPORT JavaUtilResourceBundle_Control *new_JavaUtilResourceBundle_Control_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_FORMAT_DEFAULT_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_Control, FORMAT_DEFAULT_CONTROL_, JavaUtilResourceBundle_Control *)
+FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_getControlWithJavaUtilList_(id<JavaUtilList> formats);
 
-@interface JavaUtilResourceBundle_NoFallbackControl : JavaUtilResourceBundle_Control {
-}
+FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_Control_getNoFallbackControlWithJavaUtilList_(id<JavaUtilList> formats);
 
-- (instancetype)initWithNSString:(NSString *)format;
-
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)list;
-
-- (JavaUtilLocale *)getFallbackLocaleWithNSString:(NSString *)baseName
-                               withJavaUtilLocale:(JavaUtilLocale *)locale;
-
-@end
-
-FOUNDATION_EXPORT BOOL JavaUtilResourceBundle_NoFallbackControl_initialized;
-J2OBJC_STATIC_INIT(JavaUtilResourceBundle_NoFallbackControl)
-
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_NoFallbackControl_NOFALLBACK_FORMAT_PROPERTIES_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_NoFallbackControl, NOFALLBACK_FORMAT_PROPERTIES_CONTROL_, JavaUtilResourceBundle_Control *)
-
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_NoFallbackControl_NOFALLBACK_FORMAT_CLASS_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_NoFallbackControl, NOFALLBACK_FORMAT_CLASS_CONTROL_, JavaUtilResourceBundle_Control *)
-
-FOUNDATION_EXPORT JavaUtilResourceBundle_Control *JavaUtilResourceBundle_NoFallbackControl_NOFALLBACK_FORMAT_DEFAULT_CONTROL_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilResourceBundle_NoFallbackControl, NOFALLBACK_FORMAT_DEFAULT_CONTROL_, JavaUtilResourceBundle_Control *)
-
-@interface JavaUtilResourceBundle_SimpleControl : JavaUtilResourceBundle_Control {
-}
-
-- (instancetype)initWithNSString:(NSString *)format;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilResourceBundle_SimpleControl_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilResourceBundle_Control)
 
 #endif // _JavaUtilResourceBundle_H_

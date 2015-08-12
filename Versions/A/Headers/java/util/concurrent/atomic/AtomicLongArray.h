@@ -6,61 +6,68 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicLongArray_H_
 #define _JavaUtilConcurrentAtomicAtomicLongArray_H_
 
-@class IOSLongArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicLongArray_serialVersionUID -2308431214976778248LL
+@class IOSLongArray;
 
-@interface JavaUtilConcurrentAtomicAtomicLongArray : NSObject < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentAtomicAtomicLongArray : NSObject < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)length;
 
 - (instancetype)initWithLongArray:(IOSLongArray *)array;
 
-- (jint)length;
-
-- (jlong)getWithInt:(jint)i;
-
-- (void)setWithInt:(jint)i
-          withLong:(jlong)newValue;
-
-- (void)lazySetWithInt:(jint)i
-              withLong:(jlong)newValue;
-
-- (jlong)getAndSetWithInt:(jint)i
-                 withLong:(jlong)newValue;
+- (jlong)addAndGetWithInt:(jint)i
+                 withLong:(jlong)delta;
 
 - (jboolean)compareAndSetWithInt:(jint)i
                         withLong:(jlong)expect
                         withLong:(jlong)update;
 
-- (jboolean)weakCompareAndSetWithInt:(jint)i
-                            withLong:(jlong)expect
-                            withLong:(jlong)update;
+- (jlong)decrementAndGetWithInt:(jint)i;
 
-- (jlong)getAndIncrementWithInt:(jint)i;
-
-- (jlong)getAndDecrementWithInt:(jint)i;
+- (jlong)getWithInt:(jint)i;
 
 - (jlong)getAndAddWithInt:(jint)i
                  withLong:(jlong)delta;
 
+- (jlong)getAndDecrementWithInt:(jint)i;
+
+- (jlong)getAndIncrementWithInt:(jint)i;
+
+- (jlong)getAndSetWithInt:(jint)i
+                 withLong:(jlong)newValue;
+
 - (jlong)incrementAndGetWithInt:(jint)i;
 
-- (jlong)decrementAndGetWithInt:(jint)i;
+- (void)lazySetWithInt:(jint)i
+              withLong:(jlong)newValue;
 
-- (jlong)addAndGetWithInt:(jint)i
-                 withLong:(jlong)delta;
+- (jint)length;
+
+- (void)setWithInt:(jint)i
+          withLong:(jlong)newValue;
 
 - (NSString *)description;
 
+- (jboolean)weakCompareAndSetWithInt:(jint)i
+                            withLong:(jlong)expect
+                            withLong:(jlong)update;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicLongArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicLongArray)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicLongArray, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicLongArray_initWithInt_(JavaUtilConcurrentAtomicAtomicLongArray *self, jint length);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLongArray *new_JavaUtilConcurrentAtomicAtomicLongArray_initWithInt_(jint length) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicLongArray_initWithLongArray_(JavaUtilConcurrentAtomicAtomicLongArray *self, IOSLongArray *array);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLongArray *new_JavaUtilConcurrentAtomicAtomicLongArray_initWithLongArray_(IOSLongArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicLongArray)
 
 #endif // _JavaUtilConcurrentAtomicAtomicLongArray_H_

@@ -6,13 +6,12 @@
 #ifndef _JavaUtilMissingFormatWidthException_H_
 #define _JavaUtilMissingFormatWidthException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilMissingFormatWidthException_serialVersionUID 15560123LL
+@interface JavaUtilMissingFormatWidthException : JavaUtilIllegalFormatException
 
-@interface JavaUtilMissingFormatWidthException : JavaUtilIllegalFormatException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)s;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilMissingFormatWidthException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilMissingFormatWidthException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilMissingFormatWidthException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilMissingFormatWidthException_initWithNSString_(JavaUtilMissingFormatWidthException *self, NSString *s);
+
+FOUNDATION_EXPORT JavaUtilMissingFormatWidthException *new_JavaUtilMissingFormatWidthException_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilMissingFormatWidthException)
 
 #endif // _JavaUtilMissingFormatWidthException_H_

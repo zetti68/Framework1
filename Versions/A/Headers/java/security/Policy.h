@@ -6,6 +6,8 @@
 #ifndef _JavaSecurityPolicy_H_
 #define _JavaSecurityPolicy_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaSecurityCodeSource;
 @class JavaSecurityPermission;
 @class JavaSecurityPermissionCollection;
@@ -13,10 +15,9 @@
 @class JavaSecurityProvider;
 @protocol JavaSecurityPolicy_Parameters;
 
-#import "JreEmulation.h"
+@interface JavaSecurityPolicy : NSObject
 
-@interface JavaSecurityPolicy : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,48 +26,58 @@
 
 + (JavaSecurityPolicy *)getInstanceWithNSString:(NSString *)type
               withJavaSecurityPolicy_Parameters:(id<JavaSecurityPolicy_Parameters>)params
-                                   withNSString:(NSString *)provider;
+                       withJavaSecurityProvider:(JavaSecurityProvider *)provider;
 
 + (JavaSecurityPolicy *)getInstanceWithNSString:(NSString *)type
               withJavaSecurityPolicy_Parameters:(id<JavaSecurityPolicy_Parameters>)params
-                       withJavaSecurityProvider:(JavaSecurityProvider *)provider;
+                                   withNSString:(NSString *)provider;
 
 - (id<JavaSecurityPolicy_Parameters>)getParameters;
+
+- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs;
+
+- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityProtectionDomain:(JavaSecurityProtectionDomain *)domain;
+
++ (JavaSecurityPolicy *)getPolicy;
 
 - (JavaSecurityProvider *)getProvider;
 
 - (NSString *)getType;
 
-- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityCodeSource:(JavaSecurityCodeSource *)cs;
-
-- (void)refresh;
-
-- (JavaSecurityPermissionCollection *)getPermissionsWithJavaSecurityProtectionDomain:(JavaSecurityProtectionDomain *)domain;
-
 - (jboolean)impliesWithJavaSecurityProtectionDomain:(JavaSecurityProtectionDomain *)domain
                          withJavaSecurityPermission:(JavaSecurityPermission *)permission;
 
-+ (JavaSecurityPolicy *)getPolicy;
+- (void)refresh;
 
 + (void)setPolicyWithJavaSecurityPolicy:(JavaSecurityPolicy *)policy;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecurityPolicy_initialized;
 J2OBJC_STATIC_INIT(JavaSecurityPolicy)
-FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_(NSString *type, id<JavaSecurityPolicy_Parameters> params);
-FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_withNSString_(NSString *type, id<JavaSecurityPolicy_Parameters> params, NSString *provider);
-FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_withJavaSecurityProvider_(NSString *type, id<JavaSecurityPolicy_Parameters> params, JavaSecurityProvider *provider);
-FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getPolicy();
-FOUNDATION_EXPORT void JavaSecurityPolicy_setPolicyWithJavaSecurityPolicy_(JavaSecurityPolicy *policy);
 
 FOUNDATION_EXPORT JavaSecurityPermissionCollection *JavaSecurityPolicy_UNSUPPORTED_EMPTY_COLLECTION_;
 J2OBJC_STATIC_FIELD_GETTER(JavaSecurityPolicy, UNSUPPORTED_EMPTY_COLLECTION_, JavaSecurityPermissionCollection *)
+
+FOUNDATION_EXPORT void JavaSecurityPolicy_init(JavaSecurityPolicy *self);
+
+FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_(NSString *type, id<JavaSecurityPolicy_Parameters> params);
+
+FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_withNSString_(NSString *type, id<JavaSecurityPolicy_Parameters> params, NSString *provider);
+
+FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getInstanceWithNSString_withJavaSecurityPolicy_Parameters_withJavaSecurityProvider_(NSString *type, id<JavaSecurityPolicy_Parameters> params, JavaSecurityProvider *provider);
+
+FOUNDATION_EXPORT JavaSecurityPolicy *JavaSecurityPolicy_getPolicy();
+
+FOUNDATION_EXPORT void JavaSecurityPolicy_setPolicyWithJavaSecurityPolicy_(JavaSecurityPolicy *policy);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPolicy)
 
 @protocol JavaSecurityPolicy_Parameters < NSObject, JavaObject >
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPolicy_Parameters_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPolicy_Parameters)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPolicy_Parameters)
 
 #endif // _JavaSecurityPolicy_H_

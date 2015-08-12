@@ -6,26 +6,25 @@
 #ifndef _JavaUtilZipDeflater_H_
 #define _JavaUtilZipDeflater_H_
 
-@class DalvikSystemCloseGuard;
-@class IOSByteArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSByteArray;
 
 #define JavaUtilZipDeflater_BEST_COMPRESSION 9
 #define JavaUtilZipDeflater_BEST_SPEED 1
+#define JavaUtilZipDeflater_NO_COMPRESSION 0
 #define JavaUtilZipDeflater_DEFAULT_COMPRESSION -1
 #define JavaUtilZipDeflater_DEFAULT_STRATEGY 0
 #define JavaUtilZipDeflater_DEFLATED 8
 #define JavaUtilZipDeflater_FILTERED 1
-#define JavaUtilZipDeflater_FINISH 4
-#define JavaUtilZipDeflater_FULL_FLUSH 3
 #define JavaUtilZipDeflater_HUFFMAN_ONLY 2
-#define JavaUtilZipDeflater_NO_COMPRESSION 0
 #define JavaUtilZipDeflater_NO_FLUSH 0
 #define JavaUtilZipDeflater_SYNC_FLUSH 2
+#define JavaUtilZipDeflater_FULL_FLUSH 3
 
-@interface JavaUtilZipDeflater : NSObject {
-}
+@interface JavaUtilZipDeflater : NSObject
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -47,13 +46,15 @@
 
 - (void)end;
 
-- (void)dealloc;
-
 - (void)finish;
 
 - (jboolean)finished;
 
 - (jint)getAdler;
+
+- (jlong)getBytesRead;
+
+- (jlong)getBytesWritten;
 
 - (jint)getTotalIn;
 
@@ -79,13 +80,13 @@
 
 - (void)setStrategyWithInt:(jint)strategy;
 
-- (jlong)getBytesRead;
+#pragma mark Protected
 
-- (jlong)getBytesWritten;
+- (void)dealloc;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipDeflater_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipDeflater)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipDeflater, BEST_COMPRESSION, jint)
 
@@ -109,6 +110,18 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipDeflater, SYNC_FLUSH, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipDeflater, FULL_FLUSH, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipDeflater, FINISH, jint)
+FOUNDATION_EXPORT void JavaUtilZipDeflater_init(JavaUtilZipDeflater *self);
+
+FOUNDATION_EXPORT JavaUtilZipDeflater *new_JavaUtilZipDeflater_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipDeflater_initWithInt_(JavaUtilZipDeflater *self, jint level);
+
+FOUNDATION_EXPORT JavaUtilZipDeflater *new_JavaUtilZipDeflater_initWithInt_(jint level) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipDeflater_initWithInt_withBoolean_(JavaUtilZipDeflater *self, jint level, jboolean noHeader);
+
+FOUNDATION_EXPORT JavaUtilZipDeflater *new_JavaUtilZipDeflater_initWithInt_withBoolean_(jint level, jboolean noHeader) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipDeflater)
 
 #endif // _JavaUtilZipDeflater_H_

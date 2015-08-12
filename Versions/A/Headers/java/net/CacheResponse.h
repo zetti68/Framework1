@@ -6,22 +6,27 @@
 #ifndef _JavaNetCacheResponse_H_
 #define _JavaNetCacheResponse_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
+@interface JavaNetCacheResponse : NSObject
 
-@interface JavaNetCacheResponse : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (JavaIoInputStream *)getBody;
 
 - (id<JavaUtilMap>)getHeaders;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetCacheResponse_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetCacheResponse)
+
+FOUNDATION_EXPORT void JavaNetCacheResponse_init(JavaNetCacheResponse *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetCacheResponse)
 
 #endif // _JavaNetCacheResponse_H_

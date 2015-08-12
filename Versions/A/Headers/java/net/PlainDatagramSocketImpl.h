@@ -6,33 +6,35 @@
 #ifndef _JavaNetPlainDatagramSocketImpl_H_
 #define _JavaNetPlainDatagramSocketImpl_H_
 
-@class DalvikSystemCloseGuard;
+#include "J2ObjC_header.h"
+#include "java/net/DatagramSocketImpl.h"
+
 @class JavaIoFileDescriptor;
 @class JavaNetDatagramPacket;
 @class JavaNetInetAddress;
 @class JavaNetNetworkInterface;
 @class JavaNetSocketAddress;
-@class LibcoreIoStructGroupReq;
 
-#import "JreEmulation.h"
-#include "java/net/DatagramSocketImpl.h"
+@interface JavaNetPlainDatagramSocketImpl : JavaNetDatagramSocketImpl
 
-@interface JavaNetPlainDatagramSocketImpl : JavaNetDatagramSocketImpl {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (instancetype)initWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                                      withInt:(jint)localPort;
-
-- (instancetype)init;
 
 - (void)bindWithInt:(jint)port
 withJavaNetInetAddress:(JavaNetInetAddress *)address;
 
 - (void)close;
 
+- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)inetAddr
+                              withInt:(jint)port;
+
 - (void)create;
 
-- (void)dealloc;
+- (void)disconnect;
 
 - (id)getOptionWithInt:(jint)option;
 
@@ -50,11 +52,9 @@ withJavaNetInetAddress:(JavaNetInetAddress *)address;
 - (void)leaveGroupWithJavaNetSocketAddress:(JavaNetSocketAddress *)addr
                withJavaNetNetworkInterface:(JavaNetNetworkInterface *)netInterface;
 
-- (jint)peekWithJavaNetInetAddress:(JavaNetInetAddress *)sender;
+- (jint)peekDataWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
 - (void)receiveWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
-
-- (jint)peekDataWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
 - (void)sendWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)packet;
 
@@ -65,13 +65,24 @@ withJavaNetInetAddress:(JavaNetInetAddress *)address;
 
 - (void)setTTLWithByte:(jbyte)ttl;
 
-- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)inetAddr
-                              withInt:(jint)port;
+#pragma mark Protected
 
-- (void)disconnect;
+- (void)dealloc;
+
+- (jint)peekWithJavaNetInetAddress:(JavaNetInetAddress *)sender;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetPlainDatagramSocketImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetPlainDatagramSocketImpl)
+
+FOUNDATION_EXPORT void JavaNetPlainDatagramSocketImpl_initWithJavaIoFileDescriptor_withInt_(JavaNetPlainDatagramSocketImpl *self, JavaIoFileDescriptor *fd, jint localPort);
+
+FOUNDATION_EXPORT JavaNetPlainDatagramSocketImpl *new_JavaNetPlainDatagramSocketImpl_initWithJavaIoFileDescriptor_withInt_(JavaIoFileDescriptor *fd, jint localPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetPlainDatagramSocketImpl_init(JavaNetPlainDatagramSocketImpl *self);
+
+FOUNDATION_EXPORT JavaNetPlainDatagramSocketImpl *new_JavaNetPlainDatagramSocketImpl_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetPlainDatagramSocketImpl)
 
 #endif // _JavaNetPlainDatagramSocketImpl_H_

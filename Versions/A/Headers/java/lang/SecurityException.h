@@ -6,15 +6,14 @@
 #ifndef _JavaLangSecurityException_H_
 #define _JavaLangSecurityException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangSecurityException_serialVersionUID 6878364983674394167LL
+@class JavaLangThrowable;
 
-@interface JavaLangSecurityException : JavaLangRuntimeException {
-}
+@interface JavaLangSecurityException : JavaLangRuntimeException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangSecurityException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangSecurityException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangSecurityException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangSecurityException_init(JavaLangSecurityException *self);
+
+FOUNDATION_EXPORT JavaLangSecurityException *new_JavaLangSecurityException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangSecurityException_initWithNSString_(JavaLangSecurityException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangSecurityException *new_JavaLangSecurityException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangSecurityException_initWithNSString_withJavaLangThrowable_(JavaLangSecurityException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaLangSecurityException *new_JavaLangSecurityException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangSecurityException_initWithJavaLangThrowable_(JavaLangSecurityException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaLangSecurityException *new_JavaLangSecurityException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangSecurityException)
 
 #endif // _JavaLangSecurityException_H_

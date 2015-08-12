@@ -6,31 +6,49 @@
 #ifndef _JavaUtilConcurrentLocksReentrantLock_H_
 #define _JavaUtilConcurrentLocksReentrantLock_H_
 
-@class JavaIoObjectInputStream;
-@class JavaLangThread;
-@class JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject;
-@class JavaUtilConcurrentLocksReentrantLock_Sync;
-@class JavaUtilConcurrentTimeUnitEnum;
-@protocol JavaUtilCollection;
-@protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/concurrent/locks/AbstractQueuedSynchronizer.h"
 #include "java/util/concurrent/locks/Lock.h"
 
-#define JavaUtilConcurrentLocksReentrantLock_serialVersionUID 7373984872572414699LL
+@class JavaLangThread;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
+@protocol JavaUtilConcurrentLocksCondition;
 
-@interface JavaUtilConcurrentLocksReentrantLock : NSObject < JavaUtilConcurrentLocksLock, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentLocksReentrantLock : NSObject < JavaUtilConcurrentLocksLock, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithBoolean:(jboolean)fair;
 
+- (jint)getHoldCount;
+
+- (jint)getQueueLength;
+
+- (jint)getWaitQueueLengthWithJavaUtilConcurrentLocksCondition:(id<JavaUtilConcurrentLocksCondition>)condition;
+
+- (jboolean)hasQueuedThreadWithJavaLangThread:(JavaLangThread *)thread;
+
+- (jboolean)hasQueuedThreads;
+
+- (jboolean)hasWaitersWithJavaUtilConcurrentLocksCondition:(id<JavaUtilConcurrentLocksCondition>)condition;
+
+- (jboolean)isFair;
+
+- (jboolean)isHeldByCurrentThread;
+
+- (jboolean)isLocked;
+
 - (void)lock;
 
 - (void)lockInterruptibly;
+
+- (id<JavaUtilConcurrentLocksCondition>)newCondition OBJC_METHOD_FAMILY_NONE;
+
+- (NSString *)description;
 
 - (jboolean)tryLock;
 
@@ -39,101 +57,102 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (void)unlock;
 
-- (id<JavaUtilConcurrentLocksCondition>)newCondition OBJC_METHOD_FAMILY_NONE;
-
-- (jint)getHoldCount;
-
-- (jboolean)isHeldByCurrentThread;
-
-- (jboolean)isLocked;
-
-- (jboolean)isFair;
+#pragma mark Protected
 
 - (JavaLangThread *)getOwner;
-
-- (jboolean)hasQueuedThreads;
-
-- (jboolean)hasQueuedThreadWithJavaLangThread:(JavaLangThread *)thread;
-
-- (jint)getQueueLength;
 
 - (id<JavaUtilCollection>)getQueuedThreads;
 
-- (jboolean)hasWaitersWithJavaUtilConcurrentLocksCondition:(id<JavaUtilConcurrentLocksCondition>)condition;
-
-- (jint)getWaitQueueLengthWithJavaUtilConcurrentLocksCondition:(id<JavaUtilConcurrentLocksCondition>)condition;
-
 - (id<JavaUtilCollection>)getWaitingThreadsWithJavaUtilConcurrentLocksCondition:(id<JavaUtilConcurrentLocksCondition>)condition;
-
-- (NSString *)description;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksReentrantLock_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksReentrantLock)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksReentrantLock, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksReentrantLock_init(JavaUtilConcurrentLocksReentrantLock *self);
 
-#define JavaUtilConcurrentLocksReentrantLock_Sync_serialVersionUID -5179523762034025860LL
+FOUNDATION_EXPORT JavaUtilConcurrentLocksReentrantLock *new_JavaUtilConcurrentLocksReentrantLock_init() NS_RETURNS_RETAINED;
 
-@interface JavaUtilConcurrentLocksReentrantLock_Sync : JavaUtilConcurrentLocksAbstractQueuedSynchronizer {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksReentrantLock_initWithBoolean_(JavaUtilConcurrentLocksReentrantLock *self, jboolean fair);
 
-- (void)lock;
+FOUNDATION_EXPORT JavaUtilConcurrentLocksReentrantLock *new_JavaUtilConcurrentLocksReentrantLock_initWithBoolean_(jboolean fair) NS_RETURNS_RETAINED;
 
-- (jboolean)nonfairTryAcquireWithInt:(jint)acquires;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksReentrantLock)
 
-- (jboolean)tryReleaseWithInt:(jint)releases;
+@interface JavaUtilConcurrentLocksReentrantLock_Sync : JavaUtilConcurrentLocksAbstractQueuedSynchronizer
+
+#pragma mark Protected
 
 - (jboolean)isHeldExclusively;
 
-- (JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)newCondition OBJC_METHOD_FAMILY_NONE;
+- (jboolean)tryReleaseWithInt:(jint)releases;
 
-- (JavaLangThread *)getOwner;
+#pragma mark Package-Private
+
+- (instancetype)init;
 
 - (jint)getHoldCount;
 
+- (JavaLangThread *)getOwner;
+
 - (jboolean)isLocked;
 
-- (instancetype)init;
+- (void)lock;
+
+- (JavaUtilConcurrentLocksAbstractQueuedSynchronizer_ConditionObject *)newCondition OBJC_METHOD_FAMILY_NONE;
+
+- (jboolean)nonfairTryAcquireWithInt:(jint)acquires;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksReentrantLock_Sync_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksReentrantLock_Sync)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksReentrantLock_Sync, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksReentrantLock_Sync_init(JavaUtilConcurrentLocksReentrantLock_Sync *self);
 
-#define JavaUtilConcurrentLocksReentrantLock_NonfairSync_serialVersionUID 7316153563782823691LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksReentrantLock_Sync)
 
-@interface JavaUtilConcurrentLocksReentrantLock_NonfairSync : JavaUtilConcurrentLocksReentrantLock_Sync {
-}
+@interface JavaUtilConcurrentLocksReentrantLock_NonfairSync : JavaUtilConcurrentLocksReentrantLock_Sync
 
-- (void)lock;
+#pragma mark Protected
 
 - (jboolean)tryAcquireWithInt:(jint)acquires;
 
+#pragma mark Package-Private
+
 - (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksReentrantLock_NonfairSync_init() {}
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksReentrantLock_NonfairSync, serialVersionUID, jlong)
-
-#define JavaUtilConcurrentLocksReentrantLock_FairSync_serialVersionUID -3000897897090466540LL
-
-@interface JavaUtilConcurrentLocksReentrantLock_FairSync : JavaUtilConcurrentLocksReentrantLock_Sync {
-}
 
 - (void)lock;
 
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksReentrantLock_NonfairSync)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksReentrantLock_NonfairSync_init(JavaUtilConcurrentLocksReentrantLock_NonfairSync *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLocksReentrantLock_NonfairSync *new_JavaUtilConcurrentLocksReentrantLock_NonfairSync_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksReentrantLock_NonfairSync)
+
+@interface JavaUtilConcurrentLocksReentrantLock_FairSync : JavaUtilConcurrentLocksReentrantLock_Sync
+
+#pragma mark Protected
+
 - (jboolean)tryAcquireWithInt:(jint)acquires;
+
+#pragma mark Package-Private
 
 - (instancetype)init;
 
+- (void)lock;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksReentrantLock_FairSync_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksReentrantLock_FairSync)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksReentrantLock_FairSync, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksReentrantLock_FairSync_init(JavaUtilConcurrentLocksReentrantLock_FairSync *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentLocksReentrantLock_FairSync *new_JavaUtilConcurrentLocksReentrantLock_FairSync_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksReentrantLock_FairSync)
 
 #endif // _JavaUtilConcurrentLocksReentrantLock_H_

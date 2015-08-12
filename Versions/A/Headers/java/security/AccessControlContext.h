@@ -6,14 +6,15 @@
 #ifndef _JavaSecurityAccessControlContext_H_
 #define _JavaSecurityAccessControlContext_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
 @class JavaSecurityPermission;
 @protocol JavaSecurityDomainCombiner;
 
-#import "JreEmulation.h"
+@interface JavaSecurityAccessControlContext : NSObject
 
-@interface JavaSecurityAccessControlContext : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaSecurityAccessControlContext:(JavaSecurityAccessControlContext *)acc
                           withJavaSecurityDomainCombiner:(id<JavaSecurityDomainCombiner>)combiner;
@@ -26,6 +27,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityAccessControlContext_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityAccessControlContext)
+
+FOUNDATION_EXPORT void JavaSecurityAccessControlContext_initWithJavaSecurityAccessControlContext_withJavaSecurityDomainCombiner_(JavaSecurityAccessControlContext *self, JavaSecurityAccessControlContext *acc, id<JavaSecurityDomainCombiner> combiner);
+
+FOUNDATION_EXPORT JavaSecurityAccessControlContext *new_JavaSecurityAccessControlContext_initWithJavaSecurityAccessControlContext_withJavaSecurityDomainCombiner_(JavaSecurityAccessControlContext *acc, id<JavaSecurityDomainCombiner> combiner) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityAccessControlContext_initWithJavaSecurityProtectionDomainArray_(JavaSecurityAccessControlContext *self, IOSObjectArray *context);
+
+FOUNDATION_EXPORT JavaSecurityAccessControlContext *new_JavaSecurityAccessControlContext_initWithJavaSecurityProtectionDomainArray_(IOSObjectArray *context) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityAccessControlContext)
 
 #endif // _JavaSecurityAccessControlContext_H_

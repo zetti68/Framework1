@@ -6,17 +6,14 @@
 #ifndef _JavaMathPrimality_H_
 #define _JavaMathPrimality_H_
 
-@class IOSIntArray;
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+
 @class JavaMathBigInteger;
 @class JavaUtilRandom;
 
-#import "JreEmulation.h"
+@interface JavaMathPrimality : NSObject
 
-@interface JavaMathPrimality : NSObject {
-}
-
-+ (JavaMathBigInteger *)nextProbablePrimeWithJavaMathBigInteger:(JavaMathBigInteger *)n;
+#pragma mark Package-Private
 
 + (JavaMathBigInteger *)consBigIntegerWithInt:(jint)bitLength
                                       withInt:(jint)certainty
@@ -25,24 +22,18 @@
 + (jboolean)isProbablePrimeWithJavaMathBigInteger:(JavaMathBigInteger *)n
                                           withInt:(jint)certainty;
 
++ (JavaMathBigInteger *)nextProbablePrimeWithJavaMathBigInteger:(JavaMathBigInteger *)n;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaMathPrimality_initialized;
 J2OBJC_STATIC_INIT(JavaMathPrimality)
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathPrimality_nextProbablePrimeWithJavaMathBigInteger_(JavaMathBigInteger *n);
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathPrimality_consBigIntegerWithInt_withInt_withJavaUtilRandom_(jint bitLength, jint certainty, JavaUtilRandom *rnd);
+
 FOUNDATION_EXPORT jboolean JavaMathPrimality_isProbablePrimeWithJavaMathBigInteger_withInt_(JavaMathBigInteger *n, jint certainty);
 
-FOUNDATION_EXPORT IOSIntArray *JavaMathPrimality_primes_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathPrimality, primes_, IOSIntArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *JavaMathPrimality_BIprimes_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathPrimality, BIprimes_, IOSObjectArray *)
-
-FOUNDATION_EXPORT IOSIntArray *JavaMathPrimality_BITS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathPrimality, BITS_, IOSIntArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *JavaMathPrimality_offsetPrimes_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathPrimality, offsetPrimes_, IOSObjectArray *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaMathPrimality)
 
 #endif // _JavaMathPrimality_H_

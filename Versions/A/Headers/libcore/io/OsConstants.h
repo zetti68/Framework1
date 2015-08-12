@@ -6,7 +6,7 @@
 #ifndef _LibcoreIoOsConstants_H_
 #define _LibcoreIoOsConstants_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 #define LibcoreIoOsConstants_AF_INET 2
 #define LibcoreIoOsConstants_AF_INET6 30
@@ -19,12 +19,6 @@
 #define LibcoreIoOsConstants_AI_NUMERICSERV 4096
 #define LibcoreIoOsConstants_AI_PASSIVE 1
 #define LibcoreIoOsConstants_AI_V4MAPPED 2048
-#define LibcoreIoOsConstants_E2BIG 7
-#define LibcoreIoOsConstants_EACCES 13
-#define LibcoreIoOsConstants_EADDRINUSE 48
-#define LibcoreIoOsConstants_EADDRNOTAVAIL 49
-#define LibcoreIoOsConstants_EAFNOSUPPORT 47
-#define LibcoreIoOsConstants_EAGAIN 35
 #define LibcoreIoOsConstants_EAI_AGAIN 2
 #define LibcoreIoOsConstants_EAI_BADFLAGS 3
 #define LibcoreIoOsConstants_EAI_FAIL 4
@@ -36,6 +30,12 @@
 #define LibcoreIoOsConstants_EAI_SERVICE 9
 #define LibcoreIoOsConstants_EAI_SOCKTYPE 10
 #define LibcoreIoOsConstants_EAI_SYSTEM 11
+#define LibcoreIoOsConstants_E2BIG 7
+#define LibcoreIoOsConstants_EACCES 13
+#define LibcoreIoOsConstants_EADDRINUSE 48
+#define LibcoreIoOsConstants_EADDRNOTAVAIL 49
+#define LibcoreIoOsConstants_EAFNOSUPPORT 47
+#define LibcoreIoOsConstants_EAGAIN 35
 #define LibcoreIoOsConstants_EALREADY 37
 #define LibcoreIoOsConstants_EBADF 9
 #define LibcoreIoOsConstants_EBADMSG 94
@@ -123,11 +123,11 @@
 #define LibcoreIoOsConstants_F_RDLCK 1
 #define LibcoreIoOsConstants_F_SETFD 2
 #define LibcoreIoOsConstants_F_SETFL 4
+#define LibcoreIoOsConstants_F_SETOWN 6
 #define LibcoreIoOsConstants_F_SETLK 8
 #define LibcoreIoOsConstants_F_SETLK64 8
 #define LibcoreIoOsConstants_F_SETLKW 9
 #define LibcoreIoOsConstants_F_SETLKW64 9
-#define LibcoreIoOsConstants_F_SETOWN 6
 #define LibcoreIoOsConstants_F_UNLCK 2
 #define LibcoreIoOsConstants_F_WRLCK 3
 #define LibcoreIoOsConstants_IFF_LOOPBACK 8
@@ -148,11 +148,11 @@
 #define LibcoreIoOsConstants_MAP_FIXED 16
 #define LibcoreIoOsConstants_MAP_PRIVATE 2
 #define LibcoreIoOsConstants_MAP_SHARED 1
-#define LibcoreIoOsConstants_MCAST_BLOCK_SOURCE 84
 #define LibcoreIoOsConstants_MCAST_JOIN_GROUP 80
-#define LibcoreIoOsConstants_MCAST_JOIN_SOURCE_GROUP 82
 #define LibcoreIoOsConstants_MCAST_LEAVE_GROUP 81
+#define LibcoreIoOsConstants_MCAST_JOIN_SOURCE_GROUP 82
 #define LibcoreIoOsConstants_MCAST_LEAVE_SOURCE_GROUP 83
+#define LibcoreIoOsConstants_MCAST_BLOCK_SOURCE 84
 #define LibcoreIoOsConstants_MCAST_UNBLOCK_SOURCE 85
 #define LibcoreIoOsConstants_MCL_CURRENT 1
 #define LibcoreIoOsConstants_MCL_FUTURE 2
@@ -160,10 +160,10 @@
 #define LibcoreIoOsConstants_MSG_PEEK 2
 #define LibcoreIoOsConstants_MS_ASYNC 1
 #define LibcoreIoOsConstants_MS_INVALIDATE 2
-#define LibcoreIoOsConstants_MS_SYNC 16
 #define LibcoreIoOsConstants_NI_NAMEREQD 4
 #define LibcoreIoOsConstants_NI_NUMERICHOST 2
 #define LibcoreIoOsConstants_NI_NUMERICSERV 8
+#define LibcoreIoOsConstants_MS_SYNC 16
 #define LibcoreIoOsConstants_O_ACCMODE 3
 #define LibcoreIoOsConstants_O_APPEND 8
 #define LibcoreIoOsConstants_O_CREAT 512
@@ -231,14 +231,19 @@
 #define LibcoreIoOsConstants_S_IXGRP 8
 #define LibcoreIoOsConstants_S_IXOTH 1
 #define LibcoreIoOsConstants_S_IXUSR 64
+#define LibcoreIoOsConstants__SC_PAGESIZE 29
+#define LibcoreIoOsConstants__SC_PAGE_SIZE 29
 #define LibcoreIoOsConstants_TCP_NODELAY 1
 #define LibcoreIoOsConstants_W_OK 2
 #define LibcoreIoOsConstants_X_OK 1
-#define LibcoreIoOsConstants__SC_PAGESIZE 29
-#define LibcoreIoOsConstants__SC_PAGE_SIZE 29
 
-@interface LibcoreIoOsConstants : NSObject {
-}
+@interface LibcoreIoOsConstants : NSObject
+
+#pragma mark Public
+
++ (NSString *)errnoNameWithInt:(jint)errno_;
+
++ (NSString *)gaiNameWithInt:(jint)error;
 
 + (jboolean)S_ISBLKWithInt:(jint)mode;
 
@@ -248,49 +253,29 @@
 
 + (jboolean)S_ISFIFOWithInt:(jint)mode;
 
-+ (jboolean)S_ISREGWithInt:(jint)mode;
-
 + (jboolean)S_ISLNKWithInt:(jint)mode;
+
++ (jboolean)S_ISREGWithInt:(jint)mode;
 
 + (jboolean)S_ISSOCKWithInt:(jint)mode;
 
-+ (jint)WEXITSTATUSWithInt:(jint)status;
-
 + (jboolean)WCOREDUMPWithInt:(jint)status;
 
-+ (jint)WTERMSIGWithInt:(jint)status;
-
-+ (jint)WSTOPSIGWithInt:(jint)status;
++ (jint)WEXITSTATUSWithInt:(jint)status;
 
 + (jboolean)WIFEXITEDWithInt:(jint)status;
 
-+ (jboolean)WIFSTOPPEDWithInt:(jint)status;
-
 + (jboolean)WIFSIGNALEDWithInt:(jint)status;
 
-+ (NSString *)gaiNameWithInt:(jint)error;
++ (jboolean)WIFSTOPPEDWithInt:(jint)status;
 
-+ (NSString *)errnoNameWithInt:(jint)errno_;
++ (jint)WSTOPSIGWithInt:(jint)status;
+
++ (jint)WTERMSIGWithInt:(jint)status;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoOsConstants_init() {}
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISBLKWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISCHRWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISDIRWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISFIFOWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISREGWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISLNKWithInt_(jint mode);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISSOCKWithInt_(jint mode);
-FOUNDATION_EXPORT jint LibcoreIoOsConstants_WEXITSTATUSWithInt_(jint status);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WCOREDUMPWithInt_(jint status);
-FOUNDATION_EXPORT jint LibcoreIoOsConstants_WTERMSIGWithInt_(jint status);
-FOUNDATION_EXPORT jint LibcoreIoOsConstants_WSTOPSIGWithInt_(jint status);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFEXITEDWithInt_(jint status);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFSTOPPEDWithInt_(jint status);
-FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFSIGNALEDWithInt_(jint status);
-FOUNDATION_EXPORT NSString *LibcoreIoOsConstants_gaiNameWithInt_(jint error);
-FOUNDATION_EXPORT NSString *LibcoreIoOsConstants_errnoNameWithInt_(jint errno_);
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoOsConstants)
 
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIoOsConstants, AF_INET, jint)
 
@@ -747,5 +732,39 @@ J2OBJC_STATIC_FIELD_GETTER(LibcoreIoOsConstants, TCP_NODELAY, jint)
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIoOsConstants, W_OK, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIoOsConstants, X_OK, jint)
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISBLKWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISCHRWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISDIRWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISFIFOWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISREGWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISLNKWithInt_(jint mode);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_S_ISSOCKWithInt_(jint mode);
+
+FOUNDATION_EXPORT jint LibcoreIoOsConstants_WEXITSTATUSWithInt_(jint status);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WCOREDUMPWithInt_(jint status);
+
+FOUNDATION_EXPORT jint LibcoreIoOsConstants_WTERMSIGWithInt_(jint status);
+
+FOUNDATION_EXPORT jint LibcoreIoOsConstants_WSTOPSIGWithInt_(jint status);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFEXITEDWithInt_(jint status);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFSTOPPEDWithInt_(jint status);
+
+FOUNDATION_EXPORT jboolean LibcoreIoOsConstants_WIFSIGNALEDWithInt_(jint status);
+
+FOUNDATION_EXPORT NSString *LibcoreIoOsConstants_gaiNameWithInt_(jint error);
+
+FOUNDATION_EXPORT NSString *LibcoreIoOsConstants_errnoNameWithInt_(jint errno_);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoOsConstants)
 
 #endif // _LibcoreIoOsConstants_H_

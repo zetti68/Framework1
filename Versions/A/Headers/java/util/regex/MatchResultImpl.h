@@ -6,16 +6,14 @@
 #ifndef _JavaUtilRegexMatchResultImpl_H_
 #define _JavaUtilRegexMatchResultImpl_H_
 
-@class IOSIntArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/regex/MatchResult.h"
 
-@interface JavaUtilRegexMatchResultImpl : NSObject < JavaUtilRegexMatchResult > {
-}
+@class IOSIntArray;
 
-- (instancetype)initWithNSString:(NSString *)text
-                    withIntArray:(IOSIntArray *)offsets;
+@interface JavaUtilRegexMatchResultImpl : NSObject < JavaUtilRegexMatchResult >
+
+#pragma mark Public
 
 - (jint)end;
 
@@ -31,8 +29,19 @@
 
 - (jint)startWithInt:(jint)group;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithNSString:(NSString *)text
+                    withIntArray:(IOSIntArray *)offsets;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilRegexMatchResultImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilRegexMatchResultImpl)
+
+FOUNDATION_EXPORT void JavaUtilRegexMatchResultImpl_initWithNSString_withIntArray_(JavaUtilRegexMatchResultImpl *self, NSString *text, IOSIntArray *offsets);
+
+FOUNDATION_EXPORT JavaUtilRegexMatchResultImpl *new_JavaUtilRegexMatchResultImpl_initWithNSString_withIntArray_(NSString *text, IOSIntArray *offsets) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilRegexMatchResultImpl)
 
 #endif // _JavaUtilRegexMatchResultImpl_H_

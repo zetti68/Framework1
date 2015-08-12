@@ -6,32 +6,21 @@
 #ifndef _JavaNioLongArrayBuffer_H_
 #define _JavaNioLongArrayBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/LongBuffer.h"
+
 @class IOSLongArray;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/LongBuffer.h"
+@interface JavaNioLongArrayBuffer : JavaNioLongBuffer
 
-@interface JavaNioLongArrayBuffer : JavaNioLongBuffer {
-}
-
-- (instancetype)initWithLongArray:(IOSLongArray *)array;
+#pragma mark Public
 
 - (JavaNioLongBuffer *)asReadOnlyBuffer;
 
 - (JavaNioLongBuffer *)compact;
 
 - (JavaNioLongBuffer *)duplicate;
-
-- (JavaNioLongBuffer *)slice;
-
-- (jboolean)isReadOnly;
-
-- (IOSLongArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
 
 - (jlong)get;
 
@@ -43,19 +32,39 @@
 
 - (jboolean)isDirect;
 
-- (JavaNioByteOrder *)order;
+- (jboolean)isReadOnly;
 
-- (JavaNioLongBuffer *)putWithLong:(jlong)c;
+- (JavaNioByteOrder *)order;
 
 - (JavaNioLongBuffer *)putWithInt:(jint)index
                          withLong:(jlong)c;
+
+- (JavaNioLongBuffer *)putWithLong:(jlong)c;
 
 - (JavaNioLongBuffer *)putWithLongArray:(IOSLongArray *)src
                                 withInt:(jint)srcOffset
                                 withInt:(jint)longCount;
 
+- (JavaNioLongBuffer *)slice;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithLongArray:(IOSLongArray *)array;
+
+- (IOSLongArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioLongArrayBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioLongArrayBuffer)
+
+FOUNDATION_EXPORT void JavaNioLongArrayBuffer_initWithLongArray_(JavaNioLongArrayBuffer *self, IOSLongArray *array);
+
+FOUNDATION_EXPORT JavaNioLongArrayBuffer *new_JavaNioLongArrayBuffer_initWithLongArray_(IOSLongArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioLongArrayBuffer)
 
 #endif // _JavaNioLongArrayBuffer_H_

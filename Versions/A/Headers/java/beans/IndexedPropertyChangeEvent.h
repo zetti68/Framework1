@@ -6,13 +6,12 @@
 #ifndef _JavaBeansIndexedPropertyChangeEvent_H_
 #define _JavaBeansIndexedPropertyChangeEvent_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/beans/PropertyChangeEvent.h"
 
-#define JavaBeansIndexedPropertyChangeEvent_serialVersionUID -320227448495806870LL
+@interface JavaBeansIndexedPropertyChangeEvent : JavaBeansPropertyChangeEvent
 
-@interface JavaBeansIndexedPropertyChangeEvent : JavaBeansPropertyChangeEvent {
-}
+#pragma mark Public
 
 - (instancetype)initWithId:(id)source
               withNSString:(NSString *)propertyName
@@ -24,8 +23,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaBeansIndexedPropertyChangeEvent_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaBeansIndexedPropertyChangeEvent)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaBeansIndexedPropertyChangeEvent, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaBeansIndexedPropertyChangeEvent_initWithId_withNSString_withId_withId_withInt_(JavaBeansIndexedPropertyChangeEvent *self, id source, NSString *propertyName, id oldValue, id newValue, jint index);
+
+FOUNDATION_EXPORT JavaBeansIndexedPropertyChangeEvent *new_JavaBeansIndexedPropertyChangeEvent_initWithId_withNSString_withId_withId_withInt_(id source, NSString *propertyName, id oldValue, id newValue, jint index) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaBeansIndexedPropertyChangeEvent)
 
 #endif // _JavaBeansIndexedPropertyChangeEvent_H_

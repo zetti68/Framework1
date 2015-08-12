@@ -6,34 +6,37 @@
 #ifndef _JavaNetCookieHandler_H_
 #define _JavaNetCookieHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNetURI;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
+@interface JavaNetCookieHandler : NSObject
 
-@interface JavaNetCookieHandler : NSObject {
-}
+#pragma mark Public
 
-+ (JavaNetCookieHandler *)getDefault;
-
-+ (void)setDefaultWithJavaNetCookieHandler:(JavaNetCookieHandler *)cHandler;
+- (instancetype)init;
 
 - (id<JavaUtilMap>)getWithJavaNetURI:(JavaNetURI *)uri
                      withJavaUtilMap:(id<JavaUtilMap>)requestHeaders;
 
++ (JavaNetCookieHandler *)getDefault;
+
 - (void)putWithJavaNetURI:(JavaNetURI *)uri
           withJavaUtilMap:(id<JavaUtilMap>)responseHeaders;
 
-- (instancetype)init;
++ (void)setDefaultWithJavaNetCookieHandler:(JavaNetCookieHandler *)cHandler;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetCookieHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetCookieHandler)
+
 FOUNDATION_EXPORT JavaNetCookieHandler *JavaNetCookieHandler_getDefault();
+
 FOUNDATION_EXPORT void JavaNetCookieHandler_setDefaultWithJavaNetCookieHandler_(JavaNetCookieHandler *cHandler);
 
-FOUNDATION_EXPORT JavaNetCookieHandler *JavaNetCookieHandler_systemWideCookieHandler_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetCookieHandler, systemWideCookieHandler_, JavaNetCookieHandler *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetCookieHandler, systemWideCookieHandler_, JavaNetCookieHandler *)
+FOUNDATION_EXPORT void JavaNetCookieHandler_init(JavaNetCookieHandler *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetCookieHandler)
 
 #endif // _JavaNetCookieHandler_H_

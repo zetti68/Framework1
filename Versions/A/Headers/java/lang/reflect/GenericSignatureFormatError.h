@@ -6,20 +6,23 @@
 #ifndef _JavaLangReflectGenericSignatureFormatError_H_
 #define _JavaLangReflectGenericSignatureFormatError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ClassFormatError.h"
 
-#define JavaLangReflectGenericSignatureFormatError_serialVersionUID 6709919147137911034LL
+@interface JavaLangReflectGenericSignatureFormatError : JavaLangClassFormatError
 
-@interface JavaLangReflectGenericSignatureFormatError : JavaLangClassFormatError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectGenericSignatureFormatError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectGenericSignatureFormatError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangReflectGenericSignatureFormatError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangReflectGenericSignatureFormatError_init(JavaLangReflectGenericSignatureFormatError *self);
+
+FOUNDATION_EXPORT JavaLangReflectGenericSignatureFormatError *new_JavaLangReflectGenericSignatureFormatError_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectGenericSignatureFormatError)
 
 #endif // _JavaLangReflectGenericSignatureFormatError_H_

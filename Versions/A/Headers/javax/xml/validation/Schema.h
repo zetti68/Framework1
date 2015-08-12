@@ -6,22 +6,29 @@
 #ifndef _JavaxXmlValidationSchema_H_
 #define _JavaxXmlValidationSchema_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaxXmlValidationValidator;
 @class JavaxXmlValidationValidatorHandler;
 
-#import "JreEmulation.h"
+@interface JavaxXmlValidationSchema : NSObject
 
-@interface JavaxXmlValidationSchema : NSObject {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (JavaxXmlValidationValidator *)newValidator OBJC_METHOD_FAMILY_NONE;
 
 - (JavaxXmlValidationValidatorHandler *)newValidatorHandler OBJC_METHOD_FAMILY_NONE;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlValidationSchema_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlValidationSchema)
+
+FOUNDATION_EXPORT void JavaxXmlValidationSchema_init(JavaxXmlValidationSchema *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlValidationSchema)
 
 #endif // _JavaxXmlValidationSchema_H_

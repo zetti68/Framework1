@@ -6,17 +6,16 @@
 #ifndef _AndroidUtilMapCollections_H_
 #define _AndroidUtilMapCollections_H_
 
-@class AndroidUtilMapCollections_EntrySet;
-@class AndroidUtilMapCollections_KeySet;
-@class AndroidUtilMapCollections_ValuesCollection;
-@class IOSObjectArray;
-@protocol JavaUtilMap;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Collection.h"
 #include "java/util/Iterator.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
+
+@class AndroidUtilMapCollections_EntrySet;
+@class AndroidUtilMapCollections_KeySet;
+@class AndroidUtilMapCollections_ValuesCollection;
+@class IOSObjectArray;
 
 @interface AndroidUtilMapCollections : NSObject {
  @public
@@ -25,8 +24,19 @@
   AndroidUtilMapCollections_ValuesCollection *mValues_;
 }
 
+#pragma mark Public
+
 + (jboolean)containsAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
                       withJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
++ (jboolean)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
+                                    withId:(id)object;
+
+- (id<JavaUtilSet>)getEntrySet;
+
+- (id<JavaUtilSet>)getKeySet;
+
+- (id<JavaUtilCollection>)getValues;
 
 + (jboolean)removeAllHelperWithJavaUtilMap:(id<JavaUtilMap>)map
                     withJavaUtilCollection:(id<JavaUtilCollection>)collection;
@@ -39,49 +49,52 @@
 - (IOSObjectArray *)toArrayHelperWithNSObjectArray:(IOSObjectArray *)array
                                            withInt:(jint)offset;
 
-+ (jboolean)equalsSetHelperWithJavaUtilSet:(id<JavaUtilSet>)set
-                                    withId:(id)object;
+#pragma mark Protected
 
-- (id<JavaUtilSet>)getEntrySet;
-
-- (id<JavaUtilSet>)getKeySet;
-
-- (id<JavaUtilCollection>)getValues;
-
-- (jint)colGetSize;
+- (void)colClear;
 
 - (id)colGetEntryWithInt:(jint)index
                  withInt:(jint)offset;
+
+- (id<JavaUtilMap>)colGetMap;
+
+- (jint)colGetSize;
 
 - (jint)colIndexOfKeyWithId:(id)key;
 
 - (jint)colIndexOfValueWithId:(id)key;
 
-- (id<JavaUtilMap>)colGetMap;
-
 - (void)colPutWithId:(id)key
               withId:(id)value;
+
+- (void)colRemoveAtWithInt:(jint)index;
 
 - (id)colSetValueWithInt:(jint)index
                   withId:(id)value;
 
-- (void)colRemoveAtWithInt:(jint)index;
-
-- (void)colClear;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections)
 
 J2OBJC_FIELD_SETTER(AndroidUtilMapCollections, mEntrySet_, AndroidUtilMapCollections_EntrySet *)
 J2OBJC_FIELD_SETTER(AndroidUtilMapCollections, mKeySet_, AndroidUtilMapCollections_KeySet *)
 J2OBJC_FIELD_SETTER(AndroidUtilMapCollections, mValues_, AndroidUtilMapCollections_ValuesCollection *)
+
 FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_containsAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+
 FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_removeAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+
 FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_retainAllHelperWithJavaUtilMap_withJavaUtilCollection_(id<JavaUtilMap> map, id<JavaUtilCollection> collection);
+
 FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_equalsSetHelperWithJavaUtilSet_withId_(id<JavaUtilSet> set, id object);
+
+FOUNDATION_EXPORT void AndroidUtilMapCollections_init(AndroidUtilMapCollections *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections)
 
 @interface AndroidUtilMapCollections_ArrayIterator : NSObject < JavaUtilIterator > {
  @public
@@ -91,8 +104,7 @@ FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_equalsSetHelperWithJavaUtil
   jboolean mCanRemove_;
 }
 
-- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$
-                                          withInt:(jint)offset;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
@@ -100,9 +112,20 @@ FOUNDATION_EXPORT jboolean AndroidUtilMapCollections_equalsSetHelperWithJavaUtil
 
 - (void)remove;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$
+                                          withInt:(jint)offset;
+
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_ArrayIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections_ArrayIterator)
+
+FOUNDATION_EXPORT void AndroidUtilMapCollections_ArrayIterator_initWithAndroidUtilMapCollections_withInt_(AndroidUtilMapCollections_ArrayIterator *self, AndroidUtilMapCollections *outer$, jint offset);
+
+FOUNDATION_EXPORT AndroidUtilMapCollections_ArrayIterator *new_AndroidUtilMapCollections_ArrayIterator_initWithAndroidUtilMapCollections_withInt_(AndroidUtilMapCollections *outer$, jint offset) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections_ArrayIterator)
 
 @interface AndroidUtilMapCollections_MapIterator : NSObject < JavaUtilIterator, JavaUtilMap_Entry > {
  @public
@@ -111,7 +134,15 @@ __attribute__((always_inline)) inline void AndroidUtilMapCollections_ArrayIterat
   jboolean mEntryValid_;
 }
 
-- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
+#pragma mark Public
+
+- (jboolean)isEqual:(id)o;
+
+- (id)getKey;
+
+- (id)getValue;
+
+- (NSUInteger)hash;
 
 - (jboolean)hasNext;
 
@@ -119,24 +150,27 @@ __attribute__((always_inline)) inline void AndroidUtilMapCollections_ArrayIterat
 
 - (void)remove;
 
-- (id)getKey;
-
-- (id)getValue;
-
 - (id)setValueWithId:(id)object;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
 
 - (NSString *)description;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
+
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_MapIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections_MapIterator)
 
-@interface AndroidUtilMapCollections_EntrySet : NSObject < JavaUtilSet > {
-}
+FOUNDATION_EXPORT void AndroidUtilMapCollections_MapIterator_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections_MapIterator *self, AndroidUtilMapCollections *outer$);
+
+FOUNDATION_EXPORT AndroidUtilMapCollections_MapIterator *new_AndroidUtilMapCollections_MapIterator_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections_MapIterator)
+
+@interface AndroidUtilMapCollections_EntrySet : NSObject < JavaUtilSet >
+
+#pragma mark Public
 
 - (jboolean)addWithId:(id<JavaUtilMap_Entry>)object;
 
@@ -148,6 +182,10 @@ __attribute__((always_inline)) inline void AndroidUtilMapCollections_MapIterator
 
 - (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
+- (jboolean)isEqual:(id)object;
+
+- (NSUInteger)hash;
+
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
@@ -164,19 +202,73 @@ __attribute__((always_inline)) inline void AndroidUtilMapCollections_MapIterator
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array;
 
-- (jboolean)isEqual:(id)object;
-
-- (NSUInteger)hash;
+#pragma mark Package-Private
 
 - (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_EntrySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections_EntrySet)
 
-@interface AndroidUtilMapCollections_KeySet : NSObject < JavaUtilSet > {
-}
+FOUNDATION_EXPORT void AndroidUtilMapCollections_EntrySet_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections_EntrySet *self, AndroidUtilMapCollections *outer$);
+
+FOUNDATION_EXPORT AndroidUtilMapCollections_EntrySet *new_AndroidUtilMapCollections_EntrySet_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections_EntrySet)
+
+@interface AndroidUtilMapCollections_KeySet : NSObject < JavaUtilSet >
+
+#pragma mark Public
+
+- (jboolean)addWithId:(id)object;
+
+- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (void)clear;
+
+- (jboolean)containsWithId:(id)object;
+
+- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (jboolean)isEqual:(id)object;
+
+- (NSUInteger)hash;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)removeWithId:(id)object;
+
+- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
+
+- (jint)size;
+
+- (IOSObjectArray *)toArray;
+
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
+
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections_KeySet)
+
+FOUNDATION_EXPORT void AndroidUtilMapCollections_KeySet_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections_KeySet *self, AndroidUtilMapCollections *outer$);
+
+FOUNDATION_EXPORT AndroidUtilMapCollections_KeySet *new_AndroidUtilMapCollections_KeySet_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections_KeySet)
+
+@interface AndroidUtilMapCollections_ValuesCollection : NSObject < JavaUtilCollection >
+
+#pragma mark Public
 
 - (jboolean)addWithId:(id)object;
 
@@ -204,51 +296,19 @@ __attribute__((always_inline)) inline void AndroidUtilMapCollections_EntrySet_in
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array;
 
-- (jboolean)isEqual:(id)object;
-
-- (NSUInteger)hash;
+#pragma mark Package-Private
 
 - (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_KeySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilMapCollections_ValuesCollection)
 
-@interface AndroidUtilMapCollections_ValuesCollection : NSObject < JavaUtilCollection > {
-}
+FOUNDATION_EXPORT void AndroidUtilMapCollections_ValuesCollection_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections_ValuesCollection *self, AndroidUtilMapCollections *outer$);
 
-- (jboolean)addWithId:(id)object;
+FOUNDATION_EXPORT AndroidUtilMapCollections_ValuesCollection *new_AndroidUtilMapCollections_ValuesCollection_initWithAndroidUtilMapCollections_(AndroidUtilMapCollections *outer$) NS_RETURNS_RETAINED;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (void)clear;
-
-- (jboolean)containsWithId:(id)object;
-
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (jboolean)isEmpty;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (jboolean)removeWithId:(id)object;
-
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
-
-- (jint)size;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array;
-
-- (instancetype)initWithAndroidUtilMapCollections:(AndroidUtilMapCollections *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void AndroidUtilMapCollections_ValuesCollection_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilMapCollections_ValuesCollection)
 
 #endif // _AndroidUtilMapCollections_H_

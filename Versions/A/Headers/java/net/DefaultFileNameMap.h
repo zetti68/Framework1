@@ -6,18 +6,27 @@
 #ifndef _JavaNetDefaultFileNameMap_H_
 #define _JavaNetDefaultFileNameMap_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/FileNameMap.h"
 
-@interface JavaNetDefaultFileNameMap : NSObject < JavaNetFileNameMap > {
-}
+@interface JavaNetDefaultFileNameMap : NSObject < JavaNetFileNameMap >
+
+#pragma mark Public
 
 - (NSString *)getContentTypeForWithNSString:(NSString *)filename;
+
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetDefaultFileNameMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetDefaultFileNameMap)
+
+FOUNDATION_EXPORT void JavaNetDefaultFileNameMap_init(JavaNetDefaultFileNameMap *self);
+
+FOUNDATION_EXPORT JavaNetDefaultFileNameMap *new_JavaNetDefaultFileNameMap_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetDefaultFileNameMap)
 
 #endif // _JavaNetDefaultFileNameMap_H_

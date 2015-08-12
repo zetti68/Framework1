@@ -6,12 +6,12 @@
 #ifndef _JavaSqlClob_H_
 #define _JavaSqlClob_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
 @class JavaIoReader;
 @class JavaIoWriter;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlClob < NSObject, JavaObject >
 
@@ -51,6 +51,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlClob_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlClob)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlClob)
 
 #endif // _JavaSqlClob_H_

@@ -6,29 +6,28 @@
 #ifndef _JavaIoOutputStreamWriter_H_
 #define _JavaIoOutputStreamWriter_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Writer.h"
+
 @class IOSCharArray;
 @class JavaIoOutputStream;
-@class JavaNioByteBuffer;
-@class JavaNioCharBuffer;
 @class JavaNioCharsetCharset;
 @class JavaNioCharsetCharsetEncoder;
 
-#import "JreEmulation.h"
-#include "java/io/Writer.h"
+@interface JavaIoOutputStreamWriter : JavaIoWriter
 
-@interface JavaIoOutputStreamWriter : JavaIoWriter {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
-
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
-                              withNSString:(NSString *)charsetName;
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
                  withJavaNioCharsetCharset:(JavaNioCharsetCharset *)cs;
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
           withJavaNioCharsetCharsetEncoder:(JavaNioCharsetCharsetEncoder *)charsetEncoder;
+
+- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
+                              withNSString:(NSString *)charsetName;
 
 - (void)close;
 
@@ -46,10 +45,30 @@
                   withInt:(jint)offset
                   withInt:(jint)count;
 
+#pragma mark Package-Private
+
 - (jboolean)checkError;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoOutputStreamWriter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoOutputStreamWriter)
+
+FOUNDATION_EXPORT void JavaIoOutputStreamWriter_initWithJavaIoOutputStream_(JavaIoOutputStreamWriter *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaIoOutputStreamWriter *new_JavaIoOutputStreamWriter_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withNSString_(JavaIoOutputStreamWriter *self, JavaIoOutputStream *outArg, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaIoOutputStreamWriter *new_JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withNSString_(JavaIoOutputStream *outArg, NSString *charsetName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withJavaNioCharsetCharset_(JavaIoOutputStreamWriter *self, JavaIoOutputStream *outArg, JavaNioCharsetCharset *cs);
+
+FOUNDATION_EXPORT JavaIoOutputStreamWriter *new_JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withJavaNioCharsetCharset_(JavaIoOutputStream *outArg, JavaNioCharsetCharset *cs) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withJavaNioCharsetCharsetEncoder_(JavaIoOutputStreamWriter *self, JavaIoOutputStream *outArg, JavaNioCharsetCharsetEncoder *charsetEncoder);
+
+FOUNDATION_EXPORT JavaIoOutputStreamWriter *new_JavaIoOutputStreamWriter_initWithJavaIoOutputStream_withJavaNioCharsetCharsetEncoder_(JavaIoOutputStream *outArg, JavaNioCharsetCharsetEncoder *charsetEncoder) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoOutputStreamWriter)
 
 #endif // _JavaIoOutputStreamWriter_H_

@@ -6,11 +6,11 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1TypeCollection_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1TypeCollection_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1Constructed.h"
+
 @class IOSBooleanArray;
 @class IOSObjectArray;
-
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1Constructed.h"
 
 @interface OrgApacheHarmonySecurityAsn1ASN1TypeCollection : OrgApacheHarmonySecurityAsn1ASN1Constructed {
  @public
@@ -19,23 +19,29 @@
   IOSObjectArray *DEFAULT_;
 }
 
+#pragma mark Protected
+
 - (instancetype)initWithInt:(jint)tagNumber
 withOrgApacheHarmonySecurityAsn1ASN1TypeArray:(IOSObjectArray *)type;
-
-- (void)setOptionalWithInt:(jint)index;
-
-- (void)setDefaultWithId:(id)object
-                 withInt:(jint)index;
 
 - (void)getValuesWithId:(id)object
       withNSObjectArray:(IOSObjectArray *)values;
 
+- (void)setDefaultWithId:(id)object
+                 withInt:(jint)index;
+
+- (void)setOptionalWithInt:(jint)index;
+
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1TypeCollection_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1TypeCollection)
 
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1ASN1TypeCollection, type_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1ASN1TypeCollection, OPTIONAL_, IOSBooleanArray *)
 J2OBJC_FIELD_SETTER(OrgApacheHarmonySecurityAsn1ASN1TypeCollection, DEFAULT_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1TypeCollection_initWithInt_withOrgApacheHarmonySecurityAsn1ASN1TypeArray_(OrgApacheHarmonySecurityAsn1ASN1TypeCollection *self, jint tagNumber, IOSObjectArray *type);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1TypeCollection)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1TypeCollection_H_

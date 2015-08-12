@@ -6,18 +6,21 @@
 #ifndef _JavaLangReflectWildcardType_H_
 #define _JavaLangReflectWildcardType_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/reflect/Type.h"
 
+@class IOSObjectArray;
+
 @protocol JavaLangReflectWildcardType < JavaLangReflectType, NSObject, JavaObject >
+
 - (IOSObjectArray *)getUpperBounds;
 
 - (IOSObjectArray *)getLowerBounds;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectWildcardType_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectWildcardType)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectWildcardType)
 
 #endif // _JavaLangReflectWildcardType_H_

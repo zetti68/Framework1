@@ -6,30 +6,24 @@
 #ifndef _JavaTextMessageFormat_H_
 #define _JavaTextMessageFormat_H_
 
-@class IOSIntArray;
+#include "J2ObjC_header.h"
+#include "java/text/Format.h"
+
 @class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
 @class JavaLangStringBuffer;
-@class JavaTextAttributedCharacterIterator_Attribute;
 @class JavaTextFieldPosition;
 @class JavaTextParsePosition;
 @class JavaUtilLocale;
 @protocol JavaTextAttributedCharacterIterator;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/text/Format.h"
+@interface JavaTextMessageFormat : JavaTextFormat
 
-#define JavaTextMessageFormat_serialVersionUID 6479157306784022952LL
+#pragma mark Public
 
-@interface JavaTextMessageFormat : JavaTextFormat {
-}
+- (instancetype)initWithNSString:(NSString *)template_;
 
 - (instancetype)initWithNSString:(NSString *)template_
               withJavaUtilLocale:(JavaUtilLocale *)locale;
-
-- (instancetype)initWithNSString:(NSString *)template_;
 
 - (void)applyPatternWithNSString:(NSString *)template_;
 
@@ -37,27 +31,22 @@
 
 - (jboolean)isEqual:(id)object;
 
-- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
+- (JavaLangStringBuffer *)formatWithId:(id)object
+              withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
+             withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
 - (JavaLangStringBuffer *)formatWithNSObjectArray:(IOSObjectArray *)objects
                          withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
                         withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
 
-- (JavaLangStringBuffer *)formatWithId:(id)object
-              withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
-             withJavaTextFieldPosition:(JavaTextFieldPosition *)field;
-
 + (NSString *)formatWithNSString:(NSString *)format
                withNSObjectArray:(IOSObjectArray *)args;
+
+- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
 
 - (IOSObjectArray *)getFormats;
 
 - (IOSObjectArray *)getFormatsByArgumentIndex;
-
-- (void)setFormatByArgumentIndexWithInt:(jint)argIndex
-                     withJavaTextFormat:(JavaTextFormat *)format;
-
-- (void)setFormatsByArgumentIndexWithJavaTextFormatArray:(IOSObjectArray *)formats;
 
 - (JavaUtilLocale *)getLocale;
 
@@ -74,7 +63,12 @@
 - (void)setFormatWithInt:(jint)offset
       withJavaTextFormat:(JavaTextFormat *)format;
 
+- (void)setFormatByArgumentIndexWithInt:(jint)argIndex
+                     withJavaTextFormat:(JavaTextFormat *)format;
+
 - (void)setFormatsWithJavaTextFormatArray:(IOSObjectArray *)formats;
+
+- (void)setFormatsByArgumentIndexWithJavaTextFormatArray:(IOSObjectArray *)formats;
 
 - (void)setLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
@@ -82,49 +76,37 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextMessageFormat_initialized;
 J2OBJC_STATIC_INIT(JavaTextMessageFormat)
+
+FOUNDATION_EXPORT void JavaTextMessageFormat_initWithNSString_withJavaUtilLocale_(JavaTextMessageFormat *self, NSString *template_, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextMessageFormat *new_JavaTextMessageFormat_initWithNSString_withJavaUtilLocale_(NSString *template_, JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextMessageFormat_initWithNSString_(JavaTextMessageFormat *self, NSString *template_);
+
+FOUNDATION_EXPORT JavaTextMessageFormat *new_JavaTextMessageFormat_initWithNSString_(NSString *template_) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT NSString *JavaTextMessageFormat_formatWithNSString_withNSObjectArray_(NSString *format, IOSObjectArray *args);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextMessageFormat, serialVersionUID, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextMessageFormat)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaTextMessageFormat_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaTextMessageFormat, serialPersistentFields_, IOSObjectArray *)
+@interface JavaTextMessageFormat_Field : JavaTextFormat_Field
 
-@interface JavaTextMessageFormat_FieldContainer : NSObject {
- @public
-  jint start_, end_;
-  JavaTextAttributedCharacterIterator_Attribute *attribute_;
-  id value_;
-}
-
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
-withJavaTextAttributedCharacterIterator_Attribute:(JavaTextAttributedCharacterIterator_Attribute *)attribute
-                     withId:(id)value;
-
-@end
-
-__attribute__((always_inline)) inline void JavaTextMessageFormat_FieldContainer_init() {}
-
-J2OBJC_FIELD_SETTER(JavaTextMessageFormat_FieldContainer, attribute_, JavaTextAttributedCharacterIterator_Attribute *)
-J2OBJC_FIELD_SETTER(JavaTextMessageFormat_FieldContainer, value_, id)
-
-#define JavaTextMessageFormat_Field_serialVersionUID 7899943957617360810LL
-
-@interface JavaTextMessageFormat_Field : JavaTextFormat_Field {
-}
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)fieldName;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextMessageFormat_Field_initialized;
 J2OBJC_STATIC_INIT(JavaTextMessageFormat_Field)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextMessageFormat_Field, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaTextMessageFormat_Field *JavaTextMessageFormat_Field_ARGUMENT_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextMessageFormat_Field, ARGUMENT_, JavaTextMessageFormat_Field *)
+
+FOUNDATION_EXPORT void JavaTextMessageFormat_Field_initWithNSString_(JavaTextMessageFormat_Field *self, NSString *fieldName);
+
+FOUNDATION_EXPORT JavaTextMessageFormat_Field *new_JavaTextMessageFormat_Field_initWithNSString_(NSString *fieldName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextMessageFormat_Field)
 
 #endif // _JavaTextMessageFormat_H_

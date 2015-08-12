@@ -6,89 +6,48 @@
 #ifndef _JavaIoObjectStreamClass_H_
 #define _JavaIoObjectStreamClass_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaIoObjectStreamField;
-@class JavaLangRefSoftReference;
 @class JavaLangReflectConstructor;
 @class JavaLangReflectField;
 @class JavaLangReflectMethod;
-@class JavaUtilHashMap;
-@class JavaUtilWeakHashMap;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/lang/ThreadLocal.h"
-#include "java/util/Comparator.h"
-
-#define JavaIoObjectStreamClass_CLASS_MODIFIERS_MASK 1553
-#define JavaIoObjectStreamClass_CLINIT_MODIFIERS 8
 #define JavaIoObjectStreamClass_CONSTRUCTOR_IS_NOT_RESOLVED -1LL
-#define JavaIoObjectStreamClass_FIELD_MODIFIERS_MASK 223
-#define JavaIoObjectStreamClass_METHOD_MODIFIERS_MASK 3391
-#define JavaIoObjectStreamClass_serialVersionUID -6120832682080437368LL
 
-@interface JavaIoObjectStreamClass : NSObject < JavaIoSerializable > {
-}
+@interface JavaIoObjectStreamClass : NSObject < JavaIoSerializable >
 
-- (void)setConstructorWithLong:(jlong)newConstructor;
-
-- (jlong)getConstructor;
-
-- (JavaLangReflectField *)getReflectionFieldWithJavaIoObjectStreamField:(JavaIoObjectStreamField *)osf;
-
-- (instancetype)init;
-
-- (void)buildFieldDescriptorsWithJavaLangReflectFieldArray:(IOSObjectArray *)declaredFields;
-
-+ (JavaLangReflectField *)fieldSerialPersistentFieldsWithIOSClass:(IOSClass *)cl;
+#pragma mark Public
 
 - (IOSClass *)forClass;
 
-- (id)newInstanceWithIOSClass:(IOSClass *)instantiationClass OBJC_METHOD_FAMILY_NONE;
-
-+ (NSString *)getConstructorSignatureWithJavaLangReflectConstructor:(JavaLangReflectConstructor *)c;
-
 - (JavaIoObjectStreamField *)getFieldWithNSString:(NSString *)name;
 
-- (IOSObjectArray *)fields;
-
 - (IOSObjectArray *)getFields;
-
-- (id<JavaUtilList>)getHierarchy;
-
-- (IOSObjectArray *)getLoadFields;
-
-- (jbyte)getFlags;
-
-+ (NSString *)getMethodSignatureWithJavaLangReflectMethod:(JavaLangReflectMethod *)m;
 
 - (NSString *)getName;
 
 - (jlong)getSerialVersionUID;
 
-- (JavaIoObjectStreamClass *)getSuperclass;
-
-+ (jboolean)isExternalizableWithIOSClass:(IOSClass *)cl;
-
-+ (jboolean)isPrimitiveTypeWithChar:(jchar)typecode;
-
-+ (jboolean)isSerializableWithIOSClass:(IOSClass *)cl;
-
-- (jboolean)isSerializable;
-
-- (jboolean)isExternalizable;
-
-- (jboolean)isProxy__;
-
-- (jboolean)isEnum;
-
 + (JavaIoObjectStreamClass *)lookupWithIOSClass:(IOSClass *)cl;
 
 + (JavaIoObjectStreamClass *)lookupAnyWithIOSClass:(IOSClass *)cl;
 
-+ (JavaIoObjectStreamClass *)lookupStreamClassWithIOSClass:(IOSClass *)cl;
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+- (void)buildFieldDescriptorsWithJavaLangReflectFieldArray:(IOSObjectArray *)declaredFields;
+
+- (IOSObjectArray *)fields;
+
++ (JavaLangReflectField *)fieldSerialPersistentFieldsWithIOSClass:(IOSClass *)cl;
 
 + (JavaLangReflectMethod *)findMethodWithIOSClass:(IOSClass *)cl
                                      withNSString:(NSString *)methodName;
@@ -97,35 +56,71 @@
                                             withNSString:(NSString *)methodName
                                        withIOSClassArray:(IOSObjectArray *)param;
 
-- (jboolean)hasMethodWriteReplace;
+- (jlong)getConstructor;
 
-- (JavaLangReflectMethod *)getMethodWriteReplace;
++ (NSString *)getConstructorSignatureWithJavaLangReflectConstructor:(JavaLangReflectConstructor *)c;
 
-- (jboolean)hasMethodReadResolve;
+- (jbyte)getFlags;
 
-- (JavaLangReflectMethod *)getMethodReadResolve;
+- (id<JavaUtilList>)getHierarchy;
 
-- (jboolean)hasMethodWriteObject;
-
-- (JavaLangReflectMethod *)getMethodWriteObject;
-
-- (jboolean)hasMethodReadObject;
+- (IOSObjectArray *)getLoadFields;
 
 - (JavaLangReflectMethod *)getMethodReadObject;
 
+- (JavaLangReflectMethod *)getMethodReadObjectNoData;
+
+- (JavaLangReflectMethod *)getMethodReadResolve;
+
++ (NSString *)getMethodSignatureWithJavaLangReflectMethod:(JavaLangReflectMethod *)m;
+
+- (JavaLangReflectMethod *)getMethodWriteObject;
+
+- (JavaLangReflectMethod *)getMethodWriteReplace;
+
+- (JavaLangReflectField *)getReflectionFieldWithJavaIoObjectStreamField:(JavaIoObjectStreamField *)osf;
+
+- (JavaIoObjectStreamClass *)getSuperclass;
+
+- (jboolean)hasMethodReadObject;
+
 - (jboolean)hasMethodReadObjectNoData;
 
-- (JavaLangReflectMethod *)getMethodReadObjectNoData;
+- (jboolean)hasMethodReadResolve;
+
+- (jboolean)hasMethodWriteObject;
+
+- (jboolean)hasMethodWriteReplace;
 
 - (void)initPrivateFieldsWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)desc OBJC_METHOD_FAMILY_NONE;
 
+- (jboolean)isEnum;
+
+- (jboolean)isExternalizable;
+
++ (jboolean)isExternalizableWithIOSClass:(IOSClass *)cl;
+
++ (jboolean)isPrimitiveTypeWithChar:(jchar)typecode;
+
+- (jboolean)isProxy__;
+
+- (jboolean)isSerializable;
+
++ (jboolean)isSerializableWithIOSClass:(IOSClass *)cl;
+
++ (JavaIoObjectStreamClass *)lookupStreamClassWithIOSClass:(IOSClass *)cl;
+
+- (id)newInstanceWithIOSClass:(IOSClass *)instantiationClass OBJC_METHOD_FAMILY_NONE;
+
 - (void)setClassWithIOSClass:(IOSClass *)c;
+
+- (void)setConstructorWithLong:(jlong)newConstructor;
 
 - (void)setFieldsWithJavaIoObjectStreamFieldArray:(IOSObjectArray *)f;
 
-- (void)setLoadFieldsWithJavaIoObjectStreamFieldArray:(IOSObjectArray *)f;
-
 - (void)setFlagsWithByte:(jbyte)b;
+
+- (void)setLoadFieldsWithJavaIoObjectStreamFieldArray:(IOSObjectArray *)f;
 
 - (void)setNameWithNSString:(NSString *)newName;
 
@@ -133,62 +128,17 @@
 
 - (void)setSuperclassWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)c;
 
-- (NSString *)description;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoObjectStreamClass_initialized;
 J2OBJC_STATIC_INIT(JavaIoObjectStreamClass)
-FOUNDATION_EXPORT JavaLangReflectField *JavaIoObjectStreamClass_fieldSerialPersistentFieldsWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_getConstructorSignatureWithJavaLangReflectConstructor_(JavaLangReflectConstructor *c);
-FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_getMethodSignatureWithJavaLangReflectMethod_(JavaLangReflectMethod *m);
-FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isExternalizableWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isPrimitiveTypeWithChar_(jchar typecode);
-FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isSerializableWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupAnyWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupStreamClassWithIOSClass_(IOSClass *cl);
-FOUNDATION_EXPORT JavaLangReflectMethod *JavaIoObjectStreamClass_findMethodWithIOSClass_withNSString_(IOSClass *cl, NSString *methodName);
-FOUNDATION_EXPORT JavaLangReflectMethod *JavaIoObjectStreamClass_findPrivateMethodWithIOSClass_withNSString_withIOSClassArray_(IOSClass *cl, NSString *methodName, IOSObjectArray *param);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_UID_FIELD_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, UID_FIELD_NAME_, NSString *)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CONSTRUCTOR_IS_NOT_RESOLVED, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CLASS_MODIFIERS_MASK, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, FIELD_MODIFIERS_MASK, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, METHOD_MODIFIERS_MASK, jint)
-
-FOUNDATION_EXPORT IOSObjectArray *JavaIoObjectStreamClass_READ_PARAM_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, READ_PARAM_TYPES_, IOSObjectArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *JavaIoObjectStreamClass_WRITE_PARAM_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, WRITE_PARAM_TYPES_, IOSObjectArray *)
 
 FOUNDATION_EXPORT IOSObjectArray *JavaIoObjectStreamClass_NO_FIELDS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, NO_FIELDS_, IOSObjectArray *)
 
 FOUNDATION_EXPORT IOSClass *JavaIoObjectStreamClass_ARRAY_OF_FIELDS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, ARRAY_OF_FIELDS_, IOSClass *)
-
-FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_CLINIT_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CLINIT_NAME_, NSString *)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CLINIT_MODIFIERS, jint)
-
-FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_CLINIT_SIGNATURE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CLINIT_SIGNATURE_, NSString *)
-
-FOUNDATION_EXPORT IOSClass *JavaIoObjectStreamClass_SERIALIZABLE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, SERIALIZABLE_, IOSClass *)
-
-FOUNDATION_EXPORT IOSClass *JavaIoObjectStreamClass_EXTERNALIZABLE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, EXTERNALIZABLE_, IOSClass *)
 
 FOUNDATION_EXPORT IOSClass *JavaIoObjectStreamClass_STRINGCLASS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, STRINGCLASS_, IOSClass *)
@@ -199,67 +149,32 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, CLASSCLASS_, IOSClass *)
 FOUNDATION_EXPORT IOSClass *JavaIoObjectStreamClass_OBJECTSTREAMCLASSCLASS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, OBJECTSTREAMCLASSCLASS_, IOSClass *)
 
-FOUNDATION_EXPORT JavaLangRefSoftReference *JavaIoObjectStreamClass_storage_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectStreamClass, storage_, JavaLangRefSoftReference *)
-J2OBJC_STATIC_FIELD_SETTER(JavaIoObjectStreamClass, storage_, JavaLangRefSoftReference *)
+FOUNDATION_EXPORT void JavaIoObjectStreamClass_init(JavaIoObjectStreamClass *self);
 
-@interface JavaIoObjectStreamClass_$1 : NSObject < JavaUtilComparator > {
-}
+FOUNDATION_EXPORT JavaIoObjectStreamClass *new_JavaIoObjectStreamClass_init() NS_RETURNS_RETAINED;
 
-- (jint)compareWithId:(IOSClass *)itf1
-               withId:(IOSClass *)itf2;
+FOUNDATION_EXPORT JavaLangReflectField *JavaIoObjectStreamClass_fieldSerialPersistentFieldsWithIOSClass_(IOSClass *cl);
 
-- (instancetype)init;
+FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_getConstructorSignatureWithJavaLangReflectConstructor_(JavaLangReflectConstructor *c);
 
-@end
+FOUNDATION_EXPORT NSString *JavaIoObjectStreamClass_getMethodSignatureWithJavaLangReflectMethod_(JavaLangReflectMethod *m);
 
-__attribute__((always_inline)) inline void JavaIoObjectStreamClass_$1_init() {}
+FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isExternalizableWithIOSClass_(IOSClass *cl);
 
-@interface JavaIoObjectStreamClass_$2 : NSObject < JavaUtilComparator > {
-}
+FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isPrimitiveTypeWithChar_(jchar typecode);
 
-- (jint)compareWithId:(JavaLangReflectField *)field1
-               withId:(JavaLangReflectField *)field2;
+FOUNDATION_EXPORT jboolean JavaIoObjectStreamClass_isSerializableWithIOSClass_(IOSClass *cl);
 
-- (instancetype)init;
+FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupWithIOSClass_(IOSClass *cl);
 
-@end
+FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupAnyWithIOSClass_(IOSClass *cl);
 
-__attribute__((always_inline)) inline void JavaIoObjectStreamClass_$2_init() {}
+FOUNDATION_EXPORT JavaIoObjectStreamClass *JavaIoObjectStreamClass_lookupStreamClassWithIOSClass_(IOSClass *cl);
 
-@interface JavaIoObjectStreamClass_$3 : NSObject < JavaUtilComparator > {
-}
+FOUNDATION_EXPORT JavaLangReflectMethod *JavaIoObjectStreamClass_findMethodWithIOSClass_withNSString_(IOSClass *cl, NSString *methodName);
 
-- (jint)compareWithId:(JavaLangReflectConstructor *)ctr1
-               withId:(JavaLangReflectConstructor *)ctr2;
+FOUNDATION_EXPORT JavaLangReflectMethod *JavaIoObjectStreamClass_findPrivateMethodWithIOSClass_withNSString_withIOSClassArray_(IOSClass *cl, NSString *methodName, IOSObjectArray *param);
 
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaIoObjectStreamClass_$3_init() {}
-
-@interface JavaIoObjectStreamClass_$4 : NSObject < JavaUtilComparator > {
-}
-
-- (jint)compareWithId:(JavaLangReflectMethod *)m1
-               withId:(JavaLangReflectMethod *)m2;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaIoObjectStreamClass_$4_init() {}
-
-@interface JavaIoObjectStreamClass_$5 : JavaLangThreadLocal {
-}
-
-- (JavaUtilWeakHashMap *)initialValue OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaIoObjectStreamClass_$5_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectStreamClass)
 
 #endif // _JavaIoObjectStreamClass_H_

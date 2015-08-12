@@ -6,14 +6,13 @@
 #ifndef _JavaUtilIllegalFormatFlagsException_H_
 #define _JavaUtilIllegalFormatFlagsException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilIllegalFormatFlagsException_serialVersionUID 790824LL
+@interface JavaUtilIllegalFormatFlagsException : JavaUtilIllegalFormatException < JavaIoSerializable >
 
-@interface JavaUtilIllegalFormatFlagsException : JavaUtilIllegalFormatException < JavaIoSerializable > {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)flags;
 
@@ -23,8 +22,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilIllegalFormatFlagsException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilIllegalFormatFlagsException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilIllegalFormatFlagsException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilIllegalFormatFlagsException_initWithNSString_(JavaUtilIllegalFormatFlagsException *self, NSString *flags);
+
+FOUNDATION_EXPORT JavaUtilIllegalFormatFlagsException *new_JavaUtilIllegalFormatFlagsException_initWithNSString_(NSString *flags) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilIllegalFormatFlagsException)
 
 #endif // _JavaUtilIllegalFormatFlagsException_H_

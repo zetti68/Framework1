@@ -6,41 +6,40 @@
 #ifndef _JavaLangRuntime_H_
 #define _JavaLangRuntime_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangThread;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
+@interface JavaLangRuntime : NSObject
 
-@interface JavaLangRuntime : NSObject {
-}
+#pragma mark Public
 
-+ (JavaLangRuntime *)getRuntime;
+- (void)addShutdownHookWithJavaLangThread:(JavaLangThread *)hook;
 
 - (jint)availableProcessors;
 
 - (void)exitWithInt:(jint)status;
 
-- (void)haltWithInt:(jint)status;
+- (jlong)freeMemory;
 
 - (void)gc;
 
++ (JavaLangRuntime *)getRuntime;
+
+- (void)haltWithInt:(jint)status;
+
 - (jlong)maxMemory;
-
-- (jlong)totalMemory;
-
-- (jlong)freeMemory;
-
-- (void)addShutdownHookWithJavaLangThread:(JavaLangThread *)hook;
 
 - (jboolean)removeShutdownHookWithJavaLangThread:(JavaLangThread *)hook;
 
+- (jlong)totalMemory;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangRuntime_initialized;
 J2OBJC_STATIC_INIT(JavaLangRuntime)
+
 FOUNDATION_EXPORT JavaLangRuntime *JavaLangRuntime_getRuntime();
 
-FOUNDATION_EXPORT JavaLangRuntime *JavaLangRuntime_instance_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangRuntime, instance_, JavaLangRuntime *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRuntime)
 
 #endif // _JavaLangRuntime_H_

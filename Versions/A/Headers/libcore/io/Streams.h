@@ -6,21 +6,23 @@
 #ifndef _LibcoreIoStreams_H_
 #define _LibcoreIoStreams_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
 @class JavaIoReader;
-@class JavaUtilConcurrentAtomicAtomicReference;
 
-#import "JreEmulation.h"
+@interface LibcoreIoStreams : NSObject
 
-@interface LibcoreIoStreams : NSObject {
-}
+#pragma mark Public
 
-+ (jint)readSingleByteWithJavaIoInputStream:(JavaIoInputStream *)inArg;
++ (jint)copy__WithJavaIoInputStream:(JavaIoInputStream *)inArg
+             withJavaIoOutputStream:(JavaIoOutputStream *)outArg OBJC_METHOD_FAMILY_NONE;
 
-+ (void)writeSingleByteWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
-                                      withInt:(jint)b;
++ (NSString *)readAsciiLineWithJavaIoInputStream:(JavaIoInputStream *)inArg;
+
++ (IOSByteArray *)readFullyWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
 + (void)readFullyWithJavaIoInputStream:(JavaIoInputStream *)inArg
                          withByteArray:(IOSByteArray *)dst;
@@ -30,40 +32,46 @@
                                withInt:(jint)offset
                                withInt:(jint)byteCount;
 
-+ (IOSByteArray *)readFullyWithJavaIoInputStream:(JavaIoInputStream *)inArg;
++ (NSString *)readFullyWithJavaIoReader:(JavaIoReader *)reader;
 
 + (IOSByteArray *)readFullyNoCloseWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
-+ (NSString *)readFullyWithJavaIoReader:(JavaIoReader *)reader;
++ (jint)readSingleByteWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
 + (void)skipAllWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
 + (jlong)skipByReadingWithJavaIoInputStream:(JavaIoInputStream *)inArg
                                    withLong:(jlong)byteCount;
 
-+ (jint)copy__WithJavaIoInputStream:(JavaIoInputStream *)inArg
-             withJavaIoOutputStream:(JavaIoOutputStream *)outArg OBJC_METHOD_FAMILY_NONE;
-
-+ (NSString *)readAsciiLineWithJavaIoInputStream:(JavaIoInputStream *)inArg;
++ (void)writeSingleByteWithJavaIoOutputStream:(JavaIoOutputStream *)outArg
+                                      withInt:(jint)b;
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIoStreams_initialized;
 J2OBJC_STATIC_INIT(LibcoreIoStreams)
+
 FOUNDATION_EXPORT jint LibcoreIoStreams_readSingleByteWithJavaIoInputStream_(JavaIoInputStream *inArg);
+
 FOUNDATION_EXPORT void LibcoreIoStreams_writeSingleByteWithJavaIoOutputStream_withInt_(JavaIoOutputStream *outArg, jint b);
+
 FOUNDATION_EXPORT void LibcoreIoStreams_readFullyWithJavaIoInputStream_withByteArray_(JavaIoInputStream *inArg, IOSByteArray *dst);
+
 FOUNDATION_EXPORT void LibcoreIoStreams_readFullyWithJavaIoInputStream_withByteArray_withInt_withInt_(JavaIoInputStream *inArg, IOSByteArray *dst, jint offset, jint byteCount);
+
 FOUNDATION_EXPORT IOSByteArray *LibcoreIoStreams_readFullyWithJavaIoInputStream_(JavaIoInputStream *inArg);
+
 FOUNDATION_EXPORT IOSByteArray *LibcoreIoStreams_readFullyNoCloseWithJavaIoInputStream_(JavaIoInputStream *inArg);
+
 FOUNDATION_EXPORT NSString *LibcoreIoStreams_readFullyWithJavaIoReader_(JavaIoReader *reader);
+
 FOUNDATION_EXPORT void LibcoreIoStreams_skipAllWithJavaIoInputStream_(JavaIoInputStream *inArg);
+
 FOUNDATION_EXPORT jlong LibcoreIoStreams_skipByReadingWithJavaIoInputStream_withLong_(JavaIoInputStream *inArg, jlong byteCount);
+
 FOUNDATION_EXPORT jint LibcoreIoStreams_copy__WithJavaIoInputStream_withJavaIoOutputStream_(JavaIoInputStream *inArg, JavaIoOutputStream *outArg);
+
 FOUNDATION_EXPORT NSString *LibcoreIoStreams_readAsciiLineWithJavaIoInputStream_(JavaIoInputStream *inArg);
 
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReference *LibcoreIoStreams_skipBuffer_;
-J2OBJC_STATIC_FIELD_GETTER(LibcoreIoStreams, skipBuffer_, JavaUtilConcurrentAtomicAtomicReference *)
-J2OBJC_STATIC_FIELD_SETTER(LibcoreIoStreams, skipBuffer_, JavaUtilConcurrentAtomicAtomicReference *)
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStreams)
 
 #endif // _LibcoreIoStreams_H_

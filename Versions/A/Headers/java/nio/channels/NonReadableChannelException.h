@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsNonReadableChannelException_H_
 #define _JavaNioChannelsNonReadableChannelException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsNonReadableChannelException_serialVersionUID -3200915679294993514LL
+@interface JavaNioChannelsNonReadableChannelException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsNonReadableChannelException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsNonReadableChannelException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsNonReadableChannelException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsNonReadableChannelException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsNonReadableChannelException_init(JavaNioChannelsNonReadableChannelException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsNonReadableChannelException *new_JavaNioChannelsNonReadableChannelException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsNonReadableChannelException)
 
 #endif // _JavaNioChannelsNonReadableChannelException_H_

@@ -6,9 +6,9 @@
 #ifndef _LibcoreIoStructPollfd_H_
 #define _LibcoreIoStructPollfd_H_
 
-@class JavaIoFileDescriptor;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaIoFileDescriptor;
 
 @interface LibcoreIoStructPollfd : NSObject {
  @public
@@ -18,15 +18,23 @@
   id userData_;
 }
 
-- (NSString *)description;
+#pragma mark Public
 
 - (instancetype)init;
 
+- (NSString *)description;
+
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructPollfd_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructPollfd)
 
 J2OBJC_FIELD_SETTER(LibcoreIoStructPollfd, fd_, JavaIoFileDescriptor *)
 J2OBJC_FIELD_SETTER(LibcoreIoStructPollfd, userData_, id)
+
+FOUNDATION_EXPORT void LibcoreIoStructPollfd_init(LibcoreIoStructPollfd *self);
+
+FOUNDATION_EXPORT LibcoreIoStructPollfd *new_LibcoreIoStructPollfd_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructPollfd)
 
 #endif // _LibcoreIoStructPollfd_H_

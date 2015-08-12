@@ -6,15 +6,15 @@
 #ifndef _JavaIoInvalidClassException_H_
 #define _JavaIoInvalidClassException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
-
-#define JavaIoInvalidClassException_serialVersionUID -4333316296251054416LL
 
 @interface JavaIoInvalidClassException : JavaIoObjectStreamException {
  @public
   NSString *classname_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
@@ -25,10 +25,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoInvalidClassException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoInvalidClassException)
 
 J2OBJC_FIELD_SETTER(JavaIoInvalidClassException, classname_, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoInvalidClassException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoInvalidClassException_initWithNSString_(JavaIoInvalidClassException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoInvalidClassException *new_JavaIoInvalidClassException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInvalidClassException_initWithNSString_withNSString_(JavaIoInvalidClassException *self, NSString *className_, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaIoInvalidClassException *new_JavaIoInvalidClassException_initWithNSString_withNSString_(NSString *className_, NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoInvalidClassException)
 
 #endif // _JavaIoInvalidClassException_H_

@@ -6,21 +6,23 @@
 #ifndef _JavaUtilZipCRC32_H_
 #define _JavaUtilZipCRC32_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/zip/Checksum.h"
+
+@class IOSByteArray;
 
 @interface JavaUtilZipCRC32 : NSObject < JavaUtilZipChecksum > {
  @public
   jlong tbytes_;
 }
 
+#pragma mark Public
+
+- (instancetype)init;
+
 - (jlong)getValue;
 
 - (void)reset;
-
-- (void)updateWithInt:(jint)val;
 
 - (void)updateWithByteArray:(IOSByteArray *)buf;
 
@@ -28,10 +30,16 @@
                     withInt:(jint)offset
                     withInt:(jint)byteCount;
 
-- (instancetype)init;
+- (void)updateWithInt:(jint)val;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipCRC32_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipCRC32)
+
+FOUNDATION_EXPORT void JavaUtilZipCRC32_init(JavaUtilZipCRC32 *self);
+
+FOUNDATION_EXPORT JavaUtilZipCRC32 *new_JavaUtilZipCRC32_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipCRC32)
 
 #endif // _JavaUtilZipCRC32_H_

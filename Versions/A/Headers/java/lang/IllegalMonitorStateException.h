@@ -6,13 +6,12 @@
 #ifndef _JavaLangIllegalMonitorStateException_H_
 #define _JavaLangIllegalMonitorStateException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/RuntimeException.h"
 
-#define JavaLangIllegalMonitorStateException_serialVersionUID 3713306369498869069LL
+@interface JavaLangIllegalMonitorStateException : JavaLangRuntimeException
 
-@interface JavaLangIllegalMonitorStateException : JavaLangRuntimeException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangIllegalMonitorStateException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangIllegalMonitorStateException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangIllegalMonitorStateException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangIllegalMonitorStateException_init(JavaLangIllegalMonitorStateException *self);
+
+FOUNDATION_EXPORT JavaLangIllegalMonitorStateException *new_JavaLangIllegalMonitorStateException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangIllegalMonitorStateException_initWithNSString_(JavaLangIllegalMonitorStateException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangIllegalMonitorStateException *new_JavaLangIllegalMonitorStateException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangIllegalMonitorStateException)
 
 #endif // _JavaLangIllegalMonitorStateException_H_

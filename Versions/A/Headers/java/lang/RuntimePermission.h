@@ -6,13 +6,14 @@
 #ifndef _JavaLangRuntimePermission_H_
 #define _JavaLangRuntimePermission_H_
 
-@class JavaSecurityPermission;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/BasicPermission.h"
 
-@interface JavaLangRuntimePermission : JavaSecurityBasicPermission {
-}
+@class JavaSecurityPermission;
+
+@interface JavaLangRuntimePermission : JavaSecurityBasicPermission
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)permissionName;
 
@@ -25,6 +26,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangRuntimePermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRuntimePermission)
+
+FOUNDATION_EXPORT void JavaLangRuntimePermission_initWithNSString_(JavaLangRuntimePermission *self, NSString *permissionName);
+
+FOUNDATION_EXPORT JavaLangRuntimePermission *new_JavaLangRuntimePermission_initWithNSString_(NSString *permissionName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangRuntimePermission_initWithNSString_withNSString_(JavaLangRuntimePermission *self, NSString *name, NSString *actions);
+
+FOUNDATION_EXPORT JavaLangRuntimePermission *new_JavaLangRuntimePermission_initWithNSString_withNSString_(NSString *name, NSString *actions) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRuntimePermission)
 
 #endif // _JavaLangRuntimePermission_H_

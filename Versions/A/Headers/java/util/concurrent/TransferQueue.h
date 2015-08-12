@@ -6,12 +6,13 @@
 #ifndef _JavaUtilConcurrentTransferQueue_H_
 #define _JavaUtilConcurrentTransferQueue_H_
 
-@class JavaUtilConcurrentTimeUnitEnum;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/concurrent/BlockingQueue.h"
 
+@class JavaUtilConcurrentTimeUnitEnum;
+
 @protocol JavaUtilConcurrentTransferQueue < JavaUtilConcurrentBlockingQueue, NSObject, JavaObject >
+
 - (jboolean)tryTransferWithId:(id)e;
 
 - (void)transferWithId:(id)e;
@@ -24,9 +25,10 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (jint)getWaitingConsumerCount;
 
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentTransferQueue_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentTransferQueue)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentTransferQueue)
 
 #endif // _JavaUtilConcurrentTransferQueue_H_

@@ -6,97 +6,115 @@
 #ifndef _JavaUtilConcurrentExecutors_H_
 #define _JavaUtilConcurrentExecutors_H_
 
-@class JavaLangClassLoader;
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/AbstractExecutorService.h"
+#include "java/util/concurrent/Callable.h"
+#include "java/util/concurrent/ScheduledExecutorService.h"
+#include "java/util/concurrent/ThreadFactory.h"
+
 @class JavaLangThread;
-@class JavaLangThreadGroup;
-@class JavaLangVoid;
-@class JavaSecurityAccessControlContext;
-@class JavaUtilConcurrentAtomicAtomicInteger;
 @class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaLangRunnable;
+@protocol JavaSecurityPrivilegedAction;
+@protocol JavaSecurityPrivilegedExceptionAction;
 @protocol JavaUtilCollection;
 @protocol JavaUtilConcurrentExecutorService;
 @protocol JavaUtilConcurrentFuture;
 @protocol JavaUtilConcurrentScheduledFuture;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/lang/Runnable.h"
-#include "java/security/PrivilegedAction.h"
-#include "java/security/PrivilegedExceptionAction.h"
-#include "java/util/concurrent/AbstractExecutorService.h"
-#include "java/util/concurrent/Callable.h"
-#include "java/util/concurrent/ScheduledExecutorService.h"
-#include "java/util/concurrent/ThreadFactory.h"
+@interface JavaUtilConcurrentExecutors : NSObject
 
-@interface JavaUtilConcurrentExecutors : NSObject {
-}
+#pragma mark Public
+
++ (id<JavaUtilConcurrentCallable>)callableWithJavaSecurityPrivilegedAction:(id<JavaSecurityPrivilegedAction>)action;
+
++ (id<JavaUtilConcurrentCallable>)callableWithJavaSecurityPrivilegedExceptionAction:(id<JavaSecurityPrivilegedExceptionAction>)action;
+
++ (id<JavaUtilConcurrentCallable>)callableWithJavaLangRunnable:(id<JavaLangRunnable>)task;
+
++ (id<JavaUtilConcurrentCallable>)callableWithJavaLangRunnable:(id<JavaLangRunnable>)task
+                                                        withId:(id)result;
+
++ (id<JavaUtilConcurrentThreadFactory>)defaultThreadFactory;
+
++ (id<JavaUtilConcurrentExecutorService>)newCachedThreadPool OBJC_METHOD_FAMILY_NONE;
+
++ (id<JavaUtilConcurrentExecutorService>)newCachedThreadPoolWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaUtilConcurrentExecutorService>)newFixedThreadPoolWithInt:(jint)nThreads OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaUtilConcurrentExecutorService>)newFixedThreadPoolWithInt:(jint)nThreads
                                withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
 
-+ (id<JavaUtilConcurrentExecutorService>)newSingleThreadExecutor OBJC_METHOD_FAMILY_NONE;
-
-+ (id<JavaUtilConcurrentExecutorService>)newSingleThreadExecutorWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
-
-+ (id<JavaUtilConcurrentExecutorService>)newCachedThreadPool OBJC_METHOD_FAMILY_NONE;
-
-+ (id<JavaUtilConcurrentExecutorService>)newCachedThreadPoolWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
-
-+ (id<JavaUtilConcurrentScheduledExecutorService>)newSingleThreadScheduledExecutor OBJC_METHOD_FAMILY_NONE;
-
-+ (id<JavaUtilConcurrentScheduledExecutorService>)newSingleThreadScheduledExecutorWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
-
 + (id<JavaUtilConcurrentScheduledExecutorService>)newScheduledThreadPoolWithInt:(jint)corePoolSize OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaUtilConcurrentScheduledExecutorService>)newScheduledThreadPoolWithInt:(jint)corePoolSize
                                             withJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
 
-+ (id<JavaUtilConcurrentExecutorService>)unconfigurableExecutorServiceWithJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
++ (id<JavaUtilConcurrentExecutorService>)newSingleThreadExecutor OBJC_METHOD_FAMILY_NONE;
 
-+ (id<JavaUtilConcurrentScheduledExecutorService>)unconfigurableScheduledExecutorServiceWithJavaUtilConcurrentScheduledExecutorService:(id<JavaUtilConcurrentScheduledExecutorService>)executor;
++ (id<JavaUtilConcurrentExecutorService>)newSingleThreadExecutorWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
 
-+ (id<JavaUtilConcurrentThreadFactory>)defaultThreadFactory;
++ (id<JavaUtilConcurrentScheduledExecutorService>)newSingleThreadScheduledExecutor OBJC_METHOD_FAMILY_NONE;
 
-+ (id<JavaUtilConcurrentThreadFactory>)privilegedThreadFactory;
-
-+ (id<JavaUtilConcurrentCallable>)callableWithJavaLangRunnable:(id<JavaLangRunnable>)task
-                                                        withId:(id)result;
-
-+ (id<JavaUtilConcurrentCallable>)callableWithJavaLangRunnable:(id<JavaLangRunnable>)task;
-
-+ (id<JavaUtilConcurrentCallable>)callableWithJavaSecurityPrivilegedAction:(id<JavaSecurityPrivilegedAction>)action;
-
-+ (id<JavaUtilConcurrentCallable>)callableWithJavaSecurityPrivilegedExceptionAction:(id<JavaSecurityPrivilegedExceptionAction>)action;
++ (id<JavaUtilConcurrentScheduledExecutorService>)newSingleThreadScheduledExecutorWithJavaUtilConcurrentThreadFactory:(id<JavaUtilConcurrentThreadFactory>)threadFactory OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaUtilConcurrentCallable>)privilegedCallableWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
 
 + (id<JavaUtilConcurrentCallable>)privilegedCallableUsingCurrentClassLoaderWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable;
 
++ (id<JavaUtilConcurrentThreadFactory>)privilegedThreadFactory;
+
++ (id<JavaUtilConcurrentExecutorService>)unconfigurableExecutorServiceWithJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
+
++ (id<JavaUtilConcurrentScheduledExecutorService>)unconfigurableScheduledExecutorServiceWithJavaUtilConcurrentScheduledExecutorService:(id<JavaUtilConcurrentScheduledExecutorService>)executor;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors)
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newFixedThreadPoolWithInt_(jint nThreads);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newFixedThreadPoolWithInt_withJavaUtilConcurrentThreadFactory_(jint nThreads, id<JavaUtilConcurrentThreadFactory> threadFactory);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newSingleThreadExecutor();
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newSingleThreadExecutorWithJavaUtilConcurrentThreadFactory_(id<JavaUtilConcurrentThreadFactory> threadFactory);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newCachedThreadPool();
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_newCachedThreadPoolWithJavaUtilConcurrentThreadFactory_(id<JavaUtilConcurrentThreadFactory> threadFactory);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentScheduledExecutorService> JavaUtilConcurrentExecutors_newSingleThreadScheduledExecutor();
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentScheduledExecutorService> JavaUtilConcurrentExecutors_newSingleThreadScheduledExecutorWithJavaUtilConcurrentThreadFactory_(id<JavaUtilConcurrentThreadFactory> threadFactory);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentScheduledExecutorService> JavaUtilConcurrentExecutors_newScheduledThreadPoolWithInt_(jint corePoolSize);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentScheduledExecutorService> JavaUtilConcurrentExecutors_newScheduledThreadPoolWithInt_withJavaUtilConcurrentThreadFactory_(jint corePoolSize, id<JavaUtilConcurrentThreadFactory> threadFactory);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentExecutorService> JavaUtilConcurrentExecutors_unconfigurableExecutorServiceWithJavaUtilConcurrentExecutorService_(id<JavaUtilConcurrentExecutorService> executor);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentScheduledExecutorService> JavaUtilConcurrentExecutors_unconfigurableScheduledExecutorServiceWithJavaUtilConcurrentScheduledExecutorService_(id<JavaUtilConcurrentScheduledExecutorService> executor);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentThreadFactory> JavaUtilConcurrentExecutors_defaultThreadFactory();
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentThreadFactory> JavaUtilConcurrentExecutors_privilegedThreadFactory();
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_callableWithJavaLangRunnable_withId_(id<JavaLangRunnable> task, id result);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_callableWithJavaLangRunnable_(id<JavaLangRunnable> task);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_callableWithJavaSecurityPrivilegedAction_(id<JavaSecurityPrivilegedAction> action);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_callableWithJavaSecurityPrivilegedExceptionAction_(id<JavaSecurityPrivilegedExceptionAction> action);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_privilegedCallableWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> callable);
+
 FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_privilegedCallableUsingCurrentClassLoaderWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> callable);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors)
 
 @interface JavaUtilConcurrentExecutors_RunnableAdapter : NSObject < JavaUtilConcurrentCallable > {
  @public
@@ -104,135 +122,116 @@ FOUNDATION_EXPORT id<JavaUtilConcurrentCallable> JavaUtilConcurrentExecutors_pri
   id result_;
 }
 
-- (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)task
-                                  withId:(id)result;
+#pragma mark Public
 
 - (id)call;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaLangRunnable:(id<JavaLangRunnable>)task
+                                  withId:(id)result;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_RunnableAdapter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_RunnableAdapter)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentExecutors_RunnableAdapter, task_, id<JavaLangRunnable>)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentExecutors_RunnableAdapter, result_, id)
 
-@interface JavaUtilConcurrentExecutors_PrivilegedCallable : NSObject < JavaUtilConcurrentCallable > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_RunnableAdapter_initWithJavaLangRunnable_withId_(JavaUtilConcurrentExecutors_RunnableAdapter *self, id<JavaLangRunnable> task, id result);
 
-- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_RunnableAdapter *new_JavaUtilConcurrentExecutors_RunnableAdapter_initWithJavaLangRunnable_withId_(id<JavaLangRunnable> task, id result) NS_RETURNS_RETAINED;
 
-- (id)call;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_RunnableAdapter)
 
-@end
+@interface JavaUtilConcurrentExecutors_PrivilegedCallable : NSObject < JavaUtilConcurrentCallable >
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedCallable_init() {}
-
-@interface JavaUtilConcurrentExecutors_PrivilegedCallable_$1 : NSObject < JavaSecurityPrivilegedExceptionAction > {
-}
-
-- (id)run;
-
-- (instancetype)initWithJavaUtilConcurrentExecutors_PrivilegedCallable:(JavaUtilConcurrentExecutors_PrivilegedCallable *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedCallable_$1_init() {}
-
-@interface JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader : NSObject < JavaUtilConcurrentCallable > {
-}
-
-- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+#pragma mark Public
 
 - (id)call;
 
-@end
+#pragma mark Package-Private
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader_init() {}
-
-@interface JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader_$1 : NSObject < JavaSecurityPrivilegedExceptionAction > {
-}
-
-- (id)run;
-
-- (instancetype)initWithJavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader:(JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader *)outer$;
+- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader_$1_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_PrivilegedCallable)
 
-@interface JavaUtilConcurrentExecutors_DefaultThreadFactory : NSObject < JavaUtilConcurrentThreadFactory > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_PrivilegedCallable_initWithJavaUtilConcurrentCallable_(JavaUtilConcurrentExecutors_PrivilegedCallable *self, id<JavaUtilConcurrentCallable> task);
 
-- (instancetype)init;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_PrivilegedCallable *new_JavaUtilConcurrentExecutors_PrivilegedCallable_initWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> task) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_PrivilegedCallable)
+
+@interface JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader : NSObject < JavaUtilConcurrentCallable >
+
+#pragma mark Public
+
+- (id)call;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader_initWithJavaUtilConcurrentCallable_(JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader *self, id<JavaUtilConcurrentCallable> task);
+
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader *new_JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader_initWithJavaUtilConcurrentCallable_(id<JavaUtilConcurrentCallable> task) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_PrivilegedCallableUsingCurrentClassLoader)
+
+@interface JavaUtilConcurrentExecutors_DefaultThreadFactory : NSObject < JavaUtilConcurrentThreadFactory >
+
+#pragma mark Public
 
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r OBJC_METHOD_FAMILY_NONE;
 
+#pragma mark Package-Private
+
+- (instancetype)init;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentExecutors_DefaultThreadFactory_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentExecutors_DefaultThreadFactory)
 
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicInteger *JavaUtilConcurrentExecutors_DefaultThreadFactory_poolNumber_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentExecutors_DefaultThreadFactory, poolNumber_, JavaUtilConcurrentAtomicAtomicInteger *)
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_DefaultThreadFactory_init(JavaUtilConcurrentExecutors_DefaultThreadFactory *self);
 
-@interface JavaUtilConcurrentExecutors_PrivilegedThreadFactory : JavaUtilConcurrentExecutors_DefaultThreadFactory {
-}
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_DefaultThreadFactory *new_JavaUtilConcurrentExecutors_DefaultThreadFactory_init() NS_RETURNS_RETAINED;
 
-- (instancetype)init;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_DefaultThreadFactory)
+
+@interface JavaUtilConcurrentExecutors_PrivilegedThreadFactory : JavaUtilConcurrentExecutors_DefaultThreadFactory
+
+#pragma mark Public
 
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r OBJC_METHOD_FAMILY_NONE;
 
-@end
+#pragma mark Package-Private
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedThreadFactory_init() {}
-
-@interface JavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1 : NSObject < JavaLangRunnable > {
-}
-
-- (void)run;
-
-- (instancetype)initWithJavaUtilConcurrentExecutors_PrivilegedThreadFactory:(JavaUtilConcurrentExecutors_PrivilegedThreadFactory *)outer$
-                                                       withJavaLangRunnable:(id<JavaLangRunnable>)capture$0;
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_PrivilegedThreadFactory)
 
-@interface JavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1_$1 : NSObject < JavaSecurityPrivilegedAction > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_PrivilegedThreadFactory_init(JavaUtilConcurrentExecutors_PrivilegedThreadFactory *self);
 
-- (id)run;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_PrivilegedThreadFactory *new_JavaUtilConcurrentExecutors_PrivilegedThreadFactory_init() NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1:(JavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1 *)outer$;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_PrivilegedThreadFactory)
 
-@end
+@interface JavaUtilConcurrentExecutors_DelegatedExecutorService : JavaUtilConcurrentAbstractExecutorService
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_PrivilegedThreadFactory_$1_$1_init() {}
-
-@interface JavaUtilConcurrentExecutors_DelegatedExecutorService : JavaUtilConcurrentAbstractExecutorService {
-}
-
-- (instancetype)initWithJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
-
-- (void)executeWithJavaLangRunnable:(id<JavaLangRunnable>)command;
-
-- (void)shutdown;
-
-- (id<JavaUtilList>)shutdownNow;
-
-- (jboolean)isShutdown;
-
-- (jboolean)isTerminated;
+#pragma mark Public
 
 - (jboolean)awaitTerminationWithLong:(jlong)timeout
   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task;
-
-- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
-
-- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task
-                                                    withId:(id)result;
+- (void)executeWithJavaLangRunnable:(id<JavaLangRunnable>)command;
 
 - (id<JavaUtilList>)invokeAllWithJavaUtilCollection:(id<JavaUtilCollection>)tasks;
 
@@ -246,33 +245,66 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_Privilege
                              withLong:(jlong)timeout
    withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-@end
+- (jboolean)isShutdown;
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_DelegatedExecutorService_init() {}
+- (jboolean)isTerminated;
 
-@interface JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService : JavaUtilConcurrentExecutors_DelegatedExecutorService {
-}
+- (void)shutdown;
+
+- (id<JavaUtilList>)shutdownNow;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task;
+
+- (id<JavaUtilConcurrentFuture>)submitWithJavaLangRunnable:(id<JavaLangRunnable>)task
+                                                    withId:(id)result;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_DelegatedExecutorService)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_DelegatedExecutorService_initWithJavaUtilConcurrentExecutorService_(JavaUtilConcurrentExecutors_DelegatedExecutorService *self, id<JavaUtilConcurrentExecutorService> executor);
+
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_DelegatedExecutorService *new_JavaUtilConcurrentExecutors_DelegatedExecutorService_initWithJavaUtilConcurrentExecutorService_(id<JavaUtilConcurrentExecutorService> executor) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_DelegatedExecutorService)
+
+@interface JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService : JavaUtilConcurrentExecutors_DelegatedExecutorService
+
+#pragma mark Protected
+
 - (void)dealloc;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService)
 
-@interface JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService : JavaUtilConcurrentExecutors_DelegatedExecutorService < JavaUtilConcurrentScheduledExecutorService > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService_initWithJavaUtilConcurrentExecutorService_(JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService *self, id<JavaUtilConcurrentExecutorService> executor);
 
-- (instancetype)initWithJavaUtilConcurrentScheduledExecutorService:(id<JavaUtilConcurrentScheduledExecutorService>)executor;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService *new_JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService_initWithJavaUtilConcurrentExecutorService_(id<JavaUtilConcurrentExecutorService> executor) NS_RETURNS_RETAINED;
 
-- (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaLangRunnable:(id<JavaLangRunnable>)command
-                                                             withLong:(jlong)delay
-                                   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_FinalizableDelegatedExecutorService)
+
+@interface JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService : JavaUtilConcurrentExecutors_DelegatedExecutorService < JavaUtilConcurrentScheduledExecutorService >
+
+#pragma mark Public
 
 - (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)callable
                                                                        withLong:(jlong)delay
                                              withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id<JavaUtilConcurrentScheduledFuture>)scheduleWithJavaLangRunnable:(id<JavaLangRunnable>)command
+                                                             withLong:(jlong)delay
+                                   withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (id<JavaUtilConcurrentScheduledFuture>)scheduleAtFixedRateWithJavaLangRunnable:(id<JavaLangRunnable>)command
                                                                         withLong:(jlong)initialDelay
@@ -284,30 +316,18 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_Finalizab
                                                                            withLong:(jlong)delay
                                                  withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-@end
+#pragma mark Package-Private
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService_init() {}
-
-@interface JavaUtilConcurrentExecutors_$1 : NSObject < JavaUtilConcurrentCallable > {
-}
-
-- (id)call;
-
-- (instancetype)initWithJavaSecurityPrivilegedAction:(id<JavaSecurityPrivilegedAction>)capture$0;
+- (instancetype)initWithJavaUtilConcurrentScheduledExecutorService:(id<JavaUtilConcurrentScheduledExecutorService>)executor;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_$1_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService)
 
-@interface JavaUtilConcurrentExecutors_$2 : NSObject < JavaUtilConcurrentCallable > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService_initWithJavaUtilConcurrentScheduledExecutorService_(JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService *self, id<JavaUtilConcurrentScheduledExecutorService> executor);
 
-- (id)call;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService *new_JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService_initWithJavaUtilConcurrentScheduledExecutorService_(id<JavaUtilConcurrentScheduledExecutorService> executor) NS_RETURNS_RETAINED;
 
-- (instancetype)initWithJavaSecurityPrivilegedExceptionAction:(id<JavaSecurityPrivilegedExceptionAction>)capture$0;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutors_$2_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutors_DelegatedScheduledExecutorService)
 
 #endif // _JavaUtilConcurrentExecutors_H_

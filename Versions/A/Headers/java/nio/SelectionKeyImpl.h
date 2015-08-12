@@ -6,17 +6,18 @@
 #ifndef _JavaNioSelectionKeyImpl_H_
 #define _JavaNioSelectionKeyImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/spi/AbstractSelectionKey.h"
+
 @class JavaNioChannelsSelectableChannel;
 @class JavaNioChannelsSelectionKey;
 @class JavaNioChannelsSelector;
 @class JavaNioChannelsSpiAbstractSelectableChannel;
 @class JavaNioSelectorImpl;
 
-#import "JreEmulation.h"
-#include "java/nio/channels/spi/AbstractSelectionKey.h"
+@interface JavaNioSelectionKeyImpl : JavaNioChannelsSpiAbstractSelectionKey
 
-@interface JavaNioSelectionKeyImpl : JavaNioChannelsSpiAbstractSelectionKey {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaNioChannelsSpiAbstractSelectableChannel:(JavaNioChannelsSpiAbstractSelectableChannel *)channel
                                                             withInt:(jint)operations
@@ -27,20 +28,28 @@
 
 - (jint)interestOps;
 
-- (jint)interestOpsNoCheck;
-
 - (JavaNioChannelsSelectionKey *)interestOpsWithInt:(jint)operations;
 
 - (jint)readyOps;
 
 - (JavaNioChannelsSelector *)selector;
 
-- (void)setReadyOpsWithInt:(jint)readyOps;
+#pragma mark Package-Private
+
+- (jint)interestOpsNoCheck;
 
 - (jboolean)isConnected;
 
+- (void)setReadyOpsWithInt:(jint)readyOps;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioSelectionKeyImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioSelectionKeyImpl)
+
+FOUNDATION_EXPORT void JavaNioSelectionKeyImpl_initWithJavaNioChannelsSpiAbstractSelectableChannel_withInt_withId_withJavaNioSelectorImpl_(JavaNioSelectionKeyImpl *self, JavaNioChannelsSpiAbstractSelectableChannel *channel, jint operations, id attachment, JavaNioSelectorImpl *selector);
+
+FOUNDATION_EXPORT JavaNioSelectionKeyImpl *new_JavaNioSelectionKeyImpl_initWithJavaNioChannelsSpiAbstractSelectableChannel_withInt_withId_withJavaNioSelectorImpl_(JavaNioChannelsSpiAbstractSelectableChannel *channel, jint operations, id attachment, JavaNioSelectorImpl *selector) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioSelectionKeyImpl)
 
 #endif // _JavaNioSelectionKeyImpl_H_

@@ -6,15 +6,14 @@
 #ifndef _JavaUtilServiceConfigurationError_H_
 #define _JavaUtilServiceConfigurationError_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Error.h"
 
-#define JavaUtilServiceConfigurationError_serialVersionUID 74132770414881LL
+@class JavaLangThrowable;
 
-@interface JavaUtilServiceConfigurationError : JavaLangError {
-}
+@interface JavaUtilServiceConfigurationError : JavaLangError
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)message;
 
@@ -23,8 +22,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilServiceConfigurationError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilServiceConfigurationError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilServiceConfigurationError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilServiceConfigurationError_initWithNSString_(JavaUtilServiceConfigurationError *self, NSString *message);
+
+FOUNDATION_EXPORT JavaUtilServiceConfigurationError *new_JavaUtilServiceConfigurationError_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilServiceConfigurationError_initWithNSString_withJavaLangThrowable_(JavaUtilServiceConfigurationError *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaUtilServiceConfigurationError *new_JavaUtilServiceConfigurationError_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilServiceConfigurationError)
 
 #endif // _JavaUtilServiceConfigurationError_H_

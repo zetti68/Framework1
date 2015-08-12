@@ -6,77 +6,67 @@
 #ifndef _OrgApacheHarmonySecurityFortressServices_H_
 #define _OrgApacheHarmonySecurityFortressServices_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
+
 @class JavaSecurityProvider;
 @class JavaSecurityProvider_Service;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@class JavaUtilArrayList;
 
-#import "JreEmulation.h"
+@interface OrgApacheHarmonySecurityFortressServices : NSObject
 
-@interface OrgApacheHarmonySecurityFortressServices : NSObject {
-}
+#pragma mark Public
 
-+ (IOSObjectArray *)getProviders;
+- (instancetype)init;
 
-+ (id<JavaUtilList>)getProvidersList;
++ (jint)getCacheVersion;
 
 + (JavaSecurityProvider *)getProviderWithNSString:(NSString *)name;
+
++ (JavaUtilArrayList *)getProviders;
+
++ (JavaSecurityProvider_Service *)getSecureRandomService;
+
++ (JavaUtilArrayList *)getServicesWithNSString:(NSString *)key;
+
++ (void)initServiceInfoWithJavaSecurityProvider:(JavaSecurityProvider *)p OBJC_METHOD_FAMILY_NONE;
 
 + (jint)insertProviderAtWithJavaSecurityProvider:(JavaSecurityProvider *)provider
                                          withInt:(jint)position;
 
-+ (void)removeProviderWithInt:(jint)providerNumber;
-
-+ (void)initServiceInfoWithJavaSecurityProvider:(JavaSecurityProvider *)p OBJC_METHOD_FAMILY_NONE;
-
 + (jboolean)isEmpty;
 
-+ (JavaSecurityProvider_Service *)getServiceWithNSString:(NSString *)key;
-
-+ (JavaSecurityProvider_Service *)getSecureRandomService;
++ (void)removeProviderWithInt:(jint)providerNumber;
 
 + (void)setNeedRefresh;
 
-+ (jint)getCacheVersion;
-
-- (instancetype)init;
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityFortressServices_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityFortressServices)
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheHarmonySecurityFortressServices_getProviders();
-FOUNDATION_EXPORT id<JavaUtilList> OrgApacheHarmonySecurityFortressServices_getProvidersList();
+
+FOUNDATION_EXPORT JavaUtilArrayList *OrgApacheHarmonySecurityFortressServices_getProviders();
+
 FOUNDATION_EXPORT JavaSecurityProvider *OrgApacheHarmonySecurityFortressServices_getProviderWithNSString_(NSString *name);
+
 FOUNDATION_EXPORT jint OrgApacheHarmonySecurityFortressServices_insertProviderAtWithJavaSecurityProvider_withInt_(JavaSecurityProvider *provider, jint position);
+
 FOUNDATION_EXPORT void OrgApacheHarmonySecurityFortressServices_removeProviderWithInt_(jint providerNumber);
+
 FOUNDATION_EXPORT void OrgApacheHarmonySecurityFortressServices_initServiceInfoWithJavaSecurityProvider_(JavaSecurityProvider *p);
+
 FOUNDATION_EXPORT jboolean OrgApacheHarmonySecurityFortressServices_isEmpty();
-FOUNDATION_EXPORT JavaSecurityProvider_Service *OrgApacheHarmonySecurityFortressServices_getServiceWithNSString_(NSString *key);
+
+FOUNDATION_EXPORT JavaUtilArrayList *OrgApacheHarmonySecurityFortressServices_getServicesWithNSString_(NSString *key);
+
 FOUNDATION_EXPORT JavaSecurityProvider_Service *OrgApacheHarmonySecurityFortressServices_getSecureRandomService();
+
 FOUNDATION_EXPORT void OrgApacheHarmonySecurityFortressServices_setNeedRefresh();
+
 FOUNDATION_EXPORT jint OrgApacheHarmonySecurityFortressServices_getCacheVersion();
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheHarmonySecurityFortressServices_services_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, services_, id<JavaUtilMap>)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityFortressServices_init(OrgApacheHarmonySecurityFortressServices *self);
 
-FOUNDATION_EXPORT JavaSecurityProvider_Service *OrgApacheHarmonySecurityFortressServices_cachedSecureRandomService_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, cachedSecureRandomService_, JavaSecurityProvider_Service *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheHarmonySecurityFortressServices, cachedSecureRandomService_, JavaSecurityProvider_Service *)
+FOUNDATION_EXPORT OrgApacheHarmonySecurityFortressServices *new_OrgApacheHarmonySecurityFortressServices_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jboolean OrgApacheHarmonySecurityFortressServices_needRefresh_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, needRefresh_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheHarmonySecurityFortressServices, needRefresh_, jboolean)
-
-FOUNDATION_EXPORT jint OrgApacheHarmonySecurityFortressServices_cacheVersion_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, cacheVersion_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheHarmonySecurityFortressServices, cacheVersion_, jint)
-
-FOUNDATION_EXPORT id<JavaUtilList> OrgApacheHarmonySecurityFortressServices_providers_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, providers_, id<JavaUtilList>)
-
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheHarmonySecurityFortressServices_providersNames_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityFortressServices, providersNames_, id<JavaUtilMap>)
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityFortressServices)
 
 #endif // _OrgApacheHarmonySecurityFortressServices_H_

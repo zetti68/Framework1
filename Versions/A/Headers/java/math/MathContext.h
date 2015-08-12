@@ -6,16 +6,14 @@
 #ifndef _JavaMathMathContext_H_
 #define _JavaMathMathContext_H_
 
-@class IOSCharArray;
-@class JavaMathRoundingModeEnum;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaMathMathContext_serialVersionUID 5579720004786848255LL
+@class JavaMathRoundingModeEnum;
 
-@interface JavaMathMathContext : NSObject < JavaIoSerializable > {
-}
+@interface JavaMathMathContext : NSObject < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)precision;
 
@@ -24,11 +22,11 @@ withJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode;
 
 - (instancetype)initWithNSString:(NSString *)val;
 
+- (jboolean)isEqual:(id)x;
+
 - (jint)getPrecision;
 
 - (JavaMathRoundingModeEnum *)getRoundingMode;
-
-- (jboolean)isEqual:(id)x;
 
 - (NSUInteger)hash;
 
@@ -36,7 +34,6 @@ withJavaMathRoundingModeEnum:(JavaMathRoundingModeEnum *)roundingMode;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaMathMathContext_initialized;
 J2OBJC_STATIC_INIT(JavaMathMathContext)
 
 FOUNDATION_EXPORT JavaMathMathContext *JavaMathMathContext_DECIMAL128_;
@@ -51,12 +48,18 @@ J2OBJC_STATIC_FIELD_GETTER(JavaMathMathContext, DECIMAL64_, JavaMathMathContext 
 FOUNDATION_EXPORT JavaMathMathContext *JavaMathMathContext_UNLIMITED_;
 J2OBJC_STATIC_FIELD_GETTER(JavaMathMathContext, UNLIMITED_, JavaMathMathContext *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaMathMathContext, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaMathMathContext_initWithInt_(JavaMathMathContext *self, jint precision);
 
-FOUNDATION_EXPORT IOSCharArray *JavaMathMathContext_chPrecision_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathMathContext, chPrecision_, IOSCharArray *)
+FOUNDATION_EXPORT JavaMathMathContext *new_JavaMathMathContext_initWithInt_(jint precision) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT IOSCharArray *JavaMathMathContext_chRoundingMode_;
-J2OBJC_STATIC_FIELD_GETTER(JavaMathMathContext, chRoundingMode_, IOSCharArray *)
+FOUNDATION_EXPORT void JavaMathMathContext_initWithInt_withJavaMathRoundingModeEnum_(JavaMathMathContext *self, jint precision, JavaMathRoundingModeEnum *roundingMode);
+
+FOUNDATION_EXPORT JavaMathMathContext *new_JavaMathMathContext_initWithInt_withJavaMathRoundingModeEnum_(jint precision, JavaMathRoundingModeEnum *roundingMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathMathContext_initWithNSString_(JavaMathMathContext *self, NSString *val);
+
+FOUNDATION_EXPORT JavaMathMathContext *new_JavaMathMathContext_initWithNSString_(NSString *val) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaMathMathContext)
 
 #endif // _JavaMathMathContext_H_

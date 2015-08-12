@@ -6,56 +6,46 @@
 #ifndef _JavaLangBoolean_H_
 #define _JavaLangBoolean_H_
 
-@class IOSClass;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 
-#define JavaLangBoolean_serialVersionUID -3665804199014368530LL
+@class IOSClass;
 
-@interface JavaLangBoolean : NSObject < JavaIoSerializable, JavaLangComparable > {
-}
+@interface JavaLangBoolean : NSObject < JavaIoSerializable, JavaLangComparable >
 
-- (instancetype)initWithNSString:(NSString *)string;
+#pragma mark Public
 
 - (instancetype)initWithBoolean:(jboolean)value;
 
+- (instancetype)initWithNSString:(NSString *)string;
+
 - (jboolean)booleanValue;
-
-- (jboolean)isEqual:(id)o;
-
-- (jint)compareToWithId:(JavaLangBoolean *)that;
 
 + (jint)compareWithBoolean:(jboolean)lhs
                withBoolean:(jboolean)rhs;
 
-- (NSUInteger)hash;
+- (jint)compareToWithId:(JavaLangBoolean *)that;
 
-- (NSString *)description;
+- (jboolean)isEqual:(id)o;
 
 + (jboolean)getBooleanWithNSString:(NSString *)string;
 
+- (NSUInteger)hash;
+
 + (jboolean)parseBooleanWithNSString:(NSString *)s;
+
+- (NSString *)description;
 
 + (NSString *)toStringWithBoolean:(jboolean)value;
 
-+ (JavaLangBoolean *)valueOfWithNSString:(NSString *)string;
-
 + (JavaLangBoolean *)valueOfWithBoolean:(jboolean)b;
+
++ (JavaLangBoolean *)valueOfWithNSString:(NSString *)string;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangBoolean_initialized;
 J2OBJC_STATIC_INIT(JavaLangBoolean)
-FOUNDATION_EXPORT jint JavaLangBoolean_compareWithBoolean_withBoolean_(jboolean lhs, jboolean rhs);
-FOUNDATION_EXPORT jboolean JavaLangBoolean_getBooleanWithNSString_(NSString *string);
-FOUNDATION_EXPORT jboolean JavaLangBoolean_parseBooleanWithNSString_(NSString *s);
-FOUNDATION_EXPORT NSString *JavaLangBoolean_toStringWithBoolean_(jboolean value);
-FOUNDATION_EXPORT JavaLangBoolean *JavaLangBoolean_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangBoolean *JavaLangBoolean_valueOfWithBoolean_(jboolean b);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangBoolean, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT IOSClass *JavaLangBoolean_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangBoolean, TYPE_, IOSClass *)
@@ -65,5 +55,27 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangBoolean, TRUE__, JavaLangBoolean *)
 
 FOUNDATION_EXPORT JavaLangBoolean *JavaLangBoolean_FALSE__;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangBoolean, FALSE__, JavaLangBoolean *)
+
+FOUNDATION_EXPORT void JavaLangBoolean_initWithNSString_(JavaLangBoolean *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangBoolean *new_JavaLangBoolean_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangBoolean_initWithBoolean_(JavaLangBoolean *self, jboolean value);
+
+FOUNDATION_EXPORT JavaLangBoolean *new_JavaLangBoolean_initWithBoolean_(jboolean value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangBoolean_compareWithBoolean_withBoolean_(jboolean lhs, jboolean rhs);
+
+FOUNDATION_EXPORT jboolean JavaLangBoolean_getBooleanWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jboolean JavaLangBoolean_parseBooleanWithNSString_(NSString *s);
+
+FOUNDATION_EXPORT NSString *JavaLangBoolean_toStringWithBoolean_(jboolean value);
+
+FOUNDATION_EXPORT JavaLangBoolean *JavaLangBoolean_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangBoolean *JavaLangBoolean_valueOfWithBoolean_(jboolean b);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangBoolean)
 
 #endif // _JavaLangBoolean_H_

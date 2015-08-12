@@ -6,20 +6,27 @@
 #ifndef _JavaMathBitLevel_H_
 #define _JavaMathBitLevel_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSIntArray;
 @class JavaMathBigInteger;
 
-#import "JreEmulation.h"
+@interface JavaMathBitLevel : NSObject
 
-@interface JavaMathBitLevel : NSObject {
-}
-
-+ (jint)bitLengthWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+#pragma mark Package-Private
 
 + (jint)bitCountWithJavaMathBigInteger:(JavaMathBigInteger *)val;
 
-+ (jboolean)testBitWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                  withInt:(jint)n;
++ (jint)bitLengthWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
++ (JavaMathBigInteger *)flipBitWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                              withInt:(jint)n;
+
++ (void)inplaceShiftLeftWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                       withInt:(jint)count;
+
++ (void)inplaceShiftRightWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                        withInt:(jint)count;
 
 + (jboolean)nonZeroDroppedBitsWithInt:(jint)numberOfBits
                          withIntArray:(IOSIntArray *)digits;
@@ -27,25 +34,19 @@
 + (JavaMathBigInteger *)shiftLeftWithJavaMathBigInteger:(JavaMathBigInteger *)source
                                                 withInt:(jint)count;
 
-+ (void)inplaceShiftLeftWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                       withInt:(jint)count;
-
 + (void)shiftLeftWithIntArray:(IOSIntArray *)result
                  withIntArray:(IOSIntArray *)source
                       withInt:(jint)intCount
                       withInt:(jint)count;
 
++ (JavaMathBigInteger *)shiftLeftOneBitWithJavaMathBigInteger:(JavaMathBigInteger *)source;
+
 + (void)shiftLeftOneBitWithIntArray:(IOSIntArray *)result
                        withIntArray:(IOSIntArray *)source
                             withInt:(jint)srcLen;
 
-+ (JavaMathBigInteger *)shiftLeftOneBitWithJavaMathBigInteger:(JavaMathBigInteger *)source;
-
 + (JavaMathBigInteger *)shiftRightWithJavaMathBigInteger:(JavaMathBigInteger *)source
                                                  withInt:(jint)count;
-
-+ (void)inplaceShiftRightWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                        withInt:(jint)count;
 
 + (jboolean)shiftRightWithIntArray:(IOSIntArray *)result
                            withInt:(jint)resultLen
@@ -53,24 +54,39 @@
                            withInt:(jint)intCount
                            withInt:(jint)count;
 
-+ (JavaMathBigInteger *)flipBitWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                              withInt:(jint)n;
++ (jboolean)testBitWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                  withInt:(jint)n;
 
 @end
 
-__attribute__((always_inline)) inline void JavaMathBitLevel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaMathBitLevel)
+
 FOUNDATION_EXPORT jint JavaMathBitLevel_bitLengthWithJavaMathBigInteger_(JavaMathBigInteger *val);
+
 FOUNDATION_EXPORT jint JavaMathBitLevel_bitCountWithJavaMathBigInteger_(JavaMathBigInteger *val);
+
 FOUNDATION_EXPORT jboolean JavaMathBitLevel_testBitWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint n);
+
 FOUNDATION_EXPORT jboolean JavaMathBitLevel_nonZeroDroppedBitsWithInt_withIntArray_(jint numberOfBits, IOSIntArray *digits);
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBitLevel_shiftLeftWithJavaMathBigInteger_withInt_(JavaMathBigInteger *source, jint count);
+
 FOUNDATION_EXPORT void JavaMathBitLevel_inplaceShiftLeftWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint count);
+
 FOUNDATION_EXPORT void JavaMathBitLevel_shiftLeftWithIntArray_withIntArray_withInt_withInt_(IOSIntArray *result, IOSIntArray *source, jint intCount, jint count);
+
 FOUNDATION_EXPORT void JavaMathBitLevel_shiftLeftOneBitWithIntArray_withIntArray_withInt_(IOSIntArray *result, IOSIntArray *source, jint srcLen);
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBitLevel_shiftLeftOneBitWithJavaMathBigInteger_(JavaMathBigInteger *source);
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBitLevel_shiftRightWithJavaMathBigInteger_withInt_(JavaMathBigInteger *source, jint count);
+
 FOUNDATION_EXPORT void JavaMathBitLevel_inplaceShiftRightWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint count);
+
 FOUNDATION_EXPORT jboolean JavaMathBitLevel_shiftRightWithIntArray_withInt_withIntArray_withInt_withInt_(IOSIntArray *result, jint resultLen, IOSIntArray *source, jint intCount, jint count);
+
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBitLevel_flipBitWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint n);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaMathBitLevel)
 
 #endif // _JavaMathBitLevel_H_

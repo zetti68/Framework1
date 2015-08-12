@@ -6,15 +6,12 @@
 #ifndef _JavaSqlTime_H_
 #define _JavaSqlTime_H_
 
-@class JavaLangStringBuilder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Date.h"
 
-#define JavaSqlTime_serialVersionUID 8397324403548013681LL
+@interface JavaSqlTime : JavaUtilDate
 
-@interface JavaSqlTime : JavaUtilDate {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)theHour
                     withInt:(jint)theMinute
@@ -34,9 +31,9 @@
 
 - (void)setMonthWithInt:(jint)i;
 
-- (void)setYearWithInt:(jint)i;
-
 - (void)setTimeWithLong:(jlong)time;
+
+- (void)setYearWithInt:(jint)i;
 
 - (NSString *)description;
 
@@ -44,12 +41,18 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlTime_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlTime)
+
+FOUNDATION_EXPORT void JavaSqlTime_initWithInt_withInt_withInt_(JavaSqlTime *self, jint theHour, jint theMinute, jint theSecond);
+
+FOUNDATION_EXPORT JavaSqlTime *new_JavaSqlTime_initWithInt_withInt_withInt_(jint theHour, jint theMinute, jint theSecond) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSqlTime_initWithLong_(JavaSqlTime *self, jlong theTime);
+
+FOUNDATION_EXPORT JavaSqlTime *new_JavaSqlTime_initWithLong_(jlong theTime) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaSqlTime *JavaSqlTime_valueOfWithNSString_(NSString *timeString);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlTime, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT NSString *JavaSqlTime_PADDING_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSqlTime, PADDING_, NSString *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlTime)
 
 #endif // _JavaSqlTime_H_

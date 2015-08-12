@@ -6,29 +6,34 @@
 #ifndef _JavaSecurityPermission_H_
 #define _JavaSecurityPermission_H_
 
-@class JavaSecurityPermissionCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/Guard.h"
 
-@interface JavaSecurityPermission : NSObject < JavaSecurityGuard, JavaIoSerializable > {
-}
+@class JavaSecurityPermissionCollection;
+
+@interface JavaSecurityPermission : NSObject < JavaSecurityGuard, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name;
 
-- (NSString *)getName;
-
 - (void)checkGuardWithId:(id)obj;
-
-- (JavaSecurityPermissionCollection *)newPermissionCollection OBJC_METHOD_FAMILY_NONE;
 
 - (NSString *)getActions;
 
+- (NSString *)getName;
+
 - (jboolean)impliesWithJavaSecurityPermission:(JavaSecurityPermission *)permission;
+
+- (JavaSecurityPermissionCollection *)newPermissionCollection OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPermission)
+
+FOUNDATION_EXPORT void JavaSecurityPermission_initWithNSString_(JavaSecurityPermission *self, NSString *name);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPermission)
 
 #endif // _JavaSecurityPermission_H_

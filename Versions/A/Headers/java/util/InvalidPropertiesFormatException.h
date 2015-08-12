@@ -6,17 +6,14 @@
 #ifndef _JavaUtilInvalidPropertiesFormatException_H_
 #define _JavaUtilInvalidPropertiesFormatException_H_
 
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaUtilInvalidPropertiesFormatException_serialVersionUID 7763056076009360219LL
+@class JavaLangThrowable;
 
-@interface JavaUtilInvalidPropertiesFormatException : JavaIoIOException {
-}
+@interface JavaUtilInvalidPropertiesFormatException : JavaIoIOException
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)m;
 
@@ -24,8 +21,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilInvalidPropertiesFormatException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilInvalidPropertiesFormatException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilInvalidPropertiesFormatException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilInvalidPropertiesFormatException_initWithNSString_(JavaUtilInvalidPropertiesFormatException *self, NSString *m);
+
+FOUNDATION_EXPORT JavaUtilInvalidPropertiesFormatException *new_JavaUtilInvalidPropertiesFormatException_initWithNSString_(NSString *m) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilInvalidPropertiesFormatException_initWithJavaLangThrowable_(JavaUtilInvalidPropertiesFormatException *self, JavaLangThrowable *c);
+
+FOUNDATION_EXPORT JavaUtilInvalidPropertiesFormatException *new_JavaUtilInvalidPropertiesFormatException_initWithJavaLangThrowable_(JavaLangThrowable *c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilInvalidPropertiesFormatException)
 
 #endif // _JavaUtilInvalidPropertiesFormatException_H_

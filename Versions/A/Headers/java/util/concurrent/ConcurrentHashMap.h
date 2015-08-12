@@ -6,18 +6,7 @@
 #ifndef _JavaUtilConcurrentConcurrentHashMap_H_
 #define _JavaUtilConcurrentConcurrentHashMap_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilConcurrentConcurrentHashMap_HashEntry;
-@class JavaUtilConcurrentConcurrentHashMap_Segment;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-@protocol JavaUtilMap_Entry;
-@protocol JavaUtilSet;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractCollection.h"
 #include "java/util/AbstractMap.h"
@@ -27,14 +16,22 @@
 #include "java/util/concurrent/ConcurrentMap.h"
 #include "java/util/concurrent/locks/ReentrantLock.h"
 
-#define JavaUtilConcurrentConcurrentHashMap_DEFAULT_CONCURRENCY_LEVEL 16
+@class IOSObjectArray;
+@class JavaUtilConcurrentConcurrentHashMap_HashEntry;
+@class JavaUtilConcurrentConcurrentHashMap_Segment;
+@class SunMiscUnsafe;
+@protocol JavaUtilCollection;
+@protocol JavaUtilMap;
+@protocol JavaUtilMap_Entry;
+@protocol JavaUtilSet;
+
 #define JavaUtilConcurrentConcurrentHashMap_DEFAULT_INITIAL_CAPACITY 16
 #define JavaUtilConcurrentConcurrentHashMap_DEFAULT_LOAD_FACTOR 0.75f
+#define JavaUtilConcurrentConcurrentHashMap_DEFAULT_CONCURRENCY_LEVEL 16
 #define JavaUtilConcurrentConcurrentHashMap_MAXIMUM_CAPACITY 1073741824
-#define JavaUtilConcurrentConcurrentHashMap_MAX_SEGMENTS 65536
 #define JavaUtilConcurrentConcurrentHashMap_MIN_SEGMENT_TABLE_CAPACITY 2
+#define JavaUtilConcurrentConcurrentHashMap_MAX_SEGMENTS 65536
 #define JavaUtilConcurrentConcurrentHashMap_RETRIES_BEFORE_LOCK 2
-#define JavaUtilConcurrentConcurrentHashMap_serialVersionUID 7249069246763182397LL
 
 @interface JavaUtilConcurrentConcurrentHashMap : JavaUtilAbstractMap < JavaUtilConcurrentConcurrentMap, JavaIoSerializable > {
  @public
@@ -46,91 +43,88 @@
   id<JavaUtilCollection> values__;
 }
 
-+ (JavaUtilConcurrentConcurrentHashMap_HashEntry *)entryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab
-                                                                                                         withInt:(jint)i;
+#pragma mark Public
 
-+ (void)setEntryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab
-                                                                 withInt:(jint)i
-                       withJavaUtilConcurrentConcurrentHashMap_HashEntry:(JavaUtilConcurrentConcurrentHashMap_HashEntry *)e;
+- (instancetype)init;
 
-+ (JavaUtilConcurrentConcurrentHashMap_Segment *)segmentAtWithJavaUtilConcurrentConcurrentHashMap_SegmentArray:(IOSObjectArray *)ss
-                                                                                                       withInt:(jint)j;
+- (instancetype)initWithInt:(jint)initialCapacity;
 
-+ (JavaUtilConcurrentConcurrentHashMap_HashEntry *)entryForHashWithJavaUtilConcurrentConcurrentHashMap_Segment:(JavaUtilConcurrentConcurrentHashMap_Segment *)seg
-                                                                                                       withInt:(jint)h;
+- (instancetype)initWithInt:(jint)initialCapacity
+                  withFloat:(jfloat)loadFactor;
 
 - (instancetype)initWithInt:(jint)initialCapacity
                   withFloat:(jfloat)loadFactor
                     withInt:(jint)concurrencyLevel;
 
-- (instancetype)initWithInt:(jint)initialCapacity
-                  withFloat:(jfloat)loadFactor;
-
-- (instancetype)initWithInt:(jint)initialCapacity;
-
-- (instancetype)init;
-
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)m;
 
-- (jboolean)isEmpty;
+- (void)clear;
 
-- (jint)size;
-
-- (id)getWithId:(id)key;
+- (jboolean)containsWithId:(id)value;
 
 - (jboolean)containsKeyWithId:(id)key;
 
 - (jboolean)containsValueWithId:(id)value;
 
-- (jboolean)containsWithId:(id)value;
+- (id<JavaUtilEnumeration>)elements;
+
+- (id<JavaUtilSet>)entrySet;
+
+- (id)getWithId:(id)key;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilEnumeration>)keys;
+
+- (id<JavaUtilSet>)keySet;
 
 - (id)putWithId:(id)key
          withId:(id)value;
 
+- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)m;
+
 - (id)putIfAbsentWithId:(id)key
                  withId:(id)value;
-
-- (void)putAllWithJavaUtilMap:(id<JavaUtilMap>)m;
 
 - (id)removeWithId:(id)key;
 
 - (jboolean)removeWithId:(id)key
                   withId:(id)value;
 
+- (id)replaceWithId:(id)key
+             withId:(id)value;
+
 - (jboolean)replaceWithId:(id)key
                    withId:(id)oldValue
                    withId:(id)newValue;
 
-- (id)replaceWithId:(id)key
-             withId:(id)value;
-
-- (void)clear;
-
-- (id<JavaUtilSet>)keySet;
+- (jint)size;
 
 - (id<JavaUtilCollection>)values;
 
-- (id<JavaUtilSet>)entrySet;
+#pragma mark Package-Private
 
-- (id<JavaUtilEnumeration>)keys;
++ (JavaUtilConcurrentConcurrentHashMap_HashEntry *)entryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab
+                                                                                                         withInt:(jint)i;
 
-- (id<JavaUtilEnumeration>)elements;
++ (JavaUtilConcurrentConcurrentHashMap_HashEntry *)entryForHashWithJavaUtilConcurrentConcurrentHashMap_Segment:(JavaUtilConcurrentConcurrentHashMap_Segment *)seg
+                                                                                                       withInt:(jint)h;
+
++ (JavaUtilConcurrentConcurrentHashMap_Segment *)segmentAtWithJavaUtilConcurrentConcurrentHashMap_SegmentArray:(IOSObjectArray *)ss
+                                                                                                       withInt:(jint)j;
+
++ (void)setEntryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab
+                                                                 withInt:(jint)i
+                       withJavaUtilConcurrentConcurrentHashMap_HashEntry:(JavaUtilConcurrentConcurrentHashMap_HashEntry *)e;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentHashMap_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap, segments_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap, keySet_ConcurrentHashMap_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap, entrySet__, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap, values__, id<JavaUtilCollection>)
-FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_HashEntry *JavaUtilConcurrentConcurrentHashMap_entryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray_withInt_(IOSObjectArray *tab, jint i);
-FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_setEntryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray_withInt_withJavaUtilConcurrentConcurrentHashMap_HashEntry_(IOSObjectArray *tab, jint i, JavaUtilConcurrentConcurrentHashMap_HashEntry *e);
-FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_Segment *JavaUtilConcurrentConcurrentHashMap_segmentAtWithJavaUtilConcurrentConcurrentHashMap_SegmentArray_withInt_(IOSObjectArray *ss, jint j);
-FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_HashEntry *JavaUtilConcurrentConcurrentHashMap_entryForHashWithJavaUtilConcurrentConcurrentHashMap_Segment_withInt_(JavaUtilConcurrentConcurrentHashMap_Segment *seg, jint h);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, DEFAULT_INITIAL_CAPACITY, jint)
 
@@ -146,8 +140,35 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, MAX_SEGMENTS, ji
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, RETRIES_BEFORE_LOCK, jint)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentHashMap_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_HashEntry *JavaUtilConcurrentConcurrentHashMap_entryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray_withInt_(IOSObjectArray *tab, jint i);
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_setEntryAtWithJavaUtilConcurrentConcurrentHashMap_HashEntryArray_withInt_withJavaUtilConcurrentConcurrentHashMap_HashEntry_(IOSObjectArray *tab, jint i, JavaUtilConcurrentConcurrentHashMap_HashEntry *e);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_Segment *JavaUtilConcurrentConcurrentHashMap_segmentAtWithJavaUtilConcurrentConcurrentHashMap_SegmentArray_withInt_(IOSObjectArray *ss, jint j);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_HashEntry *JavaUtilConcurrentConcurrentHashMap_entryForHashWithJavaUtilConcurrentConcurrentHashMap_Segment_withInt_(JavaUtilConcurrentConcurrentHashMap_Segment *seg, jint h);
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_initWithInt_withFloat_withInt_(JavaUtilConcurrentConcurrentHashMap *self, jint initialCapacity, jfloat loadFactor, jint concurrencyLevel);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap *new_JavaUtilConcurrentConcurrentHashMap_initWithInt_withFloat_withInt_(jint initialCapacity, jfloat loadFactor, jint concurrencyLevel) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_initWithInt_withFloat_(JavaUtilConcurrentConcurrentHashMap *self, jint initialCapacity, jfloat loadFactor);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap *new_JavaUtilConcurrentConcurrentHashMap_initWithInt_withFloat_(jint initialCapacity, jfloat loadFactor) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_initWithInt_(JavaUtilConcurrentConcurrentHashMap *self, jint initialCapacity);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap *new_JavaUtilConcurrentConcurrentHashMap_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_init(JavaUtilConcurrentConcurrentHashMap *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap *new_JavaUtilConcurrentConcurrentHashMap_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_initWithJavaUtilMap_(JavaUtilConcurrentConcurrentHashMap *self, id<JavaUtilMap> m);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap *new_JavaUtilConcurrentConcurrentHashMap_initWithJavaUtilMap_(id<JavaUtilMap> m) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap)
 
 @interface JavaUtilConcurrentConcurrentHashMap_HashEntry : NSObject {
  @public
@@ -156,6 +177,8 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap, UNSAFE_, SunMisc
   id value_;
   JavaUtilConcurrentConcurrentHashMap_HashEntry *next_;
 }
+
+#pragma mark Package-Private
 
 - (instancetype)initWithInt:(jint)hash_
                      withId:(id)key
@@ -166,7 +189,6 @@ withJavaUtilConcurrentConcurrentHashMap_HashEntry:(JavaUtilConcurrentConcurrentH
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentHashMap_HashEntry_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_HashEntry)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap_HashEntry, key_, id)
@@ -179,7 +201,11 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_HashEntry, UNSAFE
 FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentHashMap_HashEntry_nextOffset_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_HashEntry, nextOffset_, jlong)
 
-#define JavaUtilConcurrentConcurrentHashMap_Segment_serialVersionUID 2249069246763182397LL
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_HashEntry_initWithInt_withId_withId_withJavaUtilConcurrentConcurrentHashMap_HashEntry_(JavaUtilConcurrentConcurrentHashMap_HashEntry *self, jint hash_, id key, id value, JavaUtilConcurrentConcurrentHashMap_HashEntry *next);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_HashEntry *new_JavaUtilConcurrentConcurrentHashMap_HashEntry_initWithInt_withId_withId_withJavaUtilConcurrentConcurrentHashMap_HashEntry_(jint hash_, id key, id value, JavaUtilConcurrentConcurrentHashMap_HashEntry *next) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_HashEntry)
 
 @interface JavaUtilConcurrentConcurrentHashMap_Segment : JavaUtilConcurrentLocksReentrantLock < JavaIoSerializable > {
  @public
@@ -190,9 +216,13 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_HashEntry, nextOf
   jfloat loadFactor_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithFloat:(jfloat)lf
                       withInt:(jint)threshold
 withJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab;
+
+- (void)clear;
 
 - (id)putWithId:(id)key
         withInt:(jint)hash_
@@ -203,28 +233,29 @@ withJavaUtilConcurrentConcurrentHashMap_HashEntryArray:(IOSObjectArray *)tab;
            withInt:(jint)hash_
             withId:(id)value;
 
+- (id)replaceWithId:(id)key
+            withInt:(jint)hash_
+             withId:(id)value;
+
 - (jboolean)replaceWithId:(id)key
                   withInt:(jint)hash_
                    withId:(id)oldValue
                    withId:(id)newValue;
 
-- (id)replaceWithId:(id)key
-            withInt:(jint)hash_
-             withId:(id)value;
-
-- (void)clear;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentHashMap_Segment_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_Segment)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap_Segment, table_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_Segment, serialVersionUID, jlong)
-
 FOUNDATION_EXPORT jint JavaUtilConcurrentConcurrentHashMap_Segment_MAX_SCAN_RETRIES_;
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_Segment, MAX_SCAN_RETRIES_, jint)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_Segment_initWithFloat_withInt_withJavaUtilConcurrentConcurrentHashMap_HashEntryArray_(JavaUtilConcurrentConcurrentHashMap_Segment *self, jfloat lf, jint threshold, IOSObjectArray *tab);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_Segment *new_JavaUtilConcurrentConcurrentHashMap_Segment_initWithFloat_withInt_withJavaUtilConcurrentConcurrentHashMap_HashEntryArray_(jfloat lf, jint threshold, IOSObjectArray *tab) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_Segment)
 
 @interface JavaUtilConcurrentConcurrentHashMap_HashIterator : NSObject {
  @public
@@ -235,138 +266,209 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentHashMap_Segment, MAX_SCAN
   JavaUtilConcurrentConcurrentHashMap_HashEntry *lastReturned_;
 }
 
+#pragma mark Public
+
+- (jboolean)hasMoreElements;
+
+- (jboolean)hasNext;
+
+- (void)remove;
+
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
 
 - (void)advance;
 
 - (JavaUtilConcurrentConcurrentHashMap_HashEntry *)nextEntry;
 
-- (jboolean)hasNext;
-
-- (jboolean)hasMoreElements;
-
-- (void)remove;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_HashIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_HashIterator)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap_HashIterator, currentTable_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap_HashIterator, nextEntry__, JavaUtilConcurrentConcurrentHashMap_HashEntry *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentHashMap_HashIterator, lastReturned_, JavaUtilConcurrentConcurrentHashMap_HashEntry *)
 
-@interface JavaUtilConcurrentConcurrentHashMap_KeyIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator, JavaUtilEnumeration > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_HashIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_HashIterator *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_HashIterator)
+
+@interface JavaUtilConcurrentConcurrentHashMap_KeyIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator, JavaUtilEnumeration >
+
+#pragma mark Public
 
 - (id)next;
 
 - (id)nextElement;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_KeyIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_KeyIterator)
 
-@interface JavaUtilConcurrentConcurrentHashMap_ValueIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator, JavaUtilEnumeration > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_KeyIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_KeyIterator *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_KeyIterator *new_JavaUtilConcurrentConcurrentHashMap_KeyIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_KeyIterator)
+
+@interface JavaUtilConcurrentConcurrentHashMap_ValueIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator, JavaUtilEnumeration >
+
+#pragma mark Public
 
 - (id)next;
 
 - (id)nextElement;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_ValueIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_ValueIterator)
 
-@interface JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry : JavaUtilAbstractMap_SimpleEntry {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_ValueIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_ValueIterator *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_ValueIterator *new_JavaUtilConcurrentConcurrentHashMap_ValueIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_ValueIterator)
+
+@interface JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry : JavaUtilAbstractMap_SimpleEntry
+
+#pragma mark Public
+
+- (id)setValueWithId:(id)value;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$
                                                      withId:(id)k
                                                      withId:(id)v;
 
-- (id)setValueWithId:(id)value;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry)
 
-@interface JavaUtilConcurrentConcurrentHashMap_EntryIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry_initWithJavaUtilConcurrentConcurrentHashMap_withId_withId_(JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry *self, JavaUtilConcurrentConcurrentHashMap *outer$, id k, id v);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry *new_JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry_initWithJavaUtilConcurrentConcurrentHashMap_withId_withId_(JavaUtilConcurrentConcurrentHashMap *outer$, id k, id v) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_WriteThroughEntry)
+
+@interface JavaUtilConcurrentConcurrentHashMap_EntryIterator : JavaUtilConcurrentConcurrentHashMap_HashIterator < JavaUtilIterator >
+
+#pragma mark Public
 
 - (id<JavaUtilMap_Entry>)next;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_EntryIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_EntryIterator)
 
-@interface JavaUtilConcurrentConcurrentHashMap_KeySet : JavaUtilAbstractSet {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_EntryIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_EntryIterator *self, JavaUtilConcurrentConcurrentHashMap *outer$);
 
-- (id<JavaUtilIterator>)iterator;
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_EntryIterator *new_JavaUtilConcurrentConcurrentHashMap_EntryIterator_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
 
-- (jint)size;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_EntryIterator)
 
-- (jboolean)isEmpty;
+@interface JavaUtilConcurrentConcurrentHashMap_KeySet : JavaUtilAbstractSet
 
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)removeWithId:(id)o;
+#pragma mark Public
 
 - (void)clear;
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_KeySet_init() {}
-
-@interface JavaUtilConcurrentConcurrentHashMap_Values : JavaUtilAbstractCollection {
-}
-
-- (id<JavaUtilIterator>)iterator;
-
-- (jint)size;
+- (jboolean)containsWithId:(id)o;
 
 - (jboolean)isEmpty;
 
-- (jboolean)containsWithId:(id)o;
-
-- (void)clear;
-
-- (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
-
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_Values_init() {}
-
-@interface JavaUtilConcurrentConcurrentHashMap_EntrySet : JavaUtilAbstractSet {
-}
-
 - (id<JavaUtilIterator>)iterator;
-
-- (jboolean)containsWithId:(id)o;
 
 - (jboolean)removeWithId:(id)o;
 
 - (jint)size;
 
-- (jboolean)isEmpty;
-
-- (void)clear;
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentHashMap_EntrySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_KeySet)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_KeySet_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_KeySet *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_KeySet *new_JavaUtilConcurrentConcurrentHashMap_KeySet_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_KeySet)
+
+@interface JavaUtilConcurrentConcurrentHashMap_Values : JavaUtilAbstractCollection
+
+#pragma mark Public
+
+- (void)clear;
+
+- (jboolean)containsWithId:(id)o;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jint)size;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
+
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_Values)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_Values_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_Values *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_Values *new_JavaUtilConcurrentConcurrentHashMap_Values_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_Values)
+
+@interface JavaUtilConcurrentConcurrentHashMap_EntrySet : JavaUtilAbstractSet
+
+#pragma mark Public
+
+- (void)clear;
+
+- (jboolean)containsWithId:(id)o;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentConcurrentHashMap:(JavaUtilConcurrentConcurrentHashMap *)outer$;
+
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentHashMap_EntrySet)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentHashMap_EntrySet_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap_EntrySet *self, JavaUtilConcurrentConcurrentHashMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentHashMap_EntrySet *new_JavaUtilConcurrentConcurrentHashMap_EntrySet_initWithJavaUtilConcurrentConcurrentHashMap_(JavaUtilConcurrentConcurrentHashMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentHashMap_EntrySet)
 
 #endif // _JavaUtilConcurrentConcurrentHashMap_H_

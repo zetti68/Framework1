@@ -6,14 +6,14 @@
 #ifndef _JavaNetDatagramSocketImpl_H_
 #define _JavaNetDatagramSocketImpl_H_
 
+#include "J2ObjC_header.h"
+#include "java/net/SocketOptions.h"
+
 @class JavaIoFileDescriptor;
 @class JavaNetDatagramPacket;
 @class JavaNetInetAddress;
 @class JavaNetNetworkInterface;
 @class JavaNetSocketAddress;
-
-#import "JreEmulation.h"
-#include "java/net/SocketOptions.h"
 
 @interface JavaNetDatagramSocketImpl : NSObject < JavaNetSocketOptions > {
  @public
@@ -21,22 +21,31 @@
   jint localPort_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
+
+#pragma mark Protected
 
 - (void)bindWithInt:(jint)port
 withJavaNetInetAddress:(JavaNetInetAddress *)addr;
 
 - (void)close;
 
+- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)inetAddr
+                              withInt:(jint)port;
+
 - (void)create;
+
+- (void)disconnect;
 
 - (JavaIoFileDescriptor *)getFileDescriptor;
 
 - (jint)getLocalPort;
 
-- (jbyte)getTTL;
-
 - (jint)getTimeToLive;
+
+- (jbyte)getTTL;
 
 - (void)joinWithJavaNetInetAddress:(JavaNetInetAddress *)addr;
 
@@ -48,7 +57,19 @@ withJavaNetInetAddress:(JavaNetInetAddress *)addr;
 - (void)leaveGroupWithJavaNetSocketAddress:(JavaNetSocketAddress *)addr
                withJavaNetNetworkInterface:(JavaNetNetworkInterface *)netInterface;
 
+- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
+                             withInt:(jint)localPort;
+
+- (void)onClose;
+
+- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
+                                withInt:(jint)remotePort;
+
+- (void)onDisconnect;
+
 - (jint)peekWithJavaNetInetAddress:(JavaNetInetAddress *)sender;
+
+- (jint)peekDataWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
 - (void)receiveWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
 
@@ -58,27 +79,14 @@ withJavaNetInetAddress:(JavaNetInetAddress *)addr;
 
 - (void)setTTLWithByte:(jbyte)ttl;
 
-- (void)connectWithJavaNetInetAddress:(JavaNetInetAddress *)inetAddr
-                              withInt:(jint)port;
-
-- (void)disconnect;
-
-- (jint)peekDataWithJavaNetDatagramPacket:(JavaNetDatagramPacket *)pack;
-
-- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
-                             withInt:(jint)localPort;
-
-- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
-                                withInt:(jint)remotePort;
-
-- (void)onDisconnect;
-
-- (void)onClose;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetDatagramSocketImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetDatagramSocketImpl)
 
 J2OBJC_FIELD_SETTER(JavaNetDatagramSocketImpl, fd_, JavaIoFileDescriptor *)
+
+FOUNDATION_EXPORT void JavaNetDatagramSocketImpl_init(JavaNetDatagramSocketImpl *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetDatagramSocketImpl)
 
 #endif // _JavaNetDatagramSocketImpl_H_

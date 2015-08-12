@@ -6,12 +6,13 @@
 #ifndef _AndroidTextGetChars_H_
 #define _AndroidTextGetChars_H_
 
-@class IOSCharArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/CharSequence.h"
 
+@class IOSCharArray;
+
 @protocol AndroidTextGetChars < JavaLangCharSequence, NSObject, JavaObject >
+
 - (void)getCharsWithInt:(jint)start
                 withInt:(jint)end
           withCharArray:(IOSCharArray *)dest
@@ -19,6 +20,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextGetChars_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextGetChars)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextGetChars)
 
 #endif // _AndroidTextGetChars_H_

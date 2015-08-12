@@ -6,28 +6,28 @@
 #ifndef _JavaIoInputStreamReader_H_
 #define _JavaIoInputStreamReader_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Reader.h"
+
 @class IOSCharArray;
 @class JavaIoInputStream;
-@class JavaNioByteBuffer;
 @class JavaNioCharsetCharset;
 @class JavaNioCharsetCharsetDecoder;
 
-#import "JreEmulation.h"
-#include "java/io/Reader.h"
+@interface JavaIoInputStreamReader : JavaIoReader
 
-@interface JavaIoInputStreamReader : JavaIoReader {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg
-                             withNSString:(NSString *)charsetName;
+                withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg
          withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)dec;
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg
-                withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
+                             withNSString:(NSString *)charsetName;
 
 - (void)close;
 
@@ -43,6 +43,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoInputStreamReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoInputStreamReader)
+
+FOUNDATION_EXPORT void JavaIoInputStreamReader_initWithJavaIoInputStream_(JavaIoInputStreamReader *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaIoInputStreamReader *new_JavaIoInputStreamReader_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInputStreamReader_initWithJavaIoInputStream_withNSString_(JavaIoInputStreamReader *self, JavaIoInputStream *inArg, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaIoInputStreamReader *new_JavaIoInputStreamReader_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *inArg, NSString *charsetName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(JavaIoInputStreamReader *self, JavaIoInputStream *inArg, JavaNioCharsetCharsetDecoder *dec);
+
+FOUNDATION_EXPORT JavaIoInputStreamReader *new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(JavaIoInputStream *inArg, JavaNioCharsetCharsetDecoder *dec) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_(JavaIoInputStreamReader *self, JavaIoInputStream *inArg, JavaNioCharsetCharset *charset);
+
+FOUNDATION_EXPORT JavaIoInputStreamReader *new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_(JavaIoInputStream *inArg, JavaNioCharsetCharset *charset) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoInputStreamReader)
 
 #endif // _JavaIoInputStreamReader_H_

@@ -6,19 +6,20 @@
 #ifndef _JavaTextFieldPosition_H_
 #define _JavaTextFieldPosition_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaTextFormat_Field;
 
-#import "JreEmulation.h"
+@interface JavaTextFieldPosition : NSObject
 
-@interface JavaTextFieldPosition : NSObject {
-}
-
-- (instancetype)initWithInt:(jint)field;
+#pragma mark Public
 
 - (instancetype)initWithJavaTextFormat_Field:(JavaTextFormat_Field *)attribute;
 
 - (instancetype)initWithJavaTextFormat_Field:(JavaTextFormat_Field *)attribute
                                      withInt:(jint)field;
+
+- (instancetype)initWithInt:(jint)field;
 
 - (jboolean)isEqual:(id)object;
 
@@ -40,6 +41,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextFieldPosition_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextFieldPosition)
+
+FOUNDATION_EXPORT void JavaTextFieldPosition_initWithInt_(JavaTextFieldPosition *self, jint field);
+
+FOUNDATION_EXPORT JavaTextFieldPosition *new_JavaTextFieldPosition_initWithInt_(jint field) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextFieldPosition_initWithJavaTextFormat_Field_(JavaTextFieldPosition *self, JavaTextFormat_Field *attribute);
+
+FOUNDATION_EXPORT JavaTextFieldPosition *new_JavaTextFieldPosition_initWithJavaTextFormat_Field_(JavaTextFormat_Field *attribute) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextFieldPosition_initWithJavaTextFormat_Field_withInt_(JavaTextFieldPosition *self, JavaTextFormat_Field *attribute, jint field);
+
+FOUNDATION_EXPORT JavaTextFieldPosition *new_JavaTextFieldPosition_initWithJavaTextFormat_Field_withInt_(JavaTextFormat_Field *attribute, jint field) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextFieldPosition)
 
 #endif // _JavaTextFieldPosition_H_

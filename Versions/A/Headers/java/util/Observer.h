@@ -6,9 +6,9 @@
 #ifndef _JavaUtilObserver_H_
 #define _JavaUtilObserver_H_
 
-@class JavaUtilObservable;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaUtilObservable;
 
 @protocol JavaUtilObserver < NSObject, JavaObject >
 
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilObserver_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilObserver)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilObserver)
 
 #endif // _JavaUtilObserver_H_

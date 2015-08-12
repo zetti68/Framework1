@@ -6,7 +6,7 @@
 #ifndef _JavaLangSafeVarargs_H_
 #define _JavaLangSafeVarargs_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangSafeVarargs < JavaLangAnnotationAnnotation >
@@ -17,6 +17,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangSafeVarargs_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangSafeVarargs)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangSafeVarargs)
 
 #endif // _JavaLangSafeVarargs_H_

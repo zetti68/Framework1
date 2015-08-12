@@ -6,35 +6,29 @@
 #ifndef _JavaNioCharBuffer_H_
 #define _JavaNioCharBuffer_H_
 
-@class IOSCharArray;
-@class JavaNioByteOrder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Appendable.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Readable.h"
 #include "java/nio/Buffer.h"
 
-@interface JavaNioCharBuffer : JavaNioBuffer < JavaLangComparable, JavaLangCharSequence, JavaLangAppendable, JavaLangReadable > {
-}
+@class IOSCharArray;
+@class JavaNioByteOrder;
+
+@interface JavaNioCharBuffer : JavaNioBuffer < JavaLangComparable, JavaLangCharSequence, JavaLangAppendable, JavaLangReadable >
+
+#pragma mark Public
 
 + (JavaNioCharBuffer *)allocateWithInt:(jint)capacity OBJC_METHOD_FAMILY_NONE;
 
-+ (JavaNioCharBuffer *)wrapWithCharArray:(IOSCharArray *)array;
+- (JavaNioCharBuffer *)appendWithChar:(jchar)c;
 
-+ (JavaNioCharBuffer *)wrapWithCharArray:(IOSCharArray *)array
-                                 withInt:(jint)start
-                                 withInt:(jint)charCount;
+- (JavaNioCharBuffer *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
 
-+ (JavaNioCharBuffer *)wrapWithJavaLangCharSequence:(id<JavaLangCharSequence>)chseq;
-
-+ (JavaNioCharBuffer *)wrapWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
-                                            withInt:(jint)start
-                                            withInt:(jint)end;
-
-- (instancetype)initWithInt:(jint)capacity
-                   withLong:(jlong)effectiveDirectAddress;
+- (JavaNioCharBuffer *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
+                                              withInt:(jint)start
+                                              withInt:(jint)end;
 
 - (IOSCharArray *)array;
 
@@ -68,15 +62,9 @@
 
 - (jboolean)isDirect;
 
-- (jint)sequenceLength;
+- (jint)length;
 
 - (JavaNioByteOrder *)order;
-
-- (IOSCharArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
 
 - (JavaNioCharBuffer *)putWithChar:(jchar)c;
 
@@ -97,29 +85,54 @@
                                withInt:(jint)start
                                withInt:(jint)end;
 
+- (jint)readWithJavaNioCharBuffer:(JavaNioCharBuffer *)target;
+
 - (JavaNioCharBuffer *)slice;
 
-- (JavaNioCharBuffer *)subSequenceFrom:(int)start to:(int)end;
+- (JavaNioCharBuffer *)subSequenceFrom:(jint)start
+                                    to:(jint)end;
 
 - (NSString *)description;
 
-- (JavaNioCharBuffer *)appendWithChar:(jchar)c;
++ (JavaNioCharBuffer *)wrapWithCharArray:(IOSCharArray *)array;
 
-- (JavaNioCharBuffer *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
++ (JavaNioCharBuffer *)wrapWithCharArray:(IOSCharArray *)array
+                                 withInt:(jint)start
+                                 withInt:(jint)charCount;
 
-- (JavaNioCharBuffer *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                              withInt:(jint)start
-                                              withInt:(jint)end;
++ (JavaNioCharBuffer *)wrapWithJavaLangCharSequence:(id<JavaLangCharSequence>)chseq;
 
-- (jint)readWithJavaNioCharBuffer:(JavaNioCharBuffer *)target;
++ (JavaNioCharBuffer *)wrapWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs
+                                            withInt:(jint)start
+                                            withInt:(jint)end;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)capacity
+                   withLong:(jlong)effectiveDirectAddress;
+
+- (IOSCharArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharBuffer)
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioCharBuffer_allocateWithInt_(jint capacity);
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioCharBuffer_wrapWithCharArray_(IOSCharArray *array);
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioCharBuffer_wrapWithCharArray_withInt_withInt_(IOSCharArray *array, jint start, jint charCount);
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioCharBuffer_wrapWithJavaLangCharSequence_(id<JavaLangCharSequence> chseq);
+
 FOUNDATION_EXPORT JavaNioCharBuffer *JavaNioCharBuffer_wrapWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> cs, jint start, jint end);
+
+FOUNDATION_EXPORT void JavaNioCharBuffer_initWithInt_withLong_(JavaNioCharBuffer *self, jint capacity, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharBuffer)
 
 #endif // _JavaNioCharBuffer_H_

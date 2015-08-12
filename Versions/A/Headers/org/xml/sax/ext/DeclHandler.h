@@ -6,7 +6,7 @@
 #ifndef _OrgXmlSaxExtDeclHandler_H_
 #define _OrgXmlSaxExtDeclHandler_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol OrgXmlSaxExtDeclHandler < NSObject, JavaObject >
 
@@ -28,6 +28,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtDeclHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtDeclHandler)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtDeclHandler)
 
 #endif // _OrgXmlSaxExtDeclHandler_H_

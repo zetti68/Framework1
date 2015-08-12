@@ -6,10 +6,10 @@
 #ifndef _AndroidTextInputFilter_H_
 #define _AndroidTextInputFilter_H_
 
+#include "J2ObjC_header.h"
+
 @protocol AndroidTextSpanned;
 @protocol JavaLangCharSequence;
-
-#import "JreEmulation.h"
 
 @protocol AndroidTextInputFilter < NSObject, JavaObject >
 
@@ -22,10 +22,15 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextInputFilter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextInputFilter)
 
-@interface AndroidTextInputFilter_AllCaps : NSObject < AndroidTextInputFilter > {
-}
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextInputFilter)
+
+@interface AndroidTextInputFilter_AllCaps : NSObject < AndroidTextInputFilter >
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (id<JavaLangCharSequence>)filterWithJavaLangCharSequence:(id<JavaLangCharSequence>)source
                                                    withInt:(jint)start
@@ -34,14 +39,19 @@ __attribute__((always_inline)) inline void AndroidTextInputFilter_init() {}
                                                    withInt:(jint)dstart
                                                    withInt:(jint)dend;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void AndroidTextInputFilter_AllCaps_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextInputFilter_AllCaps)
 
-@interface AndroidTextInputFilter_LengthFilter : NSObject < AndroidTextInputFilter > {
-}
+FOUNDATION_EXPORT void AndroidTextInputFilter_AllCaps_init(AndroidTextInputFilter_AllCaps *self);
+
+FOUNDATION_EXPORT AndroidTextInputFilter_AllCaps *new_AndroidTextInputFilter_AllCaps_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextInputFilter_AllCaps)
+
+@interface AndroidTextInputFilter_LengthFilter : NSObject < AndroidTextInputFilter >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)max;
 
@@ -54,6 +64,12 @@ __attribute__((always_inline)) inline void AndroidTextInputFilter_AllCaps_init()
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextInputFilter_LengthFilter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextInputFilter_LengthFilter)
+
+FOUNDATION_EXPORT void AndroidTextInputFilter_LengthFilter_initWithInt_(AndroidTextInputFilter_LengthFilter *self, jint max);
+
+FOUNDATION_EXPORT AndroidTextInputFilter_LengthFilter *new_AndroidTextInputFilter_LengthFilter_initWithInt_(jint max) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextInputFilter_LengthFilter)
 
 #endif // _AndroidTextInputFilter_H_

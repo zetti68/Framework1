@@ -6,21 +6,19 @@
 #ifndef _JavaNioCharSequenceAdapter_H_
 #define _JavaNioCharSequenceAdapter_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/CharBuffer.h"
+
 @class IOSCharArray;
 @class JavaNioByteOrder;
 @protocol JavaLangCharSequence;
-
-#import "JreEmulation.h"
-#include "java/nio/CharBuffer.h"
 
 @interface JavaNioCharSequenceAdapter : JavaNioCharBuffer {
  @public
   id<JavaLangCharSequence> sequence_;
 }
 
-+ (JavaNioCharSequenceAdapter *)copy__WithJavaNioCharSequenceAdapter:(JavaNioCharSequenceAdapter *)other OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)chseq;
+#pragma mark Public
 
 - (JavaNioCharBuffer *)asReadOnlyBuffer;
 
@@ -30,11 +28,11 @@
 
 - (jchar)get;
 
-- (jchar)getWithInt:(jint)index;
-
 - (JavaNioCharBuffer *)getWithCharArray:(IOSCharArray *)dst
                                 withInt:(jint)dstOffset
                                 withInt:(jint)charCount;
+
+- (jchar)getWithInt:(jint)index;
 
 - (jboolean)isDirect;
 
@@ -42,20 +40,14 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSCharArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
-
 - (JavaNioCharBuffer *)putWithChar:(jchar)c;
-
-- (JavaNioCharBuffer *)putWithInt:(jint)index
-                         withChar:(jchar)c;
 
 - (JavaNioCharBuffer *)putWithCharArray:(IOSCharArray *)src
                                 withInt:(jint)srcOffset
                                 withInt:(jint)charCount;
+
+- (JavaNioCharBuffer *)putWithInt:(jint)index
+                         withChar:(jchar)c;
 
 - (JavaNioCharBuffer *)putWithNSString:(NSString *)src
                                withInt:(jint)start
@@ -63,13 +55,33 @@
 
 - (JavaNioCharBuffer *)slice;
 
-- (JavaNioCharBuffer *)subSequenceFrom:(int)start to:(int)end;
+- (JavaNioCharBuffer *)subSequenceFrom:(jint)start
+                                    to:(jint)end;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)chseq;
+
++ (JavaNioCharSequenceAdapter *)copy__WithJavaNioCharSequenceAdapter:(JavaNioCharSequenceAdapter *)other OBJC_METHOD_FAMILY_NONE;
+
+- (IOSCharArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharSequenceAdapter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharSequenceAdapter)
 
 J2OBJC_FIELD_SETTER(JavaNioCharSequenceAdapter, sequence_, id<JavaLangCharSequence>)
+
 FOUNDATION_EXPORT JavaNioCharSequenceAdapter *JavaNioCharSequenceAdapter_copy__WithJavaNioCharSequenceAdapter_(JavaNioCharSequenceAdapter *other);
+
+FOUNDATION_EXPORT void JavaNioCharSequenceAdapter_initWithJavaLangCharSequence_(JavaNioCharSequenceAdapter *self, id<JavaLangCharSequence> chseq);
+
+FOUNDATION_EXPORT JavaNioCharSequenceAdapter *new_JavaNioCharSequenceAdapter_initWithJavaLangCharSequence_(id<JavaLangCharSequence> chseq) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharSequenceAdapter)
 
 #endif // _JavaNioCharSequenceAdapter_H_

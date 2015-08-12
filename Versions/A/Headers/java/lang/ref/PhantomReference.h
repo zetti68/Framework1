@@ -6,13 +6,14 @@
 #ifndef _JavaLangRefPhantomReference_H_
 #define _JavaLangRefPhantomReference_H_
 
-@class JavaLangRefReferenceQueue;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ref/Reference.h"
 
-@interface JavaLangRefPhantomReference : JavaLangRefReference {
-}
+@class JavaLangRefReferenceQueue;
+
+@interface JavaLangRefPhantomReference : JavaLangRefReference
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)r
 withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
@@ -21,6 +22,12 @@ withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangRefPhantomReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRefPhantomReference)
+
+FOUNDATION_EXPORT void JavaLangRefPhantomReference_initWithId_withJavaLangRefReferenceQueue_(JavaLangRefPhantomReference *self, id r, JavaLangRefReferenceQueue *q);
+
+FOUNDATION_EXPORT JavaLangRefPhantomReference *new_JavaLangRefPhantomReference_initWithId_withJavaLangRefReferenceQueue_(id r, JavaLangRefReferenceQueue *q) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRefPhantomReference)
 
 #endif // _JavaLangRefPhantomReference_H_

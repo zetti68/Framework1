@@ -6,15 +6,17 @@
 #ifndef _JavaLangRefSoftReference_H_
 #define _JavaLangRefSoftReference_H_
 
-@class JavaLangRefReferenceQueue;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/ref/Reference.h"
+
+@class JavaLangRefReferenceQueue;
 
 @interface JavaLangRefSoftReference : JavaLangRefReference {
  @public
   jboolean queued_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithId:(id)r;
 
@@ -23,6 +25,16 @@ withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)q;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangRefSoftReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangRefSoftReference)
+
+FOUNDATION_EXPORT void JavaLangRefSoftReference_initWithId_(JavaLangRefSoftReference *self, id r);
+
+FOUNDATION_EXPORT JavaLangRefSoftReference *new_JavaLangRefSoftReference_initWithId_(id r) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangRefSoftReference_initWithId_withJavaLangRefReferenceQueue_(JavaLangRefSoftReference *self, id r, JavaLangRefReferenceQueue *q);
+
+FOUNDATION_EXPORT JavaLangRefSoftReference *new_JavaLangRefSoftReference_initWithId_withJavaLangRefReferenceQueue_(id r, JavaLangRefReferenceQueue *q) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangRefSoftReference)
 
 #endif // _JavaLangRefSoftReference_H_

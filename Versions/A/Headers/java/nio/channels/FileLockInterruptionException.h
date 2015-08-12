@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsFileLockInterruptionException_H_
 #define _JavaNioChannelsFileLockInterruptionException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNioChannelsFileLockInterruptionException_serialVersionUID 7104080643653532383LL
+@interface JavaNioChannelsFileLockInterruptionException : JavaIoIOException
 
-@interface JavaNioChannelsFileLockInterruptionException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsFileLockInterruptionException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsFileLockInterruptionException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsFileLockInterruptionException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsFileLockInterruptionException_init(JavaNioChannelsFileLockInterruptionException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsFileLockInterruptionException *new_JavaNioChannelsFileLockInterruptionException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsFileLockInterruptionException)
 
 #endif // _JavaNioChannelsFileLockInterruptionException_H_

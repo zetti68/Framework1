@@ -6,17 +6,16 @@
 #ifndef _LibcoreNetUrlFileURLConnection_H_
 #define _LibcoreNetUrlFileURLConnection_H_
 
-@class JavaIoFile;
-@class JavaIoFilePermission;
+#include "J2ObjC_header.h"
+#include "java/net/URLConnection.h"
+
 @class JavaIoInputStream;
 @class JavaNetURL;
 @class JavaSecurityPermission;
 
-#import "JreEmulation.h"
-#include "java/net/URLConnection.h"
+@interface LibcoreNetUrlFileURLConnection : JavaNetURLConnection
 
-@interface LibcoreNetUrlFileURLConnection : JavaNetURLConnection {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaNetURL:(JavaNetURL *)url;
 
@@ -34,6 +33,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreNetUrlFileURLConnection_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreNetUrlFileURLConnection)
+
+FOUNDATION_EXPORT void LibcoreNetUrlFileURLConnection_initWithJavaNetURL_(LibcoreNetUrlFileURLConnection *self, JavaNetURL *url);
+
+FOUNDATION_EXPORT LibcoreNetUrlFileURLConnection *new_LibcoreNetUrlFileURLConnection_initWithJavaNetURL_(JavaNetURL *url) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreNetUrlFileURLConnection)
 
 #endif // _LibcoreNetUrlFileURLConnection_H_

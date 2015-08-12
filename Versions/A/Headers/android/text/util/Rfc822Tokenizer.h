@@ -6,35 +6,43 @@
 #ifndef _AndroidTextUtilRfc822Tokenizer_H_
 #define _AndroidTextUtilRfc822Tokenizer_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@class JavaLangStringBuilder;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilCollection;
 
-#import "JreEmulation.h"
+@interface AndroidTextUtilRfc822Tokenizer : NSObject
 
-@interface AndroidTextUtilRfc822Tokenizer : NSObject {
-}
+#pragma mark Public
 
-+ (void)tokenizeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                  withJavaUtilCollection:(id<JavaUtilCollection>)outArg;
-
-+ (IOSObjectArray *)tokenizeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
-- (jint)findTokenStartWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                       withInt:(jint)cursor;
+- (instancetype)init;
 
 - (jint)findTokenEndWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                      withInt:(jint)cursor;
 
+- (jint)findTokenStartWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
+                                       withInt:(jint)cursor;
+
 - (id<JavaLangCharSequence>)terminateTokenWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
-- (instancetype)init;
++ (IOSObjectArray *)tokenizeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
+
++ (void)tokenizeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
+                  withJavaUtilCollection:(id<JavaUtilCollection>)outArg;
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextUtilRfc822Tokenizer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextUtilRfc822Tokenizer)
+
 FOUNDATION_EXPORT void AndroidTextUtilRfc822Tokenizer_tokenizeWithJavaLangCharSequence_withJavaUtilCollection_(id<JavaLangCharSequence> text, id<JavaUtilCollection> outArg);
+
 FOUNDATION_EXPORT IOSObjectArray *AndroidTextUtilRfc822Tokenizer_tokenizeWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
+
+FOUNDATION_EXPORT void AndroidTextUtilRfc822Tokenizer_init(AndroidTextUtilRfc822Tokenizer *self);
+
+FOUNDATION_EXPORT AndroidTextUtilRfc822Tokenizer *new_AndroidTextUtilRfc822Tokenizer_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextUtilRfc822Tokenizer)
 
 #endif // _AndroidTextUtilRfc822Tokenizer_H_

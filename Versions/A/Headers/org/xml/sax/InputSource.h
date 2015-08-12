@@ -6,44 +6,63 @@
 #ifndef _OrgXmlSaxInputSource_H_
 #define _OrgXmlSaxInputSource_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoInputStream;
 @class JavaIoReader;
 
-#import "JreEmulation.h"
+@interface OrgXmlSaxInputSource : NSObject
 
-@interface OrgXmlSaxInputSource : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithNSString:(NSString *)systemId;
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)byteStream;
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)characterStream;
 
-- (void)setPublicIdWithNSString:(NSString *)publicId;
+- (instancetype)initWithNSString:(NSString *)systemId;
+
+- (JavaIoInputStream *)getByteStream;
+
+- (JavaIoReader *)getCharacterStream;
+
+- (NSString *)getEncoding;
 
 - (NSString *)getPublicId;
-
-- (void)setSystemIdWithNSString:(NSString *)systemId;
 
 - (NSString *)getSystemId;
 
 - (void)setByteStreamWithJavaIoInputStream:(JavaIoInputStream *)byteStream;
 
-- (JavaIoInputStream *)getByteStream;
+- (void)setCharacterStreamWithJavaIoReader:(JavaIoReader *)characterStream;
 
 - (void)setEncodingWithNSString:(NSString *)encoding;
 
-- (NSString *)getEncoding;
+- (void)setPublicIdWithNSString:(NSString *)publicId;
 
-- (void)setCharacterStreamWithJavaIoReader:(JavaIoReader *)characterStream;
-
-- (JavaIoReader *)getCharacterStream;
+- (void)setSystemIdWithNSString:(NSString *)systemId;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxInputSource_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxInputSource)
+
+FOUNDATION_EXPORT void OrgXmlSaxInputSource_init(OrgXmlSaxInputSource *self);
+
+FOUNDATION_EXPORT OrgXmlSaxInputSource *new_OrgXmlSaxInputSource_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxInputSource_initWithNSString_(OrgXmlSaxInputSource *self, NSString *systemId);
+
+FOUNDATION_EXPORT OrgXmlSaxInputSource *new_OrgXmlSaxInputSource_initWithNSString_(NSString *systemId) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxInputSource_initWithJavaIoInputStream_(OrgXmlSaxInputSource *self, JavaIoInputStream *byteStream);
+
+FOUNDATION_EXPORT OrgXmlSaxInputSource *new_OrgXmlSaxInputSource_initWithJavaIoInputStream_(JavaIoInputStream *byteStream) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxInputSource_initWithJavaIoReader_(OrgXmlSaxInputSource *self, JavaIoReader *characterStream);
+
+FOUNDATION_EXPORT OrgXmlSaxInputSource *new_OrgXmlSaxInputSource_initWithJavaIoReader_(JavaIoReader *characterStream) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxInputSource)
 
 #endif // _OrgXmlSaxInputSource_H_

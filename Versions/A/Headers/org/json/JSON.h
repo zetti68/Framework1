@@ -6,16 +6,28 @@
 #ifndef _OrgJsonJSON_H_
 #define _OrgJsonJSON_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaLangBoolean;
 @class JavaLangDouble;
 @class JavaLangInteger;
 @class JavaLangLong;
 @class OrgJsonJSONException;
 
-#import "JreEmulation.h"
+@interface OrgJsonJSON : NSObject
 
-@interface OrgJsonJSON : NSObject {
-}
+#pragma mark Public
+
++ (OrgJsonJSONException *)typeMismatchWithId:(id)indexOrName
+                                      withId:(id)actual
+                                withNSString:(NSString *)requiredType;
+
++ (OrgJsonJSONException *)typeMismatchWithId:(id)actual
+                                withNSString:(NSString *)requiredType;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
 
 + (jdouble)checkDoubleWithDouble:(jdouble)d;
 
@@ -29,25 +41,30 @@
 
 + (NSString *)toStringWithId:(id)value;
 
-+ (OrgJsonJSONException *)typeMismatchWithId:(id)indexOrName
-                                      withId:(id)actual
-                                withNSString:(NSString *)requiredType;
-
-+ (OrgJsonJSONException *)typeMismatchWithId:(id)actual
-                                withNSString:(NSString *)requiredType;
-
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void OrgJsonJSON_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgJsonJSON)
+
 FOUNDATION_EXPORT jdouble OrgJsonJSON_checkDoubleWithDouble_(jdouble d);
+
 FOUNDATION_EXPORT JavaLangBoolean *OrgJsonJSON_toBooleanWithId_(id value);
+
 FOUNDATION_EXPORT JavaLangDouble *OrgJsonJSON_toDoubleWithId_(id value);
+
 FOUNDATION_EXPORT JavaLangInteger *OrgJsonJSON_toIntegerWithId_(id value);
+
 FOUNDATION_EXPORT JavaLangLong *OrgJsonJSON_toLongWithId_(id value);
+
 FOUNDATION_EXPORT NSString *OrgJsonJSON_toStringWithId_(id value);
+
 FOUNDATION_EXPORT OrgJsonJSONException *OrgJsonJSON_typeMismatchWithId_withId_withNSString_(id indexOrName, id actual, NSString *requiredType);
+
 FOUNDATION_EXPORT OrgJsonJSONException *OrgJsonJSON_typeMismatchWithId_withNSString_(id actual, NSString *requiredType);
+
+FOUNDATION_EXPORT void OrgJsonJSON_init(OrgJsonJSON *self);
+
+FOUNDATION_EXPORT OrgJsonJSON *new_OrgJsonJSON_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSON)
 
 #endif // _OrgJsonJSON_H_

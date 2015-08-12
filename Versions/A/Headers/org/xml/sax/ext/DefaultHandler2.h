@@ -6,37 +6,20 @@
 #ifndef _OrgXmlSaxExtDefaultHandler2_H_
 #define _OrgXmlSaxExtDefaultHandler2_H_
 
-@class IOSCharArray;
-@class OrgXmlSaxInputSource;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/ext/DeclHandler.h"
 #include "org/xml/sax/ext/EntityResolver2.h"
 #include "org/xml/sax/ext/LexicalHandler.h"
 #include "org/xml/sax/helpers/DefaultHandler.h"
 
-@interface OrgXmlSaxExtDefaultHandler2 : OrgXmlSaxHelpersDefaultHandler < OrgXmlSaxExtLexicalHandler, OrgXmlSaxExtDeclHandler, OrgXmlSaxExtEntityResolver2 > {
-}
+@class IOSCharArray;
+@class OrgXmlSaxInputSource;
+
+@interface OrgXmlSaxExtDefaultHandler2 : OrgXmlSaxHelpersDefaultHandler < OrgXmlSaxExtLexicalHandler, OrgXmlSaxExtDeclHandler, OrgXmlSaxExtEntityResolver2 >
+
+#pragma mark Public
 
 - (instancetype)init;
-
-- (void)startCDATA;
-
-- (void)endCDATA;
-
-- (void)startDTDWithNSString:(NSString *)name
-                withNSString:(NSString *)publicId
-                withNSString:(NSString *)systemId;
-
-- (void)endDTD;
-
-- (void)startEntityWithNSString:(NSString *)name;
-
-- (void)endEntityWithNSString:(NSString *)name;
-
-- (void)commentWithCharArray:(IOSCharArray *)ch
-                     withInt:(jint)start
-                     withInt:(jint)length;
 
 - (void)attributeDeclWithNSString:(NSString *)eName
                      withNSString:(NSString *)aName
@@ -44,29 +27,53 @@
                      withNSString:(NSString *)mode
                      withNSString:(NSString *)value;
 
+- (void)commentWithCharArray:(IOSCharArray *)ch
+                     withInt:(jint)start
+                     withInt:(jint)length;
+
 - (void)elementDeclWithNSString:(NSString *)name
                    withNSString:(NSString *)model;
+
+- (void)endCDATA;
+
+- (void)endDTD;
+
+- (void)endEntityWithNSString:(NSString *)name;
 
 - (void)externalEntityDeclWithNSString:(NSString *)name
                           withNSString:(NSString *)publicId
                           withNSString:(NSString *)systemId;
 
+- (OrgXmlSaxInputSource *)getExternalSubsetWithNSString:(NSString *)name
+                                           withNSString:(NSString *)baseURI;
+
 - (void)internalEntityDeclWithNSString:(NSString *)name
                           withNSString:(NSString *)value;
 
-- (OrgXmlSaxInputSource *)getExternalSubsetWithNSString:(NSString *)name
-                                           withNSString:(NSString *)baseURI;
+- (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
+                                       withNSString:(NSString *)systemId;
 
 - (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)name
                                        withNSString:(NSString *)publicId
                                        withNSString:(NSString *)baseURI
                                        withNSString:(NSString *)systemId;
 
-- (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
-                                       withNSString:(NSString *)systemId;
+- (void)startCDATA;
+
+- (void)startDTDWithNSString:(NSString *)name
+                withNSString:(NSString *)publicId
+                withNSString:(NSString *)systemId;
+
+- (void)startEntityWithNSString:(NSString *)name;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtDefaultHandler2_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtDefaultHandler2)
+
+FOUNDATION_EXPORT void OrgXmlSaxExtDefaultHandler2_init(OrgXmlSaxExtDefaultHandler2 *self);
+
+FOUNDATION_EXPORT OrgXmlSaxExtDefaultHandler2 *new_OrgXmlSaxExtDefaultHandler2_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtDefaultHandler2)
 
 #endif // _OrgXmlSaxExtDefaultHandler2_H_

@@ -6,25 +6,20 @@
 #ifndef _JavaUtilTreeSet_H_
 #define _JavaUtilTreeSet_H_
 
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/util/AbstractSet.h"
+#include "java/util/NavigableSet.h"
+
 @protocol JavaUtilCollection;
 @protocol JavaUtilComparator;
 @protocol JavaUtilIterator;
 @protocol JavaUtilNavigableMap;
 @protocol JavaUtilSortedSet;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/util/AbstractSet.h"
-#include "java/util/NavigableSet.h"
+@interface JavaUtilTreeSet : JavaUtilAbstractSet < JavaUtilNavigableSet, NSCopying, JavaIoSerializable >
 
-#define JavaUtilTreeSet_serialVersionUID -2479143000061671589LL
-
-@interface JavaUtilTreeSet : JavaUtilAbstractSet < JavaUtilNavigableSet, NSCopying, JavaIoSerializable > {
-}
-
-- (instancetype)initWithJavaUtilNavigableMap:(id<JavaUtilNavigableMap>)map;
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -38,6 +33,8 @@
 
 - (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)collection;
 
+- (id)ceilingWithId:(id)e;
+
 - (void)clear;
 
 - (id)clone;
@@ -46,57 +43,79 @@
 
 - (jboolean)containsWithId:(id)object;
 
+- (id<JavaUtilIterator>)descendingIterator;
+
+- (id<JavaUtilNavigableSet>)descendingSet;
+
+- (id)first;
+
+- (id)floorWithId:(id)e;
+
+- (id<JavaUtilSortedSet>)headSetWithId:(id)end;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)end
+                              withBoolean:(jboolean)endInclusive;
+
+- (id)higherWithId:(id)e;
+
 - (jboolean)isEmpty;
 
 - (id<JavaUtilIterator>)iterator;
 
-- (id<JavaUtilIterator>)descendingIterator;
-
-- (jboolean)removeWithId:(id)object;
-
-- (jint)size;
-
-- (id)first;
-
 - (id)last;
+
+- (id)lowerWithId:(id)e;
 
 - (id)pollFirst;
 
 - (id)pollLast;
 
-- (id)higherWithId:(id)e;
+- (jboolean)removeWithId:(id)object;
 
-- (id)lowerWithId:(id)e;
-
-- (id)ceilingWithId:(id)e;
-
-- (id)floorWithId:(id)e;
-
-- (id<JavaUtilNavigableSet>)descendingSet;
+- (jint)size;
 
 - (id<JavaUtilNavigableSet>)subSetWithId:(id)start
                              withBoolean:(jboolean)startInclusive
                                   withId:(id)end
                              withBoolean:(jboolean)endInclusive;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)end
-                              withBoolean:(jboolean)endInclusive;
+- (id<JavaUtilSortedSet>)subSetWithId:(id)start
+                               withId:(id)end;
+
+- (id<JavaUtilSortedSet>)tailSetWithId:(id)start;
 
 - (id<JavaUtilNavigableSet>)tailSetWithId:(id)start
                               withBoolean:(jboolean)startInclusive;
 
-- (id<JavaUtilSortedSet>)subSetWithId:(id)start
-                               withId:(id)end;
+#pragma mark Package-Private
 
-- (id<JavaUtilSortedSet>)headSetWithId:(id)end;
-
-- (id<JavaUtilSortedSet>)tailSetWithId:(id)start;
+- (instancetype)initWithJavaUtilNavigableMap:(id<JavaUtilNavigableMap>)map;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilTreeSet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilTreeSet)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilTreeSet, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilTreeSet_initWithJavaUtilNavigableMap_(JavaUtilTreeSet *self, id<JavaUtilNavigableMap> map);
+
+FOUNDATION_EXPORT JavaUtilTreeSet *new_JavaUtilTreeSet_initWithJavaUtilNavigableMap_(id<JavaUtilNavigableMap> map) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeSet_init(JavaUtilTreeSet *self);
+
+FOUNDATION_EXPORT JavaUtilTreeSet *new_JavaUtilTreeSet_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeSet_initWithJavaUtilCollection_(JavaUtilTreeSet *self, id<JavaUtilCollection> collection);
+
+FOUNDATION_EXPORT JavaUtilTreeSet *new_JavaUtilTreeSet_initWithJavaUtilCollection_(id<JavaUtilCollection> collection) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeSet_initWithJavaUtilComparator_(JavaUtilTreeSet *self, id<JavaUtilComparator> comparator);
+
+FOUNDATION_EXPORT JavaUtilTreeSet *new_JavaUtilTreeSet_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilTreeSet_initWithJavaUtilSortedSet_(JavaUtilTreeSet *self, id<JavaUtilSortedSet> set);
+
+FOUNDATION_EXPORT JavaUtilTreeSet *new_JavaUtilTreeSet_initWithJavaUtilSortedSet_(id<JavaUtilSortedSet> set) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilTreeSet)
 
 #endif // _JavaUtilTreeSet_H_

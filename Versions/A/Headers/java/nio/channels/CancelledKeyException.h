@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsCancelledKeyException_H_
 #define _JavaNioChannelsCancelledKeyException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsCancelledKeyException_serialVersionUID -8438032138028814268LL
+@interface JavaNioChannelsCancelledKeyException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsCancelledKeyException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsCancelledKeyException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsCancelledKeyException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsCancelledKeyException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsCancelledKeyException_init(JavaNioChannelsCancelledKeyException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsCancelledKeyException *new_JavaNioChannelsCancelledKeyException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsCancelledKeyException)
 
 #endif // _JavaNioChannelsCancelledKeyException_H_

@@ -6,15 +6,15 @@
 #ifndef _JavaSqlStatement_H_
 #define _JavaSqlStatement_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/AutoCloseable.h"
+#include "java/sql/Wrapper.h"
+
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaSqlSQLWarning;
 @protocol JavaSqlConnection;
 @protocol JavaSqlResultSet;
-
-#import "JreEmulation.h"
-#include "java/lang/AutoCloseable.h"
-#include "java/sql/Wrapper.h"
 
 #define JavaSqlStatement_CLOSE_ALL_RESULTS 3
 #define JavaSqlStatement_CLOSE_CURRENT_RESULT 1
@@ -25,6 +25,7 @@
 #define JavaSqlStatement_SUCCESS_NO_INFO -2
 
 @protocol JavaSqlStatement < JavaSqlWrapper, JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (void)addBatchWithNSString:(NSString *)sql;
 
 - (void)cancel;
@@ -113,7 +114,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlStatement_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlStatement)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlStatement, CLOSE_ALL_RESULTS, jint)
 
@@ -128,5 +129,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlStatement, NO_GENERATED_KEYS, jint)
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlStatement, RETURN_GENERATED_KEYS, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlStatement, SUCCESS_NO_INFO, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlStatement)
 
 #endif // _JavaSqlStatement_H_

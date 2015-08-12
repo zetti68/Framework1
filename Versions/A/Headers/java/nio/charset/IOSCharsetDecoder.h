@@ -6,30 +6,37 @@
 #ifndef _JavaNioCharsetIOSCharsetDecoder_H_
 #define _JavaNioCharsetIOSCharsetDecoder_H_
 
-@class IOSByteArray;
-@class IOSCharArray;
+#include "J2ObjC_header.h"
+#include "java/nio/charset/CharsetDecoder.h"
+
 @class JavaNioByteBuffer;
 @class JavaNioCharBuffer;
 @class JavaNioCharsetCharset;
 @class JavaNioCharsetCoderResult;
 
-#import "JreEmulation.h"
-#include "java/nio/charset/CharsetDecoder.h"
+@interface JavaNioCharsetIOSCharsetDecoder : JavaNioCharsetCharsetDecoder
 
-@interface JavaNioCharsetIOSCharsetDecoder : JavaNioCharsetCharsetDecoder {
-}
+#pragma mark Public
+
+- (jint)available;
+
+- (JavaNioCharBuffer *)decodeWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg;
+
+#pragma mark Protected
 
 - (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
 
 - (JavaNioCharsetCoderResult *)decodeLoopWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg
                                          withJavaNioCharBuffer:(JavaNioCharBuffer *)outArg;
 
-- (JavaNioCharBuffer *)decodeWithJavaNioByteBuffer:(JavaNioByteBuffer *)inArg;
-
-- (jint)available;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetIOSCharsetDecoder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetIOSCharsetDecoder)
+
+FOUNDATION_EXPORT void JavaNioCharsetIOSCharsetDecoder_initWithJavaNioCharsetCharset_(JavaNioCharsetIOSCharsetDecoder *self, JavaNioCharsetCharset *charset);
+
+FOUNDATION_EXPORT JavaNioCharsetIOSCharsetDecoder *new_JavaNioCharsetIOSCharsetDecoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetIOSCharsetDecoder)
 
 #endif // _JavaNioCharsetIOSCharsetDecoder_H_

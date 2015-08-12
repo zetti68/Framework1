@@ -6,14 +6,15 @@
 #ifndef _JavaIoFileReader_H_
 #define _JavaIoFileReader_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/InputStreamReader.h"
+
 @class JavaIoFile;
 @class JavaIoFileDescriptor;
 
-#import "JreEmulation.h"
-#include "java/io/InputStreamReader.h"
+@interface JavaIoFileReader : JavaIoInputStreamReader
 
-@interface JavaIoFileReader : JavaIoInputStreamReader {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
@@ -23,6 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileReader)
+
+FOUNDATION_EXPORT void JavaIoFileReader_initWithJavaIoFile_(JavaIoFileReader *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoFileReader *new_JavaIoFileReader_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileReader_initWithJavaIoFileDescriptor_(JavaIoFileReader *self, JavaIoFileDescriptor *fd);
+
+FOUNDATION_EXPORT JavaIoFileReader *new_JavaIoFileReader_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileReader_initWithNSString_(JavaIoFileReader *self, NSString *filename);
+
+FOUNDATION_EXPORT JavaIoFileReader *new_JavaIoFileReader_initWithNSString_(NSString *filename) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileReader)
 
 #endif // _JavaIoFileReader_H_

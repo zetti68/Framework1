@@ -6,13 +6,12 @@
 #ifndef _JavaUtilConcurrentCancellationException_H_
 #define _JavaUtilConcurrentCancellationException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaUtilConcurrentCancellationException_serialVersionUID -9202173006928992231LL
+@interface JavaUtilConcurrentCancellationException : JavaLangIllegalStateException
 
-@interface JavaUtilConcurrentCancellationException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentCancellationException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentCancellationException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentCancellationException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentCancellationException_init(JavaUtilConcurrentCancellationException *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCancellationException *new_JavaUtilConcurrentCancellationException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentCancellationException_initWithNSString_(JavaUtilConcurrentCancellationException *self, NSString *message);
+
+FOUNDATION_EXPORT JavaUtilConcurrentCancellationException *new_JavaUtilConcurrentCancellationException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentCancellationException)
 
 #endif // _JavaUtilConcurrentCancellationException_H_

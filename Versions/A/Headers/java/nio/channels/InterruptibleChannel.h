@@ -6,14 +6,17 @@
 #ifndef _JavaNioChannelsInterruptibleChannel_H_
 #define _JavaNioChannelsInterruptibleChannel_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/Channel.h"
 
 @protocol JavaNioChannelsInterruptibleChannel < JavaNioChannelsChannel, NSObject, JavaObject >
+
 - (void)close;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsInterruptibleChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsInterruptibleChannel)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsInterruptibleChannel)
 
 #endif // _JavaNioChannelsInterruptibleChannel_H_

@@ -6,49 +6,50 @@
 #ifndef _JavaSecurityCertCertificate_H_
 #define _JavaSecurityCertCertificate_H_
 
-@class IOSByteArray;
-@class IOSObjectArray;
-@protocol JavaSecurityPublicKey;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaSecurityCertCertificate_serialVersionUID -3585440601605666277LL
+@class IOSByteArray;
+@protocol JavaSecurityPublicKey;
 
-@interface JavaSecurityCertCertificate : NSObject < JavaIoSerializable > {
-}
+@interface JavaSecurityCertCertificate : NSObject < JavaIoSerializable >
 
-- (instancetype)initWithNSString:(NSString *)type;
-
-- (NSString *)getType;
+#pragma mark Public
 
 - (jboolean)isEqual:(id)other;
 
+- (IOSByteArray *)getEncoded;
+
+- (id<JavaSecurityPublicKey>)getPublicKey;
+
+- (NSString *)getType;
+
 - (NSUInteger)hash;
 
-- (IOSByteArray *)getEncoded;
+- (NSString *)description;
 
 - (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key;
 
 - (void)verifyWithJavaSecurityPublicKey:(id<JavaSecurityPublicKey>)key
                            withNSString:(NSString *)sigProvider;
 
-- (NSString *)description;
+#pragma mark Protected
 
-- (id<JavaSecurityPublicKey>)getPublicKey;
+- (instancetype)initWithNSString:(NSString *)type;
 
 - (id)writeReplace;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCertificate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCertificate)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificate, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificate_initWithNSString_(JavaSecurityCertCertificate *self, NSString *type);
 
-#define JavaSecurityCertCertificate_CertificateRep_serialVersionUID -8563758940495660020LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificate)
 
-@interface JavaSecurityCertCertificate_CertificateRep : NSObject < JavaIoSerializable > {
-}
+@interface JavaSecurityCertCertificate_CertificateRep : NSObject < JavaIoSerializable >
+
+#pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)type
                    withByteArray:(IOSByteArray *)data;
@@ -57,12 +58,12 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificate, serialVersionUID, jlong)
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecurityCertCertificate_CertificateRep_initialized;
 J2OBJC_STATIC_INIT(JavaSecurityCertCertificate_CertificateRep)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificate_CertificateRep, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertCertificate_CertificateRep_initWithNSString_withByteArray_(JavaSecurityCertCertificate_CertificateRep *self, NSString *type, IOSByteArray *data);
 
-FOUNDATION_EXPORT IOSObjectArray *JavaSecurityCertCertificate_CertificateRep_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertCertificate_CertificateRep, serialPersistentFields_, IOSObjectArray *)
+FOUNDATION_EXPORT JavaSecurityCertCertificate_CertificateRep *new_JavaSecurityCertCertificate_CertificateRep_initWithNSString_withByteArray_(NSString *type, IOSByteArray *data) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCertificate_CertificateRep)
 
 #endif // _JavaSecurityCertCertificate_H_

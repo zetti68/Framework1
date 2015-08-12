@@ -6,13 +6,12 @@
 #ifndef _JavaNioCharsetIllegalCharsetNameException_H_
 #define _JavaNioCharsetIllegalCharsetNameException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalArgumentException.h"
 
-#define JavaNioCharsetIllegalCharsetNameException_serialVersionUID 1457525358470002989LL
+@interface JavaNioCharsetIllegalCharsetNameException : JavaLangIllegalArgumentException
 
-@interface JavaNioCharsetIllegalCharsetNameException : JavaLangIllegalArgumentException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)charsetName;
 
@@ -20,8 +19,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetIllegalCharsetNameException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetIllegalCharsetNameException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetIllegalCharsetNameException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioCharsetIllegalCharsetNameException_initWithNSString_(JavaNioCharsetIllegalCharsetNameException *self, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaNioCharsetIllegalCharsetNameException *new_JavaNioCharsetIllegalCharsetNameException_initWithNSString_(NSString *charsetName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetIllegalCharsetNameException)
 
 #endif // _JavaNioCharsetIllegalCharsetNameException_H_

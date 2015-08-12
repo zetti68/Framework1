@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsOverlappingFileLockException_H_
 #define _JavaNioChannelsOverlappingFileLockException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsOverlappingFileLockException_serialVersionUID 2047812138163068433LL
+@interface JavaNioChannelsOverlappingFileLockException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsOverlappingFileLockException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsOverlappingFileLockException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsOverlappingFileLockException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsOverlappingFileLockException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsOverlappingFileLockException_init(JavaNioChannelsOverlappingFileLockException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsOverlappingFileLockException *new_JavaNioChannelsOverlappingFileLockException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsOverlappingFileLockException)
 
 #endif // _JavaNioChannelsOverlappingFileLockException_H_

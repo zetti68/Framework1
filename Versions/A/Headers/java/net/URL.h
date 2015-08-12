@@ -6,41 +6,25 @@
 #ifndef _JavaNetURL_H_
 #define _JavaNetURL_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
 @class JavaIoInputStream;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
 @class JavaNetProxy;
 @class JavaNetURI;
 @class JavaNetURLConnection;
 @class JavaNetURLStreamHandler;
-@class JavaUtilHashtable;
 @protocol JavaNetURLStreamHandlerFactory;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-
-#define JavaNetURL_serialVersionUID -7627629688361524110LL
 
 @interface JavaNetURL : NSObject < JavaIoSerializable > {
  @public
   JavaNetURLStreamHandler *streamHandler_;
 }
 
-+ (void)setURLStreamHandlerFactoryWithJavaNetURLStreamHandlerFactory:(id<JavaNetURLStreamHandlerFactory>)factory;
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)spec;
-
-- (instancetype)initWithJavaNetURL:(JavaNetURL *)context
-                      withNSString:(NSString *)spec;
-
-- (instancetype)initWithJavaNetURL:(JavaNetURL *)context
-                      withNSString:(NSString *)spec
-       withJavaNetURLStreamHandler:(JavaNetURLStreamHandler *)handler;
-
-- (instancetype)initWithNSString:(NSString *)protocol
-                    withNSString:(NSString *)host
-                    withNSString:(NSString *)file;
 
 - (instancetype)initWithNSString:(NSString *)protocol
                     withNSString:(NSString *)host
@@ -53,61 +37,72 @@
                     withNSString:(NSString *)file
      withJavaNetURLStreamHandler:(JavaNetURLStreamHandler *)handler;
 
-- (void)fixURLWithBoolean:(jboolean)fixHost;
+- (instancetype)initWithNSString:(NSString *)protocol
+                    withNSString:(NSString *)host
+                    withNSString:(NSString *)file;
+
+- (instancetype)initWithJavaNetURL:(JavaNetURL *)context
+                      withNSString:(NSString *)spec;
+
+- (instancetype)initWithJavaNetURL:(JavaNetURL *)context
+                      withNSString:(NSString *)spec
+       withJavaNetURLStreamHandler:(JavaNetURLStreamHandler *)handler;
+
+- (jboolean)isEqual:(id)o;
+
+- (NSString *)getAuthority;
+
+- (id)getContent;
+
+- (id)getContentWithIOSClassArray:(IOSObjectArray *)types;
+
+- (jint)getDefaultPort;
+
+- (jint)getEffectivePort;
+
+- (NSString *)getFile;
+
+- (NSString *)getHost;
+
+- (NSString *)getPath;
+
+- (jint)getPort;
+
+- (NSString *)getProtocol;
+
+- (NSString *)getQuery;
+
+- (NSString *)getRef;
+
+- (NSString *)getUserInfo;
+
+- (NSUInteger)hash;
+
+- (JavaNetURLConnection *)openConnection;
+
+- (JavaNetURLConnection *)openConnectionWithJavaNetProxy:(JavaNetProxy *)proxy;
+
+- (JavaIoInputStream *)openStream;
+
+- (jboolean)sameFileWithJavaNetURL:(JavaNetURL *)otherURL;
+
++ (void)setURLStreamHandlerFactoryWithJavaNetURLStreamHandlerFactory:(id<JavaNetURLStreamHandlerFactory>)factory;
+
+- (NSString *)toExternalForm;
+
+- (NSString *)description;
+
+- (JavaNetURI *)toURI;
+
+- (JavaNetURI *)toURILenient;
+
+#pragma mark Protected
 
 - (void)setWithNSString:(NSString *)protocol
            withNSString:(NSString *)host
                 withInt:(jint)port
            withNSString:(NSString *)file
            withNSString:(NSString *)ref;
-
-- (jboolean)isEqual:(id)o;
-
-- (jboolean)sameFileWithJavaNetURL:(JavaNetURL *)otherURL;
-
-- (NSUInteger)hash;
-
-- (void)setupStreamHandler;
-
-- (id)getContent;
-
-- (id)getContentWithIOSClassArray:(IOSObjectArray *)types;
-
-- (JavaIoInputStream *)openStream;
-
-- (JavaNetURLConnection *)openConnection;
-
-- (JavaNetURLConnection *)openConnectionWithJavaNetProxy:(JavaNetProxy *)proxy;
-
-- (JavaNetURI *)toURI;
-
-- (JavaNetURI *)toURILenient;
-
-- (NSString *)description;
-
-- (NSString *)toExternalForm;
-
-- (jint)getEffectivePort;
-
-- (NSString *)getProtocol;
-
-- (NSString *)getAuthority;
-
-- (NSString *)getUserInfo;
-
-- (NSString *)getHost;
-
-- (jint)getPort;
-
-- (jint)getDefaultPort;
-
-- (NSString *)getFile;
-
-- (NSString *)getPath;
-
-- (NSString *)getQuery;
-
-- (NSString *)getRef;
 
 - (void)setWithNSString:(NSString *)protocol
            withNSString:(NSString *)host
@@ -118,21 +113,44 @@
            withNSString:(NSString *)query
            withNSString:(NSString *)ref;
 
+#pragma mark Package-Private
+
+- (void)fixURLWithBoolean:(jboolean)fixHost;
+
+- (void)setupStreamHandler;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetURL_initialized;
 J2OBJC_STATIC_INIT(JavaNetURL)
 
 J2OBJC_FIELD_SETTER(JavaNetURL, streamHandler_, JavaNetURLStreamHandler *)
+
 FOUNDATION_EXPORT void JavaNetURL_setURLStreamHandlerFactoryWithJavaNetURLStreamHandlerFactory_(id<JavaNetURLStreamHandlerFactory> factory);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURL, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetURL_initWithNSString_(JavaNetURL *self, NSString *spec);
 
-FOUNDATION_EXPORT id<JavaNetURLStreamHandlerFactory> JavaNetURL_streamHandlerFactory_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURL, streamHandlerFactory_, id<JavaNetURLStreamHandlerFactory>)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetURL, streamHandlerFactory_, id<JavaNetURLStreamHandlerFactory>)
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithNSString_(NSString *spec) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT JavaUtilHashtable *JavaNetURL_streamHandlers_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetURL, streamHandlers_, JavaUtilHashtable *)
+FOUNDATION_EXPORT void JavaNetURL_initWithJavaNetURL_withNSString_(JavaNetURL *self, JavaNetURL *context, NSString *spec);
+
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithJavaNetURL_withNSString_(JavaNetURL *context, NSString *spec) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetURL_initWithJavaNetURL_withNSString_withJavaNetURLStreamHandler_(JavaNetURL *self, JavaNetURL *context, NSString *spec, JavaNetURLStreamHandler *handler);
+
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithJavaNetURL_withNSString_withJavaNetURLStreamHandler_(JavaNetURL *context, NSString *spec, JavaNetURLStreamHandler *handler) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetURL_initWithNSString_withNSString_withNSString_(JavaNetURL *self, NSString *protocol, NSString *host, NSString *file);
+
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithNSString_withNSString_withNSString_(NSString *protocol, NSString *host, NSString *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetURL_initWithNSString_withNSString_withInt_withNSString_(JavaNetURL *self, NSString *protocol, NSString *host, jint port, NSString *file);
+
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithNSString_withNSString_withInt_withNSString_(NSString *protocol, NSString *host, jint port, NSString *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetURL_initWithNSString_withNSString_withInt_withNSString_withJavaNetURLStreamHandler_(JavaNetURL *self, NSString *protocol, NSString *host, jint port, NSString *file, JavaNetURLStreamHandler *handler);
+
+FOUNDATION_EXPORT JavaNetURL *new_JavaNetURL_initWithNSString_withNSString_withInt_withNSString_withJavaNetURLStreamHandler_(NSString *protocol, NSString *host, jint port, NSString *file, JavaNetURLStreamHandler *handler) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURL)
 
 #endif // _JavaNetURL_H_

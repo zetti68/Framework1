@@ -6,11 +6,13 @@
 #ifndef _JavaNetURLEncoder_H_
 #define _JavaNetURLEncoder_H_
 
-#import "JreEmulation.h"
-#include "libcore/net/UriCodec.h"
+#include "J2ObjC_header.h"
 
-@interface JavaNetURLEncoder : NSObject {
-}
+@class LibcoreNetUriCodec;
+
+@interface JavaNetURLEncoder : NSObject
+
+#pragma mark Public
 
 + (NSString *)encodeWithNSString:(NSString *)s;
 
@@ -19,24 +21,16 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetURLEncoder_initialized;
 J2OBJC_STATIC_INIT(JavaNetURLEncoder)
-FOUNDATION_EXPORT NSString *JavaNetURLEncoder_encodeWithNSString_(NSString *s);
-FOUNDATION_EXPORT NSString *JavaNetURLEncoder_encodeWithNSString_withNSString_(NSString *s, NSString *charsetName);
 
 FOUNDATION_EXPORT LibcoreNetUriCodec *JavaNetURLEncoder_ENCODER_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetURLEncoder, ENCODER_, LibcoreNetUriCodec *)
 J2OBJC_STATIC_FIELD_SETTER(JavaNetURLEncoder, ENCODER_, LibcoreNetUriCodec *)
 
-@interface JavaNetURLEncoder_$1 : LibcoreNetUriCodec {
-}
+FOUNDATION_EXPORT NSString *JavaNetURLEncoder_encodeWithNSString_(NSString *s);
 
-- (jboolean)isRetainedWithChar:(jchar)c;
+FOUNDATION_EXPORT NSString *JavaNetURLEncoder_encodeWithNSString_withNSString_(NSString *s, NSString *charsetName);
 
-- (instancetype)init;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNetURLEncoder_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURLEncoder)
 
 #endif // _JavaNetURLEncoder_H_

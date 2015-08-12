@@ -6,10 +6,10 @@
 #ifndef _OrgXmlSaxHelpersAttributesImpl_H_
 #define _OrgXmlSaxHelpersAttributesImpl_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/Attributes.h"
+
+@class IOSObjectArray;
 
 @interface OrgXmlSaxHelpersAttributesImpl : NSObject < OrgXmlSaxAttributes > {
  @public
@@ -17,13 +17,26 @@
   IOSObjectArray *data_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (instancetype)initWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
 
-- (jint)getLength;
+- (void)addAttributeWithNSString:(NSString *)uri
+                    withNSString:(NSString *)localName
+                    withNSString:(NSString *)qName
+                    withNSString:(NSString *)type
+                    withNSString:(NSString *)value;
 
-- (NSString *)getURIWithInt:(jint)index;
+- (void)clear;
+
+- (jint)getIndexWithNSString:(NSString *)qName;
+
+- (jint)getIndexWithNSString:(NSString *)uri
+                withNSString:(NSString *)localName;
+
+- (jint)getLength;
 
 - (NSString *)getLocalNameWithInt:(jint)index;
 
@@ -31,32 +44,21 @@
 
 - (NSString *)getTypeWithInt:(jint)index;
 
-- (NSString *)getValueWithInt:(jint)index;
-
-- (jint)getIndexWithNSString:(NSString *)uri
-                withNSString:(NSString *)localName;
-
-- (jint)getIndexWithNSString:(NSString *)qName;
+- (NSString *)getTypeWithNSString:(NSString *)qName;
 
 - (NSString *)getTypeWithNSString:(NSString *)uri
                      withNSString:(NSString *)localName;
 
-- (NSString *)getTypeWithNSString:(NSString *)qName;
+- (NSString *)getURIWithInt:(jint)index;
+
+- (NSString *)getValueWithInt:(jint)index;
+
+- (NSString *)getValueWithNSString:(NSString *)qName;
 
 - (NSString *)getValueWithNSString:(NSString *)uri
                       withNSString:(NSString *)localName;
 
-- (NSString *)getValueWithNSString:(NSString *)qName;
-
-- (void)clear;
-
-- (void)setAttributesWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
-
-- (void)addAttributeWithNSString:(NSString *)uri
-                    withNSString:(NSString *)localName
-                    withNSString:(NSString *)qName
-                    withNSString:(NSString *)type
-                    withNSString:(NSString *)value;
+- (void)removeAttributeWithInt:(jint)index;
 
 - (void)setAttributeWithInt:(jint)index
                withNSString:(NSString *)uri
@@ -65,10 +67,7 @@
                withNSString:(NSString *)type
                withNSString:(NSString *)value;
 
-- (void)removeAttributeWithInt:(jint)index;
-
-- (void)setURIWithInt:(jint)index
-         withNSString:(NSString *)uri;
+- (void)setAttributesWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
 
 - (void)setLocalNameWithInt:(jint)index
                withNSString:(NSString *)localName;
@@ -79,13 +78,26 @@
 - (void)setTypeWithInt:(jint)index
           withNSString:(NSString *)type;
 
+- (void)setURIWithInt:(jint)index
+         withNSString:(NSString *)uri;
+
 - (void)setValueWithInt:(jint)index
            withNSString:(NSString *)value;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersAttributesImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersAttributesImpl)
 
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersAttributesImpl, data_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void OrgXmlSaxHelpersAttributesImpl_init(OrgXmlSaxHelpersAttributesImpl *self);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersAttributesImpl *new_OrgXmlSaxHelpersAttributesImpl_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgXmlSaxHelpersAttributesImpl_initWithOrgXmlSaxAttributes_(OrgXmlSaxHelpersAttributesImpl *self, id<OrgXmlSaxAttributes> atts);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersAttributesImpl *new_OrgXmlSaxHelpersAttributesImpl_initWithOrgXmlSaxAttributes_(id<OrgXmlSaxAttributes> atts) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersAttributesImpl)
 
 #endif // _OrgXmlSaxHelpersAttributesImpl_H_

@@ -6,15 +6,14 @@
 #ifndef _JavaNetUnknownServiceException_H_
 #define _JavaNetUnknownServiceException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetUnknownServiceException_serialVersionUID -4169033248853639508LL
+@class JavaLangThrowable;
 
-@interface JavaNetUnknownServiceException : JavaIoIOException {
-}
+@interface JavaNetUnknownServiceException : JavaIoIOException
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -25,8 +24,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetUnknownServiceException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetUnknownServiceException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetUnknownServiceException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetUnknownServiceException_init(JavaNetUnknownServiceException *self);
+
+FOUNDATION_EXPORT JavaNetUnknownServiceException *new_JavaNetUnknownServiceException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetUnknownServiceException_initWithNSString_(JavaNetUnknownServiceException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetUnknownServiceException *new_JavaNetUnknownServiceException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetUnknownServiceException_initWithNSString_withJavaLangThrowable_(JavaNetUnknownServiceException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetUnknownServiceException *new_JavaNetUnknownServiceException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetUnknownServiceException)
 
 #endif // _JavaNetUnknownServiceException_H_

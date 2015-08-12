@@ -6,14 +6,13 @@
 #ifndef _JavaSecurityCertCRL_H_
 #define _JavaSecurityCertCRL_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaSecurityCertCertificate;
 
-#import "JreEmulation.h"
+@interface JavaSecurityCertCRL : NSObject
 
-@interface JavaSecurityCertCRL : NSObject {
-}
-
-- (instancetype)initWithNSString:(NSString *)type;
+#pragma mark Public
 
 - (NSString *)getType;
 
@@ -21,8 +20,16 @@
 
 - (NSString *)description;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)type;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertCRL_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertCRL)
+
+FOUNDATION_EXPORT void JavaSecurityCertCRL_initWithNSString_(JavaSecurityCertCRL *self, NSString *type);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertCRL)
 
 #endif // _JavaSecurityCertCRL_H_

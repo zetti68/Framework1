@@ -6,69 +6,75 @@
 #ifndef _JavaNetProxy_H_
 #define _JavaNetProxy_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Enum.h"
+
 @class JavaNetProxy_TypeEnum;
 @class JavaNetSocketAddress;
 
-#import "JreEmulation.h"
-#include "java/lang/Enum.h"
+@interface JavaNetProxy : NSObject
 
-@interface JavaNetProxy : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaNetProxy_TypeEnum:(JavaNetProxy_TypeEnum *)type
                      withJavaNetSocketAddress:(JavaNetSocketAddress *)sa;
 
-- (JavaNetProxy_TypeEnum *)type;
-
 - (JavaNetSocketAddress *)address;
-
-- (NSString *)description;
 
 - (jboolean)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
+- (NSString *)description;
+
+- (JavaNetProxy_TypeEnum *)type;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetProxy_initialized;
 J2OBJC_STATIC_INIT(JavaNetProxy)
 
 FOUNDATION_EXPORT JavaNetProxy *JavaNetProxy_NO_PROXY_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetProxy, NO_PROXY_, JavaNetProxy *)
 
-typedef enum {
+FOUNDATION_EXPORT void JavaNetProxy_initWithJavaNetProxy_TypeEnum_withJavaNetSocketAddress_(JavaNetProxy *self, JavaNetProxy_TypeEnum *type, JavaNetSocketAddress *sa);
+
+FOUNDATION_EXPORT JavaNetProxy *new_JavaNetProxy_initWithJavaNetProxy_TypeEnum_withJavaNetSocketAddress_(JavaNetProxy_TypeEnum *type, JavaNetSocketAddress *sa) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetProxy)
+
+typedef NS_ENUM(NSUInteger, JavaNetProxy_Type) {
   JavaNetProxy_Type_DIRECT = 0,
   JavaNetProxy_Type_HTTP = 1,
   JavaNetProxy_Type_SOCKS = 2,
-} JavaNetProxy_Type;
+};
 
-@interface JavaNetProxy_TypeEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaNetProxy_TypeEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaNetProxy_TypeEnum_values();
 
 + (JavaNetProxy_TypeEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaNetProxy_TypeEnum *JavaNetProxy_TypeEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaNetProxy_TypeEnum *JavaNetProxy_TypeEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetProxy_TypeEnum_initialized;
 J2OBJC_STATIC_INIT(JavaNetProxy_TypeEnum)
 
 FOUNDATION_EXPORT JavaNetProxy_TypeEnum *JavaNetProxy_TypeEnum_values_[];
 
 #define JavaNetProxy_TypeEnum_DIRECT JavaNetProxy_TypeEnum_values_[JavaNetProxy_Type_DIRECT]
-J2OBJC_STATIC_FIELD_GETTER(JavaNetProxy_TypeEnum, DIRECT, JavaNetProxy_TypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNetProxy_TypeEnum, DIRECT)
 
 #define JavaNetProxy_TypeEnum_HTTP JavaNetProxy_TypeEnum_values_[JavaNetProxy_Type_HTTP]
-J2OBJC_STATIC_FIELD_GETTER(JavaNetProxy_TypeEnum, HTTP, JavaNetProxy_TypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNetProxy_TypeEnum, HTTP)
 
 #define JavaNetProxy_TypeEnum_SOCKS JavaNetProxy_TypeEnum_values_[JavaNetProxy_Type_SOCKS]
-J2OBJC_STATIC_FIELD_GETTER(JavaNetProxy_TypeEnum, SOCKS, JavaNetProxy_TypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNetProxy_TypeEnum, SOCKS)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetProxy_TypeEnum)
 
 #endif // _JavaNetProxy_H_

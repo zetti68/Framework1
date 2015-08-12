@@ -6,26 +6,27 @@
 #ifndef _JavaUtilConcurrentLocksAbstractOwnableSynchronizer_H_
 #define _JavaUtilConcurrentLocksAbstractOwnableSynchronizer_H_
 
-@class JavaLangThread;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentLocksAbstractOwnableSynchronizer_serialVersionUID 3737899427754241961LL
+@class JavaLangThread;
 
-@interface JavaUtilConcurrentLocksAbstractOwnableSynchronizer : NSObject < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentLocksAbstractOwnableSynchronizer : NSObject < JavaIoSerializable >
+
+#pragma mark Protected
 
 - (instancetype)init;
 
-- (void)setExclusiveOwnerThreadWithJavaLangThread:(JavaLangThread *)t;
-
 - (JavaLangThread *)getExclusiveOwnerThread;
+
+- (void)setExclusiveOwnerThreadWithJavaLangThread:(JavaLangThread *)t;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentLocksAbstractOwnableSynchronizer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentLocksAbstractOwnableSynchronizer)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentLocksAbstractOwnableSynchronizer, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentLocksAbstractOwnableSynchronizer_init(JavaUtilConcurrentLocksAbstractOwnableSynchronizer *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentLocksAbstractOwnableSynchronizer)
 
 #endif // _JavaUtilConcurrentLocksAbstractOwnableSynchronizer_H_

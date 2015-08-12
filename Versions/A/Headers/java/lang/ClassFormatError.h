@@ -6,13 +6,12 @@
 #ifndef _JavaLangClassFormatError_H_
 #define _JavaLangClassFormatError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/LinkageError.h"
 
-#define JavaLangClassFormatError_serialVersionUID -8420114879011949195LL
+@interface JavaLangClassFormatError : JavaLangLinkageError
 
-@interface JavaLangClassFormatError : JavaLangLinkageError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangClassFormatError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangClassFormatError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangClassFormatError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangClassFormatError_init(JavaLangClassFormatError *self);
+
+FOUNDATION_EXPORT JavaLangClassFormatError *new_JavaLangClassFormatError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangClassFormatError_initWithNSString_(JavaLangClassFormatError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangClassFormatError *new_JavaLangClassFormatError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangClassFormatError)
 
 #endif // _JavaLangClassFormatError_H_

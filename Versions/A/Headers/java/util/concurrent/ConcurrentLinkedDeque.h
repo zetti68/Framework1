@@ -6,132 +6,118 @@
 #ifndef _JavaUtilConcurrentConcurrentLinkedDeque_H_
 #define _JavaUtilConcurrentConcurrentLinkedDeque_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilArrayList;
-@class JavaUtilConcurrentConcurrentLinkedDeque_Node;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractCollection.h"
 #include "java/util/Deque.h"
-#include "java/util/Iterator.h"
 
-#define JavaUtilConcurrentConcurrentLinkedDeque_HOPS 2
-#define JavaUtilConcurrentConcurrentLinkedDeque_serialVersionUID 876323262645176354LL
+@class IOSObjectArray;
+@class JavaUtilConcurrentConcurrentLinkedDeque_Node;
+@protocol JavaUtilCollection;
+@protocol JavaUtilIterator;
 
-@interface JavaUtilConcurrentConcurrentLinkedDeque : JavaUtilAbstractCollection < JavaUtilDeque, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentConcurrentLinkedDeque : JavaUtilAbstractCollection < JavaUtilDeque, JavaIoSerializable >
 
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)prevTerminator;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)nextTerminator;
-
-- (void)unlinkWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)x;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)succWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)predWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)first;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)last;
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
+- (jboolean)addWithId:(id)e;
+
+- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
 - (void)addFirstWithId:(id)e;
 
 - (void)addLastWithId:(id)e;
 
-- (jboolean)offerFirstWithId:(id)e;
+- (void)clear;
 
-- (jboolean)offerLastWithId:(id)e;
+- (jboolean)containsWithId:(id)o;
 
-- (id)peekFirst;
+- (id<JavaUtilIterator>)descendingIterator;
 
-- (id)peekLast;
+- (id)element;
 
 - (id)getFirst;
 
 - (id)getLast;
 
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id)e;
+
+- (jboolean)offerFirstWithId:(id)e;
+
+- (jboolean)offerLastWithId:(id)e;
+
+- (id)peek;
+
+- (id)peekFirst;
+
+- (id)peekLast;
+
+- (id)poll;
+
 - (id)pollFirst;
 
 - (id)pollLast;
 
-- (id)removeFirst;
-
-- (id)removeLast;
-
-- (jboolean)offerWithId:(id)e;
-
-- (jboolean)addWithId:(id)e;
-
-- (id)poll;
-
-- (id)remove;
-
-- (id)peek;
-
-- (id)element;
+- (id)pop;
 
 - (void)pushWithId:(id)e;
 
-- (id)pop;
-
-- (jboolean)removeFirstOccurrenceWithId:(id)o;
-
-- (jboolean)removeLastOccurrenceWithId:(id)o;
-
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)isEmpty;
-
-- (jint)size;
+- (id)remove;
 
 - (jboolean)removeWithId:(id)o;
 
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+- (id)removeFirst;
 
-- (void)clear;
+- (jboolean)removeFirstOccurrenceWithId:(id)o;
+
+- (id)removeLast;
+
+- (jboolean)removeLastOccurrenceWithId:(id)o;
+
+- (jint)size;
 
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (id<JavaUtilIterator>)iterator;
+#pragma mark Package-Private
 
-- (id<JavaUtilIterator>)descendingIterator;
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)first;
+
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)last;
+
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)nextTerminator;
+
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)predWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
+
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)prevTerminator;
+
+- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)succWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
+
+- (void)unlinkWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)x;
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentLinkedDeque_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentLinkedDeque)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedDeque_init(JavaUtilConcurrentConcurrentLinkedDeque *self);
 
-FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque_Node *JavaUtilConcurrentConcurrentLinkedDeque_PREV_TERMINATOR_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, PREV_TERMINATOR_, JavaUtilConcurrentConcurrentLinkedDeque_Node *)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque *new_JavaUtilConcurrentConcurrentLinkedDeque_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque_Node *JavaUtilConcurrentConcurrentLinkedDeque_NEXT_TERMINATOR_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, NEXT_TERMINATOR_, JavaUtilConcurrentConcurrentLinkedDeque_Node *)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedDeque_initWithJavaUtilCollection_(JavaUtilConcurrentConcurrentLinkedDeque *self, id<JavaUtilCollection> c);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, HOPS, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque *new_JavaUtilConcurrentConcurrentLinkedDeque_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentLinkedDeque_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, UNSAFE_, SunMiscUnsafe *)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedDeque_headOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, headOffset_, jlong)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedDeque_tailOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, tailOffset_, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentLinkedDeque)
 
 @interface JavaUtilConcurrentConcurrentLinkedDeque_Node : NSObject {
  @public
@@ -140,6 +126,8 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, tailOffset_,
   JavaUtilConcurrentConcurrentLinkedDeque_Node *next_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 - (instancetype)initWithId:(id)item;
@@ -147,80 +135,32 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque, tailOffset_,
 - (jboolean)casItemWithId:(id)cmp
                    withId:(id)val;
 
-- (void)lazySetNextWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
-
 - (jboolean)casNextWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)cmp
                    withJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
-
-- (void)lazySetPrevWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
 
 - (jboolean)casPrevWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)cmp
                    withJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
 
+- (void)lazySetNextWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
+
+- (void)lazySetPrevWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)val;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentLinkedDeque_Node_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentLinkedDeque_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, prev_, JavaUtilConcurrentConcurrentLinkedDeque_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, item_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, next_, JavaUtilConcurrentConcurrentLinkedDeque_Node *)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentLinkedDeque_Node_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedDeque_Node_init(JavaUtilConcurrentConcurrentLinkedDeque_Node *self);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedDeque_Node_prevOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, prevOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque_Node *new_JavaUtilConcurrentConcurrentLinkedDeque_Node_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedDeque_Node_itemOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, itemOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentLinkedDeque_Node_initWithId_(JavaUtilConcurrentConcurrentLinkedDeque_Node *self, id item);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentLinkedDeque_Node_nextOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentLinkedDeque_Node, nextOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentLinkedDeque_Node *new_JavaUtilConcurrentConcurrentLinkedDeque_Node_initWithId_(id item) NS_RETURNS_RETAINED;
 
-@interface JavaUtilConcurrentConcurrentLinkedDeque_AbstractItr : NSObject < JavaUtilIterator > {
-}
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)startNode;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)nextNodeWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
-
-- (instancetype)initWithJavaUtilConcurrentConcurrentLinkedDeque:(JavaUtilConcurrentConcurrentLinkedDeque *)outer$;
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentLinkedDeque_AbstractItr_init() {}
-
-@interface JavaUtilConcurrentConcurrentLinkedDeque_Itr : JavaUtilConcurrentConcurrentLinkedDeque_AbstractItr {
-}
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)startNode;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)nextNodeWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
-
-- (instancetype)initWithJavaUtilConcurrentConcurrentLinkedDeque:(JavaUtilConcurrentConcurrentLinkedDeque *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentLinkedDeque_Itr_init() {}
-
-@interface JavaUtilConcurrentConcurrentLinkedDeque_DescendingItr : JavaUtilConcurrentConcurrentLinkedDeque_AbstractItr {
-}
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)startNode;
-
-- (JavaUtilConcurrentConcurrentLinkedDeque_Node *)nextNodeWithJavaUtilConcurrentConcurrentLinkedDeque_Node:(JavaUtilConcurrentConcurrentLinkedDeque_Node *)p;
-
-- (instancetype)initWithJavaUtilConcurrentConcurrentLinkedDeque:(JavaUtilConcurrentConcurrentLinkedDeque *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentLinkedDeque_DescendingItr_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentLinkedDeque_Node)
 
 #endif // _JavaUtilConcurrentConcurrentLinkedDeque_H_

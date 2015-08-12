@@ -6,9 +6,9 @@
 #ifndef _JavaLangReflectGenericDeclaration_H_
 #define _JavaLangReflectGenericDeclaration_H_
 
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSObjectArray;
 
 @protocol JavaLangReflectGenericDeclaration < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangReflectGenericDeclaration_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectGenericDeclaration)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectGenericDeclaration)
 
 #endif // _JavaLangReflectGenericDeclaration_H_

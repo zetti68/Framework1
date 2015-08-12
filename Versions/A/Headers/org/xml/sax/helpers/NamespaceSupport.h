@@ -6,49 +6,47 @@
 #ifndef _OrgXmlSaxHelpersNamespaceSupport_H_
 #define _OrgXmlSaxHelpersNamespaceSupport_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@class JavaUtilArrayList;
 @class JavaUtilHashtable;
-@class OrgXmlSaxHelpersNamespaceSupport_Context;
 @protocol JavaUtilEnumeration;
 
-#import "JreEmulation.h"
+@interface OrgXmlSaxHelpersNamespaceSupport : NSObject
 
-@interface OrgXmlSaxHelpersNamespaceSupport : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
-- (void)reset;
-
-- (void)pushContext;
-
-- (void)popContext;
-
 - (jboolean)declarePrefixWithNSString:(NSString *)prefix
                          withNSString:(NSString *)uri;
+
+- (id<JavaUtilEnumeration>)getDeclaredPrefixes;
+
+- (NSString *)getPrefixWithNSString:(NSString *)uri;
+
+- (id<JavaUtilEnumeration>)getPrefixes;
+
+- (id<JavaUtilEnumeration>)getPrefixesWithNSString:(NSString *)uri;
+
+- (NSString *)getURIWithNSString:(NSString *)prefix;
+
+- (jboolean)isNamespaceDeclUris;
+
+- (void)popContext;
 
 - (IOSObjectArray *)processNameWithNSString:(NSString *)qName
                           withNSStringArray:(IOSObjectArray *)parts
                                 withBoolean:(jboolean)isAttribute;
 
-- (NSString *)getURIWithNSString:(NSString *)prefix;
+- (void)pushContext;
 
-- (id<JavaUtilEnumeration>)getPrefixes;
-
-- (NSString *)getPrefixWithNSString:(NSString *)uri;
-
-- (id<JavaUtilEnumeration>)getPrefixesWithNSString:(NSString *)uri;
-
-- (id<JavaUtilEnumeration>)getDeclaredPrefixes;
+- (void)reset;
 
 - (void)setNamespaceDeclUrisWithBoolean:(jboolean)value;
 
-- (jboolean)isNamespaceDeclUris;
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgXmlSaxHelpersNamespaceSupport_initialized;
 J2OBJC_STATIC_INIT(OrgXmlSaxHelpersNamespaceSupport)
 
 FOUNDATION_EXPORT NSString *OrgXmlSaxHelpersNamespaceSupport_XMLNS_;
@@ -57,8 +55,11 @@ J2OBJC_STATIC_FIELD_GETTER(OrgXmlSaxHelpersNamespaceSupport, XMLNS_, NSString *)
 FOUNDATION_EXPORT NSString *OrgXmlSaxHelpersNamespaceSupport_NSDECL_;
 J2OBJC_STATIC_FIELD_GETTER(OrgXmlSaxHelpersNamespaceSupport, NSDECL_, NSString *)
 
-FOUNDATION_EXPORT id<JavaUtilEnumeration> OrgXmlSaxHelpersNamespaceSupport_EMPTY_ENUMERATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgXmlSaxHelpersNamespaceSupport, EMPTY_ENUMERATION_, id<JavaUtilEnumeration>)
+FOUNDATION_EXPORT void OrgXmlSaxHelpersNamespaceSupport_init(OrgXmlSaxHelpersNamespaceSupport *self);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersNamespaceSupport *new_OrgXmlSaxHelpersNamespaceSupport_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersNamespaceSupport)
 
 @interface OrgXmlSaxHelpersNamespaceSupport_Context : NSObject {
  @public
@@ -70,34 +71,42 @@ J2OBJC_STATIC_FIELD_GETTER(OrgXmlSaxHelpersNamespaceSupport, EMPTY_ENUMERATION_,
   jboolean declsOK_;
 }
 
-- (instancetype)initWithOrgXmlSaxHelpersNamespaceSupport:(OrgXmlSaxHelpersNamespaceSupport *)outer$;
+#pragma mark Package-Private
 
-- (void)setParentWithOrgXmlSaxHelpersNamespaceSupport_Context:(OrgXmlSaxHelpersNamespaceSupport_Context *)parent;
+- (instancetype)initWithOrgXmlSaxHelpersNamespaceSupport:(OrgXmlSaxHelpersNamespaceSupport *)outer$;
 
 - (void)clear;
 
 - (void)declarePrefixWithNSString:(NSString *)prefix
                      withNSString:(NSString *)uri;
 
-- (IOSObjectArray *)processNameWithNSString:(NSString *)qName
-                                withBoolean:(jboolean)isAttribute;
-
-- (NSString *)getURIWithNSString:(NSString *)prefix;
+- (id<JavaUtilEnumeration>)getDeclaredPrefixes;
 
 - (NSString *)getPrefixWithNSString:(NSString *)uri;
 
-- (id<JavaUtilEnumeration>)getDeclaredPrefixes;
-
 - (id<JavaUtilEnumeration>)getPrefixes;
+
+- (NSString *)getURIWithNSString:(NSString *)prefix;
+
+- (IOSObjectArray *)processNameWithNSString:(NSString *)qName
+                                withBoolean:(jboolean)isAttribute;
+
+- (void)setParentWithOrgXmlSaxHelpersNamespaceSupport_Context:(OrgXmlSaxHelpersNamespaceSupport_Context *)parent;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHelpersNamespaceSupport_Context_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHelpersNamespaceSupport_Context)
 
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersNamespaceSupport_Context, prefixTable_, JavaUtilHashtable *)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersNamespaceSupport_Context, uriTable_, JavaUtilHashtable *)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersNamespaceSupport_Context, elementNameTable_, JavaUtilHashtable *)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersNamespaceSupport_Context, attributeNameTable_, JavaUtilHashtable *)
 J2OBJC_FIELD_SETTER(OrgXmlSaxHelpersNamespaceSupport_Context, defaultNS_, NSString *)
+
+FOUNDATION_EXPORT void OrgXmlSaxHelpersNamespaceSupport_Context_initWithOrgXmlSaxHelpersNamespaceSupport_(OrgXmlSaxHelpersNamespaceSupport_Context *self, OrgXmlSaxHelpersNamespaceSupport *outer$);
+
+FOUNDATION_EXPORT OrgXmlSaxHelpersNamespaceSupport_Context *new_OrgXmlSaxHelpersNamespaceSupport_Context_initWithOrgXmlSaxHelpersNamespaceSupport_(OrgXmlSaxHelpersNamespaceSupport *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHelpersNamespaceSupport_Context)
 
 #endif // _OrgXmlSaxHelpersNamespaceSupport_H_

@@ -6,6 +6,9 @@
 #ifndef _JavaNetSocket_H_
 #define _JavaNetSocket_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+
 @class JavaIoFileDescriptor;
 @class JavaIoInputStream;
 @class JavaIoOutputStream;
@@ -16,48 +19,54 @@
 @class JavaNioChannelsSocketChannel;
 @protocol JavaNetSocketImplFactory;
 
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
-
 @interface JavaNetSocket : NSObject < JavaIoCloseable > {
  @public
   JavaNetSocketImpl *impl_;
   jboolean isCreated_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
-
-- (instancetype)initWithJavaNetProxy:(JavaNetProxy *)proxy;
-
-- (instancetype)initWithNSString:(NSString *)dstName
-                         withInt:(jint)dstPort;
-
-- (instancetype)initWithNSString:(NSString *)dstName
-                         withInt:(jint)dstPort
-          withJavaNetInetAddress:(JavaNetInetAddress *)localAddress
-                         withInt:(jint)localPort;
-
-- (instancetype)initWithNSString:(NSString *)hostName
-                         withInt:(jint)port
-                     withBoolean:(jboolean)streaming;
 
 - (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)dstAddress
                                    withInt:(jint)dstPort;
+
+- (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)addr
+                                   withInt:(jint)port
+                               withBoolean:(jboolean)streaming;
 
 - (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)dstAddress
                                    withInt:(jint)dstPort
                     withJavaNetInetAddress:(JavaNetInetAddress *)localAddress
                                    withInt:(jint)localPort;
 
-- (instancetype)initWithJavaNetInetAddress:(JavaNetInetAddress *)addr
-                                   withInt:(jint)port
-                               withBoolean:(jboolean)streaming;
+- (instancetype)initWithJavaNetProxy:(JavaNetProxy *)proxy;
 
-- (instancetype)initWithJavaNetSocketImpl:(JavaNetSocketImpl *)impl;
+- (instancetype)initWithNSString:(NSString *)dstName
+                         withInt:(jint)dstPort;
+
+- (instancetype)initWithNSString:(NSString *)hostName
+                         withInt:(jint)port
+                     withBoolean:(jboolean)streaming;
+
+- (instancetype)initWithNSString:(NSString *)dstName
+                         withInt:(jint)dstPort
+          withJavaNetInetAddress:(JavaNetInetAddress *)localAddress
+                         withInt:(jint)localPort;
+
+- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
 
 - (void)close;
 
-- (void)onClose;
+- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr;
+
+- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
+                                withInt:(jint)timeout;
+
+- (JavaNioChannelsSocketChannel *)getChannel;
+
+- (JavaIoFileDescriptor *)getFileDescriptor$;
 
 - (JavaNetInetAddress *)getInetAddress;
 
@@ -69,27 +78,65 @@
 
 - (jint)getLocalPort;
 
+- (JavaNetSocketAddress *)getLocalSocketAddress;
+
+- (jboolean)getOOBInline;
+
 - (JavaIoOutputStream *)getOutputStream;
 
 - (jint)getPort;
 
-- (jint)getSoLinger;
-
 - (jint)getReceiveBufferSize;
 
+- (JavaNetSocketAddress *)getRemoteSocketAddress;
+
+- (jboolean)getReuseAddress;
+
 - (jint)getSendBufferSize;
+
+- (jint)getSoLinger;
 
 - (jint)getSoTimeout;
 
 - (jboolean)getTcpNoDelay;
 
+- (jint)getTrafficClass;
+
+- (jboolean)isBound;
+
+- (jboolean)isClosed;
+
+- (jboolean)isConnected;
+
+- (jboolean)isInputShutdown;
+
+- (jboolean)isOutputShutdown;
+
+- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
+                             withInt:(jint)localPort;
+
+- (void)onClose;
+
+- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
+                                withInt:(jint)remotePort;
+
+- (void)sendUrgentDataWithInt:(jint)value;
+
 - (void)setKeepAliveWithBoolean:(jboolean)keepAlive;
 
-+ (void)setSocketImplFactoryWithJavaNetSocketImplFactory:(id<JavaNetSocketImplFactory>)fac;
+- (void)setOOBInlineWithBoolean:(jboolean)oobinline;
+
+- (void)setPerformancePreferencesWithInt:(jint)connectionTime
+                                 withInt:(jint)latency
+                                 withInt:(jint)bandwidth;
+
+- (void)setReceiveBufferSizeWithInt:(jint)size;
+
+- (void)setReuseAddressWithBoolean:(jboolean)reuse;
 
 - (void)setSendBufferSizeWithInt:(jint)size;
 
-- (void)setReceiveBufferSizeWithInt:(jint)size;
++ (void)setSocketImplFactoryWithJavaNetSocketImplFactory:(id<JavaNetSocketImplFactory>)fac;
 
 - (void)setSoLingerWithBoolean:(jboolean)on
                        withInt:(jint)timeout;
@@ -98,72 +145,66 @@
 
 - (void)setTcpNoDelayWithBoolean:(jboolean)on;
 
-- (NSString *)description;
+- (void)setTrafficClassWithInt:(jint)value;
 
 - (void)shutdownInput;
 
 - (void)shutdownOutput;
 
-- (JavaNetSocketAddress *)getLocalSocketAddress;
+- (NSString *)description;
 
-- (JavaNetSocketAddress *)getRemoteSocketAddress;
+#pragma mark Protected
 
-- (jboolean)isBound;
+- (instancetype)initWithJavaNetSocketImpl:(JavaNetSocketImpl *)impl;
 
-- (jboolean)isConnected;
-
-- (jboolean)isClosed;
-
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
-
-- (void)onBindWithJavaNetInetAddress:(JavaNetInetAddress *)localAddress
-                             withInt:(jint)localPort;
-
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr;
-
-- (void)connectWithJavaNetSocketAddress:(JavaNetSocketAddress *)remoteAddr
-                                withInt:(jint)timeout;
-
-- (void)onConnectWithJavaNetInetAddress:(JavaNetInetAddress *)remoteAddress
-                                withInt:(jint)remotePort;
-
-- (jboolean)isInputShutdown;
-
-- (jboolean)isOutputShutdown;
-
-- (void)setReuseAddressWithBoolean:(jboolean)reuse;
-
-- (jboolean)getReuseAddress;
-
-- (void)setOOBInlineWithBoolean:(jboolean)oobinline;
-
-- (jboolean)getOOBInline;
-
-- (void)setTrafficClassWithInt:(jint)value;
-
-- (jint)getTrafficClass;
-
-- (void)sendUrgentDataWithInt:(jint)value;
+#pragma mark Package-Private
 
 - (void)accepted;
 
-- (JavaNioChannelsSocketChannel *)getChannel;
-
-- (JavaIoFileDescriptor *)getFileDescriptor$;
-
-- (void)setPerformancePreferencesWithInt:(jint)connectionTime
-                                 withInt:(jint)latency
-                                 withInt:(jint)bandwidth;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocket_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocket)
 
 J2OBJC_FIELD_SETTER(JavaNetSocket, impl_, JavaNetSocketImpl *)
+
+FOUNDATION_EXPORT void JavaNetSocket_init(JavaNetSocket *self);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithJavaNetProxy_(JavaNetSocket *self, JavaNetProxy *proxy);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithJavaNetProxy_(JavaNetProxy *proxy) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithNSString_withInt_(JavaNetSocket *self, NSString *dstName, jint dstPort);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithNSString_withInt_(NSString *dstName, jint dstPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithNSString_withInt_withJavaNetInetAddress_withInt_(JavaNetSocket *self, NSString *dstName, jint dstPort, JavaNetInetAddress *localAddress, jint localPort);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithNSString_withInt_withJavaNetInetAddress_withInt_(NSString *dstName, jint dstPort, JavaNetInetAddress *localAddress, jint localPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithNSString_withInt_withBoolean_(JavaNetSocket *self, NSString *hostName, jint port, jboolean streaming);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithNSString_withInt_withBoolean_(NSString *hostName, jint port, jboolean streaming) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithJavaNetInetAddress_withInt_(JavaNetSocket *self, JavaNetInetAddress *dstAddress, jint dstPort);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithJavaNetInetAddress_withInt_(JavaNetInetAddress *dstAddress, jint dstPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithJavaNetInetAddress_withInt_withJavaNetInetAddress_withInt_(JavaNetSocket *self, JavaNetInetAddress *dstAddress, jint dstPort, JavaNetInetAddress *localAddress, jint localPort);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithJavaNetInetAddress_withInt_withJavaNetInetAddress_withInt_(JavaNetInetAddress *dstAddress, jint dstPort, JavaNetInetAddress *localAddress, jint localPort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithJavaNetInetAddress_withInt_withBoolean_(JavaNetSocket *self, JavaNetInetAddress *addr, jint port, jboolean streaming);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithJavaNetInetAddress_withInt_withBoolean_(JavaNetInetAddress *addr, jint port, jboolean streaming) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocket_initWithJavaNetSocketImpl_(JavaNetSocket *self, JavaNetSocketImpl *impl);
+
+FOUNDATION_EXPORT JavaNetSocket *new_JavaNetSocket_initWithJavaNetSocketImpl_(JavaNetSocketImpl *impl) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT void JavaNetSocket_setSocketImplFactoryWithJavaNetSocketImplFactory_(id<JavaNetSocketImplFactory> fac);
 
-FOUNDATION_EXPORT id<JavaNetSocketImplFactory> JavaNetSocket_factory_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetSocket, factory_, id<JavaNetSocketImplFactory>)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetSocket, factory_, id<JavaNetSocketImplFactory>)
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocket)
 
 #endif // _JavaNetSocket_H_

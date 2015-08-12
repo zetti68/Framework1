@@ -6,27 +6,22 @@
 #ifndef _JavaUtilConcurrentThreadLocalRandom_H_
 #define _JavaUtilConcurrentThreadLocalRandom_H_
 
-#import "JreEmulation.h"
-#include "java/lang/ThreadLocal.h"
+#include "J2ObjC_header.h"
 #include "java/util/Random.h"
-
-#define JavaUtilConcurrentThreadLocalRandom_addend 11LL
-#define JavaUtilConcurrentThreadLocalRandom_mask 281474976710655LL
-#define JavaUtilConcurrentThreadLocalRandom_multiplier 25214903917LL
-#define JavaUtilConcurrentThreadLocalRandom_serialVersionUID -5851777807851030925LL
 
 @interface JavaUtilConcurrentThreadLocalRandom : JavaUtilRandom {
  @public
   jboolean initialized_;
 }
 
-- (instancetype)init;
+#pragma mark Public
 
 + (JavaUtilConcurrentThreadLocalRandom *)current;
 
-- (void)setSeedWithLong:(jlong)seed;
+- (jdouble)nextDoubleWithDouble:(jdouble)n;
 
-- (jint)nextWithInt:(jint)bits;
+- (jdouble)nextDoubleWithDouble:(jdouble)least
+                     withDouble:(jdouble)bound;
 
 - (jint)nextIntWithInt:(jint)least
                withInt:(jint)bound;
@@ -36,37 +31,26 @@
 - (jlong)nextLongWithLong:(jlong)least
                  withLong:(jlong)bound;
 
-- (jdouble)nextDoubleWithDouble:(jdouble)n;
+- (void)setSeedWithLong:(jlong)seed;
 
-- (jdouble)nextDoubleWithDouble:(jdouble)least
-                     withDouble:(jdouble)bound;
+#pragma mark Protected
 
-@end
+- (jint)nextWithInt:(jint)bits;
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentThreadLocalRandom_initialized;
-J2OBJC_STATIC_INIT(JavaUtilConcurrentThreadLocalRandom)
-FOUNDATION_EXPORT JavaUtilConcurrentThreadLocalRandom *JavaUtilConcurrentThreadLocalRandom_current();
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadLocalRandom, multiplier, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadLocalRandom, addend, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadLocalRandom, mask, jlong)
-
-FOUNDATION_EXPORT JavaLangThreadLocal *JavaUtilConcurrentThreadLocalRandom_localRandom_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadLocalRandom, localRandom_, JavaLangThreadLocal *)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentThreadLocalRandom, serialVersionUID, jlong)
-
-@interface JavaUtilConcurrentThreadLocalRandom_$1 : JavaLangThreadLocal {
-}
-
-- (JavaUtilConcurrentThreadLocalRandom *)initialValue OBJC_METHOD_FAMILY_NONE;
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentThreadLocalRandom_$1_init() {}
+J2OBJC_STATIC_INIT(JavaUtilConcurrentThreadLocalRandom)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentThreadLocalRandom_init(JavaUtilConcurrentThreadLocalRandom *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentThreadLocalRandom *new_JavaUtilConcurrentThreadLocalRandom_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT JavaUtilConcurrentThreadLocalRandom *JavaUtilConcurrentThreadLocalRandom_current();
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentThreadLocalRandom)
 
 #endif // _JavaUtilConcurrentThreadLocalRandom_H_

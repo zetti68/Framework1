@@ -6,13 +6,12 @@
 #ifndef _JavaLangStackOverflowError_H_
 #define _JavaLangStackOverflowError_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/VirtualMachineError.h"
 
-#define JavaLangStackOverflowError_serialVersionUID 8609175038441759607LL
+@interface JavaLangStackOverflowError : JavaLangVirtualMachineError
 
-@interface JavaLangStackOverflowError : JavaLangVirtualMachineError {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangStackOverflowError_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangStackOverflowError)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaLangStackOverflowError, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaLangStackOverflowError_init(JavaLangStackOverflowError *self);
+
+FOUNDATION_EXPORT JavaLangStackOverflowError *new_JavaLangStackOverflowError_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangStackOverflowError_initWithNSString_(JavaLangStackOverflowError *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaLangStackOverflowError *new_JavaLangStackOverflowError_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangStackOverflowError)
 
 #endif // _JavaLangStackOverflowError_H_

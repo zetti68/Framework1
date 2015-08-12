@@ -6,9 +6,9 @@
 #ifndef _OrgJsonJSONObject_H_
 #define _OrgJsonJSONObject_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSObjectArray;
-@class JavaLangDouble;
-@class JavaUtilLinkedHashMap;
 @class OrgJsonJSONArray;
 @class OrgJsonJSONStringer;
 @class OrgJsonJSONTokener;
@@ -16,23 +16,87 @@
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
+@interface OrgJsonJSONObject : NSObject
 
-@interface OrgJsonJSONObject : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)copyFrom;
-
-- (instancetype)initWithOrgJsonJSONTokener:(OrgJsonJSONTokener *)readFrom;
-
-- (instancetype)initWithNSString:(NSString *)json;
 
 - (instancetype)initWithOrgJsonJSONObject:(OrgJsonJSONObject *)copyFrom
                         withNSStringArray:(IOSObjectArray *)names;
 
+- (instancetype)initWithOrgJsonJSONTokener:(OrgJsonJSONTokener *)readFrom;
+
+- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)copyFrom;
+
+- (instancetype)initWithNSString:(NSString *)json;
+
+- (OrgJsonJSONObject *)accumulateWithNSString:(NSString *)name
+                                       withId:(id)value;
+
+- (OrgJsonJSONObject *)appendWithNSString:(NSString *)name
+                                   withId:(id)value;
+
+- (id)getWithNSString:(NSString *)name;
+
+- (jboolean)getBooleanWithNSString:(NSString *)name;
+
+- (jdouble)getDoubleWithNSString:(NSString *)name;
+
+- (jint)getIntWithNSString:(NSString *)name;
+
+- (OrgJsonJSONArray *)getJSONArrayWithNSString:(NSString *)name;
+
+- (OrgJsonJSONObject *)getJSONObjectWithNSString:(NSString *)name;
+
+- (jlong)getLongWithNSString:(NSString *)name;
+
+- (NSString *)getStringWithNSString:(NSString *)name;
+
+- (jboolean)hasWithNSString:(NSString *)name;
+
+- (jboolean)isNullWithNSString:(NSString *)name;
+
+- (id<JavaUtilIterator>)keys;
+
+- (id<JavaUtilSet>)keySet;
+
 - (jint)length;
+
+- (OrgJsonJSONArray *)names;
+
++ (NSString *)numberToStringWithNSNumber:(NSNumber *)number;
+
+- (id)optWithNSString:(NSString *)name;
+
+- (jboolean)optBooleanWithNSString:(NSString *)name;
+
+- (jboolean)optBooleanWithNSString:(NSString *)name
+                       withBoolean:(jboolean)fallback;
+
+- (jdouble)optDoubleWithNSString:(NSString *)name;
+
+- (jdouble)optDoubleWithNSString:(NSString *)name
+                      withDouble:(jdouble)fallback;
+
+- (jint)optIntWithNSString:(NSString *)name;
+
+- (jint)optIntWithNSString:(NSString *)name
+                   withInt:(jint)fallback;
+
+- (OrgJsonJSONArray *)optJSONArrayWithNSString:(NSString *)name;
+
+- (OrgJsonJSONObject *)optJSONObjectWithNSString:(NSString *)name;
+
+- (jlong)optLongWithNSString:(NSString *)name;
+
+- (jlong)optLongWithNSString:(NSString *)name
+                    withLong:(jlong)fallback;
+
+- (NSString *)optStringWithNSString:(NSString *)name;
+
+- (NSString *)optStringWithNSString:(NSString *)name
+                       withNSString:(NSString *)fallback;
 
 - (OrgJsonJSONObject *)putWithNSString:(NSString *)name
                            withBoolean:(jboolean)value;
@@ -52,112 +116,57 @@
 - (OrgJsonJSONObject *)putOptWithNSString:(NSString *)name
                                    withId:(id)value;
 
-- (OrgJsonJSONObject *)accumulateWithNSString:(NSString *)name
-                                       withId:(id)value;
-
-- (OrgJsonJSONObject *)appendWithNSString:(NSString *)name
-                                   withId:(id)value;
-
-- (NSString *)checkNameWithNSString:(NSString *)name;
++ (NSString *)quoteWithNSString:(NSString *)data;
 
 - (id)removeWithNSString:(NSString *)name;
 
-- (jboolean)isNullWithNSString:(NSString *)name;
-
-- (jboolean)hasWithNSString:(NSString *)name;
-
-- (id)getWithNSString:(NSString *)name;
-
-- (id)optWithNSString:(NSString *)name;
-
-- (jboolean)getBooleanWithNSString:(NSString *)name;
-
-- (jboolean)optBooleanWithNSString:(NSString *)name;
-
-- (jboolean)optBooleanWithNSString:(NSString *)name
-                       withBoolean:(jboolean)fallback;
-
-- (jdouble)getDoubleWithNSString:(NSString *)name;
-
-- (jdouble)optDoubleWithNSString:(NSString *)name;
-
-- (jdouble)optDoubleWithNSString:(NSString *)name
-                      withDouble:(jdouble)fallback;
-
-- (jint)getIntWithNSString:(NSString *)name;
-
-- (jint)optIntWithNSString:(NSString *)name;
-
-- (jint)optIntWithNSString:(NSString *)name
-                   withInt:(jint)fallback;
-
-- (jlong)getLongWithNSString:(NSString *)name;
-
-- (jlong)optLongWithNSString:(NSString *)name;
-
-- (jlong)optLongWithNSString:(NSString *)name
-                    withLong:(jlong)fallback;
-
-- (NSString *)getStringWithNSString:(NSString *)name;
-
-- (NSString *)optStringWithNSString:(NSString *)name;
-
-- (NSString *)optStringWithNSString:(NSString *)name
-                       withNSString:(NSString *)fallback;
-
-- (OrgJsonJSONArray *)getJSONArrayWithNSString:(NSString *)name;
-
-- (OrgJsonJSONArray *)optJSONArrayWithNSString:(NSString *)name;
-
-- (OrgJsonJSONObject *)getJSONObjectWithNSString:(NSString *)name;
-
-- (OrgJsonJSONObject *)optJSONObjectWithNSString:(NSString *)name;
-
 - (OrgJsonJSONArray *)toJSONArrayWithOrgJsonJSONArray:(OrgJsonJSONArray *)names;
-
-- (id<JavaUtilIterator>)keys;
-
-- (id<JavaUtilSet>)keySet;
-
-- (OrgJsonJSONArray *)names;
 
 - (NSString *)description;
 
 - (NSString *)toStringWithInt:(jint)indentSpaces;
 
-- (void)writeToWithOrgJsonJSONStringer:(OrgJsonJSONStringer *)stringer;
-
-+ (NSString *)numberToStringWithNSNumber:(NSNumber *)number;
-
-+ (NSString *)quoteWithNSString:(NSString *)data;
-
 + (id)wrapWithId:(id)o;
+
+#pragma mark Package-Private
+
+- (NSString *)checkNameWithNSString:(NSString *)name;
+
+- (void)writeToWithOrgJsonJSONStringer:(OrgJsonJSONStringer *)stringer;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgJsonJSONObject_initialized;
 J2OBJC_STATIC_INIT(OrgJsonJSONObject)
-FOUNDATION_EXPORT NSString *OrgJsonJSONObject_numberToStringWithNSNumber_(NSNumber *number);
-FOUNDATION_EXPORT NSString *OrgJsonJSONObject_quoteWithNSString_(NSString *data);
-FOUNDATION_EXPORT id OrgJsonJSONObject_wrapWithId_(id o);
-
-FOUNDATION_EXPORT JavaLangDouble *OrgJsonJSONObject_NEGATIVE_ZERO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONObject, NEGATIVE_ZERO_, JavaLangDouble *)
 
 FOUNDATION_EXPORT id OrgJsonJSONObject_NULL__;
 J2OBJC_STATIC_FIELD_GETTER(OrgJsonJSONObject, NULL__, id)
 
-@interface OrgJsonJSONObject_$1 : NSObject {
-}
+FOUNDATION_EXPORT void OrgJsonJSONObject_init(OrgJsonJSONObject *self);
 
-- (jboolean)isEqual:(id)o;
+FOUNDATION_EXPORT OrgJsonJSONObject *new_OrgJsonJSONObject_init() NS_RETURNS_RETAINED;
 
-- (NSString *)description;
+FOUNDATION_EXPORT void OrgJsonJSONObject_initWithJavaUtilMap_(OrgJsonJSONObject *self, id<JavaUtilMap> copyFrom);
 
-- (instancetype)init;
+FOUNDATION_EXPORT OrgJsonJSONObject *new_OrgJsonJSONObject_initWithJavaUtilMap_(id<JavaUtilMap> copyFrom) NS_RETURNS_RETAINED;
 
-@end
+FOUNDATION_EXPORT void OrgJsonJSONObject_initWithOrgJsonJSONTokener_(OrgJsonJSONObject *self, OrgJsonJSONTokener *readFrom);
 
-__attribute__((always_inline)) inline void OrgJsonJSONObject_$1_init() {}
+FOUNDATION_EXPORT OrgJsonJSONObject *new_OrgJsonJSONObject_initWithOrgJsonJSONTokener_(OrgJsonJSONTokener *readFrom) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONObject_initWithNSString_(OrgJsonJSONObject *self, NSString *json);
+
+FOUNDATION_EXPORT OrgJsonJSONObject *new_OrgJsonJSONObject_initWithNSString_(NSString *json) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgJsonJSONObject_initWithOrgJsonJSONObject_withNSStringArray_(OrgJsonJSONObject *self, OrgJsonJSONObject *copyFrom, IOSObjectArray *names);
+
+FOUNDATION_EXPORT OrgJsonJSONObject *new_OrgJsonJSONObject_initWithOrgJsonJSONObject_withNSStringArray_(OrgJsonJSONObject *copyFrom, IOSObjectArray *names) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT NSString *OrgJsonJSONObject_numberToStringWithNSNumber_(NSNumber *number);
+
+FOUNDATION_EXPORT NSString *OrgJsonJSONObject_quoteWithNSString_(NSString *data);
+
+FOUNDATION_EXPORT id OrgJsonJSONObject_wrapWithId_(id o);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONObject)
 
 #endif // _OrgJsonJSONObject_H_

@@ -6,31 +6,21 @@
 #ifndef _JavaIoObjectInputStream_H_
 #define _JavaIoObjectInputStream_H_
 
-@class IOSByteArray;
-@class IOSClass;
-@class IOSObjectArray;
-@class JavaIoDataInputStream;
-@class JavaIoEmulatedFieldsForLoading;
-@class JavaIoInvalidClassException;
-@class JavaIoObjectInputStream_GetField;
-@class JavaIoObjectStreamClass;
-@class JavaIoStreamCorruptedException;
-@class JavaLangClassLoader;
-@class JavaLangException;
-@class JavaUtilArrayList;
-@class JavaUtilHashMap;
-@protocol JavaIoObjectInputValidation;
-@protocol JavaUtilList;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/InputStream.h"
 #include "java/io/ObjectInput.h"
 #include "java/io/ObjectStreamConstants.h"
 
-@interface JavaIoObjectInputStream : JavaIoInputStream < JavaIoObjectInput, JavaIoObjectStreamConstants > {
-}
+@class IOSByteArray;
+@class IOSClass;
+@class IOSObjectArray;
+@class JavaIoObjectInputStream_GetField;
+@class JavaIoObjectStreamClass;
+@protocol JavaIoObjectInputValidation;
 
-- (instancetype)init;
+@interface JavaIoObjectInputStream : JavaIoInputStream < JavaIoObjectInput, JavaIoObjectStreamConstants >
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)input;
 
@@ -40,13 +30,11 @@
 
 - (void)defaultReadObject;
 
-- (jboolean)enableResolveObjectWithBoolean:(jboolean)enable;
-
 - (jint)read;
 
 - (jint)readWithByteArray:(IOSByteArray *)buffer
-                  withInt:(jint)offset
-                  withInt:(jint)length;
+                  withInt:(jint)byteOffset
+                  withInt:(jint)byteCount;
 
 - (jboolean)readBoolean;
 
@@ -72,19 +60,11 @@
 
 - (jlong)readLong;
 
-- (JavaIoObjectStreamClass *)readClassDescriptor;
-
-- (IOSClass *)resolveProxyClassWithNSStringArray:(IOSObjectArray *)interfaceNames;
-
 - (id)readObject;
-
-- (id)readUnshared;
-
-- (id)readObjectOverride;
 
 - (jshort)readShort;
 
-- (void)readStreamHeader;
+- (id)readUnshared;
 
 - (jint)readUnsignedByte;
 
@@ -95,28 +75,39 @@
 - (void)registerValidationWithJavaIoObjectInputValidation:(id<JavaIoObjectInputValidation>)object
                                                   withInt:(jint)priority;
 
+- (jint)skipBytesWithInt:(jint)length;
+
+#pragma mark Protected
+
+- (instancetype)init;
+
+- (jboolean)enableResolveObjectWithBoolean:(jboolean)enable;
+
+- (JavaIoObjectStreamClass *)readClassDescriptor;
+
+- (id)readObjectOverride;
+
+- (void)readStreamHeader;
+
 - (IOSClass *)resolveClassWithJavaIoObjectStreamClass:(JavaIoObjectStreamClass *)osClass;
 
 - (id)resolveObjectWithId:(id)object;
 
-- (jint)skipBytesWithInt:(jint)length;
+- (IOSClass *)resolveProxyClassWithNSStringArray:(IOSObjectArray *)interfaceNames;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaIoObjectInputStream_initialized;
 J2OBJC_STATIC_INIT(JavaIoObjectInputStream)
 
-FOUNDATION_EXPORT id JavaIoObjectInputStream_UNSHARED_OBJ_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectInputStream, UNSHARED_OBJ_, id)
+FOUNDATION_EXPORT void JavaIoObjectInputStream_init(JavaIoObjectInputStream *self);
 
-FOUNDATION_EXPORT JavaUtilHashMap *JavaIoObjectInputStream_PRIMITIVE_CLASSES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectInputStream, PRIMITIVE_CLASSES_, JavaUtilHashMap *)
+FOUNDATION_EXPORT JavaIoObjectInputStream *new_JavaIoObjectInputStream_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT JavaLangClassLoader *JavaIoObjectInputStream_bootstrapLoader_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectInputStream, bootstrapLoader_, JavaLangClassLoader *)
+FOUNDATION_EXPORT void JavaIoObjectInputStream_initWithJavaIoInputStream_(JavaIoObjectInputStream *self, JavaIoInputStream *input);
 
-FOUNDATION_EXPORT JavaLangClassLoader *JavaIoObjectInputStream_systemLoader_;
-J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectInputStream, systemLoader_, JavaLangClassLoader *)
+FOUNDATION_EXPORT JavaIoObjectInputStream *new_JavaIoObjectInputStream_initWithJavaIoInputStream_(JavaIoInputStream *input) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectInputStream)
 
 @interface JavaIoObjectInputStream_InputValidationDesc : NSObject {
  @public
@@ -124,32 +115,44 @@ J2OBJC_STATIC_FIELD_GETTER(JavaIoObjectInputStream, systemLoader_, JavaLangClass
   jint priority_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectInputStream_InputValidationDesc_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectInputStream_InputValidationDesc)
 
 J2OBJC_FIELD_SETTER(JavaIoObjectInputStream_InputValidationDesc, validator_, id<JavaIoObjectInputValidation>)
 
-@interface JavaIoObjectInputStream_GetField : NSObject {
-}
+FOUNDATION_EXPORT void JavaIoObjectInputStream_InputValidationDesc_init(JavaIoObjectInputStream_InputValidationDesc *self);
 
-- (JavaIoObjectStreamClass *)getObjectStreamClass;
+FOUNDATION_EXPORT JavaIoObjectInputStream_InputValidationDesc *new_JavaIoObjectInputStream_InputValidationDesc_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectInputStream_InputValidationDesc)
+
+@interface JavaIoObjectInputStream_GetField : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (jboolean)defaultedWithNSString:(NSString *)name;
 
 - (jboolean)getWithNSString:(NSString *)name
                 withBoolean:(jboolean)defaultValue;
 
-- (jchar)getWithNSString:(NSString *)name
-                withChar:(jchar)defaultValue;
-
 - (jbyte)getWithNSString:(NSString *)name
                 withByte:(jbyte)defaultValue;
 
-- (jshort)getWithNSString:(NSString *)name
-                withShort:(jshort)defaultValue;
+- (jchar)getWithNSString:(NSString *)name
+                withChar:(jchar)defaultValue;
+
+- (jdouble)getWithNSString:(NSString *)name
+                withDouble:(jdouble)defaultValue;
+
+- (jfloat)getWithNSString:(NSString *)name
+                withFloat:(jfloat)defaultValue;
 
 - (jint)getWithNSString:(NSString *)name
                 withInt:(jint)defaultValue;
@@ -157,19 +160,20 @@ J2OBJC_FIELD_SETTER(JavaIoObjectInputStream_InputValidationDesc, validator_, id<
 - (jlong)getWithNSString:(NSString *)name
                 withLong:(jlong)defaultValue;
 
-- (jfloat)getWithNSString:(NSString *)name
-                withFloat:(jfloat)defaultValue;
-
-- (jdouble)getWithNSString:(NSString *)name
-                withDouble:(jdouble)defaultValue;
-
 - (id)getWithNSString:(NSString *)name
                withId:(id)defaultValue;
 
-- (instancetype)init;
+- (jshort)getWithNSString:(NSString *)name
+                withShort:(jshort)defaultValue;
+
+- (JavaIoObjectStreamClass *)getObjectStreamClass;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectInputStream_GetField_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectInputStream_GetField)
+
+FOUNDATION_EXPORT void JavaIoObjectInputStream_GetField_init(JavaIoObjectInputStream_GetField *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectInputStream_GetField)
 
 #endif // _JavaIoObjectInputStream_H_

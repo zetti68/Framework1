@@ -6,91 +6,76 @@
 #ifndef _JavaSecurityMessageDigest_H_
 #define _JavaSecurityMessageDigest_H_
 
+#include "J2ObjC_header.h"
+#include "java/security/MessageDigestSpi.h"
+
 @class IOSByteArray;
 @class JavaNioByteBuffer;
 @class JavaSecurityProvider;
-@class OrgApacheHarmonySecurityFortressEngine;
 
-#import "JreEmulation.h"
-#include "java/security/MessageDigestSpi.h"
+@interface JavaSecurityMessageDigest : JavaSecurityMessageDigestSpi
 
-@interface JavaSecurityMessageDigest : JavaSecurityMessageDigestSpi {
-}
+#pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)algorithm;
-
-+ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm;
-
-+ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm
-                                          withNSString:(NSString *)provider;
-
-+ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm
-                              withJavaSecurityProvider:(JavaSecurityProvider *)provider;
-
-- (void)reset;
-
-- (void)updateWithByte:(jbyte)arg0;
-
-- (void)updateWithByteArray:(IOSByteArray *)input
-                    withInt:(jint)offset
-                    withInt:(jint)len;
-
-- (void)updateWithByteArray:(IOSByteArray *)input;
+- (id)clone;
 
 - (IOSByteArray *)digest;
+
+- (IOSByteArray *)digestWithByteArray:(IOSByteArray *)input;
 
 - (jint)digestWithByteArray:(IOSByteArray *)buf
                     withInt:(jint)offset
                     withInt:(jint)len;
 
-- (IOSByteArray *)digestWithByteArray:(IOSByteArray *)input;
+- (NSString *)getAlgorithm;
 
-- (NSString *)description;
+- (jint)getDigestLength;
+
++ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm;
+
++ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm
+                              withJavaSecurityProvider:(JavaSecurityProvider *)provider;
+
++ (JavaSecurityMessageDigest *)getInstanceWithNSString:(NSString *)algorithm
+                                          withNSString:(NSString *)provider;
+
+- (JavaSecurityProvider *)getProvider;
 
 + (jboolean)isEqualWithByteArray:(IOSByteArray *)digesta
                    withByteArray:(IOSByteArray *)digestb;
 
-- (NSString *)getAlgorithm;
+- (void)reset;
 
-- (JavaSecurityProvider *)getProvider;
+- (NSString *)description;
 
-- (jint)getDigestLength;
+- (void)updateWithByte:(jbyte)arg0;
 
-- (id)clone;
+- (void)updateWithByteArray:(IOSByteArray *)input;
+
+- (void)updateWithByteArray:(IOSByteArray *)input
+                    withInt:(jint)offset
+                    withInt:(jint)len;
 
 - (void)updateWithJavaNioByteBuffer:(JavaNioByteBuffer *)input;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)algorithm;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecurityMessageDigest_initialized;
 J2OBJC_STATIC_INIT(JavaSecurityMessageDigest)
+
+FOUNDATION_EXPORT void JavaSecurityMessageDigest_initWithNSString_(JavaSecurityMessageDigest *self, NSString *algorithm);
+
 FOUNDATION_EXPORT JavaSecurityMessageDigest *JavaSecurityMessageDigest_getInstanceWithNSString_(NSString *algorithm);
+
 FOUNDATION_EXPORT JavaSecurityMessageDigest *JavaSecurityMessageDigest_getInstanceWithNSString_withNSString_(NSString *algorithm, NSString *provider);
+
 FOUNDATION_EXPORT JavaSecurityMessageDigest *JavaSecurityMessageDigest_getInstanceWithNSString_withJavaSecurityProvider_(NSString *algorithm, JavaSecurityProvider *provider);
+
 FOUNDATION_EXPORT jboolean JavaSecurityMessageDigest_isEqualWithByteArray_withByteArray_(IOSByteArray *digesta, IOSByteArray *digestb);
 
-FOUNDATION_EXPORT OrgApacheHarmonySecurityFortressEngine *JavaSecurityMessageDigest_ENGINE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityMessageDigest, ENGINE_, OrgApacheHarmonySecurityFortressEngine *)
-
-@interface JavaSecurityMessageDigest_MessageDigestImpl : JavaSecurityMessageDigest {
-}
-
-- (void)engineReset;
-
-- (IOSByteArray *)engineDigest;
-
-- (jint)engineGetDigestLength;
-
-- (void)engineUpdateWithByte:(jbyte)arg0;
-
-- (void)engineUpdateWithByteArray:(IOSByteArray *)arg0
-                          withInt:(jint)arg1
-                          withInt:(jint)arg2;
-
-- (id)clone;
-
-@end
-
-__attribute__((always_inline)) inline void JavaSecurityMessageDigest_MessageDigestImpl_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityMessageDigest)
 
 #endif // _JavaSecurityMessageDigest_H_

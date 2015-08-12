@@ -6,18 +6,16 @@
 #ifndef _JavaUtilConcurrentSemaphore_H_
 #define _JavaUtilConcurrentSemaphore_H_
 
-@class JavaUtilConcurrentSemaphore_Sync;
-@class JavaUtilConcurrentTimeUnitEnum;
-@protocol JavaUtilCollection;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/concurrent/locks/AbstractQueuedSynchronizer.h"
 
-#define JavaUtilConcurrentSemaphore_serialVersionUID -3222578661600680210LL
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
 
-@interface JavaUtilConcurrentSemaphore : NSObject < JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentSemaphore : NSObject < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)permits;
 
@@ -26,18 +24,29 @@
 
 - (void)acquire;
 
+- (void)acquireWithInt:(jint)permits;
+
 - (void)acquireUninterruptibly;
 
-- (jboolean)tryAcquire;
+- (void)acquireUninterruptiblyWithInt:(jint)permits;
 
-- (jboolean)tryAcquireWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+- (jint)availablePermits;
+
+- (jint)drainPermits;
+
+- (jint)getQueueLength;
+
+- (jboolean)hasQueuedThreads;
+
+- (jboolean)isFair;
 
 - (void)release__;
 
-- (void)acquireWithInt:(jint)permits;
+- (void)release__WithInt:(jint)permits;
 
-- (void)acquireUninterruptiblyWithInt:(jint)permits;
+- (NSString *)description;
+
+- (jboolean)tryAcquire;
 
 - (jboolean)tryAcquireWithInt:(jint)permits;
 
@@ -45,81 +54,93 @@ withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
                      withLong:(jlong)timeout
 withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-- (void)release__WithInt:(jint)permits;
+- (jboolean)tryAcquireWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
-- (jint)availablePermits;
-
-- (jint)drainPermits;
-
-- (void)reducePermitsWithInt:(jint)reduction;
-
-- (jboolean)isFair;
-
-- (jboolean)hasQueuedThreads;
-
-- (jint)getQueueLength;
+#pragma mark Protected
 
 - (id<JavaUtilCollection>)getQueuedThreads;
 
-- (NSString *)description;
+- (void)reducePermitsWithInt:(jint)reduction;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentSemaphore_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentSemaphore)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentSemaphore, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentSemaphore_initWithInt_(JavaUtilConcurrentSemaphore *self, jint permits);
 
-#define JavaUtilConcurrentSemaphore_Sync_serialVersionUID 1192457210091910933LL
+FOUNDATION_EXPORT JavaUtilConcurrentSemaphore *new_JavaUtilConcurrentSemaphore_initWithInt_(jint permits) NS_RETURNS_RETAINED;
 
-@interface JavaUtilConcurrentSemaphore_Sync : JavaUtilConcurrentLocksAbstractQueuedSynchronizer {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentSemaphore_initWithInt_withBoolean_(JavaUtilConcurrentSemaphore *self, jint permits, jboolean fair);
+
+FOUNDATION_EXPORT JavaUtilConcurrentSemaphore *new_JavaUtilConcurrentSemaphore_initWithInt_withBoolean_(jint permits, jboolean fair) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentSemaphore)
+
+@interface JavaUtilConcurrentSemaphore_Sync : JavaUtilConcurrentLocksAbstractQueuedSynchronizer
+
+#pragma mark Protected
+
+- (jboolean)tryReleaseSharedWithInt:(jint)releases;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithInt:(jint)permits;
+
+- (jint)drainPermits;
 
 - (jint)getPermits;
 
 - (jint)nonfairTryAcquireSharedWithInt:(jint)acquires;
 
-- (jboolean)tryReleaseSharedWithInt:(jint)releases;
-
 - (void)reducePermitsWithInt:(jint)reductions;
 
-- (jint)drainPermits;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentSemaphore_Sync_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentSemaphore_Sync)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentSemaphore_Sync, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentSemaphore_Sync_initWithInt_(JavaUtilConcurrentSemaphore_Sync *self, jint permits);
 
-#define JavaUtilConcurrentSemaphore_NonfairSync_serialVersionUID -2694183684443567898LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentSemaphore_Sync)
 
-@interface JavaUtilConcurrentSemaphore_NonfairSync : JavaUtilConcurrentSemaphore_Sync {
-}
+@interface JavaUtilConcurrentSemaphore_NonfairSync : JavaUtilConcurrentSemaphore_Sync
 
-- (instancetype)initWithInt:(jint)permits;
+#pragma mark Protected
 
 - (jint)tryAcquireSharedWithInt:(jint)acquires;
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentSemaphore_NonfairSync_init() {}
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentSemaphore_NonfairSync, serialVersionUID, jlong)
-
-#define JavaUtilConcurrentSemaphore_FairSync_serialVersionUID 2014338818796000944LL
-
-@interface JavaUtilConcurrentSemaphore_FairSync : JavaUtilConcurrentSemaphore_Sync {
-}
+#pragma mark Package-Private
 
 - (instancetype)initWithInt:(jint)permits;
 
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentSemaphore_NonfairSync)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentSemaphore_NonfairSync_initWithInt_(JavaUtilConcurrentSemaphore_NonfairSync *self, jint permits);
+
+FOUNDATION_EXPORT JavaUtilConcurrentSemaphore_NonfairSync *new_JavaUtilConcurrentSemaphore_NonfairSync_initWithInt_(jint permits) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentSemaphore_NonfairSync)
+
+@interface JavaUtilConcurrentSemaphore_FairSync : JavaUtilConcurrentSemaphore_Sync
+
+#pragma mark Protected
+
 - (jint)tryAcquireSharedWithInt:(jint)acquires;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)permits;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentSemaphore_FairSync_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentSemaphore_FairSync)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentSemaphore_FairSync, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentSemaphore_FairSync_initWithInt_(JavaUtilConcurrentSemaphore_FairSync *self, jint permits);
+
+FOUNDATION_EXPORT JavaUtilConcurrentSemaphore_FairSync *new_JavaUtilConcurrentSemaphore_FairSync_initWithInt_(jint permits) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentSemaphore_FairSync)
 
 #endif // _JavaUtilConcurrentSemaphore_H_

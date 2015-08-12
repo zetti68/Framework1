@@ -6,18 +6,22 @@
 #ifndef _JavaNetSocketUtils_H_
 #define _JavaNetSocketUtils_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNetSocket;
 
-#import "JreEmulation.h"
+@interface JavaNetSocketUtils : NSObject
 
-@interface JavaNetSocketUtils : NSObject {
-}
+#pragma mark Public
 
 + (void)setCreatedWithJavaNetSocket:(JavaNetSocket *)s;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketUtils_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketUtils)
+
 FOUNDATION_EXPORT void JavaNetSocketUtils_setCreatedWithJavaNetSocket_(JavaNetSocket *s);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketUtils)
 
 #endif // _JavaNetSocketUtils_H_

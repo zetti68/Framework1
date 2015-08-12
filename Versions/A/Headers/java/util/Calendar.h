@@ -6,6 +6,10 @@
 #ifndef _JavaUtilCalendar_H_
 #define _JavaUtilCalendar_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/lang/Comparable.h"
+
 @class IOSBooleanArray;
 @class IOSIntArray;
 @class IOSObjectArray;
@@ -14,55 +18,50 @@
 @class JavaUtilTimeZone;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/lang/Comparable.h"
-
-#define JavaUtilCalendar_ALL_STYLES 0
-#define JavaUtilCalendar_AM 0
-#define JavaUtilCalendar_AM_PM 9
+#define JavaUtilCalendar_JANUARY 0
+#define JavaUtilCalendar_FEBRUARY 1
+#define JavaUtilCalendar_MARCH 2
 #define JavaUtilCalendar_APRIL 3
+#define JavaUtilCalendar_MAY 4
+#define JavaUtilCalendar_JUNE 5
+#define JavaUtilCalendar_JULY 6
 #define JavaUtilCalendar_AUGUST 7
+#define JavaUtilCalendar_SEPTEMBER 8
+#define JavaUtilCalendar_OCTOBER 9
+#define JavaUtilCalendar_NOVEMBER 10
+#define JavaUtilCalendar_DECEMBER 11
+#define JavaUtilCalendar_UNDECIMBER 12
+#define JavaUtilCalendar_SUNDAY 1
+#define JavaUtilCalendar_MONDAY 2
+#define JavaUtilCalendar_TUESDAY 3
+#define JavaUtilCalendar_WEDNESDAY 4
+#define JavaUtilCalendar_THURSDAY 5
+#define JavaUtilCalendar_FRIDAY 6
+#define JavaUtilCalendar_SATURDAY 7
+#define JavaUtilCalendar_ERA 0
+#define JavaUtilCalendar_YEAR 1
+#define JavaUtilCalendar_MONTH 2
+#define JavaUtilCalendar_WEEK_OF_YEAR 3
+#define JavaUtilCalendar_WEEK_OF_MONTH 4
 #define JavaUtilCalendar_DATE 5
 #define JavaUtilCalendar_DAY_OF_MONTH 5
+#define JavaUtilCalendar_DAY_OF_YEAR 6
 #define JavaUtilCalendar_DAY_OF_WEEK 7
 #define JavaUtilCalendar_DAY_OF_WEEK_IN_MONTH 8
-#define JavaUtilCalendar_DAY_OF_YEAR 6
-#define JavaUtilCalendar_DECEMBER 11
-#define JavaUtilCalendar_DST_OFFSET 16
-#define JavaUtilCalendar_ERA 0
-#define JavaUtilCalendar_FEBRUARY 1
-#define JavaUtilCalendar_FIELD_COUNT 17
-#define JavaUtilCalendar_FRIDAY 6
+#define JavaUtilCalendar_AM_PM 9
 #define JavaUtilCalendar_HOUR 10
 #define JavaUtilCalendar_HOUR_OF_DAY 11
-#define JavaUtilCalendar_JANUARY 0
-#define JavaUtilCalendar_JULY 6
-#define JavaUtilCalendar_JUNE 5
-#define JavaUtilCalendar_LONG 2
-#define JavaUtilCalendar_MARCH 2
-#define JavaUtilCalendar_MAY 4
-#define JavaUtilCalendar_MILLISECOND 14
 #define JavaUtilCalendar_MINUTE 12
-#define JavaUtilCalendar_MONDAY 2
-#define JavaUtilCalendar_MONTH 2
-#define JavaUtilCalendar_NOVEMBER 10
-#define JavaUtilCalendar_OCTOBER 9
-#define JavaUtilCalendar_PM 1
-#define JavaUtilCalendar_SATURDAY 7
 #define JavaUtilCalendar_SECOND 13
-#define JavaUtilCalendar_SEPTEMBER 8
-#define JavaUtilCalendar_SHORT 1
-#define JavaUtilCalendar_SUNDAY 1
-#define JavaUtilCalendar_THURSDAY 5
-#define JavaUtilCalendar_TUESDAY 3
-#define JavaUtilCalendar_UNDECIMBER 12
-#define JavaUtilCalendar_WEDNESDAY 4
-#define JavaUtilCalendar_WEEK_OF_MONTH 4
-#define JavaUtilCalendar_WEEK_OF_YEAR 3
-#define JavaUtilCalendar_YEAR 1
+#define JavaUtilCalendar_MILLISECOND 14
 #define JavaUtilCalendar_ZONE_OFFSET 15
-#define JavaUtilCalendar_serialVersionUID -1807547505821590642LL
+#define JavaUtilCalendar_DST_OFFSET 16
+#define JavaUtilCalendar_FIELD_COUNT 17
+#define JavaUtilCalendar_AM 0
+#define JavaUtilCalendar_PM 1
+#define JavaUtilCalendar_ALL_STYLES 0
+#define JavaUtilCalendar_SHORT 1
+#define JavaUtilCalendar_LONG 2
 
 @interface JavaUtilCalendar : NSObject < JavaIoSerializable, NSCopying, JavaLangComparable > {
  @public
@@ -75,12 +74,7 @@
   jint lastDateFieldSet_;
 }
 
-- (instancetype)init;
-
-- (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone;
-
-- (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone
-                      withJavaUtilLocale:(JavaUtilLocale *)locale;
+#pragma mark Public
 
 - (void)addWithInt:(jint)field
            withInt:(jint)value;
@@ -95,11 +89,7 @@
 
 - (id)clone;
 
-- (void)complete;
-
-- (void)computeFields;
-
-- (void)computeTime;
+- (jint)compareToWithId:(JavaUtilCalendar *)anotherCalendar;
 
 - (jboolean)isEqual:(id)object;
 
@@ -110,6 +100,14 @@
 - (jint)getActualMinimumWithInt:(jint)field;
 
 + (IOSObjectArray *)getAvailableLocales;
+
+- (NSString *)getDisplayNameWithInt:(jint)field
+                            withInt:(jint)style
+                 withJavaUtilLocale:(JavaUtilLocale *)locale;
+
+- (id<JavaUtilMap>)getDisplayNamesWithInt:(jint)field
+                                  withInt:(jint)style
+                       withJavaUtilLocale:(JavaUtilLocale *)locale;
 
 - (jint)getFirstDayOfWeek;
 
@@ -140,17 +138,15 @@
 
 - (NSUInteger)hash;
 
-- (jint)internalGetWithInt:(jint)field;
-
 - (jboolean)isLenient;
 
 - (jboolean)isSetWithInt:(jint)field;
 
 - (void)rollWithInt:(jint)field
-            withInt:(jint)value;
+        withBoolean:(jboolean)increment;
 
 - (void)rollWithInt:(jint)field
-        withBoolean:(jboolean)increment;
+            withInt:(jint)value;
 
 - (void)setWithInt:(jint)field
            withInt:(jint)value;
@@ -186,30 +182,31 @@
 
 - (NSString *)description;
 
-- (jint)compareToWithId:(JavaUtilCalendar *)anotherCalendar;
+#pragma mark Protected
 
-- (NSString *)getDisplayNameWithInt:(jint)field
-                            withInt:(jint)style
-                 withJavaUtilLocale:(JavaUtilLocale *)locale;
+- (instancetype)init;
 
-- (id<JavaUtilMap>)getDisplayNamesWithInt:(jint)field
-                                  withInt:(jint)style
-                       withJavaUtilLocale:(JavaUtilLocale *)locale;
+- (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone
+                      withJavaUtilLocale:(JavaUtilLocale *)locale;
+
+- (void)complete;
+
+- (void)computeFields;
+
+- (void)computeTime;
+
+- (jint)internalGetWithInt:(jint)field;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilTimeZone:(JavaUtilTimeZone *)timezone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilCalendar_initialized;
 J2OBJC_STATIC_INIT(JavaUtilCalendar)
 
 J2OBJC_FIELD_SETTER(JavaUtilCalendar, fields_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(JavaUtilCalendar, isSet__, IOSBooleanArray *)
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilCalendar_getAvailableLocales();
-FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstance();
-FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
-FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_(JavaUtilTimeZone *timezone);
-FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(JavaUtilTimeZone *timezone, JavaUtilLocale *locale);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilCalendar, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilCalendar, JANUARY, jint)
 
@@ -299,7 +296,22 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilCalendar, SHORT, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilCalendar, LONG, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaUtilCalendar_FIELD_NAMES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilCalendar, FIELD_NAMES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaUtilCalendar_init(JavaUtilCalendar *self);
+
+FOUNDATION_EXPORT void JavaUtilCalendar_initWithJavaUtilTimeZone_(JavaUtilCalendar *self, JavaUtilTimeZone *timezone);
+
+FOUNDATION_EXPORT void JavaUtilCalendar_initWithJavaUtilTimeZone_withJavaUtilLocale_(JavaUtilCalendar *self, JavaUtilTimeZone *timezone, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT IOSObjectArray *JavaUtilCalendar_getAvailableLocales();
+
+FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstance();
+
+FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilLocale_(JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_(JavaUtilTimeZone *timezone);
+
+FOUNDATION_EXPORT JavaUtilCalendar *JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(JavaUtilTimeZone *timezone, JavaUtilLocale *locale);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilCalendar)
 
 #endif // _JavaUtilCalendar_H_

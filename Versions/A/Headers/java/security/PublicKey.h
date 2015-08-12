@@ -6,16 +6,19 @@
 #ifndef _JavaSecurityPublicKey_H_
 #define _JavaSecurityPublicKey_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/Key.h"
 
 #define JavaSecurityPublicKey_serialVersionUID 7187392471159151072LL
 
 @protocol JavaSecurityPublicKey < JavaSecurityKey, NSObject, JavaObject >
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPublicKey_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPublicKey)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSecurityPublicKey, serialVersionUID, jlong)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPublicKey)
 
 #endif // _JavaSecurityPublicKey_H_

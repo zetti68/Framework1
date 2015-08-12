@@ -6,26 +6,18 @@
 #ifndef _JavaNioIntBuffer_H_
 #define _JavaNioIntBuffer_H_
 
-@class IOSIntArray;
-@class JavaNioByteOrder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
 #include "java/nio/Buffer.h"
 
-@interface JavaNioIntBuffer : JavaNioBuffer < JavaLangComparable > {
-}
+@class IOSIntArray;
+@class JavaNioByteOrder;
+
+@interface JavaNioIntBuffer : JavaNioBuffer < JavaLangComparable >
+
+#pragma mark Public
 
 + (JavaNioIntBuffer *)allocateWithInt:(jint)capacity OBJC_METHOD_FAMILY_NONE;
-
-+ (JavaNioIntBuffer *)wrapWithIntArray:(IOSIntArray *)array;
-
-+ (JavaNioIntBuffer *)wrapWithIntArray:(IOSIntArray *)array
-                               withInt:(jint)start
-                               withInt:(jint)intCount;
-
-- (instancetype)initWithInt:(jint)capacity
-                   withLong:(jlong)effectiveDirectAddress;
 
 - (IOSIntArray *)array;
 
@@ -43,13 +35,13 @@
 
 - (jint)get;
 
+- (jint)getWithInt:(jint)index;
+
 - (JavaNioIntBuffer *)getWithIntArray:(IOSIntArray *)dst;
 
 - (JavaNioIntBuffer *)getWithIntArray:(IOSIntArray *)dst
                               withInt:(jint)dstOffset
                               withInt:(jint)intCount;
-
-- (jint)getWithInt:(jint)index;
 
 - (jboolean)hasArray;
 
@@ -59,13 +51,10 @@
 
 - (JavaNioByteOrder *)order;
 
-- (IOSIntArray *)protectedArray;
-
-- (jint)protectedArrayOffset;
-
-- (jboolean)protectedHasArray;
-
 - (JavaNioIntBuffer *)putWithInt:(jint)i;
+
+- (JavaNioIntBuffer *)putWithInt:(jint)index
+                         withInt:(jint)i;
 
 - (JavaNioIntBuffer *)putWithIntArray:(IOSIntArray *)src;
 
@@ -75,16 +64,37 @@
 
 - (JavaNioIntBuffer *)putWithJavaNioIntBuffer:(JavaNioIntBuffer *)src;
 
-- (JavaNioIntBuffer *)putWithInt:(jint)index
-                         withInt:(jint)i;
-
 - (JavaNioIntBuffer *)slice;
+
++ (JavaNioIntBuffer *)wrapWithIntArray:(IOSIntArray *)array;
+
++ (JavaNioIntBuffer *)wrapWithIntArray:(IOSIntArray *)array
+                               withInt:(jint)start
+                               withInt:(jint)intCount;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithInt:(jint)capacity
+                   withLong:(jlong)effectiveDirectAddress;
+
+- (IOSIntArray *)protectedArray;
+
+- (jint)protectedArrayOffset;
+
+- (jboolean)protectedHasArray;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioIntBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioIntBuffer)
+
 FOUNDATION_EXPORT JavaNioIntBuffer *JavaNioIntBuffer_allocateWithInt_(jint capacity);
+
 FOUNDATION_EXPORT JavaNioIntBuffer *JavaNioIntBuffer_wrapWithIntArray_(IOSIntArray *array);
+
 FOUNDATION_EXPORT JavaNioIntBuffer *JavaNioIntBuffer_wrapWithIntArray_withInt_withInt_(IOSIntArray *array, jint start, jint intCount);
+
+FOUNDATION_EXPORT void JavaNioIntBuffer_initWithInt_withLong_(JavaNioIntBuffer *self, jint capacity, jlong effectiveDirectAddress);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioIntBuffer)
 
 #endif // _JavaNioIntBuffer_H_

@@ -6,12 +6,13 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ObjectIdentifier_H_
 #define _OrgApacheHarmonySecurityAsn1ObjectIdentifier_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSIntArray;
 
-#import "JreEmulation.h"
+@interface OrgApacheHarmonySecurityAsn1ObjectIdentifier : NSObject
 
-@interface OrgApacheHarmonySecurityAsn1ObjectIdentifier : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithIntArray:(IOSIntArray *)oid;
 
@@ -19,24 +20,38 @@
 
 - (jboolean)isEqual:(id)o;
 
-- (NSString *)description;
-
 - (NSUInteger)hash;
-
-+ (void)validateWithIntArray:(IOSIntArray *)oid;
-
-+ (NSString *)toStringWithIntArray:(IOSIntArray *)oid;
-
-+ (IOSIntArray *)toIntArrayWithNSString:(NSString *)str;
 
 + (jboolean)isOIDWithNSString:(NSString *)str;
 
++ (IOSIntArray *)toIntArrayWithNSString:(NSString *)str;
+
+- (NSString *)description;
+
++ (NSString *)toStringWithIntArray:(IOSIntArray *)oid;
+
++ (void)validateWithIntArray:(IOSIntArray *)oid;
+
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ObjectIdentifier_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ObjectIdentifier)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ObjectIdentifier_initWithIntArray_(OrgApacheHarmonySecurityAsn1ObjectIdentifier *self, IOSIntArray *oid);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ObjectIdentifier *new_OrgApacheHarmonySecurityAsn1ObjectIdentifier_initWithIntArray_(IOSIntArray *oid) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ObjectIdentifier_initWithNSString_(OrgApacheHarmonySecurityAsn1ObjectIdentifier *self, NSString *strOid);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ObjectIdentifier *new_OrgApacheHarmonySecurityAsn1ObjectIdentifier_initWithNSString_(NSString *strOid) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ObjectIdentifier_validateWithIntArray_(IOSIntArray *oid);
+
 FOUNDATION_EXPORT NSString *OrgApacheHarmonySecurityAsn1ObjectIdentifier_toStringWithIntArray_(IOSIntArray *oid);
+
 FOUNDATION_EXPORT IOSIntArray *OrgApacheHarmonySecurityAsn1ObjectIdentifier_toIntArrayWithNSString_(NSString *str);
+
 FOUNDATION_EXPORT jboolean OrgApacheHarmonySecurityAsn1ObjectIdentifier_isOIDWithNSString_(NSString *str);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ObjectIdentifier)
 
 #endif // _OrgApacheHarmonySecurityAsn1ObjectIdentifier_H_

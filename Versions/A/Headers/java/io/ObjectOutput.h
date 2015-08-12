@@ -6,13 +6,14 @@
 #ifndef _JavaIoObjectOutput_H_
 #define _JavaIoObjectOutput_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/DataOutput.h"
 #include "java/lang/AutoCloseable.h"
 
+@class IOSByteArray;
+
 @protocol JavaIoObjectOutput < JavaIoDataOutput, JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (void)close;
 
 - (void)flush;
@@ -29,6 +30,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectOutput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectOutput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectOutput)
 
 #endif // _JavaIoObjectOutput_H_

@@ -6,11 +6,12 @@
 #ifndef _JavaUtilStringTokenizer_H_
 #define _JavaUtilStringTokenizer_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Enumeration.h"
 
-@interface JavaUtilStringTokenizer : NSObject < JavaUtilEnumeration > {
-}
+@interface JavaUtilStringTokenizer : NSObject < JavaUtilEnumeration >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)string;
 
@@ -35,6 +36,20 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilStringTokenizer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilStringTokenizer)
+
+FOUNDATION_EXPORT void JavaUtilStringTokenizer_initWithNSString_(JavaUtilStringTokenizer *self, NSString *string);
+
+FOUNDATION_EXPORT JavaUtilStringTokenizer *new_JavaUtilStringTokenizer_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilStringTokenizer_initWithNSString_withNSString_(JavaUtilStringTokenizer *self, NSString *string, NSString *delimiters);
+
+FOUNDATION_EXPORT JavaUtilStringTokenizer *new_JavaUtilStringTokenizer_initWithNSString_withNSString_(NSString *string, NSString *delimiters) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilStringTokenizer_initWithNSString_withNSString_withBoolean_(JavaUtilStringTokenizer *self, NSString *string, NSString *delimiters, jboolean returnDelimiters);
+
+FOUNDATION_EXPORT JavaUtilStringTokenizer *new_JavaUtilStringTokenizer_initWithNSString_withNSString_withBoolean_(NSString *string, NSString *delimiters, jboolean returnDelimiters) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilStringTokenizer)
 
 #endif // _JavaUtilStringTokenizer_H_

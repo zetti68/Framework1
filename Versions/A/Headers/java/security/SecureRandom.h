@@ -6,69 +6,74 @@
 #ifndef _JavaSecuritySecureRandom_H_
 #define _JavaSecuritySecureRandom_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/Random.h"
+
 @class IOSByteArray;
 @class JavaSecurityProvider;
 @class JavaSecuritySecureRandomSpi;
-@class OrgApacheHarmonySecurityFortressEngine;
 
-#import "JreEmulation.h"
-#include "java/util/Random.h"
+@interface JavaSecuritySecureRandom : JavaUtilRandom
 
-#define JavaSecuritySecureRandom_serialVersionUID 4940670005562187LL
-
-@interface JavaSecuritySecureRandom : JavaUtilRandom {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithByteArray:(IOSByteArray *)seed;
 
-- (instancetype)initWithJavaSecuritySecureRandomSpi:(JavaSecuritySecureRandomSpi *)secureRandomSpi
-                           withJavaSecurityProvider:(JavaSecurityProvider *)provider;
+- (IOSByteArray *)generateSeedWithInt:(jint)numBytes;
+
+- (NSString *)getAlgorithm;
 
 + (JavaSecuritySecureRandom *)getInstanceWithNSString:(NSString *)algorithm;
 
 + (JavaSecuritySecureRandom *)getInstanceWithNSString:(NSString *)algorithm
-                                         withNSString:(NSString *)provider;
+                             withJavaSecurityProvider:(JavaSecurityProvider *)provider;
 
 + (JavaSecuritySecureRandom *)getInstanceWithNSString:(NSString *)algorithm
-                             withJavaSecurityProvider:(JavaSecurityProvider *)provider;
+                                         withNSString:(NSString *)provider;
 
 - (JavaSecurityProvider *)getProvider;
 
-- (NSString *)getAlgorithm;
++ (IOSByteArray *)getSeedWithInt:(jint)numBytes;
+
+- (void)nextBytesWithByteArray:(IOSByteArray *)bytes;
 
 - (void)setSeedWithByteArray:(IOSByteArray *)seed;
 
 - (void)setSeedWithLong:(jlong)seed;
 
-- (void)nextBytesWithByteArray:(IOSByteArray *)bytes;
+#pragma mark Protected
+
+- (instancetype)initWithJavaSecuritySecureRandomSpi:(JavaSecuritySecureRandomSpi *)secureRandomSpi
+                           withJavaSecurityProvider:(JavaSecurityProvider *)provider;
 
 - (jint)nextWithInt:(jint)numBits;
 
-+ (IOSByteArray *)getSeedWithInt:(jint)numBytes;
-
-- (IOSByteArray *)generateSeedWithInt:(jint)numBytes;
-
 @end
 
-FOUNDATION_EXPORT BOOL JavaSecuritySecureRandom_initialized;
 J2OBJC_STATIC_INIT(JavaSecuritySecureRandom)
+
+FOUNDATION_EXPORT void JavaSecuritySecureRandom_init(JavaSecuritySecureRandom *self);
+
+FOUNDATION_EXPORT JavaSecuritySecureRandom *new_JavaSecuritySecureRandom_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySecureRandom_initWithByteArray_(JavaSecuritySecureRandom *self, IOSByteArray *seed);
+
+FOUNDATION_EXPORT JavaSecuritySecureRandom *new_JavaSecuritySecureRandom_initWithByteArray_(IOSByteArray *seed) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecuritySecureRandom_initWithJavaSecuritySecureRandomSpi_withJavaSecurityProvider_(JavaSecuritySecureRandom *self, JavaSecuritySecureRandomSpi *secureRandomSpi, JavaSecurityProvider *provider);
+
+FOUNDATION_EXPORT JavaSecuritySecureRandom *new_JavaSecuritySecureRandom_initWithJavaSecuritySecureRandomSpi_withJavaSecurityProvider_(JavaSecuritySecureRandomSpi *secureRandomSpi, JavaSecurityProvider *provider) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaSecuritySecureRandom *JavaSecuritySecureRandom_getInstanceWithNSString_(NSString *algorithm);
+
 FOUNDATION_EXPORT JavaSecuritySecureRandom *JavaSecuritySecureRandom_getInstanceWithNSString_withNSString_(NSString *algorithm, NSString *provider);
+
 FOUNDATION_EXPORT JavaSecuritySecureRandom *JavaSecuritySecureRandom_getInstanceWithNSString_withJavaSecurityProvider_(NSString *algorithm, JavaSecurityProvider *provider);
+
 FOUNDATION_EXPORT IOSByteArray *JavaSecuritySecureRandom_getSeedWithInt_(jint numBytes);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecureRandom, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT NSString *JavaSecuritySecureRandom_SERVICE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecureRandom, SERVICE_, NSString *)
-
-FOUNDATION_EXPORT OrgApacheHarmonySecurityFortressEngine *JavaSecuritySecureRandom_ENGINE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecureRandom, ENGINE_, OrgApacheHarmonySecurityFortressEngine *)
-
-FOUNDATION_EXPORT JavaSecuritySecureRandom *JavaSecuritySecureRandom_internalSecureRandom_;
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecureRandom, internalSecureRandom_, JavaSecuritySecureRandom *)
-J2OBJC_STATIC_FIELD_SETTER(JavaSecuritySecureRandom, internalSecureRandom_, JavaSecuritySecureRandom *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecuritySecureRandom)
 
 #endif // _JavaSecuritySecureRandom_H_

@@ -6,6 +6,8 @@
 #ifndef _JavaSqlSQLOutput_H_
 #define _JavaSqlSQLOutput_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
@@ -23,8 +25,6 @@
 @protocol JavaSqlSQLData;
 @protocol JavaSqlSQLXML;
 @protocol JavaSqlStruct;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlSQLOutput < NSObject, JavaObject >
 
@@ -84,6 +84,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLOutput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLOutput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLOutput)
 
 #endif // _JavaSqlSQLOutput_H_

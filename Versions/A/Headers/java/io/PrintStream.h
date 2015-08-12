@@ -6,6 +6,11 @@
 #ifndef _JavaIoPrintStream_H_
 #define _JavaIoPrintStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+#include "java/io/FilterOutputStream.h"
+#include "java/lang/Appendable.h"
+
 @class IOSByteArray;
 @class IOSCharArray;
 @class IOSObjectArray;
@@ -14,13 +19,14 @@
 @class JavaUtilLocale;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
-#include "java/io/FilterOutputStream.h"
-#include "java/lang/Appendable.h"
+@interface JavaIoPrintStream : JavaIoFilterOutputStream < JavaLangAppendable, JavaIoCloseable >
 
-@interface JavaIoPrintStream : JavaIoFilterOutputStream < JavaLangAppendable, JavaIoCloseable > {
-}
+#pragma mark Public
+
+- (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
+
+- (instancetype)initWithJavaIoFile:(JavaIoFile *)file
+                      withNSString:(NSString *)charsetName;
 
 - (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outArg;
 
@@ -31,41 +37,37 @@
                                withBoolean:(jboolean)autoFlush
                               withNSString:(NSString *)charsetName;
 
-- (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
-
-- (instancetype)initWithJavaIoFile:(JavaIoFile *)file
-                      withNSString:(NSString *)charsetName;
-
 - (instancetype)initWithNSString:(NSString *)fileName;
 
 - (instancetype)initWithNSString:(NSString *)fileName
                     withNSString:(NSString *)charsetName;
 
-- (jboolean)checkError;
+- (JavaIoPrintStream *)appendWithChar:(jchar)c;
 
-- (void)clearError;
+- (JavaIoPrintStream *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)charSequence;
+
+- (JavaIoPrintStream *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)charSequence
+                                              withInt:(jint)start
+                                              withInt:(jint)end;
+
+- (jboolean)checkError;
 
 - (void)close;
 
 - (void)flush;
 
-- (JavaIoPrintStream *)formatWithNSString:(NSString *)format
-                        withNSObjectArray:(IOSObjectArray *)args;
-
 - (JavaIoPrintStream *)formatWithJavaUtilLocale:(JavaUtilLocale *)l
                                    withNSString:(NSString *)format
                               withNSObjectArray:(IOSObjectArray *)args;
 
-- (JavaIoPrintStream *)printfWithNSString:(NSString *)format
+- (JavaIoPrintStream *)formatWithNSString:(NSString *)format
                         withNSObjectArray:(IOSObjectArray *)args;
 
-- (JavaIoPrintStream *)printfWithJavaUtilLocale:(JavaUtilLocale *)l
-                                   withNSString:(NSString *)format
-                              withNSObjectArray:(IOSObjectArray *)args;
-
-- (void)printWithCharArray:(IOSCharArray *)chars;
+- (void)printWithBoolean:(jboolean)b;
 
 - (void)printWithChar:(jchar)c;
+
+- (void)printWithCharArray:(IOSCharArray *)chars;
 
 - (void)printWithDouble:(jdouble)d;
 
@@ -79,13 +81,20 @@
 
 - (void)printWithNSString:(NSString *)str;
 
-- (void)printWithBoolean:(jboolean)b;
+- (JavaIoPrintStream *)printfWithJavaUtilLocale:(JavaUtilLocale *)l
+                                   withNSString:(NSString *)format
+                              withNSObjectArray:(IOSObjectArray *)args;
+
+- (JavaIoPrintStream *)printfWithNSString:(NSString *)format
+                        withNSObjectArray:(IOSObjectArray *)args;
 
 - (void)println;
 
-- (void)printlnWithCharArray:(IOSCharArray *)chars;
+- (void)printlnWithBoolean:(jboolean)b;
 
 - (void)printlnWithChar:(jchar)c;
+
+- (void)printlnWithCharArray:(IOSCharArray *)chars;
 
 - (void)printlnWithDouble:(jdouble)d;
 
@@ -99,26 +108,50 @@
 
 - (void)printlnWithNSString:(NSString *)str;
 
-- (void)printlnWithBoolean:(jboolean)b;
-
-- (void)setError;
-
 - (void)writeWithByteArray:(IOSByteArray *)buffer
                    withInt:(jint)offset
                    withInt:(jint)length;
 
 - (void)writeWithInt:(jint)oneByte;
 
-- (JavaIoPrintStream *)appendWithChar:(jchar)c;
+#pragma mark Protected
 
-- (JavaIoPrintStream *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)charSequence;
+- (void)clearError;
 
-- (JavaIoPrintStream *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)charSequence
-                                              withInt:(jint)start
-                                              withInt:(jint)end;
+- (void)setError;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoPrintStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPrintStream)
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithJavaIoOutputStream_(JavaIoPrintStream *self, JavaIoOutputStream *outArg);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithJavaIoOutputStream_(JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_(JavaIoPrintStream *self, JavaIoOutputStream *outArg, jboolean autoFlush);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_(JavaIoOutputStream *outArg, jboolean autoFlush) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_withNSString_(JavaIoPrintStream *self, JavaIoOutputStream *outArg, jboolean autoFlush, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_withNSString_(JavaIoOutputStream *outArg, jboolean autoFlush, NSString *charsetName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithJavaIoFile_(JavaIoPrintStream *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithJavaIoFile_withNSString_(JavaIoPrintStream *self, JavaIoFile *file, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithJavaIoFile_withNSString_(JavaIoFile *file, NSString *charsetName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithNSString_(JavaIoPrintStream *self, NSString *fileName);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithNSString_(NSString *fileName) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPrintStream_initWithNSString_withNSString_(JavaIoPrintStream *self, NSString *fileName, NSString *charsetName);
+
+FOUNDATION_EXPORT JavaIoPrintStream *new_JavaIoPrintStream_initWithNSString_withNSString_(NSString *fileName, NSString *charsetName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPrintStream)
 
 #endif // _JavaIoPrintStream_H_

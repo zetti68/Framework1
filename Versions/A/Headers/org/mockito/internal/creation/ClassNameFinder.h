@@ -6,17 +6,26 @@
 #ifndef _OrgMockitoInternalCreationClassNameFinder_H_
 #define _OrgMockitoInternalCreationClassNameFinder_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
-@interface OrgMockitoInternalCreationClassNameFinder : NSObject {
-}
+@interface OrgMockitoInternalCreationClassNameFinder : NSObject
 
-+ (NSString *)classNameForMockWithId:(id)mock;
+#pragma mark Public
 
 - (instancetype)init;
 
++ (NSString *)classNameForMockWithId:(id)mock;
+
 @end
 
-__attribute__((always_inline)) inline void OrgMockitoInternalCreationClassNameFinder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgMockitoInternalCreationClassNameFinder)
+
+FOUNDATION_EXPORT NSString *OrgMockitoInternalCreationClassNameFinder_classNameForMockWithId_(id mock);
+
+FOUNDATION_EXPORT void OrgMockitoInternalCreationClassNameFinder_init(OrgMockitoInternalCreationClassNameFinder *self);
+
+FOUNDATION_EXPORT OrgMockitoInternalCreationClassNameFinder *new_OrgMockitoInternalCreationClassNameFinder_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgMockitoInternalCreationClassNameFinder)
 
 #endif // _OrgMockitoInternalCreationClassNameFinder_H_

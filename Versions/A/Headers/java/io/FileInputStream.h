@@ -6,17 +6,17 @@
 #ifndef _JavaIoFileInputStream_H_
 #define _JavaIoFileInputStream_H_
 
-@class DalvikSystemCloseGuard;
+#include "J2ObjC_header.h"
+#include "java/io/InputStream.h"
+
 @class IOSByteArray;
 @class JavaIoFile;
 @class JavaIoFileDescriptor;
 @class JavaNioChannelsFileChannel;
 
-#import "JreEmulation.h"
-#include "java/io/InputStream.h"
+@interface JavaIoFileInputStream : JavaIoInputStream
 
-@interface JavaIoFileInputStream : JavaIoInputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
@@ -27,8 +27,6 @@
 - (jint)available;
 
 - (void)close;
-
-- (void)dealloc;
 
 - (JavaNioChannelsFileChannel *)getChannel;
 
@@ -42,8 +40,26 @@
 
 - (jlong)skipWithLong:(jlong)byteCount;
 
+#pragma mark Protected
+
+- (void)dealloc;
+
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileInputStream)
+
+FOUNDATION_EXPORT void JavaIoFileInputStream_initWithJavaIoFile_(JavaIoFileInputStream *self, JavaIoFile *file);
+
+FOUNDATION_EXPORT JavaIoFileInputStream *new_JavaIoFileInputStream_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileInputStream_initWithJavaIoFileDescriptor_(JavaIoFileInputStream *self, JavaIoFileDescriptor *fd);
+
+FOUNDATION_EXPORT JavaIoFileInputStream *new_JavaIoFileInputStream_initWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoFileInputStream_initWithNSString_(JavaIoFileInputStream *self, NSString *path);
+
+FOUNDATION_EXPORT JavaIoFileInputStream *new_JavaIoFileInputStream_initWithNSString_(NSString *path) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileInputStream)
 
 #endif // _JavaIoFileInputStream_H_

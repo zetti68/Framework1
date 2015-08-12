@@ -6,27 +6,28 @@
 #ifndef _JavaLangAnnotationTarget_H_
 #define _JavaLangAnnotationTarget_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/annotation/Annotation.h"
+
+@class IOSObjectArray;
 
 @protocol JavaLangAnnotationTarget < JavaLangAnnotationAnnotation >
 
 @property (readonly) IOSObjectArray *value;
 
-
 @end
 
 @interface JavaLangAnnotationTarget : NSObject < JavaLangAnnotationTarget > {
  @private
-  IOSObjectArray *value;
+  IOSObjectArray *value_;
 }
 
-- (instancetype)initWithValue:(IOSObjectArray *)value_;
+- (instancetype)initWithValue:(IOSObjectArray *)value__;
 
 @end
 
-__attribute__((always_inline)) inline void JavaLangAnnotationTarget_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaLangAnnotationTarget)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangAnnotationTarget)
 
 #endif // _JavaLangAnnotationTarget_H_

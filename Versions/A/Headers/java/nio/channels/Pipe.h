@@ -6,53 +6,75 @@
 #ifndef _JavaNioChannelsPipe_H_
 #define _JavaNioChannelsPipe_H_
 
-@class JavaNioChannelsPipe_SinkChannel;
-@class JavaNioChannelsPipe_SourceChannel;
-@class JavaNioChannelsSpiSelectorProvider;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/channels/GatheringByteChannel.h"
 #include "java/nio/channels/ReadableByteChannel.h"
 #include "java/nio/channels/ScatteringByteChannel.h"
 #include "java/nio/channels/WritableByteChannel.h"
 #include "java/nio/channels/spi/AbstractSelectableChannel.h"
 
-@interface JavaNioChannelsPipe : NSObject {
-}
+@class JavaNioChannelsPipe_SinkChannel;
+@class JavaNioChannelsPipe_SourceChannel;
+@class JavaNioChannelsSpiSelectorProvider;
+
+@interface JavaNioChannelsPipe : NSObject
+
+#pragma mark Public
 
 + (JavaNioChannelsPipe *)open;
-
-- (instancetype)init;
 
 - (JavaNioChannelsPipe_SinkChannel *)sink;
 
 - (JavaNioChannelsPipe_SourceChannel *)source;
 
+#pragma mark Protected
+
+- (instancetype)init;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsPipe_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsPipe)
+
 FOUNDATION_EXPORT JavaNioChannelsPipe *JavaNioChannelsPipe_open();
 
-@interface JavaNioChannelsPipe_SinkChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsWritableByteChannel, JavaNioChannelsGatheringByteChannel > {
-}
+FOUNDATION_EXPORT void JavaNioChannelsPipe_init(JavaNioChannelsPipe *self);
 
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)provider;
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsPipe)
 
-- (jint)validOps;
+@interface JavaNioChannelsPipe_SinkChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsWritableByteChannel, JavaNioChannelsGatheringByteChannel >
 
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsPipe_SinkChannel_init() {}
-
-@interface JavaNioChannelsPipe_SourceChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsReadableByteChannel, JavaNioChannelsScatteringByteChannel > {
-}
-
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)provider;
+#pragma mark Public
 
 - (jint)validOps;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)provider;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsPipe_SourceChannel_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsPipe_SinkChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsPipe_SinkChannel_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsPipe_SinkChannel *self, JavaNioChannelsSpiSelectorProvider *provider);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsPipe_SinkChannel)
+
+@interface JavaNioChannelsPipe_SourceChannel : JavaNioChannelsSpiAbstractSelectableChannel < JavaNioChannelsReadableByteChannel, JavaNioChannelsScatteringByteChannel >
+
+#pragma mark Public
+
+- (jint)validOps;
+
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)provider;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsPipe_SourceChannel)
+
+FOUNDATION_EXPORT void JavaNioChannelsPipe_SourceChannel_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsPipe_SourceChannel *self, JavaNioChannelsSpiSelectorProvider *provider);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsPipe_SourceChannel)
 
 #endif // _JavaNioChannelsPipe_H_

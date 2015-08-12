@@ -6,25 +6,20 @@
 #ifndef _JavaMathMultiplication_H_
 #define _JavaMathMultiplication_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaMathBigInteger;
 
-#import "JreEmulation.h"
-
 #define JavaMathMultiplication_whenUseKaratsuba 63
 
-@interface JavaMathMultiplication : NSObject {
-}
+@interface JavaMathMultiplication : NSObject
 
-+ (JavaMathBigInteger *)multiplyWithJavaMathBigInteger:(JavaMathBigInteger *)x
-                                withJavaMathBigInteger:(JavaMathBigInteger *)y;
+#pragma mark Package-Private
 
 + (JavaMathBigInteger *)karatsubaWithJavaMathBigInteger:(JavaMathBigInteger *)op1
                                  withJavaMathBigInteger:(JavaMathBigInteger *)op2;
-
-+ (JavaMathBigInteger *)multiplyPAPWithJavaMathBigInteger:(JavaMathBigInteger *)a
-                                   withJavaMathBigInteger:(JavaMathBigInteger *)b;
 
 + (void)multArraysPAPWithIntArray:(IOSIntArray *)aDigits
                           withInt:(jint)aLen
@@ -32,11 +27,11 @@
                           withInt:(jint)bLen
                      withIntArray:(IOSIntArray *)resDigits;
 
-+ (void)multPAPWithIntArray:(IOSIntArray *)a
-               withIntArray:(IOSIntArray *)b
-               withIntArray:(IOSIntArray *)t
-                    withInt:(jint)aLen
-                    withInt:(jint)bLen;
++ (JavaMathBigInteger *)multiplyWithJavaMathBigInteger:(JavaMathBigInteger *)x
+                                withJavaMathBigInteger:(JavaMathBigInteger *)y;
+
++ (JavaMathBigInteger *)multiplyByFivePowWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                                        withInt:(jint)exp;
 
 + (jint)multiplyByIntWithIntArray:(IOSIntArray *)a
                           withInt:(jint)aSize
@@ -45,20 +40,26 @@
 + (JavaMathBigInteger *)multiplyByPositiveIntWithJavaMathBigInteger:(JavaMathBigInteger *)val
                                                             withInt:(jint)factor;
 
++ (JavaMathBigInteger *)multiplyByTenPowWithJavaMathBigInteger:(JavaMathBigInteger *)val
+                                                      withLong:(jlong)exp;
+
++ (JavaMathBigInteger *)multiplyPAPWithJavaMathBigInteger:(JavaMathBigInteger *)a
+                                   withJavaMathBigInteger:(JavaMathBigInteger *)b;
+
++ (void)multPAPWithIntArray:(IOSIntArray *)a
+               withIntArray:(IOSIntArray *)b
+               withIntArray:(IOSIntArray *)t
+                    withInt:(jint)aLen
+                    withInt:(jint)bLen;
+
 + (JavaMathBigInteger *)powWithJavaMathBigInteger:(JavaMathBigInteger *)base
                                           withInt:(jint)exponent;
+
++ (JavaMathBigInteger *)powerOf10WithLong:(jlong)exp;
 
 + (IOSIntArray *)squareWithIntArray:(IOSIntArray *)a
                             withInt:(jint)aLen
                        withIntArray:(IOSIntArray *)res;
-
-+ (JavaMathBigInteger *)multiplyByTenPowWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                                      withLong:(jlong)exp;
-
-+ (JavaMathBigInteger *)powerOf10WithLong:(jlong)exp;
-
-+ (JavaMathBigInteger *)multiplyByFivePowWithJavaMathBigInteger:(JavaMathBigInteger *)val
-                                                        withInt:(jint)exp;
 
 + (jlong)unsignedMultAddAddWithInt:(jint)a
                            withInt:(jint)b
@@ -67,21 +68,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaMathMultiplication_initialized;
 J2OBJC_STATIC_INIT(JavaMathMultiplication)
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *x, JavaMathBigInteger *y);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_karatsubaWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *op1, JavaMathBigInteger *op2);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyPAPWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *a, JavaMathBigInteger *b);
-FOUNDATION_EXPORT void JavaMathMultiplication_multArraysPAPWithIntArray_withInt_withIntArray_withInt_withIntArray_(IOSIntArray *aDigits, jint aLen, IOSIntArray *bDigits, jint bLen, IOSIntArray *resDigits);
-FOUNDATION_EXPORT void JavaMathMultiplication_multPAPWithIntArray_withIntArray_withIntArray_withInt_withInt_(IOSIntArray *a, IOSIntArray *b, IOSIntArray *t, jint aLen, jint bLen);
-FOUNDATION_EXPORT jint JavaMathMultiplication_multiplyByIntWithIntArray_withInt_withInt_(IOSIntArray *a, jint aSize, jint factor);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByPositiveIntWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint factor);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_powWithJavaMathBigInteger_withInt_(JavaMathBigInteger *base, jint exponent);
-FOUNDATION_EXPORT IOSIntArray *JavaMathMultiplication_squareWithIntArray_withInt_withIntArray_(IOSIntArray *a, jint aLen, IOSIntArray *res);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByTenPowWithJavaMathBigInteger_withLong_(JavaMathBigInteger *val, jlong exp);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_powerOf10WithLong_(jlong exp);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByFivePowWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint exp);
-FOUNDATION_EXPORT jlong JavaMathMultiplication_unsignedMultAddAddWithInt_withInt_withInt_withInt_(jint a, jint b, jint c, jint d);
 
 J2OBJC_STATIC_FIELD_GETTER(JavaMathMultiplication, whenUseKaratsuba, jint)
 
@@ -96,5 +83,33 @@ J2OBJC_STATIC_FIELD_GETTER(JavaMathMultiplication, bigTenPows_, IOSObjectArray *
 
 FOUNDATION_EXPORT IOSObjectArray *JavaMathMultiplication_bigFivePows_;
 J2OBJC_STATIC_FIELD_GETTER(JavaMathMultiplication, bigFivePows_, IOSObjectArray *)
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *x, JavaMathBigInteger *y);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_karatsubaWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *op1, JavaMathBigInteger *op2);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyPAPWithJavaMathBigInteger_withJavaMathBigInteger_(JavaMathBigInteger *a, JavaMathBigInteger *b);
+
+FOUNDATION_EXPORT void JavaMathMultiplication_multArraysPAPWithIntArray_withInt_withIntArray_withInt_withIntArray_(IOSIntArray *aDigits, jint aLen, IOSIntArray *bDigits, jint bLen, IOSIntArray *resDigits);
+
+FOUNDATION_EXPORT void JavaMathMultiplication_multPAPWithIntArray_withIntArray_withIntArray_withInt_withInt_(IOSIntArray *a, IOSIntArray *b, IOSIntArray *t, jint aLen, jint bLen);
+
+FOUNDATION_EXPORT jint JavaMathMultiplication_multiplyByIntWithIntArray_withInt_withInt_(IOSIntArray *a, jint aSize, jint factor);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByPositiveIntWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint factor);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_powWithJavaMathBigInteger_withInt_(JavaMathBigInteger *base, jint exponent);
+
+FOUNDATION_EXPORT IOSIntArray *JavaMathMultiplication_squareWithIntArray_withInt_withIntArray_(IOSIntArray *a, jint aLen, IOSIntArray *res);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByTenPowWithJavaMathBigInteger_withLong_(JavaMathBigInteger *val, jlong exp);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_powerOf10WithLong_(jlong exp);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathMultiplication_multiplyByFivePowWithJavaMathBigInteger_withInt_(JavaMathBigInteger *val, jint exp);
+
+FOUNDATION_EXPORT jlong JavaMathMultiplication_unsignedMultAddAddWithInt_withInt_withInt_withInt_(jint a, jint b, jint c, jint d);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaMathMultiplication)
 
 #endif // _JavaMathMultiplication_H_

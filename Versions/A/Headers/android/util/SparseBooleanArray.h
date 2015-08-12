@@ -6,49 +6,57 @@
 #ifndef _AndroidUtilSparseBooleanArray_H_
 #define _AndroidUtilSparseBooleanArray_H_
 
-@class IOSBooleanArray;
-@class IOSIntArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface AndroidUtilSparseBooleanArray : NSObject < NSCopying >
 
-@interface AndroidUtilSparseBooleanArray : NSObject < NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialCapacity;
 
+- (void)appendWithInt:(jint)key
+          withBoolean:(jboolean)value;
+
+- (void)clear;
+
 - (AndroidUtilSparseBooleanArray *)clone;
+
+- (void)delete__WithInt:(jint)key;
 
 - (jboolean)getWithInt:(jint)key;
 
 - (jboolean)getWithInt:(jint)key
            withBoolean:(jboolean)valueIfKeyNotFound;
 
-- (void)delete__WithInt:(jint)key;
+- (jint)indexOfKeyWithInt:(jint)key;
+
+- (jint)indexOfValueWithBoolean:(jboolean)value;
+
+- (jint)keyAtWithInt:(jint)index;
 
 - (void)putWithInt:(jint)key
        withBoolean:(jboolean)value;
 
 - (jint)size;
 
-- (jint)keyAtWithInt:(jint)index;
+- (NSString *)description;
 
 - (jboolean)valueAtWithInt:(jint)index;
 
-- (jint)indexOfKeyWithInt:(jint)key;
-
-- (jint)indexOfValueWithBoolean:(jboolean)value;
-
-- (void)clear;
-
-- (void)appendWithInt:(jint)key
-          withBoolean:(jboolean)value;
-
-- (NSString *)description;
-
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilSparseBooleanArray_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilSparseBooleanArray)
+
+FOUNDATION_EXPORT void AndroidUtilSparseBooleanArray_init(AndroidUtilSparseBooleanArray *self);
+
+FOUNDATION_EXPORT AndroidUtilSparseBooleanArray *new_AndroidUtilSparseBooleanArray_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void AndroidUtilSparseBooleanArray_initWithInt_(AndroidUtilSparseBooleanArray *self, jint initialCapacity);
+
+FOUNDATION_EXPORT AndroidUtilSparseBooleanArray *new_AndroidUtilSparseBooleanArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilSparseBooleanArray)
 
 #endif // _AndroidUtilSparseBooleanArray_H_

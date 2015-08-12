@@ -6,32 +6,32 @@
 #ifndef _JavaLangThreadLocal_H_
 #define _JavaLangThreadLocal_H_
 
-@class JavaUtilConcurrentAtomicAtomicInteger;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface JavaLangThreadLocal : NSObject
 
-@interface JavaLangThreadLocal : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 - (id)get;
-
-- (id)initialValue OBJC_METHOD_FAMILY_NONE;
 
 - (void)remove;
 
 - (void)setWithId:(id)value;
 
-- (instancetype)init;
+#pragma mark Protected
+
+- (id)initialValue OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangThreadLocal_initialized;
 J2OBJC_STATIC_INIT(JavaLangThreadLocal)
 
-FOUNDATION_EXPORT NSString *JavaLangThreadLocal_KEY_PREFIX_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangThreadLocal, KEY_PREFIX_, NSString *)
+FOUNDATION_EXPORT void JavaLangThreadLocal_init(JavaLangThreadLocal *self);
 
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicInteger *JavaLangThreadLocal_nextId_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangThreadLocal, nextId_, JavaUtilConcurrentAtomicAtomicInteger *)
+FOUNDATION_EXPORT JavaLangThreadLocal *new_JavaLangThreadLocal_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangThreadLocal)
 
 #endif // _JavaLangThreadLocal_H_

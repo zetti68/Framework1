@@ -6,11 +6,11 @@
 #ifndef _JavaUtilZipZipEntry_H_
 #define _JavaUtilZipZipEntry_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/zip/ZipConstants.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
-
-#import "JreEmulation.h"
-#include "java/util/zip/ZipConstants.h"
 
 #define JavaUtilZipZipEntry_DEFLATED 8
 #define JavaUtilZipZipEntry_STORED 0
@@ -30,7 +30,13 @@
   jlong localHeaderRelOffset_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)name;
+
+- (instancetype)initWithJavaUtilZipZipEntry:(JavaUtilZipZipEntry *)ze;
+
+- (id)clone;
 
 - (NSString *)getComment;
 
@@ -47,6 +53,8 @@
 - (jlong)getSize;
 
 - (jlong)getTime;
+
+- (NSUInteger)hash;
 
 - (jboolean)isDirectory;
 
@@ -66,18 +74,14 @@
 
 - (NSString *)description;
 
-- (instancetype)initWithJavaUtilZipZipEntry:(JavaUtilZipZipEntry *)ze;
-
-- (id)clone;
-
-- (NSUInteger)hash;
+#pragma mark Package-Private
 
 - (instancetype)initWithByteArray:(IOSByteArray *)hdrBuf
             withJavaIoInputStream:(JavaIoInputStream *)inArg;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipEntry_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipEntry)
 
 J2OBJC_FIELD_SETTER(JavaUtilZipZipEntry, name_, NSString *)
 J2OBJC_FIELD_SETTER(JavaUtilZipZipEntry, comment_, NSString *)
@@ -86,5 +90,19 @@ J2OBJC_FIELD_SETTER(JavaUtilZipZipEntry, extra_, IOSByteArray *)
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipEntry, DEFLATED, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipEntry, STORED, jint)
+
+FOUNDATION_EXPORT void JavaUtilZipZipEntry_initWithNSString_(JavaUtilZipZipEntry *self, NSString *name);
+
+FOUNDATION_EXPORT JavaUtilZipZipEntry *new_JavaUtilZipZipEntry_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipZipEntry_initWithJavaUtilZipZipEntry_(JavaUtilZipZipEntry *self, JavaUtilZipZipEntry *ze);
+
+FOUNDATION_EXPORT JavaUtilZipZipEntry *new_JavaUtilZipZipEntry_initWithJavaUtilZipZipEntry_(JavaUtilZipZipEntry *ze) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipZipEntry_initWithByteArray_withJavaIoInputStream_(JavaUtilZipZipEntry *self, IOSByteArray *hdrBuf, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaUtilZipZipEntry *new_JavaUtilZipZipEntry_initWithByteArray_withJavaIoInputStream_(IOSByteArray *hdrBuf, JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipEntry)
 
 #endif // _JavaUtilZipZipEntry_H_

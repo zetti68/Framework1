@@ -6,102 +6,100 @@
 #ifndef _JavaUtilConcurrentPriorityBlockingQueue_H_
 #define _JavaUtilConcurrentPriorityBlockingQueue_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilConcurrentLocksReentrantLock;
-@class JavaUtilConcurrentTimeUnitEnum;
-@class JavaUtilPriorityQueue;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-@protocol JavaUtilComparator;
-@protocol JavaUtilConcurrentLocksCondition;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/util/AbstractQueue.h"
 #include "java/util/Iterator.h"
 #include "java/util/concurrent/BlockingQueue.h"
 
-#define JavaUtilConcurrentPriorityBlockingQueue_DEFAULT_INITIAL_CAPACITY 11
-#define JavaUtilConcurrentPriorityBlockingQueue_MAX_ARRAY_SIZE 2147483639
-#define JavaUtilConcurrentPriorityBlockingQueue_serialVersionUID 5595510919245408276LL
+@class IOSObjectArray;
+@class JavaUtilConcurrentTimeUnitEnum;
+@protocol JavaUtilCollection;
+@protocol JavaUtilComparator;
 
-@interface JavaUtilConcurrentPriorityBlockingQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentPriorityBlockingQueue : JavaUtilAbstractQueue < JavaUtilConcurrentBlockingQueue, JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (instancetype)initWithInt:(jint)initialCapacity;
 
 - (instancetype)initWithInt:(jint)initialCapacity
      withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
-- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
 - (jboolean)addWithId:(id)e;
 
-- (jboolean)offerWithId:(id)e;
-
-- (void)putWithId:(id)e;
-
-- (jboolean)offerWithId:(id)e
-               withLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)poll;
-
-- (id)take;
-
-- (id)pollWithLong:(jlong)timeout
-withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
-- (id)peek;
+- (void)clear;
 
 - (id<JavaUtilComparator>)comparator;
 
-- (jint)size;
-
-- (jint)remainingCapacity;
-
-- (jboolean)removeWithId:(id)o;
-
-- (void)removeEQWithId:(id)o;
-
 - (jboolean)containsWithId:(id)o;
-
-- (IOSObjectArray *)toArray;
-
-- (NSString *)description;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c;
 
 - (jint)drainToWithJavaUtilCollection:(id<JavaUtilCollection>)c
                               withInt:(jint)maxElements;
 
-- (void)clear;
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)offerWithId:(id)e;
+
+- (jboolean)offerWithId:(id)e
+               withLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (id)peek;
+
+- (id)poll;
+
+- (id)pollWithLong:(jlong)timeout
+withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
+
+- (void)putWithId:(id)e;
+
+- (jint)remainingCapacity;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
+- (id)take;
+
+- (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (id<JavaUtilIterator>)iterator;
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (void)removeEQWithId:(id)o;
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentPriorityBlockingQueue_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentPriorityBlockingQueue)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentPriorityBlockingQueue_init(JavaUtilConcurrentPriorityBlockingQueue *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, DEFAULT_INITIAL_CAPACITY, jint)
+FOUNDATION_EXPORT JavaUtilConcurrentPriorityBlockingQueue *new_JavaUtilConcurrentPriorityBlockingQueue_init() NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, MAX_ARRAY_SIZE, jint)
+FOUNDATION_EXPORT void JavaUtilConcurrentPriorityBlockingQueue_initWithInt_(JavaUtilConcurrentPriorityBlockingQueue *self, jint initialCapacity);
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentPriorityBlockingQueue_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT JavaUtilConcurrentPriorityBlockingQueue *new_JavaUtilConcurrentPriorityBlockingQueue_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentPriorityBlockingQueue_allocationSpinLockOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, allocationSpinLockOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentPriorityBlockingQueue_initWithInt_withJavaUtilComparator_(JavaUtilConcurrentPriorityBlockingQueue *self, jint initialCapacity, id<JavaUtilComparator> comparator);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPriorityBlockingQueue *new_JavaUtilConcurrentPriorityBlockingQueue_initWithInt_withJavaUtilComparator_(jint initialCapacity, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPriorityBlockingQueue_initWithJavaUtilCollection_(JavaUtilConcurrentPriorityBlockingQueue *self, id<JavaUtilCollection> c);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPriorityBlockingQueue *new_JavaUtilConcurrentPriorityBlockingQueue_initWithJavaUtilCollection_(id<JavaUtilCollection> c) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentPriorityBlockingQueue)
 
 @interface JavaUtilConcurrentPriorityBlockingQueue_Itr : NSObject < JavaUtilIterator > {
  @public
@@ -110,8 +108,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, allocationSp
   jint lastRet_;
 }
 
-- (instancetype)initWithJavaUtilConcurrentPriorityBlockingQueue:(JavaUtilConcurrentPriorityBlockingQueue *)outer$
-                                              withNSObjectArray:(IOSObjectArray *)array;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
@@ -119,10 +116,21 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentPriorityBlockingQueue, allocationSp
 
 - (void)remove;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentPriorityBlockingQueue:(JavaUtilConcurrentPriorityBlockingQueue *)outer$
+                                              withNSObjectArray:(IOSObjectArray *)array;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentPriorityBlockingQueue_Itr_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentPriorityBlockingQueue_Itr)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentPriorityBlockingQueue_Itr, array_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentPriorityBlockingQueue_Itr_initWithJavaUtilConcurrentPriorityBlockingQueue_withNSObjectArray_(JavaUtilConcurrentPriorityBlockingQueue_Itr *self, JavaUtilConcurrentPriorityBlockingQueue *outer$, IOSObjectArray *array);
+
+FOUNDATION_EXPORT JavaUtilConcurrentPriorityBlockingQueue_Itr *new_JavaUtilConcurrentPriorityBlockingQueue_Itr_initWithJavaUtilConcurrentPriorityBlockingQueue_withNSObjectArray_(JavaUtilConcurrentPriorityBlockingQueue *outer$, IOSObjectArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentPriorityBlockingQueue_Itr)
 
 #endif // _JavaUtilConcurrentPriorityBlockingQueue_H_

@@ -6,10 +6,11 @@
 #ifndef _JavaUtilConcurrentConcurrentMap_H_
 #define _JavaUtilConcurrentConcurrentMap_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/Map.h"
 
 @protocol JavaUtilConcurrentConcurrentMap < JavaUtilMap, NSObject, JavaObject >
+
 - (id)putIfAbsentWithId:(id)key
                  withId:(id)value;
 
@@ -25,6 +26,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentMap)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentMap)
 
 #endif // _JavaUtilConcurrentConcurrentMap_H_

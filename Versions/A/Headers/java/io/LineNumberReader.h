@@ -6,14 +6,15 @@
 #ifndef _JavaIoLineNumberReader_H_
 #define _JavaIoLineNumberReader_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/BufferedReader.h"
+
 @class IOSCharArray;
 @class JavaIoReader;
 
-#import "JreEmulation.h"
-#include "java/io/BufferedReader.h"
+@interface JavaIoLineNumberReader : JavaIoBufferedReader
 
-@interface JavaIoLineNumberReader : JavaIoBufferedReader {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
 
@@ -40,6 +41,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoLineNumberReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoLineNumberReader)
+
+FOUNDATION_EXPORT void JavaIoLineNumberReader_initWithJavaIoReader_(JavaIoLineNumberReader *self, JavaIoReader *inArg);
+
+FOUNDATION_EXPORT JavaIoLineNumberReader *new_JavaIoLineNumberReader_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoLineNumberReader_initWithJavaIoReader_withInt_(JavaIoLineNumberReader *self, JavaIoReader *inArg, jint size);
+
+FOUNDATION_EXPORT JavaIoLineNumberReader *new_JavaIoLineNumberReader_initWithJavaIoReader_withInt_(JavaIoReader *inArg, jint size) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoLineNumberReader)
 
 #endif // _JavaIoLineNumberReader_H_

@@ -6,13 +6,12 @@
 #ifndef _JavaNetUnknownHostException_H_
 #define _JavaNetUnknownHostException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetUnknownHostException_serialVersionUID -4639126076052875403LL
+@interface JavaNetUnknownHostException : JavaIoIOException
 
-@interface JavaNetUnknownHostException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetUnknownHostException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetUnknownHostException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetUnknownHostException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetUnknownHostException_init(JavaNetUnknownHostException *self);
+
+FOUNDATION_EXPORT JavaNetUnknownHostException *new_JavaNetUnknownHostException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetUnknownHostException_initWithNSString_(JavaNetUnknownHostException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetUnknownHostException *new_JavaNetUnknownHostException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetUnknownHostException)
 
 #endif // _JavaNetUnknownHostException_H_

@@ -6,7 +6,7 @@
 #ifndef _JavaIoObjectInputValidation_H_
 #define _JavaIoObjectInputValidation_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaIoObjectInputValidation < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoObjectInputValidation_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoObjectInputValidation)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoObjectInputValidation)
 
 #endif // _JavaIoObjectInputValidation_H_

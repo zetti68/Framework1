@@ -6,7 +6,7 @@
 #ifndef _JavaSecurityPrincipal_H_
 #define _JavaSecurityPrincipal_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaSecurityPrincipal < NSObject, JavaObject >
 
@@ -20,6 +20,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityPrincipal_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityPrincipal)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityPrincipal)
 
 #endif // _JavaSecurityPrincipal_H_

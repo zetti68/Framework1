@@ -6,13 +6,12 @@
 #ifndef _JavaUtilMissingFormatArgumentException_H_
 #define _JavaUtilMissingFormatArgumentException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/IllegalFormatException.h"
 
-#define JavaUtilMissingFormatArgumentException_serialVersionUID 19190115LL
+@interface JavaUtilMissingFormatArgumentException : JavaUtilIllegalFormatException
 
-@interface JavaUtilMissingFormatArgumentException : JavaUtilIllegalFormatException {
-}
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)s;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilMissingFormatArgumentException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilMissingFormatArgumentException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilMissingFormatArgumentException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilMissingFormatArgumentException_initWithNSString_(JavaUtilMissingFormatArgumentException *self, NSString *s);
+
+FOUNDATION_EXPORT JavaUtilMissingFormatArgumentException *new_JavaUtilMissingFormatArgumentException_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilMissingFormatArgumentException)
 
 #endif // _JavaUtilMissingFormatArgumentException_H_

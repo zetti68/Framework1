@@ -6,14 +6,15 @@
 #ifndef _JavaUtilLoggingIOSLogHandler_H_
 #define _JavaUtilLoggingIOSLogHandler_H_
 
-@class JavaUtilLoggingLogRecord;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/logging/Formatter.h"
 #include "java/util/logging/Handler.h"
 
-@interface JavaUtilLoggingIOSLogHandler : JavaUtilLoggingHandler {
-}
+@class JavaUtilLoggingLogRecord;
+
+@interface JavaUtilLoggingIOSLogHandler : JavaUtilLoggingHandler
+
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -23,31 +24,37 @@
 
 - (void)publishWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)record;
 
-+ (NSString *)getDefaultProperties;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingIOSLogHandler_init() {}
-FOUNDATION_EXPORT NSString *JavaUtilLoggingIOSLogHandler_getDefaultProperties();
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingIOSLogHandler)
 
-FOUNDATION_EXPORT NSString *JavaUtilLoggingIOSLogHandler_IOS_LOG_MANAGER_DEFAULTS_DEBUG_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingIOSLogHandler, IOS_LOG_MANAGER_DEFAULTS_DEBUG_, NSString *)
+FOUNDATION_EXPORT NSString *JavaUtilLoggingIOSLogHandler_IOS_LOG_MANAGER_DEFAULTS_;
+J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingIOSLogHandler, IOS_LOG_MANAGER_DEFAULTS_, NSString *)
 
-FOUNDATION_EXPORT NSString *JavaUtilLoggingIOSLogHandler_IOS_LOG_MANAGER_DEFAULTS_PRODUCTION_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingIOSLogHandler, IOS_LOG_MANAGER_DEFAULTS_PRODUCTION_, NSString *)
+FOUNDATION_EXPORT void JavaUtilLoggingIOSLogHandler_init(JavaUtilLoggingIOSLogHandler *self);
 
-FOUNDATION_EXPORT NSString *JavaUtilLoggingIOSLogHandler_ASLCLIENT_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilLoggingIOSLogHandler, ASLCLIENT_, NSString *)
+FOUNDATION_EXPORT JavaUtilLoggingIOSLogHandler *new_JavaUtilLoggingIOSLogHandler_init() NS_RETURNS_RETAINED;
 
-@interface JavaUtilLoggingIOSLogHandler_IOSLogFormatter : JavaUtilLoggingFormatter {
-}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingIOSLogHandler)
+
+@interface JavaUtilLoggingIOSLogHandler_IOSLogFormatter : JavaUtilLoggingFormatter
+
+#pragma mark Public
 
 - (NSString *)formatWithJavaUtilLoggingLogRecord:(JavaUtilLoggingLogRecord *)record;
+
+#pragma mark Package-Private
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingIOSLogHandler_IOSLogFormatter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingIOSLogHandler_IOSLogFormatter)
+
+FOUNDATION_EXPORT void JavaUtilLoggingIOSLogHandler_IOSLogFormatter_init(JavaUtilLoggingIOSLogHandler_IOSLogFormatter *self);
+
+FOUNDATION_EXPORT JavaUtilLoggingIOSLogHandler_IOSLogFormatter *new_JavaUtilLoggingIOSLogHandler_IOSLogFormatter_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingIOSLogHandler_IOSLogFormatter)
 
 #endif // _JavaUtilLoggingIOSLogHandler_H_

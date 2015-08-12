@@ -6,18 +6,14 @@
 #ifndef _JavaNetInet4Address_H_
 #define _JavaNetInet4Address_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/net/InetAddress.h"
 
-#define JavaNetInet4Address_serialVersionUID 3286316764910316507LL
+@class IOSByteArray;
 
-@interface JavaNetInet4Address : JavaNetInetAddress {
-}
+@interface JavaNetInet4Address : JavaNetInetAddress
 
-- (instancetype)initWithByteArray:(IOSByteArray *)ipaddress
-                     withNSString:(NSString *)hostName;
+#pragma mark Public
 
 - (jboolean)isAnyLocalAddress;
 
@@ -39,12 +35,14 @@
 
 - (jboolean)isSiteLocalAddress;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithByteArray:(IOSByteArray *)ipaddress
+                     withNSString:(NSString *)hostName;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetInet4Address_initialized;
 J2OBJC_STATIC_INIT(JavaNetInet4Address)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetInet4Address, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInet4Address_ANY_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetInet4Address, ANY_, JavaNetInetAddress *)
@@ -54,5 +52,11 @@ J2OBJC_STATIC_FIELD_GETTER(JavaNetInet4Address, ALL_, JavaNetInetAddress *)
 
 FOUNDATION_EXPORT JavaNetInetAddress *JavaNetInet4Address_LOOPBACK_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetInet4Address, LOOPBACK_, JavaNetInetAddress *)
+
+FOUNDATION_EXPORT void JavaNetInet4Address_initWithByteArray_withNSString_(JavaNetInet4Address *self, IOSByteArray *ipaddress, NSString *hostName);
+
+FOUNDATION_EXPORT JavaNetInet4Address *new_JavaNetInet4Address_initWithByteArray_withNSString_(IOSByteArray *ipaddress, NSString *hostName) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetInet4Address)
 
 #endif // _JavaNetInet4Address_H_

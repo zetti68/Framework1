@@ -6,29 +6,20 @@
 #ifndef _JavaTextSimpleDateFormat_H_
 #define _JavaTextSimpleDateFormat_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
+#include "J2ObjC_header.h"
+#include "java/text/DateFormat.h"
+
 @class JavaLangStringBuffer;
 @class JavaTextDateFormatSymbols;
 @class JavaTextFieldPosition;
 @class JavaTextParsePosition;
 @class JavaUtilDate;
 @class JavaUtilLocale;
-@class JavaUtilTimeZone;
 @protocol JavaTextAttributedCharacterIterator;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/text/DateFormat.h"
+@interface JavaTextSimpleDateFormat : JavaTextDateFormat
 
-#define JavaTextSimpleDateFormat_RFC_822_TIMEZONE_FIELD 18
-#define JavaTextSimpleDateFormat_STAND_ALONE_DAY_OF_WEEK_FIELD 20
-#define JavaTextSimpleDateFormat_STAND_ALONE_MONTH_FIELD 19
-#define JavaTextSimpleDateFormat_serialVersionUID 4774881970558875024LL
-
-@interface JavaTextSimpleDateFormat : JavaTextDateFormat {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -48,11 +39,11 @@
 
 - (jboolean)isEqual:(id)object;
 
-- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
-
 - (JavaLangStringBuffer *)formatWithJavaUtilDate:(JavaUtilDate *)date
                         withJavaLangStringBuffer:(JavaLangStringBuffer *)buffer
                        withJavaTextFieldPosition:(JavaTextFieldPosition *)fieldPos;
+
+- (id<JavaTextAttributedCharacterIterator>)formatToCharacterIteratorWithId:(id)object;
 
 - (JavaUtilDate *)get2DigitYearStart;
 
@@ -73,21 +64,27 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextSimpleDateFormat_initialized;
 J2OBJC_STATIC_INIT(JavaTextSimpleDateFormat)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT NSString *JavaTextSimpleDateFormat_PATTERN_CHARS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, PATTERN_CHARS_, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, RFC_822_TIMEZONE_FIELD, jint)
+FOUNDATION_EXPORT void JavaTextSimpleDateFormat_init(JavaTextSimpleDateFormat *self);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, STAND_ALONE_MONTH_FIELD, jint)
+FOUNDATION_EXPORT JavaTextSimpleDateFormat *new_JavaTextSimpleDateFormat_init() NS_RETURNS_RETAINED;
 
-J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, STAND_ALONE_DAY_OF_WEEK_FIELD, jint)
+FOUNDATION_EXPORT void JavaTextSimpleDateFormat_initWithNSString_(JavaTextSimpleDateFormat *self, NSString *pattern);
 
-FOUNDATION_EXPORT IOSObjectArray *JavaTextSimpleDateFormat_serialPersistentFields_;
-J2OBJC_STATIC_FIELD_GETTER(JavaTextSimpleDateFormat, serialPersistentFields_, IOSObjectArray *)
+FOUNDATION_EXPORT JavaTextSimpleDateFormat *new_JavaTextSimpleDateFormat_initWithNSString_(NSString *pattern) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextSimpleDateFormat_initWithNSString_withJavaTextDateFormatSymbols_(JavaTextSimpleDateFormat *self, NSString *template_, JavaTextDateFormatSymbols *value);
+
+FOUNDATION_EXPORT JavaTextSimpleDateFormat *new_JavaTextSimpleDateFormat_initWithNSString_withJavaTextDateFormatSymbols_(NSString *template_, JavaTextDateFormatSymbols *value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaTextSimpleDateFormat_initWithNSString_withJavaUtilLocale_(JavaTextSimpleDateFormat *self, NSString *template_, JavaUtilLocale *locale);
+
+FOUNDATION_EXPORT JavaTextSimpleDateFormat *new_JavaTextSimpleDateFormat_initWithNSString_withJavaUtilLocale_(NSString *template_, JavaUtilLocale *locale) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextSimpleDateFormat)
 
 #endif // _JavaTextSimpleDateFormat_H_

@@ -6,22 +6,22 @@
 #ifndef _DalvikSystemBlockGuard_H_
 #define _DalvikSystemBlockGuard_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/RuntimeException.h"
+
 @protocol DalvikSystemBlockGuard_Policy;
 
-#import "JreEmulation.h"
-#include "java/lang/RuntimeException.h"
-#include "java/lang/ThreadLocal.h"
-
-#define DalvikSystemBlockGuard_DISALLOW_DISK_READ 2
 #define DalvikSystemBlockGuard_DISALLOW_DISK_WRITE 1
+#define DalvikSystemBlockGuard_DISALLOW_DISK_READ 2
 #define DalvikSystemBlockGuard_DISALLOW_NETWORK 4
 #define DalvikSystemBlockGuard_PASS_RESTRICTIONS_VIA_RPC 8
-#define DalvikSystemBlockGuard_PENALTY_DEATH 64
-#define DalvikSystemBlockGuard_PENALTY_DIALOG 32
 #define DalvikSystemBlockGuard_PENALTY_LOG 16
+#define DalvikSystemBlockGuard_PENALTY_DIALOG 32
+#define DalvikSystemBlockGuard_PENALTY_DEATH 64
 
-@interface DalvikSystemBlockGuard : NSObject {
-}
+@interface DalvikSystemBlockGuard : NSObject
+
+#pragma mark Public
 
 + (id<DalvikSystemBlockGuard_Policy>)getThreadPolicy;
 
@@ -29,10 +29,7 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL DalvikSystemBlockGuard_initialized;
 J2OBJC_STATIC_INIT(DalvikSystemBlockGuard)
-FOUNDATION_EXPORT id<DalvikSystemBlockGuard_Policy> DalvikSystemBlockGuard_getThreadPolicy();
-FOUNDATION_EXPORT void DalvikSystemBlockGuard_setThreadPolicyWithDalvikSystemBlockGuard_Policy_(id<DalvikSystemBlockGuard_Policy> policy);
 
 J2OBJC_STATIC_FIELD_GETTER(DalvikSystemBlockGuard, DISALLOW_DISK_WRITE, jint)
 
@@ -51,29 +48,11 @@ J2OBJC_STATIC_FIELD_GETTER(DalvikSystemBlockGuard, PENALTY_DEATH, jint)
 FOUNDATION_EXPORT id<DalvikSystemBlockGuard_Policy> DalvikSystemBlockGuard_LAX_POLICY_;
 J2OBJC_STATIC_FIELD_GETTER(DalvikSystemBlockGuard, LAX_POLICY_, id<DalvikSystemBlockGuard_Policy>)
 
-FOUNDATION_EXPORT JavaLangThreadLocal *DalvikSystemBlockGuard_threadPolicy_;
-J2OBJC_STATIC_FIELD_GETTER(DalvikSystemBlockGuard, threadPolicy_, JavaLangThreadLocal *)
-J2OBJC_STATIC_FIELD_SETTER(DalvikSystemBlockGuard, threadPolicy_, JavaLangThreadLocal *)
+FOUNDATION_EXPORT id<DalvikSystemBlockGuard_Policy> DalvikSystemBlockGuard_getThreadPolicy();
 
-@interface DalvikSystemBlockGuard_BlockGuardPolicyException : JavaLangRuntimeException {
-}
+FOUNDATION_EXPORT void DalvikSystemBlockGuard_setThreadPolicyWithDalvikSystemBlockGuard_Policy_(id<DalvikSystemBlockGuard_Policy> policy);
 
-- (instancetype)initWithInt:(jint)policyState
-                    withInt:(jint)policyViolated;
-
-- (instancetype)initWithInt:(jint)policyState
-                    withInt:(jint)policyViolated
-               withNSString:(NSString *)message;
-
-- (jint)getPolicy;
-
-- (jint)getPolicyViolation;
-
-- (NSString *)getMessage;
-
-@end
-
-__attribute__((always_inline)) inline void DalvikSystemBlockGuard_BlockGuardPolicyException_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(DalvikSystemBlockGuard)
 
 @protocol DalvikSystemBlockGuard_Policy < NSObject, JavaObject >
 
@@ -87,34 +66,39 @@ __attribute__((always_inline)) inline void DalvikSystemBlockGuard_BlockGuardPoli
 
 @end
 
-__attribute__((always_inline)) inline void DalvikSystemBlockGuard_Policy_init() {}
+J2OBJC_EMPTY_STATIC_INIT(DalvikSystemBlockGuard_Policy)
 
-@interface DalvikSystemBlockGuard_$1 : NSObject < DalvikSystemBlockGuard_Policy > {
-}
+J2OBJC_TYPE_LITERAL_HEADER(DalvikSystemBlockGuard_Policy)
 
-- (void)onWriteToDisk;
+@interface DalvikSystemBlockGuard_BlockGuardPolicyException : JavaLangRuntimeException
 
-- (void)onReadFromDisk;
+#pragma mark Public
 
-- (void)onNetwork;
+- (instancetype)initWithInt:(jint)policyState
+                    withInt:(jint)policyViolated;
 
-- (jint)getPolicyMask;
+- (instancetype)initWithInt:(jint)policyState
+                    withInt:(jint)policyViolated
+               withNSString:(NSString *)message;
 
-- (instancetype)init;
+- (NSString *)getMessage;
 
-@end
+- (jint)getPolicy;
 
-__attribute__((always_inline)) inline void DalvikSystemBlockGuard_$1_init() {}
-
-@interface DalvikSystemBlockGuard_$2 : JavaLangThreadLocal {
-}
-
-- (id<DalvikSystemBlockGuard_Policy>)initialValue OBJC_METHOD_FAMILY_NONE;
-
-- (instancetype)init;
+- (jint)getPolicyViolation;
 
 @end
 
-__attribute__((always_inline)) inline void DalvikSystemBlockGuard_$2_init() {}
+J2OBJC_EMPTY_STATIC_INIT(DalvikSystemBlockGuard_BlockGuardPolicyException)
+
+FOUNDATION_EXPORT void DalvikSystemBlockGuard_BlockGuardPolicyException_initWithInt_withInt_(DalvikSystemBlockGuard_BlockGuardPolicyException *self, jint policyState, jint policyViolated);
+
+FOUNDATION_EXPORT DalvikSystemBlockGuard_BlockGuardPolicyException *new_DalvikSystemBlockGuard_BlockGuardPolicyException_initWithInt_withInt_(jint policyState, jint policyViolated) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void DalvikSystemBlockGuard_BlockGuardPolicyException_initWithInt_withInt_withNSString_(DalvikSystemBlockGuard_BlockGuardPolicyException *self, jint policyState, jint policyViolated, NSString *message);
+
+FOUNDATION_EXPORT DalvikSystemBlockGuard_BlockGuardPolicyException *new_DalvikSystemBlockGuard_BlockGuardPolicyException_initWithInt_withInt_withNSString_(jint policyState, jint policyViolated, NSString *message) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(DalvikSystemBlockGuard_BlockGuardPolicyException)
 
 #endif // _DalvikSystemBlockGuard_H_

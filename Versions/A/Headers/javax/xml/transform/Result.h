@@ -6,7 +6,7 @@
 #ifndef _JavaxXmlTransformResult_H_
 #define _JavaxXmlTransformResult_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaxXmlTransformResult < NSObject, JavaObject >
 
@@ -16,12 +16,14 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaxXmlTransformResult_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaxXmlTransformResult)
 
 FOUNDATION_EXPORT NSString *JavaxXmlTransformResult_PI_DISABLE_OUTPUT_ESCAPING_;
 J2OBJC_STATIC_FIELD_GETTER(JavaxXmlTransformResult, PI_DISABLE_OUTPUT_ESCAPING_, NSString *)
 
 FOUNDATION_EXPORT NSString *JavaxXmlTransformResult_PI_ENABLE_OUTPUT_ESCAPING_;
 J2OBJC_STATIC_FIELD_GETTER(JavaxXmlTransformResult, PI_ENABLE_OUTPUT_ESCAPING_, NSString *)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaxXmlTransformResult)
 
 #endif // _JavaxXmlTransformResult_H_

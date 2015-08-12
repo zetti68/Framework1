@@ -6,6 +6,10 @@
 #ifndef _JavaSqlConnection_H_
 #define _JavaSqlConnection_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/AutoCloseable.h"
+#include "java/sql/Wrapper.h"
+
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaSqlSQLWarning;
@@ -23,10 +27,6 @@
 @protocol JavaSqlStruct;
 @protocol JavaUtilMap;
 
-#import "JreEmulation.h"
-#include "java/lang/AutoCloseable.h"
-#include "java/sql/Wrapper.h"
-
 #define JavaSqlConnection_TRANSACTION_NONE 0
 #define JavaSqlConnection_TRANSACTION_READ_COMMITTED 2
 #define JavaSqlConnection_TRANSACTION_READ_UNCOMMITTED 1
@@ -34,6 +34,7 @@
 #define JavaSqlConnection_TRANSACTION_SERIALIZABLE 8
 
 @protocol JavaSqlConnection < JavaSqlWrapper, JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (void)clearWarnings;
 
 - (void)close;
@@ -149,7 +150,7 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlConnection_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlConnection)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlConnection, TRANSACTION_NONE, jint)
 
@@ -160,5 +161,7 @@ J2OBJC_STATIC_FIELD_GETTER(JavaSqlConnection, TRANSACTION_READ_UNCOMMITTED, jint
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlConnection, TRANSACTION_REPEATABLE_READ, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaSqlConnection, TRANSACTION_SERIALIZABLE, jint)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlConnection)
 
 #endif // _JavaSqlConnection_H_

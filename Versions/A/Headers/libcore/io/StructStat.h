@@ -6,7 +6,7 @@
 #ifndef _LibcoreIoStructStat_H_
 #define _LibcoreIoStructStat_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreIoStructStat : NSObject {
  @public
@@ -25,6 +25,8 @@
   jlong st_blocks_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithLong:(jlong)st_dev
                     withLong:(jlong)st_ino
                      withInt:(jint)st_mode
@@ -41,6 +43,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructStat_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructStat)
+
+FOUNDATION_EXPORT void LibcoreIoStructStat_initWithLong_withLong_withInt_withLong_withInt_withInt_withLong_withLong_withLong_withLong_withLong_withLong_withLong_(LibcoreIoStructStat *self, jlong st_dev, jlong st_ino, jint st_mode, jlong st_nlink, jint st_uid, jint st_gid, jlong st_rdev, jlong st_size, jlong st_atime, jlong st_mtime, jlong st_ctime, jlong st_blksize, jlong st_blocks);
+
+FOUNDATION_EXPORT LibcoreIoStructStat *new_LibcoreIoStructStat_initWithLong_withLong_withInt_withLong_withInt_withInt_withLong_withLong_withLong_withLong_withLong_withLong_withLong_(jlong st_dev, jlong st_ino, jint st_mode, jlong st_nlink, jint st_uid, jint st_gid, jlong st_rdev, jlong st_size, jlong st_atime, jlong st_mtime, jlong st_ctime, jlong st_blksize, jlong st_blocks) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructStat)
 
 #endif // _LibcoreIoStructStat_H_

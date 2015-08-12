@@ -6,28 +6,31 @@
 #ifndef _JavaSecuritySecureRandomSpi_H_
 #define _JavaSecuritySecureRandomSpi_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaSecuritySecureRandomSpi_serialVersionUID -2991854161009191830LL
+@class IOSByteArray;
 
-@interface JavaSecuritySecureRandomSpi : NSObject < JavaIoSerializable > {
-}
+@interface JavaSecuritySecureRandomSpi : NSObject < JavaIoSerializable >
 
-- (void)engineSetSeedWithByteArray:(IOSByteArray *)seed;
-
-- (void)engineNextBytesWithByteArray:(IOSByteArray *)bytes;
-
-- (IOSByteArray *)engineGenerateSeedWithInt:(jint)numBytes;
+#pragma mark Public
 
 - (instancetype)init;
 
+#pragma mark Protected
+
+- (IOSByteArray *)engineGenerateSeedWithInt:(jint)numBytes;
+
+- (void)engineNextBytesWithByteArray:(IOSByteArray *)bytes;
+
+- (void)engineSetSeedWithByteArray:(IOSByteArray *)seed;
+
 @end
 
-__attribute__((always_inline)) inline void JavaSecuritySecureRandomSpi_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecuritySecureRandomSpi)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecuritySecureRandomSpi, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecuritySecureRandomSpi_init(JavaSecuritySecureRandomSpi *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecuritySecureRandomSpi)
 
 #endif // _JavaSecuritySecureRandomSpi_H_

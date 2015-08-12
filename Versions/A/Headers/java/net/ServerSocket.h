@@ -6,6 +6,9 @@
 #ifndef _JavaNetServerSocket_H_
 #define _JavaNetServerSocket_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Closeable.h"
+
 @class JavaNetInetAddress;
 @class JavaNetSocket;
 @class JavaNetSocketAddress;
@@ -13,15 +16,9 @@
 @class JavaNioChannelsServerSocketChannel;
 @protocol JavaNetSocketImplFactory;
 
-#import "JreEmulation.h"
-#include "java/io/Closeable.h"
+@interface JavaNetServerSocket : NSObject < JavaIoCloseable >
 
-#define JavaNetServerSocket_DEFAULT_BACKLOG 50
-
-@interface JavaNetServerSocket : NSObject < JavaIoCloseable > {
-}
-
-- (JavaNetSocketImpl *)getImpl$;
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -36,15 +33,40 @@
 
 - (JavaNetSocket *)accept;
 
+- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
+
+- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr
+                             withInt:(jint)backlog;
+
 - (void)close;
+
+- (JavaNioChannelsServerSocketChannel *)getChannel;
+
+- (JavaNetSocketImpl *)getImpl$;
 
 - (JavaNetInetAddress *)getInetAddress;
 
 - (jint)getLocalPort;
 
+- (JavaNetSocketAddress *)getLocalSocketAddress;
+
+- (jint)getReceiveBufferSize;
+
+- (jboolean)getReuseAddress;
+
 - (jint)getSoTimeout;
 
-- (void)implAcceptWithJavaNetSocket:(JavaNetSocket *)aSocket;
+- (jboolean)isBound;
+
+- (jboolean)isClosed;
+
+- (void)setPerformancePreferencesWithInt:(jint)connectionTime
+                                 withInt:(jint)latency
+                                 withInt:(jint)bandwidth;
+
+- (void)setReceiveBufferSizeWithInt:(jint)size;
+
+- (void)setReuseAddressWithBoolean:(jboolean)reuse;
 
 + (void)setSocketFactoryWithJavaNetSocketImplFactory:(id<JavaNetSocketImplFactory>)aFactory;
 
@@ -52,40 +74,36 @@
 
 - (NSString *)description;
 
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr;
+#pragma mark Protected
 
-- (void)bindWithJavaNetSocketAddress:(JavaNetSocketAddress *)localAddr
-                             withInt:(jint)backlog;
-
-- (JavaNetSocketAddress *)getLocalSocketAddress;
-
-- (jboolean)isBound;
-
-- (jboolean)isClosed;
-
-- (void)setReuseAddressWithBoolean:(jboolean)reuse;
-
-- (jboolean)getReuseAddress;
-
-- (void)setReceiveBufferSizeWithInt:(jint)size;
-
-- (jint)getReceiveBufferSize;
-
-- (JavaNioChannelsServerSocketChannel *)getChannel;
-
-- (void)setPerformancePreferencesWithInt:(jint)connectionTime
-                                 withInt:(jint)latency
-                                 withInt:(jint)bandwidth;
+- (void)implAcceptWithJavaNetSocket:(JavaNetSocket *)aSocket;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetServerSocket_init() {}
-FOUNDATION_EXPORT void JavaNetServerSocket_setSocketFactoryWithJavaNetSocketImplFactory_(id<JavaNetSocketImplFactory> aFactory);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNetServerSocket, DEFAULT_BACKLOG, jint)
+J2OBJC_EMPTY_STATIC_INIT(JavaNetServerSocket)
 
 FOUNDATION_EXPORT id<JavaNetSocketImplFactory> JavaNetServerSocket_factory_;
 J2OBJC_STATIC_FIELD_GETTER(JavaNetServerSocket, factory_, id<JavaNetSocketImplFactory>)
 J2OBJC_STATIC_FIELD_SETTER(JavaNetServerSocket, factory_, id<JavaNetSocketImplFactory>)
+
+FOUNDATION_EXPORT void JavaNetServerSocket_init(JavaNetServerSocket *self);
+
+FOUNDATION_EXPORT JavaNetServerSocket *new_JavaNetServerSocket_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetServerSocket_initWithInt_(JavaNetServerSocket *self, jint port);
+
+FOUNDATION_EXPORT JavaNetServerSocket *new_JavaNetServerSocket_initWithInt_(jint port) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetServerSocket_initWithInt_withInt_(JavaNetServerSocket *self, jint port, jint backlog);
+
+FOUNDATION_EXPORT JavaNetServerSocket *new_JavaNetServerSocket_initWithInt_withInt_(jint port, jint backlog) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetServerSocket_initWithInt_withInt_withJavaNetInetAddress_(JavaNetServerSocket *self, jint port, jint backlog, JavaNetInetAddress *localAddress);
+
+FOUNDATION_EXPORT JavaNetServerSocket *new_JavaNetServerSocket_initWithInt_withInt_withJavaNetInetAddress_(jint port, jint backlog, JavaNetInetAddress *localAddress) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetServerSocket_setSocketFactoryWithJavaNetSocketImplFactory_(id<JavaNetSocketImplFactory> aFactory);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetServerSocket)
 
 #endif // _JavaNetServerSocket_H_

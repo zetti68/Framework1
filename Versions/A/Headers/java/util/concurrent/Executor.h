@@ -6,9 +6,9 @@
 #ifndef _JavaUtilConcurrentExecutor_H_
 #define _JavaUtilConcurrentExecutor_H_
 
-@protocol JavaLangRunnable;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@protocol JavaLangRunnable;
 
 @protocol JavaUtilConcurrentExecutor < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutor_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutor)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutor)
 
 #endif // _JavaUtilConcurrentExecutor_H_

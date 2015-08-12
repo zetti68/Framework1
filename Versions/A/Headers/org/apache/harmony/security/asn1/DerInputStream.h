@@ -6,17 +6,18 @@
 #ifndef _OrgApacheHarmonySecurityAsn1DerInputStream_H_
 #define _OrgApacheHarmonySecurityAsn1DerInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/BerInputStream.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class OrgApacheHarmonySecurityAsn1ASN1Sequence;
 @class OrgApacheHarmonySecurityAsn1ASN1SetOf;
 @class OrgApacheHarmonySecurityAsn1ASN1StringType;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/BerInputStream.h"
+@interface OrgApacheHarmonySecurityAsn1DerInputStream : OrgApacheHarmonySecurityAsn1BerInputStream
 
-@interface OrgApacheHarmonySecurityAsn1DerInputStream : OrgApacheHarmonySecurityAsn1BerInputStream {
-}
+#pragma mark Public
 
 - (instancetype)initWithByteArray:(IOSByteArray *)encoded;
 
@@ -32,6 +33,8 @@
 
 - (void)readBoolean;
 
+- (void)readGeneralizedTime;
+
 - (void)readOctetString;
 
 - (void)readSequenceWithOrgApacheHarmonySecurityAsn1ASN1Sequence:(OrgApacheHarmonySecurityAsn1ASN1Sequence *)sequence;
@@ -42,14 +45,22 @@
 
 - (void)readUTCTime;
 
-- (void)readGeneralizedTime;
-
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityAsn1DerInputStream_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityAsn1DerInputStream)
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheHarmonySecurityAsn1DerInputStream_UNUSED_BITS_MASK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityAsn1DerInputStream, UNUSED_BITS_MASK_, IOSByteArray *)
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1DerInputStream_initWithByteArray_(OrgApacheHarmonySecurityAsn1DerInputStream *self, IOSByteArray *encoded);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1DerInputStream *new_OrgApacheHarmonySecurityAsn1DerInputStream_initWithByteArray_(IOSByteArray *encoded) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1DerInputStream_initWithByteArray_withInt_withInt_(OrgApacheHarmonySecurityAsn1DerInputStream *self, IOSByteArray *encoded, jint offset, jint encodingLen);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1DerInputStream *new_OrgApacheHarmonySecurityAsn1DerInputStream_initWithByteArray_withInt_withInt_(IOSByteArray *encoded, jint offset, jint encodingLen) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1DerInputStream_initWithJavaIoInputStream_(OrgApacheHarmonySecurityAsn1DerInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1DerInputStream *new_OrgApacheHarmonySecurityAsn1DerInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1DerInputStream)
 
 #endif // _OrgApacheHarmonySecurityAsn1DerInputStream_H_

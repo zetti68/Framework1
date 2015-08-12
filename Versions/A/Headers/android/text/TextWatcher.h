@@ -6,13 +6,14 @@
 #ifndef _AndroidTextTextWatcher_H_
 #define _AndroidTextTextWatcher_H_
 
+#include "J2ObjC_header.h"
+#include "android/text/NoCopySpan.h"
+
 @protocol AndroidTextEditable;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
-#include "android/text/NoCopySpan.h"
-
 @protocol AndroidTextTextWatcher < AndroidTextNoCopySpan, NSObject, JavaObject >
+
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
                                           withInt:(jint)start
                                           withInt:(jint)count
@@ -27,6 +28,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidTextTextWatcher_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidTextTextWatcher)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidTextTextWatcher)
 
 #endif // _AndroidTextTextWatcher_H_

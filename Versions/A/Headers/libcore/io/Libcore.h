@@ -6,20 +6,20 @@
 #ifndef _LibcoreIoLibcore_H_
 #define _LibcoreIoLibcore_H_
 
+#include "J2ObjC_header.h"
+
 @protocol LibcoreIoOs;
 
-#import "JreEmulation.h"
-
-@interface LibcoreIoLibcore : NSObject {
-}
+@interface LibcoreIoLibcore : NSObject
 
 @end
 
-FOUNDATION_EXPORT BOOL LibcoreIoLibcore_initialized;
 J2OBJC_STATIC_INIT(LibcoreIoLibcore)
 
 FOUNDATION_EXPORT id<LibcoreIoOs> LibcoreIoLibcore_os_;
 J2OBJC_STATIC_FIELD_GETTER(LibcoreIoLibcore, os_, id<LibcoreIoOs>)
 J2OBJC_STATIC_FIELD_SETTER(LibcoreIoLibcore, os_, id<LibcoreIoOs>)
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoLibcore)
 
 #endif // _LibcoreIoLibcore_H_

@@ -6,114 +6,117 @@
 #ifndef _JavaUtilBitSet_H_
 #define _JavaUtilBitSet_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+
 @class IOSByteArray;
 @class IOSLongArray;
-@class JavaIoObjectInputStream;
 @class JavaNioByteBuffer;
 @class JavaNioLongBuffer;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
+@interface JavaUtilBitSet : NSObject < JavaIoSerializable, NSCopying >
 
-#define JavaUtilBitSet_ALL_ONES -1LL
-#define JavaUtilBitSet_serialVersionUID 7997698588986878753LL
-
-@interface JavaUtilBitSet : NSObject < JavaIoSerializable, NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)bitCount;
 
+- (void)and__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
+
+- (void)andNotWithJavaUtilBitSet:(JavaUtilBitSet *)bs;
+
+- (jint)cardinality;
+
+- (void)clear;
+
+- (void)clearWithInt:(jint)index;
+
+- (void)clearWithInt:(jint)fromIndex
+             withInt:(jint)toIndex;
+
 - (id)clone;
 
 - (jboolean)isEqual:(id)o;
 
-- (NSUInteger)hash;
+- (void)flipWithInt:(jint)index;
+
+- (void)flipWithInt:(jint)fromIndex
+            withInt:(jint)toIndex;
 
 - (jboolean)getWithInt:(jint)index;
 
-- (void)setWithInt:(jint)index;
-
-- (void)clearWithInt:(jint)index;
-
-- (void)flipWithInt:(jint)index;
-
 - (JavaUtilBitSet *)getWithInt:(jint)fromIndex
                        withInt:(jint)toIndex;
+
+- (NSUInteger)hash;
+
+- (jboolean)intersectsWithJavaUtilBitSet:(JavaUtilBitSet *)bs;
+
+- (jboolean)isEmpty;
+
+- (jint)length;
+
+- (jint)nextClearBitWithInt:(jint)index;
+
+- (jint)nextSetBitWithInt:(jint)index;
+
+- (void)or__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
+
+- (jint)previousClearBitWithInt:(jint)index;
+
+- (jint)previousSetBitWithInt:(jint)index;
+
+- (void)setWithInt:(jint)index;
 
 - (void)setWithInt:(jint)index
        withBoolean:(jboolean)state;
 
 - (void)setWithInt:(jint)fromIndex
+           withInt:(jint)toIndex;
+
+- (void)setWithInt:(jint)fromIndex
            withInt:(jint)toIndex
        withBoolean:(jboolean)state;
 
-- (void)clear;
-
-- (void)setWithInt:(jint)fromIndex
-           withInt:(jint)toIndex;
-
-- (void)clearWithInt:(jint)fromIndex
-             withInt:(jint)toIndex;
-
-- (void)flipWithInt:(jint)fromIndex
-            withInt:(jint)toIndex;
-
-- (jboolean)intersectsWithJavaUtilBitSet:(JavaUtilBitSet *)bs;
-
-- (void)and__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
-
-- (void)andNotWithJavaUtilBitSet:(JavaUtilBitSet *)bs;
-
-- (void)or__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
-
-- (void)xor__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
-
 - (jint)size;
 
-- (jint)length;
+- (IOSByteArray *)toByteArray;
+
+- (IOSLongArray *)toLongArray;
 
 - (NSString *)description;
-
-- (jint)nextSetBitWithInt:(jint)index;
-
-- (jint)nextClearBitWithInt:(jint)index;
-
-- (jint)previousSetBitWithInt:(jint)index;
-
-- (jint)previousClearBitWithInt:(jint)index;
-
-- (jboolean)isEmpty;
-
-- (jint)cardinality;
-
-+ (JavaUtilBitSet *)valueOfWithLongArray:(IOSLongArray *)longs;
-
-+ (JavaUtilBitSet *)valueOfWithJavaNioLongBuffer:(JavaNioLongBuffer *)longBuffer;
 
 + (JavaUtilBitSet *)valueOfWithByteArray:(IOSByteArray *)bytes;
 
 + (JavaUtilBitSet *)valueOfWithJavaNioByteBuffer:(JavaNioByteBuffer *)byteBuffer;
 
-- (IOSLongArray *)toLongArray;
++ (JavaUtilBitSet *)valueOfWithLongArray:(IOSLongArray *)longs;
 
-- (IOSByteArray *)toByteArray;
++ (JavaUtilBitSet *)valueOfWithJavaNioLongBuffer:(JavaNioLongBuffer *)longBuffer;
+
+- (void)xor__WithJavaUtilBitSet:(JavaUtilBitSet *)bs;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilBitSet_initialized;
 J2OBJC_STATIC_INIT(JavaUtilBitSet)
+
+FOUNDATION_EXPORT void JavaUtilBitSet_init(JavaUtilBitSet *self);
+
+FOUNDATION_EXPORT JavaUtilBitSet *new_JavaUtilBitSet_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilBitSet_initWithInt_(JavaUtilBitSet *self, jint bitCount);
+
+FOUNDATION_EXPORT JavaUtilBitSet *new_JavaUtilBitSet_initWithInt_(jint bitCount) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaUtilBitSet *JavaUtilBitSet_valueOfWithLongArray_(IOSLongArray *longs);
+
 FOUNDATION_EXPORT JavaUtilBitSet *JavaUtilBitSet_valueOfWithJavaNioLongBuffer_(JavaNioLongBuffer *longBuffer);
+
 FOUNDATION_EXPORT JavaUtilBitSet *JavaUtilBitSet_valueOfWithByteArray_(IOSByteArray *bytes);
+
 FOUNDATION_EXPORT JavaUtilBitSet *JavaUtilBitSet_valueOfWithJavaNioByteBuffer_(JavaNioByteBuffer *byteBuffer);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilBitSet, serialVersionUID, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilBitSet, ALL_ONES, jlong)
-
-FOUNDATION_EXPORT jint JavaUtilBitSet_SIZEOF_LONG_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilBitSet, SIZEOF_LONG_, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilBitSet)
 
 #endif // _JavaUtilBitSet_H_

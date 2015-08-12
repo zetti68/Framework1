@@ -6,16 +6,18 @@
 #ifndef _LibcoreIoGaiException_H_
 #define _LibcoreIoGaiException_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/RuntimeException.h"
+
 @class JavaLangThrowable;
 @class JavaNetUnknownHostException;
-
-#import "JreEmulation.h"
-#include "java/lang/RuntimeException.h"
 
 @interface LibcoreIoGaiException : JavaLangRuntimeException {
  @public
   jint error_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)functionName
                          withInt:(jint)error;
@@ -26,12 +28,22 @@
 
 - (NSString *)getMessage;
 
-- (JavaNetUnknownHostException *)rethrowAsUnknownHostExceptionWithNSString:(NSString *)detailMessage;
-
 - (JavaNetUnknownHostException *)rethrowAsUnknownHostException;
+
+- (JavaNetUnknownHostException *)rethrowAsUnknownHostExceptionWithNSString:(NSString *)detailMessage;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoGaiException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoGaiException)
+
+FOUNDATION_EXPORT void LibcoreIoGaiException_initWithNSString_withInt_(LibcoreIoGaiException *self, NSString *functionName, jint error);
+
+FOUNDATION_EXPORT LibcoreIoGaiException *new_LibcoreIoGaiException_initWithNSString_withInt_(NSString *functionName, jint error) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void LibcoreIoGaiException_initWithNSString_withInt_withJavaLangThrowable_(LibcoreIoGaiException *self, NSString *functionName, jint error, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT LibcoreIoGaiException *new_LibcoreIoGaiException_initWithNSString_withInt_withJavaLangThrowable_(NSString *functionName, jint error, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoGaiException)
 
 #endif // _LibcoreIoGaiException_H_

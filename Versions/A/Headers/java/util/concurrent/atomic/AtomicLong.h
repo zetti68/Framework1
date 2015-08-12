@@ -6,60 +6,69 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicLong_H_
 #define _JavaUtilConcurrentAtomicAtomicLong_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicLong_serialVersionUID 1927816293512124184LL
+@interface JavaUtilConcurrentAtomicAtomicLong : NSNumber < JavaIoSerializable >
 
-@interface JavaUtilConcurrentAtomicAtomicLong : NSNumber < JavaIoSerializable > {
-}
-
-
-- (instancetype)initWithLong:(jlong)initialValue;
-
+#pragma mark Public
 
 - (instancetype)init;
 
-- (jlong)get;
+- (instancetype)initWithLong:(jlong)initialValue;
 
-- (void)setWithLong:(jlong)newValue;
-
-- (void)lazySetWithLong:(jlong)newValue;
-
-- (jlong)getAndSetWithLong:(jlong)newValue;
+- (jlong)addAndGetWithLong:(jlong)delta;
 
 - (jboolean)compareAndSetWithLong:(jlong)expect
                          withLong:(jlong)update;
 
-- (jboolean)weakCompareAndSetWithLong:(jlong)expect
-                             withLong:(jlong)update;
-
-- (jlong)getAndIncrement;
-
-- (jlong)getAndDecrement;
-
-- (jlong)getAndAddWithLong:(jlong)delta;
-
-- (jlong)incrementAndGet;
-
 - (jlong)decrementAndGet;
-
-- (jlong)addAndGetWithLong:(jlong)delta;
-
-- (NSString *)description;
-
-- (jint)intValue;
-
-- (jlong)longLongValue;
-
-- (jfloat)floatValue;
 
 - (jdouble)doubleValue;
 
+- (jfloat)floatValue;
+
+- (jlong)get;
+
+- (jlong)getAndAddWithLong:(jlong)delta;
+
+- (jlong)getAndDecrement;
+
+- (jlong)getAndIncrement;
+
+- (jlong)getAndSetWithLong:(jlong)newValue;
+
+- (jlong)incrementAndGet;
+
+- (jint)intValue;
+
+- (void)lazySetWithLong:(jlong)newValue;
+
+- (jlong)longLongValue;
+
+- (void)setWithLong:(jlong)newValue;
+
+- (NSString *)description;
+
+- (jboolean)weakCompareAndSetWithLong:(jlong)expect
+                             withLong:(jlong)update;
+
+#pragma mark Package-Private
+
+
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicLong_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicLong)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicLong, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicLong_initWithLong_(JavaUtilConcurrentAtomicAtomicLong *self, jlong initialValue);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLong *new_JavaUtilConcurrentAtomicAtomicLong_initWithLong_(jlong initialValue) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicLong_init(JavaUtilConcurrentAtomicAtomicLong *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicLong *new_JavaUtilConcurrentAtomicAtomicLong_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicLong)
 
 #endif // _JavaUtilConcurrentAtomicAtomicLong_H_

@@ -6,32 +6,29 @@
 #ifndef _OrgApacheHarmonySecurityX501Name_H_
 #define _OrgApacheHarmonySecurityX501Name_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaxSecurityAuthX500X500Principal;
+@class OrgApacheHarmonySecurityAsn1ASN1SequenceOf;
 @class OrgApacheHarmonySecurityAsn1ASN1SetOf;
-@class OrgApacheHarmonySecurityAsn1BerInputStream;
-@protocol JavaUtilCollection;
-@protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1SequenceOf.h"
+@interface OrgApacheHarmonySecurityX501Name : NSObject
 
-@interface OrgApacheHarmonySecurityX501Name : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithByteArray:(IOSByteArray *)encoding;
 
 - (instancetype)initWithNSString:(NSString *)name;
 
-- (JavaxSecurityAuthX500X500Principal *)getX500Principal;
+- (IOSByteArray *)getEncoded;
 
 - (NSString *)getNameWithNSString:(NSString *)format;
 
-- (IOSByteArray *)getEncoded;
+- (JavaxSecurityAuthX500X500Principal *)getX500Principal;
 
 @end
 
-FOUNDATION_EXPORT BOOL OrgApacheHarmonySecurityX501Name_initialized;
 J2OBJC_STATIC_INIT(OrgApacheHarmonySecurityX501Name)
 
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1SetOf *OrgApacheHarmonySecurityX501Name_ASN1_RDN_;
@@ -40,17 +37,14 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityX501Name, ASN1_RDN_, OrgApach
 FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1SequenceOf *OrgApacheHarmonySecurityX501Name_ASN1_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonySecurityX501Name, ASN1_, OrgApacheHarmonySecurityAsn1ASN1SequenceOf *)
 
-@interface OrgApacheHarmonySecurityX501Name_$1 : OrgApacheHarmonySecurityAsn1ASN1SequenceOf {
-}
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501Name_initWithByteArray_(OrgApacheHarmonySecurityX501Name *self, IOSByteArray *encoding);
 
-- (id)getDecodedObjectWithOrgApacheHarmonySecurityAsn1BerInputStream:(OrgApacheHarmonySecurityAsn1BerInputStream *)inArg;
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501Name *new_OrgApacheHarmonySecurityX501Name_initWithByteArray_(IOSByteArray *encoding) NS_RETURNS_RETAINED;
 
-- (id<JavaUtilCollection>)getValuesWithId:(id)object;
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityX501Name_initWithNSString_(OrgApacheHarmonySecurityX501Name *self, NSString *name);
 
-- (instancetype)initWithOrgApacheHarmonySecurityAsn1ASN1SetOf:(OrgApacheHarmonySecurityAsn1ASN1SetOf *)arg$0;
+FOUNDATION_EXPORT OrgApacheHarmonySecurityX501Name *new_OrgApacheHarmonySecurityX501Name_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityX501Name_$1_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityX501Name)
 
 #endif // _OrgApacheHarmonySecurityX501Name_H_

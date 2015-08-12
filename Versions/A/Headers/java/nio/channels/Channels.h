@@ -6,31 +6,29 @@
 #ifndef _JavaNioChannelsChannels_H_
 #define _JavaNioChannelsChannels_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
+
+@class JavaIoInputStream;
+@class JavaIoOutputStream;
 @class JavaIoReader;
 @class JavaIoWriter;
-@class JavaNioByteBuffer;
 @class JavaNioCharsetCharsetDecoder;
 @class JavaNioCharsetCharsetEncoder;
 @protocol JavaNioChannelsChannel;
+@protocol JavaNioChannelsReadableByteChannel;
+@protocol JavaNioChannelsWritableByteChannel;
 
-#import "JreEmulation.h"
-#include "java/io/InputStream.h"
-#include "java/io/OutputStream.h"
-#include "java/nio/channels/ReadableByteChannel.h"
-#include "java/nio/channels/WritableByteChannel.h"
-#include "java/nio/channels/spi/AbstractInterruptibleChannel.h"
+@interface JavaNioChannelsChannels : NSObject
 
-@interface JavaNioChannelsChannels : NSObject {
-}
-
-+ (JavaIoInputStream *)newInputStreamWithJavaNioChannelsReadableByteChannel:(id<JavaNioChannelsReadableByteChannel>)channel OBJC_METHOD_FAMILY_NONE;
-
-+ (JavaIoOutputStream *)newOutputStreamWithJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)channel OBJC_METHOD_FAMILY_NONE;
+#pragma mark Public
 
 + (id<JavaNioChannelsReadableByteChannel>)newChannelWithJavaIoInputStream:(JavaIoInputStream *)inputStream OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaNioChannelsWritableByteChannel>)newChannelWithJavaIoOutputStream:(JavaIoOutputStream *)outputStream OBJC_METHOD_FAMILY_NONE;
+
++ (JavaIoInputStream *)newInputStreamWithJavaNioChannelsReadableByteChannel:(id<JavaNioChannelsReadableByteChannel>)channel OBJC_METHOD_FAMILY_NONE;
+
++ (JavaIoOutputStream *)newOutputStreamWithJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)channel OBJC_METHOD_FAMILY_NONE;
 
 + (JavaIoReader *)newReaderWithJavaNioChannelsReadableByteChannel:(id<JavaNioChannelsReadableByteChannel>)channel
                                  withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)decoder
@@ -46,81 +44,32 @@
 + (JavaIoWriter *)newWriterWithJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)channel
                                                      withNSString:(NSString *)charsetName OBJC_METHOD_FAMILY_NONE;
 
+#pragma mark Package-Private
+
 + (void)checkBlockingWithJavaNioChannelsChannel:(id<JavaNioChannelsChannel>)channel;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsChannels_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsChannels)
+
 FOUNDATION_EXPORT JavaIoInputStream *JavaNioChannelsChannels_newInputStreamWithJavaNioChannelsReadableByteChannel_(id<JavaNioChannelsReadableByteChannel> channel);
+
 FOUNDATION_EXPORT JavaIoOutputStream *JavaNioChannelsChannels_newOutputStreamWithJavaNioChannelsWritableByteChannel_(id<JavaNioChannelsWritableByteChannel> channel);
+
 FOUNDATION_EXPORT id<JavaNioChannelsReadableByteChannel> JavaNioChannelsChannels_newChannelWithJavaIoInputStream_(JavaIoInputStream *inputStream);
+
 FOUNDATION_EXPORT id<JavaNioChannelsWritableByteChannel> JavaNioChannelsChannels_newChannelWithJavaIoOutputStream_(JavaIoOutputStream *outputStream);
+
 FOUNDATION_EXPORT JavaIoReader *JavaNioChannelsChannels_newReaderWithJavaNioChannelsReadableByteChannel_withJavaNioCharsetCharsetDecoder_withInt_(id<JavaNioChannelsReadableByteChannel> channel, JavaNioCharsetCharsetDecoder *decoder, jint minBufferCapacity);
+
 FOUNDATION_EXPORT JavaIoReader *JavaNioChannelsChannels_newReaderWithJavaNioChannelsReadableByteChannel_withNSString_(id<JavaNioChannelsReadableByteChannel> channel, NSString *charsetName);
+
 FOUNDATION_EXPORT JavaIoWriter *JavaNioChannelsChannels_newWriterWithJavaNioChannelsWritableByteChannel_withJavaNioCharsetCharsetEncoder_withInt_(id<JavaNioChannelsWritableByteChannel> channel, JavaNioCharsetCharsetEncoder *encoder, jint minBufferCapacity);
+
 FOUNDATION_EXPORT JavaIoWriter *JavaNioChannelsChannels_newWriterWithJavaNioChannelsWritableByteChannel_withNSString_(id<JavaNioChannelsWritableByteChannel> channel, NSString *charsetName);
+
 FOUNDATION_EXPORT void JavaNioChannelsChannels_checkBlockingWithJavaNioChannelsChannel_(id<JavaNioChannelsChannel> channel);
 
-@interface JavaNioChannelsChannels_ChannelInputStream : JavaIoInputStream {
-}
-
-- (instancetype)initWithJavaNioChannelsReadableByteChannel:(id<JavaNioChannelsReadableByteChannel>)channel;
-
-- (jint)read;
-
-- (jint)readWithByteArray:(IOSByteArray *)target
-                  withInt:(jint)byteOffset
-                  withInt:(jint)byteCount;
-
-- (jint)available;
-
-- (void)close;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsChannels_ChannelInputStream_init() {}
-
-@interface JavaNioChannelsChannels_ChannelOutputStream : JavaIoOutputStream {
-}
-
-- (instancetype)initWithJavaNioChannelsWritableByteChannel:(id<JavaNioChannelsWritableByteChannel>)channel;
-
-- (void)writeWithInt:(jint)oneByte;
-
-- (void)writeWithByteArray:(IOSByteArray *)source
-                   withInt:(jint)offset
-                   withInt:(jint)length;
-
-- (void)close;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsChannels_ChannelOutputStream_init() {}
-
-@interface JavaNioChannelsChannels_InputStreamChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsReadableByteChannel > {
-}
-
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inputStream;
-
-- (jint)readWithJavaNioByteBuffer:(JavaNioByteBuffer *)target;
-
-- (void)implCloseChannel;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsChannels_InputStreamChannel_init() {}
-
-@interface JavaNioChannelsChannels_OutputStreamChannel : JavaNioChannelsSpiAbstractInterruptibleChannel < JavaNioChannelsWritableByteChannel > {
-}
-
-- (instancetype)initWithJavaIoOutputStream:(JavaIoOutputStream *)outputStream;
-
-- (jint)writeWithJavaNioByteBuffer:(JavaNioByteBuffer *)source;
-
-- (void)implCloseChannel;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsChannels_OutputStreamChannel_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsChannels)
 
 #endif // _JavaNioChannelsChannels_H_

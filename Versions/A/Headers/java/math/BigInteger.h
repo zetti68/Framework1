@@ -6,21 +6,18 @@
 #ifndef _JavaMathBigInteger_H_
 #define _JavaMathBigInteger_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/lang/Comparable.h"
+
 @class IOSByteArray;
 @class IOSIntArray;
 @class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
 @class JavaUtilRandom;
-
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/lang/Comparable.h"
 
 #define JavaMathBigInteger_EQUALS 0
 #define JavaMathBigInteger_GREATER 1
 #define JavaMathBigInteger_LESS -1
-#define JavaMathBigInteger_serialVersionUID -8287574255936472291LL
 
 @interface JavaMathBigInteger : NSNumber < JavaLangComparable, JavaIoSerializable > {
  @public
@@ -29,11 +26,18 @@
   jint sign_;
 }
 
-- (instancetype)initWithInt:(jint)numBits
-         withJavaUtilRandom:(JavaUtilRandom *)rnd;
+#pragma mark Public
+
+- (instancetype)initWithByteArray:(IOSByteArray *)val;
+
+- (instancetype)initWithInt:(jint)signum
+              withByteArray:(IOSByteArray *)magnitude;
 
 - (instancetype)initWithInt:(jint)bitLength
                     withInt:(jint)certainty
+         withJavaUtilRandom:(JavaUtilRandom *)rnd;
+
+- (instancetype)initWithInt:(jint)numBits
          withJavaUtilRandom:(JavaUtilRandom *)rnd;
 
 - (instancetype)initWithNSString:(NSString *)val;
@@ -41,10 +45,97 @@
 - (instancetype)initWithNSString:(NSString *)val
                          withInt:(jint)radix;
 
-- (instancetype)initWithInt:(jint)signum
-              withByteArray:(IOSByteArray *)magnitude;
+- (JavaMathBigInteger *)abs;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)val;
+- (JavaMathBigInteger *)addWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)and__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)andNotWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (jint)bitCount;
+
+- (jint)bitLength;
+
+- (JavaMathBigInteger *)clearBitWithInt:(jint)n;
+
+- (jint)compareToWithId:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)divideWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
+
+- (IOSObjectArray *)divideAndRemainderWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
+
+- (jdouble)doubleValue;
+
+- (jboolean)isEqual:(id)x;
+
+- (JavaMathBigInteger *)flipBitWithInt:(jint)n;
+
+- (jfloat)floatValue;
+
+- (JavaMathBigInteger *)gcdWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (jint)getLowestSetBit;
+
+- (NSUInteger)hash;
+
+- (jint)intValue;
+
+- (jboolean)isProbablePrimeWithInt:(jint)certainty;
+
+- (jlong)longLongValue;
+
+- (JavaMathBigInteger *)maxWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)minWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)modWithJavaMathBigInteger:(JavaMathBigInteger *)m;
+
+- (JavaMathBigInteger *)modInverseWithJavaMathBigInteger:(JavaMathBigInteger *)m;
+
+- (JavaMathBigInteger *)modPowWithJavaMathBigInteger:(JavaMathBigInteger *)exponent
+                              withJavaMathBigInteger:(JavaMathBigInteger *)m;
+
+- (JavaMathBigInteger *)multiplyWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)negate;
+
+- (JavaMathBigInteger *)nextProbablePrime;
+
+- (JavaMathBigInteger *)not__;
+
+- (JavaMathBigInteger *)or__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (JavaMathBigInteger *)powWithInt:(jint)exp;
+
++ (JavaMathBigInteger *)probablePrimeWithInt:(jint)bitLength
+                          withJavaUtilRandom:(JavaUtilRandom *)rnd;
+
+- (JavaMathBigInteger *)remainderWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
+
+- (JavaMathBigInteger *)setBitWithInt:(jint)n;
+
+- (JavaMathBigInteger *)shiftLeftWithInt:(jint)n;
+
+- (JavaMathBigInteger *)shiftRightWithInt:(jint)n;
+
+- (jint)signum;
+
+- (JavaMathBigInteger *)subtractWithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+- (jboolean)testBitWithInt:(jint)n;
+
+- (IOSByteArray *)toByteArray;
+
+- (NSString *)description;
+
+- (NSString *)toStringWithInt:(jint)radix;
+
++ (JavaMathBigInteger *)valueOfWithLong:(jlong)val;
+
+- (JavaMathBigInteger *)xor__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithInt:(jint)sign
                     withInt:(jint)value;
@@ -53,130 +144,34 @@
                     withInt:(jint)numberLength
                withIntArray:(IOSIntArray *)digits;
 
-- (instancetype)initWithInt:(jint)sign
-                   withLong:(jlong)val;
-
 - (instancetype)initWithInt:(jint)signum
                withIntArray:(IOSIntArray *)digits;
 
-+ (JavaMathBigInteger *)valueOfWithLong:(jlong)val;
-
-- (IOSByteArray *)toByteArray;
-
-- (JavaMathBigInteger *)abs;
-
-- (JavaMathBigInteger *)negate;
-
-- (JavaMathBigInteger *)addWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)subtractWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (jint)signum;
-
-- (JavaMathBigInteger *)shiftRightWithInt:(jint)n;
-
-- (JavaMathBigInteger *)shiftLeftWithInt:(jint)n;
-
-- (JavaMathBigInteger *)shiftLeftOneBit;
-
-- (jint)bitLength;
-
-- (jboolean)testBitWithInt:(jint)n;
-
-- (JavaMathBigInteger *)setBitWithInt:(jint)n;
-
-- (JavaMathBigInteger *)clearBitWithInt:(jint)n;
-
-- (JavaMathBigInteger *)flipBitWithInt:(jint)n;
-
-- (jint)getLowestSetBit;
-
-- (jint)bitCount;
-
-- (JavaMathBigInteger *)not__;
-
-- (JavaMathBigInteger *)and__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)or__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)xor__WithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)andNotWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (jint)intValue;
-
-- (jlong)longLongValue;
-
-- (jfloat)floatValue;
-
-- (jdouble)doubleValue;
-
-- (jint)compareToWithId:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)minWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)maxWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (NSUInteger)hash;
-
-- (jboolean)isEqual:(id)x;
-
-- (jboolean)equalsArraysWithIntArray:(IOSIntArray *)b;
-
-- (NSString *)description;
-
-- (NSString *)toStringWithInt:(jint)radix;
-
-- (JavaMathBigInteger *)gcdWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)multiplyWithJavaMathBigInteger:(JavaMathBigInteger *)val;
-
-- (JavaMathBigInteger *)powWithInt:(jint)exp;
-
-- (IOSObjectArray *)divideAndRemainderWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
-
-- (JavaMathBigInteger *)divideWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
-
-- (JavaMathBigInteger *)remainderWithJavaMathBigInteger:(JavaMathBigInteger *)divisor;
-
-- (JavaMathBigInteger *)modInverseWithJavaMathBigInteger:(JavaMathBigInteger *)m;
-
-- (JavaMathBigInteger *)modPowWithJavaMathBigInteger:(JavaMathBigInteger *)exponent
-                              withJavaMathBigInteger:(JavaMathBigInteger *)m;
-
-- (JavaMathBigInteger *)modWithJavaMathBigInteger:(JavaMathBigInteger *)m;
-
-- (jboolean)isProbablePrimeWithInt:(jint)certainty;
-
-- (JavaMathBigInteger *)nextProbablePrime;
-
-+ (JavaMathBigInteger *)probablePrimeWithInt:(jint)bitLength
-                          withJavaUtilRandom:(JavaUtilRandom *)rnd;
-
-- (void)cutOffLeadingZeroes;
-
-- (jboolean)isOne;
-
-- (jint)getFirstNonzeroDigit;
+- (instancetype)initWithInt:(jint)sign
+                   withLong:(jlong)val;
 
 - (JavaMathBigInteger *)copy__ OBJC_METHOD_FAMILY_NONE;
 
-- (void)unCache;
+- (void)cutOffLeadingZeroes;
+
+- (jboolean)equalsArraysWithIntArray:(IOSIntArray *)b;
+
+- (jint)getFirstNonzeroDigit;
 
 + (JavaMathBigInteger *)getPowerOfTwoWithInt:(jint)exp;
+
+- (jboolean)isOne;
+
+- (JavaMathBigInteger *)shiftLeftOneBit;
+
+- (void)unCache;
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaMathBigInteger_initialized;
 J2OBJC_STATIC_INIT(JavaMathBigInteger)
 
 J2OBJC_FIELD_SETTER(JavaMathBigInteger, digits_, IOSIntArray *)
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_valueOfWithLong_(jlong val);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_probablePrimeWithInt_withJavaUtilRandom_(jint bitLength, JavaUtilRandom *rnd);
-FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_getPowerOfTwoWithInt_(jint exp);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaMathBigInteger, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_ZERO_;
 J2OBJC_STATIC_FIELD_GETTER(JavaMathBigInteger, ZERO_, JavaMathBigInteger *)
@@ -201,5 +196,53 @@ J2OBJC_STATIC_FIELD_GETTER(JavaMathBigInteger, SMALL_VALUES_, IOSObjectArray *)
 
 FOUNDATION_EXPORT IOSObjectArray *JavaMathBigInteger_TWO_POWS_;
 J2OBJC_STATIC_FIELD_GETTER(JavaMathBigInteger, TWO_POWS_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withJavaUtilRandom_(JavaMathBigInteger *self, jint numBits, JavaUtilRandom *rnd);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withJavaUtilRandom_(jint numBits, JavaUtilRandom *rnd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withInt_withJavaUtilRandom_(JavaMathBigInteger *self, jint bitLength, jint certainty, JavaUtilRandom *rnd);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withInt_withJavaUtilRandom_(jint bitLength, jint certainty, JavaUtilRandom *rnd) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithNSString_(JavaMathBigInteger *self, NSString *val);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithNSString_(NSString *val) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithNSString_withInt_(JavaMathBigInteger *self, NSString *val, jint radix);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithNSString_withInt_(NSString *val, jint radix) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withByteArray_(JavaMathBigInteger *self, jint signum, IOSByteArray *magnitude);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withByteArray_(jint signum, IOSByteArray *magnitude) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithByteArray_(JavaMathBigInteger *self, IOSByteArray *val);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithByteArray_(IOSByteArray *val) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withInt_(JavaMathBigInteger *self, jint sign, jint value);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withInt_(jint sign, jint value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withInt_withIntArray_(JavaMathBigInteger *self, jint sign, jint numberLength, IOSIntArray *digits);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withInt_withIntArray_(jint sign, jint numberLength, IOSIntArray *digits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withLong_(JavaMathBigInteger *self, jint sign, jlong val);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withLong_(jint sign, jlong val) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaMathBigInteger_initWithInt_withIntArray_(JavaMathBigInteger *self, jint signum, IOSIntArray *digits);
+
+FOUNDATION_EXPORT JavaMathBigInteger *new_JavaMathBigInteger_initWithInt_withIntArray_(jint signum, IOSIntArray *digits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_valueOfWithLong_(jlong val);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_probablePrimeWithInt_withJavaUtilRandom_(jint bitLength, JavaUtilRandom *rnd);
+
+FOUNDATION_EXPORT JavaMathBigInteger *JavaMathBigInteger_getPowerOfTwoWithInt_(jint exp);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaMathBigInteger)
 
 #endif // _JavaMathBigInteger_H_

@@ -6,26 +6,38 @@
 #ifndef _AndroidUtilSparseArray_H_
 #define _AndroidUtilSparseArray_H_
 
-@class IOSIntArray;
-@class IOSObjectArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@interface AndroidUtilSparseArray : NSObject < NSCopying >
 
-@interface AndroidUtilSparseArray : NSObject < NSCopying > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)initialCapacity;
 
+- (void)appendWithInt:(jint)key
+               withId:(id)value;
+
+- (void)clear;
+
 - (AndroidUtilSparseArray *)clone;
+
+- (void)delete__WithInt:(jint)key;
 
 - (id)getWithInt:(jint)key;
 
 - (id)getWithInt:(jint)key
           withId:(id)valueIfKeyNotFound;
 
-- (void)delete__WithInt:(jint)key;
+- (jint)indexOfKeyWithInt:(jint)key;
+
+- (jint)indexOfValueWithId:(id)value;
+
+- (jint)keyAtWithInt:(jint)index;
+
+- (void)putWithInt:(jint)key
+            withId:(id)value;
 
 - (void)removeWithInt:(jint)key;
 
@@ -34,35 +46,27 @@
 - (void)removeAtRangeWithInt:(jint)index
                      withInt:(jint)size;
 
-- (void)putWithInt:(jint)key
-            withId:(id)value;
-
-- (jint)size;
-
-- (jint)keyAtWithInt:(jint)index;
-
-- (id)valueAtWithInt:(jint)index;
-
 - (void)setValueAtWithInt:(jint)index
                    withId:(id)value;
 
-- (jint)indexOfKeyWithInt:(jint)key;
-
-- (jint)indexOfValueWithId:(id)value;
-
-- (void)clear;
-
-- (void)appendWithInt:(jint)key
-               withId:(id)value;
+- (jint)size;
 
 - (NSString *)description;
 
+- (id)valueAtWithInt:(jint)index;
+
 @end
 
-FOUNDATION_EXPORT BOOL AndroidUtilSparseArray_initialized;
 J2OBJC_STATIC_INIT(AndroidUtilSparseArray)
 
-FOUNDATION_EXPORT id AndroidUtilSparseArray_DELETED_;
-J2OBJC_STATIC_FIELD_GETTER(AndroidUtilSparseArray, DELETED_, id)
+FOUNDATION_EXPORT void AndroidUtilSparseArray_init(AndroidUtilSparseArray *self);
+
+FOUNDATION_EXPORT AndroidUtilSparseArray *new_AndroidUtilSparseArray_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void AndroidUtilSparseArray_initWithInt_(AndroidUtilSparseArray *self, jint initialCapacity);
+
+FOUNDATION_EXPORT AndroidUtilSparseArray *new_AndroidUtilSparseArray_initWithInt_(jint initialCapacity) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilSparseArray)
 
 #endif // _AndroidUtilSparseArray_H_

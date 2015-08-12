@@ -6,21 +6,26 @@
 #ifndef _LibcoreIoAsynchronousCloseMonitor_H_
 #define _LibcoreIoAsynchronousCloseMonitor_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaIoFileDescriptor;
 
-#import "JreEmulation.h"
+@interface LibcoreIoAsynchronousCloseMonitor : NSObject
 
-@interface LibcoreIoAsynchronousCloseMonitor : NSObject {
-}
-
-+ (void)signalBlockedThreadsWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
+#pragma mark Public
 
 + (id)newAsynchronousSocketCloseMonitorWithInt:(jint)fd OBJC_METHOD_FAMILY_NONE;
 
++ (void)signalBlockedThreadsWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd;
+
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoAsynchronousCloseMonitor_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoAsynchronousCloseMonitor)
+
 FOUNDATION_EXPORT void LibcoreIoAsynchronousCloseMonitor_signalBlockedThreadsWithJavaIoFileDescriptor_(JavaIoFileDescriptor *fd);
+
 FOUNDATION_EXPORT id LibcoreIoAsynchronousCloseMonitor_newAsynchronousSocketCloseMonitorWithInt_(jint fd);
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoAsynchronousCloseMonitor)
 
 #endif // _LibcoreIoAsynchronousCloseMonitor_H_

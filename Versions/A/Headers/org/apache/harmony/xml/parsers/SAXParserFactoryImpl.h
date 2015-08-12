@@ -6,14 +6,16 @@
 #ifndef _OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_H_
 #define _OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_H_
 
-@class JavaxXmlParsersSAXParser;
-@protocol JavaUtilMap;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "javax/xml/parsers/SAXParserFactory.h"
 
-@interface OrgApacheHarmonyXmlParsersSAXParserFactoryImpl : JavaxXmlParsersSAXParserFactory {
-}
+@class JavaxXmlParsersSAXParser;
+
+@interface OrgApacheHarmonyXmlParsersSAXParserFactoryImpl : JavaxXmlParsersSAXParserFactory
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (jboolean)getFeatureWithNSString:(NSString *)name;
 
@@ -30,16 +32,14 @@
 
 - (void)setValidatingWithBoolean:(jboolean)value;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonyXmlParsersSAXParserFactoryImpl)
 
-FOUNDATION_EXPORT NSString *OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_NAMESPACES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonyXmlParsersSAXParserFactoryImpl, NAMESPACES_, NSString *)
+FOUNDATION_EXPORT void OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_init(OrgApacheHarmonyXmlParsersSAXParserFactoryImpl *self);
 
-FOUNDATION_EXPORT NSString *OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_VALIDATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheHarmonyXmlParsersSAXParserFactoryImpl, VALIDATION_, NSString *)
+FOUNDATION_EXPORT OrgApacheHarmonyXmlParsersSAXParserFactoryImpl *new_OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonyXmlParsersSAXParserFactoryImpl)
 
 #endif // _OrgApacheHarmonyXmlParsersSAXParserFactoryImpl_H_

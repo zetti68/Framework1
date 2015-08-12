@@ -6,57 +6,47 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicStampedReference_H_
 #define _JavaUtilConcurrentAtomicAtomicStampedReference_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSIntArray;
-@class JavaUtilConcurrentAtomicAtomicStampedReference_Pair;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentAtomicAtomicStampedReference : NSObject
 
-@interface JavaUtilConcurrentAtomicAtomicStampedReference : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithId:(id)initialRef
                    withInt:(jint)initialStamp;
 
-- (id)getReference;
-
-- (jint)getStamp;
-
-- (id)getWithIntArray:(IOSIntArray *)stampHolder;
-
-- (jboolean)weakCompareAndSetWithId:(id)expectedReference
-                             withId:(id)newReference
-                            withInt:(jint)expectedStamp
-                            withInt:(jint)newStamp;
+- (jboolean)attemptStampWithId:(id)expectedReference
+                       withInt:(jint)newStamp;
 
 - (jboolean)compareAndSetWithId:(id)expectedReference
                          withId:(id)newReference
                         withInt:(jint)expectedStamp
                         withInt:(jint)newStamp;
 
+- (id)getWithIntArray:(IOSIntArray *)stampHolder;
+
+- (id)getReference;
+
+- (jint)getStamp;
+
 - (void)setWithId:(id)newReference
           withInt:(jint)newStamp;
 
-- (jboolean)attemptStampWithId:(id)expectedReference
-                       withInt:(jint)newStamp;
+- (jboolean)weakCompareAndSetWithId:(id)expectedReference
+                             withId:(id)newReference
+                            withInt:(jint)expectedStamp
+                            withInt:(jint)newStamp;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicStampedReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicStampedReference)
 
-@interface JavaUtilConcurrentAtomicAtomicStampedReference_Pair : NSObject {
- @public
-  id reference_;
-  jint stamp_;
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicStampedReference_initWithId_withInt_(JavaUtilConcurrentAtomicAtomicStampedReference *self, id initialRef, jint initialStamp);
 
-+ (JavaUtilConcurrentAtomicAtomicStampedReference_Pair *)ofWithId:(id)reference
-                                                          withInt:(jint)stamp;
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicStampedReference *new_JavaUtilConcurrentAtomicAtomicStampedReference_initWithId_withInt_(id initialRef, jint initialStamp) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicStampedReference_Pair_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentAtomicAtomicStampedReference_Pair, reference_, id)
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicStampedReference_Pair *JavaUtilConcurrentAtomicAtomicStampedReference_Pair_ofWithId_withInt_(id reference, jint stamp);
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicStampedReference)
 
 #endif // _JavaUtilConcurrentAtomicAtomicStampedReference_H_

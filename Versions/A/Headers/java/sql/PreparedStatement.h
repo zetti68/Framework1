@@ -6,6 +6,9 @@
 #ifndef _JavaSqlPreparedStatement_H_
 #define _JavaSqlPreparedStatement_H_
 
+#include "J2ObjC_header.h"
+#include "java/sql/Statement.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaIoReader;
@@ -26,10 +29,8 @@
 @protocol JavaSqlRowId;
 @protocol JavaSqlSQLXML;
 
-#import "JreEmulation.h"
-#include "java/sql/Statement.h"
-
 @protocol JavaSqlPreparedStatement < JavaSqlStatement, NSObject, JavaObject >
+
 - (void)addBatch;
 
 - (void)clearParameters;
@@ -208,6 +209,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlPreparedStatement_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlPreparedStatement)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlPreparedStatement)
 
 #endif // _JavaSqlPreparedStatement_H_

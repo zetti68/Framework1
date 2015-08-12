@@ -6,33 +6,23 @@
 #ifndef _JavaLangPackage_H_
 #define _JavaLangPackage_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/reflect/AnnotatedElement.h"
+
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaNetURL;
 @protocol JavaLangAnnotationAnnotation;
 
-#import "JreEmulation.h"
-#include "java/lang/reflect/AnnotatedElement.h"
+@interface JavaLangPackage : NSObject < JavaLangReflectAnnotatedElement >
 
-@interface JavaLangPackage : NSObject < JavaLangReflectAnnotatedElement > {
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)specTitle
-                    withNSString:(NSString *)specVersion
-                    withNSString:(NSString *)specVendor
-                    withNSString:(NSString *)implTitle
-                    withNSString:(NSString *)implVersion
-                    withNSString:(NSString *)implVendor
-                  withJavaNetURL:(JavaNetURL *)sealBase;
+#pragma mark Public
 
 - (id)getAnnotationWithIOSClass:(IOSClass *)annotationType;
 
 - (IOSObjectArray *)getAnnotations;
 
 - (IOSObjectArray *)getDeclaredAnnotations;
-
-- (jboolean)isAnnotationPresentWithIOSClass:(IOSClass *)annotationType;
 
 - (NSString *)getImplementationTitle;
 
@@ -54,6 +44,8 @@
 
 - (NSUInteger)hash;
 
+- (jboolean)isAnnotationPresentWithIOSClass:(IOSClass *)annotationType;
+
 - (jboolean)isCompatibleWithWithNSString:(NSString *)version_;
 
 - (jboolean)isSealed;
@@ -62,14 +54,29 @@
 
 - (NSString *)description;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithNSString:(NSString *)name
+                    withNSString:(NSString *)specTitle
+                    withNSString:(NSString *)specVersion
+                    withNSString:(NSString *)specVendor
+                    withNSString:(NSString *)implTitle
+                    withNSString:(NSString *)implVersion
+                    withNSString:(NSString *)implVendor
+                  withJavaNetURL:(JavaNetURL *)sealBase;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangPackage_initialized;
 J2OBJC_STATIC_INIT(JavaLangPackage)
+
+FOUNDATION_EXPORT void JavaLangPackage_initWithNSString_withNSString_withNSString_withNSString_withNSString_withNSString_withNSString_withJavaNetURL_(JavaLangPackage *self, NSString *name, NSString *specTitle, NSString *specVersion, NSString *specVendor, NSString *implTitle, NSString *implVersion, NSString *implVendor, JavaNetURL *sealBase);
+
+FOUNDATION_EXPORT JavaLangPackage *new_JavaLangPackage_initWithNSString_withNSString_withNSString_withNSString_withNSString_withNSString_withNSString_withJavaNetURL_(NSString *name, NSString *specTitle, NSString *specVersion, NSString *specVendor, NSString *implTitle, NSString *implVersion, NSString *implVendor, JavaNetURL *sealBase) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT JavaLangPackage *JavaLangPackage_getPackageWithNSString_(NSString *packageName);
+
 FOUNDATION_EXPORT IOSObjectArray *JavaLangPackage_getPackages();
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangPackage_NO_ANNOTATIONS_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangPackage, NO_ANNOTATIONS_, IOSObjectArray *)
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangPackage)
 
 #endif // _JavaLangPackage_H_

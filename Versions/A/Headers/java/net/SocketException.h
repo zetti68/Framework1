@@ -6,29 +6,44 @@
 #ifndef _JavaNetSocketException_H_
 #define _JavaNetSocketException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaNetSocketException_serialVersionUID -5935874303556886934LL
+@class JavaLangThrowable;
 
-@interface JavaNetSocketException : JavaIoIOException {
-}
+@interface JavaNetSocketException : JavaIoIOException
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
-
 - (instancetype)initWithNSString:(NSString *)detailMessage
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetSocketException_init(JavaNetSocketException *self);
+
+FOUNDATION_EXPORT JavaNetSocketException *new_JavaNetSocketException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketException_initWithNSString_(JavaNetSocketException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetSocketException *new_JavaNetSocketException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketException_initWithJavaLangThrowable_(JavaNetSocketException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetSocketException *new_JavaNetSocketException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketException_initWithNSString_withJavaLangThrowable_(JavaNetSocketException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetSocketException *new_JavaNetSocketException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketException)
 
 #endif // _JavaNetSocketException_H_

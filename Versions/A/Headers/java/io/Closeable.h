@@ -6,14 +6,17 @@
 #ifndef _JavaIoCloseable_H_
 #define _JavaIoCloseable_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/AutoCloseable.h"
 
 @protocol JavaIoCloseable < JavaLangAutoCloseable, NSObject, JavaObject >
+
 - (void)close;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoCloseable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoCloseable)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoCloseable)
 
 #endif // _JavaIoCloseable_H_

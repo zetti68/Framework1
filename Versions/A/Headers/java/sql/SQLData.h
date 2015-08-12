@@ -6,10 +6,10 @@
 #ifndef _JavaSqlSQLData_H_
 #define _JavaSqlSQLData_H_
 
+#include "J2ObjC_header.h"
+
 @protocol JavaSqlSQLInput;
 @protocol JavaSqlSQLOutput;
-
-#import "JreEmulation.h"
 
 @protocol JavaSqlSQLData < NSObject, JavaObject >
 
@@ -22,6 +22,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSqlSQLData_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSqlSQLData)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSqlSQLData)
 
 #endif // _JavaSqlSQLData_H_

@@ -6,57 +6,47 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicMarkableReference_H_
 #define _JavaUtilConcurrentAtomicAtomicMarkableReference_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSBooleanArray;
-@class JavaUtilConcurrentAtomicAtomicMarkableReference_Pair;
 
-#import "JreEmulation.h"
+@interface JavaUtilConcurrentAtomicAtomicMarkableReference : NSObject
 
-@interface JavaUtilConcurrentAtomicAtomicMarkableReference : NSObject {
-}
+#pragma mark Public
 
 - (instancetype)initWithId:(id)initialRef
                withBoolean:(jboolean)initialMark;
 
-- (id)getReference;
-
-- (jboolean)isMarked;
-
-- (id)getWithBooleanArray:(IOSBooleanArray *)markHolder;
-
-- (jboolean)weakCompareAndSetWithId:(id)expectedReference
-                             withId:(id)newReference
-                        withBoolean:(jboolean)expectedMark
-                        withBoolean:(jboolean)newMark;
+- (jboolean)attemptMarkWithId:(id)expectedReference
+                  withBoolean:(jboolean)newMark;
 
 - (jboolean)compareAndSetWithId:(id)expectedReference
                          withId:(id)newReference
                     withBoolean:(jboolean)expectedMark
                     withBoolean:(jboolean)newMark;
 
+- (id)getWithBooleanArray:(IOSBooleanArray *)markHolder;
+
+- (id)getReference;
+
+- (jboolean)isMarked;
+
 - (void)setWithId:(id)newReference
       withBoolean:(jboolean)newMark;
 
-- (jboolean)attemptMarkWithId:(id)expectedReference
-                  withBoolean:(jboolean)newMark;
+- (jboolean)weakCompareAndSetWithId:(id)expectedReference
+                             withId:(id)newReference
+                        withBoolean:(jboolean)expectedMark
+                        withBoolean:(jboolean)newMark;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicMarkableReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicMarkableReference)
 
-@interface JavaUtilConcurrentAtomicAtomicMarkableReference_Pair : NSObject {
- @public
-  id reference_;
-  jboolean mark_;
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicMarkableReference_initWithId_withBoolean_(JavaUtilConcurrentAtomicAtomicMarkableReference *self, id initialRef, jboolean initialMark);
 
-+ (JavaUtilConcurrentAtomicAtomicMarkableReference_Pair *)ofWithId:(id)reference
-                                                       withBoolean:(jboolean)mark;
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicMarkableReference *new_JavaUtilConcurrentAtomicAtomicMarkableReference_initWithId_withBoolean_(id initialRef, jboolean initialMark) NS_RETURNS_RETAINED;
 
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicMarkableReference_Pair_init() {}
-
-J2OBJC_FIELD_SETTER(JavaUtilConcurrentAtomicAtomicMarkableReference_Pair, reference_, id)
-FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicMarkableReference_Pair *JavaUtilConcurrentAtomicAtomicMarkableReference_Pair_ofWithId_withBoolean_(id reference, jboolean mark);
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicMarkableReference)
 
 #endif // _JavaUtilConcurrentAtomicAtomicMarkableReference_H_

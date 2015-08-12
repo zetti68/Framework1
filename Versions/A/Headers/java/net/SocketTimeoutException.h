@@ -6,29 +6,44 @@
 #ifndef _JavaNetSocketTimeoutException_H_
 #define _JavaNetSocketTimeoutException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/InterruptedIOException.h"
 
-#define JavaNetSocketTimeoutException_serialVersionUID -8846654841826352300LL
+@class JavaLangThrowable;
 
-@interface JavaNetSocketTimeoutException : JavaIoInterruptedIOException {
-}
+@interface JavaNetSocketTimeoutException : JavaIoInterruptedIOException
+
+#pragma mark Public
 
 - (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)detailMessage;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
-
 - (instancetype)initWithNSString:(NSString *)detailMessage
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
+- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketTimeoutException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketTimeoutException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNetSocketTimeoutException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNetSocketTimeoutException_init(JavaNetSocketTimeoutException *self);
+
+FOUNDATION_EXPORT JavaNetSocketTimeoutException *new_JavaNetSocketTimeoutException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketTimeoutException_initWithNSString_(JavaNetSocketTimeoutException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaNetSocketTimeoutException *new_JavaNetSocketTimeoutException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketTimeoutException_initWithJavaLangThrowable_(JavaNetSocketTimeoutException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetSocketTimeoutException *new_JavaNetSocketTimeoutException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaNetSocketTimeoutException_initWithNSString_withJavaLangThrowable_(JavaNetSocketTimeoutException *self, NSString *detailMessage, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaNetSocketTimeoutException *new_JavaNetSocketTimeoutException_initWithNSString_withJavaLangThrowable_(NSString *detailMessage, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketTimeoutException)
 
 #endif // _JavaNetSocketTimeoutException_H_

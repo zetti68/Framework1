@@ -6,34 +6,19 @@
 #ifndef _JavaNioCharsetCharsetEncoder_H_
 #define _JavaNioCharsetCharsetEncoder_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class JavaNioByteBuffer;
 @class JavaNioCharBuffer;
 @class JavaNioCharsetCharset;
-@class JavaNioCharsetCharsetDecoder;
 @class JavaNioCharsetCoderResult;
 @class JavaNioCharsetCodingErrorAction;
 @protocol JavaLangCharSequence;
 
-#import "JreEmulation.h"
+@interface JavaNioCharsetCharsetEncoder : NSObject
 
-#define JavaNioCharsetCharsetEncoder_END 2
-#define JavaNioCharsetCharsetEncoder_FLUSH 3
-#define JavaNioCharsetCharsetEncoder_INIT 4
-#define JavaNioCharsetCharsetEncoder_ONGOING 1
-#define JavaNioCharsetCharsetEncoder_READY 0
-
-@interface JavaNioCharsetCharsetEncoder : NSObject {
-}
-
-- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)cs
-                                    withFloat:(jfloat)averageBytesPerChar
-                                    withFloat:(jfloat)maxBytesPerChar;
-
-- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)cs
-                                    withFloat:(jfloat)averageBytesPerChar
-                                    withFloat:(jfloat)maxBytesPerChar
-                                withByteArray:(IOSByteArray *)replacement;
+#pragma mark Public
 
 - (jfloat)averageBytesPerChar;
 
@@ -48,9 +33,6 @@
 - (JavaNioCharsetCoderResult *)encodeWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg
                                      withJavaNioByteBuffer:(JavaNioByteBuffer *)outArg
                                                withBoolean:(jboolean)endOfInput;
-
-- (JavaNioCharsetCoderResult *)encodeLoopWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg
-                                         withJavaNioByteBuffer:(JavaNioByteBuffer *)outArg;
 
 - (JavaNioCharsetCoderResult *)flushWithJavaNioByteBuffer:(JavaNioByteBuffer *)outArg;
 
@@ -70,18 +52,28 @@
 
 - (JavaNioCharsetCodingErrorAction *)unmappableCharacterAction;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)cs
+                                    withFloat:(jfloat)averageBytesPerChar
+                                    withFloat:(jfloat)maxBytesPerChar;
+
+- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)cs
+                                    withFloat:(jfloat)averageBytesPerChar
+                                    withFloat:(jfloat)maxBytesPerChar
+                                withByteArray:(IOSByteArray *)replacement;
+
+- (JavaNioCharsetCoderResult *)encodeLoopWithJavaNioCharBuffer:(JavaNioCharBuffer *)inArg
+                                         withJavaNioByteBuffer:(JavaNioByteBuffer *)outArg;
+
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetCharsetEncoder_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetCharsetEncoder)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsetEncoder, READY, jint)
+FOUNDATION_EXPORT void JavaNioCharsetCharsetEncoder_initWithJavaNioCharsetCharset_withFloat_withFloat_(JavaNioCharsetCharsetEncoder *self, JavaNioCharsetCharset *cs, jfloat averageBytesPerChar, jfloat maxBytesPerChar);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsetEncoder, ONGOING, jint)
+FOUNDATION_EXPORT void JavaNioCharsetCharsetEncoder_initWithJavaNioCharsetCharset_withFloat_withFloat_withByteArray_(JavaNioCharsetCharsetEncoder *self, JavaNioCharsetCharset *cs, jfloat averageBytesPerChar, jfloat maxBytesPerChar, IOSByteArray *replacement);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsetEncoder, END, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsetEncoder, FLUSH, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetCharsetEncoder, INIT, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetCharsetEncoder)
 
 #endif // _JavaNioCharsetCharsetEncoder_H_

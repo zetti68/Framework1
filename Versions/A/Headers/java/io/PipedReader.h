@@ -6,25 +6,24 @@
 #ifndef _JavaIoPipedReader_H_
 #define _JavaIoPipedReader_H_
 
-@class IOSCharArray;
-@class JavaIoPipedWriter;
-@class JavaLangThread;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Reader.h"
 
-#define JavaIoPipedReader_PIPE_SIZE 1024
+@class IOSCharArray;
+@class JavaIoPipedWriter;
 
 @interface JavaIoPipedReader : JavaIoReader {
  @public
   jboolean isConnected_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
-- (instancetype)initWithJavaIoPipedWriter:(JavaIoPipedWriter *)outArg;
-
 - (instancetype)initWithInt:(jint)pipeSize;
+
+- (instancetype)initWithJavaIoPipedWriter:(JavaIoPipedWriter *)outArg;
 
 - (instancetype)initWithJavaIoPipedWriter:(JavaIoPipedWriter *)outArg
                                   withInt:(jint)pipeSize;
@@ -32,8 +31,6 @@
 - (void)close;
 
 - (void)connectWithJavaIoPipedWriter:(JavaIoPipedWriter *)src;
-
-- (void)establishConnection;
 
 - (jint)read;
 
@@ -43,18 +40,38 @@
 
 - (jboolean)ready;
 
+#pragma mark Package-Private
+
+- (void)done;
+
+- (void)establishConnection;
+
 - (void)receiveWithChar:(jchar)oneChar;
 
 - (void)receiveWithCharArray:(IOSCharArray *)chars
                      withInt:(jint)offset
                      withInt:(jint)count;
 
-- (void)done;
-
 @end
 
-__attribute__((always_inline)) inline void JavaIoPipedReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoPipedReader)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoPipedReader, PIPE_SIZE, jint)
+FOUNDATION_EXPORT void JavaIoPipedReader_init(JavaIoPipedReader *self);
+
+FOUNDATION_EXPORT JavaIoPipedReader *new_JavaIoPipedReader_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPipedReader_initWithJavaIoPipedWriter_(JavaIoPipedReader *self, JavaIoPipedWriter *outArg);
+
+FOUNDATION_EXPORT JavaIoPipedReader *new_JavaIoPipedReader_initWithJavaIoPipedWriter_(JavaIoPipedWriter *outArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPipedReader_initWithInt_(JavaIoPipedReader *self, jint pipeSize);
+
+FOUNDATION_EXPORT JavaIoPipedReader *new_JavaIoPipedReader_initWithInt_(jint pipeSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaIoPipedReader_initWithJavaIoPipedWriter_withInt_(JavaIoPipedReader *self, JavaIoPipedWriter *outArg, jint pipeSize);
+
+FOUNDATION_EXPORT JavaIoPipedReader *new_JavaIoPipedReader_initWithJavaIoPipedWriter_withInt_(JavaIoPipedWriter *outArg, jint pipeSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoPipedReader)
 
 #endif // _JavaIoPipedReader_H_

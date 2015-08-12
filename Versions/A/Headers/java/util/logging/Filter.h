@@ -6,9 +6,9 @@
 #ifndef _JavaUtilLoggingFilter_H_
 #define _JavaUtilLoggingFilter_H_
 
-@class JavaUtilLoggingLogRecord;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaUtilLoggingLogRecord;
 
 @protocol JavaUtilLoggingFilter < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilLoggingFilter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilLoggingFilter)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilLoggingFilter)
 
 #endif // _JavaUtilLoggingFilter_H_

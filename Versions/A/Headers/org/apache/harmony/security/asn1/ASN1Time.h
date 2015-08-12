@@ -6,13 +6,14 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Time_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Time_H_
 
-@class OrgApacheHarmonySecurityAsn1BerInputStream;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/apache/harmony/security/asn1/ASN1StringType.h"
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Time : OrgApacheHarmonySecurityAsn1ASN1StringType {
-}
+@class OrgApacheHarmonySecurityAsn1BerInputStream;
+
+@interface OrgApacheHarmonySecurityAsn1ASN1Time : OrgApacheHarmonySecurityAsn1ASN1StringType
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)tagNumber;
 
@@ -20,6 +21,10 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Time_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Time)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Time_initWithInt_(OrgApacheHarmonySecurityAsn1ASN1Time *self, jint tagNumber);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Time)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Time_H_

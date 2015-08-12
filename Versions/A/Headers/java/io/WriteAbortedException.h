@@ -6,32 +6,36 @@
 #ifndef _JavaIoWriteAbortedException_H_
 #define _JavaIoWriteAbortedException_H_
 
-@class JavaLangException;
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/ObjectStreamException.h"
 
-#define JavaIoWriteAbortedException_serialVersionUID -3326426625597282442LL
+@class JavaLangException;
+@class JavaLangThrowable;
 
 @interface JavaIoWriteAbortedException : JavaIoObjectStreamException {
  @public
   JavaLangException *detail_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithNSString:(NSString *)detailMessage
            withJavaLangException:(JavaLangException *)rootCause;
 
-- (NSString *)getMessage;
-
 - (JavaLangThrowable *)getCause;
+
+- (NSString *)getMessage;
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoWriteAbortedException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoWriteAbortedException)
 
 J2OBJC_FIELD_SETTER(JavaIoWriteAbortedException, detail_, JavaLangException *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaIoWriteAbortedException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaIoWriteAbortedException_initWithNSString_withJavaLangException_(JavaIoWriteAbortedException *self, NSString *detailMessage, JavaLangException *rootCause);
+
+FOUNDATION_EXPORT JavaIoWriteAbortedException *new_JavaIoWriteAbortedException_initWithNSString_withJavaLangException_(NSString *detailMessage, JavaLangException *rootCause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoWriteAbortedException)
 
 #endif // _JavaIoWriteAbortedException_H_

@@ -6,15 +6,16 @@
 #ifndef _JavaTextAttributedCharacterIterator_H_
 #define _JavaTextAttributedCharacterIterator_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/Serializable.h"
+#include "java/text/CharacterIterator.h"
+
 @class JavaTextAttributedCharacterIterator_Attribute;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/io/Serializable.h"
-#include "java/text/CharacterIterator.h"
-
 @protocol JavaTextAttributedCharacterIterator < JavaTextCharacterIterator, NSObject, JavaObject >
+
 - (id<JavaUtilSet>)getAllAttributeKeys;
 
 - (id)getAttributeWithJavaTextAttributedCharacterIterator_Attribute:(JavaTextAttributedCharacterIterator_Attribute *)attribute;
@@ -35,31 +36,31 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaTextAttributedCharacterIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaTextAttributedCharacterIterator)
 
-#define JavaTextAttributedCharacterIterator_Attribute_serialVersionUID -9142742483513960612LL
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAttributedCharacterIterator)
 
-@interface JavaTextAttributedCharacterIterator_Attribute : NSObject < JavaIoSerializable > {
-}
+@interface JavaTextAttributedCharacterIterator_Attribute : NSObject < JavaIoSerializable >
 
-- (instancetype)initWithNSString:(NSString *)name;
+#pragma mark Public
 
 - (jboolean)isEqual:(id)object;
 
-- (NSString *)getName;
-
 - (NSUInteger)hash;
-
-- (id)readResolve;
 
 - (NSString *)description;
 
+#pragma mark Protected
+
+- (instancetype)initWithNSString:(NSString *)name;
+
+- (NSString *)getName;
+
+- (id)readResolve;
+
 @end
 
-FOUNDATION_EXPORT BOOL JavaTextAttributedCharacterIterator_Attribute_initialized;
 J2OBJC_STATIC_INIT(JavaTextAttributedCharacterIterator_Attribute)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaTextAttributedCharacterIterator_Attribute, serialVersionUID, jlong)
 
 FOUNDATION_EXPORT JavaTextAttributedCharacterIterator_Attribute *JavaTextAttributedCharacterIterator_Attribute_INPUT_METHOD_SEGMENT_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextAttributedCharacterIterator_Attribute, INPUT_METHOD_SEGMENT_, JavaTextAttributedCharacterIterator_Attribute *)
@@ -69,5 +70,11 @@ J2OBJC_STATIC_FIELD_GETTER(JavaTextAttributedCharacterIterator_Attribute, LANGUA
 
 FOUNDATION_EXPORT JavaTextAttributedCharacterIterator_Attribute *JavaTextAttributedCharacterIterator_Attribute_READING_;
 J2OBJC_STATIC_FIELD_GETTER(JavaTextAttributedCharacterIterator_Attribute, READING_, JavaTextAttributedCharacterIterator_Attribute *)
+
+FOUNDATION_EXPORT void JavaTextAttributedCharacterIterator_Attribute_initWithNSString_(JavaTextAttributedCharacterIterator_Attribute *self, NSString *name);
+
+FOUNDATION_EXPORT JavaTextAttributedCharacterIterator_Attribute *new_JavaTextAttributedCharacterIterator_Attribute_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaTextAttributedCharacterIterator_Attribute)
 
 #endif // _JavaTextAttributedCharacterIterator_H_

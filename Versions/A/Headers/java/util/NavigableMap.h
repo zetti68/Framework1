@@ -6,13 +6,14 @@
 #ifndef _JavaUtilNavigableMap_H_
 #define _JavaUtilNavigableMap_H_
 
+#include "J2ObjC_header.h"
+#include "java/util/SortedMap.h"
+
 @protocol JavaUtilMap_Entry;
 @protocol JavaUtilNavigableSet;
 
-#import "JreEmulation.h"
-#include "java/util/SortedMap.h"
-
 @protocol JavaUtilNavigableMap < JavaUtilSortedMap, NSObject, JavaObject >
+
 - (id<JavaUtilMap_Entry>)lowerEntryWithId:(id)key;
 
 - (id)lowerKeyWithId:(id)key;
@@ -63,6 +64,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilNavigableMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilNavigableMap)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilNavigableMap)
 
 #endif // _JavaUtilNavigableMap_H_

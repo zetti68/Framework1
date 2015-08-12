@@ -6,7 +6,7 @@
 #ifndef _LibcoreIoStructFlock_H_
 #define _LibcoreIoStructFlock_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface LibcoreIoStructFlock : NSObject {
  @public
@@ -17,10 +17,18 @@
   jint l_pid_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoStructFlock_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoStructFlock)
+
+FOUNDATION_EXPORT void LibcoreIoStructFlock_init(LibcoreIoStructFlock *self);
+
+FOUNDATION_EXPORT LibcoreIoStructFlock *new_LibcoreIoStructFlock_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoStructFlock)
 
 #endif // _LibcoreIoStructFlock_H_

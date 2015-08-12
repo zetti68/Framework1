@@ -6,20 +6,20 @@
 #ifndef _JavaUtilZipDeflaterInputStream_H_
 #define _JavaUtilZipDeflaterInputStream_H_
 
+#include "J2ObjC_header.h"
+#include "java/io/FilterInputStream.h"
+
 @class IOSByteArray;
 @class JavaIoInputStream;
 @class JavaUtilZipDeflater;
-
-#import "JreEmulation.h"
-#include "java/io/FilterInputStream.h"
-
-#define JavaUtilZipDeflaterInputStream_DEFAULT_BUFFER_SIZE 1024
 
 @interface JavaUtilZipDeflaterInputStream : JavaIoFilterInputStream {
  @public
   JavaUtilZipDeflater *def_;
   IOSByteArray *buf_;
 }
+
+#pragma mark Public
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)inArg;
 
@@ -30,7 +30,13 @@
                   withJavaUtilZipDeflater:(JavaUtilZipDeflater *)deflater
                                   withInt:(jint)bufferSize;
 
+- (jint)available;
+
 - (void)close;
+
+- (void)markWithInt:(jint)limit;
+
+- (jboolean)markSupported;
 
 - (jint)read;
 
@@ -38,23 +44,29 @@
                   withInt:(jint)byteOffset
                   withInt:(jint)byteCount;
 
-- (jlong)skipWithLong:(jlong)byteCount;
-
-- (jint)available;
-
-- (jboolean)markSupported;
-
-- (void)markWithInt:(jint)limit;
-
 - (void)reset;
+
+- (jlong)skipWithLong:(jlong)byteCount;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipDeflaterInputStream_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipDeflaterInputStream)
 
 J2OBJC_FIELD_SETTER(JavaUtilZipDeflaterInputStream, def_, JavaUtilZipDeflater *)
 J2OBJC_FIELD_SETTER(JavaUtilZipDeflaterInputStream, buf_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipDeflaterInputStream, DEFAULT_BUFFER_SIZE, jint)
+FOUNDATION_EXPORT void JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_(JavaUtilZipDeflaterInputStream *self, JavaIoInputStream *inArg);
+
+FOUNDATION_EXPORT JavaUtilZipDeflaterInputStream *new_JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_(JavaIoInputStream *inArg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_withJavaUtilZipDeflater_(JavaUtilZipDeflaterInputStream *self, JavaIoInputStream *inArg, JavaUtilZipDeflater *deflater);
+
+FOUNDATION_EXPORT JavaUtilZipDeflaterInputStream *new_JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_withJavaUtilZipDeflater_(JavaIoInputStream *inArg, JavaUtilZipDeflater *deflater) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_withJavaUtilZipDeflater_withInt_(JavaUtilZipDeflaterInputStream *self, JavaIoInputStream *inArg, JavaUtilZipDeflater *deflater, jint bufferSize);
+
+FOUNDATION_EXPORT JavaUtilZipDeflaterInputStream *new_JavaUtilZipDeflaterInputStream_initWithJavaIoInputStream_withJavaUtilZipDeflater_withInt_(JavaIoInputStream *inArg, JavaUtilZipDeflater *deflater, jint bufferSize) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipDeflaterInputStream)
 
 #endif // _JavaUtilZipDeflaterInputStream_H_

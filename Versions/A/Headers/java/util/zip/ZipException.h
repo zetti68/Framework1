@@ -6,13 +6,12 @@
 #ifndef _JavaUtilZipZipException_H_
 #define _JavaUtilZipZipException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/IOException.h"
 
-#define JavaUtilZipZipException_serialVersionUID 8000196834066748623LL
+@interface JavaUtilZipZipException : JavaIoIOException
 
-@interface JavaUtilZipZipException : JavaIoIOException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -20,8 +19,16 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipZipException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipZipException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilZipZipException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilZipZipException_init(JavaUtilZipZipException *self);
+
+FOUNDATION_EXPORT JavaUtilZipZipException *new_JavaUtilZipZipException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilZipZipException_initWithNSString_(JavaUtilZipZipException *self, NSString *detailMessage);
+
+FOUNDATION_EXPORT JavaUtilZipZipException *new_JavaUtilZipZipException_initWithNSString_(NSString *detailMessage) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipZipException)
 
 #endif // _JavaUtilZipZipException_H_

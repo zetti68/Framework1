@@ -6,27 +6,7 @@
 #ifndef _JavaUtilConcurrentConcurrentSkipListMap_H_
 #define _JavaUtilConcurrentConcurrentSkipListMap_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaUtilAbstractMap_SimpleImmutableEntry;
-@class JavaUtilConcurrentConcurrentSkipListMap_EntrySet;
-@class JavaUtilConcurrentConcurrentSkipListMap_HeadIndex;
-@class JavaUtilConcurrentConcurrentSkipListMap_Index;
-@class JavaUtilConcurrentConcurrentSkipListMap_KeySet;
-@class JavaUtilConcurrentConcurrentSkipListMap_Node;
-@class JavaUtilConcurrentConcurrentSkipListMap_Values;
-@class JavaUtilRandom;
-@class SunMiscUnsafe;
-@protocol JavaUtilCollection;
-@protocol JavaUtilComparator;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-@protocol JavaUtilMap_Entry;
-@protocol JavaUtilSet;
-@protocol JavaUtilSortedMap;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 #include "java/util/AbstractCollection.h"
@@ -36,43 +16,19 @@
 #include "java/util/NavigableSet.h"
 #include "java/util/concurrent/ConcurrentNavigableMap.h"
 
-#define JavaUtilConcurrentConcurrentSkipListMap_EQ 1
-#define JavaUtilConcurrentConcurrentSkipListMap_GT 0
-#define JavaUtilConcurrentConcurrentSkipListMap_LT 2
-#define JavaUtilConcurrentConcurrentSkipListMap_serialVersionUID -8627078645895051609LL
+@class IOSObjectArray;
+@class JavaUtilConcurrentConcurrentSkipListMap_Node;
+@protocol JavaUtilCollection;
+@protocol JavaUtilComparator;
+@protocol JavaUtilList;
+@protocol JavaUtilMap;
+@protocol JavaUtilMap_Entry;
+@protocol JavaUtilSet;
+@protocol JavaUtilSortedMap;
 
-@interface JavaUtilConcurrentConcurrentSkipListMap : JavaUtilAbstractMap < JavaUtilConcurrentConcurrentNavigableMap, NSCopying, JavaIoSerializable > {
-}
+@interface JavaUtilConcurrentConcurrentSkipListMap : JavaUtilAbstractMap < JavaUtilConcurrentConcurrentNavigableMap, NSCopying, JavaIoSerializable >
 
-- (void)initialize__ OBJC_METHOD_FAMILY_NONE;
-
-- (jint)compareWithId:(id)k1
-               withId:(id)k2;
-
-- (jboolean)inHalfOpenRangeWithId:(id)key
-                           withId:(id)least
-                           withId:(id)fence;
-
-- (jboolean)inOpenRangeWithId:(id)key
-                       withId:(id)least
-                       withId:(id)fence;
-
-- (id)doRemoveWithId:(id)okey
-              withId:(id)value;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findFirst;
-
-- (id<JavaUtilMap_Entry>)doRemoveFirstEntry;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findLast;
-
-- (id<JavaUtilMap_Entry>)doRemoveLastEntry;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findNearWithId:(id)kkey
-                                                         withInt:(jint)rel;
-
-- (JavaUtilAbstractMap_SimpleImmutableEntry *)getNearWithId:(id)key
-                                                    withInt:(jint)rel;
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -82,133 +38,163 @@
 
 - (instancetype)initWithJavaUtilSortedMap:(id<JavaUtilSortedMap>)m;
 
+- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
+
+- (id)ceilingKeyWithId:(id)key;
+
+- (void)clear;
+
 - (JavaUtilConcurrentConcurrentSkipListMap *)clone;
+
+- (id<JavaUtilComparator>)comparator;
 
 - (jboolean)containsKeyWithId:(id)key;
 
+- (jboolean)containsValueWithId:(id)value;
+
+- (id<JavaUtilNavigableSet>)descendingKeySet;
+
+- (id<JavaUtilConcurrentConcurrentNavigableMap>)descendingMap;
+
+- (id<JavaUtilSet>)entrySet;
+
+- (jboolean)isEqual:(id)o;
+
+- (id<JavaUtilMap_Entry>)firstEntry;
+
+- (id)firstKey;
+
+- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
+
+- (id)floorKeyWithId:(id)key;
+
 - (id)getWithId:(id)key;
+
+- (id<JavaUtilConcurrentConcurrentNavigableMap>)headMapWithId:(id)toKey;
+
+- (id<JavaUtilConcurrentConcurrentNavigableMap>)headMapWithId:(id)toKey
+                                                  withBoolean:(jboolean)inclusive;
+
+- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
+
+- (id)higherKeyWithId:(id)key;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilNavigableSet>)keySet;
+
+- (id<JavaUtilMap_Entry>)lastEntry;
+
+- (id)lastKey;
+
+- (id<JavaUtilMap_Entry>)lowerEntryWithId:(id)key;
+
+- (id)lowerKeyWithId:(id)key;
+
+- (id<JavaUtilNavigableSet>)navigableKeySet;
+
+- (id<JavaUtilMap_Entry>)pollFirstEntry;
+
+- (id<JavaUtilMap_Entry>)pollLastEntry;
 
 - (id)putWithId:(id)key
          withId:(id)value;
 
-- (id)removeWithId:(id)key;
-
-- (jboolean)containsValueWithId:(id)value;
-
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (void)clear;
-
-- (id<JavaUtilNavigableSet>)keySet;
-
-- (id<JavaUtilNavigableSet>)navigableKeySet;
-
-- (id<JavaUtilCollection>)values;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilConcurrentConcurrentNavigableMap>)descendingMap;
-
-- (id<JavaUtilNavigableSet>)descendingKeySet;
-
-- (jboolean)isEqual:(id)o;
-
 - (id)putIfAbsentWithId:(id)key
                  withId:(id)value;
 
+- (id)removeWithId:(id)key;
+
 - (jboolean)removeWithId:(id)key
                   withId:(id)value;
+
+- (id)replaceWithId:(id)key
+             withId:(id)value;
 
 - (jboolean)replaceWithId:(id)key
                    withId:(id)oldValue
                    withId:(id)newValue;
 
-- (id)replaceWithId:(id)key
-             withId:(id)value;
-
-- (id<JavaUtilComparator>)comparator;
-
-- (id)firstKey;
-
-- (id)lastKey;
+- (jint)size;
 
 - (id<JavaUtilConcurrentConcurrentNavigableMap>)subMapWithId:(id)fromKey
                                                  withBoolean:(jboolean)fromInclusive
                                                       withId:(id)toKey
                                                  withBoolean:(jboolean)toInclusive;
 
-- (id<JavaUtilConcurrentConcurrentNavigableMap>)headMapWithId:(id)toKey
-                                                  withBoolean:(jboolean)inclusive;
+- (id<JavaUtilConcurrentConcurrentNavigableMap>)subMapWithId:(id)fromKey
+                                                      withId:(id)toKey;
+
+- (id<JavaUtilConcurrentConcurrentNavigableMap>)tailMapWithId:(id)fromKey;
 
 - (id<JavaUtilConcurrentConcurrentNavigableMap>)tailMapWithId:(id)fromKey
                                                   withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilConcurrentConcurrentNavigableMap>)subMapWithId:(id)fromKey
-                                                      withId:(id)toKey;
+- (id<JavaUtilCollection>)values;
 
-- (id<JavaUtilConcurrentConcurrentNavigableMap>)headMapWithId:(id)toKey;
+#pragma mark Package-Private
 
-- (id<JavaUtilConcurrentConcurrentNavigableMap>)tailMapWithId:(id)fromKey;
+- (jint)compareWithId:(id)k1
+               withId:(id)k2;
 
-- (id<JavaUtilMap_Entry>)lowerEntryWithId:(id)key;
+- (id)doRemoveWithId:(id)okey
+              withId:(id)value;
 
-- (id)lowerKeyWithId:(id)key;
+- (id<JavaUtilMap_Entry>)doRemoveFirstEntry;
 
-- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
-
-- (id)floorKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
-
-- (id)ceilingKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
-
-- (id)higherKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)firstEntry;
-
-- (id<JavaUtilMap_Entry>)lastEntry;
-
-- (id<JavaUtilMap_Entry>)pollFirstEntry;
-
-- (id<JavaUtilMap_Entry>)pollLastEntry;
-
-- (id<JavaUtilIterator>)keyIterator;
-
-- (id<JavaUtilIterator>)valueIterator;
+- (id<JavaUtilMap_Entry>)doRemoveLastEntry;
 
 - (id<JavaUtilIterator>)entryIterator;
 
+- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findFirst;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findLast;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_Node *)findNearWithId:(id)kkey
+                                                         withInt:(jint)rel;
+
+- (JavaUtilAbstractMap_SimpleImmutableEntry *)getNearWithId:(id)key
+                                                    withInt:(jint)rel;
+
+- (jboolean)inHalfOpenRangeWithId:(id)key
+                           withId:(id)least
+                           withId:(id)fence;
+
+- (void)initialize__ OBJC_METHOD_FAMILY_NONE;
+
+- (jboolean)inOpenRangeWithId:(id)key
+                       withId:(id)least
+                       withId:(id)fence;
+
+- (id<JavaUtilIterator>)keyIterator;
+
 + (id<JavaUtilList>)toListWithJavaUtilCollection:(id<JavaUtilCollection>)c;
+
+- (id<JavaUtilIterator>)valueIterator;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentSkipListMap_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_init(JavaUtilConcurrentConcurrentSkipListMap *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap *new_JavaUtilConcurrentConcurrentSkipListMap_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilComparator_(JavaUtilConcurrentConcurrentSkipListMap *self, id<JavaUtilComparator> comparator);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap *new_JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilMap_(JavaUtilConcurrentConcurrentSkipListMap *self, id<JavaUtilMap> m);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap *new_JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilMap_(id<JavaUtilMap> m) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilSortedMap_(JavaUtilConcurrentConcurrentSkipListMap *self, id<JavaUtilSortedMap> m);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap *new_JavaUtilConcurrentConcurrentSkipListMap_initWithJavaUtilSortedMap_(id<JavaUtilSortedMap> m) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT id<JavaUtilList> JavaUtilConcurrentConcurrentSkipListMap_toListWithJavaUtilCollection_(id<JavaUtilCollection> c);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT JavaUtilRandom *JavaUtilConcurrentConcurrentSkipListMap_seedGenerator_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, seedGenerator_, JavaUtilRandom *)
-
-FOUNDATION_EXPORT id JavaUtilConcurrentConcurrentSkipListMap_BASE_HEADER_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, BASE_HEADER_, id)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, EQ, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, LT, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, GT, jint)
-
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentSkipListMap_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, UNSAFE_, SunMiscUnsafe *)
-
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentSkipListMap_headOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, headOffset_, jlong)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_Node : NSObject {
  @public
@@ -217,48 +203,50 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap, headOffset_,
   JavaUtilConcurrentConcurrentSkipListMap_Node *next_;
 }
 
+#pragma mark Package-Private
+
 - (instancetype)initWithId:(id)key
                     withId:(id)value
 withJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)next;
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)next;
 
-- (jboolean)casValueWithId:(id)cmp
-                    withId:(id)val;
+- (jboolean)appendMarkerWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)f;
 
 - (jboolean)casNextWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)cmp
                    withJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)val;
 
-- (jboolean)isMarker;
+- (jboolean)casValueWithId:(id)cmp
+                    withId:(id)val;
 
-- (jboolean)isBaseHeader;
+- (JavaUtilAbstractMap_SimpleImmutableEntry *)createSnapshot;
 
-- (jboolean)appendMarkerWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)f;
+- (id)getValidValue;
 
 - (void)helpDeleteWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)b
                   withJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)f;
 
-- (id)getValidValue;
+- (jboolean)isBaseHeader;
 
-- (JavaUtilAbstractMap_SimpleImmutableEntry *)createSnapshot;
+- (jboolean)isMarker;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentSkipListMap_Node_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_Node)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, key_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, value_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, next_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentSkipListMap_Node_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_Node_initWithId_withId_withJavaUtilConcurrentConcurrentSkipListMap_Node_(JavaUtilConcurrentConcurrentSkipListMap_Node *self, id key, id value, JavaUtilConcurrentConcurrentSkipListMap_Node *next);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentSkipListMap_Node_valueOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, valueOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_Node *new_JavaUtilConcurrentConcurrentSkipListMap_Node_initWithId_withId_withJavaUtilConcurrentConcurrentSkipListMap_Node_(id key, id value, JavaUtilConcurrentConcurrentSkipListMap_Node *next) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentSkipListMap_Node_nextOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, nextOffset_, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_Node_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_(JavaUtilConcurrentConcurrentSkipListMap_Node *self, JavaUtilConcurrentConcurrentSkipListMap_Node *next);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_Node *new_JavaUtilConcurrentConcurrentSkipListMap_Node_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_(JavaUtilConcurrentConcurrentSkipListMap_Node *next) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_Node)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_Index : NSObject {
  @public
@@ -266,6 +254,8 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, nextOff
   JavaUtilConcurrentConcurrentSkipListMap_Index *down_;
   JavaUtilConcurrentConcurrentSkipListMap_Index *right_;
 }
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)node
                    withJavaUtilConcurrentConcurrentSkipListMap_Index:(JavaUtilConcurrentConcurrentSkipListMap_Index *)down
@@ -283,23 +273,24 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Node, nextOff
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilConcurrentConcurrentSkipListMap_Index_initialized;
 J2OBJC_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_Index)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, node_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, down_, JavaUtilConcurrentConcurrentSkipListMap_Index *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, right_, JavaUtilConcurrentConcurrentSkipListMap_Index *)
 
-FOUNDATION_EXPORT SunMiscUnsafe *JavaUtilConcurrentConcurrentSkipListMap_Index_UNSAFE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, UNSAFE_, SunMiscUnsafe *)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_Index_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_withJavaUtilConcurrentConcurrentSkipListMap_Index_withJavaUtilConcurrentConcurrentSkipListMap_Index_(JavaUtilConcurrentConcurrentSkipListMap_Index *self, JavaUtilConcurrentConcurrentSkipListMap_Node *node, JavaUtilConcurrentConcurrentSkipListMap_Index *down, JavaUtilConcurrentConcurrentSkipListMap_Index *right);
 
-FOUNDATION_EXPORT jlong JavaUtilConcurrentConcurrentSkipListMap_Index_rightOffset_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, rightOffset_, jlong)
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_Index *new_JavaUtilConcurrentConcurrentSkipListMap_Index_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_withJavaUtilConcurrentConcurrentSkipListMap_Index_withJavaUtilConcurrentConcurrentSkipListMap_Index_(JavaUtilConcurrentConcurrentSkipListMap_Node *node, JavaUtilConcurrentConcurrentSkipListMap_Index *down, JavaUtilConcurrentConcurrentSkipListMap_Index *right) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_Index)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_HeadIndex : JavaUtilConcurrentConcurrentSkipListMap_Index {
  @public
   jint level_;
 }
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_Node:(JavaUtilConcurrentConcurrentSkipListMap_Node *)node
                    withJavaUtilConcurrentConcurrentSkipListMap_Index:(JavaUtilConcurrentConcurrentSkipListMap_Index *)down
@@ -308,7 +299,13 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_Index, rightO
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_HeadIndex_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_HeadIndex)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_HeadIndex_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_withJavaUtilConcurrentConcurrentSkipListMap_Index_withJavaUtilConcurrentConcurrentSkipListMap_Index_withInt_(JavaUtilConcurrentConcurrentSkipListMap_HeadIndex *self, JavaUtilConcurrentConcurrentSkipListMap_Node *node, JavaUtilConcurrentConcurrentSkipListMap_Index *down, JavaUtilConcurrentConcurrentSkipListMap_Index *right, jint level);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_HeadIndex *new_JavaUtilConcurrentConcurrentSkipListMap_HeadIndex_initWithJavaUtilConcurrentConcurrentSkipListMap_Node_withJavaUtilConcurrentConcurrentSkipListMap_Index_withJavaUtilConcurrentConcurrentSkipListMap_Index_withInt_(JavaUtilConcurrentConcurrentSkipListMap_Node *node, JavaUtilConcurrentConcurrentSkipListMap_Index *down, JavaUtilConcurrentConcurrentSkipListMap_Index *right, jint level) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_HeadIndex)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator : NSObject < JavaLangComparable > {
  @public
@@ -316,17 +313,27 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListM
   id<JavaUtilComparator> cmp_;
 }
 
-- (instancetype)initWithId:(id)key
-    withJavaUtilComparator:(id<JavaUtilComparator>)cmp;
+#pragma mark Public
 
 - (jint)compareToWithId:(id)k2;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithId:(id)key
+    withJavaUtilComparator:(id<JavaUtilComparator>)cmp;
+
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator, actualKey_, id)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator, cmp_, id<JavaUtilComparator>)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator_initWithId_withJavaUtilComparator_(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator *self, id key, id<JavaUtilComparator> cmp);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator *new_JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator_initWithId_withJavaUtilComparator_(id key, id<JavaUtilComparator> cmp) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingComparator)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_Iter : NSObject < JavaUtilIterator > {
  @public
@@ -335,179 +342,332 @@ J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_ComparableUsingCompa
   id nextValue_;
 }
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)outer$;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
-- (void)advance;
-
 - (void)remove;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)outer$;
+
+- (void)advance;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_Iter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_Iter)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Iter, lastReturned_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Iter, next_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_Iter, nextValue_, id)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_ValueIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_Iter_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap_Iter *self, JavaUtilConcurrentConcurrentSkipListMap *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_Iter)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_ValueIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter
+
+#pragma mark Public
 
 - (id)next;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_ValueIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_ValueIterator)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_KeyIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_ValueIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap_ValueIterator *self, JavaUtilConcurrentConcurrentSkipListMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_ValueIterator *new_JavaUtilConcurrentConcurrentSkipListMap_ValueIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_ValueIterator)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_KeyIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter
+
+#pragma mark Public
 
 - (id)next;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_KeyIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_KeyIterator)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_EntryIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_KeyIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap_KeyIterator *self, JavaUtilConcurrentConcurrentSkipListMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_KeyIterator *new_JavaUtilConcurrentConcurrentSkipListMap_KeyIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_KeyIterator)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_EntryIterator : JavaUtilConcurrentConcurrentSkipListMap_Iter
+
+#pragma mark Public
 
 - (id<JavaUtilMap_Entry>)next;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_EntryIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_EntryIterator)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_KeySet : JavaUtilAbstractSet < JavaUtilNavigableSet > {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_EntryIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap_EntryIterator *self, JavaUtilConcurrentConcurrentSkipListMap *outer$);
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)map;
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_EntryIterator *new_JavaUtilConcurrentConcurrentSkipListMap_EntryIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_(JavaUtilConcurrentConcurrentSkipListMap *outer$) NS_RETURNS_RETAINED;
 
-- (jint)size;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_EntryIterator)
 
-- (jboolean)isEmpty;
+@interface JavaUtilConcurrentConcurrentSkipListMap_KeySet : JavaUtilAbstractSet < JavaUtilNavigableSet >
 
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)removeWithId:(id)o;
-
-- (void)clear;
-
-- (id)lowerWithId:(id)e;
-
-- (id)floorWithId:(id)e;
+#pragma mark Public
 
 - (id)ceilingWithId:(id)e;
 
-- (id)higherWithId:(id)e;
+- (void)clear;
 
 - (id<JavaUtilComparator>)comparator;
 
+- (jboolean)containsWithId:(id)o;
+
+- (id<JavaUtilIterator>)descendingIterator;
+
+- (id<JavaUtilNavigableSet>)descendingSet;
+
+- (jboolean)isEqual:(id)o;
+
 - (id)first;
 
+- (id)floorWithId:(id)e;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement;
+
+- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement
+                              withBoolean:(jboolean)inclusive;
+
+- (id)higherWithId:(id)e;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
 - (id)last;
+
+- (id)lowerWithId:(id)e;
 
 - (id)pollFirst;
 
 - (id)pollLast;
 
-- (id<JavaUtilIterator>)iterator;
+- (jboolean)removeWithId:(id)o;
 
-- (jboolean)isEqual:(id)o;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
-
-- (id<JavaUtilIterator>)descendingIterator;
+- (jint)size;
 
 - (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
                              withBoolean:(jboolean)fromInclusive
                                   withId:(id)toElement
                              withBoolean:(jboolean)toInclusive;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement
-                              withBoolean:(jboolean)inclusive;
+- (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
+                                  withId:(id)toElement;
+
+- (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement;
 
 - (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement
                               withBoolean:(jboolean)inclusive;
 
-- (id<JavaUtilNavigableSet>)subSetWithId:(id)fromElement
-                                  withId:(id)toElement;
+- (IOSObjectArray *)toArray;
 
-- (id<JavaUtilNavigableSet>)headSetWithId:(id)toElement;
+- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-- (id<JavaUtilNavigableSet>)tailSetWithId:(id)fromElement;
+#pragma mark Package-Private
 
-- (id<JavaUtilNavigableSet>)descendingSet;
+- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)map;
 
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_KeySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_KeySet)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_Values : JavaUtilAbstractCollection {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_KeySet_initWithJavaUtilConcurrentConcurrentNavigableMap_(JavaUtilConcurrentConcurrentSkipListMap_KeySet *self, id<JavaUtilConcurrentConcurrentNavigableMap> map);
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)map;
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_KeySet *new_JavaUtilConcurrentConcurrentSkipListMap_KeySet_initWithJavaUtilConcurrentConcurrentNavigableMap_(id<JavaUtilConcurrentConcurrentNavigableMap> map) NS_RETURNS_RETAINED;
 
-- (id<JavaUtilIterator>)iterator;
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_KeySet)
 
-- (jboolean)isEmpty;
+@interface JavaUtilConcurrentConcurrentSkipListMap_Values : JavaUtilAbstractCollection
 
-- (jint)size;
+#pragma mark Public
+
+- (void)clear;
 
 - (jboolean)containsWithId:(id)o;
 
-- (void)clear;
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jint)size;
 
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
-
-@end
-
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_Values_init() {}
-
-@interface JavaUtilConcurrentConcurrentSkipListMap_EntrySet : JavaUtilAbstractSet {
-}
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)map;
 
-- (id<JavaUtilIterator>)iterator;
 
-- (jboolean)containsWithId:(id)o;
+@end
 
-- (jboolean)removeWithId:(id)o;
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_Values)
 
-- (jboolean)isEmpty;
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_Values_initWithJavaUtilConcurrentConcurrentNavigableMap_(JavaUtilConcurrentConcurrentSkipListMap_Values *self, id<JavaUtilConcurrentConcurrentNavigableMap> map);
 
-- (jint)size;
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_Values *new_JavaUtilConcurrentConcurrentSkipListMap_Values_initWithJavaUtilConcurrentConcurrentNavigableMap_(id<JavaUtilConcurrentConcurrentNavigableMap> map) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_Values)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_EntrySet : JavaUtilAbstractSet
+
+#pragma mark Public
 
 - (void)clear;
+
+- (jboolean)containsWithId:(id)o;
 
 - (jboolean)isEqual:(id)o;
 
+- (jboolean)isEmpty;
+
+- (id<JavaUtilIterator>)iterator;
+
+- (jboolean)removeWithId:(id)o;
+
+- (jint)size;
+
 - (IOSObjectArray *)toArray;
 
 - (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)a;
 
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentConcurrentNavigableMap:(id<JavaUtilConcurrentConcurrentNavigableMap>)map;
+
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_EntrySet_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_EntrySet)
 
-#define JavaUtilConcurrentConcurrentSkipListMap_SubMap_serialVersionUID -7647078645895051609LL
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_EntrySet_initWithJavaUtilConcurrentConcurrentNavigableMap_(JavaUtilConcurrentConcurrentSkipListMap_EntrySet *self, id<JavaUtilConcurrentConcurrentNavigableMap> map);
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap : JavaUtilAbstractMap < JavaUtilConcurrentConcurrentNavigableMap, NSCopying, JavaIoSerializable > {
-}
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_EntrySet *new_JavaUtilConcurrentConcurrentSkipListMap_EntrySet_initWithJavaUtilConcurrentConcurrentNavigableMap_(id<JavaUtilConcurrentConcurrentNavigableMap> map) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_EntrySet)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap : JavaUtilAbstractMap < JavaUtilConcurrentConcurrentNavigableMap, NSCopying, JavaIoSerializable >
+
+#pragma mark Public
+
+- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
+
+- (id)ceilingKeyWithId:(id)key;
+
+- (void)clear;
+
+- (id<JavaUtilComparator>)comparator;
+
+- (jboolean)containsKeyWithId:(id)key;
+
+- (jboolean)containsValueWithId:(id)value;
+
+- (id<JavaUtilNavigableSet>)descendingKeySet;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)descendingMap;
+
+- (id<JavaUtilSet>)entrySet;
+
+- (id<JavaUtilMap_Entry>)firstEntry;
+
+- (id)firstKey;
+
+- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
+
+- (id)floorKeyWithId:(id)key;
+
+- (id)getWithId:(id)key;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)headMapWithId:(id)toKey;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)headMapWithId:(id)toKey
+                                                      withBoolean:(jboolean)inclusive;
+
+- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
+
+- (id)higherKeyWithId:(id)key;
+
+- (jboolean)isEmpty;
+
+- (id<JavaUtilNavigableSet>)keySet;
+
+- (id<JavaUtilMap_Entry>)lastEntry;
+
+- (id)lastKey;
+
+- (id<JavaUtilMap_Entry>)lowerEntryWithId:(id)key;
+
+- (id)lowerKeyWithId:(id)key;
+
+- (id<JavaUtilNavigableSet>)navigableKeySet;
+
+- (id<JavaUtilMap_Entry>)pollFirstEntry;
+
+- (id<JavaUtilMap_Entry>)pollLastEntry;
+
+- (id)putWithId:(id)key
+         withId:(id)value;
+
+- (id)putIfAbsentWithId:(id)key
+                 withId:(id)value;
+
+- (id)removeWithId:(id)key;
+
+- (jboolean)removeWithId:(id)key
+                  withId:(id)value;
+
+- (id)replaceWithId:(id)key
+             withId:(id)value;
+
+- (jboolean)replaceWithId:(id)key
+                   withId:(id)oldValue
+                   withId:(id)newValue;
+
+- (jint)size;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)subMapWithId:(id)fromKey
+                                                     withBoolean:(jboolean)fromInclusive
+                                                          withId:(id)toKey
+                                                     withBoolean:(jboolean)toInclusive;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)subMapWithId:(id)fromKey
+                                                          withId:(id)toKey;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)tailMapWithId:(id)fromKey;
+
+- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)tailMapWithId:(id)fromKey
+                                                      withBoolean:(jboolean)inclusive;
+
+- (id<JavaUtilCollection>)values;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap:(JavaUtilConcurrentConcurrentSkipListMap *)map
                                                          withId:(id)fromKey
@@ -516,107 +676,21 @@ __attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListM
                                                     withBoolean:(jboolean)toInclusive
                                                     withBoolean:(jboolean)isDescending;
 
-- (jboolean)containsKeyWithId:(id)key;
-
-- (id)getWithId:(id)key;
-
-- (id)putWithId:(id)key
-         withId:(id)value;
-
-- (id)removeWithId:(id)key;
-
-- (jint)size;
-
-- (jboolean)isEmpty;
-
-- (jboolean)containsValueWithId:(id)value;
-
-- (void)clear;
-
-- (id)putIfAbsentWithId:(id)key
-                 withId:(id)value;
-
-- (jboolean)removeWithId:(id)key
-                  withId:(id)value;
-
-- (jboolean)replaceWithId:(id)key
-                   withId:(id)oldValue
-                   withId:(id)newValue;
-
-- (id)replaceWithId:(id)key
-             withId:(id)value;
-
-- (id<JavaUtilComparator>)comparator;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)subMapWithId:(id)fromKey
-                                                     withBoolean:(jboolean)fromInclusive
-                                                          withId:(id)toKey
-                                                     withBoolean:(jboolean)toInclusive;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)headMapWithId:(id)toKey
-                                                      withBoolean:(jboolean)inclusive;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)tailMapWithId:(id)fromKey
-                                                      withBoolean:(jboolean)inclusive;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)subMapWithId:(id)fromKey
-                                                          withId:(id)toKey;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)headMapWithId:(id)toKey;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)tailMapWithId:(id)fromKey;
-
-- (JavaUtilConcurrentConcurrentSkipListMap_SubMap *)descendingMap;
-
-- (id<JavaUtilMap_Entry>)ceilingEntryWithId:(id)key;
-
-- (id)ceilingKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)lowerEntryWithId:(id)key;
-
-- (id)lowerKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)floorEntryWithId:(id)key;
-
-- (id)floorKeyWithId:(id)key;
-
-- (id<JavaUtilMap_Entry>)higherEntryWithId:(id)key;
-
-- (id)higherKeyWithId:(id)key;
-
-- (id)firstKey;
-
-- (id)lastKey;
-
-- (id<JavaUtilMap_Entry>)firstEntry;
-
-- (id<JavaUtilMap_Entry>)lastEntry;
-
-- (id<JavaUtilMap_Entry>)pollFirstEntry;
-
-- (id<JavaUtilMap_Entry>)pollLastEntry;
-
-- (id<JavaUtilNavigableSet>)keySet;
-
-- (id<JavaUtilNavigableSet>)navigableKeySet;
-
-- (id<JavaUtilCollection>)values;
-
-- (id<JavaUtilSet>)entrySet;
-
-- (id<JavaUtilNavigableSet>)descendingKeySet;
+- (id<JavaUtilIterator>)entryIterator;
 
 - (id<JavaUtilIterator>)keyIterator;
 
 - (id<JavaUtilIterator>)valueIterator;
 
-- (id<JavaUtilIterator>)entryIterator;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_SubMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_SubMap)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_SubMap, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_SubMap_initWithJavaUtilConcurrentConcurrentSkipListMap_withId_withBoolean_withId_withBoolean_withBoolean_(JavaUtilConcurrentConcurrentSkipListMap_SubMap *self, JavaUtilConcurrentConcurrentSkipListMap *map, id fromKey, jboolean fromInclusive, id toKey, jboolean toInclusive, jboolean isDescending);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_SubMap *new_JavaUtilConcurrentConcurrentSkipListMap_SubMap_initWithJavaUtilConcurrentConcurrentSkipListMap_withId_withBoolean_withId_withBoolean_withBoolean_(JavaUtilConcurrentConcurrentSkipListMap *map, id fromKey, jboolean fromInclusive, id toKey, jboolean toInclusive, jboolean isDescending) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_SubMap)
 
 @interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter : NSObject < JavaUtilIterator > {
  @public
@@ -625,53 +699,88 @@ J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentConcurrentSkipListMap_SubMap, seria
   id nextValue_;
 }
 
-- (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap:(JavaUtilConcurrentConcurrentSkipListMap_SubMap *)outer$;
+#pragma mark Public
 
 - (jboolean)hasNext;
 
-- (void)advance;
-
 - (void)remove;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap:(JavaUtilConcurrentConcurrentSkipListMap_SubMap *)outer$;
+
+- (void)advance;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter)
 
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter, lastReturned_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter, next_, JavaUtilConcurrentConcurrentSkipListMap_Node *)
 J2OBJC_FIELD_SETTER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter, nextValue_, id)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter *self, JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter
+
+#pragma mark Public
 
 - (id)next;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap:(JavaUtilConcurrentConcurrentSkipListMap_SubMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator *self, JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator *new_JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapValueIterator)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter
+
+#pragma mark Public
 
 - (id)next;
+
+#pragma mark Package-Private
 
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap:(JavaUtilConcurrentConcurrentSkipListMap_SubMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator)
 
-@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator *self, JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator *new_JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapKeyIterator)
+
+@interface JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator : JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapIter
+
+#pragma mark Public
 
 - (id<JavaUtilMap_Entry>)next;
 
+#pragma mark Package-Private
+
 - (instancetype)initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap:(JavaUtilConcurrentConcurrentSkipListMap_SubMap *)outer$;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator)
+
+FOUNDATION_EXPORT void JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator *self, JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$);
+
+FOUNDATION_EXPORT JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator *new_JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator_initWithJavaUtilConcurrentConcurrentSkipListMap_SubMap_(JavaUtilConcurrentConcurrentSkipListMap_SubMap *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentSkipListMap_SubMap_SubMapEntryIterator)
 
 #endif // _JavaUtilConcurrentConcurrentSkipListMap_H_

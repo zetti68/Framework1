@@ -6,12 +6,13 @@
 #ifndef _JavaSecurityBasicPermission_H_
 #define _JavaSecurityBasicPermission_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/security/Permission.h"
 
-@interface JavaSecurityBasicPermission : JavaSecurityPermission < JavaIoSerializable > {
-}
+@interface JavaSecurityBasicPermission : JavaSecurityPermission < JavaIoSerializable >
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name;
 
@@ -24,6 +25,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityBasicPermission_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityBasicPermission)
+
+FOUNDATION_EXPORT void JavaSecurityBasicPermission_initWithNSString_(JavaSecurityBasicPermission *self, NSString *name);
+
+FOUNDATION_EXPORT void JavaSecurityBasicPermission_initWithNSString_withNSString_(JavaSecurityBasicPermission *self, NSString *name, NSString *action);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityBasicPermission)
 
 #endif // _JavaSecurityBasicPermission_H_

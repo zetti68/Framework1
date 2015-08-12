@@ -6,13 +6,14 @@
 #ifndef _JavaUtilConcurrentConcurrentNavigableMap_H_
 #define _JavaUtilConcurrentConcurrentNavigableMap_H_
 
-@protocol JavaUtilNavigableSet;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/NavigableMap.h"
 #include "java/util/concurrent/ConcurrentMap.h"
 
+@protocol JavaUtilNavigableSet;
+
 @protocol JavaUtilConcurrentConcurrentNavigableMap < JavaUtilConcurrentConcurrentMap, JavaUtilNavigableMap, NSObject, JavaObject >
+
 - (id<JavaUtilConcurrentConcurrentNavigableMap>)subMapWithId:(id)fromKey
                                                  withBoolean:(jboolean)fromInclusive
                                                       withId:(id)toKey
@@ -41,6 +42,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentConcurrentNavigableMap_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentConcurrentNavigableMap)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentConcurrentNavigableMap)
 
 #endif // _JavaUtilConcurrentConcurrentNavigableMap_H_

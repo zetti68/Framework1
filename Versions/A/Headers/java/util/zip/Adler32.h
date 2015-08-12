@@ -6,19 +6,20 @@
 #ifndef _JavaUtilZipAdler32_H_
 #define _JavaUtilZipAdler32_H_
 
-@class IOSByteArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/util/zip/Checksum.h"
 
-@interface JavaUtilZipAdler32 : NSObject < JavaUtilZipChecksum > {
-}
+@class IOSByteArray;
+
+@interface JavaUtilZipAdler32 : NSObject < JavaUtilZipChecksum >
+
+#pragma mark Public
+
+- (instancetype)init;
 
 - (jlong)getValue;
 
 - (void)reset;
-
-- (void)updateWithInt:(jint)i;
 
 - (void)updateWithByteArray:(IOSByteArray *)buf;
 
@@ -26,10 +27,16 @@
                     withInt:(jint)offset
                     withInt:(jint)byteCount;
 
-- (instancetype)init;
+- (void)updateWithInt:(jint)i;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilZipAdler32_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilZipAdler32)
+
+FOUNDATION_EXPORT void JavaUtilZipAdler32_init(JavaUtilZipAdler32 *self);
+
+FOUNDATION_EXPORT JavaUtilZipAdler32 *new_JavaUtilZipAdler32_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilZipAdler32)
 
 #endif // _JavaUtilZipAdler32_H_

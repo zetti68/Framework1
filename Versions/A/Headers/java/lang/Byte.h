@@ -6,19 +6,18 @@
 #ifndef _JavaLangByte_H_
 #define _JavaLangByte_H_
 
-@class IOSClass;
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
+
+@class IOSClass;
 
 #define JavaLangByte_MAX_VALUE 127
 #define JavaLangByte_MIN_VALUE -128
 #define JavaLangByte_SIZE 8
-#define JavaLangByte_serialVersionUID -7183698231559129828LL
 
-@interface JavaLangByte : NSNumber < JavaLangComparable > {
-}
+@interface JavaLangByte : NSNumber < JavaLangComparable >
+
+#pragma mark Public
 
 - (instancetype)initWithByte:(jbyte)value;
 
@@ -26,10 +25,10 @@
 
 - (jbyte)charValue;
 
-- (jint)compareToWithId:(JavaLangByte *)object;
-
 + (jint)compareWithByte:(jbyte)lhs
                withByte:(jbyte)rhs;
+
+- (jint)compareToWithId:(JavaLangByte *)object;
 
 + (JavaLangByte *)decodeWithNSString:(NSString *)string;
 
@@ -52,36 +51,26 @@
 
 - (jshort)shortValue;
 
-- (NSString *)description;
-
 + (NSString *)toHexStringWithByte:(jbyte)b
                       withBoolean:(jboolean)upperCase;
 
+- (NSString *)description;
+
 + (NSString *)toStringWithByte:(jbyte)value;
+
++ (JavaLangByte *)valueOfWithByte:(jbyte)b;
 
 + (JavaLangByte *)valueOfWithNSString:(NSString *)string;
 
 + (JavaLangByte *)valueOfWithNSString:(NSString *)string
                               withInt:(jint)radix;
 
-+ (JavaLangByte *)valueOfWithByte:(jbyte)b;
+#pragma mark Package-Private
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangByte_initialized;
 J2OBJC_STATIC_INIT(JavaLangByte)
-FOUNDATION_EXPORT jint JavaLangByte_compareWithByte_withByte_(jbyte lhs, jbyte rhs);
-FOUNDATION_EXPORT JavaLangByte *JavaLangByte_decodeWithNSString_(NSString *string);
-FOUNDATION_EXPORT jbyte JavaLangByte_parseByteWithNSString_(NSString *string);
-FOUNDATION_EXPORT jbyte JavaLangByte_parseByteWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT NSString *JavaLangByte_toHexStringWithByte_withBoolean_(jbyte b, jboolean upperCase);
-FOUNDATION_EXPORT NSString *JavaLangByte_toStringWithByte_(jbyte value);
-FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithByte_(jbyte b);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangByte, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangByte, MAX_VALUE, jbyte)
 
@@ -92,8 +81,33 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangByte, SIZE, jint)
 FOUNDATION_EXPORT IOSClass *JavaLangByte_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangByte, TYPE_, IOSClass *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangByte_VALUES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangByte, VALUES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaLangByte_initWithByte_(JavaLangByte *self, jbyte value);
+
+FOUNDATION_EXPORT JavaLangByte *new_JavaLangByte_initWithByte_(jbyte value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangByte_initWithNSString_(JavaLangByte *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangByte *new_JavaLangByte_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangByte_compareWithByte_withByte_(jbyte lhs, jbyte rhs);
+
+FOUNDATION_EXPORT JavaLangByte *JavaLangByte_decodeWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jbyte JavaLangByte_parseByteWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jbyte JavaLangByte_parseByteWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT NSString *JavaLangByte_toHexStringWithByte_withBoolean_(jbyte b, jboolean upperCase);
+
+FOUNDATION_EXPORT NSString *JavaLangByte_toStringWithByte_(jbyte value);
+
+FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT JavaLangByte *JavaLangByte_valueOfWithByte_(jbyte b);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangByte)
 
 BOXED_INC_AND_DEC(Byte, charValue, JavaLangByte)
 

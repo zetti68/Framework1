@@ -6,15 +6,16 @@
 #ifndef _OrgApacheHarmonySecurityAsn1ASN1Set_H_
 #define _OrgApacheHarmonySecurityAsn1ASN1Set_H_
 
+#include "J2ObjC_header.h"
+#include "org/apache/harmony/security/asn1/ASN1TypeCollection.h"
+
 @class IOSObjectArray;
 @class OrgApacheHarmonySecurityAsn1BerInputStream;
 @class OrgApacheHarmonySecurityAsn1BerOutputStream;
 
-#import "JreEmulation.h"
-#include "org/apache/harmony/security/asn1/ASN1TypeCollection.h"
+@interface OrgApacheHarmonySecurityAsn1ASN1Set : OrgApacheHarmonySecurityAsn1ASN1TypeCollection
 
-@interface OrgApacheHarmonySecurityAsn1ASN1Set : OrgApacheHarmonySecurityAsn1ASN1TypeCollection {
-}
+#pragma mark Public
 
 - (instancetype)initWithOrgApacheHarmonySecurityAsn1ASN1TypeArray:(IOSObjectArray *)type;
 
@@ -26,6 +27,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgApacheHarmonySecurityAsn1ASN1Set_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheHarmonySecurityAsn1ASN1Set)
+
+FOUNDATION_EXPORT void OrgApacheHarmonySecurityAsn1ASN1Set_initWithOrgApacheHarmonySecurityAsn1ASN1TypeArray_(OrgApacheHarmonySecurityAsn1ASN1Set *self, IOSObjectArray *type);
+
+FOUNDATION_EXPORT OrgApacheHarmonySecurityAsn1ASN1Set *new_OrgApacheHarmonySecurityAsn1ASN1Set_initWithOrgApacheHarmonySecurityAsn1ASN1TypeArray_(IOSObjectArray *type) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheHarmonySecurityAsn1ASN1Set)
 
 #endif // _OrgApacheHarmonySecurityAsn1ASN1Set_H_

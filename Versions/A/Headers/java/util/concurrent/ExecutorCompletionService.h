@@ -6,26 +6,29 @@
 #ifndef _JavaUtilConcurrentExecutorCompletionService_H_
 #define _JavaUtilConcurrentExecutorCompletionService_H_
 
-@class JavaUtilConcurrentAbstractExecutorService;
+#include "J2ObjC_header.h"
+#include "java/util/concurrent/CompletionService.h"
+
 @class JavaUtilConcurrentTimeUnitEnum;
 @protocol JavaLangRunnable;
 @protocol JavaUtilConcurrentBlockingQueue;
 @protocol JavaUtilConcurrentCallable;
 @protocol JavaUtilConcurrentExecutor;
 @protocol JavaUtilConcurrentFuture;
-@protocol JavaUtilConcurrentRunnableFuture;
 
-#import "JreEmulation.h"
-#include "java/util/concurrent/CompletionService.h"
-#include "java/util/concurrent/FutureTask.h"
+@interface JavaUtilConcurrentExecutorCompletionService : NSObject < JavaUtilConcurrentCompletionService >
 
-@interface JavaUtilConcurrentExecutorCompletionService : NSObject < JavaUtilConcurrentCompletionService > {
-}
+#pragma mark Public
 
 - (instancetype)initWithJavaUtilConcurrentExecutor:(id<JavaUtilConcurrentExecutor>)executor;
 
 - (instancetype)initWithJavaUtilConcurrentExecutor:(id<JavaUtilConcurrentExecutor>)executor
                withJavaUtilConcurrentBlockingQueue:(id<JavaUtilConcurrentBlockingQueue>)completionQueue;
+
+- (id<JavaUtilConcurrentFuture>)poll;
+
+- (id<JavaUtilConcurrentFuture>)pollWithLong:(jlong)timeout
+          withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
 
 - (id<JavaUtilConcurrentFuture>)submitWithJavaUtilConcurrentCallable:(id<JavaUtilConcurrentCallable>)task;
 
@@ -34,25 +37,18 @@
 
 - (id<JavaUtilConcurrentFuture>)take;
 
-- (id<JavaUtilConcurrentFuture>)poll;
-
-- (id<JavaUtilConcurrentFuture>)pollWithLong:(jlong)timeout
-          withJavaUtilConcurrentTimeUnitEnum:(JavaUtilConcurrentTimeUnitEnum *)unit;
-
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutorCompletionService_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentExecutorCompletionService)
 
-@interface JavaUtilConcurrentExecutorCompletionService_QueueingFuture : JavaUtilConcurrentFutureTask {
-}
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutorCompletionService_initWithJavaUtilConcurrentExecutor_(JavaUtilConcurrentExecutorCompletionService *self, id<JavaUtilConcurrentExecutor> executor);
 
-- (instancetype)initWithJavaUtilConcurrentExecutorCompletionService:(JavaUtilConcurrentExecutorCompletionService *)outer$
-                               withJavaUtilConcurrentRunnableFuture:(id<JavaUtilConcurrentRunnableFuture>)task;
+FOUNDATION_EXPORT JavaUtilConcurrentExecutorCompletionService *new_JavaUtilConcurrentExecutorCompletionService_initWithJavaUtilConcurrentExecutor_(id<JavaUtilConcurrentExecutor> executor) NS_RETURNS_RETAINED;
 
-- (void)done;
+FOUNDATION_EXPORT void JavaUtilConcurrentExecutorCompletionService_initWithJavaUtilConcurrentExecutor_withJavaUtilConcurrentBlockingQueue_(JavaUtilConcurrentExecutorCompletionService *self, id<JavaUtilConcurrentExecutor> executor, id<JavaUtilConcurrentBlockingQueue> completionQueue);
 
-@end
+FOUNDATION_EXPORT JavaUtilConcurrentExecutorCompletionService *new_JavaUtilConcurrentExecutorCompletionService_initWithJavaUtilConcurrentExecutor_withJavaUtilConcurrentBlockingQueue_(id<JavaUtilConcurrentExecutor> executor, id<JavaUtilConcurrentBlockingQueue> completionQueue) NS_RETURNS_RETAINED;
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentExecutorCompletionService_QueueingFuture_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentExecutorCompletionService)
 
 #endif // _JavaUtilConcurrentExecutorCompletionService_H_

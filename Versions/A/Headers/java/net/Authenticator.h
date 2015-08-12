@@ -6,28 +6,19 @@
 #ifndef _JavaNetAuthenticator_H_
 #define _JavaNetAuthenticator_H_
 
+#include "J2ObjC_header.h"
+#include "java/lang/Enum.h"
+
 @class JavaNetAuthenticator_RequestorTypeEnum;
 @class JavaNetInetAddress;
 @class JavaNetPasswordAuthentication;
 @class JavaNetURL;
 
-#import "JreEmulation.h"
-#include "java/lang/Enum.h"
+@interface JavaNetAuthenticator : NSObject
 
-@interface JavaNetAuthenticator : NSObject {
-}
+#pragma mark Public
 
-- (JavaNetPasswordAuthentication *)getPasswordAuthentication;
-
-- (jint)getRequestingPort;
-
-- (JavaNetInetAddress *)getRequestingSite;
-
-- (NSString *)getRequestingPrompt;
-
-- (NSString *)getRequestingProtocol;
-
-- (NSString *)getRequestingScheme;
+- (instancetype)init;
 
 + (JavaNetPasswordAuthentication *)requestPasswordAuthenticationWithJavaNetInetAddress:(JavaNetInetAddress *)rAddr
                                                                                withInt:(jint)rPort
@@ -35,16 +26,12 @@
                                                                           withNSString:(NSString *)rPrompt
                                                                           withNSString:(NSString *)rScheme;
 
-+ (void)setDefaultWithJavaNetAuthenticator:(JavaNetAuthenticator *)a;
-
 + (JavaNetPasswordAuthentication *)requestPasswordAuthenticationWithNSString:(NSString *)rHost
                                                       withJavaNetInetAddress:(JavaNetInetAddress *)rAddr
                                                                      withInt:(jint)rPort
                                                                 withNSString:(NSString *)rProtocol
                                                                 withNSString:(NSString *)rPrompt
                                                                 withNSString:(NSString *)rScheme;
-
-- (NSString *)getRequestingHost;
 
 + (JavaNetPasswordAuthentication *)requestPasswordAuthenticationWithNSString:(NSString *)rHost
                                                       withJavaNetInetAddress:(JavaNetInetAddress *)rAddr
@@ -55,53 +42,73 @@
                                                               withJavaNetURL:(JavaNetURL *)rURL
                                   withJavaNetAuthenticator_RequestorTypeEnum:(JavaNetAuthenticator_RequestorTypeEnum *)reqType;
 
++ (void)setDefaultWithJavaNetAuthenticator:(JavaNetAuthenticator *)a;
+
+#pragma mark Protected
+
+- (JavaNetPasswordAuthentication *)getPasswordAuthentication;
+
+- (NSString *)getRequestingHost;
+
+- (jint)getRequestingPort;
+
+- (NSString *)getRequestingPrompt;
+
+- (NSString *)getRequestingProtocol;
+
+- (NSString *)getRequestingScheme;
+
+- (JavaNetInetAddress *)getRequestingSite;
+
 - (JavaNetURL *)getRequestingURL;
 
 - (JavaNetAuthenticator_RequestorTypeEnum *)getRequestorType;
 
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetAuthenticator_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetAuthenticator)
+
 FOUNDATION_EXPORT JavaNetPasswordAuthentication *JavaNetAuthenticator_requestPasswordAuthenticationWithJavaNetInetAddress_withInt_withNSString_withNSString_withNSString_(JavaNetInetAddress *rAddr, jint rPort, NSString *rProtocol, NSString *rPrompt, NSString *rScheme);
+
 FOUNDATION_EXPORT void JavaNetAuthenticator_setDefaultWithJavaNetAuthenticator_(JavaNetAuthenticator *a);
+
 FOUNDATION_EXPORT JavaNetPasswordAuthentication *JavaNetAuthenticator_requestPasswordAuthenticationWithNSString_withJavaNetInetAddress_withInt_withNSString_withNSString_withNSString_(NSString *rHost, JavaNetInetAddress *rAddr, jint rPort, NSString *rProtocol, NSString *rPrompt, NSString *rScheme);
+
 FOUNDATION_EXPORT JavaNetPasswordAuthentication *JavaNetAuthenticator_requestPasswordAuthenticationWithNSString_withJavaNetInetAddress_withInt_withNSString_withNSString_withNSString_withJavaNetURL_withJavaNetAuthenticator_RequestorTypeEnum_(NSString *rHost, JavaNetInetAddress *rAddr, jint rPort, NSString *rProtocol, NSString *rPrompt, NSString *rScheme, JavaNetURL *rURL, JavaNetAuthenticator_RequestorTypeEnum *reqType);
 
-FOUNDATION_EXPORT JavaNetAuthenticator *JavaNetAuthenticator_thisAuthenticator_;
-J2OBJC_STATIC_FIELD_GETTER(JavaNetAuthenticator, thisAuthenticator_, JavaNetAuthenticator *)
-J2OBJC_STATIC_FIELD_SETTER(JavaNetAuthenticator, thisAuthenticator_, JavaNetAuthenticator *)
+FOUNDATION_EXPORT void JavaNetAuthenticator_init(JavaNetAuthenticator *self);
 
-typedef enum {
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetAuthenticator)
+
+typedef NS_ENUM(NSUInteger, JavaNetAuthenticator_RequestorType) {
   JavaNetAuthenticator_RequestorType_PROXY = 0,
   JavaNetAuthenticator_RequestorType_SERVER = 1,
-} JavaNetAuthenticator_RequestorType;
+};
 
-@interface JavaNetAuthenticator_RequestorTypeEnum : JavaLangEnum < NSCopying > {
-}
+@interface JavaNetAuthenticator_RequestorTypeEnum : JavaLangEnum < NSCopying >
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal;
+#pragma mark Package-Private
 
 + (IOSObjectArray *)values;
 FOUNDATION_EXPORT IOSObjectArray *JavaNetAuthenticator_RequestorTypeEnum_values();
 
 + (JavaNetAuthenticator_RequestorTypeEnum *)valueOfWithNSString:(NSString *)name;
+FOUNDATION_EXPORT JavaNetAuthenticator_RequestorTypeEnum *JavaNetAuthenticator_RequestorTypeEnum_valueOfWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT JavaNetAuthenticator_RequestorTypeEnum *JavaNetAuthenticator_RequestorTypeEnum_valueOfWithNSString_(NSString *name);- (id)copyWithZone:(NSZone *)zone;
+- (id)copyWithZone:(NSZone *)zone;
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaNetAuthenticator_RequestorTypeEnum_initialized;
 J2OBJC_STATIC_INIT(JavaNetAuthenticator_RequestorTypeEnum)
 
 FOUNDATION_EXPORT JavaNetAuthenticator_RequestorTypeEnum *JavaNetAuthenticator_RequestorTypeEnum_values_[];
 
 #define JavaNetAuthenticator_RequestorTypeEnum_PROXY JavaNetAuthenticator_RequestorTypeEnum_values_[JavaNetAuthenticator_RequestorType_PROXY]
-J2OBJC_STATIC_FIELD_GETTER(JavaNetAuthenticator_RequestorTypeEnum, PROXY, JavaNetAuthenticator_RequestorTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNetAuthenticator_RequestorTypeEnum, PROXY)
 
 #define JavaNetAuthenticator_RequestorTypeEnum_SERVER JavaNetAuthenticator_RequestorTypeEnum_values_[JavaNetAuthenticator_RequestorType_SERVER]
-J2OBJC_STATIC_FIELD_GETTER(JavaNetAuthenticator_RequestorTypeEnum, SERVER, JavaNetAuthenticator_RequestorTypeEnum *)
+J2OBJC_ENUM_CONSTANT_GETTER(JavaNetAuthenticator_RequestorTypeEnum, SERVER)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetAuthenticator_RequestorTypeEnum)
 
 #endif // _JavaNetAuthenticator_H_

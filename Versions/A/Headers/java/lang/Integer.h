@@ -6,32 +6,31 @@
 #ifndef _JavaLangInteger_H_
 #define _JavaLangInteger_H_
 
-@class IOSByteArray;
-@class IOSClass;
-@class IOSObjectArray;
-@class JavaLangNumberFormatException;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Comparable.h"
+
+@class IOSClass;
 
 #define JavaLangInteger_MAX_VALUE 2147483647
 #define JavaLangInteger_MIN_VALUE ((jint) 0x80000000)
 #define JavaLangInteger_SIZE 32
-#define JavaLangInteger_serialVersionUID 1360826667806852920LL
 
-@interface JavaLangInteger : NSNumber < JavaLangComparable > {
-}
+@interface JavaLangInteger : NSNumber < JavaLangComparable >
+
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)value;
 
 - (instancetype)initWithNSString:(NSString *)string;
 
-- (jbyte)charValue;
++ (jint)bitCountWithInt:(jint)i;
 
-- (jint)compareToWithId:(JavaLangInteger *)object;
+- (jbyte)charValue;
 
 + (jint)compareWithInt:(jint)lhs
                withInt:(jint)rhs;
+
+- (jint)compareToWithId:(JavaLangInteger *)object;
 
 + (JavaLangInteger *)decodeWithNSString:(NSString *)string;
 
@@ -51,16 +50,36 @@
 
 - (NSUInteger)hash;
 
++ (jint)highestOneBitWithInt:(jint)i;
+
 - (jint)intValue;
 
 - (jlong)longLongValue;
+
++ (jint)lowestOneBitWithInt:(jint)i;
+
++ (jint)numberOfLeadingZerosWithInt:(jint)i;
+
++ (jint)numberOfTrailingZerosWithInt:(jint)i;
 
 + (jint)parseIntWithNSString:(NSString *)string;
 
 + (jint)parseIntWithNSString:(NSString *)string
                      withInt:(jint)radix;
 
++ (jint)reverseWithInt:(jint)i;
+
++ (jint)reverseBytesWithInt:(jint)i;
+
++ (jint)rotateLeftWithInt:(jint)i
+                  withInt:(jint)distance;
+
++ (jint)rotateRightWithInt:(jint)i
+                   withInt:(jint)distance;
+
 - (jshort)shortValue;
+
++ (jint)signumWithInt:(jint)i;
 
 + (NSString *)toBinaryStringWithInt:(jint)i;
 
@@ -75,67 +94,19 @@
 + (NSString *)toStringWithInt:(jint)i
                       withInt:(jint)radix;
 
++ (JavaLangInteger *)valueOfWithInt:(jint)i;
+
 + (JavaLangInteger *)valueOfWithNSString:(NSString *)string;
 
 + (JavaLangInteger *)valueOfWithNSString:(NSString *)string
                                  withInt:(jint)radix;
 
-+ (jint)highestOneBitWithInt:(jint)i;
-
-+ (jint)lowestOneBitWithInt:(jint)i;
-
-+ (jint)numberOfLeadingZerosWithInt:(jint)i;
-
-+ (jint)numberOfTrailingZerosWithInt:(jint)i;
-
-+ (jint)bitCountWithInt:(jint)i;
-
-+ (jint)rotateLeftWithInt:(jint)i
-                  withInt:(jint)distance;
-
-+ (jint)rotateRightWithInt:(jint)i
-                   withInt:(jint)distance;
-
-+ (jint)reverseBytesWithInt:(jint)i;
-
-+ (jint)reverseWithInt:(jint)i;
-
-+ (jint)signumWithInt:(jint)i;
-
-+ (JavaLangInteger *)valueOfWithInt:(jint)i;
+#pragma mark Package-Private
 
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaLangInteger_initialized;
 J2OBJC_STATIC_INIT(JavaLangInteger)
-FOUNDATION_EXPORT jint JavaLangInteger_compareWithInt_withInt_(jint lhs, jint rhs);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_decodeWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_withInt_(NSString *string, jint defaultValue);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_withJavaLangInteger_(NSString *string, JavaLangInteger *defaultValue);
-FOUNDATION_EXPORT jint JavaLangInteger_parseIntWithNSString_(NSString *string);
-FOUNDATION_EXPORT jint JavaLangInteger_parseIntWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT NSString *JavaLangInteger_toBinaryStringWithInt_(jint i);
-FOUNDATION_EXPORT NSString *JavaLangInteger_toHexStringWithInt_(jint i);
-FOUNDATION_EXPORT NSString *JavaLangInteger_toOctalStringWithInt_(jint i);
-FOUNDATION_EXPORT NSString *JavaLangInteger_toStringWithInt_(jint i);
-FOUNDATION_EXPORT NSString *JavaLangInteger_toStringWithInt_withInt_(jint i, jint radix);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithNSString_(NSString *string);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithNSString_withInt_(NSString *string, jint radix);
-FOUNDATION_EXPORT jint JavaLangInteger_highestOneBitWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_lowestOneBitWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_numberOfLeadingZerosWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_numberOfTrailingZerosWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_bitCountWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_rotateLeftWithInt_withInt_(jint i, jint distance);
-FOUNDATION_EXPORT jint JavaLangInteger_rotateRightWithInt_withInt_(jint i, jint distance);
-FOUNDATION_EXPORT jint JavaLangInteger_reverseBytesWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_reverseWithInt_(jint i);
-FOUNDATION_EXPORT jint JavaLangInteger_signumWithInt_(jint i);
-FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithInt_(jint i);
-
-J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, serialVersionUID, jlong)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, MAX_VALUE, jint)
 
@@ -143,14 +114,68 @@ J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, MIN_VALUE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, SIZE, jint)
 
-FOUNDATION_EXPORT IOSByteArray *JavaLangInteger_NTZ_TABLE_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, NTZ_TABLE_, IOSByteArray *)
-
 FOUNDATION_EXPORT IOSClass *JavaLangInteger_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, TYPE_, IOSClass *)
 
-FOUNDATION_EXPORT IOSObjectArray *JavaLangInteger_SMALL_VALUES_;
-J2OBJC_STATIC_FIELD_GETTER(JavaLangInteger, SMALL_VALUES_, IOSObjectArray *)
+FOUNDATION_EXPORT void JavaLangInteger_initWithInt_(JavaLangInteger *self, jint value);
+
+FOUNDATION_EXPORT JavaLangInteger *new_JavaLangInteger_initWithInt_(jint value) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaLangInteger_initWithNSString_(JavaLangInteger *self, NSString *string);
+
+FOUNDATION_EXPORT JavaLangInteger *new_JavaLangInteger_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT jint JavaLangInteger_compareWithInt_withInt_(jint lhs, jint rhs);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_decodeWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_withInt_(NSString *string, jint defaultValue);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_getIntegerWithNSString_withJavaLangInteger_(NSString *string, JavaLangInteger *defaultValue);
+
+FOUNDATION_EXPORT jint JavaLangInteger_parseIntWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT jint JavaLangInteger_parseIntWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT NSString *JavaLangInteger_toBinaryStringWithInt_(jint i);
+
+FOUNDATION_EXPORT NSString *JavaLangInteger_toHexStringWithInt_(jint i);
+
+FOUNDATION_EXPORT NSString *JavaLangInteger_toOctalStringWithInt_(jint i);
+
+FOUNDATION_EXPORT NSString *JavaLangInteger_toStringWithInt_(jint i);
+
+FOUNDATION_EXPORT NSString *JavaLangInteger_toStringWithInt_withInt_(jint i, jint radix);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithNSString_(NSString *string);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithNSString_withInt_(NSString *string, jint radix);
+
+FOUNDATION_EXPORT jint JavaLangInteger_highestOneBitWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_lowestOneBitWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_numberOfLeadingZerosWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_numberOfTrailingZerosWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_bitCountWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_rotateLeftWithInt_withInt_(jint i, jint distance);
+
+FOUNDATION_EXPORT jint JavaLangInteger_rotateRightWithInt_withInt_(jint i, jint distance);
+
+FOUNDATION_EXPORT jint JavaLangInteger_reverseBytesWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_reverseWithInt_(jint i);
+
+FOUNDATION_EXPORT jint JavaLangInteger_signumWithInt_(jint i);
+
+FOUNDATION_EXPORT JavaLangInteger *JavaLangInteger_valueOfWithInt_(jint i);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangInteger)
 
 BOXED_INC_AND_DEC(Int, intValue, JavaLangInteger)
 

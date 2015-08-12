@@ -6,28 +6,26 @@
 #ifndef _ComGoogleJ2objcSecurityIosSecurityProvider_H_
 #define _ComGoogleJ2objcSecurityIosSecurityProvider_H_
 
-@class IOSObjectArray;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/security/Provider.h"
 
-@interface ComGoogleJ2objcSecurityIosSecurityProvider : JavaSecurityProvider {
-}
+@interface ComGoogleJ2objcSecurityIosSecurityProvider : JavaSecurityProvider
+
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-FOUNDATION_EXPORT BOOL ComGoogleJ2objcSecurityIosSecurityProvider_initialized;
 J2OBJC_STATIC_INIT(ComGoogleJ2objcSecurityIosSecurityProvider)
 
 FOUNDATION_EXPORT NSString *ComGoogleJ2objcSecurityIosSecurityProvider_PROVIDER_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(ComGoogleJ2objcSecurityIosSecurityProvider, PROVIDER_NAME_, NSString *)
 
-FOUNDATION_EXPORT NSString *ComGoogleJ2objcSecurityIosSecurityProvider_PREFIX_;
-J2OBJC_STATIC_FIELD_GETTER(ComGoogleJ2objcSecurityIosSecurityProvider, PREFIX_, NSString *)
+FOUNDATION_EXPORT void ComGoogleJ2objcSecurityIosSecurityProvider_init(ComGoogleJ2objcSecurityIosSecurityProvider *self);
 
-FOUNDATION_EXPORT IOSObjectArray *ComGoogleJ2objcSecurityIosSecurityProvider_unused_;
-J2OBJC_STATIC_FIELD_GETTER(ComGoogleJ2objcSecurityIosSecurityProvider, unused_, IOSObjectArray *)
+FOUNDATION_EXPORT ComGoogleJ2objcSecurityIosSecurityProvider *new_ComGoogleJ2objcSecurityIosSecurityProvider_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(ComGoogleJ2objcSecurityIosSecurityProvider)
 
 #endif // _ComGoogleJ2objcSecurityIosSecurityProvider_H_

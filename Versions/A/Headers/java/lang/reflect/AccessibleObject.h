@@ -43,6 +43,14 @@
 
 @end
 
+CF_EXTERN_C_BEGIN
+
+void JavaLangReflectAccessibleObject_init(JavaLangReflectAccessibleObject *self);
+JavaLangReflectAccessibleObject *new_JavaLangReflectAccessibleObject_init();
+
+void JavaLangReflectAccessibleObject_setAccessibleWithJavaLangReflectAccessibleObjectArray_withBoolean_(
+    IOSObjectArray *objects, BOOL b);
+
 // Returns true if type can be mapped to a valid Java type.
 BOOL validTypeEncoding(const char *type);
 
@@ -53,5 +61,11 @@ IOSClass *decodeTypeEncoding(const char *type);
 // Return a Java type name for an Objective-C type encoding.  For example,
 // "byte" is returned for 'c', since a Java byte is mapped to a C char.
 NSString *describeTypeEncoding(NSString *type);
+
+CF_EXTERN_C_END
+
+J2OBJC_EMPTY_STATIC_INIT(JavaLangReflectAccessibleObject)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaLangReflectAccessibleObject)
 
 #endif // _AccessibleObject_H_

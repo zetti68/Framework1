@@ -6,7 +6,7 @@
 #ifndef _AndroidUtilPair_H_
 #define _AndroidUtilPair_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @interface AndroidUtilPair : NSObject {
  @public
@@ -14,22 +14,31 @@
   id second_;
 }
 
+#pragma mark Public
+
 - (instancetype)initWithId:(id)first
                     withId:(id)second;
+
++ (AndroidUtilPair *)createWithId:(id)a
+                           withId:(id)b;
 
 - (jboolean)isEqual:(id)o;
 
 - (NSUInteger)hash;
 
-+ (AndroidUtilPair *)createWithId:(id)a
-                           withId:(id)b;
-
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilPair_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilPair)
 
 J2OBJC_FIELD_SETTER(AndroidUtilPair, first_, id)
 J2OBJC_FIELD_SETTER(AndroidUtilPair, second_, id)
+
+FOUNDATION_EXPORT void AndroidUtilPair_initWithId_withId_(AndroidUtilPair *self, id first, id second);
+
+FOUNDATION_EXPORT AndroidUtilPair *new_AndroidUtilPair_initWithId_withId_(id first, id second) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT AndroidUtilPair *AndroidUtilPair_createWithId_withId_(id a, id b);
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilPair)
 
 #endif // _AndroidUtilPair_H_

@@ -6,19 +6,18 @@
 #ifndef _JavaSecurityGeneralSecurityException_H_
 #define _JavaSecurityGeneralSecurityException_H_
 
-@class JavaLangThrowable;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-#define JavaSecurityGeneralSecurityException_serialVersionUID 894798122053539237LL
+@class JavaLangThrowable;
 
-@interface JavaSecurityGeneralSecurityException : JavaLangException {
-}
+@interface JavaSecurityGeneralSecurityException : JavaLangException
 
-- (instancetype)initWithNSString:(NSString *)msg;
+#pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)msg;
 
 - (instancetype)initWithNSString:(NSString *)message
            withJavaLangThrowable:(JavaLangThrowable *)cause;
@@ -27,8 +26,24 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityGeneralSecurityException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityGeneralSecurityException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityGeneralSecurityException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityGeneralSecurityException_initWithNSString_(JavaSecurityGeneralSecurityException *self, NSString *msg);
+
+FOUNDATION_EXPORT JavaSecurityGeneralSecurityException *new_JavaSecurityGeneralSecurityException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityGeneralSecurityException_init(JavaSecurityGeneralSecurityException *self);
+
+FOUNDATION_EXPORT JavaSecurityGeneralSecurityException *new_JavaSecurityGeneralSecurityException_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityGeneralSecurityException_initWithNSString_withJavaLangThrowable_(JavaSecurityGeneralSecurityException *self, NSString *message, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityGeneralSecurityException *new_JavaSecurityGeneralSecurityException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaSecurityGeneralSecurityException_initWithJavaLangThrowable_(JavaSecurityGeneralSecurityException *self, JavaLangThrowable *cause);
+
+FOUNDATION_EXPORT JavaSecurityGeneralSecurityException *new_JavaSecurityGeneralSecurityException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityGeneralSecurityException)
 
 #endif // _JavaSecurityGeneralSecurityException_H_

@@ -6,57 +6,53 @@
 #ifndef _JavaNioChannelsSpiAbstractSelector_H_
 #define _JavaNioChannelsSpiAbstractSelector_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/channels/Selector.h"
+
 @class JavaNioChannelsSelectionKey;
 @class JavaNioChannelsSpiAbstractSelectableChannel;
 @class JavaNioChannelsSpiAbstractSelectionKey;
 @class JavaNioChannelsSpiSelectorProvider;
-@class JavaUtilConcurrentAtomicAtomicBoolean;
 @protocol JavaUtilSet;
 
-#import "JreEmulation.h"
-#include "java/lang/Runnable.h"
-#include "java/nio/channels/Selector.h"
+@interface JavaNioChannelsSpiAbstractSelector : JavaNioChannelsSelector
 
-@interface JavaNioChannelsSpiAbstractSelector : JavaNioChannelsSelector {
-}
-
-- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
+#pragma mark Public
 
 - (void)close;
-
-- (void)implCloseSelector;
 
 - (jboolean)isOpen;
 
 - (JavaNioChannelsSpiSelectorProvider *)provider;
 
+#pragma mark Protected
+
+- (instancetype)initWithJavaNioChannelsSpiSelectorProvider:(JavaNioChannelsSpiSelectorProvider *)selectorProvider;
+
+- (void)begin;
+
 - (id<JavaUtilSet>)cancelledKeys;
+
+- (void)deregisterWithJavaNioChannelsSpiAbstractSelectionKey:(JavaNioChannelsSpiAbstractSelectionKey *)key;
+
+- (void)end;
+
+- (void)implCloseSelector;
 
 - (JavaNioChannelsSelectionKey *)register__WithJavaNioChannelsSpiAbstractSelectableChannel:(JavaNioChannelsSpiAbstractSelectableChannel *)channel
                                                                                    withInt:(jint)operations
                                                                                     withId:(id)attachment;
 
-- (void)deregisterWithJavaNioChannelsSpiAbstractSelectionKey:(JavaNioChannelsSpiAbstractSelectionKey *)key;
-
-- (void)begin;
-
-- (void)end;
+#pragma mark Package-Private
 
 - (void)cancelWithJavaNioChannelsSelectionKey:(JavaNioChannelsSelectionKey *)key;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractSelector_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsSpiAbstractSelector)
 
-@interface JavaNioChannelsSpiAbstractSelector_WakeUpTask : NSObject < JavaLangRunnable > {
-}
+FOUNDATION_EXPORT void JavaNioChannelsSpiAbstractSelector_initWithJavaNioChannelsSpiSelectorProvider_(JavaNioChannelsSpiAbstractSelector *self, JavaNioChannelsSpiSelectorProvider *selectorProvider);
 
-- (void)run;
-
-- (instancetype)initWithJavaNioChannelsSpiAbstractSelector:(JavaNioChannelsSpiAbstractSelector *)outer$;
-
-@end
-
-__attribute__((always_inline)) inline void JavaNioChannelsSpiAbstractSelector_WakeUpTask_init() {}
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsSpiAbstractSelector)
 
 #endif // _JavaNioChannelsSpiAbstractSelector_H_

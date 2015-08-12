@@ -6,9 +6,9 @@
 #ifndef _JavaNetSocketOption_H_
 #define _JavaNetSocketOption_H_
 
-@class IOSClass;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSClass;
 
 @protocol JavaNetSocketOption < NSObject, JavaObject >
 
@@ -18,6 +18,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNetSocketOption_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetSocketOption)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetSocketOption)
 
 #endif // _JavaNetSocketOption_H_

@@ -6,7 +6,7 @@
 #ifndef _AndroidUtilPrinter_H_
 #define _AndroidUtilPrinter_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol AndroidUtilPrinter < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void AndroidUtilPrinter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(AndroidUtilPrinter)
+
+J2OBJC_TYPE_LITERAL_HEADER(AndroidUtilPrinter)
 
 #endif // _AndroidUtilPrinter_H_

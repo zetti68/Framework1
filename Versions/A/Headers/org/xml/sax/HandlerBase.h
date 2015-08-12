@@ -6,65 +6,72 @@
 #ifndef _OrgXmlSaxHandlerBase_H_
 #define _OrgXmlSaxHandlerBase_H_
 
+#include "J2ObjC_header.h"
+#include "org/xml/sax/DTDHandler.h"
+#include "org/xml/sax/DocumentHandler.h"
+#include "org/xml/sax/EntityResolver.h"
+#include "org/xml/sax/ErrorHandler.h"
+
 @class IOSCharArray;
 @class OrgXmlSaxInputSource;
 @class OrgXmlSaxSAXParseException;
 @protocol OrgXmlSaxAttributeList;
 @protocol OrgXmlSaxLocator;
 
-#import "JreEmulation.h"
-#include "org/xml/sax/DTDHandler.h"
-#include "org/xml/sax/DocumentHandler.h"
-#include "org/xml/sax/EntityResolver.h"
-#include "org/xml/sax/ErrorHandler.h"
+@interface OrgXmlSaxHandlerBase : NSObject < OrgXmlSaxEntityResolver, OrgXmlSaxDTDHandler, OrgXmlSaxDocumentHandler, OrgXmlSaxErrorHandler >
 
-@interface OrgXmlSaxHandlerBase : NSObject < OrgXmlSaxEntityResolver, OrgXmlSaxDTDHandler, OrgXmlSaxDocumentHandler, OrgXmlSaxErrorHandler > {
-}
+#pragma mark Public
 
-- (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
-                                       withNSString:(NSString *)systemId;
+- (instancetype)init;
+
+- (void)charactersWithCharArray:(IOSCharArray *)ch
+                        withInt:(jint)start
+                        withInt:(jint)length;
+
+- (void)endDocument;
+
+- (void)endElementWithNSString:(NSString *)name;
+
+- (void)errorWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)e;
+
+- (void)fatalErrorWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)e;
+
+- (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
+                                 withInt:(jint)start
+                                 withInt:(jint)length;
 
 - (void)notationDeclWithNSString:(NSString *)name
                     withNSString:(NSString *)publicId
                     withNSString:(NSString *)systemId;
+
+- (void)processingInstructionWithNSString:(NSString *)target
+                             withNSString:(NSString *)data;
+
+- (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
+                                       withNSString:(NSString *)systemId;
+
+- (void)setDocumentLocatorWithOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
+
+- (void)startDocument;
+
+- (void)startElementWithNSString:(NSString *)name
+      withOrgXmlSaxAttributeList:(id<OrgXmlSaxAttributeList>)attributes;
 
 - (void)unparsedEntityDeclWithNSString:(NSString *)name
                           withNSString:(NSString *)publicId
                           withNSString:(NSString *)systemId
                           withNSString:(NSString *)notationName;
 
-- (void)setDocumentLocatorWithOrgXmlSaxLocator:(id<OrgXmlSaxLocator>)locator;
-
-- (void)startDocument;
-
-- (void)endDocument;
-
-- (void)startElementWithNSString:(NSString *)name
-      withOrgXmlSaxAttributeList:(id<OrgXmlSaxAttributeList>)attributes;
-
-- (void)endElementWithNSString:(NSString *)name;
-
-- (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
-
-- (void)ignorableWhitespaceWithCharArray:(IOSCharArray *)ch
-                                 withInt:(jint)start
-                                 withInt:(jint)length;
-
-- (void)processingInstructionWithNSString:(NSString *)target
-                             withNSString:(NSString *)data;
-
 - (void)warningWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)e;
-
-- (void)errorWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)e;
-
-- (void)fatalErrorWithOrgXmlSaxSAXParseException:(OrgXmlSaxSAXParseException *)e;
-
-- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxHandlerBase_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxHandlerBase)
+
+FOUNDATION_EXPORT void OrgXmlSaxHandlerBase_init(OrgXmlSaxHandlerBase *self);
+
+FOUNDATION_EXPORT OrgXmlSaxHandlerBase *new_OrgXmlSaxHandlerBase_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxHandlerBase)
 
 #endif // _OrgXmlSaxHandlerBase_H_

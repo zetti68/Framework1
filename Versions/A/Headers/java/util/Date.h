@@ -6,20 +6,13 @@
 #ifndef _JavaUtilDate_H_
 #define _JavaUtilDate_H_
 
-@class IOSObjectArray;
-@class JavaIoObjectInputStream;
-@class JavaIoObjectOutputStream;
-@class JavaLangIllegalArgumentException;
-@class JavaLangStringBuilder;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 #include "java/lang/Comparable.h"
 
-#define JavaUtilDate_serialVersionUID 7523967970034938905LL
+@interface JavaUtilDate : NSObject < JavaIoSerializable, NSCopying, JavaLangComparable >
 
-@interface JavaUtilDate : NSObject < JavaIoSerializable, NSCopying, JavaLangComparable > {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
@@ -105,14 +98,36 @@
 
 @end
 
-FOUNDATION_EXPORT BOOL JavaUtilDate_initialized;
 J2OBJC_STATIC_INIT(JavaUtilDate)
+
+FOUNDATION_EXPORT void JavaUtilDate_init(JavaUtilDate *self);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilDate_initWithInt_withInt_withInt_(JavaUtilDate *self, jint year, jint month, jint day);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_initWithInt_withInt_withInt_(jint year, jint month, jint day) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilDate_initWithInt_withInt_withInt_withInt_withInt_(JavaUtilDate *self, jint year, jint month, jint day, jint hour, jint minute);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_initWithInt_withInt_withInt_withInt_withInt_(jint year, jint month, jint day, jint hour, jint minute) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilDate_initWithInt_withInt_withInt_withInt_withInt_withInt_(JavaUtilDate *self, jint year, jint month, jint day, jint hour, jint minute, jint second);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_initWithInt_withInt_withInt_withInt_withInt_withInt_(jint year, jint month, jint day, jint hour, jint minute, jint second) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilDate_initWithLong_(JavaUtilDate *self, jlong milliseconds);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_initWithLong_(jlong milliseconds) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilDate_initWithNSString_(JavaUtilDate *self, NSString *string);
+
+FOUNDATION_EXPORT JavaUtilDate *new_JavaUtilDate_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
 FOUNDATION_EXPORT jlong JavaUtilDate_parseWithNSString_(NSString *string);
+
 FOUNDATION_EXPORT jlong JavaUtilDate_UTCWithInt_withInt_withInt_withInt_withInt_withInt_(jint year, jint month, jint day, jint hour, jint minute, jint second);
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilDate, serialVersionUID, jlong)
-
-FOUNDATION_EXPORT jint JavaUtilDate_CREATION_YEAR_;
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilDate, CREATION_YEAR_, jint)
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilDate)
 
 #endif // _JavaUtilDate_H_

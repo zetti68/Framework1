@@ -6,13 +6,12 @@
 #ifndef _JavaNioCharsetUnmappableCharacterException_H_
 #define _JavaNioCharsetUnmappableCharacterException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/nio/charset/CharacterCodingException.h"
 
-#define JavaNioCharsetUnmappableCharacterException_serialVersionUID -7026962371537706123LL
+@interface JavaNioCharsetUnmappableCharacterException : JavaNioCharsetCharacterCodingException
 
-@interface JavaNioCharsetUnmappableCharacterException : JavaNioCharsetCharacterCodingException {
-}
+#pragma mark Public
 
 - (instancetype)initWithInt:(jint)length;
 
@@ -22,8 +21,12 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharsetUnmappableCharacterException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharsetUnmappableCharacterException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioCharsetUnmappableCharacterException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioCharsetUnmappableCharacterException_initWithInt_(JavaNioCharsetUnmappableCharacterException *self, jint length);
+
+FOUNDATION_EXPORT JavaNioCharsetUnmappableCharacterException *new_JavaNioCharsetUnmappableCharacterException_initWithInt_(jint length) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharsetUnmappableCharacterException)
 
 #endif // _JavaNioCharsetUnmappableCharacterException_H_

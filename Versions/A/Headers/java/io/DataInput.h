@@ -6,9 +6,9 @@
 #ifndef _JavaIoDataInput_H_
 #define _JavaIoDataInput_H_
 
-@class IOSByteArray;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class IOSByteArray;
 
 @protocol JavaIoDataInput < NSObject, JavaObject >
 
@@ -46,6 +46,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoDataInput_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoDataInput)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoDataInput)
 
 #endif // _JavaIoDataInput_H_

@@ -6,20 +6,23 @@
 #ifndef _JavaNioChannelsNoConnectionPendingException_H_
 #define _JavaNioChannelsNoConnectionPendingException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/IllegalStateException.h"
 
-#define JavaNioChannelsNoConnectionPendingException_serialVersionUID -8296561183633134743LL
+@interface JavaNioChannelsNoConnectionPendingException : JavaLangIllegalStateException
 
-@interface JavaNioChannelsNoConnectionPendingException : JavaLangIllegalStateException {
-}
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaNioChannelsNoConnectionPendingException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioChannelsNoConnectionPendingException)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaNioChannelsNoConnectionPendingException, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaNioChannelsNoConnectionPendingException_init(JavaNioChannelsNoConnectionPendingException *self);
+
+FOUNDATION_EXPORT JavaNioChannelsNoConnectionPendingException *new_JavaNioChannelsNoConnectionPendingException_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioChannelsNoConnectionPendingException)
 
 #endif // _JavaNioChannelsNoConnectionPendingException_H_

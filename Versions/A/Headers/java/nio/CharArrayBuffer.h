@@ -6,16 +6,15 @@
 #ifndef _JavaNioCharArrayBuffer_H_
 #define _JavaNioCharArrayBuffer_H_
 
+#include "J2ObjC_header.h"
+#include "java/nio/CharBuffer.h"
+
 @class IOSCharArray;
 @class JavaNioByteOrder;
 
-#import "JreEmulation.h"
-#include "java/nio/CharBuffer.h"
+@interface JavaNioCharArrayBuffer : JavaNioCharBuffer
 
-@interface JavaNioCharArrayBuffer : JavaNioCharBuffer {
-}
-
-- (instancetype)initWithCharArray:(IOSCharArray *)array;
+#pragma mark Public
 
 - (JavaNioCharBuffer *)asReadOnlyBuffer;
 
@@ -23,9 +22,39 @@
 
 - (JavaNioCharBuffer *)duplicate;
 
-- (JavaNioCharBuffer *)slice;
+- (jchar)get;
+
+- (JavaNioCharBuffer *)getWithCharArray:(IOSCharArray *)dst
+                                withInt:(jint)srcOffset
+                                withInt:(jint)charCount;
+
+- (jchar)getWithInt:(jint)index;
+
+- (jboolean)isDirect;
 
 - (jboolean)isReadOnly;
+
+- (JavaNioByteOrder *)order;
+
+- (JavaNioCharBuffer *)putWithChar:(jchar)c;
+
+- (JavaNioCharBuffer *)putWithCharArray:(IOSCharArray *)src
+                                withInt:(jint)srcOffset
+                                withInt:(jint)charCount;
+
+- (JavaNioCharBuffer *)putWithInt:(jint)index
+                         withChar:(jchar)c;
+
+- (JavaNioCharBuffer *)slice;
+
+- (JavaNioCharBuffer *)subSequenceFrom:(jint)start
+                                    to:(jint)end;
+
+- (NSString *)description;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithCharArray:(IOSCharArray *)array;
 
 - (IOSCharArray *)protectedArray;
 
@@ -33,33 +62,14 @@
 
 - (jboolean)protectedHasArray;
 
-- (jchar)get;
-
-- (jchar)getWithInt:(jint)index;
-
-- (JavaNioCharBuffer *)getWithCharArray:(IOSCharArray *)dst
-                                withInt:(jint)srcOffset
-                                withInt:(jint)charCount;
-
-- (jboolean)isDirect;
-
-- (JavaNioByteOrder *)order;
-
-- (JavaNioCharBuffer *)subSequenceFrom:(int)start to:(int)end;
-
-- (JavaNioCharBuffer *)putWithChar:(jchar)c;
-
-- (JavaNioCharBuffer *)putWithInt:(jint)index
-                         withChar:(jchar)c;
-
-- (JavaNioCharBuffer *)putWithCharArray:(IOSCharArray *)src
-                                withInt:(jint)srcOffset
-                                withInt:(jint)charCount;
-
-- (NSString *)description;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNioCharArrayBuffer_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNioCharArrayBuffer)
+
+FOUNDATION_EXPORT void JavaNioCharArrayBuffer_initWithCharArray_(JavaNioCharArrayBuffer *self, IOSCharArray *array);
+
+FOUNDATION_EXPORT JavaNioCharArrayBuffer *new_JavaNioCharArrayBuffer_initWithCharArray_(IOSCharArray *array) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNioCharArrayBuffer)
 
 #endif // _JavaNioCharArrayBuffer_H_

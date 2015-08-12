@@ -6,10 +6,10 @@
 #ifndef _JavaUtilObservable_H_
 #define _JavaUtilObservable_H_
 
+#include "J2ObjC_header.h"
+
 @protocol JavaUtilList;
 @protocol JavaUtilObserver;
-
-#import "JreEmulation.h"
 
 @interface JavaUtilObservable : NSObject {
  @public
@@ -17,11 +17,11 @@
   jboolean changed_;
 }
 
+#pragma mark Public
+
 - (instancetype)init;
 
 - (void)addObserverWithJavaUtilObserver:(id<JavaUtilObserver>)observer;
-
-- (void)clearChanged;
 
 - (jint)countObservers;
 
@@ -35,12 +35,22 @@
 
 - (void)notifyObserversWithId:(id)data;
 
+#pragma mark Protected
+
+- (void)clearChanged;
+
 - (void)setChanged;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilObservable_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilObservable)
 
 J2OBJC_FIELD_SETTER(JavaUtilObservable, observers_, id<JavaUtilList>)
+
+FOUNDATION_EXPORT void JavaUtilObservable_init(JavaUtilObservable *self);
+
+FOUNDATION_EXPORT JavaUtilObservable *new_JavaUtilObservable_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilObservable)
 
 #endif // _JavaUtilObservable_H_

@@ -6,7 +6,7 @@
 #ifndef _JavaSecurityGuard_H_
 #define _JavaSecurityGuard_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 
 @protocol JavaSecurityGuard < NSObject, JavaObject >
 
@@ -14,6 +14,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityGuard_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityGuard)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityGuard)
 
 #endif // _JavaSecurityGuard_H_

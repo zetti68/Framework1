@@ -6,16 +6,23 @@
 #ifndef _OrgJsonJSONException_H_
 #define _OrgJsonJSONException_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/lang/Exception.h"
 
-@interface OrgJsonJSONException : JavaLangException {
-}
+@interface OrgJsonJSONException : JavaLangException
+
+#pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)s;
 
 @end
 
-__attribute__((always_inline)) inline void OrgJsonJSONException_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgJsonJSONException)
+
+FOUNDATION_EXPORT void OrgJsonJSONException_initWithNSString_(OrgJsonJSONException *self, NSString *s);
+
+FOUNDATION_EXPORT OrgJsonJSONException *new_OrgJsonJSONException_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgJsonJSONException)
 
 #endif // _OrgJsonJSONException_H_

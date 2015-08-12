@@ -6,6 +6,10 @@
 #ifndef _JavaSecurityCertX509Certificate_H_
 #define _JavaSecurityCertX509Certificate_H_
 
+#include "J2ObjC_header.h"
+#include "java/security/cert/Certificate.h"
+#include "java/security/cert/X509Extension.h"
+
 @class IOSBooleanArray;
 @class IOSByteArray;
 @class JavaMathBigInteger;
@@ -15,40 +19,33 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
-#import "JreEmulation.h"
-#include "java/security/cert/Certificate.h"
-#include "java/security/cert/X509Extension.h"
+@interface JavaSecurityCertX509Certificate : JavaSecurityCertCertificate < JavaSecurityCertX509Extension >
 
-#define JavaSecurityCertX509Certificate_serialVersionUID -2491127588187038216LL
-
-@interface JavaSecurityCertX509Certificate : JavaSecurityCertCertificate < JavaSecurityCertX509Extension > {
-}
-
-- (instancetype)init;
+#pragma mark Public
 
 - (void)checkValidity;
 
 - (void)checkValidityWithJavaUtilDate:(JavaUtilDate *)date;
 
-- (jint)getVersion;
+- (jint)getBasicConstraints;
 
-- (JavaMathBigInteger *)getSerialNumber;
+- (id<JavaUtilList>)getExtendedKeyUsage;
+
+- (id<JavaUtilCollection>)getIssuerAlternativeNames;
 
 - (id<JavaSecurityPrincipal>)getIssuerDN;
 
+- (IOSBooleanArray *)getIssuerUniqueID;
+
 - (JavaxSecurityAuthX500X500Principal *)getIssuerX500Principal;
 
-- (id<JavaSecurityPrincipal>)getSubjectDN;
-
-- (JavaxSecurityAuthX500X500Principal *)getSubjectX500Principal;
-
-- (JavaUtilDate *)getNotBefore;
+- (IOSBooleanArray *)getKeyUsage;
 
 - (JavaUtilDate *)getNotAfter;
 
-- (IOSByteArray *)getTBSCertificate;
+- (JavaUtilDate *)getNotBefore;
 
-- (IOSByteArray *)getSignature;
+- (JavaMathBigInteger *)getSerialNumber;
 
 - (NSString *)getSigAlgName;
 
@@ -56,24 +53,30 @@
 
 - (IOSByteArray *)getSigAlgParams;
 
-- (IOSBooleanArray *)getIssuerUniqueID;
-
-- (IOSBooleanArray *)getSubjectUniqueID;
-
-- (IOSBooleanArray *)getKeyUsage;
-
-- (id<JavaUtilList>)getExtendedKeyUsage;
-
-- (jint)getBasicConstraints;
+- (IOSByteArray *)getSignature;
 
 - (id<JavaUtilCollection>)getSubjectAlternativeNames;
 
-- (id<JavaUtilCollection>)getIssuerAlternativeNames;
+- (id<JavaSecurityPrincipal>)getSubjectDN;
+
+- (IOSBooleanArray *)getSubjectUniqueID;
+
+- (JavaxSecurityAuthX500X500Principal *)getSubjectX500Principal;
+
+- (IOSByteArray *)getTBSCertificate;
+
+- (jint)getVersion;
+
+#pragma mark Protected
+
+- (instancetype)init;
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertX509Certificate_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertX509Certificate)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaSecurityCertX509Certificate, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaSecurityCertX509Certificate_init(JavaSecurityCertX509Certificate *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertX509Certificate)
 
 #endif // _JavaSecurityCertX509Certificate_H_

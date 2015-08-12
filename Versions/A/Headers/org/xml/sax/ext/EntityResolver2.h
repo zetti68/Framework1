@@ -6,12 +6,13 @@
 #ifndef _OrgXmlSaxExtEntityResolver2_H_
 #define _OrgXmlSaxExtEntityResolver2_H_
 
-@class OrgXmlSaxInputSource;
-
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "org/xml/sax/EntityResolver.h"
 
+@class OrgXmlSaxInputSource;
+
 @protocol OrgXmlSaxExtEntityResolver2 < OrgXmlSaxEntityResolver, NSObject, JavaObject >
+
 - (OrgXmlSaxInputSource *)getExternalSubsetWithNSString:(NSString *)name
                                            withNSString:(NSString *)baseURI;
 
@@ -22,6 +23,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxExtEntityResolver2_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxExtEntityResolver2)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxExtEntityResolver2)
 
 #endif // _OrgXmlSaxExtEntityResolver2_H_

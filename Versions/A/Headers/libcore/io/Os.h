@@ -6,6 +6,8 @@
 #ifndef _LibcoreIoOs_H_
 #define _LibcoreIoOs_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @class IOSIntArray;
 @class IOSObjectArray;
@@ -25,8 +27,6 @@
 @class LibcoreIoStructUtsname;
 @class LibcoreUtilMutableInt;
 @class LibcoreUtilMutableLong;
-
-#import "JreEmulation.h"
 
 @protocol LibcoreIoOs < NSObject, JavaObject >
 
@@ -173,8 +173,12 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
 
 - (IOSObjectArray *)pipe;
 
+- (jint)getpid;
+
 - (jint)pollWithLibcoreIoStructPollfdArray:(IOSObjectArray *)fds
                                    withInt:(jint)timeoutMs;
+
+- (jint)getppid;
 
 - (jint)preadWithJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
                 withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer
@@ -318,6 +322,8 @@ withJavaIoFileDescriptor:(JavaIoFileDescriptor *)fd
 
 @end
 
-__attribute__((always_inline)) inline void LibcoreIoOs_init() {}
+J2OBJC_EMPTY_STATIC_INIT(LibcoreIoOs)
+
+J2OBJC_TYPE_LITERAL_HEADER(LibcoreIoOs)
 
 #endif // _LibcoreIoOs_H_

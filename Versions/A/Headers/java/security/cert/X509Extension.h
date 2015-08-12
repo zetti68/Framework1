@@ -6,10 +6,10 @@
 #ifndef _JavaSecurityCertX509Extension_H_
 #define _JavaSecurityCertX509Extension_H_
 
+#include "J2ObjC_header.h"
+
 @class IOSByteArray;
 @protocol JavaUtilSet;
-
-#import "JreEmulation.h"
 
 @protocol JavaSecurityCertX509Extension < NSObject, JavaObject >
 
@@ -23,6 +23,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaSecurityCertX509Extension_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaSecurityCertX509Extension)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaSecurityCertX509Extension)
 
 #endif // _JavaSecurityCertX509Extension_H_

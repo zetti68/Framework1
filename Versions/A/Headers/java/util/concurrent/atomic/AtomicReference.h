@@ -6,38 +6,45 @@
 #ifndef _JavaUtilConcurrentAtomicAtomicReference_H_
 #define _JavaUtilConcurrentAtomicAtomicReference_H_
 
-#import "JreEmulation.h"
+#include "J2ObjC_header.h"
 #include "java/io/Serializable.h"
 
-#define JavaUtilConcurrentAtomicAtomicReference_serialVersionUID -1848883965231344442LL
+@interface JavaUtilConcurrentAtomicAtomicReference : NSObject < JavaIoSerializable >
 
-@interface JavaUtilConcurrentAtomicAtomicReference : NSObject < JavaIoSerializable > {
-}
-
-- (instancetype)initWithId:(id)initialValue;
+#pragma mark Public
 
 - (instancetype)init;
 
-- (id)get;
-
-- (void)setWithId:(id)newValue;
-
-- (void)lazySetWithId:(id)newValue;
+- (instancetype)initWithId:(id)initialValue;
 
 - (jboolean)compareAndSetWithId:(id)expect
                          withId:(id)update;
 
-- (jboolean)weakCompareAndSetWithId:(id)expect
-                             withId:(id)update;
+- (id)get;
 
 - (id)getAndSetWithId:(id)newValue;
 
+- (void)lazySetWithId:(id)newValue;
+
+- (void)setWithId:(id)newValue;
+
 - (NSString *)description;
+
+- (jboolean)weakCompareAndSetWithId:(id)expect
+                             withId:(id)update;
 
 @end
 
-__attribute__((always_inline)) inline void JavaUtilConcurrentAtomicAtomicReference_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaUtilConcurrentAtomicAtomicReference)
 
-J2OBJC_STATIC_FIELD_GETTER(JavaUtilConcurrentAtomicAtomicReference, serialVersionUID, jlong)
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicReference_initWithId_(JavaUtilConcurrentAtomicAtomicReference *self, id initialValue);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReference *new_JavaUtilConcurrentAtomicAtomicReference_initWithId_(id initialValue) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT void JavaUtilConcurrentAtomicAtomicReference_init(JavaUtilConcurrentAtomicAtomicReference *self);
+
+FOUNDATION_EXPORT JavaUtilConcurrentAtomicAtomicReference *new_JavaUtilConcurrentAtomicAtomicReference_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaUtilConcurrentAtomicAtomicReference)
 
 #endif // _JavaUtilConcurrentAtomicAtomicReference_H_

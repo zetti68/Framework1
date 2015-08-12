@@ -6,13 +6,13 @@
 #ifndef _OrgXmlSaxXMLReader_H_
 #define _OrgXmlSaxXMLReader_H_
 
+#include "J2ObjC_header.h"
+
 @class OrgXmlSaxInputSource;
 @protocol OrgXmlSaxContentHandler;
 @protocol OrgXmlSaxDTDHandler;
 @protocol OrgXmlSaxEntityResolver;
 @protocol OrgXmlSaxErrorHandler;
-
-#import "JreEmulation.h"
 
 @protocol OrgXmlSaxXMLReader < NSObject, JavaObject >
 
@@ -48,6 +48,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void OrgXmlSaxXMLReader_init() {}
+J2OBJC_EMPTY_STATIC_INIT(OrgXmlSaxXMLReader)
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgXmlSaxXMLReader)
 
 #endif // _OrgXmlSaxXMLReader_H_

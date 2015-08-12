@@ -6,9 +6,9 @@
 #ifndef _JavaIoFileFilter_H_
 #define _JavaIoFileFilter_H_
 
-@class JavaIoFile;
+#include "J2ObjC_header.h"
 
-#import "JreEmulation.h"
+@class JavaIoFile;
 
 @protocol JavaIoFileFilter < NSObject, JavaObject >
 
@@ -16,6 +16,8 @@
 
 @end
 
-__attribute__((always_inline)) inline void JavaIoFileFilter_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaIoFileFilter)
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaIoFileFilter)
 
 #endif // _JavaIoFileFilter_H_

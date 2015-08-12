@@ -6,15 +6,32 @@
 #ifndef _JavaNetURLStreamHandler_H_
 #define _JavaNetURLStreamHandler_H_
 
+#include "J2ObjC_header.h"
+
 @class JavaNetInetAddress;
 @class JavaNetProxy;
 @class JavaNetURL;
 @class JavaNetURLConnection;
 
-#import "JreEmulation.h"
+@interface JavaNetURLStreamHandler : NSObject
 
-@interface JavaNetURLStreamHandler : NSObject {
-}
+#pragma mark Public
+
+- (instancetype)init;
+
+#pragma mark Protected
+
+- (jboolean)equalsWithJavaNetURL:(JavaNetURL *)a
+                  withJavaNetURL:(JavaNetURL *)b;
+
+- (jint)getDefaultPort;
+
+- (JavaNetInetAddress *)getHostAddressWithJavaNetURL:(JavaNetURL *)url;
+
+- (jint)hashCodeWithJavaNetURL:(JavaNetURL *)url;
+
+- (jboolean)hostsEqualWithJavaNetURL:(JavaNetURL *)a
+                      withJavaNetURL:(JavaNetURL *)b;
 
 - (JavaNetURLConnection *)openConnectionWithJavaNetURL:(JavaNetURL *)u;
 
@@ -25,6 +42,9 @@
                   withNSString:(NSString *)spec
                        withInt:(jint)start
                        withInt:(jint)end;
+
+- (jboolean)sameFileWithJavaNetURL:(JavaNetURL *)a
+                    withJavaNetURL:(JavaNetURL *)b;
 
 - (void)setURLWithJavaNetURL:(JavaNetURL *)u
                 withNSString:(NSString *)protocol
@@ -45,28 +65,17 @@
 
 - (NSString *)toExternalFormWithJavaNetURL:(JavaNetURL *)url;
 
+#pragma mark Package-Private
+
 - (NSString *)toExternalFormWithJavaNetURL:(JavaNetURL *)url
                                withBoolean:(jboolean)escapeIllegalCharacters;
 
-- (jboolean)equalsWithJavaNetURL:(JavaNetURL *)a
-                  withJavaNetURL:(JavaNetURL *)b;
-
-- (jint)getDefaultPort;
-
-- (JavaNetInetAddress *)getHostAddressWithJavaNetURL:(JavaNetURL *)url;
-
-- (jint)hashCodeWithJavaNetURL:(JavaNetURL *)url;
-
-- (jboolean)hostsEqualWithJavaNetURL:(JavaNetURL *)a
-                      withJavaNetURL:(JavaNetURL *)b;
-
-- (jboolean)sameFileWithJavaNetURL:(JavaNetURL *)a
-                    withJavaNetURL:(JavaNetURL *)b;
-
-- (instancetype)init;
-
 @end
 
-__attribute__((always_inline)) inline void JavaNetURLStreamHandler_init() {}
+J2OBJC_EMPTY_STATIC_INIT(JavaNetURLStreamHandler)
+
+FOUNDATION_EXPORT void JavaNetURLStreamHandler_init(JavaNetURLStreamHandler *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(JavaNetURLStreamHandler)
 
 #endif // _JavaNetURLStreamHandler_H_
